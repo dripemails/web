@@ -1,0 +1,13 @@
+{
+  "name": "dripemails-org",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "setup": "pip install -r requirements.txt",
+    "start": "python manage.py runserver",
+    "migrate": "python manage.py migrate",
+    "makemigrations": "python manage.py makemigrations",
+    "createsuperuser": "python manage.py createsuperuser"
+  }
+}

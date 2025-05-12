@@ -1,0 +1,1 @@
+# Campaigns app initialization

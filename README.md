@@ -1,4 +1,4 @@
-Welcome to DripEmail.org, the open source repository.  This app allows for easy drip emails to be sent by your users.
+Welcome to DripEmails.org, the open source repository.  This app allows for easy drip emails to be sent by your users.
 
 Getting started:
 * Feel free to contribute code.

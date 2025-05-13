@@ -1,66 +1,80 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from campaigns.models import Campaign
 from subscribers.models import List
-from django.http import JsonResponse
+from analytics.models import UserProfile
 
-def home(request):
-    """Home page view."""
-    return render(request, 'core/home.html')
+@login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def dashboard_api(request):
+    """API endpoint for dashboard data."""
+    # Get user's campaigns
+    campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+    campaign_data = [{
+        'id': str(campaign.id),
+        'name': campaign.name,
+        'description': campaign.description,
+        'is_active': campaign.is_active,
+        'emails_count': campaign.emails_count,
+        'sent_count': campaign.sent_count,
+        'created_at': campaign.created_at
+    } for campaign in campaigns]
+
+    # Get user's lists
+    lists = List.objects.filter(user=request.user).order_by('-created_at')
+    list_data = [{
+        'id': str(list_obj.id),
+        'name': list_obj.name,
+        'description': list_obj.description,
+        'subscribers_count': list_obj.subscribers_count,
+        'active_subscribers_count': list_obj.active_subscribers_count,
+        'created_at': list_obj.created_at
+    } for list_obj in lists]
+
+    # Get user profile
+    profile = UserProfile.objects.get(user=request.user)
+
+    return Response({
+        'campaigns': campaign_data,
+        'lists': list_data,
+        'stats': {
+            'campaigns_count': len(campaign_data),
+            'lists_count': len(list_data),
+            'subscribers_count': sum(list_obj.subscribers_count for list_obj in lists),
+            'sent_emails_count': sum(campaign.sent_count for campaign in campaigns),
+        },
+        'profile': {
+            'has_verified_promo': profile.has_verified_promo,
+            'send_without_unsubscribe': profile.send_without_unsubscribe,
+        }
+    })
 
 @login_required
 def dashboard(request):
-    """Dashboard view with user's campaigns and lists."""
-    campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
-    lists = List.objects.filter(user=request.user).order_by('-created_at')
-    
-    context = {
-        'campaigns': campaigns,
-        'lists': lists,
-        'campaigns_count': campaigns.count(),
-        'lists_count': lists.count(),
-        'subscribers_count': sum(list.subscribers.count() for list in lists),
-        'sent_emails_count': sum(campaign.sent_count for campaign in campaigns),
-    }
-    return render(request, 'core/dashboard.html', context)
+    """Render dashboard page."""
+    return render(request, 'core/dashboard.html')
 
-def pricing(request):
-    """Pricing page view."""
-    return render(request, 'core/pricing.html')
-
-def about(request):
-    """About page view."""
-    return render(request, 'core/about.html')
-
-def contact(request):
-    """Contact page view."""
-    return render(request, 'core/contact.html')
-
-def terms(request):
-    """Terms page view."""
-    return render(request, 'core/terms.html')
-
-def privacy(request):
-    """Privacy page view."""
-    return render(request, 'core/privacy.html')
+def home(request):
+    """Render home page."""
+    return render(request, 'core/home.html')
 
 @login_required
-def promo_verification(request):
-    """Verify promotional tweet or blog post to remove ads."""
-    if request.method == 'POST':
-        promo_url = request.POST.get('promo_url')
-        promo_type = request.POST.get('promo_type')
-        
-        # In a real app, you'd verify the URL contains proper promotion
-        # For this MVP, we'll just accept any URL
-        profile = request.user.profile
-        profile.has_verified_promo = True
-        profile.promo_url = promo_url
-        profile.save()
-        
-        messages.success(request, _("Thank you for promoting DripEmails.org! Ads have been disabled for your account."))
-        return redirect('dashboard')
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def profile_settings(request):
+    """Get or update profile settings."""
+    profile = UserProfile.objects.get(user=request.user)
     
-    return render(request, 'core/promo_verification.html')
+    if request.method == 'POST':
+        profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+        profile.save()
+    
+    return Response({
+        'has_verified_promo': profile.has_verified_promo,
+        'send_without_unsubscribe': profile.send_without_unsubscribe,
+    })

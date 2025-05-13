@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit Campaign" %} - {{ campaign.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">{% trans "Edit Campaign" %}: {{ campaign.name }}</h1>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">{% trans "Campaign Details" %}</h2>
+        <p><strong class="font-medium">{% trans "Description" %}:</strong> {{ campaign.description|default:"N/A" }}</p>
+        <p><strong class="font-medium">{% trans "Subscriber List" %}:</strong> {{ campaign.subscriber_list.name }}</p>
+        <p><strong class="font-medium">{% trans "Status" %}:</strong> 
+            {% if campaign.is_active %}
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{% trans "Active" %}</span>
+            {% else %}
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">{% trans "Inactive" %}</span>
+            {% endif %}
+        </p>
+        {# Add more campaign details here as needed #}
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">{% trans "Emails in this Campaign" %}</h2>
+            <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                {% trans "Add New Email" %}
+            </a>
+        </div>
+
+        {% if emails %}
+            <ul id="email-list" class="space-y-4">
+                {% for email in emails %}
+                    <li data-email-id="{{ email.id }}" data-order="{{ email.order }}" class="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-50">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">{{ email.subject }}</h3>
+                                <p class="text-sm text-gray-600">{% trans "Order" %}: {{ email.order }}</p>
+                                <p class="text-sm text-gray-500">{% trans "Wait" %}: {{ email.wait_time_display }} {% trans "after previous email" %}</p>
+                            </div>
+                            <div class="space-x-2">
+                                <button class="text-sm text-blue-600 hover:text-blue-800">{% trans "Reorder (placeholder)" %}</button>
+                                <button class="text-sm text-green-600 hover:text-green-800 show-api-code-button">{% trans "Toggle API Code" %}</button>
+                                <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800">{% trans "Edit Email" %}</a>
+                                <a href="#" class="text-sm text-red-600 hover:text-red-800">{% trans "Delete Email" %}</a>
+                            </div>
+                        </div>
+                        <div class="mt-2 p-3 bg-gray-100 rounded anHidden api-code-display hidden">
+                            <h4 class="font-semibold mb-1">{% trans "API Code to Launch Template" %}:</h4>
+                            <pre class="bg-gray-200 p-2 rounded text-sm overflow-x-auto"><code>curl -X POST \
+  http://localhost:8000/api/campaigns/{{ campaign.id }}/emails/{{ email.id }}/send \
+  -H 'Authorization: Token YOUR_API_TOKEN' \
+  -d '{"recipient_email": "subscriber@example.com"}'</code></pre>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-600">{% trans "No emails have been added to this campaign yet." %}</p>
+        {% endif %}
+    </div>
+</div>
+
+{# Basic JavaScript for showing/hiding API code - can be enhanced later #}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const emailList = document.getElementById('email-list');
+    if (emailList) {
+        emailList.addEventListener('click', function(event) {
+            if (event.target.matches('.show-api-code-button')) { // Assuming you'll add this class
+                const listItem = event.target.closest('li');
+                const apiCodeDisplay = listItem.querySelector('.api-code-display');
+                if (apiCodeDisplay) {
+                    apiCodeDisplay.classList.toggle('hidden');
+                }
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}

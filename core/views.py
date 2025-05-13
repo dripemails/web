@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
@@ -10,6 +11,7 @@ from campaigns.models import Campaign
 from subscribers.models import List
 from analytics.models import UserProfile
 from django.conf import settings
+import re
 
 @login_required
 @api_view(['GET'])
@@ -108,6 +110,48 @@ def terms(request):
 def privacy(request):
     """Render privacy page."""
     return render(request, 'core/privacy.html')
+
+@login_required
+def promo_verification(request):
+    """Handle promo verification."""
+    if request.method == 'POST':
+        promo_url = request.POST.get('promo_url')
+        promo_type = request.POST.get('promo_type')
+        
+        if not promo_url:
+            messages.error(request, _("Please provide a URL to your post"))
+            return redirect('core:promo_verification')
+        
+        # Basic URL validation
+        if not re.match(r'^https?://', promo_url):
+            messages.error(request, _("Please provide a valid URL starting with http:// or https://"))
+            return redirect('core:promo_verification')
+        
+        # Validate URL based on promo type
+        valid_url = False
+        if promo_type == 'twitter':
+            valid_url = 'twitter.com' in promo_url or 'x.com' in promo_url
+        elif promo_type == 'facebook':
+            valid_url = 'facebook.com' in promo_url
+        elif promo_type == 'linkedin':
+            valid_url = 'linkedin.com' in promo_url
+        elif promo_type in ['blog', 'other']:
+            valid_url = True
+        
+        if not valid_url:
+            messages.error(request, _("Please provide a valid URL for the selected platform"))
+            return redirect('core:promo_verification')
+        
+        # Update user profile
+        profile = request.user.profile
+        profile.has_verified_promo = True
+        profile.promo_url = promo_url
+        profile.save()
+        
+        messages.success(request, _("Thank you for promoting DripEmails.org! Ads have been disabled for your account."))
+        return redirect('core:dashboard')
+    
+    return render(request, 'core/promo_verification.html')
 
 @login_required
 @api_view(['GET', 'POST'])

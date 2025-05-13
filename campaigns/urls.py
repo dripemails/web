@@ -4,11 +4,12 @@ from . import views
 app_name = 'campaigns'
 
 urlpatterns = [
-    path('campaigns/', views.CampaignListCreateAPIView.as_view(), name='campaign-list-create'),
-    path('campaigns/<uuid:pk>/', views.CampaignRetrieveUpdateDestroyAPIView.as_view(), name='campaign-detail'),
-    path('campaigns/<uuid:campaign_id>/emails/', views.EmailListCreateAPIView.as_view(), name='email-list-create'),
-    path('campaigns/<uuid:campaign_id>/emails/<uuid:pk>/', views.EmailRetrieveUpdateDestroyAPIView.as_view(), name='email-detail'),
-    path('campaigns/<uuid:campaign_id>/activate/', views.activate_campaign, name='campaign-activate'),
-    path('campaigns/<uuid:campaign_id>/deactivate/', views.deactivate_campaign, name='campaign-deactivate'),
-    path('campaigns/<uuid:pk>/edit/', views.campaign_edit_view, name='campaign-edit'),
+    path('campaigns/create/', views.campaign_create, name='create'),
+    path('campaigns/template/<uuid:campaign_id>/', views.campaign_template, name='template'),
+    path('campaigns/template/', views.campaign_template, name='new-template'),
+    path('api/campaigns/create/', views.create_campaign, name='api-create'),
+    path('api/campaigns/<uuid:campaign_id>/emails/', views.EmailListCreateAPIView.as_view(), name='email-list-create'),
+    path('api/campaigns/<uuid:campaign_id>/emails/<uuid:pk>/', views.EmailRetrieveUpdateDestroyAPIView.as_view(), name='email-detail'),
+    path('api/campaigns/<uuid:campaign_id>/activate/', views.activate_campaign, name='campaign-activate'),
+    path('api/campaigns/<uuid:campaign_id>/deactivate/', views.deactivate_campaign, name='campaign-deactivate'),
 ]

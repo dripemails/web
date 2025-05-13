@@ -63,6 +63,26 @@ def home(request):
     """Render home page."""
     return render(request, 'core/home.html')
 
+def pricing(request):
+    """Render pricing page."""
+    return render(request, 'core/pricing.html')
+
+def about(request):
+    """Render about page."""
+    return render(request, 'core/about.html')
+
+def contact(request):
+    """Render contact page."""
+    return render(request, 'core/contact.html')
+
+def terms(request):
+    """Render terms page."""
+    return render(request, 'core/terms.html')
+
+def privacy(request):
+    """Render privacy page."""
+    return render(request, 'core/privacy.html')
+
 @login_required
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])

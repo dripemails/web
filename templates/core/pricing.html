@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Pricing" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{% trans "Simple, Free Pricing" %}</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">{% trans "DripEmails.org is completely free. No credit card required, no hidden fees, no usage limits." %}</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-indigo-600 p-8 text-center text-white">
+                <h2 class="text-3xl font-bold mb-4">{% trans "Free Forever Plan" %}</h2>
+                <p class="text-xl opacity-90">{% trans "Everything you need to automate your email marketing" %}</p>
+                <div class="mt-6">
+                    <span class="text-5xl font-bold">$0</span>
+                    <span class="text-xl opacity-90">/{% trans "month" %}</span>
+                </div>
+            </div>
+
+            <div class="p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">{% trans "Email Features" %}</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Unlimited Email Campaigns" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Unlimited Subscribers" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Automated Drip Sequences" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Custom Email Templates" %}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">{% trans "Marketing Tools" %}</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Detailed Analytics" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "Subscriber Management" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "CSV/Excel Import" %}
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                {% trans "API Access" %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <div class="text-center">
+                        <a href="{% url 'account_signup' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+                            {% trans "Get Started Free" %}
+                        </a>
+                        <p class="mt-4 text-sm text-gray-500">{% trans "No credit card required" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-8">{% trans "Frequently Asked Questions" %}</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{% trans "Is it really free?" %}</h3>
+                    <p class="text-gray-600">{% trans "Yes! DripEmails.org is completely free to use. We add a small advertisement to the bottom of emails, which you can remove by sharing about us on social media." %}</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{% trans "Are there any limits?" %}</h3>
+                    <p class="text-gray-600">{% trans "No. You can have unlimited subscribers, unlimited campaigns, and send unlimited emails. We believe in providing value without restrictions." %}</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{% trans "How can you offer this for free?" %}</h3>
+                    <p class="text-gray-600">{% trans "We keep our costs low by using efficient technologies and include a small advertisement in emails. This allows us to provide a powerful service at no cost to you." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

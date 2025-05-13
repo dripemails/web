@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -98,3 +99,14 @@ def deactivate_campaign(request, campaign_id):
         {"message": "Campaign deactivated successfully. No more emails will be sent."},
         status=status.HTTP_200_OK
     )
+
+
+@login_required
+def campaign_edit_view(request, pk):
+    campaign = get_object_or_404(Campaign, pk=pk, user=request.user)
+    emails = campaign.emails.all() # Emails are already ordered by the 'order' field in the model's Meta
+    context = {
+        'campaign': campaign,
+        'emails': emails,
+    }
+    return render(request, 'campaigns/campaign_edit_page.html', context)

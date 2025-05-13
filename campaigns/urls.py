@@ -10,4 +10,5 @@ urlpatterns = [
     path('campaigns/<uuid:campaign_id>/emails/<uuid:pk>/', views.EmailRetrieveUpdateDestroyAPIView.as_view(), name='email-detail'),
     path('campaigns/<uuid:campaign_id>/activate/', views.activate_campaign, name='campaign-activate'),
     path('campaigns/<uuid:campaign_id>/deactivate/', views.deactivate_campaign, name='campaign-deactivate'),
+    path('campaigns/<uuid:pk>/edit/', views.campaign_edit_view, name='campaign-edit'),
 ]

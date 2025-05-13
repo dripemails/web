@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n %}
 {% load static %}
 
 {% block title %}{% trans "Dashboard" %} - DripEmails.org{% endblock %}
@@ -115,7 +115,7 @@
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
                     <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-xl font-semibold text-gray-800">{% trans "Your Campaigns" %}</h2>
-                        <a href="{% url 'campaigns:create' %}" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
+                        <a href="{% url 'campaigns:campaign-list-create' %}" c
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
@@ -162,7 +162,7 @@
                                         {{ campaign.created_at|date:"M d, Y" }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}</a>
+                                        <a href="{% url 'campaigns:campaign-edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -176,7 +176,7 @@
                         </svg>
                         <h3 class="text-lg font-medium text-gray-900 mb-2">{% trans "No campaigns yet" %}</h3>
                         <p class="text-gray-500 max-w-md mx-auto mb-6">{% trans "Create your first campaign to start sending automated emails to your subscribers." %}</p>
-                        <a href="{% url 'campaigns:create' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <a href="{% url 'campaigns:campaign-list-create' %}
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
@@ -189,7 +189,7 @@
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-xl font-semibold text-gray-800">{% trans "Your Subscriber Lists" %}</h2>
-                        <a href="{% url 'subscribers:import' %}" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
+                        <a href="{% url 'subscribers:list-list-create' %}" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
@@ -228,8 +228,8 @@
                                         {{ list.created_at|date:"M d, Y" }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{% url 'subscribers:view' list.id %}" class="text-indigo-600 hover:text-indigo-900 mr-3">{% trans "View" %}</a>
-                                        <a href="{% url 'subscribers:edit' list.id %}" class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}</a>
+                                        <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 mr-3">{% trans "View" %}</a>
+                                        <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900">{% trans "Edit" %}</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -243,7 +243,7 @@
                         </svg>
                         <h3 class="text-lg font-medium text-gray-900 mb-2">{% trans "No subscriber lists yet" %}</h3>
                         <p class="text-gray-500 max-w-md mx-auto mb-6">{% trans "Create your first subscriber list to start organizing your contacts." %}</p>
-                        <a href="{% url 'subscribers:import' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <a href="{% url 'subscribers:list-list-create' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
@@ -260,13 +260,13 @@
                 <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">{% trans "Quick Actions" %}</h3>
                     <div class="space-y-3">
-                        <a href="{% url 'campaigns:create' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
+                        <a href="{% url 'campaigns:campaign-list-create' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
                             {% trans "Create New Campaign" %}
                         </a>
-                        <a href="{% url 'subscribers:import' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
+                        <a href="{% url 'subscribers:import-subscribers' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
@@ -278,7 +278,7 @@
                             </svg>
                             {% trans "View Analytics" %}
                         </a>
-                        <a href="{% url 'campaigns:template' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
+                        <a href="{% url 'campaigns:campaign-list-create' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>

@@ -8,13 +8,60 @@ from rest_framework.response import Response
 from .models import Campaign, Email
 from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
-import uuid
+
+@login_required
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def campaign_list_create(request):
+    """List all campaigns or create a new one."""
+    if request.method == 'GET':
+        campaigns = Campaign.objects.filter(user=request.user)
+        serializer = CampaignSerializer(campaigns, many=True)
+        return Response(serializer.data)
+    
+    serializer = CampaignSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        campaign = serializer.save(user=request.user)
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@login_required
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def campaign_detail(request, campaign_id):
+    """Retrieve, update or delete a campaign."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    if request.method == 'GET':
+        serializer = CampaignSerializer(campaign)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = CampaignSerializer(campaign, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    elif request.method == 'DELETE':
+        campaign.delete()
+        return Response(status=204)
 
 @login_required
 def campaign_create(request):
     """Render campaign creation page."""
     lists = List.objects.filter(user=request.user)
     return render(request, 'campaigns/create.html', {'lists': lists})
+
+@login_required
+def campaign_edit(request, campaign_id):
+    """Edit campaign and its templates."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    emails = campaign.emails.all().order_by('order')
+    return render(request, 'campaigns/edit.html', {
+        'campaign': campaign,
+        'emails': emails
+    })
 
 @login_required
 def campaign_template(request, campaign_id=None):
@@ -41,81 +88,33 @@ def campaign_template(request, campaign_id=None):
     return render(request, 'campaigns/template.html', context)
 
 @login_required
-def campaign_edit(request, campaign_id):
-    """Edit campaign and its templates."""
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def activate_campaign(request, campaign_id):
+    """Activate a campaign."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
-    emails = campaign.emails.all().order_by('order')
-    return render(request, 'campaigns/edit.html', {
-        'campaign': campaign,
-        'emails': emails
+    
+    if campaign.emails.count() == 0:
+        return Response({
+            'error': _('Cannot activate a campaign with no emails')
+        }, status=400)
+    
+    campaign.is_active = True
+    campaign.save()
+    
+    return Response({
+        'message': _('Campaign activated successfully')
     })
 
 @login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def create_campaign(request):
-    """Create a new campaign with templates."""
-    serializer = CampaignSerializer(data=request.data, context={'request': request})
-    if serializer.is_valid():
-        campaign = serializer.save()
-        
-        # Create email templates
-        emails_data = request.data.get('emails', [])
-        for index, email_data in enumerate(emails_data):
-            email_data['campaign'] = campaign.id
-            email_data['order'] = index
-            email_serializer = EmailSerializer(data=email_data)
-            if email_serializer.is_valid():
-                email_serializer.save()
-        
-        return Response({
-            'id': campaign.id,
-            'message': _('Campaign created successfully')
-        })
-    return Response(serializer.errors, status=400)
-
-@login_required
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def update_template_order(request, campaign_id):
-    """Update the order of email templates in a campaign."""
+def deactivate_campaign(request, campaign_id):
+    """Deactivate a campaign."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
-    template_orders = request.data.get('template_orders', [])
-    
-    for order_data in template_orders:
-        template_id = order_data.get('id')
-        new_order = order_data.get('order')
-        if template_id and new_order is not None:
-            try:
-                template = Email.objects.get(id=template_id, campaign=campaign)
-                template.order = new_order
-                template.save()
-            except Email.DoesNotExist:
-                continue
-    
-    return Response({'message': _('Template order updated successfully')})
-
-@login_required
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def update_template_timing(request, campaign_id, template_id):
-    """Update the wait time and unit for a template."""
-    template = get_object_or_404(Email, id=template_id, campaign__id=campaign_id, campaign__user=request.user)
-    
-    wait_time = request.data.get('wait_time')
-    wait_unit = request.data.get('wait_unit')
-    
-    if wait_time is not None and wait_unit:
-        template.wait_time = wait_time
-        template.wait_unit = wait_unit
-        template.save()
-        
-        return Response({
-            'message': _('Template timing updated successfully'),
-            'wait_time': template.wait_time,
-            'wait_unit': template.wait_unit
-        })
+    campaign.is_active = False
+    campaign.save()
     
     return Response({
-        'error': _('Invalid timing parameters')
-    }, status=400)
+        'message': _('Campaign deactivated successfully')
+    })

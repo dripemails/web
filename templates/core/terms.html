@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Terms of Service" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="bg-indigo-600 p-8 text-white">
+                    <h1 class="text-3xl font-bold mb-4">{% trans "Terms of Service" %}</h1>
+                    <p class="text-xl opacity-90">{% trans "Last updated: May 13, 2025" %}</p>
+                </div>
+
+                <div class="p-8">
+                    <div class="prose max-w-none">
+                        <h2>1. {% trans "Acceptance of Terms" %}</h2>
+                        <p>{% trans "By accessing and using DripEmails.org, you accept and agree to be bound by the terms and provision of this agreement." %}</p>
+
+                        <h2>2. {% trans "Description of Service" %}</h2>
+                        <p>{% trans "DripEmails.org provides email marketing automation services. The service is provided 'as is' and we make no warranties about its reliability or availability." %}</p>
+
+                        <h2>3. {% trans "User Responsibilities" %}</h2>
+                        <ul>
+                            <li>{% trans "You must comply with all applicable laws and regulations" %}</li>
+                            <li>{% trans "You must obtain proper consent from email recipients" %}</li>
+                            <li>{% trans "You are responsible for maintaining the security of your account" %}</li>
+                            <li>{% trans "You must not use the service for spam or malicious purposes" %}</li>
+                        </ul>
+
+                        <h2>4. {% trans "Limitation of Liability" %}</h2>
+                        <p>{% trans "DripEmails.org and its operators shall not be liable for any damages arising from the use of the service. This includes but is not limited to direct, indirect, incidental, punitive, and consequential damages." %}</p>
+
+                        <h2>5. {% trans "Service Modifications" %}</h2>
+                        <p>{% trans "We reserve the right to modify or discontinue the service at any time without notice." %}</p>
+
+                        <h2>6. {% trans "Account Terms" %}</h2>
+                        <ul>
+                            <li>{% trans "You must provide accurate information when registering" %}</li>
+                            <li>{% trans "You are responsible for all activity under your account" %}</li>
+                            <li>{% trans "We may terminate accounts that violate our terms" %}</li>
+                        </ul>
+
+                        <h2>7. {% trans "Content Ownership" %}</h2>
+                        <p>{% trans "You retain all rights to the content you create and distribute through our service." %}</p>
+
+                        <h2>8. {% trans "Prohibited Uses" %}</h2>
+                        <p>{% trans "You may not use DripEmails.org for:" %}</p>
+                        <ul>
+                            <li>{% trans "Sending spam or unsolicited emails" %}</li>
+                            <li>{% trans "Distributing malware or harmful content" %}</li>
+                            <li>{% trans "Violating any laws or regulations" %}</li>
+                            <li>{% trans "Impersonating others" %}</li>
+                        </ul>
+
+                        <h2>9. {% trans "Disclaimer of Warranties" %}</h2>
+                        <p>{% trans "THE SERVICE IS PROVIDED 'AS IS' WITHOUT ANY WARRANTIES OF ANY KIND." %}</p>
+
+                        <h2>10. {% trans "Changes to Terms" %}</h2>
+                        <p>{% trans "We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of new terms." %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Privacy Policy" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="bg-indigo-600 p-8 text-white">
+                    <h1 class="text-3xl font-bold mb-4">{% trans "Privacy Policy" %}</h1>
+                    <p class="text-xl opacity-90">{% trans "Last updated: May 13, 2025" %}</p>
+                </div>
+
+                <div class="p-8">
+                    <div class="prose max-w-none">
+                        <h2>{% trans "Information We Collect" %}</h2>
+                        <p>{% trans "We collect the following information to provide and improve our service:" %}</p>
+                        <ul>
+                            <li>{% trans "Account information (email, name, password)" %}</li>
+                            <li>{% trans "Usage data (login times, features used)" %}</li>
+                            <li>{% trans "Email campaign statistics" %}</li>
+                            <li>{% trans "Subscriber lists you create" %}</li>
+                            <li>{% trans "Technical information (IP address, browser type)" %}</li>
+                        </ul>
+
+                        <h2>{% trans "How We Use Your Information" %}</h2>
+                        <p>{% trans "We use your information to:" %}</p>
+                        <ul>
+                            <li>{% trans "Provide and maintain the service" %}</li>
+                            <li>{% trans "Send system notifications" %}</li>
+                            <li>{% trans "Improve our service" %}</li>
+                            <li>{% trans "Detect and prevent fraud" %}</li>
+                            <li>{% trans "Comply with legal obligations" %}</li>
+                        </ul>
+
+                        <h2>{% trans "Information Sharing" %}</h2>
+                        <p>{% trans "We do not sell your personal information. We may share data with:" %}</p>
+                        <ul>
+                            <li>{% trans "Service providers (email delivery, analytics)" %}</li>
+                            <li>{% trans "Law enforcement when required by law" %}</li>
+                        </ul>
+
+                        <h2>{% trans "Data Security" %}</h2>
+                        <p>{% trans "We implement appropriate security measures to protect your data, including:" %}</p>
+                        <ul>
+                            <li>{% trans "Encryption in transit and at rest" %}</li>
+                            <li>{% trans "Regular security audits" %}</li>
+                            <li>{% trans "Access controls and monitoring" %}</li>
+                        </ul>
+
+                        <h2>{% trans "Your Rights" %}</h2>
+                        <p>{% trans "You have the right to:" %}</p>
+                        <ul>
+                            <li>{% trans "Access your personal data" %}</li>
+                            <li>{% trans "Correct inaccurate data" %}</li>
+                            <li>{% trans "Delete your account and data" %}</li>
+                            <li>{% trans "Export your data" %}</li>
+                            <li>{% trans "Object to data processing" %}</li>
+                        </ul>
+
+                        <h2>{% trans "Cookies" %}</h2>
+                        <p>{% trans "We use cookies to:" %}</p>
+                        <ul>
+                            <li>{% trans "Keep you logged in" %}</li>
+                            <li>{% trans "Remember your preferences" %}</li>
+                            <li>{% trans "Analyze site usage" %}</li>
+                        </ul>
+
+                        <h2>{% trans "Children's Privacy" %}</h2>
+                        <p>{% trans "Our service is not intended for children under 13. We do not knowingly collect data from children." %}</p>
+
+                        <h2>{% trans "Changes to Privacy Policy" %}</h2>
+                        <p>{% trans "We may update this policy. We will notify you of significant changes via email." %}</p>
+
+                        <h2>{% trans "Contact Us" %}</h2>
+                        <p>{% trans "For privacy questions, contact:" %} founders@dripemails.org</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -7,6 +9,7 @@ from rest_framework.response import Response
 from campaigns.models import Campaign
 from subscribers.models import List
 from analytics.models import UserProfile
+from django.conf import settings
 
 @login_required
 @api_view(['GET'])
@@ -74,6 +77,29 @@ def about(request):
 def contact(request):
     """Render contact page."""
     return render(request, 'core/contact.html')
+
+@api_view(['POST'])
+def send_contact(request):
+    """Handle contact form submission."""
+    try:
+        name = request.data.get('name')
+        email = request.data.get('email')
+        subject = request.data.get('subject')
+        message = request.data.get('message')
+        
+        # Send email
+        full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        send_mail(
+            f"Contact Form: {subject}",
+            full_message,
+            email,
+            ['founders@dripemails.org'],
+            fail_silently=False,
+        )
+        
+        return JsonResponse({'status': 'success'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 def terms(request):
     """Render terms page."""

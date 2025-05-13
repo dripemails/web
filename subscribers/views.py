@@ -5,10 +5,93 @@ from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-import pandas as pd
 from .models import List, Subscriber, CustomField, CustomValue
+from .serializers import ListSerializer, SubscriberSerializer
 from campaigns.models import Campaign
+import pandas as pd
 import json
+
+@login_required
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def list_list_create(request):
+    """List all subscriber lists or create a new one."""
+    if request.method == 'GET':
+        lists = List.objects.filter(user=request.user)
+        serializer = ListSerializer(lists, many=True)
+        return Response(serializer.data)
+    
+    serializer = ListSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        list_obj = serializer.save(user=request.user)
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@login_required
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def list_detail(request, pk):
+    """Retrieve, update or delete a subscriber list."""
+    list_obj = get_object_or_404(List, id=pk, user=request.user)
+    
+    if request.method == 'GET':
+        serializer = ListSerializer(list_obj)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = ListSerializer(list_obj, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    elif request.method == 'DELETE':
+        list_obj.delete()
+        return Response(status=204)
+
+@login_required
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def subscriber_list_create(request):
+    """List all subscribers or create a new one."""
+    if request.method == 'GET':
+        list_id = request.query_params.get('list_id')
+        if list_id:
+            list_obj = get_object_or_404(List, id=list_id, user=request.user)
+            subscribers = list_obj.subscribers.all()
+        else:
+            subscribers = Subscriber.objects.filter(lists__user=request.user).distinct()
+        
+        serializer = SubscriberSerializer(subscribers, many=True)
+        return Response(serializer.data)
+    
+    serializer = SubscriberSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        subscriber = serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@login_required
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def subscriber_detail(request, pk):
+    """Retrieve, update or delete a subscriber."""
+    subscriber = get_object_or_404(Subscriber, id=pk, lists__user=request.user)
+    
+    if request.method == 'GET':
+        serializer = SubscriberSerializer(subscriber)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = SubscriberSerializer(subscriber, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    elif request.method == 'DELETE':
+        subscriber.delete()
+        return Response(status=204)
 
 @login_required
 def import_subscribers(request):
@@ -22,19 +105,19 @@ def import_subscribers(request):
     return render(request, 'subscribers/import.html', context)
 
 @login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def process_import(request):
     """Process the uploaded file and import subscribers."""
-    if request.method != 'POST':
-        return redirect('subscribers:import')
-    
     file = request.FILES.get('file')
-    list_id = request.POST.get('list_id')
-    campaign_id = request.POST.get('campaign_id')
-    mappings = json.loads(request.POST.get('mappings', '{}'))
+    list_id = request.data.get('list_id')
+    campaign_id = request.data.get('campaign_id')
+    mappings = json.loads(request.data.get('mappings', '{}'))
     
     if not file or not list_id:
-        messages.error(request, _('Please provide both a file and select a list'))
-        return redirect('subscribers:import')
+        return Response({
+            'error': _('Please provide both a file and select a list')
+        }, status=400)
     
     try:
         # Read file based on extension
@@ -43,8 +126,9 @@ def process_import(request):
         elif file.name.endswith(('.xls', '.xlsx')):
             df = pd.read_excel(file)
         else:
-            messages.error(request, _('Unsupported file format'))
-            return redirect('subscribers:import')
+            return Response({
+                'error': _('Unsupported file format')
+            }, status=400)
         
         subscriber_list = List.objects.get(id=list_id, user=request.user)
         campaign = None
@@ -103,22 +187,17 @@ def process_import(request):
             
             imported_count += 1
         
-        messages.success(
-            request,
-            _('Successfully imported %(imported)d subscribers (%(skipped)d skipped)') % {
+        return Response({
+            'message': _('Successfully imported %(imported)d subscribers (%(skipped)d skipped)') % {
                 'imported': imported_count,
                 'skipped': skipped_count
             }
-        )
-        
-        # If campaign was selected, redirect to campaign edit page
-        if campaign:
-            return redirect('campaigns:edit', campaign_id=campaign.id)
-        return redirect('dashboard')
+        })
         
     except Exception as e:
-        messages.error(request, _('Error importing subscribers: {}').format(str(e)))
-        return redirect('subscribers:import')
+        return Response({
+            'error': str(e)
+        }, status=400)
 
 @login_required
 @api_view(['POST'])

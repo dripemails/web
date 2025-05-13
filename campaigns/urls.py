@@ -11,7 +11,8 @@ urlpatterns = [
     path('campaigns/template/', views.campaign_template, name='new-template'),
     
     # API endpoints
-    path('api/campaigns/create/', views.create_campaign, name='api-create'),
-    path('api/campaigns/<uuid:campaign_id>/templates/order/', views.update_template_order, name='update-template-order'),
-    path('api/campaigns/<uuid:campaign_id>/templates/<uuid:template_id>/timing/', views.update_template_timing, name='update-template-timing'),
+    path('api/campaigns/', views.campaign_list_create, name='list-create'),
+    path('api/campaigns/<uuid:campaign_id>/', views.campaign_detail, name='detail'),
+    path('api/campaigns/<uuid:campaign_id>/activate/', views.activate_campaign, name='activate'),
+    path('api/campaigns/<uuid:campaign_id>/deactivate/', views.deactivate_campaign, name='deactivate'),
 ]

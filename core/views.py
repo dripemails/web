@@ -12,6 +12,7 @@ from subscribers.models import List
 from analytics.models import UserProfile
 from django.conf import settings
 import re
+from .models import BlogPost
 
 @login_required
 @api_view(['GET'])
@@ -61,11 +62,11 @@ def dashboard_api(request):
 
 @login_required
 def dashboard(request):
-    """Render dashboard page."""
+    """Render the dashboard for authenticated users."""
     return render(request, 'core/dashboard.html')
 
 def home(request):
-    """Render home page."""
+    """Render the landing page."""
     return render(request, 'core/home.html')
 
 def pricing(request):
@@ -168,3 +169,52 @@ def profile_settings(request):
         'has_verified_promo': profile.has_verified_promo,
         'send_without_unsubscribe': profile.send_without_unsubscribe,
     })
+
+def feature_drip_campaigns(request):
+    return render(request, 'core/feature_drip_campaigns.html')
+
+def feature_email_scheduling(request):
+    return render(request, 'core/feature_email_scheduling.html')
+
+def feature_analytics(request):
+    return render(request, 'core/feature_analytics.html')
+
+def feature_subscriber_management(request):
+    return render(request, 'core/feature_subscriber_management.html')
+
+def feature_email_templates(request):
+    return render(request, 'core/feature_email_templates.html')
+
+def resource_documentation(request):
+    return render(request, 'core/resource_documentation.html')
+
+def resource_tutorials(request):
+    return render(request, 'core/resource_tutorials.html')
+
+def resource_api_reference(request):
+    return render(request, 'core/resource_api_reference.html')
+
+def resource_community(request):
+    return render(request, 'core/resource_community.html')
+
+# Simple blog with placeholder data
+def blog_index(request):
+    posts = BlogPost.objects.filter(published=True).order_by('-date')
+    return render(request, 'blog/blog_index.html', {'posts': posts})
+
+def blog_post_detail(request, slug):
+    from django.shortcuts import get_object_or_404
+    post = get_object_or_404(BlogPost, slug=slug, published=True)
+    return render(request, 'blog/blog_post_detail.html', {'post': post})
+
+def community_user_forum(request):
+    return render(request, 'core/community_user_forum.html')
+
+def community_feature_requests(request):
+    return render(request, 'core/community_feature_requests.html')
+
+def community_success_stories(request):
+    return render(request, 'core/community_success_stories.html')
+
+def community_social(request):
+    return render(request, 'core/community_social.html')

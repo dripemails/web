@@ -14,8 +14,8 @@ non_prefixed_urlpatterns = [
 language_prefixed_urlpatterns = i18n_patterns(
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls')),
-    path('', include('campaigns.urls')),
-    path('', include('subscribers.urls')),
+    path('campaigns/', include('campaigns.urls')),
+    path('subscribers/', include('subscribers.urls')),
     path('', include('analytics.urls')),
     prefix_default_language=False
 )

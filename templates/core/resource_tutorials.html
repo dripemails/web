@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Tutorials" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Tutorials" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "Step-by-step tutorials to help you make the most of DripEmails.org." %}</p>
+    <div class="bg-white rounded-lg shadow-lg p-8">
+        <ul class="list-disc pl-6 text-gray-700 space-y-2">
+            <li>{% trans "How to Create a Drip Campaign" %}</li>
+            <li>{% trans "Importing Subscribers" %}</li>
+            <li>{% trans "Designing Email Templates" %}</li>
+            <li>{% trans "Using the API" %}</li>
+            <li>{% trans "Analyzing Campaign Performance" %}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %} 

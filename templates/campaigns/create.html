@@ -4,194 +4,166 @@
 {% block title %}{% trans "Create Campaign" %} - DripEmails.org{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-100 py-12">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div class="bg-indigo-600 py-6 px-8 text-white">
-                    <h1 class="text-2xl font-bold">{% trans "Create New Campaign" %}</h1>
-                    <p class="text-indigo-100">{% trans "Set up your email sequence" %}</p>
-                </div>
-                
-                <form id="campaignForm" class="p-8">
-                    <div class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">{% trans "Campaign Name" %}</label>
-                            <input type="text" id="name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                        </div>
-                        
-                        <div>
-                            <label for="description" class="block text-sm font-medium text-gray-700">{% trans "Description" %}</label>
-                            <textarea id="description" name="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                        </div>
-                        
-                        <div>
-                            <label for="subscriber_list" class="block text-sm font-medium text-gray-700">{% trans "Subscriber List" %}</label>
-                            <select id="subscriber_list" name="subscriber_list" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option value="">{% trans "Select a list..." %}</option>
-                            </select>
-                        </div>
-                        
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-medium text-gray-900">{% trans "Email Templates" %}</h3>
-                                <button type="button" id="addTemplate" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    {% trans "Add Template" %}
-                                </button>
-                            </div>
-                            
-                            <div id="templateList" class="space-y-4">
-                                <!-- Templates will be added here dynamically -->
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                            <button type="button" onclick="history.back()" class="text-gray-600 hover:text-gray-800">
-                                {% trans "Cancel" %}
-                            </button>
-                            <div class="flex space-x-3">
-                                <button type="submit" name="save_draft" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                                    {% trans "Save Draft" %}
-                                </button>
-                                <button type="submit" name="activate" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    {% trans "Create & Activate" %}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">{% trans "Create New Campaign" %}</h1>
+        
+        <form id="campaignForm" class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">{% trans "Campaign Name" %}</label>
+                <input type="text" name="name" id="name" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
             </div>
-        </div>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Load subscriber lists
-    fetch('/api/lists/')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('subscriber_list');
-            data.results.forEach(list => {
-                const option = document.createElement('option');
-                option.value = list.id;
-                option.textContent = list.name;
-                select.appendChild(option);
-            });
-        });
-    
-    let templateCount = 0;
-    
-    document.getElementById('addTemplate').addEventListener('click', function() {
-        const template = document.createElement('div');
-        template.className = 'bg-white p-6 rounded-lg shadow-sm border border-gray-200';
-        template.innerHTML = `
-            <div class="flex justify-between items-start mb-4">
-                <div class="flex-1">
-                    <input type="text" name="templates[${templateCount}][subject]" placeholder="{% trans "Email Subject" %}" required
-                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                </div>
-                <button type="button" class="ml-4 text-gray-400 hover:text-red-500" onclick="this.closest('.bg-white').remove()">
-                    {% trans "Remove" %}
-                </button>
+            
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">{% trans "Description" %}</label>
+                <textarea name="description" id="description" rows="3"
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
             </div>
             
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Wait Time" %}</label>
-                    <div class="flex space-x-3">
-                        <input type="number" name="templates[${templateCount}][wait_time]" min="1" required
-                               class="block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                        <select name="templates[${templateCount}][wait_unit]" required
-                                class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="hours">{% trans "Hours" %}</option>
-                            <option value="days" selected>{% trans "Days" %}</option>
+                    <label for="subscriber_list" class="block text-sm font-medium text-gray-700">{% trans "Subscriber List" %}</label>
+                    <div class="mt-1 flex space-x-4">
+                        <select name="subscriber_list" id="subscriber_list"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <option value="">{% trans "Select a list or upload contacts" %}</option>
+                            {% for list in lists %}
+                                <option value="{{ list.id }}">{{ list.name }}</option>
+                            {% endfor %}
                         </select>
+                        <button type="button" id="uploadBtn"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            {% trans "Upload Contacts" %}
+                        </button>
                     </div>
                 </div>
                 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Content" %}</label>
-                    <div class="mb-2 text-sm text-gray-500">
-                        {% trans "Available variables:" %} {{first_name}}, {{last_name}}, {{full_name}}, {{email}}
+                <!-- File Upload Modal -->
+                <div id="uploadModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+                    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">{% trans "Upload Contacts" %}</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="list_name" class="block text-sm font-medium text-gray-700">{% trans "List Name" %}</label>
+                                <input type="text" id="list_name" name="list_name"
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                       placeholder="{% trans 'My Contact List' %}">
+                            </div>
+                            <div>
+                                <label for="contact_file" class="block text-sm font-medium text-gray-700">{% trans "Contact File" %}</label>
+                                <input type="file" id="contact_file" name="file" accept=".csv,.xls,.xlsx"
+                                       class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                <p class="mt-1 text-sm text-gray-500">{% trans "Supported formats: CSV, Excel (.xls, .xlsx)" %}</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <button type="button" id="cancelUpload"
+                                    class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                {% trans "Cancel" %}
+                            </button>
+                            <button type="button" id="submitUpload"
+                                    class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                                {% trans "Upload" %}
+                            </button>
+                        </div>
                     </div>
-                    <textarea name="templates[${templateCount}][body_html]" rows="6" required
-                              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                              placeholder="{% trans "Enter your email content here..." %}"></textarea>
                 </div>
             </div>
-        `;
-        
-        document.getElementById('templateList').appendChild(template);
-        templateCount++;
+            
+            <div class="pt-5">
+                <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {% trans "Create Campaign" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Show upload modal
+    $('#uploadBtn').click(function() {
+        $('#uploadModal').removeClass('hidden');
     });
     
-    document.getElementById('campaignForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    // Hide upload modal
+    $('#cancelUpload').click(function() {
+        $('#uploadModal').addClass('hidden');
+        $('#contact_file').val('');
+        $('#list_name').val('');
+    });
+    
+    // Handle file upload
+    $('#submitUpload').click(function() {
+        const file = $('#contact_file')[0].files[0];
+        const listName = $('#list_name').val();
         
-        const formData = new FormData(this);
-        const data = {
-            name: formData.get('name'),
-            description: formData.get('description'),
-            subscriber_list: formData.get('subscriber_list'),
-            is_active: e.submitter.name === 'activate',
-            emails: []
-        };
+        if (!file) {
+            alert('{% trans "Please select a file to upload" %}');
+            return;
+        }
         
-        // Collect template data
-        const templates = document.querySelectorAll('#templateList > div');
-        templates.forEach((template, index) => {
-            data.emails.push({
-                subject: formData.get(`templates[${index}][subject]`),
-                body_html: formData.get(`templates[${index}][body_html]`),
-                wait_time: parseInt(formData.get(`templates[${index}][wait_time]`)),
-                wait_unit: formData.get(`templates[${index}][wait_unit]`),
-                order: index
-            });
-        });
+        const formData = new FormData();
+        formData.append('file', file);
+        if (listName) {
+            formData.append('list_name', listName);
+        }
         
-        // Create campaign
-        fetch('/api/campaigns/', {
-            method: 'POST',
+        $.ajax({
+            url: '/api/upload-contacts/',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
             headers: {
-                'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
             },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(campaign => {
-            // Create email templates
-            const emailPromises = data.emails.map(email => 
-                fetch(`/api/campaigns/${campaign.id}/emails/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken')
-                    },
-                    body: JSON.stringify(email)
-                })
-            );
-            
-            return Promise.all(emailPromises).then(() => campaign);
-        })
-        .then(campaign => {
-            if (data.is_active) {
-                return fetch(`/api/campaigns/${campaign.id}/activate/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken')
-                    }
-                });
+            success: function(response) {
+                // Add the new list to the select dropdown
+                const option = new Option(response.list_name, response.list_id, true, true);
+                $('#subscriber_list').append(option);
+                
+                // Close modal and reset form
+                $('#uploadModal').addClass('hidden');
+                $('#contact_file').val('');
+                $('#list_name').val('');
+                
+                // Show success message
+                alert('{% trans "Contacts uploaded successfully" %}');
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.error || '{% trans "An error occurred while uploading contacts" %}');
             }
-        })
-        .then(() => {
-            window.location.href = '/dashboard/';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('{% trans "An error occurred while creating the campaign. Please try again." %}');
+        });
+    });
+    
+    // Handle campaign form submission
+    $('#campaignForm').submit(function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: $('#name').val(),
+            description: $('#description').val(),
+            subscriber_list: $('#subscriber_list').val() || null
+        };
+        
+        $.ajax({
+            url: '/api/campaigns/',
+            type: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            success: function(response) {
+                window.location.href = '/campaigns/' + response.id + '/edit/';
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.error || '{% trans "An error occurred while creating the campaign" %}');
+            }
         });
     });
     
@@ -212,4 +184,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+{% endblock %}
 {% endblock %}

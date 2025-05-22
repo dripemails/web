@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Email Templates" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Email Templates" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "Design beautiful, reusable email templates. Save time and ensure brand consistency across all your campaigns." %}</p>
+    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
+        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "Template Features" %}</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li>{% trans "Drag-and-drop or code your own templates." %}</li>
+                <li>{% trans "Personalize emails with dynamic variables." %}</li>
+                <li>{% trans "Preview and test before sending." %}</li>
+                <li>{% trans "Save templates for future campaigns." %}</li>
+            </ul>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
+                <rect x="20" y="20" width="60" height="60" rx="8" stroke-width="6" class="text-indigo-200" />
+                <rect x="35" y="35" width="30" height="30" rx="4" stroke-width="6" />
+            </svg>
+        </div>
+    </div>
+</div>
+{% endblock %} 

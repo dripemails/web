@@ -138,22 +138,16 @@ def send_campaign_email(email_id, subscriber_id):
         # Schedule the next email in sequence if one exists
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()
         if next_email:
-            # Calculate delay based on wait time and unit
-            if next_email.wait_unit == 'hours':
-                delay = timedelta(hours=next_email.wait_time)
-            else:  # days
-                delay = timedelta(days=next_email.wait_time)
-            
-            # Schedule the next email
+            # Calculate when to send the next email
+            wait_time = timedelta(**{next_email.wait_unit: next_email.wait_time})
             send_campaign_email.apply_async(
                 args=[str(next_email.id), str(subscriber.id)],
-                eta=timezone.now() + delay
+                countdown=wait_time.total_seconds()
             )
-            
             logger.info(f"Scheduled next email '{next_email.subject}' for {subscriber.email} in {next_email.wait_time} {next_email.wait_unit}")
     
     except Exception as e:
-        logger.error(f"Failed to send email to {subscriber.email}: {str(e)}")
+        logger.error(f"Error sending email to {subscriber.email}: {str(e)}")
 
 
 @shared_task
@@ -221,3 +215,94 @@ def process_email_click(tracking_id, subscriber_email, link_url):
         logger.error(f"No matching sent event found for tracking ID {tracking_id}")
     except Exception as e:
         logger.error(f"Failed to process email click: {str(e)}")
+
+
+@shared_task
+def send_test_email(email_id, test_email, variables=None):
+    """Send a test email to a specific address."""
+    from .models import Email
+    
+    try:
+        email = Email.objects.select_related('campaign').get(id=email_id)
+    except Email.DoesNotExist:
+        logger.error(f"Email {email_id} not found")
+        return
+    
+    # Replace variables in content
+    html_content = email.body_html
+    text_content = email.body_text
+    subject = email.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Create and send email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[test_email]
+    )
+    msg.attach_alternative(html_content, "text/html")
+    
+    try:
+        msg.send()
+        logger.info(f"Sent test email '{subject}' to {test_email}")
+    except Exception as e:
+        logger.error(f"Error sending test email to {test_email}: {str(e)}")
+
+
+@shared_task
+def send_single_email(email_id, subscriber_email, variables=None):
+    """Send a single email to a specific address."""
+    from .models import Email, EmailEvent
+    
+    try:
+        email = Email.objects.select_related('campaign').get(id=email_id)
+    except Email.DoesNotExist:
+        logger.error(f"Email {email_id} not found")
+        return
+    
+    # Replace variables in content
+    html_content = email.body_html
+    text_content = email.body_text
+    subject = email.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Create and send email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[subscriber_email]
+    )
+    msg.attach_alternative(html_content, "text/html")
+    
+    try:
+        msg.send()
+        
+        # Record the event
+        EmailEvent.objects.create(
+            email=email,
+            subscriber_email=subscriber_email,
+            event_type='sent'
+        )
+        
+        # Update campaign metrics
+        campaign = email.campaign
+        campaign.sent_count += 1
+        campaign.save(update_fields=['sent_count'])
+        
+        logger.info(f"Sent single email '{subject}' to {subscriber_email}")
+    except Exception as e:
+        logger.error(f"Error sending single email to {subscriber_email}: {str(e)}")

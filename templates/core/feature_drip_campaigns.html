@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Drip Campaigns" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Drip Campaigns" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "Automate your email marketing with powerful drip campaigns. Send a series of emails to your subscribers at the right time, every time." %}</p>
+    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
+        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "How Drip Campaigns Work" %}</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li>{% trans "Create a sequence of emails for your campaign." %}</li>
+                <li>{% trans "Set wait times between each email." %}</li>
+                <li>{% trans "Subscribers receive emails automatically based on your schedule." %}</li>
+                <li>{% trans "Track opens, clicks, and engagement for each step." %}</li>
+            </ul>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
+                <circle cx="50" cy="50" r="45" stroke-width="6" class="text-indigo-200" />
+                <path d="M30 50 L50 70 L70 30" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+</div>
+{% endblock %} 

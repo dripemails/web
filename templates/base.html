@@ -140,22 +140,22 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">{% trans "Features" %}</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Drip Campaigns" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Scheduling" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Analytics" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Subscriber Management" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Templates" %}</a></li>
+                        <li><a href="{% url 'core:feature_drip_campaigns' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Drip Campaigns" %}</a></li>
+                        <li><a href="{% url 'core:feature_email_scheduling' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Scheduling" %}</a></li>
+                        <li><a href="{% url 'core:feature_analytics' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Analytics" %}</a></li>
+                        <li><a href="{% url 'core:feature_subscriber_management' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Subscriber Management" %}</a></li>
+                        <li><a href="{% url 'core:feature_email_templates' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Templates" %}</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">{% trans "Resources" %}</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Documentation" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Blog" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Tutorials" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "API Reference" %}</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{% trans "Community" %}</a></li>
+                        <li><a href="{% url 'core:resource_documentation' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Documentation" %}</a></li>
+                        <li><a href="{% url 'core:blog_index' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Blog" %}</a></li>
+                        <li><a href="{% url 'core:resource_tutorials' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Tutorials" %}</a></li>
+                        <li><a href="{% url 'core:resource_api_reference' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "API Reference" %}</a></li>
+                        <li><a href="{% url 'core:resource_community' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Community" %}</a></li>
                     </ul>
                 </div>
                 

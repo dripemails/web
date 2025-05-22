@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Email Scheduling" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Email Scheduling" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "Plan and schedule your emails in advance. Ensure your messages reach your audience at the perfect time, every time." %}</p>
+    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
+        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "Why Schedule Emails?" %}</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li>{% trans "Maximize open rates by sending at optimal times." %}</li>
+                <li>{% trans "Never miss a holiday, event, or important date." %}</li>
+                <li>{% trans "Automate recurring newsletters and announcements." %}</li>
+                <li>{% trans "Save time and reduce manual work." %}</li>
+            </ul>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
+                <circle cx="50" cy="50" r="45" stroke-width="6" class="text-indigo-200" />
+                <rect x="40" y="30" width="20" height="40" rx="4" stroke-width="6" />
+                <circle cx="50" cy="50" r="6" fill="currentColor" />
+            </svg>
+        </div>
+    </div>
+</div>
+{% endblock %} 

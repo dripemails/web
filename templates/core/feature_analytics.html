@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Analytics" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Analytics" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "Gain insights into your campaigns with real-time analytics. Track opens, clicks, and subscriber growth to optimize your email marketing." %}</p>
+    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
+        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "What You Can Track" %}</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li>{% trans "Open rates and click rates for each campaign." %}</li>
+                <li>{% trans "Subscriber growth and engagement trends." %}</li>
+                <li>{% trans "Top performing emails and links." %}</li>
+                <li>{% trans "Export analytics data for further analysis." %}</li>
+            </ul>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
+                <rect x="20" y="60" width="10" height="20" rx="2" stroke-width="6" class="text-indigo-200" />
+                <rect x="40" y="40" width="10" height="40" rx="2" stroke-width="6" class="text-indigo-200" />
+                <rect x="60" y="30" width="10" height="50" rx="2" stroke-width="6" class="text-indigo-200" />
+                <rect x="80" y="20" width="10" height="60" rx="2" stroke-width="6" class="text-indigo-200" />
+            </svg>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -28,8 +28,9 @@
                                        class="block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <select id="wait_unit" name="wait_unit" required
                                         class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="hours">{% trans "Hours" %}</option>
-                                    <option value="days" selected>{% trans "Days" %}</option>
+                                    {% for value, label in wait_units %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <p class="mt-1 text-sm text-gray-500">
@@ -78,6 +79,25 @@
                         
                         <div class="border-t border-gray-200 pt-6">
                             <h2 class="text-lg font-medium text-gray-900 mb-4">{% trans "API Integration" %}</h2>
+                            
+                            <!-- API Key Section -->
+                            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-700">{% trans "Your API Key" %}</h3>
+                                        <p class="text-sm text-gray-500 mt-1">{% trans "Use this key to authenticate your API requests" %}</p>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="text" id="apiKey" value="{{ request.user.auth_token.key }}" readonly
+                                               class="block w-64 rounded-md border-gray-300 bg-gray-100 text-sm font-mono">
+                                        <button type="button" onclick="copyApiKey()" 
+                                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            {% trans "Copy" %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="bg-gray-50 p-4 rounded-lg space-y-4">
                                 <p class="text-sm text-gray-600">
                                     {% trans "Send emails using this template via API. Here's how to trigger this template programmatically:" %}
@@ -87,9 +107,9 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
+url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/"
 headers = {
-    "Authorization": "Bearer YOUR_API_KEY",
+    "Authorization": "Bearer {{ request.user.auth_token.key }}",
     "Content-Type": "application/json"
 }
 data = {
@@ -105,10 +125,10 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                 
                                 <div class="space-y-2">
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "JavaScript" %}</h3>
-                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/", {
     method: "POST",
     headers: {
-        "Authorization": "Bearer YOUR_API_KEY",
+        "Authorization": "Bearer {{ request.user.auth_token.key }}",
         "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -126,9 +146,9 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>require 'net/http'
 require 'json'
 
-uri = URI("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
+uri = URI("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/")
 headers = {
-    'Authorization' => 'Bearer YOUR_API_KEY',
+    'Authorization' => 'Bearer {{ request.user.auth_token.key }}',
     'Content-Type' => 'application/json'
 }
 data = {
@@ -214,9 +234,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const testModal = document.getElementById('testModal');
     const templateForm = document.getElementById('templateForm');
     const testForm = document.getElementById('testForm');
+    const campaignId = '{{ campaign.id }}';
+    const templateId = '{{ template.id }}';
     
     // Load template data if editing
-    const templateId = new URLSearchParams(window.location.search).get('id');
     if (templateId) {
         fetch(`/api/campaigns/${campaignId}/emails/${templateId}/`)
             .then(response => response.json())
@@ -225,6 +246,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('wait_time').value = data.wait_time;
                 document.getElementById('wait_unit').value = data.wait_unit;
                 document.getElementById('body_html').value = data.body_html;
+            })
+            .catch(error => {
+                console.error('Error loading template:', error);
+                alert('{% trans "An error occurred while loading the template. Please try again." %}');
             });
     }
     
@@ -248,7 +273,8 @@ document.addEventListener('DOMContentLoaded', function() {
             subject: document.getElementById('subject').value,
             wait_time: parseInt(document.getElementById('wait_time').value),
             wait_unit: document.getElementById('wait_unit').value,
-            body_html: document.getElementById('body_html').value
+            body_html: document.getElementById('body_html').value,
+            body_text: document.getElementById('body_html').value.replace(/<[^>]*>/g, '') // Convert HTML to plain text
         };
         
         const url = templateId 
@@ -263,8 +289,13 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(() => {
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
             window.location.href = `/campaigns/${campaignId}/`;
         })
         .catch(error => {
@@ -287,7 +318,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        fetch(`/api/campaigns/${campaignId}/emails/${templateId}/test/`, {
+        const url = templateId 
+            ? `/api/campaigns/${campaignId}/emails/${templateId}/test/`
+            : `/api/campaigns/${campaignId}/emails/test/`;
+        
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -295,7 +330,10 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(data)
         })
-        .then(() => {
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             closeTestModal();
             alert('{% trans "Test email sent successfully!" %}');
         })
@@ -312,6 +350,20 @@ function closePreviewModal() {
 
 function closeTestModal() {
     document.getElementById('testModal').classList.add('hidden');
+}
+
+function copyApiKey() {
+    const apiKeyInput = document.getElementById('apiKey');
+    apiKeyInput.select();
+    document.execCommand('copy');
+    
+    // Show feedback
+    const copyButton = apiKeyInput.nextElementSibling;
+    const originalText = copyButton.textContent;
+    copyButton.textContent = '{% trans "Copied!" %}';
+    setTimeout(() => {
+        copyButton.textContent = originalText;
+    }, 2000);
 }
 
 function getCookie(name) {

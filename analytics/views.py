@@ -1,13 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.db import models
 
-from .models import UserProfile
+from .models import UserProfile, EmailFooter
 from campaigns.models import Campaign, EmailEvent
 from subscribers.models import List
 from campaigns.tasks import process_email_open, process_email_click
@@ -230,3 +233,90 @@ def update_profile_settings(request):
             'promo_url': profile.promo_url,
             'send_without_unsubscribe': profile.send_without_unsubscribe,
         })
+
+
+# Footer Management Views
+@login_required
+def footer_list(request):
+    """List all footers for the user."""
+    footers = EmailFooter.objects.filter(user=request.user)
+    return render(request, 'analytics/footer_list.html', {
+        'footers': footers
+    })
+
+
+@login_required
+def footer_create(request):
+    """Create a new footer."""
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        html_content = request.POST.get('html_content')
+        is_default = request.POST.get('is_default') == 'on'
+        
+        if name and html_content:
+            footer = EmailFooter.objects.create(
+                user=request.user,
+                name=name,
+                html_content=html_content,
+                is_default=is_default
+            )
+            messages.success(request, _('Footer created successfully!'))
+            return redirect('analytics:footer_list')
+        else:
+            messages.error(request, _('Please provide both name and content.'))
+    
+    return render(request, 'analytics/footer_form.html', {
+        'footer': None,
+        'is_create': True
+    })
+
+
+@login_required
+def footer_edit(request, footer_id):
+    """Edit an existing footer."""
+    footer = get_object_or_404(EmailFooter, id=footer_id, user=request.user)
+    
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        html_content = request.POST.get('html_content')
+        is_default = request.POST.get('is_default') == 'on'
+        
+        if name and html_content:
+            footer.name = name
+            footer.html_content = html_content
+            footer.is_default = is_default
+            footer.save()
+            messages.success(request, _('Footer updated successfully!'))
+            return redirect('analytics:footer_list')
+        else:
+            messages.error(request, _('Please provide both name and content.'))
+    
+    return render(request, 'analytics/footer_form.html', {
+        'footer': footer,
+        'is_create': False
+    })
+
+
+@login_required
+def footer_delete(request, footer_id):
+    """Delete a footer."""
+    footer = get_object_or_404(EmailFooter, id=footer_id, user=request.user)
+    
+    if request.method == 'POST':
+        footer.delete()
+        messages.success(request, _('Footer deleted successfully!'))
+        return redirect('analytics:footer_list')
+    
+    return render(request, 'analytics/footer_confirm_delete.html', {
+        'footer': footer
+    })
+
+
+@login_required
+def footer_set_default(request, footer_id):
+    """Set a footer as default."""
+    footer = get_object_or_404(EmailFooter, id=footer_id, user=request.user)
+    footer.is_default = True
+    footer.save()
+    messages.success(request, _('Default footer updated successfully!'))
+    return redirect('analytics:footer_list')

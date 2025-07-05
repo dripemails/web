@@ -8,8 +8,11 @@ import uuid
 class Campaign(models.Model):
     """Campaign model representing an email sequence."""
     FREQUENCY_CHOICES = [
+        ('minutes', _('Minutes')),
         ('hours', _('Hours')),
         ('days', _('Days')),
+        ('weeks', _('Weeks')),
+        ('months', _('Months')),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -65,8 +68,9 @@ class Email(models.Model):
     body_html = models.TextField(_('HTML Body'))
     body_text = models.TextField(_('Text Body'))
     wait_time = models.IntegerField(_('Wait Time'), default=1, help_text=_("Time to wait before sending this email"))
-    wait_unit = models.CharField(_('Wait Unit'), max_length=5, choices=Campaign.FREQUENCY_CHOICES, default='days')
+    wait_unit = models.CharField(_('Wait Unit'), max_length=7, choices=Campaign.FREQUENCY_CHOICES, default='days')
     order = models.PositiveIntegerField(_('Order'), default=0)
+    footer = models.ForeignKey('analytics.EmailFooter', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('Footer'))
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
     

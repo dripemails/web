@@ -65,13 +65,12 @@ def email_list_create(request, campaign_id):
         # Set the order to be the next available number
         data = request.data.copy()
         data['order'] = campaign.emails.count()
-        data['campaign'] = campaign.id
-        
-        serializer = EmailSerializer(data=data)
+        # Remove data['campaign'] = campaign.id
+        serializer = EmailSerializer(data=data, context={'request': request})
         if serializer.is_valid():
-            email = serializer.save()
+            email = serializer.save(campaign=campaign)
             return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+        return Response({'error': 'Validation failed', 'details': serializer.errors}, status=400)
 
 @login_required
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -86,11 +85,11 @@ def email_detail(request, campaign_id, email_id):
         return Response(serializer.data)
     
     elif request.method == 'PUT':
-        serializer = EmailSerializer(email, data=request.data)
+        serializer = EmailSerializer(email, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        return Response({'error': 'Validation failed', 'details': serializer.errors}, status=400)
     
     elif request.method == 'DELETE':
         email.delete()
@@ -141,9 +140,11 @@ def campaign_edit(request, campaign_id):
     """Edit campaign and its templates."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     emails = campaign.emails.all().order_by('order')
+    lists = List.objects.filter(user=request.user)
     return render(request, 'campaigns/edit.html', {
         'campaign': campaign,
-        'emails': emails
+        'emails': emails,
+        'lists': lists
     })
 
 @login_required
@@ -157,9 +158,14 @@ def campaign_template(request, campaign_id=None):
         if template_id:
             template = get_object_or_404(Email, id=template_id, campaign=campaign)
     
+    # Get user's footers
+    from analytics.models import EmailFooter
+    user_footers = EmailFooter.objects.filter(user=request.user)
+    
     context = {
         'campaign': campaign,
         'template': template,
+        'user_footers': user_footers,
         'wait_units': [
             ('minutes', _('Minutes')),
             ('hours', _('Hours')),
@@ -256,6 +262,28 @@ def upload_contacts(request):
 @login_required
 def campaign_create(request):
     """Render campaign creation page."""
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        subscriber_list_id = request.POST.get('subscriber_list')
+        
+        if name:
+            subscriber_list = None
+            if subscriber_list_id:
+                subscriber_list = get_object_or_404(List, id=subscriber_list_id, user=request.user)
+            
+            campaign = Campaign.objects.create(
+                user=request.user,
+                name=name,
+                description=description or '',
+                subscriber_list=subscriber_list
+            )
+            
+            messages.success(request, _('Campaign created successfully!'))
+            return redirect('campaigns:edit', campaign_id=campaign.id)
+        else:
+            messages.error(request, _('Please provide a campaign name.'))
+    
     return render(request, 'campaigns/create.html', {
         'subscriber_lists': List.objects.filter(user=request.user)
     })

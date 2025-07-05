@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load i18n_utils %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -44,7 +45,7 @@
                     <!-- Language Selector -->
                     <form action="{% url 'set_language' %}" method="post" class="inline-block">
                         {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <input name="next" type="hidden" value="{% get_path_without_language %}">
                         <select name="language" onchange="this.form.submit()" class="bg-transparent text-gray-600 border-none focus:ring-0">
                             {% get_current_language as LANGUAGE_CODE %}
                             {% get_available_languages as LANGUAGES %}

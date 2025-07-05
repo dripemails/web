@@ -3,10 +3,37 @@ from .models import Campaign, Email, EmailEvent
 from subscribers.models import List
 
 class EmailSerializer(serializers.ModelSerializer):
+    footer_id = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    
     class Meta:
         model = Email
-        fields = ['id', 'subject', 'body_html', 'body_text', 'wait_time', 'wait_unit', 'order']
+        fields = ['id', 'subject', 'body_html', 'body_text', 'wait_time', 'wait_unit', 'order', 'footer', 'footer_id']
         read_only_fields = ['id', 'created_at', 'updated_at']
+        
+    def create(self, validated_data):
+        footer_id = validated_data.pop('footer_id', None)
+        if footer_id and footer_id.strip():
+            from analytics.models import EmailFooter
+            try:
+                footer = EmailFooter.objects.get(id=footer_id, user=self.context['request'].user)
+                validated_data['footer'] = footer
+            except EmailFooter.DoesNotExist:
+                pass
+        return super().create(validated_data)
+        
+    def update(self, instance, validated_data):
+        footer_id = validated_data.pop('footer_id', None)
+        if footer_id and footer_id.strip():
+            from analytics.models import EmailFooter
+            try:
+                footer = EmailFooter.objects.get(id=footer_id, user=self.context['request'].user)
+                validated_data['footer'] = footer
+            except EmailFooter.DoesNotExist:
+                validated_data['footer'] = None
+        else:
+            validated_data['footer'] = None
+            
+        return super().update(instance, validated_data)
         
     def validate_order(self, value):
         """Ensure order starts from 0."""

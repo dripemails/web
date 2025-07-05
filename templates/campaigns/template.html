@@ -3,6 +3,19 @@
 
 {% block title %}{% trans "Email Template" %} - DripEmails.org{% endblock %}
 
+{% block extra_head %}
+<!-- Quill.js - Free WYSIWYG Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<style>
+    .ql-editor {
+        min-height: 300px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="min-h-screen bg-gray-100 py-12">
     <div class="container mx-auto px-4">
@@ -13,7 +26,8 @@
                     <p class="text-indigo-100">{% trans "Design your email template" %}</p>
                 </div>
                 
-                <form id="templateForm" class="p-8">
+                <form id="templateForm" class="p-8" method="POST" action="{% if template %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
+                    {% csrf_token %}
                     <div class="space-y-6">
                         <div>
                             <label for="subject" class="block text-sm font-medium text-gray-700">{% trans "Email Subject" %}</label>
@@ -70,10 +84,22 @@
                             </div>
                             
                             <div>
-                                <label for="body_html" class="sr-only">{% trans "Email Content" %}</label>
-                                <textarea id="body_html" name="body_html" rows="12" required
-                                          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                          placeholder="{% trans "Enter your email content here..." %}"></textarea>
+                                <label for="body_html" class="block text-sm font-medium text-gray-700 mb-2">{% trans "Email Content" %}</label>
+                                <div id="editor" class="border border-gray-300 rounded-md"></div>
+                                <textarea id="body_html" name="body_html" style="display: none;"></textarea>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="footer_select" class="block text-sm font-medium text-gray-700 mb-2">{% trans "Email Footer" %}</label>
+                                <select id="footer_select" name="footer_id" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="">{% trans "No footer" %}</option>
+                                    {% for footer in user_footers %}
+                                        <option value="{{ footer.id }}" {% if footer.is_default %}selected{% endif %}>{{ footer.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    {% trans "Select a footer to append to your email, or leave empty for no footer." %}
+                                </p>
                             </div>
                         </div>
                         
@@ -107,7 +133,7 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/"
+        url = "{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/"
 headers = {
     "Authorization": "Bearer {{ request.user.auth_token.key }}",
     "Content-Type": "application/json"
@@ -125,7 +151,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                 
                                 <div class="space-y-2">
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "JavaScript" %}</h3>
-                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/", {
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/", {
     method: "POST",
     headers: {
         "Authorization": "Bearer {{ request.user.auth_token.key }}",
@@ -146,7 +172,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>require 'net/http'
 require 'json'
 
-uri = URI("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/")
+uri = URI("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/")
 headers = {
     'Authorization' => 'Bearer {{ request.user.auth_token.key }}',
     'Content-Type' => 'application/json'
@@ -228,6 +254,23 @@ response = http.request(request)</code></pre>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Quill editor
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                ['link', 'image'],
+                ['clean']
+            ]
+        },
+        placeholder: '{% trans "Enter your email content here..." %}'
+    });
+    
     const previewBtn = document.getElementById('previewBtn');
     const testBtn = document.getElementById('testBtn');
     const previewModal = document.getElementById('previewModal');
@@ -239,13 +282,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load template data if editing
     if (templateId) {
-        fetch(`/api/campaigns/${campaignId}/emails/${templateId}/`)
+        fetch(`/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('subject').value = data.subject;
                 document.getElementById('wait_time').value = data.wait_time;
                 document.getElementById('wait_unit').value = data.wait_unit;
-                document.getElementById('body_html').value = data.body_html;
+                
+                // Set content in Quill editor
+                quill.root.innerHTML = data.body_html;
+                
+                // Set footer if available
+                if (data.footer_id) {
+                    document.getElementById('footer_select').value = data.footer_id;
+                }
             })
             .catch(error => {
                 console.error('Error loading template:', error);
@@ -255,8 +305,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Preview functionality
     previewBtn.addEventListener('click', function() {
-        const content = document.getElementById('body_html').value;
-        document.getElementById('previewContent').innerHTML = content;
+        const content = quill.root.innerHTML;
+        
+        // Get selected footer content
+        const footerSelect = document.getElementById('footer_select');
+        const selectedFooterId = footerSelect.value;
+        let footerContent = '';
+        
+        if (selectedFooterId) {
+            // Find the footer content from the options
+            const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
+            if (footerOption) {
+                // This is a simplified approach - in a real implementation, you'd fetch the footer content
+                footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">[Footer content would appear here]</div>';
+            }
+        }
+        
+        document.getElementById('previewContent').innerHTML = content + footerContent;
         previewModal.classList.remove('hidden');
     });
     
@@ -269,17 +334,38 @@ document.addEventListener('DOMContentLoaded', function() {
     templateForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        // Show loading state
+        const submitBtn = templateForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = '{% trans "Saving..." %}';
+        submitBtn.disabled = true;
+        
+        // Get content from Quill editor
+        const htmlContent = quill.root.innerHTML;
+        
+        // Get selected footer
+        const footerSelect = document.getElementById('footer_select');
+        const selectedFooterId = footerSelect.value;
+        
         const data = {
             subject: document.getElementById('subject').value,
             wait_time: parseInt(document.getElementById('wait_time').value),
             wait_unit: document.getElementById('wait_unit').value,
-            body_html: document.getElementById('body_html').value,
-            body_text: document.getElementById('body_html').value.replace(/<[^>]*>/g, '') // Convert HTML to plain text
+            body_html: htmlContent,
+            body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
         };
         
+        // Only add footer_id if a footer is selected
+        if (selectedFooterId && selectedFooterId.trim()) {
+            data.footer_id = selectedFooterId;
+        }
+        
         const url = templateId 
-            ? `/api/campaigns/${campaignId}/emails/${templateId}/`
-            : `/api/campaigns/${campaignId}/emails/`;
+            ? `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`
+            : `/campaigns/api/campaigns/${campaignId}/emails/`;
+        
+        console.log('Submitting data:', data);
+        console.log('URL:', url);
         
         fetch(url, {
             method: templateId ? 'PUT' : 'POST',
@@ -291,16 +377,30 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                return response.json().then(errorData => {
+                    throw new Error(errorData.error || 'Network response was not ok');
+                });
             }
             return response.json();
         })
         .then(data => {
-            window.location.href = `/campaigns/${campaignId}/`;
+            // Show success message
+            alert('{% trans "Template saved successfully!" %}');
+            // Redirect to campaign edit page
+            window.location.href = `/campaigns/${campaignId}/edit/`;
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('{% trans "An error occurred while saving the template. Please try again." %}');
+            let errorMessage = '{% trans "An error occurred while saving the template. Please try again." %}';
+            if (error.message) {
+                errorMessage += '\n\nError: ' + error.message;
+            }
+            alert(errorMessage);
+        })
+        .finally(() => {
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
     });
     
@@ -319,8 +419,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         const url = templateId 
-            ? `/api/campaigns/${campaignId}/emails/${templateId}/test/`
-            : `/api/campaigns/${campaignId}/emails/test/`;
+            ? `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/test/`
+            : `/campaigns/api/campaigns/${campaignId}/emails/test/`;
         
         fetch(url, {
             method: 'POST',

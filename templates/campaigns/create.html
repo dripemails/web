@@ -8,7 +8,8 @@
     <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-900 mb-8">{% trans "Create New Campaign" %}</h1>
         
-        <form id="campaignForm" class="space-y-6">
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">{% trans "Campaign Name" %}</label>
                 <input type="text" name="name" id="name" required
@@ -28,7 +29,7 @@
                         <select name="subscriber_list" id="subscriber_list"
                                 class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">{% trans "Select a list or upload contacts" %}</option>
-                            {% for list in lists %}
+                            {% for list in subscriber_lists %}
                                 <option value="{{ list.id }}">{{ list.name }}</option>
                             {% endfor %}
                         </select>
@@ -140,32 +141,7 @@ $(document).ready(function() {
         });
     });
     
-    // Handle campaign form submission
-    $('#campaignForm').submit(function(e) {
-        e.preventDefault();
-        
-        const formData = {
-            name: $('#name').val(),
-            description: $('#description').val(),
-            subscriber_list: $('#subscriber_list').val() || null
-        };
-        
-        $.ajax({
-            url: '/api/campaigns/',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            success: function(response) {
-                window.location.href = '/campaigns/' + response.id + '/edit/';
-            },
-            error: function(xhr) {
-                alert(xhr.responseJSON.error || '{% trans "An error occurred while creating the campaign" %}');
-            }
-        });
-    });
+    // Form submission is now handled by Django's form processing
     
     // Helper function to get CSRF token
     function getCookie(name) {

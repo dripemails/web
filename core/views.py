@@ -63,7 +63,28 @@ def dashboard_api(request):
 @login_required
 def dashboard(request):
     """Render the dashboard for authenticated users."""
-    return render(request, 'core/dashboard.html')
+    # Get user's campaigns
+    campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+    
+    # Get user's lists
+    lists = List.objects.filter(user=request.user).order_by('-created_at')
+    
+    # Calculate stats
+    campaigns_count = campaigns.count()
+    lists_count = lists.count()
+    subscribers_count = sum(list_obj.subscribers_count for list_obj in lists)
+    sent_emails_count = sum(campaign.sent_count for campaign in campaigns)
+    
+    context = {
+        'campaigns': campaigns,
+        'lists': lists,
+        'campaigns_count': campaigns_count,
+        'lists_count': lists_count,
+        'subscribers_count': subscribers_count,
+        'sent_emails_count': sent_emails_count,
+    }
+    
+    return render(request, 'core/dashboard.html', context)
 
 def home(request):
     """Render the landing page."""

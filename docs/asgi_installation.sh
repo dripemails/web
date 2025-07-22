@@ -43,7 +43,7 @@ sudo apt update && sudo apt upgrade -y
 
 # Install system dependencies
 print_status "Installing system dependencies..."
-sudo apt install -y python3 python3-pip python3-venv nginx mysql-server redis-server supervisor git curl
+sudo apt install -y python3 python3-pip python3-venv nginx postgresql postgresql-contrib redis-server supervisor git curl
 
 # Install Python dependencies
 print_status "Installing Python dependencies..."
@@ -61,7 +61,7 @@ source /home/dripemails/venv/bin/activate
 
 # Install Python packages
 print_status "Installing Python packages..."
-pip install django daphne uvicorn gunicorn mysqlclient redis celery django-cors-headers django-allauth djangorestframework
+pip install django daphne uvicorn gunicorn psycopg2-binary redis celery django-cors-headers django-allauth djangorestframework python-dotenv
 
 # Clone or setup project
 print_status "Setting up project directory..."
@@ -81,12 +81,12 @@ SECRET_KEY=your-super-secret-key-change-this
 DEBUG=False
 ALLOWED_HOSTS=dripemails.org,www.dripemails.org,api.dripemails.org
 
-# Database Settings
+# Database Settings (PostgreSQL)
 DB_NAME=dripemails
 DB_USER=dripemails
 DB_PASSWORD=password
 DB_HOST=localhost
-DB_PORT=3306
+DB_PORT=5432
 
 # Email Settings
 EMAIL_HOST=smtp.gmail.com
@@ -103,12 +103,12 @@ EOF
 
 print_warning "Please edit /home/dripemails/web/.env with your actual values!"
 
-# Setup MySQL
-print_status "Setting up MySQL database..."
-sudo mysql -e "CREATE DATABASE IF NOT EXISTS dripemails CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-sudo mysql -e "CREATE USER IF NOT EXISTS 'dripemails'@'localhost' IDENTIFIED BY 'password';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON dripemails.* TO 'dripemails'@'localhost';"
-sudo mysql -e "FLUSH PRIVILEGES;"
+# Setup PostgreSQL
+print_status "Setting up PostgreSQL database..."
+sudo -u postgres psql -c "CREATE DATABASE dripemails;"
+sudo -u postgres psql -c "CREATE USER dripemails WITH PASSWORD 'password';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE dripemails TO dripemails;"
+sudo -u postgres psql -c "ALTER USER dripemails CREATEDB;"
 
 # Setup Redis
 print_status "Configuring Redis..."

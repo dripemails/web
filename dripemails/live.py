@@ -28,8 +28,7 @@ ALLOWED_HOSTS = [
     'dripemails.org',
     'www.dripemails.org',
     'api.dripemails.org',
-    'dripemail.org',
-    'www.dripemail.org',
+    'docs.dripemails.org',
     'localhost',
     '127.0.0.1',
 ]
@@ -51,10 +50,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'crispy_forms',
-    'crispy_tailwind',
-    'django_celery_beat',
-    'django_celery_results',
     
     # Local apps
     'core.apps.CoreConfig',
@@ -67,7 +62,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -89,7 +83,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processors.current_year',
             ],
         },
     },
@@ -98,17 +91,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dripemails.wsgi.application'
 
 # Database Configuration
-# PostgreSQL for production
+# MySQL for production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DB_NAME', 'dripemails'),
         'USER': os.environ.get('DB_USER', 'dripemails'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'dripemails'),
+        'HOST': os.environ.get('DB_HOST', '10.124.0.3'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
-            'charset': 'utf8',
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'autocommit': True,
         },
         'CONN_MAX_AGE': 60,
         'CONN_HEALTH_CHECKS': True,
@@ -123,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
         'OPTIONS': {
-            'min_length': 5,
+            'min_length': 8,
         }
     },
     {
@@ -140,20 +135,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Available languages
-from django.utils.translation import gettext_lazy as _
-LANGUAGES = [
-    ('en', _('English')),
-    ('es', _('Spanish')),
-    ('fr', _('French')),
-    ('de', _('German')),
-]
-
-# Location of translation files
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
-
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -168,11 +149,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Crispy Forms
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
-CRISPY_TEMPLATE_PACK = 'tailwind'
-
-# Django AllAuth Configuration
+# Django Allauth Configuration
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -188,8 +165,6 @@ ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -225,6 +200,8 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "https://dripemails.org",
     "https://www.dripemails.org",
+    "https://dripemail.org",
+    "https://www.dripemail.org",
     "https://api.dripemails.org",
 ]
 
@@ -324,7 +301,6 @@ CELERY_TASK_ALWAYS_EAGER = False
 CELERY_TASK_EAGER_PROPAGATES = True
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Cache Configuration
 CACHES = {

@@ -18,22 +18,23 @@ sudo apt update && sudo apt upgrade -y
 
 ### Install Dependencies
 ```bash
-sudo apt install -y python3 python3-pip python3-venv nginx mysql-server redis-server supervisor git curl
+sudo apt install -y python3 python3-pip python3-venv nginx postgresql postgresql-contrib redis-server supervisor git curl
 ```
 
 ## 2. Database Setup
 
-### Configure MySQL
+### Configure PostgreSQL
 ```bash
-sudo mysql_secure_installation
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
 ```
 
 ### Create Database and User
-```sql
-CREATE DATABASE dripemails CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'dripemails'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON dripemails.* TO 'dripemails'@'localhost';
-FLUSH PRIVILEGES;
+```bash
+sudo -u postgres psql -c "CREATE DATABASE dripemails;"
+sudo -u postgres psql -c "CREATE USER dripemails WITH PASSWORD 'password';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE dripemails TO dripemails;"
+sudo -u postgres psql -c "ALTER USER dripemails CREATEDB;"
 ```
 
 ## 3. Application Setup
@@ -60,7 +61,7 @@ pip install --upgrade pip
 
 ### Install Python Dependencies
 ```bash
-pip install django daphne uvicorn gunicorn mysqlclient redis celery django-cors-headers django-allauth djangorestframework python-dotenv
+pip install django daphne uvicorn gunicorn psycopg2-binary redis celery django-cors-headers django-allauth djangorestframework python-dotenv
 ```
 
 ## 4. Environment Configuration
@@ -205,7 +206,7 @@ curl -I https://dripemails.org
 cat > /home/dripemails/web/backup.sh << 'EOF'
 #!/bin/bash
 DATE=$(date +%Y%m%d_%H%M%S)
-mysqldump -u dripemails -p'password' dripemails > /home/dripemails/web/backups/db_backup_$DATE.sql
+pg_dump -h localhost -U dripemails -d dripemails > /home/dripemails/web/backups/db_backup_$DATE.sql
 tar -czf /home/dripemails/web/backups/media_backup_$DATE.tar.gz /home/dripemails/web/media/
 find /home/dripemails/web/backups/ -name "*.sql" -mtime +7 -delete
 find /home/dripemails/web/backups/ -name "*.tar.gz" -mtime +7 -delete
@@ -259,9 +260,9 @@ query_cache_type = 1
 - Check logs: `sudo supervisorctl tail dripemails-daphne`
 
 **Database Connection Error**
-- Verify MySQL is running: `sudo systemctl status mysql`
+- Verify PostgreSQL is running: `sudo systemctl status postgresql`
 - Check credentials in .env file
-- Test connection: `mysql -u dripemails -p dripemails`
+- Test connection: `psql -h localhost -U dripemails -d dripemails`
 
 **Static Files Not Loading**
 - Run collectstatic: `cd /home/dripemails/web && source ../venv/bin/activate && python manage.py collectstatic --noinput`

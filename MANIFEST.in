@@ -1,0 +1,17 @@
+include README.md
+include LICENSE
+include CONTRIBUTING.md
+include requirements.txt
+include setup.py
+include smtp_config_example.json
+
+recursive-include core *.py
+recursive-include tests *.py
+recursive-include docs *.md *.txt *.py *.sh *.json
+
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude *.log 

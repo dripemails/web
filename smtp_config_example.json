@@ -1,0 +1,19 @@
+{
+    "debug": false,
+    "save_to_database": true,
+    "log_to_file": true,
+    "log_file": "email_log.jsonl",
+    "forward_to_webhook": false,
+    "webhook_url": "https://api.example.com/webhook",
+    "allowed_domains": [
+        "dripemails.org",
+        "localhost",
+        "127.0.0.1"
+    ],
+    "rate_limit": 100,
+    "rate_limit_window": 3600,
+    "ssl_cert_file": null,
+    "ssl_key_file": null,
+    "max_message_size": 10485760,
+    "timeout": 30
+} 

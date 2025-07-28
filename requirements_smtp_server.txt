@@ -1,0 +1,19 @@
+# Core dependencies for DripEmails SMTP Server
+aiosmtpd>=1.4.4
+atpublic>=2.3
+attrs>=21.0.0
+
+# Optional dependencies
+# Django integration (optional)
+# django>=4.0.0
+
+# Webhook support (optional)
+# aiohttp>=3.8.0
+
+# Development dependencies (install with pip install -r requirements_smtp_server.txt[dev])
+# pytest>=7.0.0
+# pytest-asyncio>=0.21.0
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0
+# coverage>=7.0.0 

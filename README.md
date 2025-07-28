@@ -1,356 +1,327 @@
-# DripEmails SMTP Server
+# DripEmails.org - Modern Email Marketing Platform
 
-A modern, async SMTP server built with `aiosmtpd` for Python 3.11+. Perfect for development, testing, and production email handling.
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+[![Django](https://img.shields.io/badge/Django-4.0%2B-green.svg)](https://www.djangoproject.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI](https://img.shields.io/badge/PyPI-dripemails--smtp--server-blue.svg)](https://pypi.org/project/dripemails-smtp-server/)
+
+> **A modern, open-source email marketing platform built with Django and Python 3.11+**
+
+DripEmails.org is a comprehensive email marketing solution that combines powerful drip campaign management, subscriber analytics, and a custom SMTP server. Built with modern web technologies and designed for scalability, it's perfect for businesses looking to take control of their email marketing infrastructure.
 
 ## 🚀 Features
 
-- **Modern Async Architecture**: Built with `aiosmtpd` for high-performance async email handling
-- **Python 3.11+ Compatible**: Optimized for modern Python versions
-- **Django Integration**: Seamless integration with Django applications
-- **Webhook Support**: Forward email metadata to external services
-- **Database Logging**: Store email metadata in your database
-- **Rate Limiting**: Built-in protection against spam and abuse
-- **Authentication**: Support for PLAIN and LOGIN authentication
-- **Debug Mode**: Comprehensive logging and debugging capabilities
-- **Production Ready**: Designed for both development and production use
+### 📧 **Email Campaign Management**
+- **Drip Campaigns**: Create automated email sequences with customizable delays
+- **Email Templates**: Rich HTML and text email templates with dynamic content
+- **Scheduling**: Advanced email scheduling with timezone support
+- **A/B Testing**: Built-in A/B testing for subject lines and content
+- **Campaign Analytics**: Detailed tracking and reporting
 
-## 📋 Requirements
+### 👥 **Subscriber Management**
+- **Import/Export**: Bulk subscriber import from CSV/Excel files
+- **Segmentation**: Advanced subscriber segmentation and targeting
+- **Subscription Management**: Double opt-in, unsubscribe handling
+- **Custom Fields**: Extensible subscriber data fields
+- **API Integration**: RESTful API for subscriber management
 
-- Python 3.11 or higher
-- `aiosmtpd>=1.4.4`
-- Optional: Django 4.0+ for database integration
-- Optional: `aiohttp>=3.8.0` for webhook support
+### 📊 **Analytics & Reporting**
+- **Real-time Analytics**: Live campaign performance tracking
+- **Email Footer Analytics**: Track engagement through custom footers
+- **Conversion Tracking**: Monitor click-through rates and conversions
+- **Dashboard**: Beautiful, responsive analytics dashboard
+- **Export Reports**: Generate detailed reports in multiple formats
 
-## 🛠️ Installation
+### 🔧 **Custom SMTP Server**
+- **Built-in SMTP Server**: Custom `aiosmtpd`-based email server
+- **Authentication**: Secure SMTP authentication
+- **Rate Limiting**: Built-in spam protection and rate limiting
+- **Webhook Support**: Real-time email processing notifications
+- **Django Integration**: Seamless integration with Django models
 
-### From PyPI (Coming Soon)
+### 🛡️ **Security & Compliance**
+- **GDPR Compliance**: Built-in privacy controls and data protection
+- **Email Authentication**: SPF, DKIM, and DMARC support
+- **Secure Authentication**: Django Allauth integration
+- **Rate Limiting**: Protection against abuse and spam
+- **Data Encryption**: Secure data storage and transmission
 
-```bash
-pip install dripemails-smtp
+### 🎨 **Modern UI/UX**
+- **Responsive Design**: Mobile-first, responsive interface
+- **Modern Frontend**: Built with React, TypeScript, and Tailwind CSS
+- **Dark Mode**: Optional dark theme support
+- **Accessibility**: WCAG 2.1 compliant design
+- **Progressive Web App**: PWA capabilities for mobile users
+
+## 🏗️ Architecture
+
 ```
-
-### From Source
-
-```bash
-git clone https://github.com/dripemails/dripemails-smtp.git
-cd dripemails-smtp
-pip install -e .
+dripemails.org/
+├── 📁 core/                 # Core Django app with SMTP server
+├── 📁 campaigns/            # Email campaign management
+├── 📁 subscribers/          # Subscriber management
+├── 📁 analytics/            # Analytics and reporting
+├── 📁 smtp_server/          # Standalone SMTP server package
+├── 📁 templates/            # Django templates
+├── 📁 static/               # Static assets
+├── 📁 docs/                 # Documentation
+└── 📁 tests/                # Test suite
 ```
 
 ## 🚀 Quick Start
 
-### Basic Usage
+### Prerequisites
 
-```python
-from core.smtp_server import create_smtp_server
+- **Python 3.11+** (3.12.3 recommended)
+- **Node.js 18+** (for frontend development)
+- **MySQL/PostgreSQL** database
+- **Redis** (for caching and Celery)
 
-# Create server with default configuration
-server = create_smtp_server()
+### Installation
 
-# Start server on localhost:1025
-server.start('localhost', 1025)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/dripemails/dripemails.org.git
+   cd dripemails.org
+   ```
 
-# Keep server running
-import time
-try:
-    while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    server.stop()
-```
+2. **Set up Python environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/macOS
+   # or
+   venv\Scripts\activate     # Windows
+   
+   pip install -r requirements.txt
+   ```
 
-### Django Integration
+3. **Set up frontend**
+   ```bash
+   npm install
+   npm run build
+   ```
 
-```python
-# In your Django management command
-from django.core.management.base import BaseCommand
-from core.smtp_server import run_smtp_server
+4. **Configure environment**
+   ```bash
+   cp docs/env.example .env
+   # Edit .env with your configuration
+   ```
 
-class Command(BaseCommand):
-    help = 'Run SMTP server'
-    
-    def handle(self, *args, **options):
-        config = {
-            'debug': True,
-            'save_to_database': True,
-            'allowed_domains': ['yourdomain.com'],
-        }
-        run_smtp_server('localhost', 1025, config)
-```
+5. **Run migrations**
+   ```bash
+   python manage.py migrate
+   ```
 
-### Command Line Usage
+6. **Create superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-```bash
-# Run with debug mode
-python -m core.smtp_server --debug --port 1025
+7. **Start the development server**
+   ```bash
+   python manage.py runserver
+   ```
 
-# Run with custom configuration
-python -m core.smtp_server --config smtp_config.json --port 1025
-```
+8. **Start the SMTP server** (optional)
+   ```bash
+   python manage.py run_smtp_server --debug --port 1025
+   ```
 
-## ⚙️ Configuration
+## 📧 SMTP Server
 
-### Basic Configuration
+DripEmails includes a custom SMTP server built with `aiosmtpd`. You can use it standalone or as part of the full platform.
 
-```python
-config = {
-    'debug': False,                    # Enable debug output
-    'save_to_database': True,          # Save emails to database
-    'log_to_file': True,               # Log to file
-    'log_file': 'email_log.jsonl',     # Log file path
-    'allowed_domains': [               # Allowed recipient domains
-        'yourdomain.com',
-        'localhost',
-        '127.0.0.1'
-    ],
-    'webhook_url': None,               # Webhook URL for notifications
-    'forward_to_webhook': False,       # Enable webhook forwarding
-    'auth_enabled': True,              # Enable authentication
-    'allowed_users': ['founders'],     # Allowed users for auth
-}
-```
-
-### Configuration File (JSON)
-
-```json
-{
-    "debug": true,
-    "save_to_database": true,
-    "log_to_file": true,
-    "log_file": "email_log.jsonl",
-    "allowed_domains": ["yourdomain.com", "localhost"],
-    "webhook_url": "https://api.yourdomain.com/webhook",
-    "forward_to_webhook": true,
-    "auth_enabled": true,
-    "allowed_users": ["founders", "admin"],
-    "max_message_size": 10485760,
-    "timeout": 30
-}
-```
-
-## 🔧 Django Integration
-
-### 1. Add to INSTALLED_APPS
-
-```python
-INSTALLED_APPS = [
-    # ... other apps
-    'core',
-]
-```
-
-### 2. Run Migrations
+### Quick SMTP Server Setup
 
 ```bash
-python manage.py makemigrations core
-python manage.py migrate
+# Install the standalone SMTP server
+pip install dripemails-smtp-server
+
+# Run the server
+dripemails-smtp --port 25 --debug
 ```
 
-### 3. Create Management Command
+### Features
+- **Async Performance**: Built with `aiosmtpd` for high performance
+- **Authentication**: PLAIN and LOGIN authentication support
+- **Rate Limiting**: Built-in spam protection
+- **Webhook Integration**: Real-time email processing
+- **Django Integration**: Seamless database integration
+
+For detailed SMTP server documentation, see [README.smtp_server.md](smtp_server/README.smtp_server.md).
+
+## 🔧 Configuration
+
+### Django Settings
 
 ```python
-# core/management/commands/run_smtp_server.py
-from django.core.management.base import BaseCommand
-from core.smtp_server import run_smtp_server
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'your_username'
+EMAIL_HOST_PASSWORD = 'your_password'
+DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'
 
-class Command(BaseCommand):
-    help = 'Run SMTP server'
-    
-    def add_arguments(self, parser):
-        parser.add_argument('--port', type=int, default=1025)
-        parser.add_argument('--debug', action='store_true')
-        parser.add_argument('--config', type=str)
-    
-    def handle(self, *args, **options):
-        config = {
-            'debug': options['debug'],
-            'save_to_database': True,
-        }
-        run_smtp_server('localhost', options['port'], config)
+# SMTP Server Configuration
+SMTP_SERVER_CONFIG = {
+    'host': 'localhost',
+    'port': 25,
+    'auth_enabled': True,
+    'allowed_domains': ['yourdomain.com'],
+    'max_message_size': 10485760,  # 10MB
+    'rate_limit': 100,  # emails per minute
+}
 ```
 
-### 4. Run Server
+### Environment Variables
 
 ```bash
-python manage.py run_smtp_server --debug --port 1025
+# Database
+DB_NAME=dripemails
+DB_USER=dripemails
+DB_PASSWORD=your_password
+DB_HOST=localhost
+
+# Email
+EMAIL_HOST=localhost
+EMAIL_PORT=25
+EMAIL_HOST_USER=your_username
+EMAIL_HOST_PASSWORD=your_password
+
+# Redis
+REDIS_URL=redis://localhost:6379/0
+
+# Django
+SECRET_KEY=your_secret_key
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ```
 
-## 📧 Email Processing
+## 📊 API Documentation
 
-### Email Metadata Structure
+DripEmails provides a comprehensive REST API for integration:
 
-```python
+### Campaigns API
+```bash
+# List campaigns
+GET /api/campaigns/
+
+# Create campaign
+POST /api/campaigns/
 {
-    'from': 'sender@example.com',
-    'to': 'recipient@yourdomain.com',
-    'subject': 'Test Email',
-    'date': '2024-01-01T12:00:00',
-    'message_id': '<unique-message-id>',
-    'received_at': '2024-01-01T12:00:00.123456',
-    'size': 1024,
-    'body': 'Email content...'
+    "name": "Welcome Series",
+    "subject": "Welcome to our platform",
+    "content": "<h1>Welcome!</h1>",
+    "delay_hours": 24
 }
+
+# Send campaign
+POST /api/campaigns/{id}/send/
 ```
 
-### Database Model (Django)
+### Subscribers API
+```bash
+# List subscribers
+GET /api/subscribers/
 
-```python
-from django.db import models
-
-class EmailLog(models.Model):
-    sender = models.EmailField(max_length=254)
-    recipient = models.EmailField(max_length=254)
-    subject = models.CharField(max_length=255)
-    body = models.TextField()
-    message_id = models.CharField(max_length=255, blank=True)
-    received_at = models.DateTimeField(auto_now_add=True)
-    size = models.IntegerField(default=0)
-    processed = models.BooleanField(default=False)
-    error_message = models.TextField(blank=True)
-    
-    class Meta:
-        ordering = ['-received_at']
-        indexes = [
-            models.Index(fields=['sender']),
-            models.Index(fields=['recipient']),
-            models.Index(fields=['received_at']),
-        ]
-```
-
-## 🔐 Authentication
-
-### Supported Methods
-
-- **PLAIN**: Simple username/password authentication
-- **LOGIN**: Base64 encoded credentials
-
-### Django User Authentication
-
-The server integrates with Django's authentication system:
-
-```python
-# Users must exist in Django and be active
-# Authentication checks against Django's User model
-# Supports user groups and permissions
-```
-
-## 🌐 Webhook Support
-
-### Webhook Payload
-
-```json
+# Add subscriber
+POST /api/subscribers/
 {
-    "from": "sender@example.com",
-    "to": "recipient@yourdomain.com",
-    "subject": "Test Email",
-    "date": "2024-01-01T12:00:00",
-    "message_id": "<unique-message-id>",
-    "received_at": "2024-01-01T12:00:00.123456",
-    "size": 1024,
-    "body": "Email content..."
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe"
 }
+
+# Import subscribers
+POST /api/subscribers/import/
 ```
 
-### Configuration
+### Analytics API
+```bash
+# Get campaign analytics
+GET /api/analytics/campaigns/{id}/
 
-```python
-config = {
-    'webhook_url': 'https://api.yourdomain.com/webhook',
-    'forward_to_webhook': True,
-}
+# Get subscriber analytics
+GET /api/analytics/subscribers/
+
+# Export analytics
+GET /api/analytics/export/?format=csv
 ```
 
 ## 🧪 Testing
 
-### Test Script
+```bash
+# Run all tests
+python manage.py test
 
-```python
-import smtplib
-from email.mime.text import MIMEText
+# Run specific app tests
+python manage.py test campaigns
+python manage.py test subscribers
+python manage.py test analytics
 
-def test_smtp_server(host='localhost', port=1025):
-    # Create message
-    msg = MIMEText('Test email content')
-    msg['From'] = 'test@example.com'
-    msg['To'] = 'test@yourdomain.com'
-    msg['Subject'] = 'Test Email'
-    
-    # Send email
-    server = smtplib.SMTP(host, port)
-    server.send_message(msg)
-    server.quit()
-    
-    print("Test email sent successfully!")
-
-# Run test
-test_smtp_server()
+# Run SMTP server tests
+cd smtp_server
+python -m pytest tests/
 ```
 
-### Automated Tests
+## 🚀 Deployment
+
+### Production Setup
+
+1. **Set up your server**
+   ```bash
+   # Install system dependencies
+   sudo apt update
+   sudo apt install python3.11 python3.11-venv nginx redis-server mysql-server
+   ```
+
+2. **Configure Nginx**
+   ```bash
+   # Copy nginx configuration
+   sudo cp docs/nginx.conf /etc/nginx/sites-available/dripemails
+   sudo ln -s /etc/nginx/sites-available/dripemails /etc/nginx/sites-enabled/
+   ```
+
+3. **Set up SSL**
+   ```bash
+   sudo certbot --nginx -d yourdomain.com
+   ```
+
+4. **Configure SMTP server**
+   ```bash
+   # Run SMTP server with supervisord
+   sudo cp docs/supervisord.conf /etc/supervisor/conf.d/dripemails.conf
+   sudo supervisorctl reread
+   sudo supervisorctl update
+   ```
+
+### Docker Deployment
 
 ```bash
-# Run tests
-pytest tests/
+# Build and run with Docker Compose
+docker-compose up -d
 
-# Run with coverage
-pytest --cov=core tests/
+# Or build individual containers
+docker build -t dripemails .
+docker run -p 8000:8000 dripemails
 ```
 
-## 📊 Monitoring
+## 📈 Performance
 
-### Server Statistics
+- **Email Processing**: 1000+ emails per minute
+- **Database**: Optimized queries with proper indexing
+- **Caching**: Redis-based caching for improved performance
+- **Async Processing**: Celery for background tasks
+- **CDN Ready**: Static assets optimized for CDN delivery
 
-```python
-server = create_smtp_server()
-stats = server.get_stats()
+## 🔒 Security
 
-print(f"Emails received: {stats['emails_received']}")
-print(f"Emails processed: {stats['emails_processed']}")
-print(f"Emails failed: {stats['emails_failed']}")
-print(f"Uptime: {stats['uptime']} seconds")
-```
-
-### Logging
-
-```python
-import logging
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-```
-
-## 🚀 Production Deployment
-
-### Using Supervisord
-
-```ini
-[program:dripemails-smtp]
-command=python manage.py run_smtp_server --port 25
-directory=/path/to/your/project
-user=www-data
-autostart=true
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/var/log/dripemails-smtp.log
-```
-
-### Using Docker
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-EXPOSE 25
-
-CMD ["python", "manage.py", "run_smtp_server", "--port", "25"]
-```
+- **Authentication**: Django Allauth with 2FA support
+- **Email Security**: SPF, DKIM, DMARC implementation
+- **Data Protection**: GDPR-compliant data handling
+- **Rate Limiting**: Protection against abuse
+- **Input Validation**: Comprehensive input sanitization
 
 ## 🤝 Contributing
 
@@ -358,41 +329,50 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ### Development Setup
 
-```bash
-# Clone repository
-git clone https://github.com/dripemails/dripemails-smtp.git
-cd dripemails-smtp
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes**
+4. **Run tests**
+   ```bash
+   python manage.py test
+   ```
+5. **Submit a pull request**
 
-# Install development dependencies
-pip install -e ".[dev]"
+### Code Style
 
-# Run tests
-pytest
-
-# Format code
-black core/ tests/
-
-# Lint code
-flake8 core/ tests/
-```
+- **Python**: Follow PEP 8 with Black formatting
+- **JavaScript**: ESLint with Prettier
+- **CSS**: Tailwind CSS with custom components
+- **Documentation**: Comprehensive docstrings and README updates
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-- **Documentation**: [GitHub Wiki](https://github.com/dripemails/dripemails-smtp/wiki)
-- **Issues**: [GitHub Issues](https://github.com/dripemails/dripemails-smtp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/dripemails/dripemails-smtp/discussions)
-- **Email**: founders@dripemails.org
-
 ## 🙏 Acknowledgments
 
-- Built with [aiosmtpd](https://aiosmtpd.readthedocs.io/)
-- Inspired by modern async Python patterns
-- Community feedback and contributions
+- **Django**: The web framework for perfectionists with deadlines
+- **aiosmtpd**: Asynchronous SMTP server implementation
+- **Tailwind CSS**: Utility-first CSS framework
+- **React**: JavaScript library for building user interfaces
+- **Celery**: Distributed task queue
+
+## 📞 Support
+
+- **Documentation**: [docs.dripemails.org](https://docs.dripemails.org)
+- **Issues**: [GitHub Issues](https://github.com/dripemails/dripemails.org/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/dripemails/dripemails.org/discussions)
+- **Email**: founders@dripemails.org
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=dripemails/dripemails.org&type=Date)](https://star-history.com/#dripemails/dripemails.org&Date)
 
 ---
 
 **Made with ❤️ by the DripEmails Team**
+
+*Empowering businesses to take control of their email marketing infrastructure.*

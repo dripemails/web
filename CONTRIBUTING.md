@@ -1,6 +1,6 @@
-# Contributing to DripEmails SMTP Server
+# Contributing to DripEmails.org
 
-Thank you for your interest in contributing to DripEmails SMTP Server! We welcome contributions from the community and appreciate your help in making this project better.
+Thank you for your interest in contributing to DripEmails.org! We welcome contributions from the community and appreciate your help in making this comprehensive email marketing platform better.
 
 ## 🤝 How to Contribute
 
@@ -11,11 +11,13 @@ Before creating a new issue, please:
 1. **Search existing issues** to see if your problem has already been reported
 2. **Check the documentation** to see if there's already a solution
 3. **Provide detailed information** including:
-   - Python version
+   - Python version (3.11+)
+   - Django version
    - Operating system
    - Error messages and stack traces
    - Steps to reproduce the issue
    - Expected vs actual behavior
+   - Browser/device information (for frontend issues)
 
 ### Suggesting Features
 
@@ -25,6 +27,7 @@ We welcome feature suggestions! Please:
 2. **Explain the use case** and why it would be valuable
 3. **Consider implementation** - is it feasible and maintainable?
 4. **Check existing issues** to avoid duplicates
+5. **Specify the component** (frontend, backend, SMTP server, etc.)
 
 ### Code Contributions
 
@@ -32,8 +35,8 @@ We welcome feature suggestions! Please:
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/your-username/dripemails-smtp.git
-   cd dripemails-smtp
+   git clone https://github.com/your-username/dripemails.org.git
+   cd dripemails.org
    ```
 
 2. **Create a virtual environment**
@@ -42,12 +45,28 @@ We welcome feature suggestions! Please:
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies**
+3. **Install Python dependencies**
    ```bash
-   pip install -e ".[dev]"
+   pip install -r requirements.txt
    ```
 
-4. **Create a feature branch**
+4. **Install frontend dependencies**
+   ```bash
+   npm install
+   ```
+
+5. **Set up environment**
+   ```bash
+   cp docs/env.example .env
+   # Edit .env with your configuration
+   ```
+
+6. **Run migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+7. **Create a feature branch**
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -55,178 +74,219 @@ We welcome feature suggestions! Please:
 #### Coding Standards
 
 - **Python 3.11+**: Ensure compatibility with Python 3.11 and above
+- **Django 4.0+**: Follow Django best practices and conventions
 - **Type hints**: Use type hints for function parameters and return values
 - **Docstrings**: Add docstrings to all public functions and classes
-- **Code formatting**: Use Black for code formatting
+- **Code formatting**: Use Black for Python code formatting
 - **Linting**: Follow PEP 8 guidelines and use flake8
+- **JavaScript/TypeScript**: Use ESLint and Prettier
+- **CSS**: Follow Tailwind CSS conventions
 
 #### Testing
 
 1. **Write tests** for new features and bug fixes
 2. **Run existing tests** to ensure nothing breaks
    ```bash
-   pytest tests/
+   # Run all Django tests
+   python manage.py test
+   
+   # Run specific app tests
+   python manage.py test campaigns
+   python manage.py test subscribers
+   python manage.py test analytics
+   
+   # Run SMTP server tests
+   cd smtp_server
+   python -m pytest tests/
    ```
 3. **Check test coverage**
    ```bash
-   pytest --cov=core tests/
+   pytest --cov=core --cov=campaigns --cov=subscribers --cov=analytics tests/
    ```
 
 #### Code Quality
 
 Before submitting a pull request:
 
-1. **Format your code**
+1. **Format your Python code**
    ```bash
-   black core/ tests/
+   black core/ campaigns/ subscribers/ analytics/ tests/
    ```
 
-2. **Run linting**
+2. **Run Python linting**
    ```bash
-   flake8 core/ tests/
+   flake8 core/ campaigns/ subscribers/ analytics/ tests/
    ```
 
 3. **Run type checking**
    ```bash
-   mypy core/
+   mypy core/ campaigns/ subscribers/ analytics/
    ```
 
-4. **Run all tests**
+4. **Format your JavaScript/TypeScript code**
    ```bash
-   pytest
+   npm run lint:fix
+   ```
+
+5. **Run all tests**
+   ```bash
+   python manage.py test
+   npm test
    ```
 
 ### Pull Request Process
 
-1. **Create a pull request** with a clear description of your changes
-2. **Reference issues** that your PR addresses
-3. **Include tests** for new functionality
-4. **Update documentation** if needed
-5. **Ensure CI passes** before requesting review
+1. **Update documentation** if your changes affect user-facing features
+2. **Add tests** for new functionality
+3. **Update CHANGELOG.md** with a brief description of your changes
+4. **Ensure all tests pass** and code quality checks are satisfied
+5. **Request review** from maintainers
 
-### Commit Messages
+### Development Guidelines
 
-Use clear, descriptive commit messages:
+#### Django Development
+- Follow Django's MVT (Model-View-Template) pattern
+- Use Django REST Framework for API endpoints
+- Implement proper model relationships and constraints
+- Use Django's built-in security features
+- Follow Django's naming conventions
 
-```
-feat: add webhook authentication support
-fix: resolve session.peer compatibility issue
-docs: update installation instructions
-test: add tests for email processing
-```
+#### Frontend Development
+- Use React functional components with hooks
+- Implement TypeScript for type safety
+- Follow Tailwind CSS utility-first approach
+- Ensure responsive design for mobile devices
+- Implement proper error handling and loading states
 
-## 📋 Development Guidelines
+#### SMTP Server Development
+- Maintain async/await patterns for performance
+- Implement proper error handling and logging
+- Follow aiosmtpd conventions and best practices
+- Ensure backward compatibility with existing configurations
+- Add comprehensive tests for new features
 
-### Architecture
+#### Database Changes
+- Create proper migrations for model changes
+- Include both forward and backward migrations
+- Test migrations on sample data
+- Document any breaking changes
 
-- **Keep it simple**: Prefer simple, readable code over complex solutions
-- **Async first**: Use async/await patterns where appropriate
-- **Error handling**: Provide meaningful error messages and graceful degradation
-- **Logging**: Use appropriate log levels and include context
-
-### Security
-
-- **Input validation**: Validate all user inputs
-- **Authentication**: Implement secure authentication mechanisms
-- **Rate limiting**: Protect against abuse and spam
-- **Dependencies**: Keep dependencies updated and secure
-
-### Performance
-
-- **Async operations**: Use async I/O for network operations
-- **Memory efficiency**: Avoid unnecessary object creation
-- **Database queries**: Optimize database operations
-- **Resource cleanup**: Ensure proper cleanup of resources
-
-## 🧪 Testing Guidelines
-
-### Test Structure
+## 🏗️ Project Structure
 
 ```
-tests/
-├── unit/
-│   ├── test_email_processor.py
-│   ├── test_smtp_server.py
-│   └── test_webhook.py
-├── integration/
-│   ├── test_django_integration.py
-│   └── test_smtp_communication.py
-└── fixtures/
-    └── sample_emails/
+dripemails.org/
+├── core/                    # Core Django app with SMTP server
+├── campaigns/               # Email campaign management
+├── subscribers/             # Subscriber management
+├── analytics/               # Analytics and reporting
+├── smtp_server/             # Standalone SMTP server package
+├── templates/               # Django templates
+├── static/                  # Static assets
+├── src/                     # React frontend source
+├── docs/                    # Documentation
+└── tests/                   # Test suite
 ```
 
-### Test Requirements
+## 🧪 Testing Strategy
 
-- **Unit tests**: Test individual components in isolation
-- **Integration tests**: Test component interactions
-- **Edge cases**: Test error conditions and boundary cases
-- **Performance tests**: Test with realistic load
+### Backend Testing
+- **Unit Tests**: Test individual functions and methods
+- **Integration Tests**: Test component interactions
+- **API Tests**: Test REST API endpoints
+- **SMTP Tests**: Test email server functionality
 
-### Mocking
+### Frontend Testing
+- **Component Tests**: Test React components
+- **Integration Tests**: Test component interactions
+- **E2E Tests**: Test complete user workflows
 
-- **External services**: Mock webhook calls and database operations
-- **Network calls**: Mock SMTP client connections
-- **Time-dependent code**: Mock datetime operations
+### Performance Testing
+- **Load Testing**: Test system under high load
+- **Email Processing**: Test SMTP server performance
+- **Database Performance**: Test query optimization
 
 ## 📚 Documentation
 
 ### Code Documentation
-
-- **Docstrings**: Use Google-style docstrings
-- **Type hints**: Include type hints for all public APIs
-- **Examples**: Provide usage examples in docstrings
+- **Docstrings**: Comprehensive docstrings for all functions
+- **Type Hints**: Use type hints for better code understanding
+- **Comments**: Add comments for complex logic
+- **README Updates**: Update relevant README files
 
 ### User Documentation
+- **API Documentation**: Document all API endpoints
+- **Installation Guides**: Update installation instructions
+- **Configuration**: Document configuration options
+- **Troubleshooting**: Add common issues and solutions
 
-- **README**: Keep the README up to date
-- **API docs**: Document all public APIs
-- **Examples**: Provide working examples
-- **Troubleshooting**: Include common issues and solutions
+## 🔒 Security
 
-## 🚀 Release Process
+### Security Guidelines
+- **Input Validation**: Validate all user inputs
+- **SQL Injection**: Use Django ORM to prevent SQL injection
+- **XSS Protection**: Use Django's built-in XSS protection
+- **CSRF Protection**: Implement CSRF protection for forms
+- **Authentication**: Use secure authentication methods
+- **Data Encryption**: Encrypt sensitive data
 
-### Versioning
+### Security Reporting
+- **Responsible Disclosure**: Report security issues privately
+- **Security Issues**: Create private security issues
+- **CVE Reporting**: Follow CVE reporting guidelines
 
-We use [Semantic Versioning](https://semver.org/):
+## 🚀 Deployment
 
-- **Major**: Breaking changes
-- **Minor**: New features (backward compatible)
-- **Patch**: Bug fixes (backward compatible)
-
-### Release Checklist
-
-- [ ] All tests pass
-- [ ] Documentation is updated
-- [ ] Changelog is updated
-- [ ] Version is bumped
-- [ ] Release notes are written
-
-## 🏷️ Labels
-
-We use the following labels for issues and PRs:
-
-- `bug`: Something isn't working
-- `enhancement`: New feature or request
-- `documentation`: Improvements or additions to documentation
-- `good first issue`: Good for newcomers
-- `help wanted`: Extra attention is needed
-- `question`: Further information is requested
-- `wontfix`: This will not be worked on
+### Production Considerations
+- **Environment Variables**: Use environment variables for configuration
+- **Database Migrations**: Test migrations in staging environment
+- **Static Files**: Configure proper static file serving
+- **SSL/TLS**: Implement proper SSL/TLS configuration
+- **Monitoring**: Set up monitoring and alerting
 
 ## 📞 Getting Help
 
-If you need help with contributing:
+- **GitHub Issues**: Create issues for bugs and feature requests
+- **GitHub Discussions**: Use discussions for questions and ideas
+- **Documentation**: Check the docs/ directory for guides
+- **Code Examples**: Look at existing code for patterns
 
-- **GitHub Discussions**: Ask questions and share ideas
-- **GitHub Issues**: Report bugs and request features
-- **Email**: Contact us at founders@dripemails.org
+## 🎯 Contribution Areas
 
-## 🙏 Recognition
+We welcome contributions in these areas:
 
-Contributors will be recognized in:
+### Backend Development
+- Django application development
+- API endpoint implementation
+- Database optimization
+- SMTP server enhancements
+- Background task processing
 
-- **README**: List of contributors
-- **Release notes**: Credit for significant contributions
-- **Documentation**: Attribution for major features
+### Frontend Development
+- React component development
+- UI/UX improvements
+- Responsive design
+- Performance optimization
+- Accessibility improvements
 
-Thank you for contributing to DripEmails SMTP Server! 🎉 
+### DevOps & Infrastructure
+- Docker containerization
+- CI/CD pipeline improvements
+- Deployment automation
+- Monitoring and logging
+- Security hardening
+
+### Documentation
+- API documentation
+- User guides
+- Developer documentation
+- Tutorial creation
+- Code examples
+
+### Testing
+- Test coverage improvement
+- Performance testing
+- Security testing
+- Integration testing
+- End-to-end testing
+
+Thank you for contributing to DripEmails.org! Your contributions help make this platform better for everyone. 

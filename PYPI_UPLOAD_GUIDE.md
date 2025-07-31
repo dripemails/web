@@ -1,20 +1,31 @@
-# PyPI Upload Guide for DripEmails SMTP Server
+# PyPI Upload Guide for DripEmails.org Components
 
-This guide will help you upload your package to PyPI successfully.
+This guide will help you upload DripEmails.org packages to PyPI successfully.
+
+## 📦 Available Packages
+
+DripEmails.org consists of multiple components that can be published to PyPI:
+
+1. **dripemails-smtp-server** - Standalone SMTP server component
+2. **dripemails-core** - Core Django application (future)
+3. **dripemails-campaigns** - Campaign management (future)
+4. **dripemails-analytics** - Analytics and reporting (future)
 
 ## 🚀 Quick Upload
 
-### Option 1: Use the Upload Script (Recommended)
+### SMTP Server Package
 
 ```bash
 # From the smtp_server directory
+cd smtp_server
 python upload_to_pypi.py
 ```
 
-### Option 2: Manual Upload
+### Manual Upload
 
 ```bash
 # From the smtp_server directory
+cd smtp_server
 python -m twine upload dist/*
 ```
 
@@ -100,106 +111,197 @@ pip install twine
 ### 1. Prepare Your Package
 
 ```bash
-# Make sure you're in the smtp_server directory
+# Navigate to the component directory
 cd smtp_server
 
-# Check if package files exist
-ls dist/
+# Clean previous builds
+rm -rf build/ dist/ *.egg-info/
+
+# Update version numbers
+# Edit setup.py and pyproject.toml with new version
 ```
 
-### 2. Validate Your Package
+### 2. Build the Package
 
 ```bash
-# Check package for issues
-python -m twine check dist/*
+# Build the package
+python -m build
+
+# Or use the packaging script
+python package_smtp_server.py
 ```
 
-### 3. Upload to PyPI
+### 3. Test the Package
 
 ```bash
-# Upload to PyPI
-python -m twine upload dist/*
-```
-
-### 4. Verify Upload
-
-```bash
-# Check if package is available
-pip install dripemails-smtp-server
-```
-
-## 🧪 TestPyPI (Optional)
-
-For testing before uploading to PyPI:
-
-### 1. Upload to TestPyPI
-
-```bash
+# Test upload to TestPyPI first
 python -m twine upload --repository testpypi dist/*
-```
 
-### 2. Install from TestPyPI
-
-```bash
+# Install from TestPyPI to verify
 pip install --index-url https://test.pypi.org/simple/ dripemails-smtp-server
 ```
 
-## 🔍 Troubleshooting Commands
-
-### Check Package Files
+### 4. Upload to PyPI
 
 ```bash
-# List package files
-ls -la dist/
-
-# Check package contents
-python -m twine check dist/*
+# Upload to production PyPI
+python -m twine upload dist/*
 ```
 
-### Check PyPI Configuration
+## 📝 Package Configuration
+
+### SMTP Server Package (smtp_server/)
+
+```python
+# setup.py
+setup(
+    name="dripemails-smtp-server",
+    version="1.0.0",
+    description="Custom SMTP server for DripEmails.org",
+    long_description=read("README.md"),
+    author="DripEmails Team",
+    author_email="founders@dripemails.org",
+    url="https://github.com/dripemails/dripemails.org",
+    packages=find_packages(),
+    install_requires=[
+        "aiosmtpd>=1.4.4",
+        "django>=4.0",
+        "aiohttp>=3.8.0",
+    ],
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+    ],
+)
+```
+
+### Future Packages
+
+#### Core Package (core/)
+```python
+# Future setup.py for core package
+setup(
+    name="dripemails-core",
+    version="1.0.0",
+    description="Core Django application for DripEmails.org",
+    # ... configuration
+)
+```
+
+#### Campaigns Package (campaigns/)
+```python
+# Future setup.py for campaigns package
+setup(
+    name="dripemails-campaigns",
+    version="1.0.0",
+    description="Campaign management for DripEmails.org",
+    # ... configuration
+)
+```
+
+## 🔄 Version Management
+
+### Semantic Versioning
+
+Follow [Semantic Versioning](https://semver.org/) for all packages:
+
+- **MAJOR.MINOR.PATCH**
+- **MAJOR**: Breaking changes
+- **MINOR**: New features, backward compatible
+- **PATCH**: Bug fixes, backward compatible
+
+### Version Update Process
+
+1. **Update version in multiple files:**
+   - `setup.py`
+   - `pyproject.toml`
+   - `__init__.py` (if applicable)
+   - `CHANGELOG.md`
+
+2. **Update CHANGELOG.md:**
+   - Add new version section
+   - Document all changes
+   - Follow [Keep a Changelog](https://keepachangelog.com/) format
+
+3. **Commit and tag:**
+   ```bash
+   git add .
+   git commit -m "Release version 1.0.0"
+   git tag -a v1.0.0 -m "Version 1.0.0"
+   git push origin main --tags
+   ```
+
+## 🧪 Testing Before Upload
+
+### Local Testing
 
 ```bash
-# Check if .pypirc exists
-cat ~/.pypirc
+# Install package in development mode
+pip install -e .
 
-# Check environment variables
-echo $TWINE_USERNAME
-echo $TWINE_PASSWORD
+# Run tests
+python -m pytest tests/
+
+# Test functionality
+python -c "import dripemails_smtp; print('Package works!')"
 ```
 
-### Validate Package
+### TestPyPI Testing
 
 ```bash
-# Check package metadata
-python -m twine check dist/*
+# Upload to TestPyPI
+python -m twine upload --repository testpypi dist/*
 
-# Test package installation
-pip install --no-index --find-links dist/ dripemails-smtp-server
+# Install from TestPyPI
+pip install --index-url https://test.pypi.org/simple/ dripemails-smtp-server
+
+# Test installation
+python -c "import dripemails_smtp; print('TestPyPI package works!')"
 ```
 
-## 📞 Getting Help
+## 📊 Package Statistics
 
-If you're still having issues:
+After successful upload, you can monitor your package:
 
-1. **Check PyPI Status:** https://status.python.org/
-2. **PyPI Documentation:** https://packaging.python.org/tutorials/packaging-projects/
-3. **Twine Documentation:** https://twine.readthedocs.io/
+- **PyPI Page**: https://pypi.org/project/dripemails-smtp-server/
+- **Download Statistics**: https://pypistats.org/packages/dripemails-smtp-server
+- **GitHub Releases**: https://github.com/dripemails/dripemails.org/releases
 
-## 🎯 Success Checklist
+## 🚨 Security Considerations
 
-- [ ] Package builds successfully
-- [ ] Package validation passes
-- [ ] PyPI credentials are correct
-- [ ] Package name is available
-- [ ] Version number is unique
-- [ ] Upload completes without errors
-- [ ] Package is visible on PyPI
-- [ ] Package installs correctly
+### Package Security
 
-## 🚨 Important Notes
+- **Sign your packages** with GPG for additional security
+- **Use API tokens** instead of username/password
+- **Regular updates** to fix security vulnerabilities
+- **Dependency scanning** for known vulnerabilities
 
-- **Never commit API tokens** to version control
-- **Use API tokens** instead of passwords for better security
-- **Test on TestPyPI** before uploading to PyPI
-- **Update version numbers** for each release
-- **Keep .pypirc file secure** with proper permissions 
+### Upload Security
+
+- **Never commit** API tokens to version control
+- **Use environment variables** for sensitive data
+- **Test on TestPyPI** before production upload
+- **Verify package contents** before upload
+
+## 📞 Support
+
+If you encounter issues with package uploads:
+
+1. **Check PyPI Status**: https://status.python.org/
+2. **Review PyPI Documentation**: https://packaging.python.org/
+3. **Create GitHub Issue**: https://github.com/dripemails/dripemails.org/issues
+4. **Contact Maintainers**: founders@dripemails.org
+
+## 🎯 Best Practices
+
+1. **Always test** on TestPyPI first
+2. **Update documentation** with new features
+3. **Follow semantic versioning** strictly
+4. **Maintain changelog** for all releases
+5. **Use automated tools** for packaging when possible
+6. **Verify package integrity** after upload
+7. **Monitor package statistics** and user feedback 

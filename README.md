@@ -127,7 +127,7 @@ dripemails.org/
    python manage.py run_smtp_server --debug --port 1025
    ```
 
-## 📧 SMTP Server
+## 📧 SMTP Server Component
 
 DripEmails includes a custom SMTP server built with `aiosmtpd`. You can use it standalone or as part of the full platform.
 
@@ -141,14 +141,14 @@ pip install dripemails-smtp-server
 dripemails-smtp --port 25 --debug
 ```
 
-### Features
+### SMTP Server Features
 - **Async Performance**: Built with `aiosmtpd` for high performance
 - **Authentication**: PLAIN and LOGIN authentication support
 - **Rate Limiting**: Built-in spam protection
 - **Webhook Integration**: Real-time email processing
 - **Django Integration**: Seamless database integration
 
-For detailed SMTP server documentation, see [README.smtp_server.md](smtp_server/README.smtp_server.md).
+For detailed SMTP server documentation, see [docs/smtp_server_production_setup.md](docs/smtp_server_production_setup.md).
 
 ## 🔧 Configuration
 

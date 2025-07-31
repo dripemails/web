@@ -81,8 +81,8 @@ dripemails.org/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/dripemails/dripemails.org.git
-   cd dripemails.org
+   git clone https://github.com/dripemails/web.git
+   cd web
    ```
 
 2. **Set up Python environment**
@@ -363,13 +363,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Documentation**: [docs.dripemails.org](https://docs.dripemails.org)
-- **Issues**: [GitHub Issues](https://github.com/dripemails/dripemails.org/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/dripemails/dripemails.org/discussions)
+- **Issues**: [GitHub Issues](https://github.com/dripemails/web/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/dripemails/web/discussions)
 - **Email**: founders@dripemails.org
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dripemails/dripemails.org&type=Date)](https://star-history.com/#dripemails/dripemails.org&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=dripemails/web&type=Date)](https://star-history.com/#dripemails/web&Date)
 
 ---
 

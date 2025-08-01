@@ -39,7 +39,11 @@ print_status "Starting final Postfix ownership fix..."
 # Step 1: Stop Postfix completely
 print_status "Step 1: Stopping Postfix completely..."
 systemctl stop postfix 2>/dev/null || true
-pkill -f postfix 2>/dev/null || true
+pkill -f "postfix.*master" 2>/dev/null || true
+pkill -f "postfix.*smtpd" 2>/dev/null || true
+pkill -f "postfix.*qmgr" 2>/dev/null || true
+pkill -f "postfix.*pickup" 2>/dev/null || true
+pkill -f "postfix.*cleanup" 2>/dev/null || true
 sleep 3
 print_success "Postfix stopped"
 

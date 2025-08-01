@@ -76,11 +76,11 @@ print_success "Postfix reinstalled"
 
 # Step 6: Verify binaries exist
 print_status "Step 6: Verifying Postfix binaries..."
-if [ -f "/usr/lib/postfix/smtpd" ] && [ -f "/usr/lib/postfix/qmgr" ] && [ -f "/usr/lib/postfix/pickup" ]; then
+if [ -f "/usr/lib/postfix/sbin/smtpd" ] && [ -f "/usr/lib/postfix/sbin/qmgr" ] && [ -f "/usr/lib/postfix/sbin/pickup" ]; then
     print_success "All Postfix binaries are present"
 else
     print_error "Postfix binaries are missing"
-    ls -la /usr/lib/postfix/
+    ls -la /usr/lib/postfix/sbin/
     exit 1
 fi
 

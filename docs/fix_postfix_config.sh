@@ -36,6 +36,26 @@ fi
 
 print_status "Fixing Postfix configuration issues..."
 
+# Check if Postfix is properly installed
+print_status "Checking Postfix installation..."
+if ! command -v postfix > /dev/null 2>&1; then
+    print_error "Postfix is not installed. Installing now..."
+    apt update
+    apt install -y postfix
+elif [ ! -f "/usr/lib/postfix/postfix-script" ]; then
+    print_warning "Postfix script is missing. Reinstalling Postfix..."
+    apt update
+    apt install -y --reinstall postfix
+fi
+
+# Verify Postfix installation
+if [ ! -f "/usr/lib/postfix/postfix-script" ]; then
+    print_error "Postfix installation is still incomplete. Please check your system."
+    exit 1
+fi
+
+print_success "Postfix installation verified"
+
 # Backup current configuration
 BACKUP_FILE="/etc/postfix/main.cf.backup.$(date +%Y%m%d_%H%M%S)"
 cp /etc/postfix/main.cf "$BACKUP_FILE"
@@ -141,6 +161,8 @@ if postfix check; then
     print_success "Postfix configuration is valid"
 else
     print_error "Postfix configuration has errors"
+    print_status "Checking Postfix status:"
+    systemctl status postfix --no-pager -l
     exit 1
 fi
 

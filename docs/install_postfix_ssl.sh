@@ -93,7 +93,7 @@ print_success "Nginx started"
 
 # Step 5: Obtain SSL certificate
 print_status "Step 5: Obtaining SSL certificate..."
-certbot certonly --webroot -w /var/www/html -d $DOMAIN -d www.$DOMAIN --email admin@$DOMAIN --agree-tos --non-interactive
+certbot certonly --webroot -w /var/www/html -d $DOMAIN -d www.$DOMAIN --email admin@$DOMAIN --agree-tos --non-interactive --expand
 print_success "SSL certificate obtained"
 
 # Step 6: Stop nginx

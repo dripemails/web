@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Postfix Configuration Fix Script
-# This script fixes common Postfix configuration issues and removes Dovecot dependency
+# This script fixes common Postfix configuration issues with simple authentication
 
 set -e
 
@@ -41,10 +41,10 @@ BACKUP_FILE="/etc/postfix/main.cf.backup.$(date +%Y%m%d_%H%M%S)"
 cp /etc/postfix/main.cf "$BACKUP_FILE"
 print_success "Configuration backed up to $BACKUP_FILE"
 
-# Install SASL authentication packages
-print_status "Installing SASL authentication packages..."
+# Install basic SASL packages
+print_status "Installing SASL packages..."
 apt update
-apt install -y libsasl2-2 libsasl2-modules sasl2-bin
+apt install -y libsasl2-2 libsasl2-modules
 
 # Create a clean main.cf configuration
 print_status "Creating clean Postfix configuration..."
@@ -72,14 +72,13 @@ home_mailbox = Maildir/
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 
-# SASL Authentication (without Dovecot)
+# Basic SASL Authentication (simple setup)
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_security_options = noanonymous
 smtpd_sasl_local_domain = $myhostname
 broken_sasl_auth_clients = yes
-smtpd_sasl_type = cyrus
 
-# Relay restrictions
+# Relay restrictions (simplified)
 smtpd_relay_restrictions = 
     permit_mynetworks,
     permit_sasl_authenticated,
@@ -88,34 +87,23 @@ smtpd_relay_restrictions =
 smtpd_recipient_restrictions = 
     permit_mynetworks,
     permit_sasl_authenticated,
-    reject_unauth_destination,
-    reject_invalid_hostname,
-    reject_non_fqdn_hostname,
-    reject_non_fqdn_sender,
-    reject_non_fqdn_recipient,
-    reject_unknown_sender_domain,
-    reject_unknown_recipient_domain
+    reject_unauth_destination
 
 # Client restrictions
 smtpd_client_restrictions = 
     permit_mynetworks,
-    permit_sasl_authenticated,
-    reject_unknown_client_hostname
+    permit_sasl_authenticated
 
 # Helo restrictions
 smtpd_helo_required = yes
 smtpd_helo_restrictions = 
     permit_mynetworks,
-    permit_sasl_authenticated,
-    reject_invalid_helo_hostname,
-    reject_non_fqdn_helo_hostname
+    permit_sasl_authenticated
 
 # Sender restrictions
 smtpd_sender_restrictions = 
     permit_mynetworks,
-    permit_sasl_authenticated,
-    reject_non_fqdn_sender,
-    reject_unknown_sender_domain
+    permit_sasl_authenticated
 
 # TLS settings (will be updated by SSL script)
 smtpd_tls_security_level = may
@@ -142,34 +130,10 @@ smtpd_tls_session_cache_timeout = 3600s
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 EOF
 
-# Configure SASL
-print_status "Configuring SASL authentication..."
-cat > /etc/postfix/sasl/smtpd.conf << 'EOF'
-pwcheck_method: saslauthd
-mech_list: PLAIN LOGIN
-EOF
-
-# Create SASL authentication directory
-mkdir -p /etc/postfix/sasl
-
-# Configure saslauthd
-print_status "Configuring saslauthd..."
-cat > /etc/default/saslauthd << 'EOF'
-START=yes
-DESC="SASL Authentication Daemon"
-MECHANISMS="pam"
-OPTIONS="-c -m /var/spool/postfix/var/run/saslauthd"
-EOF
-
-# Create saslauthd directory for Postfix
-mkdir -p /var/spool/postfix/var/run/saslauthd
-chown postfix:sasl /var/spool/postfix/var/run/saslauthd
-chmod 710 /var/spool/postfix/var/run/saslauthd
-
-# Restart saslauthd
-print_status "Restarting saslauthd..."
-systemctl restart saslauthd
-systemctl enable saslauthd
+# Stop saslauthd if it's running
+print_status "Stopping saslauthd service..."
+systemctl stop saslauthd 2>/dev/null || true
+systemctl disable saslauthd 2>/dev/null || true
 
 # Test configuration
 print_status "Testing Postfix configuration..."
@@ -190,12 +154,14 @@ if systemctl is-active --quiet postfix; then
     print_success "Postfix is running successfully"
 else
     print_error "Postfix failed to start"
-    systemctl status postfix
+    systemctl status postfix --no-pager -l
     exit 1
 fi
 
 print_success "Postfix configuration has been fixed!"
-print_status "Dovecot dependency has been removed"
-print_status "SASL authentication is now configured with saslauthd"
+print_status "Simplified authentication setup (no saslauthd dependency)"
 print_status "You can now run the SSL certificate installation script"
-print_status "Run: sudo bash install_postfix_ssl.sh dripemails.org" 
+print_status "Run: sudo bash install_postfix_ssl.sh dripemails.org"
+print_status ""
+print_status "Note: For SMTP authentication, you'll need to create users manually:"
+print_status "sudo bash add_smtp_user.sh founders" 

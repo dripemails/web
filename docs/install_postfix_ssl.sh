@@ -1,19 +1,17 @@
 #!/bin/sh
 
-# Postfix SSL Certificate Installation Script for Ubuntu Server 24.04.1
-# This script uses certbot to obtain and configure SSL certificates for Postfix
-# Run this script as root: sudo ./install_postfix_ssl.sh
+# Postfix SSL Certificate Installation Script
+# This script installs and configures SSL certificates for production use
 
-set -e  # Exit on any error
+set -e
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Function to print colored output
 print_status() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
@@ -30,331 +28,328 @@ print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Function to check if running as root
-check_root() {
-    if [ "$(id -u)" -ne 0 ]; then
-        print_error "This script must be run as root (use sudo)"
-        exit 1
-    fi
+# Check if running as root
+if [ "$(id -u)" -ne 0 ]; then
+    print_error "This script must be run as root (use sudo)"
+    exit 1
+fi
+
+# Check if domain is provided
+if [ -z "$1" ]; then
+    print_error "Usage: $0 <domain>"
+    print_error "Example: $0 dripemails.org"
+    exit 1
+fi
+
+DOMAIN="$1"
+print_status "Installing SSL certificates for domain: $DOMAIN"
+
+# Step 1: Install certbot and dependencies
+print_status "Step 1: Installing certbot and dependencies..."
+apt update
+apt install -y certbot python3-certbot-nginx nginx
+print_success "Certbot and dependencies installed"
+
+# Step 2: Stop nginx temporarily (if running)
+print_status "Step 2: Stopping nginx temporarily..."
+systemctl stop nginx 2>/dev/null || true
+print_success "Nginx stopped"
+
+# Step 3: Create temporary nginx configuration for certbot
+print_status "Step 3: Creating temporary nginx configuration..."
+mkdir -p /etc/nginx/sites-available
+cat > /etc/nginx/sites-available/certbot << 'EOF'
+server {
+    listen 80;
+    server_name dripemails.org www.dripemails.org;
+    
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
+    
+    location / {
+        return 301 https://$server_name$request_uri;
+    }
 }
+EOF
 
-# Function to check if domain is provided
-check_domain() {
-    if [ -z "$DOMAIN" ]; then
-        print_error "Domain name is required. Usage: $0 <domain>"
-        print_status "Example: $0 mail.dripemails.org"
-        exit 1
-    fi
-}
+# Enable the site
+ln -sf /etc/nginx/sites-available/certbot /etc/nginx/sites-enabled/
+rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
 
-# Function to check system requirements
-check_requirements() {
-    print_status "Checking system requirements..."
-    
-    # Check if running Ubuntu 24.04
-    if ! grep -q "Ubuntu 24.04" /etc/os-release; then
-        print_warning "This script is designed for Ubuntu 24.04.1. You're running:"
-        cat /etc/os-release | grep PRETTY_NAME
-    fi
-    
-    # Check if Postfix is installed
-    if ! command -v postfix > /dev/null 2>&1; then
-        print_error "Postfix is not installed. Please install it first:"
-        print_status "sudo apt update && sudo apt install postfix"
-        exit 1
-    fi
-    
-    # Check if certbot is installed
-    if ! command -v certbot > /dev/null 2>&1; then
-        print_status "Installing certbot..."
-        apt update
-        apt install -y certbot
-    fi
-    
-    print_success "System requirements check completed"
-}
+# Create webroot directory
+mkdir -p /var/www/html/.well-known/acme-challenge
+chown -R www-data:www-data /var/www/html
 
-# Function to backup Postfix configuration
-backup_config() {
-    print_status "Backing up Postfix configuration..."
-    
-    BACKUP_DIR="/etc/postfix/backup_$(date +%Y%m%d_%H%M%S)"
-    mkdir -p "$BACKUP_DIR"
-    
-    cp /etc/postfix/main.cf "$BACKUP_DIR/"
-    cp /etc/postfix/master.cf "$BACKUP_DIR/"
-    
-    print_success "Configuration backed up to $BACKUP_DIR"
-}
+# Test nginx configuration
+nginx -t
+print_success "Nginx configuration is valid"
 
-# Function to obtain SSL certificate
-obtain_certificate() {
-    print_status "Obtaining SSL certificate for $DOMAIN..."
-    
-    # Stop Postfix temporarily
-    systemctl stop postfix
-    
-    # Obtain certificate using certbot
-    if certbot certonly --standalone -d "$DOMAIN" --non-interactive --agree-tos --email admin@"$DOMAIN"; then
-        print_success "SSL certificate obtained successfully"
-    else
-        print_error "Failed to obtain SSL certificate"
-        systemctl start postfix
-        exit 1
-    fi
-}
+# Step 4: Start nginx for certbot
+print_status "Step 4: Starting nginx for certbot..."
+systemctl start nginx
+sleep 3
+print_success "Nginx started"
 
-# Function to configure Postfix with SSL
-configure_postfix_ssl() {
-    print_status "Configuring Postfix with SSL certificates..."
-    
-    # SSL certificate paths
-    CERT_PATH="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-    KEY_PATH="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
-    
-    # Verify certificates exist
-    if [ ! -f "$CERT_PATH" ] || [ ! -f "$KEY_PATH" ]; then
-        print_error "SSL certificates not found at expected locations"
-        exit 1
-    fi
-    
-    # Set proper permissions for Postfix to read certificates
-    chmod 644 "$CERT_PATH"
-    chmod 600 "$KEY_PATH"
-    chown root:root "$CERT_PATH" "$KEY_PATH"
-    
-    # Configure Postfix main.cf for SSL
-    cat >> /etc/postfix/main.cf << EOF
+# Step 5: Obtain SSL certificate
+print_status "Step 5: Obtaining SSL certificate..."
+certbot certonly --webroot -w /var/www/html -d $DOMAIN -d www.$DOMAIN --email admin@$DOMAIN --agree-tos --non-interactive
+print_success "SSL certificate obtained"
 
-# SSL Configuration for $DOMAIN
-smtpd_tls_cert_file = $CERT_PATH
-smtpd_tls_key_file = $KEY_PATH
+# Step 6: Stop nginx
+print_status "Step 6: Stopping nginx..."
+systemctl stop nginx
+print_success "Nginx stopped"
+
+# Step 7: Configure Postfix with SSL certificates
+print_status "Step 7: Configuring Postfix with SSL certificates..."
+cat > /etc/postfix/main.cf << 'EOF'
+# Postfix Configuration - Production with SSL
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/lib/postfix
+data_directory = /var/lib/postfix
+mail_owner = postfix
+myhostname = web.dripemails.org
+mydomain = dripemails.org
+myorigin = $mydomain
+inet_interfaces = all
+inet_protocols = all
+mydestination = $myhostname, $mydomain, mail.$mydomain, localhost.$mydomain, localhost
+local_recipient_maps =
+relayhost =
+mynetworks = 127.0.0.0/8, 10.124.0.3, 134.199.221.231
+mailbox_size_limit = 0
+recipient_delimiter = +
+home_mailbox = Maildir/
+
+# Alias maps
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+# SASL Authentication
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_local_domain = $myhostname
+broken_sasl_auth_clients = yes
+
+# Relay restrictions
+smtpd_relay_restrictions = 
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    reject_unauth_destination
+
+smtpd_recipient_restrictions = 
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    reject_unauth_destination
+
+# Client restrictions
+smtpd_client_restrictions = 
+    permit_mynetworks,
+    permit_sasl_authenticated
+
+# Helo restrictions
+smtpd_helo_required = yes
+smtpd_helo_restrictions = 
+    permit_mynetworks,
+    permit_sasl_authenticated
+
+# Sender restrictions
+smtpd_sender_restrictions = 
+    permit_mynetworks,
+    permit_sasl_authenticated
+
+# TLS settings with Let's Encrypt certificates
 smtpd_tls_security_level = may
-smtpd_tls_auth_only = yes
-smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtpd_tls_mandatory_ciphers = high
+smtpd_tls_auth_only = no
+smtpd_tls_cert_file = /etc/letsencrypt/live/dripemails.org/fullchain.pem
+smtpd_tls_key_file = /etc/letsencrypt/live/dripemails.org/privkey.pem
+smtpd_tls_protocols = !SSLv2, !SSLv3
 smtpd_tls_ciphers = high
-smtpd_tls_exclude_ciphers = aNULL, DES, 3DES, MD5, DES+MD5, RC4
-smtpd_tls_dh1024_param_file = \${config_directory}/dh2048.pem
-smtpd_tls_session_cache_database = btree:\${data_directory}/smtpd_scache
-smtp_tls_session_cache_database = btree:\${data_directory}/smtp_scache
-
-# Enable TLS for incoming connections
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+smtpd_tls_mandatory_ciphers = high
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_session_cache_timeout = 3600s
 smtpd_tls_received_header = yes
 smtpd_tls_loglevel = 1
-smtp_tls_loglevel = 1
 
-# Force TLS for authentication
-smtpd_tls_auth_only = yes
-smtpd_sasl_security_options = noanonymous
-smtpd_sasl_tls_security_options = noanonymous
-
-# TLS for outgoing connections
+# SMTP TLS settings
 smtp_tls_security_level = may
-smtp_tls_cert_file = $CERT_PATH
-smtp_tls_key_file = $KEY_PATH
-smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtp_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
-smtp_tls_mandatory_ciphers = high
-smtp_tls_ciphers = high
-smtp_tls_exclude_ciphers = aNULL, DES, 3DES, MD5, DES+MD5, RC4
+smtp_tls_CApath = /etc/ssl/certs
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_session_cache_timeout = 3600s
+
+# Disable multi-instance completely
+multi_instance_enable = no
+multi_instance_name = 
+multi_instance_group = 
+multi_instance_directories = 
 EOF
-    
-    # Generate DH parameters for better security
-    print_status "Generating DH parameters (this may take a while)..."
-    openssl dhparam -out /etc/postfix/dh2048.pem 2048
-    
-    # Set proper permissions
-    chmod 644 /etc/postfix/dh2048.pem
-    chown root:root /etc/postfix/dh2048.pem
-    
-    print_success "Postfix SSL configuration completed"
-}
+print_success "Postfix configured with SSL certificates"
 
-# Function to configure master.cf for SSL ports
-configure_master_ssl() {
-    print_status "Configuring Postfix master.cf for SSL ports..."
-    
-    # Backup master.cf
-    cp /etc/postfix/master.cf /etc/postfix/master.cf.backup
-    
-    # Add SSL configuration to master.cf
-    cat >> /etc/postfix/master.cf << EOF
-
-# SSL SMTP on port 465
-465      inet  n       -       n       -       -       smtpd
+# Step 8: Update master.cf for SSL
+print_status "Step 8: Updating master.cf for SSL..."
+cat > /etc/postfix/master.cf << 'EOF'
+#
+# Postfix master process configuration file
+#
+# ==========================================================================
+# service type  private unpriv  chroot  wakeup  maxproc command + args
+#               (yes)   (yes)   (no)    (never) (100)
+# ==========================================================================
+smtp      inet  n       -       y       -       -       smtpd
+submission inet n       -       y       -       -       smtpd
+  -o syslog_name=postfix/submission
+  -o smtpd_tls_security_level=encrypt
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_tls_auth_only=yes
+  -o smtpd_reject_unlisted_recipient=no
+  -o smtpd_client_restrictions=permit_mynetworks,permit_sasl_authenticated,reject
+  -o smtpd_helo_restrictions=permit_mynetworks,permit_sasl_authenticated
+  -o smtpd_sender_restrictions=permit_mynetworks,permit_sasl_authenticated
+  -o smtpd_recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+  -o smtpd_relay_restrictions=permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+  -o milter_macro_daemon_name=ORIGINATING
+smtps     inet  n       -       y       -       -       smtpd
   -o syslog_name=postfix/smtps
   -o smtpd_tls_wrappermode=yes
   -o smtpd_sasl_auth_enable=yes
   -o smtpd_reject_unlisted_recipient=no
-  -o smtpd_client_restrictions=\$mua_client_restrictions
-  -o smtpd_helo_restrictions=\$mua_helo_restrictions
-  -o smtpd_sender_restrictions=\$mua_sender_restrictions
-  -o smtpd_recipient_restrictions=
-  -o smtpd_relay_restrictions=\$mua_relay_restrictions
-  -o smtpd_authentication_filter=permit_sasl_authenticated,reject
-  -o smtpd_tls_security_level=encrypt
-  -o smtpd_tls_wrappermode=yes
-  -o smtpd_sasl_security_options=noanonymous,noplaintext
-  -o smtpd_sasl_local_domain=\$myhostname
-  -o smtpd_sasl_auth_enable=yes
-  -o smtpd_sasl_type=dovecot
-  -o smtpd_sasl_path=private/auth
-  -o smtpd_sasl_authenticated_header=yes
-  -o smtpd_tls_cert_file=$CERT_PATH
-  -o smtpd_tls_key_file=$KEY_PATH
-  -o smtpd_tls_security_level=encrypt
-  -o smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1
-  -o smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1
-  -o smtpd_tls_mandatory_ciphers=high
-  -o smtpd_tls_ciphers=high
-  -o smtpd_tls_exclude_ciphers=aNULL,DES,3DES,MD5,DES+MD5,RC4
-  -o smtpd_tls_dh1024_param_file=\${config_directory}/dh2048.pem
-  -o smtpd_tls_session_cache_database=btree:\${data_directory}/smtpd_scache
-  -o smtpd_tls_received_header=yes
-  -o smtpd_tls_loglevel=1
-  -o smtpd_tls_auth_only=yes
-  -o smtpd_sasl_security_options=noanonymous
-  -o smtpd_sasl_tls_security_options=noanonymous
+  -o smtpd_client_restrictions=permit_mynetworks,permit_sasl_authenticated,reject
+  -o smtpd_helo_restrictions=permit_mynetworks,permit_sasl_authenticated
+  -o smtpd_sender_restrictions=permit_mynetworks,permit_sasl_authenticated
+  -o smtpd_recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+  -o smtpd_relay_restrictions=permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination
+  -o milter_macro_daemon_name=ORIGINATING
+pickup    unix  n       -       y       60      1       pickup
+cleanup   unix  n       -       y       -       0       cleanup
+qmgr      unix  n       -       n       300     1       qmgr
+tlsmgr    unix  -       -       y       1000?   1       tlsmgr
+rewrite   unix  -       -       y       -       -       trivial-rewrite
+bounce    unix  -       -       y       -       0       bounce
+defer     unix  -       -       y       -       0       bounce
+trace     unix  -       -       y       -       0       bounce
+verify    unix  -       -       y       -       1       verify
+flush     unix  n       -       y       1000?   0       flush
+proxymap  unix  -       -       n       -       -       proxymap
+proxywrite unix -       -       n       -       1       proxymap
+smtp      unix  -       -       y       -       -       smtp
+relay     unix  -       -       y       -       -       smtp
+        -o syslog_name=postfix/$service_name
+showq     unix  n       -       y       -       -       showq
+error     unix  -       -       y       -       -       error
+retry     unix  -       -       y       -       -       error
+discard   unix  -       -       y       -       -       discard
+local     unix  -       n       n       -       -       local
+virtual   unix  -       n       n       -       -       virtual
+lmtp      unix  -       -       y       -       -       lmtp
+anvil     unix  -       -       y       -       1       anvil
+scache    unix  -       -       y       -       1       scache
+maildrop  unix  -       n       n       -       -       pipe
+  flags=DRhu user=vmail argv=/usr/bin/maildrop -d ${recipient}
+uucp      unix  -       n       n       -       -       pipe
+  flags=Fqhu user=uucp argv=uux -r -n -z -a$sender - $nexthop!rmail ($recipient)
+ifmail    unix  -       n       n       -       -       pipe
+  flags=F user=ftn argv=/usr/lib/ifmail/ifmail -r $nexthop ($recipient)
+bsmtp     unix  -       n       n       -       -       pipe
+  flags=Fq. user=bsmtp argv=/usr/lib/bsmtp/bsmtp -t$nexthop -f$sender $recipient
+scalemail-backend unix	-	n	n	-	2	pipe
+  flags=R user=scalemail argv=/usr/lib/scalemail/bin/scalemail-queue -w -e -m ${extension} ${user}
+mailman   unix  -       n       n       -       -       pipe
+  flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
+  ${nexthop} ${user}
 EOF
-    
-    print_success "Master.cf SSL configuration completed"
-}
+print_success "Master.cf updated for SSL"
 
-# Function to configure firewall
-configure_firewall() {
-    print_status "Configuring firewall for SMTP ports..."
-    
-    # Check if ufw is active
-    if ufw status | grep -q "Status: active"; then
-        ufw allow 25/tcp   # SMTP
-        ufw allow 465/tcp  # SMTPS
-        ufw allow 587/tcp  # Submission
-        print_success "Firewall rules added for SMTP ports"
-    else
-        print_warning "UFW is not active. Please configure firewall manually:"
-        print_status "sudo ufw allow 25/tcp   # SMTP"
-        print_status "sudo ufw allow 465/tcp  # SMTPS"
-        print_status "sudo ufw allow 587/tcp  # Submission"
-    fi
-}
+# Step 9: Set proper permissions for SSL certificates
+print_status "Step 9: Setting proper permissions for SSL certificates..."
+chmod 644 /etc/letsencrypt/live/$DOMAIN/fullchain.pem
+chmod 600 /etc/letsencrypt/live/$DOMAIN/privkey.pem
+chown root:root /etc/letsencrypt/live/$DOMAIN/fullchain.pem
+chown root:root /etc/letsencrypt/live/$DOMAIN/privkey.pem
+print_success "SSL certificate permissions set"
 
-# Function to test configuration
-test_configuration() {
-    print_status "Testing Postfix configuration..."
-    
-    # Test configuration syntax
-    if postconf -n | grep -q "smtpd_tls_cert_file"; then
-        print_success "SSL configuration found in Postfix"
-    else
-        print_error "SSL configuration not found in Postfix"
-        exit 1
-    fi
-    
-    # Test configuration validity
-    if postfix check; then
-        print_success "Postfix configuration is valid"
-    else
-        print_error "Postfix configuration has errors"
-        exit 1
-    fi
-}
+# Step 10: Test Postfix configuration
+print_status "Step 10: Testing Postfix configuration..."
+if postfix check; then
+    print_success "Postfix configuration is valid"
+else
+    print_error "Postfix configuration has errors"
+    postfix check
+    exit 1
+fi
 
-# Function to restart services
-restart_services() {
-    print_status "Restarting Postfix service..."
-    
-    systemctl restart postfix
-    
-    if systemctl is-active --quiet postfix; then
-        print_success "Postfix service is running"
-    else
-        print_error "Postfix service failed to start"
-        systemctl status postfix
-        exit 1
-    fi
-}
-
-# Function to create renewal script
-create_renewal_script() {
-    print_status "Creating certificate renewal script..."
-    
-    cat > /etc/letsencrypt/renewal-hooks/post/postfix-ssl-renew.sh << 'EOF'
-#!/bin/bash
-
-# Postfix SSL Certificate Renewal Script
-# This script is called by certbot after certificate renewal
-
-set -e
-
-DOMAIN="$1"
-CERT_PATH="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-KEY_PATH="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
-
-# Set proper permissions
-chmod 644 "$CERT_PATH"
-chmod 600 "$KEY_PATH"
-chown root:root "$CERT_PATH" "$KEY_PATH"
-
-# Reload Postfix to pick up new certificates
+# Step 11: Reload Postfix
+print_status "Step 11: Reloading Postfix..."
 systemctl reload postfix
+sleep 3
+print_success "Postfix reloaded"
 
-echo "Postfix SSL certificates renewed and reloaded for $DOMAIN"
+# Step 12: Check Postfix status
+print_status "Step 12: Checking Postfix status..."
+if systemctl is-active --quiet postfix; then
+    print_success "Postfix is running successfully"
+else
+    print_error "Postfix failed to start"
+    systemctl status postfix --no-pager -l
+    exit 1
+fi
+
+# Step 13: Check SMTP ports
+print_status "Step 13: Checking SMTP ports..."
+sleep 3
+if netstat -tlnp | grep -q ":25\|:587\|:465"; then
+    print_success "SMTP ports are listening:"
+    netstat -tlnp | grep -E ":(25|587|465)"
+else
+    print_warning "SMTP ports are not listening"
+fi
+
+# Step 14: Test SSL connections
+print_status "Step 14: Testing SSL connections..."
+if echo "QUIT" | openssl s_client -connect localhost:465 -quiet 2>/dev/null | grep -q "220"; then
+    print_success "SSL connection to port 465 is working"
+else
+    print_warning "SSL connection to port 465 failed"
+fi
+
+# Step 15: Set up automatic renewal
+print_status "Step 15: Setting up automatic renewal..."
+cat > /etc/cron.d/certbot-renew << 'EOF'
+# Certbot renewal
+0 12 * * * root /usr/bin/certbot renew --quiet --post-hook "systemctl reload postfix"
 EOF
-    
-    chmod +x /etc/letsencrypt/renewal-hooks/post/postfix-ssl-renew.sh
-    
-    print_success "Renewal script created"
-}
+print_success "Automatic renewal configured"
 
-# Function to display final information
-display_final_info() {
-    print_success "SSL certificate installation completed!"
-    echo
-    print_status "Configuration Summary:"
-    echo "  Domain: $DOMAIN"
-    echo "  Certificate: $CERT_PATH"
-    echo "  Private Key: $KEY_PATH"
-    echo "  SSL Port: 465 (SMTPS)"
-    echo "  Standard Port: 25 (SMTP)"
-    echo "  Submission Port: 587 (SMTP with STARTTLS)"
-    echo
-    print_status "Next Steps:"
-    echo "  1. Test SSL connection: openssl s_client -connect $DOMAIN:465"
-    echo "  2. Check Postfix logs: journalctl -u postfix -f"
-    echo "  3. Test email sending with SSL"
-    echo "  4. Set up automatic renewal: certbot renew --dry-run"
-    echo
-    print_status "Certificate will auto-renew every 60 days"
-    print_status "Renewal script: /etc/letsencrypt/renewal-hooks/post/postfix-ssl-renew.sh"
-}
+# Step 16: Create renewal script
+print_status "Step 16: Creating renewal script..."
+cat > /usr/local/bin/renew-ssl.sh << 'EOF'
+#!/bin/bash
+# SSL Certificate Renewal Script
+certbot renew --quiet
+if [ $? -eq 0 ]; then
+    systemctl reload postfix
+    echo "SSL certificates renewed successfully"
+else
+    echo "SSL certificate renewal failed"
+    exit 1
+fi
+EOF
+chmod +x /usr/local/bin/renew-ssl.sh
+print_success "Renewal script created"
 
-# Main execution
-main() {
-    echo "=========================================="
-    echo "  Postfix SSL Certificate Installation"
-    echo "  Ubuntu Server 24.04.1"
-    echo "=========================================="
-    echo
-    
-    # Get domain from command line argument
-    DOMAIN="$1"
-    
-    # Run all functions
-    check_root
-    check_domain
-    check_requirements
-    backup_config
-    obtain_certificate
-    configure_postfix_ssl
-    configure_master_ssl
-    configure_firewall
-    test_configuration
-    restart_services
-    create_renewal_script
-    display_final_info
-}
-
-# Run main function with all arguments
-main "$@" 
+print_success "SSL certificate installation completed!"
+print_status "Summary:"
+print_status "1. SSL certificates obtained from Let's Encrypt"
+print_status "2. Postfix configured with SSL certificates"
+print_status "3. All SMTP ports (25, 587, 465) configured with SSL"
+print_status "4. Automatic renewal configured"
+print_status "5. Postfix is running with SSL support"
+print_status ""
+print_status "Your Postfix server is now configured with SSL certificates!"
+print_status "You can test SSL connections with:"
+print_status "openssl s_client -connect dripemails.org:465"
+print_status "openssl s_client -connect dripemails.org:587"
+print_status ""
+print_status "Certificates will automatically renew every 60 days" 

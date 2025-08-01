@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Postfix SSL Certificate Installation Script for Ubuntu Server 24.04.1
 # This script uses certbot to obtain and configure SSL certificates for Postfix
@@ -32,7 +32,7 @@ print_error() {
 
 # Function to check if running as root
 check_root() {
-    if [[ $EUID -ne 0 ]]; then
+    if [ "$(id -u)" -ne 0 ]; then
         print_error "This script must be run as root (use sudo)"
         exit 1
     fi
@@ -40,7 +40,7 @@ check_root() {
 
 # Function to check if domain is provided
 check_domain() {
-    if [[ -z "$DOMAIN" ]]; then
+    if [ -z "$DOMAIN" ]; then
         print_error "Domain name is required. Usage: $0 <domain>"
         print_status "Example: $0 mail.dripemails.org"
         exit 1
@@ -58,14 +58,14 @@ check_requirements() {
     fi
     
     # Check if Postfix is installed
-    if ! command -v postfix &> /dev/null; then
+    if ! command -v postfix > /dev/null 2>&1; then
         print_error "Postfix is not installed. Please install it first:"
         print_status "sudo apt update && sudo apt install postfix"
         exit 1
     fi
     
     # Check if certbot is installed
-    if ! command -v certbot &> /dev/null; then
+    if ! command -v certbot > /dev/null 2>&1; then
         print_status "Installing certbot..."
         apt update
         apt install -y certbot
@@ -113,7 +113,7 @@ configure_postfix_ssl() {
     KEY_PATH="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
     
     # Verify certificates exist
-    if [[ ! -f "$CERT_PATH" ]] || [[ ! -f "$KEY_PATH" ]]; then
+    if [ ! -f "$CERT_PATH" ] || [ ! -f "$KEY_PATH" ]; then
         print_error "SSL certificates not found at expected locations"
         exit 1
     fi

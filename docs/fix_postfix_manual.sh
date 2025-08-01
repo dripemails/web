@@ -43,7 +43,11 @@ print_success "Postfix stopped"
 
 # Step 2: Kill any remaining postfix processes
 print_status "Step 2: Killing any remaining Postfix processes..."
-pkill -f postfix 2>/dev/null || true
+pkill -f "postfix.*master" 2>/dev/null || true
+pkill -f "postfix.*smtpd" 2>/dev/null || true
+pkill -f "postfix.*qmgr" 2>/dev/null || true
+pkill -f "postfix.*pickup" 2>/dev/null || true
+pkill -f "postfix.*cleanup" 2>/dev/null || true
 sleep 3
 print_success "Postfix processes killed"
 

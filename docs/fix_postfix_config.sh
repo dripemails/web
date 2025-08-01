@@ -42,14 +42,14 @@ if ! command -v postfix > /dev/null 2>&1; then
     print_error "Postfix is not installed. Installing now..."
     apt update
     apt install -y postfix
-elif [ ! -f "/usr/lib/postfix/postfix-script" ]; then
+elif [ ! -f "/usr/lib/postfix/sbin/postfix-script" ]; then
     print_warning "Postfix script is missing. Reinstalling Postfix..."
     apt update
     apt install -y --reinstall postfix
 fi
 
 # Verify Postfix installation
-if [ ! -f "/usr/lib/postfix/postfix-script" ]; then
+if [ ! -f "/usr/lib/postfix/sbin/postfix-script" ]; then
     print_error "Postfix installation is still incomplete. Please check your system."
     exit 1
 fi

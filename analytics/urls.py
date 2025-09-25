@@ -13,6 +13,7 @@ urlpatterns = [
     # Footer management
     path('footers/', views.footer_list, name='footer_list'),
     path('footers/create/', views.footer_create, name='footer_create'),
+    path('api/footers/create/', views.footer_create_api, name='footer_create_api'),
     path('footers/<int:footer_id>/edit/', views.footer_edit, name='footer_edit'),
     path('footers/<int:footer_id>/delete/', views.footer_delete, name='footer_delete'),
     path('footers/<int:footer_id>/set-default/', views.footer_set_default, name='footer_set_default'),

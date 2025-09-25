@@ -43,7 +43,7 @@ def dashboard_api(request):
     } for list_obj in lists]
 
     # Get user profile
-    profile = UserProfile.objects.get(user=request.user)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     return Response({
         'campaigns': campaign_data,
@@ -165,7 +165,7 @@ def promo_verification(request):
             return redirect('core:promo_verification')
         
         # Update user profile
-        profile = request.user.profile
+        profile, created = UserProfile.objects.get_or_create(user=request.user)
         profile.has_verified_promo = True
         profile.promo_url = promo_url
         profile.save()
@@ -180,7 +180,7 @@ def promo_verification(request):
 @permission_classes([IsAuthenticated])
 def profile_settings(request):
     """Get or update profile settings."""
-    profile = UserProfile.objects.get(user=request.user)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
     
     if request.method == 'POST':
         profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)

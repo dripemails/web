@@ -13,6 +13,56 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
     }
+    
+    /* Ensure variables don't carry background styling when copied */
+    .variable-code {
+        background: transparent !important;
+        color: #374151;
+        font-family: 'Courier New', monospace;
+        font-size: 0.875rem;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+    }
+    
+    /* Override any inherited styles for copied content */
+    .variable-code:focus,
+    .variable-code:active,
+    .variable-code:hover {
+        background: transparent !important;
+        color: #374151 !important;
+    }
+    
+    /* Footer modal responsive sizing */
+    #footerEditor .ql-editor {
+        min-height: 200px;
+        max-height: calc(90vh - 300px);
+        overflow-y: auto;
+    }
+    
+    #footerEditor .ql-container {
+        height: auto;
+        min-height: 200px;
+        max-height: calc(90vh - 300px);
+    }
+    
+    /* Ensure modal is responsive on mobile */
+    @media (max-width: 768px) {
+        #newFooterModal .bg-white {
+            margin: 1rem;
+            max-width: calc(100vw - 2rem);
+        }
+        
+        #footerEditor .ql-editor {
+            min-height: 150px;
+            max-height: calc(90vh - 250px);
+        }
+        
+        #footerEditor .ql-container {
+            min-height: 150px;
+            max-height: calc(90vh - 250px);
+        }
+    }
 </style>
 {% endblock %}
 
@@ -66,19 +116,19 @@
                             </div>
                             
                             <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                                <h3 class="text-sm font-medium text-gray-700 mb-2">{% trans "Available Variables" %}</h3>
+                                <h3 class="text-sm font-medium text-gray-700 mb-2">{% trans "Available Variables" %} <span class="text-xs text-gray-500">({% trans "Click to copy" %})</span></h3>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm">
-                                        <code>{{first_name}}</code>
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{first_name}}', this)">
+                                        <code class="variable-code">{{first_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm">
-                                        <code>{{last_name}}</code>
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{last_name}}', this)">
+                                        <code class="variable-code">{{last_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm">
-                                        <code>{{full_name}}</code>
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{full_name}}', this)">
+                                        <code class="variable-code">{{full_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm">
-                                        <code>{{email}}</code>
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{email}}', this)">
+                                        <code class="variable-code">{{email}}</code>
                                     </div>
                                 </div>
                             </div>
@@ -91,12 +141,17 @@
                             
                             <div class="mt-4">
                                 <label for="footer_select" class="block text-sm font-medium text-gray-700 mb-2">{% trans "Email Footer" %}</label>
-                                <select id="footer_select" name="footer_id" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="">{% trans "No footer" %}</option>
-                                    {% for footer in user_footers %}
-                                        <option value="{{ footer.id }}" {% if footer.is_default %}selected{% endif %}>{{ footer.name }}</option>
-                                    {% endfor %}
-                                </select>
+                                <div class="flex space-x-2">
+                                    <select id="footer_select" name="footer_id" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="">{% trans "No footer" %}</option>
+                                        {% for footer in user_footers %}
+                                            <option value="{{ footer.id }}" {% if footer.is_default %}selected{% endif %}>{{ footer.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="button" id="newFooterBtn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        {% trans "New Footer" %}
+                                    </button>
+                                </div>
                                 <p class="mt-1 text-sm text-gray-500">
                                     {% trans "Select a footer to append to your email, or leave empty for no footer." %}
                                 </p>
@@ -114,7 +169,7 @@
                                         <p class="text-sm text-gray-500 mt-1">{% trans "Use this key to authenticate your API requests" %}</p>
                                     </div>
                                     <div class="flex items-center space-x-2">
-                                        <input type="text" id="apiKey" value="{{ request.user.auth_token.key }}" readonly
+                                        <input type="text" id="apiKey" value="{% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}{% trans 'No API key found. Please contact support.' %}{% endif %}" readonly
                                                class="block w-64 rounded-md border-gray-300 bg-gray-100 text-sm font-mono">
                                         <button type="button" onclick="copyApiKey()" 
                                                 class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -124,6 +179,7 @@
                                 </div>
                             </div>
                             
+                            {% if template %}
                             <div class="bg-gray-50 p-4 rounded-lg space-y-4">
                                 <p class="text-sm text-gray-600">
                                     {% trans "Send emails using this template via API. Here's how to trigger this template programmatically:" %}
@@ -133,9 +189,9 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-        url = "{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/"
+        url = "{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
 headers = {
-    "Authorization": "Bearer {{ request.user.auth_token.key }}",
+    "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
     "Content-Type": "application/json"
 }
 data = {
@@ -151,10 +207,10 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                 
                                 <div class="space-y-2">
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "JavaScript" %}</h3>
-                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/", {
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
     method: "POST",
     headers: {
-        "Authorization": "Bearer {{ request.user.auth_token.key }}",
+        "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
         "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -172,9 +228,9 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>require 'net/http'
 require 'json'
 
-uri = URI("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% if template %}{{ template.id }}{% endif %}/send/")
+uri = URI("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
 headers = {
-    'Authorization' => 'Bearer {{ request.user.auth_token.key }}',
+    'Authorization' => 'Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}',
     'Content-Type' => 'application/json'
 }
 data = {
@@ -191,6 +247,13 @@ request.body = data.to_json
 response = http.request(request)</code></pre>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                                <p class="text-sm text-yellow-800">
+                                    {% trans "Save your email template first to see the API code for sending emails." %}
+                                </p>
+                            </div>
+                            {% endif %}
                         </div>
                         
                         <div class="flex items-center justify-between pt-6">
@@ -238,6 +301,18 @@ response = http.request(request)</code></pre>
                         <input type="email" id="test_email" required
                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
+                    <div>
+                        <label for="test_first_name" class="block text-sm font-medium text-gray-700">{% trans "First Name" %}</label>
+                        <input type="text" id="test_first_name" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               placeholder="{% trans 'Enter first name...' %}">
+                    </div>
+                    <div>
+                        <label for="test_last_name" class="block text-sm font-medium text-gray-700">{% trans "Last Name" %}</label>
+                        <input type="text" id="test_last_name" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               placeholder="{% trans 'Enter last name...' %}">
+                    </div>
                     <div class="flex justify-end space-x-3">
                         <button type="button" onclick="closeTestModal()" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
                             {% trans "Cancel" %}
@@ -250,12 +325,95 @@ response = http.request(request)</code></pre>
             </form>
         </div>
     </div>
+    
+    <!-- New Footer Modal -->
+    <div id="newFooterModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-200 flex-shrink-0">
+                <h3 class="text-lg font-medium text-gray-900">{% trans "Create New Footer" %}</h3>
+            </div>
+            <form id="newFooterForm" class="px-6 py-4 flex-1 flex flex-col overflow-hidden">
+                <div class="space-y-4 flex-1 flex flex-col">
+                    <div class="flex-shrink-0">
+                        <label for="footerName" class="block text-sm font-medium text-gray-700 mb-1">
+                            {% trans "Footer Name" %}
+                        </label>
+                        <input type="text" id="footerName" name="name" required 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               placeholder="{% trans 'Enter footer name...' %}">
+                    </div>
+                    <div class="flex-1 flex flex-col min-h-0">
+                        <label for="footerContent" class="block text-sm font-medium text-gray-700 mb-1 flex-shrink-0">
+                            {% trans "Footer Content (HTML)" %}
+                        </label>
+                        <div class="flex-1 min-h-0">
+                            <div id="footerEditor" class="border border-gray-300 rounded-md h-full"></div>
+                        </div>
+                        <textarea id="footerContent" name="html_content" style="display: none;"></textarea>
+                        <p class="mt-1 text-sm text-gray-500 flex-shrink-0">
+                            {% trans "Enter the HTML content for your footer. You can use variables like {{first_name}}, {{last_name}}, {{email}}, etc." %}
+                        </p>
+                    </div>
+                    <div class="flex items-center flex-shrink-0">
+                        <input type="checkbox" id="isDefault" name="is_default" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="isDefault" class="ml-2 block text-sm text-gray-900">
+                            {% trans "Set as default footer" %}
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6 flex-shrink-0 border-t border-gray-200 pt-4">
+                    <button type="button" id="cancelNewFooter" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                        {% trans "Cancel" %}
+                    </button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        {% trans "Create Footer" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script>
+// Global variables for Quill editors
+let quill;
+let footerQuill;
+
+// Function to copy variable to clipboard and insert into editor
+function copyVariable(variable, element) {
+    // Copy to clipboard
+    navigator.clipboard.writeText(variable).then(function() {
+        // Insert into Quill editor at current cursor position
+        if (quill) {
+            const range = quill.getSelection();
+            if (range) {
+                quill.insertText(range.index, variable);
+                quill.setSelection(range.index + variable.length);
+            } else {
+                // If no selection, append to end
+                const length = quill.getLength();
+                quill.insertText(length - 1, variable);
+                quill.setSelection(length + variable.length - 1);
+            }
+        }
+        
+        // Show brief success feedback
+        if (element) {
+            const originalBg = element.style.backgroundColor;
+            element.style.backgroundColor = '#10B981';
+            setTimeout(() => {
+                element.style.backgroundColor = originalBg;
+            }, 200);
+        }
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+        alert('{% trans "Could not copy variable. Please try again." %}');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Quill editor
-    const quill = new Quill('#editor', {
+    quill = new Quill('#editor', {
         theme: 'snow',
         modules: {
             toolbar: [
@@ -271,6 +429,23 @@ document.addEventListener('DOMContentLoaded', function() {
         placeholder: '{% trans "Enter your email content here..." %}'
     });
     
+    // Initialize footer editor
+    footerQuill = new Quill('#footerEditor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                ['link'],
+                ['clean']
+            ]
+        },
+        placeholder: '{% trans "Enter footer content here..." %}'
+    });
+    
     const previewBtn = document.getElementById('previewBtn');
     const testBtn = document.getElementById('testBtn');
     const previewModal = document.getElementById('previewModal');
@@ -279,6 +454,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const testForm = document.getElementById('testForm');
     const campaignId = '{{ campaign.id }}';
     const templateId = '{{ template.id }}';
+    
+    // Footer modal elements
+    const newFooterBtn = document.getElementById('newFooterBtn');
+    const newFooterModal = document.getElementById('newFooterModal');
+    const cancelNewFooter = document.getElementById('cancelNewFooter');
+    const newFooterForm = document.getElementById('newFooterForm');
     
     // Load template data if editing
     if (templateId) {
@@ -328,6 +509,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Test email functionality
     testBtn.addEventListener('click', function() {
         testModal.classList.remove('hidden');
+    });
+    
+    // Footer modal functionality
+    newFooterBtn.addEventListener('click', function() {
+        newFooterModal.classList.remove('hidden');
+        document.getElementById('footerName').focus();
+    });
+    
+    cancelNewFooter.addEventListener('click', function() {
+        newFooterModal.classList.add('hidden');
+        newFooterForm.reset();
+        footerQuill.setContents([]);
+    });
+    
+    // Close footer modal when clicking outside
+    newFooterModal.addEventListener('click', function(e) {
+        if (e.target === newFooterModal) {
+            newFooterModal.classList.add('hidden');
+            newFooterForm.reset();
+            footerQuill.setContents([]);
+        }
     });
     
     // Form submission
@@ -408,19 +610,28 @@ document.addEventListener('DOMContentLoaded', function() {
     testForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        const email = document.getElementById('test_email').value;
+        const firstName = document.getElementById('test_first_name').value;
+        const lastName = document.getElementById('test_last_name').value;
+        const fullName = `${firstName} ${lastName}`.trim();
+        
         const data = {
-            email: document.getElementById('test_email').value,
+            email: email,
             variables: {
-                first_name: 'Test',
-                last_name: 'User',
-                full_name: 'Test User',
-                email: document.getElementById('test_email').value
+                first_name: firstName,
+                last_name: lastName,
+                full_name: fullName,
+                email: email
             }
         };
         
-        const url = templateId 
-            ? `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/test/`
-            : `/campaigns/api/campaigns/${campaignId}/emails/test/`;
+        // The URL must include the email_id (templateId)
+        if (!templateId) {
+            alert('{% trans "Please save the email template first before sending a test email." %}');
+            return;
+        }
+        
+        const url = `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/test/`;
         
         fetch(url, {
             method: 'POST',
@@ -480,5 +691,72 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// Footer form submission
+document.getElementById('newFooterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('footerName').value;
+    const htmlContent = footerQuill.root.innerHTML;
+    const isDefault = document.getElementById('isDefault').checked;
+    
+    if (!name.trim()) {
+        alert('{% trans "Please enter a footer name." %}');
+        return;
+    }
+    
+    if (!htmlContent.trim()) {
+        alert('{% trans "Please enter footer content." %}');
+        return;
+    }
+    
+    const data = {
+        name: name,
+        html_content: htmlContent,
+        is_default: isDefault
+    };
+    
+    fetch('/api/footers/create/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            // Add new footer to dropdown
+            const select = document.getElementById('footer_select');
+            const option = document.createElement('option');
+            option.value = data.footer_id;
+            option.textContent = name;
+            if (isDefault) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+            
+            // Close modal and reset form
+            document.getElementById('newFooterModal').classList.add('hidden');
+            document.getElementById('newFooterForm').reset();
+            footerQuill.setContents([]);
+            
+            // Show success message
+            alert('{% trans "Footer created successfully!" %}');
+        } else {
+            alert('{% trans "Error creating footer. Please try again." %}');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('{% trans "Error creating footer. Please try again." %}');
+    });
+});
 </script>
 {% endblock %}

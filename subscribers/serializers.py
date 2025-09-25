@@ -14,6 +14,8 @@ class ListSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create list and associate with the current user."""
         user = self.context['request'].user
+        # Remove user from validated_data if it exists to avoid duplicate keyword argument
+        validated_data.pop('user', None)
         list_obj = List.objects.create(user=user, **validated_data)
         return list_obj
 

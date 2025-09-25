@@ -270,6 +270,39 @@ def footer_create(request):
         'is_create': True
     })
 
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def footer_create_api(request):
+    """Create a new footer via API."""
+    try:
+        data = request.data
+        name = data.get('name', '').strip()
+        html_content = data.get('html_content', '').strip()
+        is_default = data.get('is_default', False)
+        
+        if not name:
+            return Response({'error': _('Footer name is required')}, status=400)
+        
+        if not html_content:
+            return Response({'error': _('Footer content is required')}, status=400)
+        
+        footer = EmailFooter.objects.create(
+            user=request.user,
+            name=name,
+            html_content=html_content,
+            is_default=is_default
+        )
+        
+        return Response({
+            'success': True,
+            'footer_id': footer.id,
+            'message': _('Footer created successfully!')
+        }, status=201)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
 
 @login_required
 def footer_edit(request, footer_id):

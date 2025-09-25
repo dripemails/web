@@ -28,9 +28,14 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 {% trans "Choose List" %}
                             </label>
-                            <select id="list" name="list" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option value="">{% trans "Select a list..." %}</option>
-                            </select>
+                            <div class="flex space-x-2">
+                                <select id="list" name="list" required class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="">{% trans "Select a list..." %}</option>
+                                </select>
+                                <button type="button" id="createListBtn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                    {% trans "Create New List" %}
+                                </button>
+                            </div>
                         </div>
 
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center" id="dropZone">
@@ -73,6 +78,43 @@
     </div>
 </div>
 
+<!-- Create List Modal -->
+<div id="createListModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">{% trans "Create New List" %}</h3>
+        </div>
+        <form id="createListForm" class="px-6 py-4">
+            <div class="space-y-4">
+                <div>
+                    <label for="listName" class="block text-sm font-medium text-gray-700 mb-1">
+                        {% trans "List Name" %}
+                    </label>
+                    <input type="text" id="listName" name="name" required 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                           placeholder="{% trans 'Enter list name...' %}">
+                </div>
+                <div>
+                    <label for="listDescription" class="block text-sm font-medium text-gray-700 mb-1">
+                        {% trans "Description (Optional)" %}
+                    </label>
+                    <textarea id="listDescription" name="description" rows="3"
+                              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                              placeholder="{% trans 'Enter description...' %}"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+                <button type="button" id="cancelCreateList" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                    {% trans "Cancel" %}
+                </button>
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    {% trans "Create List" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Load campaigns and lists
@@ -88,11 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-    fetch('/api/lists/')
+    fetch('/subscribers/api/lists/')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('list');
-            data.results.forEach(list => {
+            data.forEach(list => {
                 const option = document.createElement('option');
                 option.value = list.id;
                 option.textContent = list.name;
@@ -227,6 +269,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return cookieValue;
     }
+
+    // Create List Modal functionality
+    const createListBtn = document.getElementById('createListBtn');
+    const createListModal = document.getElementById('createListModal');
+    const cancelCreateList = document.getElementById('cancelCreateList');
+    const createListForm = document.getElementById('createListForm');
+
+    // Open modal
+    createListBtn.addEventListener('click', function() {
+        createListModal.classList.remove('hidden');
+        document.getElementById('listName').focus();
+    });
+
+    // Close modal
+    cancelCreateList.addEventListener('click', function() {
+        createListModal.classList.add('hidden');
+        createListForm.reset();
+    });
+
+    // Close modal when clicking outside
+    createListModal.addEventListener('click', function(e) {
+        if (e.target === createListModal) {
+            createListModal.classList.add('hidden');
+            createListForm.reset();
+        }
+    });
+
+    // Handle form submission
+    createListForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(createListForm);
+        const listData = {
+            name: formData.get('name'),
+            description: formData.get('description')
+        };
+
+        fetch('/subscribers/api/lists/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(listData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.id) {
+                // Add new list to dropdown
+                const select = document.getElementById('list');
+                const option = document.createElement('option');
+                option.value = data.id;
+                option.textContent = data.name;
+                option.selected = true;
+                select.appendChild(option);
+                
+                // Close modal and reset form
+                createListModal.classList.add('hidden');
+                createListForm.reset();
+                
+                // Show success message
+                alert('{% trans "List created successfully!" %}');
+            } else {
+                console.error('API Response:', data);
+                alert('{% trans "Error creating list. Please check console for details." %}');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('{% trans "Error creating list. Please check console for details." %}');
+        });
+    });
 });
 </script>
 {% endblock %}

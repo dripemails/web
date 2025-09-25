@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from datetime import timedelta
 import logging
 import uuid
+from analytics.models import UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +78,7 @@ def send_campaign_email(email_id, subscriber_id):
         return
     
     # Get user profile for ad settings
-    user_profile = email.campaign.user.profile
+    user_profile, created = UserProfile.objects.get_or_create(user=email.campaign.user)
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
     

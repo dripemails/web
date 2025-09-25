@@ -215,6 +215,54 @@ def deactivate_campaign(request, campaign_id):
 @login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+def reorder_emails(request, campaign_id):
+    """Reorder emails in a campaign."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    email_id = request.data.get('email_id')
+    direction = request.data.get('direction')  # 'up' or 'down'
+    
+    if not email_id or not direction:
+        return Response({'error': _('Email ID and direction are required')}, status=400)
+    
+    try:
+        email = Email.objects.get(id=email_id, campaign=campaign)
+    except Email.DoesNotExist:
+        return Response({'error': _('Email not found')}, status=404)
+    
+    emails = list(campaign.emails.all().order_by('order'))
+    current_index = None
+    
+    # Find current email index
+    for i, e in enumerate(emails):
+        if e.id == email.id:
+            current_index = i
+            break
+    
+    if current_index is None:
+        return Response({'error': _('Email not found in campaign')}, status=404)
+    
+    # Determine new index
+    if direction == 'up' and current_index > 0:
+        new_index = current_index - 1
+    elif direction == 'down' and current_index < len(emails) - 1:
+        new_index = current_index + 1
+    else:
+        return Response({'error': _('Cannot move email in that direction')}, status=400)
+    
+    # Swap orders
+    emails[current_index], emails[new_index] = emails[new_index], emails[current_index]
+    
+    # Update orders
+    for i, e in enumerate(emails):
+        e.order = i
+        e.save(update_fields=['order'])
+    
+    return Response({'message': _('Email order updated successfully')})
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def upload_contacts(request):
     """Upload contacts from a CSV or Excel file."""
     if 'file' not in request.FILES:

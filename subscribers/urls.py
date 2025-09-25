@@ -10,6 +10,8 @@ urlpatterns = [
     path('subscribers/lists/<uuid:pk>/', views.list_detail, name='list-detail'),
     
     # API endpoints
+    path('api/lists/', views.list_list_create, name='api-list-list-create'),
+    path('api/lists/<uuid:pk>/', views.list_detail, name='api-list-detail'),
     path('api/subscribers/', views.subscriber_list_create, name='list-create'),
     path('api/subscribers/<uuid:pk>/', views.subscriber_detail, name='detail'),
     path('api/subscribers/import/', views.process_import, name='process-import'),

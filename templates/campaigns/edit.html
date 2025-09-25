@@ -58,18 +58,53 @@
         </div>
 
         <div class="mt-8">
-            <h2 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Email Sequence" %}</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-900">{% trans "Email Sequence" %}</h2>
+                <a href="{% url 'campaigns:template' campaign.id %}" 
+                   class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    {% trans "Create New Email" %}
+                </a>
+            </div>
             <div class="space-y-4">
                 {% for email in emails %}
-                <div class="bg-white shadow rounded-lg overflow-hidden">
+                <div class="bg-white shadow rounded-lg overflow-hidden" data-email-id="{{ email.id }}" data-order="{{ email.order }}">
                     <div class="p-6">
                         <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <h3 class="text-lg font-medium text-gray-900">{{ email.subject }}</h3>
-                                <p class="mt-1 text-sm text-gray-500">
-                                    {% trans "Wait" %}: {{ email.wait_time_display }}
-                                </p>
+                            <div class="flex items-start space-x-4">
+                                <!-- Order Controls -->
+                                <div class="flex flex-col space-y-1">
+                                    <button type="button" class="move-up-btn text-gray-400 hover:text-gray-600 disabled:text-gray-200 disabled:cursor-not-allowed" 
+                                            data-email-id="{{ email.id }}" {% if forloop.first %}disabled{% endif %}>
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                        </svg>
+                                    </button>
+                                    <button type="button" class="move-down-btn text-gray-400 hover:text-gray-600 disabled:text-gray-200 disabled:cursor-not-allowed" 
+                                            data-email-id="{{ email.id }}" {% if forloop.last %}disabled{% endif %}>
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- Email Info -->
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                            {% trans "Step" %} {{ forloop.counter }}
+                                        </span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-900">{{ email.subject }}</h3>
+                                    <p class="mt-1 text-sm text-gray-500">
+                                        {% trans "Wait" %}: {{ email.wait_time_display }}
+                                    </p>
+                                </div>
                             </div>
+                            
+                            <!-- Action Buttons -->
                             <div class="flex space-x-2">
                                 <a href="{% url 'campaigns:template' campaign.id %}?template_id={{ email.id }}" 
                                    class="text-indigo-600 hover:text-indigo-900">
@@ -256,6 +291,47 @@ $(document).ready(function() {
             }
         });
     });
+    
+    // Handle email reordering
+    $('.move-up-btn').click(function() {
+        const emailId = $(this).data('email-id');
+        reorderEmail(emailId, 'up');
+    });
+    
+    $('.move-down-btn').click(function() {
+        const emailId = $(this).data('email-id');
+        reorderEmail(emailId, 'down');
+    });
+    
+    function reorderEmail(emailId, direction) {
+        $.ajax({
+            url: '/api/campaigns/{{ campaign.id }}/emails/reorder/',
+            type: 'POST',
+            data: JSON.stringify({
+                email_id: emailId,
+                direction: direction
+            }),
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            success: function(response) {
+                // Reload the page to show updated order
+                window.location.reload();
+            },
+            error: function(xhr) {
+                let errorMessage = '{% trans "An error occurred while reordering emails" %}';
+                try {
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                } catch (e) {
+                    // Fallback to default message
+                }
+                alert(errorMessage);
+            }
+        });
+    }
     
     // Helper function to get CSRF token
     function getCookie(name) {

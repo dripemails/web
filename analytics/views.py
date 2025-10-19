@@ -235,6 +235,26 @@ def update_profile_settings(request):
         })
 
 
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def regenerate_api_key(request):
+    """Regenerate the user's API key."""
+    from rest_framework.authtoken.models import Token
+    
+    # Delete existing token if it exists
+    Token.objects.filter(user=request.user).delete()
+    
+    # Create new token
+    token = Token.objects.create(user=request.user)
+    
+    return Response({
+        'success': True,
+        'api_key': token.key,
+        'message': _('API key regenerated successfully!')
+    })
+
+
 # Footer Management Views
 @login_required
 def footer_list(request):

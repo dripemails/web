@@ -175,6 +175,10 @@
                                                 class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             {% trans "Copy" %}
                                         </button>
+                                        <button type="button" onclick="regenerateApiKey()" 
+                                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            {% trans "Regenerate" %}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -675,6 +679,58 @@ function copyApiKey() {
     setTimeout(() => {
         copyButton.textContent = originalText;
     }, 2000);
+}
+
+function regenerateApiKey() {
+    if (!confirm('{% trans "Are you sure you want to regenerate your API key? This will invalidate your current key and you will need to update any applications using it." %}')) {
+        return;
+    }
+    
+    const regenerateButton = document.querySelector('button[onclick="regenerateApiKey()"]');
+    const originalText = regenerateButton.textContent;
+    regenerateButton.textContent = '{% trans "Regenerating..." %}';
+    regenerateButton.disabled = true;
+    
+    fetch('/api/regenerate-key/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the API key input
+            document.getElementById('apiKey').value = data.api_key;
+            
+            // Update all API examples with the new key
+            updateApiExamples(data.api_key);
+            
+            alert('{% trans "API key regenerated successfully!" %}');
+        } else {
+            alert('{% trans "Error regenerating API key. Please try again." %}');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('{% trans "Error regenerating API key. Please try again." %}');
+    })
+    .finally(() => {
+        regenerateButton.textContent = originalText;
+        regenerateButton.disabled = false;
+    });
+}
+
+function updateApiExamples(newApiKey) {
+    // Update all API examples with the new key
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach(block => {
+        let content = block.textContent;
+        // Replace the API key in all code examples
+        content = content.replace(/Bearer [A-Za-z0-9]+/g, `Bearer ${newApiKey}`);
+        block.textContent = content;
+    });
 }
 
 function getCookie(name) {

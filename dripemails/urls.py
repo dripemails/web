@@ -23,6 +23,7 @@ non_prefixed_urlpatterns = [
     path('api/upload-contacts/', campaign_views.upload_contacts, name='api-upload-contacts'),
     # Analytics API endpoints (no language prefix needed)
     path('api/footers/create/', analytics_views.footer_create_api, name='api-footer-create'),
+    path('api/regenerate-key/', analytics_views.regenerate_api_key, name='api-regenerate-key'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code

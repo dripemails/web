@@ -76,7 +76,7 @@
                     <p class="text-indigo-100">{% trans "Design your email template" %}</p>
                 </div>
                 
-                <form id="templateForm" class="p-8" method="POST" action="{% if template %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
+                <form id="templateForm" class="p-8" method="POST" action="{% if template %}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
                     {% csrf_token %}
                     <div class="space-y-6">
                         <div>
@@ -189,7 +189,7 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-        url = "{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
+        url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
 headers = {
     "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
     "Content-Type": "application/json"
@@ -207,7 +207,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                 
                                 <div class="space-y-2">
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "JavaScript" %}</h3>
-                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
     method: "POST",
     headers: {
         "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
@@ -228,7 +228,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>require 'net/http'
 require 'json'
 
-uri = URI("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
+uri = URI("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
 headers = {
     'Authorization' => 'Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}',
     'Content-Type' => 'application/json'
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load template data if editing
     if (templateId) {
-        fetch(`/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`)
+        fetch(`/api/campaigns/${campaignId}/emails/${templateId}/`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('subject').value = data.subject;
@@ -563,8 +563,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const url = templateId 
-            ? `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`
-            : `/campaigns/api/campaigns/${campaignId}/emails/`;
+            ? `/api/campaigns/${campaignId}/emails/${templateId}/`
+            : `/api/campaigns/${campaignId}/emails/`;
         
         console.log('Submitting data:', data);
         console.log('URL:', url);
@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const url = `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/test/`;
+        const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
         
         fetch(url, {
             method: 'POST',

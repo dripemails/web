@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from campaigns import views as campaign_views
+from analytics import views as analytics_views
 
 # URL patterns that should NOT be prefixed with a language code
 non_prefixed_urlpatterns = [
@@ -20,6 +21,8 @@ non_prefixed_urlpatterns = [
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/test/', campaign_views.test_email, name='api-test-email'),
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/send/', campaign_views.send_email, name='api-send-email'),
     path('api/upload-contacts/', campaign_views.upload_contacts, name='api-upload-contacts'),
+    # Analytics API endpoints (no language prefix needed)
+    path('api/footers/create/', analytics_views.footer_create_api, name='api-footer-create'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code

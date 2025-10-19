@@ -73,7 +73,6 @@ dripemails.org/
 ### Prerequisites
 
 - **Python 3.11+** (3.12.3 recommended)
-- **Node.js 18+** (for frontend development)
 - **MySQL/PostgreSQL** database
 - **Redis** (for caching and Celery)
 
@@ -87,18 +86,12 @@ dripemails.org/
 
 2. **Set up Python environment**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/macOS
+   python -m dripemails dripemails
+   source dripemails/bin/activate  # Linux/macOS
    # or
-   venv\Scripts\activate     # Windows
+   dripemails\Scripts\activate     # Windows
    
    pip install -r requirements.txt
-   ```
-
-3. **Set up frontend**
-   ```bash
-   npm install
-   npm run build
    ```
 
 4. **Configure environment**

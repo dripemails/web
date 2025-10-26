@@ -318,7 +318,11 @@ docker run -p 8000:8000 dripemails
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions from developers around the world! Whether you're interested in contributing code, improving documentation, or adding new features, we'd love to have you join our community.
+
+**Want to get involved?** Email us at **founders@dripemails.org** to introduce yourself and let us know what you'd like to contribute.
+
+For contribution guidelines, please see our [Contributing Guide](CONTRIBUTING.md).
 
 ### Development Setup
 

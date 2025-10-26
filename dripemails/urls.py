@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from campaigns import views as campaign_views
 from analytics import views as analytics_views
+from subscribers import views as subscriber_views
 
 # URL patterns that should NOT be prefixed with a language code
 non_prefixed_urlpatterns = [
@@ -24,6 +25,13 @@ non_prefixed_urlpatterns = [
     # Analytics API endpoints (no language prefix needed)
     path('api/footers/create/', analytics_views.footer_create_api, name='api-footer-create'),
     path('api/regenerate-key/', analytics_views.regenerate_api_key, name='api-regenerate-key'),
+    # Subscribers API endpoints (no language prefix needed)
+    path('api/subscribers/lists/', subscriber_views.list_list_create, name='api-subscriber-list-create'),
+    path('api/subscribers/lists/<uuid:pk>/', subscriber_views.list_detail, name='api-subscriber-list-detail'),
+    path('api/subscribers/', subscriber_views.subscriber_list_create, name='api-subscriber-create'),
+    path('api/subscribers/<uuid:pk>/', subscriber_views.subscriber_detail, name='api-subscriber-detail'),
+    path('api/subscribers/import/', subscriber_views.process_import, name='api-subscriber-import'),
+    path('api/subscribers/validate-file/', subscriber_views.validate_file, name='api-subscriber-validate-file'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code

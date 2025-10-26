@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from campaigns.models import Campaign
+from campaigns.models import Campaign, Email
 from subscribers.models import List
 from analytics.models import UserProfile
 from django.conf import settings
@@ -239,3 +239,81 @@ def community_success_stories(request):
 
 def community_social(request):
     return render(request, 'core/community_social.html')
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def send_email_api(request):
+    """Send an email to a subscriber."""
+    first_name = request.data.get('first_name', '')
+    last_name = request.data.get('last_name', '')
+    email = request.data.get('email')
+    campaign_id = request.data.get('campaign_id')
+    email_id = request.data.get('email_id')
+    schedule = request.data.get('schedule', 'now')
+    schedule_value = request.data.get('schedule_value', '0')
+    
+    if not email or not campaign_id or not email_id:
+        return Response({
+            'error': _('Please provide email address, campaign, and email template')
+        }, status=400)
+    
+    try:
+        # Verify campaign belongs to user
+        campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+        email_obj = Email.objects.get(id=email_id, campaign=campaign)
+        
+        # Get the subscriber or create one
+        from subscribers.models import Subscriber
+        subscriber, created = Subscriber.objects.get_or_create(
+            email=email,
+            defaults={
+                'first_name': first_name or '',
+                'last_name': last_name or '',
+                'is_active': True
+            }
+        )
+        
+        # Parse the schedule
+        from datetime import timedelta
+        if schedule == 'now':
+            send_delay = timedelta(0)
+        else:
+            value = int(schedule_value) if schedule_value else 0
+            if schedule == 'minutes':
+                send_delay = timedelta(minutes=value)
+            elif schedule == 'hours':
+                send_delay = timedelta(hours=value)
+            elif schedule == 'days':
+                send_delay = timedelta(days=value)
+            elif schedule == 'weeks':
+                send_delay = timedelta(weeks=value)
+            elif schedule == 'months':
+                send_delay = timedelta(days=value * 30)
+            else:
+                send_delay = timedelta(0)
+        
+        # Send email using Celery task
+        from campaigns.tasks import send_single_email
+        if schedule == 'now':
+            send_single_email.delay(
+                str(email_obj.id),
+                email,
+                {'first_name': first_name or '', 'last_name': last_name or ''}
+            )
+        else:
+            send_single_email.apply_async(
+                args=[str(email_obj.id), email, {'first_name': first_name or '', 'last_name': last_name or ''}],
+                countdown=int(send_delay.total_seconds())
+            )
+        
+        return Response({
+            'message': _('Email scheduled successfully')
+        })
+        
+    except Campaign.DoesNotExist:
+        return Response({'error': _('Campaign not found')}, status=404)
+    except Email.DoesNotExist:
+        return Response({'error': _('Email template not found')}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=400)

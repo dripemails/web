@@ -8,8 +8,9 @@ from rest_framework.response import Response
 from .models import Campaign, Email
 from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
-import pandas as pd
+import csv
 import io
+from openpyxl import load_workbook
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -274,13 +275,32 @@ def upload_contacts(request):
     
     try:
         if file.name.endswith('.csv'):
-            df = pd.read_csv(file)
+            # Read CSV file
+            file.seek(0)  # Reset file pointer
+            decoded_file = file.read().decode('utf-8-sig')
+            reader = csv.DictReader(decoded_file.splitlines())
+            rows = list(reader)
+            columns = reader.fieldnames or []
         else:
-            df = pd.read_excel(file)
+            # Read Excel file
+            workbook = load_workbook(filename=file, read_only=True, data_only=True)
+            worksheet = workbook.active
+            rows = []
+            columns = None
+            for idx, row in enumerate(worksheet.iter_rows(values_only=True)):
+                if idx == 0:
+                    columns = [str(cell) if cell else f'Column_{i+1}' for i, cell in enumerate(row)]
+                else:
+                    row_dict = {}
+                    for i, cell in enumerate(row):
+                        if i < len(columns):
+                            row_dict[columns[i]] = cell
+                    rows.append(row_dict)
+            workbook.close()
         
         # Validate required columns
         required_columns = ['email']
-        missing_columns = [col for col in required_columns if col not in df.columns]
+        missing_columns = [col for col in required_columns if col not in columns]
         if missing_columns:
             return Response({
                 'error': _('Missing required columns: {}').format(', '.join(missing_columns))
@@ -288,12 +308,12 @@ def upload_contacts(request):
         
         # Process the data
         contacts = []
-        for _, row in df.iterrows():
+        for row in rows:
             contact = {
-                'email': row['email'],
-                'first_name': row.get('first_name', ''),
-                'last_name': row.get('last_name', ''),
-                'full_name': row.get('full_name', '')
+                'email': row.get('email', ''),
+                'first_name': row.get('first_name', '') or '',
+                'last_name': row.get('last_name', '') or '',
+                'full_name': row.get('full_name', '') or ''
             }
             contacts.append(contact)
         

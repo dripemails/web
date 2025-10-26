@@ -88,6 +88,59 @@
             </div>
         </div>
         
+        <!-- Send Email Form -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Send Email</h3>
+            <form id="sendEmailForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="send_first_name" name="first_name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="send_last_name" name="last_name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" id="send_email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Campaign</label>
+                    <select id="send_campaign" name="campaign" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="">Select a campaign...</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Template</label>
+                    <select id="send_email_template" name="email_template" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" disabled>
+                        <option value="">Select a campaign first...</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Schedule</label>
+                        <select id="send_schedule" name="schedule" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="now">Send Now</option>
+                            <option value="minutes">Send in X Minutes</option>
+                            <option value="hours">Send in X Hours</option>
+                            <option value="days">Send in X Days</option>
+                            <option value="weeks">Send in X Weeks</option>
+                            <option value="months">Send in X Months</option>
+                        </select>
+                    </div>
+                    <div id="schedule_value_container" class="hidden">
+                        <label id="schedule_value_label" class="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                        <input type="number" id="schedule_value" name="schedule_value" min="1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">
+                    Send Email
+                </button>
+            </form>
+        </div>
+
         <!-- Advertisement Status -->
         {% if not user.profile.has_verified_promo %}
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8 border-l-4 border-yellow-500">
@@ -350,4 +403,133 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('sendEmailForm');
+    const campaignSelect = document.getElementById('send_campaign');
+    const emailTemplateSelect = document.getElementById('send_email_template');
+    const scheduleSelect = document.getElementById('send_schedule');
+    const scheduleValueContainer = document.getElementById('schedule_value_container');
+    const scheduleValueInput = document.getElementById('schedule_value');
+    const scheduleValueLabel = document.getElementById('schedule_value_label');
+
+    // Load campaigns
+    fetch('/api/campaigns/')
+        .then(response => response.json())
+        .then(data => {
+            const campaigns = Array.isArray(data) ? data : (data.results || []);
+            campaigns.forEach(campaign => {
+                const option = document.createElement('option');
+                option.value = campaign.id;
+                option.textContent = campaign.name;
+                campaignSelect.appendChild(option);
+            });
+        });
+
+    // Handle campaign selection
+    campaignSelect.addEventListener('change', function() {
+        const campaignId = this.value;
+        if (campaignId) {
+            // Fetch emails for this campaign
+            emailTemplateSelect.disabled = false;
+            emailTemplateSelect.innerHTML = '<option value="">Loading...</option>';
+            
+            fetch(`/api/campaigns/${campaignId}/emails/`)
+                .then(response => response.json())
+                .then(data => {
+                    const emails = Array.isArray(data) ? data : [];
+                    emailTemplateSelect.innerHTML = '<option value="">Select an email template...</option>';
+                    emails.forEach(email => {
+                        const option = document.createElement('option');
+                        option.value = email.id;
+                        option.textContent = email.subject || `Email ${email.order}`;
+                        emailTemplateSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading emails:', error);
+                    emailTemplateSelect.innerHTML = '<option value="">Error loading emails</option>';
+                });
+        } else {
+            emailTemplateSelect.disabled = true;
+            emailTemplateSelect.innerHTML = '<option value="">Select a campaign first...</option>';
+        }
+    });
+
+    // Handle schedule change
+    scheduleSelect.addEventListener('change', function() {
+        if (this.value === 'now') {
+            scheduleValueContainer.classList.add('hidden');
+            scheduleValueInput.value = '';
+        } else {
+            scheduleValueContainer.classList.remove('hidden');
+            // Update label based on selection
+            const labelMap = {
+                'minutes': 'X Minutes',
+                'hours': 'X Hours',
+                'days': 'X Days',
+                'weeks': 'X Weeks',
+                'months': 'X Months'
+            };
+            scheduleValueLabel.textContent = labelMap[this.value] || 'Value';
+        }
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            first_name: document.getElementById('send_first_name').value,
+            last_name: document.getElementById('send_last_name').value,
+            email: document.getElementById('send_email').value,
+            campaign_id: campaignSelect.value,
+            email_id: emailTemplateSelect.value,
+            schedule: scheduleSelect.value,
+            schedule_value: scheduleValueInput.value || '0'
+        };
+
+        fetch('/api/send-email/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error: ' + data.error);
+            } else {
+                alert('Email scheduled successfully!');
+                form.reset();
+                scheduleValueContainer.classList.add('hidden');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error sending email. Please try again.');
+        });
+    });
+
+    // Helper function to get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
+
 {% endblock %}

@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'django_celery_beat',
+    # 'django_celery_beat',  # Not using django-celery-beat - would downgrade Django to 4.2.25
     'django_celery_results',
     
     # Local apps
@@ -188,7 +188,9 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Not using django-celery-beat
+# To use beat without django-celery-beat, you can set:
+# CELERY_BEAT_SCHEDULER = 'celery.beat:PersistentScheduler'
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = DEBUG

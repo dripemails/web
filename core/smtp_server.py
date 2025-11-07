@@ -267,7 +267,7 @@ class SMTPServerManager:
         self.processor = EmailProcessor(config)
         self.logger = logging.getLogger(__name__)
     
-    def start(self, host: str = 'localhost', port: int = 25):
+    def start(self, host: str = 'localhost', port: int = 1025):
         """Start the SMTP server."""
         try:
             # Create handler and server
@@ -313,7 +313,7 @@ def create_smtp_server(config: Dict[str, Any] = None) -> SMTPServerManager:
     return SMTPServerManager(config)
 
 
-def run_smtp_server(host: str = 'localhost', port: int = 25, config: Dict[str, Any] = None):
+def run_smtp_server(host: str = 'localhost', port: int = 1025, config: Dict[str, Any] = None):
     """Run the SMTP server in a blocking manner."""
     server = create_smtp_server(config)
     

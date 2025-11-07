@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     promo_url = models.URLField(_('Promo URL'), blank=True)
     send_without_unsubscribe = models.BooleanField(_('Send Without Unsubscribe'), default=False)
     custom_footer_html = models.TextField(_('Custom Footer HTML'), blank=True, help_text=_('Custom footer HTML for emails'))
+    timezone = models.CharField(_('Time Zone'), max_length=64, default='UTC')
     
     class Meta:
         verbose_name = _('User Profile')

@@ -141,6 +141,20 @@
             </form>
         </div>
 
+        <!-- Recent Send Activity -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Recent Send Activity</h3>
+                <button id="refreshSendActivity" type="button" class="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Refresh
+                </button>
+            </div>
+            <p id="sendActivityTimezone" class="text-xs text-gray-500 mb-4">Times shown in {{ user_timezone|default:'UTC' }}.</p>
+            <div id="sendEmailActivity" class="space-y-4">
+                <p class="text-sm text-gray-500">Loading activity...</p>
+            </div>
+        </div>
+
         <!-- Advertisement Status -->
         {% if not user.profile.has_verified_promo %}
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8 border-l-4 border-yellow-500">
@@ -368,6 +382,12 @@
                             </span>
                             {% endif %}
                         </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Timezone</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {{ user_timezone|default:'UTC' }}
+                            </span>
+                        </div>
                         <div class="pt-4 border-t border-gray-200">
                             <div class="space-y-2">
                                 <a href="{% url 'core:promo_verification' %}" class="block text-indigo-600 hover:text-indigo-800 text-sm font-medium">
@@ -413,6 +433,154 @@ document.addEventListener('DOMContentLoaded', function() {
     const scheduleValueContainer = document.getElementById('schedule_value_container');
     const scheduleValueInput = document.getElementById('schedule_value');
     const scheduleValueLabel = document.getElementById('schedule_value_label');
+    const activityContainer = document.getElementById('sendEmailActivity');
+    const refreshSendActivityButton = document.getElementById('refreshSendActivity');
+    const activityTimezoneLabel = document.getElementById('sendActivityTimezone');
+
+    const statusBadgeClasses = {
+        pending: 'bg-yellow-100 text-yellow-800',
+        queued: 'bg-blue-100 text-blue-800',
+        sent: 'bg-green-100 text-green-800',
+        failed: 'bg-red-100 text-red-800'
+    };
+
+    function formatDisplayDate(iso, fallbackDisplay) {
+        if (fallbackDisplay) {
+            return fallbackDisplay;
+        }
+        if (!iso) {
+            return '—';
+        }
+        const date = new Date(iso);
+        if (isNaN(date.getTime())) {
+            return '—';
+        }
+        return date.toLocaleString();
+    }
+
+    function renderSendEmailActivity(requests) {
+        if (!activityContainer) return;
+
+        if (!requests.length) {
+            activityContainer.innerHTML = '<p class="text-sm text-gray-500">No send activity yet. Use the form above to send an email.</p>';
+            return;
+        }
+
+        const cards = requests.map(req => {
+            const statusClass = statusBadgeClasses[req.status] || 'bg-gray-100 text-gray-800';
+            const scheduledText = formatDisplayDate(req.scheduled_for, req.scheduled_for_display);
+            const sentText = formatDisplayDate(req.sent_at, req.sent_at_display);
+            const canSendNow = req.status !== 'sent';
+
+            return `
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-sm font-semibold text-gray-800">${req.email_subject || 'Untitled Email'}</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${statusClass}">
+                                    ${req.status.charAt(0).toUpperCase() + req.status.slice(1)}
+                                </span>
+                            </div>
+                            <p class="text-sm text-gray-500">
+                                ${req.campaign} &bull; ${req.subscriber_name || req.subscriber_email}
+                            </p>
+                            <div class="mt-2 text-xs text-gray-500 space-y-1">
+                                <div><span class="font-medium text-gray-600">Scheduled:</span> ${scheduledText}</div>
+                                <div><span class="font-medium text-gray-600">Sent:</span> ${sentText}</div>
+                                ${req.error_message ? `<div class="text-red-600">${req.error_message}</div>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                data-action="send-now"
+                                data-request-id="${req.id}"
+                                ${canSendNow ? '' : 'disabled'}
+                            >
+                                Send Now
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center px-3 py-1.5 border border-red-200 rounded-md text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100"
+                                data-action="unsubscribe"
+                                data-request-id="${req.id}"
+                            >
+                                Unsubscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        activityContainer.innerHTML = cards;
+    }
+
+    function loadSendEmailActivity() {
+        if (!activityContainer) return;
+        activityContainer.innerHTML = '<p class="text-sm text-gray-500">Loading activity...</p>';
+        fetch('/api/send-email/requests/')
+            .then(response => response.json())
+            .then(data => {
+                const requests = data.requests || [];
+                if (activityTimezoneLabel) {
+                    const tz = data.timezone || '{{ user_timezone|default:"UTC" }}';
+                    activityTimezoneLabel.textContent = `Times shown in ${tz}.`;
+                }
+                renderSendEmailActivity(requests);
+            })
+            .catch(error => {
+                console.error('Error loading send activity:', error);
+                activityContainer.innerHTML = '<p class="text-sm text-red-600">Failed to load activity. Please try again.</p>';
+            });
+    }
+
+    function performSendEmailAction(action, requestId) {
+        if (!requestId) return;
+        const url = action === 'send-now'
+            ? `/api/send-email/requests/${requestId}/send-now/`
+            : `/api/send-email/requests/${requestId}/unsubscribe/`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status >= 200 && status < 300) {
+                alert(body.message || 'Action completed successfully.');
+                loadSendEmailActivity();
+            } else {
+                alert(body.error || 'Action failed.');
+            }
+        })
+        .catch(error => {
+            console.error('Error performing action:', error);
+            alert('Error performing action. Please try again.');
+        });
+    }
+
+    if (activityContainer) {
+        loadSendEmailActivity();
+        activityContainer.addEventListener('click', function(e) {
+            const button = e.target.closest('[data-action]');
+            if (!button) return;
+            const action = button.dataset.action;
+            const requestId = button.dataset.requestId;
+            performSendEmailAction(action, requestId);
+        });
+    }
+
+    if (refreshSendActivityButton) {
+        refreshSendActivityButton.addEventListener('click', function() {
+            loadSendEmailActivity();
+        });
+    }
 
     // Load campaigns
     fetch('/api/campaigns/')
@@ -503,9 +671,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error) {
                 alert('Error: ' + data.error);
             } else {
-                alert('Email scheduled successfully!');
+                alert(data.message || 'Email scheduled successfully!');
                 form.reset();
                 scheduleValueContainer.classList.add('hidden');
+                loadSendEmailActivity();
             }
         })
         .catch(error => {

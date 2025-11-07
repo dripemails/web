@@ -101,6 +101,7 @@ def email_detail(request, campaign_id, email_id):
 @permission_classes([IsAuthenticated])
 def test_email(request, campaign_id, email_id):
     """Send a test email."""
+    import logging
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     email = get_object_or_404(Email, id=email_id, campaign=campaign)
     
@@ -110,17 +111,50 @@ def test_email(request, campaign_id, email_id):
     
     variables = request.data.get('variables', {})
     
-    # Send test email
-    from .tasks import send_test_email
-    send_test_email.delay(str(email.id), test_email, variables)
+    # Send test email - try Celery first, fall back to synchronous if unavailable
+    import sys
+    from django.conf import settings
+    from .tasks import send_test_email, _send_test_email_sync
+    logger = logging.getLogger(__name__)
     
-    return Response({'message': _('Test email sent successfully')})
+    # For Windows development, prefer synchronous sending if DEBUG is True
+    use_sync = (sys.platform == 'win32' and settings.DEBUG)
+    
+    if use_sync:
+        # On Windows dev, send synchronously by default
+        try:
+            _send_test_email_sync(str(email.id), test_email, variables)
+            return Response({'message': _('Test email sent successfully')})
+        except Exception as sync_error:
+            return Response({
+                'error': _('Failed to send test email: {}').format(str(sync_error))
+            }, status=500)
+    else:
+        # Try to use Celery, fall back to sync if it fails
+        try:
+            send_test_email.delay(str(email.id), test_email, variables)
+            return Response({'message': _('Test email sent successfully')})
+        except (ConnectionError, OSError, Exception) as e:
+            # If Celery is not available (e.g., Redis not running), send synchronously
+            error_msg = str(e)
+            if '6379' in error_msg or 'redis' in error_msg.lower() or 'Connection refused' in error_msg:
+                logger.warning(f"Redis/Celery unavailable (likely on Windows dev), sending test email synchronously: {error_msg}")
+            else:
+                logger.warning(f"Celery unavailable, sending test email synchronously: {error_msg}")
+            try:
+                _send_test_email_sync(str(email.id), test_email, variables)
+                return Response({'message': _('Test email sent successfully')})
+            except Exception as sync_error:
+                return Response({
+                    'error': _('Failed to send test email: {}').format(str(sync_error))
+                }, status=500)
 
 @login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def send_email(request, campaign_id, email_id):
     """Send an email to a specific subscriber."""
+    import logging
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     email = get_object_or_404(Email, id=email_id, campaign=campaign)
     
@@ -130,11 +164,43 @@ def send_email(request, campaign_id, email_id):
     
     variables = request.data.get('variables', {})
     
-    # Send email
-    from .tasks import send_single_email
-    send_single_email.delay(str(email.id), subscriber_email, variables)
+    # Send email - try Celery first, fall back to synchronous if unavailable
+    import sys
+    from django.conf import settings
+    from .tasks import send_single_email, _send_single_email_sync
+    logger = logging.getLogger(__name__)
     
-    return Response({'message': _('Email sent successfully')})
+    # For Windows development, prefer synchronous sending if DEBUG is True
+    use_sync = (sys.platform == 'win32' and settings.DEBUG)
+    
+    if use_sync:
+        # On Windows dev, send synchronously by default
+        try:
+            _send_single_email_sync(str(email.id), subscriber_email, variables)
+            return Response({'message': _('Email sent successfully')})
+        except Exception as sync_error:
+            return Response({
+                'error': _('Failed to send email: {}').format(str(sync_error))
+            }, status=500)
+    else:
+        # Try to use Celery, fall back to sync if it fails
+        try:
+            send_single_email.delay(str(email.id), subscriber_email, variables)
+            return Response({'message': _('Email sent successfully')})
+        except (ConnectionError, OSError, Exception) as e:
+            # If Celery is not available (e.g., Redis not running), send synchronously
+            error_msg = str(e)
+            if '6379' in error_msg or 'redis' in error_msg.lower() or 'Connection refused' in error_msg:
+                logger.warning(f"Redis/Celery unavailable (likely on Windows dev), sending email synchronously: {error_msg}")
+            else:
+                logger.warning(f"Celery unavailable, sending email synchronously: {error_msg}")
+            try:
+                _send_single_email_sync(str(email.id), subscriber_email, variables)
+                return Response({'message': _('Email sent successfully')})
+            except Exception as sync_error:
+                return Response({
+                    'error': _('Failed to send email: {}').format(str(sync_error))
+                }, status=500)
 
 @login_required
 def campaign_edit(request, campaign_id):

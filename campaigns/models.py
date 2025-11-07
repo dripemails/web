@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-from subscribers.models import List
+from subscribers.models import List, Subscriber
 import uuid
 
 class Campaign(models.Model):
@@ -117,3 +117,36 @@ class EmailEvent(models.Model):
     
     def __str__(self):
         return f"{self.event_type} - {self.email} - {self.subscriber_email}"
+
+
+class EmailSendRequest(models.Model):
+    """Store information about individual email send requests."""
+
+    STATUS_CHOICES = [
+        ('pending', _('Pending')),
+        ('queued', _('Queued')),
+        ('sent', _('Sent')),
+        ('failed', _('Failed')),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_send_requests', verbose_name=_('User'))
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='email_send_requests', verbose_name=_('Campaign'))
+    email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='send_requests', verbose_name=_('Email'))
+    subscriber = models.ForeignKey(Subscriber, on_delete=models.SET_NULL, null=True, blank=True, related_name='send_requests', verbose_name=_('Subscriber'))
+    subscriber_email = models.EmailField(_('Subscriber Email'))
+    variables = models.JSONField(_('Variables'), default=dict, blank=True)
+    status = models.CharField(_('Status'), max_length=10, choices=STATUS_CHOICES, default='pending')
+    scheduled_for = models.DateTimeField(_('Scheduled For'))
+    sent_at = models.DateTimeField(_('Sent At'), null=True, blank=True)
+    error_message = models.TextField(_('Error Message'), blank=True)
+    created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = _('Email Send Request')
+        verbose_name_plural = _('Email Send Requests')
+
+    def __str__(self):
+        return f"{self.email.subject} -> {self.subscriber_email} ({self.status})"

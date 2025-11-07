@@ -6,9 +6,136 @@ from django.template.loader import render_to_string
 from datetime import timedelta
 import logging
 import uuid
+import sys
 from analytics.models import UserProfile
 
 logger = logging.getLogger(__name__)
+
+
+def _is_celery_available():
+    """Check if Celery broker is available."""
+    try:
+        from celery import current_app
+        inspect = current_app.control.inspect()
+        # Try to check if workers are available (this will fail if Redis is down)
+        stats = inspect.stats()
+        return stats is not None
+    except Exception:
+        # If any exception occurs, assume Celery is not available
+        return False
+
+
+def _send_test_email_sync(email_id, test_email, variables=None):
+    """Send a test email synchronously (non-Celery version)."""
+    from .models import Email
+    
+    try:
+        email = Email.objects.select_related('campaign').get(id=email_id)
+    except Email.DoesNotExist:
+        logger.error(f"Email {email_id} not found")
+        raise
+    
+    # Replace variables in content
+    html_content = email.body_html
+    text_content = email.body_text
+    subject = email.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Create and send email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[test_email]
+    )
+    msg.attach_alternative(html_content, "text/html")
+    
+    try:
+        msg.send()
+        logger.info(f"Sent test email '{subject}' to {test_email}")
+    except Exception as e:
+        logger.error(f"Error sending test email to {test_email}: {str(e)}")
+        raise
+
+
+def _send_single_email_sync(email_id, subscriber_email, variables=None, request_id=None):
+    """Send a single email synchronously (non-Celery version)."""
+    from .models import Email, EmailEvent, EmailSendRequest
+    request_obj = None
+    if request_id:
+        try:
+            request_obj = EmailSendRequest.objects.get(id=request_id)
+        except EmailSendRequest.DoesNotExist:
+            request_obj = None
+    
+    try:
+        email = Email.objects.select_related('campaign').get(id=email_id)
+    except Email.DoesNotExist:
+        logger.error(f"Email {email_id} not found")
+        if request_obj:
+            request_obj.status = 'failed'
+            request_obj.error_message = f"Email {email_id} not found"
+            request_obj.save(update_fields=['status', 'error_message', 'updated_at'])
+        raise
+    
+    # Replace variables in content
+    html_content = email.body_html
+    text_content = email.body_text
+    subject = email.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Create and send email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[subscriber_email]
+    )
+    msg.attach_alternative(html_content, "text/html")
+    
+    try:
+        msg.send()
+        
+        # Record the event
+        EmailEvent.objects.create(
+            email=email,
+            subscriber_email=subscriber_email,
+            event_type='sent'
+        )
+        
+        # Update campaign metrics
+        campaign = email.campaign
+        campaign.sent_count += 1
+        campaign.save(update_fields=['sent_count'])
+        
+        # Update send request status
+        if request_obj:
+            request_obj.status = 'sent'
+            request_obj.error_message = ''
+            request_obj.sent_at = timezone.now()
+            request_obj.save(update_fields=['status', 'error_message', 'sent_at', 'updated_at'])
+        
+        logger.info(f"Sent single email '{subject}' to {subscriber_email}")
+    except Exception as e:
+        logger.error(f"Error sending single email to {subscriber_email}: {str(e)}")
+        if request_obj:
+            request_obj.status = 'failed'
+            request_obj.error_message = str(e)
+            request_obj.save(update_fields=['status', 'error_message', 'updated_at'])
+        raise
+
 
 @shared_task
 def send_campaign_emails(campaign_id):
@@ -221,89 +348,10 @@ def process_email_click(tracking_id, subscriber_email, link_url):
 @shared_task
 def send_test_email(email_id, test_email, variables=None):
     """Send a test email to a specific address."""
-    from .models import Email
-    
-    try:
-        email = Email.objects.select_related('campaign').get(id=email_id)
-    except Email.DoesNotExist:
-        logger.error(f"Email {email_id} not found")
-        return
-    
-    # Replace variables in content
-    html_content = email.body_html
-    text_content = email.body_text
-    subject = email.subject
-    
-    if variables:
-        for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value))
-            text_content = text_content.replace(placeholder, str(value))
-            subject = subject.replace(placeholder, str(value))
-    
-    # Create and send email
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[test_email]
-    )
-    msg.attach_alternative(html_content, "text/html")
-    
-    try:
-        msg.send()
-        logger.info(f"Sent test email '{subject}' to {test_email}")
-    except Exception as e:
-        logger.error(f"Error sending test email to {test_email}: {str(e)}")
+    return _send_test_email_sync(email_id, test_email, variables)
 
 
 @shared_task
-def send_single_email(email_id, subscriber_email, variables=None):
+def send_single_email(email_id, subscriber_email, variables=None, request_id=None):
     """Send a single email to a specific address."""
-    from .models import Email, EmailEvent
-    
-    try:
-        email = Email.objects.select_related('campaign').get(id=email_id)
-    except Email.DoesNotExist:
-        logger.error(f"Email {email_id} not found")
-        return
-    
-    # Replace variables in content
-    html_content = email.body_html
-    text_content = email.body_text
-    subject = email.subject
-    
-    if variables:
-        for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value))
-            text_content = text_content.replace(placeholder, str(value))
-            subject = subject.replace(placeholder, str(value))
-    
-    # Create and send email
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[subscriber_email]
-    )
-    msg.attach_alternative(html_content, "text/html")
-    
-    try:
-        msg.send()
-        
-        # Record the event
-        EmailEvent.objects.create(
-            email=email,
-            subscriber_email=subscriber_email,
-            event_type='sent'
-        )
-        
-        # Update campaign metrics
-        campaign = email.campaign
-        campaign.sent_count += 1
-        campaign.save(update_fields=['sent_count'])
-        
-        logger.info(f"Sent single email '{subject}' to {subscriber_email}")
-    except Exception as e:
-        logger.error(f"Error sending single email to {subscriber_email}: {str(e)}")
+    return _send_single_email_sync(email_id, subscriber_email, variables, request_id=request_id)

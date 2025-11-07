@@ -15,12 +15,15 @@ env = environ.Env(
     DATABASE_URL=(str, f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.smtp.EmailBackend'),
     EMAIL_HOST=(str, 'localhost'),
-    EMAIL_PORT=(int, 1025),
+    EMAIL_PORT=(int, 1025),  # Default to 1025 to match run_smtp_server default (avoids Postfix conflict)
     EMAIL_HOST_USER=(str, ''),
     EMAIL_HOST_PASSWORD=(str, ''),
     EMAIL_USE_TLS=(bool, False),
     DEFAULT_FROM_EMAIL=(str, 'DripEmails <noreply@dripemails.org>'),
     SITE_URL=(str, 'http://localhost:8000'),
+    CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
+    CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
+    CELERY_RESULT_BACKEND=(str, 'django-db'),
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -176,14 +179,45 @@ LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = env('EMAIL_BACKEND')
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
-# Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'django-db'
+# For local development on Windows, make authentication optional
+# If EMAIL_HOST_USER is empty, Django won't use authentication
+# This is useful when running a local SMTP server without auth
+import sys
+if sys.platform == 'win32' and DEBUG:
+    # On Windows development, ensure empty credentials don't cause issues
+    if not EMAIL_HOST_USER:
+        EMAIL_HOST_USER = ''
+    if not EMAIL_HOST_PASSWORD:
+        EMAIL_HOST_PASSWORD = ''
+    # Ensure we're using port 1025 for local SMTP server (matches run_smtp_server default)
+    # This avoids conflicts with Postfix which typically runs on port 25
+    if EMAIL_HOST == 'localhost':
+        # If port is 587 or 25, switch to 1025 for local dev (avoids Postfix conflicts)
+        if EMAIL_PORT in (587, 25):
+            EMAIL_PORT = 1025
+            EMAIL_USE_TLS = False
+        # Otherwise keep the configured port
+
+# Celery settings (optional - Redis not required)
+# Celery is used for asynchronous email sending, but the app will fall back to
+# synchronous sending if Redis/Celery is not available
+import sys
+_celery_enabled_env = env('CELERY_ENABLED', default='')
+if not _celery_enabled_env or _celery_enabled_env.lower() in ('', 'auto', 'none'):
+    # Auto-detect: Disable Celery on Windows when DEBUG=True (for easier development)
+    # Enable Celery by default on Linux/macOS or when DEBUG=False
+    CELERY_ENABLED = (sys.platform != 'win32' or not DEBUG)
+else:
+    # Convert string to boolean
+    CELERY_ENABLED = _celery_enabled_env.lower() in ('true', '1', 'yes', 'on')
+
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='django-db')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -191,6 +225,10 @@ CELERY_TIMEZONE = TIME_ZONE
 # CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Not using django-celery-beat
 # To use beat without django-celery-beat, you can set:
 # CELERY_BEAT_SCHEDULER = 'celery.beat:PersistentScheduler'
+
+# Note: On Windows development with DEBUG=True, Celery is disabled by default
+# Email sending will be synchronous. For production or to enable Celery, set
+# CELERY_ENABLED=True in your .env file and ensure Redis is running.
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = DEBUG

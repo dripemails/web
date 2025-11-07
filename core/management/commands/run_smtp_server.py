@@ -6,8 +6,9 @@ Usage:
 
 This command starts a modern async SMTP server that can receive emails from your Django application
 and handle them appropriately. Perfect for development, testing, and production email handling.
-Compatible with Python 3.11+ and 3.12+. Runs on standard SMTP port 25 by default (no SSL required).
+Compatible with Python 3.11+ and 3.12+. Runs on port 1025 by default (to avoid conflicts with Postfix on port 25).
 Supports authentication with Django users including the 'founders' account.
+Press Ctrl+C to gracefully stop the server.
 """
 
 import asyncio
@@ -15,6 +16,8 @@ import argparse
 import logging
 import json
 import os
+import signal
+import sys
 from pathlib import Path
 from django.core.management.base import BaseCommand
 from django.conf import settings
@@ -30,8 +33,8 @@ class Command(BaseCommand):
         parser.add_argument(
             '--port',
             type=int,
-            default=25,
-            help='Port to run the SMTP server on (default: 25)'
+            default=1025,
+            help='Port to run the SMTP server on (default: 1025)'
         )
         parser.add_argument(
             '--host',
@@ -166,36 +169,46 @@ class Command(BaseCommand):
         
         if server.start(host, port):
             try:
-                # Python 3.11+ compatible event loop handling
-                try:
-                    # Try to get existing event loop
-                    loop = asyncio.get_event_loop()
-                    if loop.is_running():
-                        # If loop is already running, just keep it running
-                        pass
-                    else:
-                        # Run the event loop
-                        loop.run_forever()
-                except RuntimeError:
-                    # No event loop available, create a new one
-                    loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(loop)
-                    loop.run_forever()
+                # The aiosmtpd Controller manages its own event loop
+                # Just keep the process alive until interrupted
+                import time
+                while True:
+                    # Check if controller is still running
+                    if server.controller is None:
+                        break
+                    if not hasattr(server.controller, 'smtpd') or server.controller.smtpd is None:
+                        break
+                    time.sleep(0.5)  # Sleep to avoid CPU spinning
             except KeyboardInterrupt:
-                pass
+                self.stdout.write(
+                    self.style.WARNING('\n🛑 Keyboard interrupt received. Stopping server...')
+                )
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f'❌ Error running server: {e}')
+                )
             finally:
+                # Stop the server gracefully
                 server.stop()
+                self.stdout.write(
+                    self.style.SUCCESS('✅ Server stopped successfully.')
+                )
         else:
             raise RuntimeError("Failed to start SMTP server")
     
     def _load_config(self, options):
         """Load configuration from file or command line options."""
+        import sys
+        # Automatically disable auth for Windows development when DEBUG is True
+        # unless explicitly enabled via --no-auth flag
+        auto_no_auth = (sys.platform == 'win32' and settings.DEBUG and not options['no_auth'])
+        
         config = {
             'debug': options['debug'],
             'save_to_database': options['save_to_db'],
             'log_to_file': options['log_to_file'],
             'allowed_domains': ['dripemails.org', 'localhost', '127.0.0.1'],
-            'auth_enabled': not options['no_auth'],
+            'auth_enabled': not (options['no_auth'] or auto_no_auth),
             'allowed_users': options['allowed_users'],
         }
         

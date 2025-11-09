@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'dripemails'),
         'USER': os.environ.get('DB_USER', 'dripemails'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'dripemails'),
-        'HOST': os.environ.get('DB_HOST', '10.124.0.3'),
+        'HOST': os.environ.get('DB_HOST', '10.124.0.7'),
         'PORT': os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',

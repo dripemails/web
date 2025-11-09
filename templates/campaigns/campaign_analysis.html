@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Campaign Analysis" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">{% trans "Campaign Analysis" %}</h1>
+    <div>
+      <a href="{% url 'campaigns:abtest' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "AB Test" %}</a>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <form method="get" class="mb-6">
+      <label class="flex items-center space-x-3">
+        <span class="text-sm text-gray-600">{% trans "Campaign" %}</span>
+        <select name="campaign_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
+          <option value="">-- {% trans "Select" %} --</option>
+          {% for c in campaigns %}
+            <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </form>
+
+    {% if not campaign %}
+      <p class="text-gray-600">{% trans "Select a campaign to view analysis." %}</p>
+    {% else %}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Sent" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.sent_count }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Opens" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.open_count }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Clicks" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.click_count }}</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h2 class="text-lg font-medium mb-2">{% trans "Monthly events" %}</h2>
+        {% if by_month_items %}
+          <div class="overflow-auto bg-white rounded border">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Month" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Sent" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Opened" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Clicked" %}</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-100">
+                {% for month, vals in by_month_items %}
+                <tr>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ month }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ vals.sent }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ vals.opened }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ vals.clicked }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="text-gray-600">{% trans "No events found for this campaign." %}</p>
+        {% endif %}
+      </div>
+
+      <div>
+        <h2 class="text-lg font-medium mb-2">{% trans "Per-email breakdown" %}</h2>
+        {% if email_rows %}
+          <div class="overflow-auto bg-white rounded border">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Subject" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Sent" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Opened" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Clicked" %}</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-100">
+                {% for r in email_rows %}
+                <tr>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.subject }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.sent }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.opened }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.clicked }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="text-gray-600">{% trans "No emails found for this campaign." %}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}{% endblock %}
+{% block extra_scripts %}
+  <!-- Chart.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{% static 'campaigns/js/campaigns-charts.js' %}"></script>
+  <script>
+    // Prepare data for charts using template variables
+    (function(){
+      // Metrics canvas data attributes
+      var metricsCanvas = document.getElementById('metricsChart');
+      if(metricsCanvas){
+        metricsCanvas.dataset.sent = '{{ campaign.sent_count|default:0 }}';
+        metricsCanvas.dataset.opens = '{{ campaign.open_count|default:0 }}';
+        metricsCanvas.dataset.clicks = '{{ campaign.click_count|default:0 }}';
+      }
+
+      // Monthly events
+      var monthlyCanvas = document.getElementById('monthlyChart');
+      if(monthlyCanvas){
+        var months = [];
+        var sent = [];
+        var opens = [];
+        var clicks = [];
+        {% for month, vals in by_month_items %}
+          months.push('{{ month }}');
+          sent.push({{ vals.sent|default:0 }});
+          opens.push({{ vals.opened|default:0 }});
+          clicks.push({{ vals.clicked|default:0 }});
+        {% endfor %}
+        monthlyCanvas.dataset.months = JSON.stringify(months);
+        monthlyCanvas.dataset.sent = JSON.stringify(sent);
+        monthlyCanvas.dataset.opens = JSON.stringify(opens);
+        monthlyCanvas.dataset.clicks = JSON.stringify(clicks);
+      }
+
+      // Per-email
+      var perEmailCanvas = document.getElementById('perEmailChart');
+      if(perEmailCanvas){
+        var labels = [];
+        var sent2 = [];
+        var opened2 = [];
+        var clicked2 = [];
+        {% for r in email_rows %}
+          labels.push('{{ r.subject|escapejs }}');
+          sent2.push({{ r.sent|default:0 }});
+          opened2.push({{ r.opened|default:0 }});
+          clicked2.push({{ r.clicked|default:0 }});
+        {% endfor %}
+        perEmailCanvas.dataset.labels = JSON.stringify(labels);
+        perEmailCanvas.dataset.sent = JSON.stringify(sent2);
+        perEmailCanvas.dataset.opens = JSON.stringify(opened2);
+        perEmailCanvas.dataset.clicks = JSON.stringify(clicked2);
+      }
+    })();
+  </script>
+{% endblock %}

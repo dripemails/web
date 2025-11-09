@@ -5,7 +5,9 @@ from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Campaign, Email
+from .models import Campaign, Email, EmailEvent
+from django.urls import reverse
+from django.template import TemplateDoesNotExist
 from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
 import csv
@@ -420,4 +422,102 @@ def campaign_create(request):
     
     return render(request, 'campaigns/create.html', {
         'subscriber_lists': List.objects.filter(user=request.user)
+    })
+
+
+@login_required
+def abtest_view(request):
+    """Simple web view replacement for the Streamlit AB test utility.
+
+    - GET: select a campaign and email to preview
+    - POST: save an edited draft of an email's HTML body
+    """
+    campaigns = Campaign.objects.filter(user=request.user)
+    campaign = None
+    emails = []
+    email = None
+
+    # Allow selecting campaign/email via querystring or form
+    campaign_id = request.GET.get('campaign_id') or request.POST.get('campaign_id')
+    if campaign_id:
+        campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+        emails = campaign.emails.all().order_by('order')
+
+        email_id = request.GET.get('email_id') or request.POST.get('email_id')
+        if email_id:
+            try:
+                email = campaign.emails.get(id=email_id)
+            except Email.DoesNotExist:
+                email = None
+
+    if request.method == 'POST' and email:
+        draft = request.POST.get('draft', '')
+        email.body_html = draft
+        email.save(update_fields=['body_html', 'updated_at'])
+        messages.success(request, 'Draft saved to database.')
+        # Redirect back to the same selection
+        url = reverse('campaigns:abtest')
+        params = f'?campaign_id={campaign.id}&email_id={email.id}'
+        return redirect(url + params)
+
+    context = {
+        'campaigns': campaigns,
+        'campaign': campaign,
+        'emails': emails,
+        'email': email,
+    }
+    try:
+        return render(request, 'campaigns/abtest.html', context)
+    except TemplateDoesNotExist:
+        # Support templates placed directly under a templates/ folder without app subdir
+        return render(request, 'abtest.html', context)
+
+
+@login_required
+def campaign_analysis_view(request):
+    """Render campaign analysis similar to the Streamlit view.
+
+    Shows basic metrics, monthly aggregates and per-email breakdown.
+    """
+    campaigns = Campaign.objects.filter(user=request.user)
+    campaign = None
+    by_month = {}
+    email_rows = []
+
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id:
+        campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+
+        events = EmailEvent.objects.filter(email__campaign=campaign)
+        from collections import defaultdict
+        by_month = defaultdict(lambda: {'opened': 0, 'clicked': 0, 'sent': 0})
+        for ev in events:
+            month = ev.created_at.strftime('%Y-%m')
+            if ev.event_type == 'opened':
+                by_month[month]['opened'] += 1
+            elif ev.event_type == 'clicked':
+                by_month[month]['clicked'] += 1
+            elif ev.event_type == 'sent':
+                by_month[month]['sent'] += 1
+
+        # Per-email breakdown
+        for e in campaign.emails.all():
+            sent = EmailEvent.objects.filter(email=e, event_type='sent').count()
+            opened = EmailEvent.objects.filter(email=e, event_type='opened').count()
+            clicked = EmailEvent.objects.filter(email=e, event_type='clicked').count()
+            email_rows.append({'subject': e.subject, 'sent': sent, 'opened': opened, 'clicked': clicked})
+
+    # Convert defaultdict to a sorted list of (month, values) tuples for the template
+    # This avoids relying on the template dictsort filter which may behave differently
+    # across Django versions or custom template configurations.
+    month_items = []
+    if by_month:
+        # sort by month string (YYYY-MM) ascending
+        month_items = sorted(by_month.items())
+
+    return render(request, 'campaigns/campaign_analysis.html', {
+        'campaigns': campaigns,
+        'campaign': campaign,
+        'by_month_items': month_items,
+        'email_rows': email_rows,
     })

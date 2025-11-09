@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "AB Test" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">{% trans "AB Test" %}</h1>
+    <div>
+      <a href="{% url 'campaigns:analysis' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Analysis" %}</a>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <form method="get" class="mb-4 flex items-center space-x-4">
+      <label class="flex items-center space-x-2">
+        <span class="text-sm text-gray-600">{% trans "Campaign" %}</span>
+        <select name="campaign_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
+          <option value="">-- {% trans "Select" %} --</option>
+          {% for c in campaigns %}
+            <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% if campaign %}
+        <label class="flex items-center space-x-2">
+          <span class="text-sm text-gray-600">{% trans "Email" %}</span>
+          <input type="hidden" name="campaign_id" value="{{ campaign.id }}">
+          <select name="email_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
+            <option value="">-- {% trans "Select" %} --</option>
+            {% for e in emails %}
+              <option value="{{ e.id }}" {% if email and email.id == e.id %}selected{% endif %}>{{ e.order }} - {{ e.subject }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      {% endif %}
+    </form>
+
+    {% if not campaigns %}
+      <p class="text-gray-600">{% trans "No campaigns available." %}</p>
+    {% else %}
+      {% if not email %}
+        <p class="text-gray-600">{% trans "Select an email to preview and edit a draft." %}</p>
+      {% else %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Original -->
+          <div class="border rounded p-4 bg-gray-50">
+            <h3 class="font-medium mb-2">{% trans "Original" %}</h3>
+            <div id="original-content" class="prose max-h-80 overflow-auto p-2 bg-white rounded">
+              {% if email.body_html %}
+                <div>{{ email.body_html|safe }}</div>
+              {% else %}
+                <pre class="whitespace-pre-wrap">{{ email.body_text }}</pre>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Editable -->
+          <div class="border rounded p-4 bg-gray-50">
+            <h3 class="font-medium mb-2">{% trans "Edit Draft" %}</h3>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="campaign_id" value="{{ campaign.id }}">
+              <input type="hidden" name="email_id" value="{{ email.id }}">
+
+              <div class="mb-3 flex items-center space-x-3">
+                <label class="flex items-center space-x-2 text-sm text-gray-600"><input type="checkbox" id="live-preview" checked class="form-checkbox"> <span>{% trans "Live preview" %}</span></label>
+                <button type="button" id="preview-button" class="ml-auto bg-gray-100 px-3 py-1 rounded text-sm">{% trans "Refresh preview" %}</button>
+              </div>
+
+              <textarea name="draft" id="draft-textarea" class="w-full h-64 p-3 border rounded mb-3">{{ email.body_html|default:email.body_text }}</textarea>
+
+              <div class="mb-4">
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">{% trans "Save draft" %}</button>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-2">{% trans "Preview" %}</h4>
+                <div id="draft-preview" class="prose max-h-48 overflow-auto p-3 bg-white rounded border"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  (function(){
+    const textarea = document.getElementById('draft-textarea');
+    const preview = document.getElementById('draft-preview');
+    const live = document.getElementById('live-preview');
+    const previewBtn = document.getElementById('preview-button');
+    const orig = document.getElementById('original-content');
+
+    function updatePreview(){
+      if(!preview || !textarea) return;
+      const v = textarea.value || '';
+      if(v.trim().startsWith('<') && v.includes('>')){
+        preview.innerHTML = v;
+      } else {
+        preview.textContent = v;
+      }
+    }
+
+    if(textarea){
+      updatePreview();
+      textarea.addEventListener('input', function(){ if(live && live.checked) updatePreview(); });
+    }
+    if(previewBtn){ previewBtn.addEventListener('click', updatePreview); }
+
+    // Scroll sync between original and preview for easier comparison
+    if(orig && preview){
+      orig.addEventListener('scroll', function(){ preview.scrollTop = orig.scrollTop; });
+      preview.addEventListener('scroll', function(){ orig.scrollTop = preview.scrollTop; });
+    }
+  })();
+</script>
+{% endblock %}

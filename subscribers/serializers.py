@@ -44,27 +44,41 @@ class SubscriberSerializer(serializers.ModelSerializer):
         custom_values_data = validated_data.pop('custom_values', None)
         
         # Get the list from context
-        list_id = self.context.get('list_id')
-        if not list_id:
-            raise serializers.ValidationError("List ID is required")
-        
-        try:
-            list_obj = List.objects.get(id=list_id)
-        except List.DoesNotExist:
-            raise serializers.ValidationError("List does not exist")
-        
+        list_obj = self.context.get('list_obj')
+        if list_obj is None:
+            list_id = self.context.get('list_id')
+            if list_id:
+                request = self.context.get('request')
+                list_queryset = List.objects.all()
+                if request and getattr(request, 'user', None):
+                    list_queryset = list_queryset.filter(user=request.user)
+                try:
+                    list_obj = list_queryset.get(id=list_id)
+                except List.DoesNotExist:
+                    raise serializers.ValidationError("List does not exist")
+ 
         # Check if subscriber already exists
         email = validated_data.get('email')
-        try:
-            subscriber = Subscriber.objects.get(email=email)
-            # Add to this list if not already in it
-            if list_obj not in subscriber.lists.all():
-                subscriber.lists.add(list_obj)
-        except Subscriber.DoesNotExist:
-            # Create new subscriber
-            subscriber = Subscriber.objects.create(**validated_data)
+        subscriber, created = Subscriber.objects.get_or_create(
+            email=email,
+            defaults=validated_data
+        )
+ 
+        if not created:
+            updated_fields = []
+            for attr in ['first_name', 'last_name', 'is_active', 'confirmed']:
+                value = validated_data.get(attr)
+                if value is not None and getattr(subscriber, attr) != value:
+                    setattr(subscriber, attr, value)
+                    updated_fields.append(attr)
+
+            if updated_fields:
+                subscriber.save(update_fields=updated_fields)
+
+        # Link subscriber to the list if provided
+        if list_obj and list_obj not in subscriber.lists.all():
             subscriber.lists.add(list_obj)
-        
+ 
         # Create custom values if provided
         if custom_values_data:
             for value_data in custom_values_data:

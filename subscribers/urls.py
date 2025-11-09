@@ -6,6 +6,7 @@ app_name = 'subscribers'
 urlpatterns = [
     # Web views (no 'subscribers/' prefix since it's added in main urls.py)
     path('', views.subscriber_directory, name='list'),
+    path('add/', views.add_subscriber, name='add'),
     path('import/', views.import_subscribers, name='import'),
     path('lists/', views.list_list_create, name='list-list-create'),
     path('lists/<uuid:pk>/', views.list_detail, name='list-detail'),

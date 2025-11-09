@@ -338,6 +338,8 @@ def send_email_api(request):
                 send_delay = timedelta(weeks=value)
             elif schedule == 'months':
                 send_delay = timedelta(days=value * 30)
+            elif schedule == 'seconds':
+                send_delay = timedelta(seconds=value)
             else:
                 send_delay = timedelta(0)
         

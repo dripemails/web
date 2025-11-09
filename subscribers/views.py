@@ -69,9 +69,21 @@ def subscriber_list_create(request):
         serializer = SubscriberSerializer(subscribers, many=True)
         return Response(serializer.data)
     
-    serializer = SubscriberSerializer(data=request.data, context={'request': request})
+    list_id = request.data.get('list_id') or None
+    list_obj = None
+
+    if list_id:
+        try:
+            list_obj = List.objects.get(id=list_id, user=request.user)
+        except List.DoesNotExist:
+            return Response({'list_id': _('Selected list does not exist.')}, status=404)
+ 
+    serializer = SubscriberSerializer(
+        data=request.data,
+        context={'request': request, 'list_obj': list_obj, 'list_id': list_id}
+    )
     if serializer.is_valid():
-        subscriber = serializer.save()
+        serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
 
@@ -315,3 +327,32 @@ def subscriber_directory(request):
         'total_count': paginator.count,
     }
     return render(request, 'subscribers/list.html', context)
+
+
+@login_required
+def add_subscriber(request):
+    """Render the add subscriber page with list and campaign data."""
+    lists = List.objects.filter(user=request.user).order_by('name')
+    campaigns = Campaign.objects.filter(user=request.user).prefetch_related('emails').order_by('name')
+
+    campaign_data = [
+        {
+            'id': str(campaign.id),
+            'name': campaign.name,
+            'emails': [
+                {
+                    'id': str(email.id),
+                    'subject': email.subject,
+                }
+                for email in campaign.emails.all()
+            ],
+        }
+        for campaign in campaigns
+    ]
+
+    context = {
+        'lists': lists,
+        'campaigns': campaigns,
+        'campaign_data_json': json.dumps(campaign_data),
+    }
+    return render(request, 'subscribers/add.html', context)

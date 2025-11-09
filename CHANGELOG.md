@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial release of DripEmails.org - Complete Email Marketing Platform
 - **Core Platform**: Full Django-based email marketing solution
 - **Campaign Management**: Drip campaigns, email templates, scheduling
@@ -20,16 +21,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Production Ready**: Deployment guides and configuration
 
 ### Core Features
+
 - **Email Campaigns**: Create and manage drip campaigns with customizable delays
 - **Email Templates**: Rich HTML and text templates with dynamic content
 - **Subscriber Management**: Bulk import, segmentation, subscription handling
 - **Analytics & Reporting**: Real-time tracking, conversion monitoring
-- **SMTP Server**: Custom async email server with authentication
+- **SMTP Server**: Custom async email server with authentication -
+- **AB Testing**:
+  Added an AB testing page for comparing and editing email versions
+- **Campaign Analysis**
+  Added a campaign analysis page for viewing campaign analytics
 - **API Integration**: RESTful API for all platform features
 - **User Authentication**: Django Allauth with social login support
 - **Responsive UI**: Mobile-first design with dark mode support
 
 ### Technical Features
+
 - **Django 4.0+**: Modern web framework with latest features
 - **Python 3.11+**: Latest Python with type hints and async support
 - **React Frontend**: Modern JavaScript with TypeScript
@@ -41,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **SSL Support**: Automatic certificate management
 
 ### SMTP Server Component
+
 - **Async Performance**: Built with aiosmtpd for high throughput
 - **Authentication**: PLAIN and LOGIN authentication support
 - **Rate Limiting**: Built-in spam protection and abuse prevention
@@ -49,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Production Deployment**: Systemd, supervisord, and Docker support
 
 ### Documentation
+
 - **Comprehensive Guides**: Installation, deployment, and API docs
 - **Production Setup**: SSL certificates, monitoring, and scaling
 - **Development Guide**: Contributing guidelines and code standards
@@ -57,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-01-01
 
 ### Added
+
 - Initial release of DripEmails.org platform
 - Core Django application structure
 - Campaign management system
@@ -71,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation and examples
 
 ### Core Applications
+
 - **core**: Main Django app with SMTP server integration
 - **campaigns**: Email campaign management and automation
 - **subscribers**: Subscriber database and management
@@ -78,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **smtp_server**: Standalone SMTP server package
 
 ### Features
+
 - **Email Processing**: Parse and process incoming emails
 - **Campaign Automation**: Drip campaigns with customizable delays
 - **Subscriber Management**: Import, segment, and manage subscribers
@@ -90,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Statistics**: Track platform performance and usage
 
 ### Technical Details
+
 - Built with Django 4.0+ and Python 3.11+
 - Async SMTP server with aiosmtpd 1.4.4+
 - React frontend with TypeScript
@@ -102,12 +115,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Production-ready configuration options
 
 ### Known Issues
+
 - Session.peer compatibility issues with some aiosmtpd versions
 - Authentication requires additional testing in production environments
 - Webhook functionality requires aiohttp dependency
 - Frontend build process needs optimization for production
 
 ### Future Plans
+
 - Enhanced authentication mechanisms (OAuth, SAML)
 - SSL/TLS support for SMTP server
 - Advanced spam filtering and email validation
@@ -121,4 +136,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Email template builder with drag-and-drop interface
 - Advanced segmentation and personalization
 - A/B testing framework for campaigns
-- Email deliverability monitoring and optimization 
+- Email deliverability monitoring and optimization

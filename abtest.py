@@ -6,6 +6,7 @@ from streamlit_django import setup_django
 setup_django()
 
 from campaigns.models import Campaign, Email
+import streamlit.components.v1 as components
 
 
 st.title("Email version comparison")

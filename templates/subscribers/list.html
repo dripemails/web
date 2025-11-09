@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Subscribers" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">{% trans "Subscribers" %}</h1>
+                <p class="text-gray-600">{% trans "View and search all subscribers across your lists" %}</p>
+            </div>
+            <form method="get" class="w-full lg:w-auto">
+                <label for="subscriber-search" class="sr-only">{% trans "Search subscribers" %}</label>
+                <div class="relative flex rounded-md shadow-sm">
+                    <input
+                        id="subscriber-search"
+                        name="q"
+                        value="{{ query }}"
+                        type="search"
+                        placeholder="{% trans 'Search by name or email...' %}"
+                        class="w-full lg:w-80 rounded-md border border-gray-300 py-2 pl-4 pr-10 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
+                    {% if query %}
+                        <a href="{% url 'subscribers:list' %}"
+                           class="absolute inset-y-0 right-9 flex items-center text-xs text-indigo-600 hover:text-indigo-800 px-2">
+                            {% trans "Clear" %}
+                        </a>
+                    {% endif %}
+                    <button type="submit"
+                            class="absolute inset-y-0 right-0 inline-flex items-center rounded-r-md bg-indigo-600 px-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                        {% trans "Search" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-900">
+                    {% blocktrans count total=total_count %}
+                        {{ total }} subscriber
+                    {% plural %}
+                        {{ total }} subscribers
+                    {% endblocktrans %}
+                </h2>
+                {% if query %}
+                    <p class="text-sm text-gray-500">
+                        {% blocktrans trimmed %}
+                            Showing results for "{{ query }}"
+                        {% endblocktrans %}
+                    </p>
+                {% endif %}
+            </div>
+
+            {% if page_obj.object_list %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{% trans "Name" %}</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{% trans "Email" %}</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{% trans "Lists" %}</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{% trans "Status" %}</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{% trans "Joined" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for subscriber in page_obj.object_list %}
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {% if subscriber.full_name %}
+                                                {{ subscriber.full_name }}
+                                            {% else %}
+                                                <span class="text-gray-500 italic">{% trans "No name provided" %}</span>
+                                            {% endif %}
+                                        </div>
+                                        {% if subscriber.first_name or subscriber.last_name %}
+                                            <div class="text-xs text-gray-500">
+                                                {{ subscriber.first_name }}{% if subscriber.first_name and subscriber.last_name %} {% endif %}{{ subscriber.last_name }}
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-sm text-indigo-600 break-all">{{ subscriber.email }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {% with subscriber.lists.all as memberships %}
+                                            {% if memberships %}
+                                                <div class="flex flex-wrap gap-2">
+                                                    {% for list in memberships %}
+                                                        <span class="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700">
+                                                            {{ list.name }}
+                                                        </span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <span class="text-xs text-gray-400">{% trans "No lists" %}</span>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap space-y-1">
+                                        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {% if subscriber.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">
+                                            {% if subscriber.is_active %}
+                                                {% trans "Active" %}
+                                            {% else %}
+                                                {% trans "Inactive" %}
+                                            {% endif %}
+                                        </span>
+                                        <span class="block text-xs text-gray-500">
+                                            {% if subscriber.confirmed %}
+                                                {% trans "Confirmed" %}
+                                            {% else %}
+                                                {% trans "Unconfirmed" %}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ subscriber.created_at|date:"MEDIUM_DATE_FORMAT" }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="px-6 py-4 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-3">
+                    <p class="text-sm text-gray-500">
+                        {% blocktrans with start=page_obj.start_index end=page_obj.end_index total=page_obj.paginator.count %}
+                            Showing {{ start }}-{{ end }} of {{ total }} subscribers
+                        {% endblocktrans %}
+                    </p>
+                    <div class="inline-flex items-center gap-2">
+                        {% if page_obj.has_previous %}
+                            <a href="?{% if query %}q={{ query|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                               class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                {% trans "Previous" %}
+                            </a>
+                        {% else %}
+                            <span class="inline-flex items-center rounded-md border border-gray-200 bg-gray-100 px-3 py-1 text-sm text-gray-400 cursor-not-allowed">
+                                {% trans "Previous" %}
+                            </span>
+                        {% endif %}
+
+                        <span class="text-sm text-gray-500">
+                            {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}
+                                Page {{ number }} of {{ total }}
+                            {% endblocktrans %}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?{% if query %}q={{ query|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"
+                               class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                {% trans "Next" %}
+                            </a>
+                        {% else %}
+                            <span class="inline-flex items-center rounded-md border border-gray-200 bg-gray-100 px-3 py-1 text-sm text-gray-400 cursor-not-allowed">
+                                {% trans "Next" %}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="px-6 py-12 text-center">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">
+                        {% if query %}
+                            {% trans "No subscribers match your search" %}
+                        {% else %}
+                            {% trans "You have no subscribers yet" %}
+                        {% endif %}
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-6">
+                        {% if query %}
+                            {% trans "Try a different name or email address." %}
+                        {% else %}
+                            {% trans "Import contacts or add subscribers manually to see them listed here." %}
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'subscribers:import' %}"
+                       class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        {% trans "Import Subscribers" %}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

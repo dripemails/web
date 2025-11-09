@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.core.paginator import Paginator
+from django.db.models import Q, Value, CharField
+from django.db.models.functions import Coalesce, Concat, Trim
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -271,3 +274,44 @@ def validate_file(request):
         
     except Exception as e:
         return Response({'error': str(e)}, status=400)
+
+
+@login_required
+def subscriber_directory(request):
+    """Display the subscribers for the authenticated user with search and pagination."""
+    query = request.GET.get('q', '').strip()
+
+    subscribers = (
+        Subscriber.objects.filter(lists__user=request.user)
+        .distinct()
+        .prefetch_related('lists')
+        .annotate(
+            full_name=Trim(
+                Concat(
+                    Coalesce('first_name', Value('')),
+                    Value(' '),
+                    Coalesce('last_name', Value('')),
+                    output_field=CharField(),
+                )
+            )
+        )
+        .order_by('-created_at')
+    )
+
+    if query:
+        subscribers = subscribers.filter(
+            Q(first_name__icontains=query)
+            | Q(last_name__icontains=query)
+            | Q(email__icontains=query)
+            | Q(full_name__icontains=query)
+        )
+
+    paginator = Paginator(subscribers, 25)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
+    context = {
+        'page_obj': page_obj,
+        'query': query,
+        'total_count': paginator.count,
+    }
+    return render(request, 'subscribers/list.html', context)

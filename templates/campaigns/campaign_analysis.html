@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "Campaign Analysis" %} - {{ block.super }}{% endblock %}
 
@@ -43,10 +44,18 @@
         </div>
       </div>
 
+      <!-- Metrics chart -->
+      <div class="mb-6">
+        <h2 class="text-lg font-medium mb-2">{% trans "Metrics Overview" %}</h2>
+        <canvas id="metricsChart" width="400" height="200"></canvas>
+      </div>
+
+      <!-- Monthly events chart -->
       <div class="mb-6">
         <h2 class="text-lg font-medium mb-2">{% trans "Monthly events" %}</h2>
         {% if by_month_items %}
-          <div class="overflow-auto bg-white rounded border">
+          <canvas id="monthlyChart" width="800" height="300"></canvas>
+          <div class="overflow-auto bg-white rounded border mt-4">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -73,9 +82,11 @@
         {% endif %}
       </div>
 
+      <!-- Per-email breakdown chart and table -->
       <div>
         <h2 class="text-lg font-medium mb-2">{% trans "Per-email breakdown" %}</h2>
         {% if email_rows %}
+          <canvas id="perEmailChart" width="800" height="300" class="mb-4"></canvas>
           <div class="overflow-auto bg-white rounded border">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
@@ -107,15 +118,12 @@
 </div>
 {% endblock %}
 
-{% block extra_scripts %}{% endblock %}
 {% block extra_scripts %}
-  <!-- Chart.js from CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{% static 'campaigns/js/campaigns-charts.js' %}"></script>
   <script>
-    // Prepare data for charts using template variables
     (function(){
-      // Metrics canvas data attributes
+      // Metrics chart
       var metricsCanvas = document.getElementById('metricsChart');
       if(metricsCanvas){
         metricsCanvas.dataset.sent = '{{ campaign.sent_count|default:0 }}';
@@ -123,7 +131,7 @@
         metricsCanvas.dataset.clicks = '{{ campaign.click_count|default:0 }}';
       }
 
-      // Monthly events
+      // Monthly events chart
       var monthlyCanvas = document.getElementById('monthlyChart');
       if(monthlyCanvas){
         var months = [];
@@ -142,7 +150,7 @@
         monthlyCanvas.dataset.clicks = JSON.stringify(clicks);
       }
 
-      // Per-email
+      // Per-email chart
       var perEmailCanvas = document.getElementById('perEmailChart');
       if(perEmailCanvas){
         var labels = [];

@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from .env file
 env = environ.Env(
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
     SECRET_KEY=(str, 'django-insecure-default-key-for-dev'),
     DATABASE_URL=(str, f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.smtp.EmailBackend'),

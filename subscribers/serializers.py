@@ -57,20 +57,29 @@ class SubscriberSerializer(serializers.ModelSerializer):
                 except List.DoesNotExist:
                     raise serializers.ValidationError("List does not exist")
  
+        # Ensure is_active has a default value if not provided
+        if 'is_active' not in validated_data:
+            validated_data['is_active'] = True
+        
         # Check if subscriber already exists
         email = validated_data.get('email')
         subscriber, created = Subscriber.objects.get_or_create(
             email=email,
             defaults=validated_data
         )
- 
+
         if not created:
+            # Update fields if subscriber already exists
             updated_fields = []
             for attr in ['first_name', 'last_name', 'is_active', 'confirmed']:
-                value = validated_data.get(attr)
-                if value is not None and getattr(subscriber, attr) != value:
-                    setattr(subscriber, attr, value)
-                    updated_fields.append(attr)
+                if attr in validated_data:
+                    value = validated_data[attr]
+                    # Get current value directly from the model instance
+                    current_value = getattr(subscriber, attr)
+                    # Only update if the value has changed
+                    if current_value != value:
+                        setattr(subscriber, attr, value)
+                        updated_fields.append(attr)
 
             if updated_fields:
                 subscriber.save(update_fields=updated_fields)

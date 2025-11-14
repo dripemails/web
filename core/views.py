@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from campaigns.models import Campaign, Email, EmailSendRequest
-from subscribers.models import List
+from subscribers.models import List, Subscriber
 from analytics.models import UserProfile
 from django.conf import settings
 import re
@@ -47,13 +47,16 @@ def dashboard_api(request):
     # Get user profile
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
+    # Count unique subscribers across all user's lists (avoid double counting)
+    subscribers_count = Subscriber.objects.filter(lists__user=request.user).distinct().count()
+    
     return Response({
         'campaigns': campaign_data,
         'lists': list_data,
         'stats': {
             'campaigns_count': len(campaign_data),
             'lists_count': len(list_data),
-            'subscribers_count': sum(list_obj.subscribers_count for list_obj in lists),
+            'subscribers_count': subscribers_count,
             'sent_emails_count': sum(campaign.sent_count for campaign in campaigns),
         },
         'profile': {
@@ -74,7 +77,8 @@ def dashboard(request):
     # Calculate stats
     campaigns_count = campaigns.count()
     lists_count = lists.count()
-    subscribers_count = sum(list_obj.subscribers_count for list_obj in lists)
+    # Count unique subscribers across all user's lists (avoid double counting)
+    subscribers_count = Subscriber.objects.filter(lists__user=request.user).distinct().count()
     sent_emails_count = sum(campaign.sent_count for campaign in campaigns)
 
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
@@ -297,27 +301,44 @@ def send_email_api(request):
         
         # Get the subscriber or create one
         from subscribers.models import Subscriber
-        subscriber, created = Subscriber.objects.get_or_create(
-            email=email,
-            defaults={
-                'first_name': first_name or '',
-                'last_name': last_name or '',
-                'is_active': True
-            }
-        )
-        if not created:
-            updated = False
-            if first_name and subscriber.first_name != first_name:
-                subscriber.first_name = first_name
-                updated = True
-            if last_name and subscriber.last_name != last_name:
-                subscriber.last_name = last_name
-                updated = True
-            if not subscriber.is_active:
-                subscriber.is_active = True
-                updated = True
-            if updated:
-                subscriber.save()
+        import pdb; pdb.set_trace()  # DEBUG: Breakpoint before subscriber creation
+        try:
+            subscriber, created = Subscriber.objects.get_or_create(
+                email=email,
+                defaults={
+                    'first_name': first_name or '',
+                    'last_name': last_name or '',
+                    'is_active': True
+                }
+            )
+            import pdb; pdb.set_trace()  # DEBUG: Breakpoint after subscriber creation
+            if not created:
+                updated = False
+                if first_name and subscriber.first_name != first_name:
+                    subscriber.first_name = first_name
+                    updated = True
+                if last_name and subscriber.last_name != last_name:
+                    subscriber.last_name = last_name
+                    updated = True
+                # Check is_active properly - it's a boolean field, not a callable
+                import pdb; pdb.set_trace()  # DEBUG: Breakpoint before is_active check
+                is_active_value = getattr(subscriber, 'is_active', True)
+                if not is_active_value:
+                    subscriber.is_active = True
+                    updated = True
+                if updated:
+                    subscriber.save()
+        except Exception as sub_error:
+            import traceback
+            import logging
+            import pdb; pdb.set_trace()  # DEBUG: Breakpoint in exception handler
+            error_trace = traceback.format_exc()
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error creating/updating subscriber: {str(sub_error)}\n{error_trace}")
+            return Response({
+                'error': _('Failed to create or update subscriber: {}').format(str(sub_error)),
+                'traceback': error_trace if settings.DEBUG else None
+            }, status=500)
         
         # Parse the schedule
         from datetime import timedelta
@@ -356,6 +377,7 @@ def send_email_api(request):
         use_sync = (sys.platform == 'win32' and settings.DEBUG)
         
         # Create send request record
+        import pdb; pdb.set_trace()  # DEBUG: Breakpoint before EmailSendRequest creation
         send_request = EmailSendRequest.objects.create(
             user=request.user,
             campaign=campaign,
@@ -365,6 +387,7 @@ def send_email_api(request):
             variables=variables,
             scheduled_for=scheduled_for,
         )
+        import pdb; pdb.set_trace()  # DEBUG: Breakpoint after EmailSendRequest creation
         
         def send_immediately():
             """Send the email immediately (synchronous)."""

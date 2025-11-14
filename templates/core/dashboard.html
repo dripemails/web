@@ -673,20 +673,39 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert('Error: ' + data.error);
-            } else {
-                alert(data.message || 'Email scheduled successfully!');
-                form.reset();
-                scheduleValueContainer.classList.add('hidden');
-                loadSendEmailActivity();
+        .then(async response => {
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                console.warn('Could not parse response as JSON:', jsonError);
+                const textResponse = await response.text();
+                console.warn('Response text:', textResponse);
+                throw new Error('Invalid response from server');
             }
+            
+            if (!response.ok) {
+                const errorMessage = data?.error || data?.detail || JSON.stringify(data) || 'Failed to send email.';
+                throw new Error(errorMessage);
+            }
+            
+            return data;
+        })
+        .then(data => {
+            alert(data.message || 'Email scheduled successfully!');
+            form.reset();
+            scheduleValueContainer.classList.add('hidden');
+            loadSendEmailActivity();
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending email. Please try again.');
+            console.error('Error details:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            if (error.stack) {
+                console.error('Error stack:', error.stack);
+            }
+            const errorMessage = error.message || 'Error sending email. Please try again.';
+            alert('Error: ' + errorMessage);
         });
     });
 

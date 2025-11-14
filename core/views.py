@@ -14,6 +14,7 @@ from analytics.models import UserProfile
 from django.conf import settings
 import re
 import pytz
+import logging
 from .models import BlogPost
 
 @login_required
@@ -81,7 +82,7 @@ def dashboard(request):
     subscribers_count = Subscriber.objects.filter(lists__user=request.user).distinct().count()
     sent_emails_count = sum(campaign.sent_count for campaign in campaigns)
 
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     user_timezone = profile.timezone or 'UTC'
     
     context = {
@@ -146,7 +147,7 @@ def privacy(request):
 @login_required
 def promo_verification(request):
     """Handle promo verification and account settings updates."""
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     common_timezones = pytz.common_timezones
 
     if request.method == 'POST':
@@ -287,7 +288,7 @@ def send_email_api(request):
         }, status=400)
     
     try:
-        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        profile, _created = UserProfile.objects.get_or_create(user=request.user)
         try:
             user_timezone = pytz.timezone(profile.timezone or 'UTC')
         except pytz.UnknownTimeZoneError:
@@ -301,7 +302,6 @@ def send_email_api(request):
         
         # Get the subscriber or create one
         from subscribers.models import Subscriber
-        import pdb; pdb.set_trace()  # DEBUG: Breakpoint before subscriber creation
         try:
             subscriber, created = Subscriber.objects.get_or_create(
                 email=email,
@@ -311,7 +311,6 @@ def send_email_api(request):
                     'is_active': True
                 }
             )
-            import pdb; pdb.set_trace()  # DEBUG: Breakpoint after subscriber creation
             if not created:
                 updated = False
                 if first_name and subscriber.first_name != first_name:
@@ -321,7 +320,6 @@ def send_email_api(request):
                     subscriber.last_name = last_name
                     updated = True
                 # Check is_active properly - it's a boolean field, not a callable
-                import pdb; pdb.set_trace()  # DEBUG: Breakpoint before is_active check
                 is_active_value = getattr(subscriber, 'is_active', True)
                 if not is_active_value:
                     subscriber.is_active = True
@@ -331,7 +329,6 @@ def send_email_api(request):
         except Exception as sub_error:
             import traceback
             import logging
-            import pdb; pdb.set_trace()  # DEBUG: Breakpoint in exception handler
             error_trace = traceback.format_exc()
             logger = logging.getLogger(__name__)
             logger.error(f"Error creating/updating subscriber: {str(sub_error)}\n{error_trace}")
@@ -377,7 +374,6 @@ def send_email_api(request):
         use_sync = (sys.platform == 'win32' and settings.DEBUG)
         
         # Create send request record
-        import pdb; pdb.set_trace()  # DEBUG: Breakpoint before EmailSendRequest creation
         send_request = EmailSendRequest.objects.create(
             user=request.user,
             campaign=campaign,
@@ -387,7 +383,6 @@ def send_email_api(request):
             variables=variables,
             scheduled_for=scheduled_for,
         )
-        import pdb; pdb.set_trace()  # DEBUG: Breakpoint after EmailSendRequest creation
         
         def send_immediately():
             """Send the email immediately (synchronous)."""
@@ -497,14 +492,21 @@ def send_email_api(request):
     except Email.DoesNotExist:
         return Response({'error': _('Email template not found')}, status=404)
     except Exception as e:
-        return Response({'error': str(e)}, status=400)
+        import traceback
+        error_trace = traceback.format_exc()
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error in send_email_api: {str(e)}\n{error_trace}")
+        return Response({
+            'error': str(e),
+            'traceback': error_trace if settings.DEBUG else None
+        }, status=400)
 
 @login_required
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def send_email_requests_list(request):
     """Return the latest email send requests for the current user."""
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     try:
         user_timezone = pytz.timezone(profile.timezone or 'UTC')
     except pytz.UnknownTimeZoneError:

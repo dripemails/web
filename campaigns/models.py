@@ -150,3 +150,32 @@ class EmailSendRequest(models.Model):
 
     def __str__(self):
         return f"{self.email.subject} -> {self.subscriber_email} ({self.status})"
+
+
+class EmailAIAnalysis(models.Model):
+    """Store AI-generated content and topic analysis results for emails."""
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.OneToOneField(Email, on_delete=models.CASCADE, related_name='ai_analysis', verbose_name=_('Email'))
+    
+    # AI-generated content
+    generated_subject = models.CharField(_('Generated Subject'), max_length=200, blank=True)
+    generated_body_html = models.TextField(_('Generated Body HTML'), blank=True)
+    generation_prompt = models.TextField(_('Generation Prompt'), blank=True, help_text=_("The prompt used to generate content"))
+    generation_model = models.CharField(_('Generation Model'), max_length=50, default='gpt-3.5-turbo', blank=True)
+    
+    # Topic analysis results
+    topics_json = models.JSONField(_('Topics'), default=list, blank=True, help_text=_("Extracted topics and keywords"))
+    dominant_topics = models.JSONField(_('Dominant Topics'), default=list, blank=True, help_text=_("Dominant topic for this email"))
+    topic_analysis_count = models.IntegerField(_('Emails Analyzed'), default=0, help_text=_("Number of emails used in topic analysis"))
+    
+    # Metadata
+    created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('Email AI Analysis')
+        verbose_name_plural = _('Email AI Analyses')
+
+    def __str__(self):
+        return f"AI Analysis for {self.email.subject}"

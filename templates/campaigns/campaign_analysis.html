@@ -44,10 +44,55 @@
         </div>
       </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Open Rate" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.open_rate|default:"0%" }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Click Rate" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.click_rate|default:"0%" }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Delivery Rate" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.delivery_rate|default:"0%" }}</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Bounces" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.bounce_count|default:0 }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Unsubscribes" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.unsubscribe_count|default:0 }}</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded border">
+          <div class="text-sm text-gray-500">{% trans "Complaints" %}</div>
+          <div class="text-xl font-semibold">{{ campaign.complaint_count|default:0 }}</div>
+        </div>
+      </div>
+
       <!-- Metrics chart -->
       <div class="mb-6">
         <h2 class="text-lg font-medium mb-2">{% trans "Metrics Overview" %}</h2>
         <canvas id="metricsChart" width="400" height="200"></canvas>
+        <!-- Additional small rate charts (placeholders) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          <div class="p-2 bg-white rounded border text-center">
+            <h3 class="text-sm text-gray-600">{% trans "Open Rate (trend)" %}</h3>
+            <canvas id="openRateChart" width="300" height="120"></canvas>
+          </div>
+          <div class="p-2 bg-white rounded border text-center">
+            <h3 class="text-sm text-gray-600">{% trans "Click Rate (trend)" %}</h3>
+            <canvas id="clickRateChart" width="300" height="120"></canvas>
+          </div>
+          <div class="p-2 bg-white rounded border text-center">
+            <h3 class="text-sm text-gray-600">{% trans "Delivery Rate (trend)" %}</h3>
+            <canvas id="deliveryChart" width="300" height="120"></canvas>
+          </div>
+        </div>
       </div>
 
       <!-- Monthly events chart -->
@@ -55,6 +100,21 @@
         <h2 class="text-lg font-medium mb-2">{% trans "Monthly events" %}</h2>
         {% if by_month_items %}
           <canvas id="monthlyChart" width="800" height="300"></canvas>
+          <!-- additional monthly metric placeholders -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <div class="p-4 bg-white rounded border text-center">
+              <h3 class="text-sm text-gray-600">{% trans "Monthly Bounces" %}</h3>
+              <canvas id="monthlyBouncesChart" width="400" height="120"></canvas>
+            </div>
+            <div class="p-4 bg-white rounded border text-center">
+              <h3 class="text-sm text-gray-600">{% trans "Monthly Unsubscribes" %}</h3>
+              <canvas id="monthlyUnsubsChart" width="400" height="120"></canvas>
+            </div>
+            <div class="p-4 bg-white rounded border text-center">
+              <h3 class="text-sm text-gray-600">{% trans "Monthly Complaints" %}</h3>
+              <canvas id="monthlyComplaintsChart" width="400" height="120"></canvas>
+            </div>
+          </div>
           <div class="overflow-auto bg-white rounded border mt-4">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
@@ -87,6 +147,17 @@
         <h2 class="text-lg font-medium mb-2">{% trans "Per-email breakdown" %}</h2>
         {% if email_rows %}
           <canvas id="perEmailChart" width="800" height="300" class="mb-4"></canvas>
+          <!-- per-email rate placeholders -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="p-4 bg-white rounded border text-center">
+              <h3 class="text-sm text-gray-600">{% trans "Per-email Open Rate" %}</h3>
+              <canvas id="perEmailOpenRateChart" width="400" height="120"></canvas>
+            </div>
+            <div class="p-4 bg-white rounded border text-center">
+              <h3 class="text-sm text-gray-600">{% trans "Per-email Click Rate" %}</h3>
+              <canvas id="perEmailClickRateChart" width="400" height="120"></canvas>
+            </div>
+          </div>
           <div class="overflow-auto bg-white rounded border">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
@@ -119,55 +190,107 @@
 {% endblock %}
 
 {% block extra_scripts %}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{% static 'chart.min.js' %}"></script>
   <script src="{% static 'campaigns/js/campaigns-charts.js' %}"></script>
+  <script type="text/template" id="chart-data">
+    {
+      "metrics": {
+        "sent": "{{ campaign.sent_count|default:0 }}",
+        "opens": "{{ campaign.open_count|default:0 }}",
+        "clicks": "{{ campaign.click_count|default:0 }}",
+        "open_rate": "{{ campaign.open_rate|default:0 }}",
+        "click_rate": "{{ campaign.click_rate|default:0 }}",
+        "delivery_rate": "{{ campaign.delivery_rate|default:0 }}",
+        "bounces": "{{ campaign.bounce_count|default:0 }}",
+        "unsubscribes": "{{ campaign.unsubscribe_count|default:0 }}",
+        "complaints": "{{ campaign.complaint_count|default:0 }}"
+      },
+      "monthly": {
+        "months": [{% for month, vals in by_month_items %}"{{ month }}"{% if not forloop.last %},{% endif %}{% endfor %}],
+        "sent": [{% for month, vals in by_month_items %}{{ vals.sent|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "opens": [{% for month, vals in by_month_items %}{{ vals.opened|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "clicks": [{% for month, vals in by_month_items %}{{ vals.clicked|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "bounces": [{% for month, vals in by_month_items %}{{ vals.bounces|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "unsubscribes": [{% for month, vals in by_month_items %}{{ vals.unsubscribes|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "complaints": [{% for month, vals in by_month_items %}{{ vals.complaints|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}]
+      },
+      "email": {
+        "labels": [{% for r in email_rows %}"{{ r.subject|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}],
+        "sent": [{% for r in email_rows %}{{ r.sent|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "opens": [{% for r in email_rows %}{{ r.opened|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "clicks": [{% for r in email_rows %}{{ r.clicked|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "open_rate": [{% for r in email_rows %}{{ r.open_rate|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        "click_rate": [{% for r in email_rows %}{{ r.click_rate|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}]
+      }
+    }
+  </script>
   <script>
-    (function(){
-      // Metrics chart
+    document.addEventListener('DOMContentLoaded', function() {
+      var chartDataEl = document.getElementById('chart-data');
+      var data = JSON.parse(chartDataEl.innerHTML);
+      
       var metricsCanvas = document.getElementById('metricsChart');
-      if(metricsCanvas){
-        metricsCanvas.dataset.sent = '{{ campaign.sent_count|default:0 }}';
-        metricsCanvas.dataset.opens = '{{ campaign.open_count|default:0 }}';
-        metricsCanvas.dataset.clicks = '{{ campaign.click_count|default:0 }}';
+      if (metricsCanvas) {
+        metricsCanvas.dataset.sent = data.metrics.sent;
+        metricsCanvas.dataset.opens = data.metrics.opens;
+        metricsCanvas.dataset.clicks = data.metrics.clicks;
+        metricsCanvas.dataset.open_rate = data.metrics.open_rate||0;
+        metricsCanvas.dataset.click_rate = data.metrics.click_rate||0;
+        metricsCanvas.dataset.delivery_rate = data.metrics.delivery_rate||0;
+        metricsCanvas.dataset.bounces = data.metrics.bounces||0;
+        metricsCanvas.dataset.unsubscribes = data.metrics.unsubscribes||0;
+        metricsCanvas.dataset.complaints = data.metrics.complaints||0;
       }
-
-      // Monthly events chart
+      
       var monthlyCanvas = document.getElementById('monthlyChart');
-      if(monthlyCanvas){
-        var months = [];
-        var sent = [];
-        var opens = [];
-        var clicks = [];
-        {% for month, vals in by_month_items %}
-          months.push('{{ month }}');
-          sent.push({{ vals.sent|default:0 }});
-          opens.push({{ vals.opened|default:0 }});
-          clicks.push({{ vals.clicked|default:0 }});
-        {% endfor %}
-        monthlyCanvas.dataset.months = JSON.stringify(months);
-        monthlyCanvas.dataset.sent = JSON.stringify(sent);
-        monthlyCanvas.dataset.opens = JSON.stringify(opens);
-        monthlyCanvas.dataset.clicks = JSON.stringify(clicks);
+      if (monthlyCanvas) {
+        monthlyCanvas.dataset.months = JSON.stringify(data.monthly.months);
+        monthlyCanvas.dataset.sent = JSON.stringify(data.monthly.sent);
+        monthlyCanvas.dataset.opens = JSON.stringify(data.monthly.opens);
+        monthlyCanvas.dataset.clicks = JSON.stringify(data.monthly.clicks);
+        monthlyCanvas.dataset.bounces = JSON.stringify(data.monthly.bounces||[]);
+        monthlyCanvas.dataset.unsubscribes = JSON.stringify(data.monthly.unsubscribes||[]);
+        monthlyCanvas.dataset.complaints = JSON.stringify(data.monthly.complaints||[]);
+      }
+      
+      var perEmailCanvas = document.getElementById('perEmailChart');
+      if (perEmailCanvas) {
+        perEmailCanvas.dataset.labels = JSON.stringify(data.email.labels);
+        perEmailCanvas.dataset.sent = JSON.stringify(data.email.sent);
+        perEmailCanvas.dataset.opens = JSON.stringify(data.email.opens);
+        perEmailCanvas.dataset.clicks = JSON.stringify(data.email.clicks);
+        perEmailCanvas.dataset.open_rate = JSON.stringify(data.email.open_rate||[]);
+        perEmailCanvas.dataset.click_rate = JSON.stringify(data.email.click_rate||[]);
       }
 
-      // Per-email chart
-      var perEmailCanvas = document.getElementById('perEmailChart');
-      if(perEmailCanvas){
-        var labels = [];
-        var sent2 = [];
-        var opened2 = [];
-        var clicked2 = [];
-        {% for r in email_rows %}
-          labels.push('{{ r.subject|escapejs }}');
-          sent2.push({{ r.sent|default:0 }});
-          opened2.push({{ r.opened|default:0 }});
-          clicked2.push({{ r.clicked|default:0 }});
-        {% endfor %}
-        perEmailCanvas.dataset.labels = JSON.stringify(labels);
-        perEmailCanvas.dataset.sent = JSON.stringify(sent2);
-        perEmailCanvas.dataset.opens = JSON.stringify(opened2);
-        perEmailCanvas.dataset.clicks = JSON.stringify(clicked2);
+      // small-rate charts and placeholders
+      var openRateCanvas = document.getElementById('openRateChart');
+      if (openRateCanvas) {
+        openRateCanvas.dataset.months = JSON.stringify(data.monthly.months||[]);
+        openRateCanvas.dataset.values = JSON.stringify(data.monthly.opens||[]);
       }
-    })();
+      var clickRateCanvas = document.getElementById('clickRateChart');
+      if (clickRateCanvas) {
+        clickRateCanvas.dataset.months = JSON.stringify(data.monthly.months||[]);
+        clickRateCanvas.dataset.values = JSON.stringify(data.monthly.clicks||[]);
+      }
+      var deliveryCanvas = document.getElementById('deliveryChart');
+      if (deliveryCanvas) {
+        deliveryCanvas.dataset.months = JSON.stringify(data.monthly.months||[]);
+        deliveryCanvas.dataset.values = JSON.stringify(data.monthly.sent||[]);
+      }
+
+      var monthlyBounces = document.getElementById('monthlyBouncesChart');
+      if (monthlyBounces) monthlyBounces.dataset.values = JSON.stringify(data.monthly.bounces||[]);
+      var monthlyUnsubs = document.getElementById('monthlyUnsubsChart');
+      if (monthlyUnsubs) monthlyUnsubs.dataset.values = JSON.stringify(data.monthly.unsubscribes||[]);
+      var monthlyComplaints = document.getElementById('monthlyComplaintsChart');
+      if (monthlyComplaints) monthlyComplaints.dataset.values = JSON.stringify(data.monthly.complaints||[]);
+
+      var perEmailOpenRate = document.getElementById('perEmailOpenRateChart');
+      if (perEmailOpenRate) perEmailOpenRate.dataset.values = JSON.stringify(data.email.open_rate||[]);
+      var perEmailClickRate = document.getElementById('perEmailClickRateChart');
+      if (perEmailClickRate) perEmailClickRate.dataset.values = JSON.stringify(data.email.click_rate||[]);
+    });
   </script>
 {% endblock %}

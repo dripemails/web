@@ -5,6 +5,7 @@
 
 {% block extra_head %}
 <!-- Quill.js - Free WYSIWYG Editor -->
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
 <link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
 <script src="{% static 'js/quill.min.js' %}"></script>
 <style>
@@ -284,23 +285,37 @@ response = http.request(request)</code></pre>
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
             <div class="px-6 py-4 border-b border-gray-200">
                 <h3 class="text-lg font-medium text-gray-900">✨ {% trans "Generate Email with AI" %}</h3>
-                <p class="text-sm text-gray-500 mt-1">{% trans "Let OpenAI help you create engaging email content" %}</p>
+                <p class="text-sm text-gray-500 mt-1">{% trans "Describe what you want in your email and let AI create the content" %}</p>
             </div>
             <form id="aiGenerateForm" class="p-6">
                 <div class="space-y-4">
                     <div>
-                        <label for="ai_subject_topic" class="block text-sm font-medium text-gray-700">{% trans "Email Topic/Subject" %}</label>
+                        <label for="ai_subject_topic" class="block text-sm font-medium text-gray-700">{% trans "What is the email about?" %}</label>
                         <input type="text" id="ai_subject_topic" required
                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                               placeholder="{% trans 'e.g., New product launch, summer sale, onboarding...' %}">
+                               placeholder="{% trans 'e.g., New product launch, special discount offer, welcome to our service...' %}">
+                        <p class="mt-1 text-xs text-gray-500">{% trans "Describe the main topic or purpose of the email" %}</p>
                     </div>
+                    
                     <div>
-                        <label for="ai_recipient" class="block text-sm font-medium text-gray-700">{% trans "Recipient" %}</label>
-                        <input type="text" id="ai_recipient"
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                               placeholder="{% trans 'e.g., customer, subscriber, developer...' %}" value="subscriber">
+                        <label for="ai_context" class="block text-sm font-medium text-gray-700">{% trans "Email Details" %}</label>
+                        <textarea id="ai_context" rows="4"
+                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                  placeholder="Provide specific details:
+- What action do you want readers to take?
+- Any special offers or key information?
+- Brand voice or personality to use?
+- Call to action?"></textarea>
+                        <p class="mt-1 text-xs text-gray-500">{% trans "Include any specific details, offers, key points, or instructions you want included" %}</p>
                     </div>
+                    
                     <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="ai_recipient" class="block text-sm font-medium text-gray-700">{% trans "Who is this for?" %}</label>
+                            <input type="text" id="ai_recipient"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                   placeholder="{% trans 'e.g., customers, subscribers, users...' %}" value="subscriber">
+                        </div>
                         <div>
                             <label for="ai_tone" class="block text-sm font-medium text-gray-700">{% trans "Tone" %}</label>
                             <select id="ai_tone"
@@ -312,33 +327,30 @@ response = http.request(request)</code></pre>
                                 <option value="formal">{% trans "Formal" %}</option>
                             </select>
                         </div>
-                        <div>
-                            <label for="ai_length" class="block text-sm font-medium text-gray-700">{% trans "Length" %}</label>
-                            <select id="ai_length"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
-                                <option value="short">{% trans "Short" %}</option>
-                                <option value="medium" selected>{% trans "Medium" %}</option>
-                                <option value="long">{% trans "Long" %}</option>
-                            </select>
-                        </div>
                     </div>
+                    
                     <div>
-                        <label for="ai_context" class="block text-sm font-medium text-gray-700">{% trans "Additional Context (Optional)" %}</label>
-                        <textarea id="ai_context" rows="3"
-                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                                  placeholder="{% trans 'Add any specific details or requirements for the email...' %}"></textarea>
+                        <label for="ai_length" class="block text-sm font-medium text-gray-700">{% trans "Email Length" %}</label>
+                        <select id="ai_length"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <option value="short">{% trans "Short (concise, 2-3 paragraphs)" %}</option>
+                            <option value="medium" selected>{% trans "Medium (balanced, 4-5 paragraphs)" %}</option>
+                            <option value="long">{% trans "Long (detailed, 6+ paragraphs)" %}</option>
+                        </select>
                     </div>
+                    
                     <div class="bg-blue-50 border border-blue-200 p-4 rounded-md">
                         <p class="text-sm text-blue-800">
-                            ℹ️ {% trans "AI generation requires OpenAI API key to be configured. The generated content will replace your current email subject and body." %}
+                            ℹ️ {% trans "AI generation uses your local Ollama model to create email content. The generated subject and body will replace your current email." %}
                         </p>
                     </div>
+                    
                     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
                         <button type="button" id="cancelAiGenerate" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
                             {% trans "Cancel" %}
                         </button>
                         <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                            ✨ {% trans "Generate" %}
+                            ✨ {% trans "Generate Email" %}
                         </button>
                     </div>
                 </div>
@@ -534,6 +546,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const campaignId = '{{ campaign.id }}';
     const templateId = '{{ template.id }}';
     
+    // Debug: Log campaignId and templateId
+    console.log('campaignId:', campaignId);
+    console.log('templateId:', templateId);
     // Footer modal elements
     const newFooterBtn = document.getElementById('newFooterBtn');
     const newFooterModal = document.getElementById('newFooterModal');
@@ -563,259 +578,290 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // AI Generate functionality
-    aiGenerateBtn.addEventListener('click', function() {
-        aiModal.classList.remove('hidden');
-        document.getElementById('ai_subject_topic').focus();
-    });
+    // AI Generate functionality - Show modal for user input
+    if (aiGenerateBtn) {
+        aiGenerateBtn.addEventListener('click', function() {
+            // Check if campaignId is empty
+            if (!campaignId || campaignId.trim() === '') {
+                alert('{% trans "Error: Campaign ID is missing. Please select a campaign first." %}');
+                return;
+            }
+            
+            // Show the modal instead of auto-generating
+            aiModal.classList.remove('hidden');
+            document.getElementById('ai_subject_topic').focus();
+        });
+    }
     
-    cancelAiGenerate.addEventListener('click', function() {
-        aiModal.classList.add('hidden');
-        aiGenerateForm.reset();
-    });
-    
-    aiModal.addEventListener('click', function(e) {
-        if (e.target === aiModal) {
+    // Keep cancel functionality for modal in case it's still needed elsewhere
+    if (cancelAiGenerate) {
+        cancelAiGenerate.addEventListener('click', function() {
             aiModal.classList.add('hidden');
             aiGenerateForm.reset();
-        }
-    });
+        });
+    }
     
-    aiGenerateForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const topic = document.getElementById('ai_subject_topic').value;
-        const recipient = document.getElementById('ai_recipient').value;
-        const tone = document.getElementById('ai_tone').value;
-        const length = document.getElementById('ai_length').value;
-        const context = document.getElementById('ai_context').value;
-        
-        const submitBtn = aiGenerateForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = '✨ {% trans "Generating..." %}';
-        submitBtn.disabled = true;
-        
-        const data = {
-            subject_topic: topic,
-            recipient: recipient,
-            tone: tone,
-            length: length,
-            context: context,
-            email_id: templateId || null
-        };
-        
-        fetch(`/api/campaigns/${campaignId}/generate-email/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.error || 'Failed to generate email');
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.subject) {
-                document.getElementById('subject').value = data.subject;
-                quill.root.innerHTML = data.body_html;
+    if (aiModal) {
+        aiModal.addEventListener('click', function(e) {
+            if (e.target === aiModal) {
                 aiModal.classList.add('hidden');
                 aiGenerateForm.reset();
-                alert('{% trans "Email generated successfully! Review and save when ready." %}');
-            } else {
-                alert('{% trans "Error: Invalid response from AI service." %}');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            let errorMsg = '{% trans "Failed to generate email. " %}';
-            if (error.message.includes('API key')) {
-                errorMsg += '{% trans "Please ensure OPENAI_API_KEY is configured." %}';
-            } else {
-                errorMsg += error.message;
-            }
-            alert(errorMsg);
-        })
-        .finally(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
         });
-    });
+    }
+    
+    // Form submission for modal (in case user opens it manually)
+    if (aiGenerateForm) {
+        aiGenerateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const topic = document.getElementById('ai_subject_topic').value;
+            const recipient = document.getElementById('ai_recipient').value;
+            const tone = document.getElementById('ai_tone').value;
+            const length = document.getElementById('ai_length').value;
+            const context = document.getElementById('ai_context').value;
+            
+            const submitBtn = aiGenerateForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '✨ {% trans "Generating..." %}';
+            submitBtn.disabled = true;
+            
+            const data = {
+                subject_topic: topic,
+                recipient: recipient,
+                tone: tone,
+                length: length,
+                context: context,
+                email_id: templateId || null
+            };
+            
+            fetch(`/api/campaigns/${campaignId}/generate-email/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.error || 'Failed to generate email');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.subject) {
+                    document.getElementById('subject').value = data.subject;
+                    quill.root.innerHTML = data.body_html;
+                    aiModal.classList.add('hidden');
+                    aiGenerateForm.reset();
+                    alert('{% trans "Email generated successfully! Review and save when ready." %}');
+                } else {
+                    alert('{% trans "Error: Invalid response from AI service." %}');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                let errorMsg = '{% trans "Failed to generate email. " %}';
+                if (error.message.includes('Ollama')) {
+                    errorMsg += '{% trans "Make sure Ollama is running on localhost:11434." %}';
+                } else {
+                    errorMsg += error.message;
+                }
+                alert(errorMsg);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
     
     // Preview functionality
-    previewBtn.addEventListener('click', function() {
-        const content = quill.root.innerHTML;
-        
-        // Get selected footer content
-        const footerSelect = document.getElementById('footer_select');
-        const selectedFooterId = footerSelect.value;
-        let footerContent = '';
-        
-        if (selectedFooterId) {
-            // Find the footer content from the options
-            const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
-            if (footerOption) {
-                // This is a simplified approach - in a real implementation, you'd fetch the footer content
-                footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">[Footer content would appear here]</div>';
+    if (previewBtn) {
+        previewBtn.addEventListener('click', function() {
+            const content = quill.root.innerHTML;
+            
+            // Get selected footer content
+            const footerSelect = document.getElementById('footer_select');
+            const selectedFooterId = footerSelect.value;
+            let footerContent = '';
+            
+            if (selectedFooterId) {
+                // Find the footer content from the options
+                const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
+                if (footerOption) {
+                    // This is a simplified approach - in a real implementation, you'd fetch the footer content
+                    footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">[Footer content would appear here]</div>';
+                }
             }
-        }
-        
-        document.getElementById('previewContent').innerHTML = content + footerContent;
-        previewModal.classList.remove('hidden');
-    });
+            
+            document.getElementById('previewContent').innerHTML = content + footerContent;
+            previewModal.classList.remove('hidden');
+        });
+    }
     
     // Test email functionality
-    testBtn.addEventListener('click', function() {
-        testModal.classList.remove('hidden');
-    });
+    if (testBtn) {
+        testBtn.addEventListener('click', function() {
+            testModal.classList.remove('hidden');
+        });
+    }
     
     // Footer modal functionality
-    newFooterBtn.addEventListener('click', function() {
-        newFooterModal.classList.remove('hidden');
-        document.getElementById('footerName').focus();
-    });
+    if (newFooterBtn) {
+        newFooterBtn.addEventListener('click', function() {
+            newFooterModal.classList.remove('hidden');
+            document.getElementById('footerName').focus();
+        });
+    }
     
-    cancelNewFooter.addEventListener('click', function() {
-        newFooterModal.classList.add('hidden');
-        newFooterForm.reset();
-        footerQuill.setContents([]);
-    });
-    
-    // Close footer modal when clicking outside
-    newFooterModal.addEventListener('click', function(e) {
-        if (e.target === newFooterModal) {
+    if (cancelNewFooter) {
+        cancelNewFooter.addEventListener('click', function() {
             newFooterModal.classList.add('hidden');
             newFooterForm.reset();
             footerQuill.setContents([]);
-        }
-    });
+        });
+    }
+    
+    // Close footer modal when clicking outside
+    if (newFooterModal) {
+        newFooterModal.addEventListener('click', function(e) {
+            if (e.target === newFooterModal) {
+                newFooterModal.classList.add('hidden');
+                newFooterForm.reset();
+                footerQuill.setContents([]);
+            }
+        });
+    }
     
     // Form submission
-    templateForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show loading state
-        const submitBtn = templateForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = '{% trans "Saving..." %}';
-        submitBtn.disabled = true;
-        
-        // Get content from Quill editor
-        const htmlContent = quill.root.innerHTML;
-        
-        // Get selected footer
-        const footerSelect = document.getElementById('footer_select');
-        const selectedFooterId = footerSelect.value;
-        
-        const data = {
-            subject: document.getElementById('subject').value,
-            wait_time: parseInt(document.getElementById('wait_time').value),
-            wait_unit: document.getElementById('wait_unit').value,
-            body_html: htmlContent,
-            body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
-        };
-        
-        // Only add footer_id if a footer is selected
-        if (selectedFooterId && selectedFooterId.trim()) {
-            data.footer_id = selectedFooterId;
-        }
-        
-        const url = templateId 
-            ? `/api/campaigns/${campaignId}/emails/${templateId}/`
-            : `/api/campaigns/${campaignId}/emails/`;
-        
-        console.log('Submitting data:', data);
-        console.log('URL:', url);
-        
-        fetch(url, {
-            method: templateId ? 'PUT' : 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.error || 'Network response was not ok');
-                });
+    if (templateForm) {
+        templateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = templateForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '{% trans "Saving..." %}';
+            submitBtn.disabled = true;
+            
+            // Get content from Quill editor
+            const htmlContent = quill.root.innerHTML;
+            
+            // Get selected footer
+            const footerSelect = document.getElementById('footer_select');
+            const selectedFooterId = footerSelect.value;
+            
+            const data = {
+                subject: document.getElementById('subject').value,
+                wait_time: parseInt(document.getElementById('wait_time').value),
+                wait_unit: document.getElementById('wait_unit').value,
+                body_html: htmlContent,
+                body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
+            };
+            
+            // Only add footer_id if a footer is selected
+            if (selectedFooterId && selectedFooterId.trim()) {
+                data.footer_id = selectedFooterId;
             }
-            return response.json();
-        })
-        .then(data => {
-            // Show success message
-            alert('{% trans "Template saved successfully!" %}');
-            // Redirect to campaign edit page
-            window.location.href = `/campaigns/${campaignId}/edit/`;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            let errorMessage = '{% trans "An error occurred while saving the template. Please try again." %}';
-            if (error.message) {
-                errorMessage += '\n\nError: ' + error.message;
-            }
-            alert(errorMessage);
-        })
-        .finally(() => {
-            // Reset button state
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            
+            const url = templateId 
+                ? `/api/campaigns/${campaignId}/emails/${templateId}/`
+                : `/api/campaigns/${campaignId}/emails/`;
+            
+            console.log('Submitting data:', data);
+            console.log('URL:', url);
+            
+            fetch(url, {
+                method: templateId ? 'PUT' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.error || 'Network response was not ok');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Show success message
+                alert('{% trans "Template saved successfully!" %}');
+                // Redirect to campaign edit page
+                window.location.href = `/campaigns/${campaignId}/edit/`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                let errorMessage = '{% trans "An error occurred while saving the template. Please try again." %}';
+                if (error.message) {
+                    errorMessage += '\n\nError: ' + error.message;
+                }
+                alert(errorMessage);
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
-    });
+    }
     
     // Test email form submission
-    testForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('test_email').value;
-        const firstName = document.getElementById('test_first_name').value;
-        const lastName = document.getElementById('test_last_name').value;
-        const fullName = `${firstName} ${lastName}`.trim();
-        
-        const data = {
-            email: email,
-            variables: {
-                first_name: firstName,
-                last_name: lastName,
-                full_name: fullName,
-                email: email
+    if (testForm) {
+        testForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('test_email').value;
+            const firstName = document.getElementById('test_first_name').value;
+            const lastName = document.getElementById('test_last_name').value;
+            const fullName = `${firstName} ${lastName}`.trim();
+            
+            const data = {
+                email: email,
+                variables: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    full_name: fullName,
+                    email: email
+                }
+            };
+            
+            // The URL must include the email_id (templateId)
+            if (!templateId) {
+                alert('{% trans "Please save the email template first before sending a test email." %}');
+                return;
             }
-        };
-        
-        // The URL must include the email_id (templateId)
-        if (!templateId) {
-            alert('{% trans "Please save the email template first before sending a test email." %}');
-            return;
-        }
-        
-        const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
-        
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            closeTestModal();
-            alert('{% trans "Test email sent successfully!" %}');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('{% trans "An error occurred while sending the test email. Please try again." %}');
+            
+            const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                closeTestModal();
+                alert('{% trans "Test email sent successfully!" %}');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('{% trans "An error occurred while sending the test email. Please try again." %}');
+            });
         });
-    });
+    }
 });
 
 function closePreviewModal() {

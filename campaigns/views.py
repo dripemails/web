@@ -222,11 +222,22 @@ def campaign_template(request, campaign_id=None):
     """Render template creation/edit page."""
     campaign = None
     template = None
+    
     if campaign_id:
         campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
         template_id = request.GET.get('template_id')
         if template_id:
             template = get_object_or_404(Email, id=template_id, campaign=campaign)
+    else:
+        # If no campaign_id provided, try to get the first campaign or redirect
+        campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+        if campaigns.exists():
+            # Redirect to the first campaign's template page
+            return redirect('campaigns:template', campaign_id=campaigns.first().id)
+        else:
+            # No campaigns exist, show error message
+            messages.error(request, _('Please create a campaign first before creating email templates.'))
+            return redirect('campaigns:list')
     
     # Get user's footers
     from analytics.models import EmailFooter

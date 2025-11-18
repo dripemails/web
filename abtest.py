@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Small standalone exporter: generate a static HTML preview for an AB test
 without requiring Streamlit. The script bootstraps Django, pulls the
@@ -220,17 +219,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-=======
-import streamlit as st 
-
-st.title("Email version comparison")
-
-orig, new=st.columns(2)
-
-with orig:
-    st.subheader("Original email")
-    st.write("Original email goes here")
-with new:
-    st.subheader("Revised email")
-    draft=st.text_area("Edit email below:", height=250, placeholder="Type here...")
->>>>>>> d6f61bfd0f56739a71fcc644a1234db83876add2

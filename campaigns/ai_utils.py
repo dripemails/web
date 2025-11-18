@@ -17,8 +17,9 @@ from nltk.stem import PorterStemmer
 import gensim.models
 import gensim.corpora as corpora
 
-# AI imports
-import openai
+# AI imports - Using local LLM via Ollama (llama3.1:8b)
+import requests
+import json
 
 # Download required NLTK data (run once)
 try:
@@ -27,8 +28,9 @@ except LookupError:
     nltk.download('stopwords')
     nltk.download('punkt')
 
-# Initialize OpenAI API key from environment
-openai.api_key = os.getenv('OPENAI_API_KEY', '')
+# Ollama configuration
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "llama3.1:8b"
 
 
 def generate_email_content(
@@ -39,61 +41,84 @@ def generate_email_content(
     context: str = ""
 ) -> Dict[str, str]:
     """
-    Generate email content using OpenAI's GPT model.
+    Generate email content using local Ollama LLM (llama3.1:8b).
     
     Args:
         subject: The subject or topic of the email
         recipient: Who the email is intended for (default: "subscriber")
         tone: Tone of the email (professional, friendly, persuasive, etc.)
         length: Length of email (short, medium, long)
-        context: Additional context for email generation
+        context: Additional context/details for email generation
     
     Returns:
         Dictionary with 'subject' and 'body_html' keys
         
     Raises:
-        ValueError: If OpenAI API key is not set
+        ValueError: If Ollama server is not accessible
         Exception: If API call fails
     """
-    if not openai.api_key:
-        raise ValueError("OPENAI_API_KEY environment variable not set")
     
-    # Build the prompt
+    # Determine length guidance
+    length_guidance = {
+        'short': '2-3 paragraphs, concise and direct',
+        'medium': '4-5 paragraphs, balanced content',
+        'long': '6+ paragraphs, detailed and comprehensive'
+    }
+    
+    length_desc = length_guidance.get(length, length_guidance['medium'])
+    
+    # Build the comprehensive prompt
     prompt_parts = [
-        f"Write a {tone} email to a {recipient}",
-        f"Subject/Topic: {subject}",
-        f"Length: {length}",
+        "You are an expert email marketing copywriter. Create a professional and engaging email.",
+        "",
+        f"Email Purpose/Topic: {subject}",
+        f"Target Audience: {recipient}",
+        f"Tone: {tone}",
+        f"Length: {length_desc}",
     ]
     
-    if context:
-        prompt_parts.append(f"Additional context: {context}")
+    if context and context.strip():
+        prompt_parts.extend([
+            "",
+            "Additional Details:",
+            context
+        ])
     
-    prompt_parts.append(
-        "Respond with a JSON object containing 'subject' and 'body_html' keys. "
-        "The body_html should be basic HTML suitable for email (use <p>, <strong>, <em> tags)."
-    )
+    prompt_parts.extend([
+        "",
+        "Instructions:",
+        "1. Create a compelling email subject line that captures attention",
+        "2. Write engaging email body content with proper HTML formatting",
+        "3. Use the specified tone and include all relevant details from the user input",
+        "4. Use basic HTML tags: <p>, <strong>, <em>, <br>, <h3>, <ul>, <li>, <a>",
+        "5. Keep the email professional and suitable for marketing/business communication",
+        "6. Include a clear call-to-action if appropriate",
+        "7. Make the content match the specified tone and length",
+        "",
+        "IMPORTANT: Respond with ONLY a valid JSON object in this exact format (no other text before or after):",
+        "{",
+        '    "subject": "The email subject line here",',
+        '    "body_html": "The complete email body in HTML format here"',
+        "}"
+    ])
     
     full_prompt = "\n".join(prompt_parts)
     
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are an expert email copywriter. Generate professional, engaging emails."
-                },
-                {
-                    "role": "user",
-                    "content": full_prompt
-                }
-            ],
-            temperature=0.7,
-            max_tokens=500,
+        response = requests.post(
+            OLLAMA_URL,
+            json={
+                "model": OLLAMA_MODEL,
+                "prompt": full_prompt,
+                "stream": False
+            },
+            timeout=120
         )
+        response.raise_for_status()
         
-        # Extract the response text
-        response_text = response.choices[0].message.content.strip()
+        # Extract the response text from JSON response
+        response_data = response.json()
+        response_text = response_data.get("response", "").strip()
         
         # Try to parse as JSON
         try:
@@ -115,8 +140,8 @@ def generate_email_content(
                 'success': True
             }
     
-    except Exception as e:
-        raise Exception(f"OpenAI API error: {str(e)}")
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Ollama API error: {str(e)}. Make sure Ollama is running on localhost:11434")
 
 
 def preprocess_text(text: str) -> List[str]:

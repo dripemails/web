@@ -171,12 +171,18 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# For development, make email verification optional; for production use 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional' if DEBUG else 'mandatory'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Email settings
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+# For development, use console backend to avoid SMTP connection errors
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = env('EMAIL_BACKEND')
+
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')

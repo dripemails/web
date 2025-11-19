@@ -5,11 +5,6 @@ requested campaign and email (default: first available) and writes an
 HTML file in `static_dashboards/abtest.html` that shows the original
 and revised bodies side-by-side. This uses jQuery in the page (CDN)
 and does not attempt to persist edits back to the DB.
-
-Usage: run from the project root with the virtualenv activated:
-    python abtest.py [campaign_id] [email_id]
-
-If no IDs are provided the first campaign/email found will be used.
 """
 
 import os
@@ -59,9 +54,8 @@ def render_abtest_html(campaign, email, out_path):
     orig_text = (email.body_text or '') if email else ''
     draft_html = orig_html or orig_text
 
-    # Escape closing </script> sequences if needed in content (simple protection)
-    safe_draft = draft_html.replace('</script>', '<\/script>')
-    safe_orig = orig_html.replace('</script>', '<\/script>') if orig_html else ''
+    safe_draft = draft_html.replace('</script>', '<\\/script>')
+    safe_orig = orig_html.replace('</script>', '<\\/script>') if orig_html else ''
 
     html_template = """
 <!doctype html>
@@ -71,36 +65,136 @@ def render_abtest_html(campaign, email, out_path):
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AB Test Preview</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>body{font-family:Arial,Helvetica,sans-serif;margin:20px}.col{width:48%;display:inline-block;vertical-align:top}.col pre{white-space:pre-wrap;background:#f8f8f8;padding:10px;border-radius:4px}</style>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px}
+    .col{width:48%;display:inline-block;vertical-align:top}
+    .metric-block{border:1px solid #ddd;padding:12px;border-radius:6px;margin-top:20px;background:#fafafa}
+    .metric-block input{width:80px}
+    table{border-collapse:collapse;margin-top:10px}
+    table td{padding:4px 8px;border-bottom:1px solid #eee}
+  </style>
 </head>
+
 <body>
   <h1>AB Test Preview</h1>
   <p>Campaign: {CAMPAIGN_NAME}</p>
+
   <div class="col">
     <h2>Original</h2>
-    <div>
-      {SAFE_ORIG}
+    <div>{SAFE_ORIG}</div>
+
+    <div class="metric-block">
+      <h3>Original Metrics</h3>
+      Opens: <input id="a_opens" type="number" value="0">
+      Clicks: <input id="a_clicks" type="number" value="0">
+      Conversions: <input id="a_conv" type="number" value="0">
+      <div id="a_results"></div>
     </div>
   </div>
+
   <div class="col" style="float:right">
     <h2>Revised (preview)</h2>
     <textarea id="draft" style="width:100%;height:300px">{SAFE_DRAFT}</textarea>
     <div style="margin-top:8px;color:#666">Note: this preview does not persist edits back to the database.</div>
+
+    <div class="metric-block">
+      <h3>Revised Metrics</h3>
+      Opens: <input id="b_opens" type="number" value="0">
+      Clicks: <input id="b_clicks" type="number" value="0">
+      Conversions: <input id="b_conv" type="number" value="0">
+      <div id="b_results"></div>
+    </div>
   </div>
 
   <div style="clear:both;margin-top:18px">
     <h3>Live Preview</h3>
-    <div id="live_preview_html" style="border:1px solid #eee;padding:12px;border-radius:6px;background:#fff">{LIVE_PREVIEW}</div>
+    <div id="live_preview_html"
+         style="border:1px solid #eee;padding:12px;border-radius:6px;background:#fff">
+      {LIVE_PREVIEW}
+    </div>
   </div>
 
-  <script>
-    $(function(){
+  <div class="metric-block" style="margin-top:30px;">
+    <h3>A/B Comparison</h3>
+    <div id="ab_comparison"></div>
+  </div>
+
+<script>
+  function pct(x) { return (x * 100).toFixed(2) + "%"; }
+
+  function computeRates(opens, clicks, conv){
+      return {
+          open_rate: opens > 0 ? clicks / opens : 0,
+          ctr: opens > 0 ? clicks / opens : 0,
+          ctor: clicks > 0 ? conv / clicks : 0,
+          conv_rate: opens > 0 ? conv / opens : 0
+      };
+  }
+
+  function zTest(p1, n1, p2, n2){
+      if(n1===0 || n2===0) return 0;
+      var p = (p1*n1 + p2*n2) / (n1+n2);
+      var se = Math.sqrt(p*(1-p)*(1/n1 + 1/n2));
+      if(se===0) return 0;
+      return (p2 - p1) / se;
+  }
+
+  function updateMetrics(){
+      var A = {
+        opens: parseInt($('#a_opens').val()) || 0,
+        clicks: parseInt($('#a_clicks').val()) || 0,
+        conv: parseInt($('#a_conv').val()) || 0
+      };
+      var B = {
+        opens: parseInt($('#b_opens').val()) || 0,
+        clicks: parseInt($('#b_clicks').val()) || 0,
+        conv: parseInt($('#b_conv').val()) || 0
+      };
+
+      var ra = computeRates(A.opens, A.clicks, A.conv);
+      var rb = computeRates(B.opens, B.clicks, B.conv);
+
+      $('#a_results').html(
+        "<table>" +
+        "<tr><td>Open Rate:</td><td>" + pct(ra.open_rate) + "</td></tr>" +
+        "<tr><td>CTR:</td><td>" + pct(ra.ctr) + "</td></tr>" +
+        "<tr><td>CTOR:</td><td>" + pct(ra.ctor) + "</td></tr>" +
+        "<tr><td>Conv Rate:</td><td>" + pct(ra.conv_rate) + "</td></tr>" +
+        "</table>"
+      );
+
+      $('#b_results').html(
+        "<table>" +
+        "<tr><td>Open Rate:</td><td>" + pct(rb.open_rate) + "</td></tr>" +
+        "<tr><td>CTR:</td><td>" + pct(rb.ctr) + "</td></tr>" +
+        "<tr><td>CTOR:</td><td>" + pct(rb.ctor) + "</td></tr>" +
+        "<tr><td>Conv Rate:</td><td>" + pct(rb.conv_rate) + "</td></tr>" +
+        "</table>"
+      );
+
+      var z = zTest(ra.conv_rate, A.opens, rb.conv_rate, B.opens);
+
+      $('#ab_comparison').html(
+        "<table>" +
+        "<tr><td>Conversion Lift:</td><td>" +
+        pct(rb.conv_rate - ra.conv_rate) + "</td></tr>" +
+        "<tr><td>Z-score:</td><td>" + z.toFixed(3) + "</td></tr>" +
+        "<tr><td>Significant? (|z| > 1.96)</td><td>" +
+        (Math.abs(z) > 1.96 ? "Yes" : "No") +
+        "</td></tr>" +
+        "</table>"
+      );
+  }
+
+  $(function(){
       $('#draft').on('input', function(){
-        var v = $(this).val();
-        $('#live_preview_html').html(v);
+        $('#live_preview_html').html($(this).val());
       });
-    });
-  </script>
+
+      $('input').on('input', updateMetrics);
+      updateMetrics();
+  });
+</script>
 </body>
 </html>
 """

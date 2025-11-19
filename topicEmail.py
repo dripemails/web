@@ -1,3 +1,4 @@
+# Using local LLM via Ollama (llama3.1:8b)
 import pandas as pd 
 import re
 from nltk.corpus import stopwords

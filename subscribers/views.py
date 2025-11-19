@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
 from django.db.models import Q, Value, CharField
 from django.db.models.functions import Coalesce, Concat, Trim
+from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -83,8 +84,18 @@ def subscriber_list_create(request):
         context={'request': request, 'list_obj': list_obj, 'list_id': list_id}
     )
     if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=201)
+        try:
+            subscriber = serializer.save()
+            # Update the serializer instance with the saved object to get the response data
+            serializer.instance = subscriber
+            return Response(serializer.data, status=201)
+        except Exception as e:
+            import traceback
+            error_trace = traceback.format_exc()
+            return Response({
+                'error': str(e),
+                'traceback': error_trace if settings.DEBUG else None
+            }, status=500)
     return Response(serializer.errors, status=400)
 
 @login_required
@@ -332,6 +343,8 @@ def subscriber_directory(request):
 @login_required
 def add_subscriber(request):
     """Render the add subscriber page with list and campaign data."""
+    from django.urls import reverse
+    
     lists = List.objects.filter(user=request.user).order_by('name')
     campaigns = Campaign.objects.filter(user=request.user).prefetch_related('emails').order_by('name')
 
@@ -350,9 +363,19 @@ def add_subscriber(request):
         for campaign in campaigns
     ]
 
+    # Build absolute URLs for API endpoints to avoid language prefix issues
+    scheme = 'https' if request.is_secure() else 'http'
+    host = request.get_host()
+    api_subscriber_create_path = reverse('api-subscriber-create')
+    api_send_email_path = reverse('api-send-email')
+    api_subscriber_create_url = f"{scheme}://{host}{api_subscriber_create_path}"
+    api_send_email_url = f"{scheme}://{host}{api_send_email_path}"
+
     context = {
         'lists': lists,
         'campaigns': campaigns,
         'campaign_data_json': json.dumps(campaign_data),
+        'api_subscriber_create_url': api_subscriber_create_url,
+        'api_send_email_url': api_send_email_url,
     }
     return render(request, 'subscribers/add.html', context)

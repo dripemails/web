@@ -216,7 +216,9 @@
                                 {% for campaign in campaigns %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ campaign.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ campaign.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ campaign.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -289,7 +291,9 @@
                                 {% for list in lists %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ list.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ list.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ list.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

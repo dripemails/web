@@ -158,43 +158,79 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS('🛑 SMTP server stopped by user.')
             )
+            sys.exit(0)
         except Exception as e:
-            self.stdout.write(
-                self.style.ERROR(f'❌ Error running SMTP server: {e}')
-            )
+            import traceback
+            error_msg = f'❌ Error running SMTP server: {e}'
+            self.stdout.write(self.style.ERROR(error_msg))
+            # Also print to stderr for supervisor to capture
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc())
+            logger.error(f"SMTP server error: {e}", exc_info=True)
+            sys.exit(1)
     
     def _run_smtp_server(self, host: str, port: int, config: dict):
         """Run the SMTP server with proper event loop handling for Python 3.11+."""
-        server = create_smtp_server(config)
+        try:
+            server = create_smtp_server(config)
+        except Exception as e:
+            import traceback
+            error_msg = f"Failed to create SMTP server: {e}"
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
         
-        if server.start(host, port):
+        try:
+            if not server.start(host, port):
+                error_msg = f"Failed to start SMTP server on {host}:{port}. Check if port is available and you have permissions."
+                self.stderr.write(error_msg + '\n')
+                logger.error(error_msg)
+                raise RuntimeError(error_msg)
+        except OSError as e:
+            import traceback
+            if e.errno == 13:  # Permission denied
+                error_msg = f"Permission denied binding to {host}:{port}. Port {port} may require root privileges. Try using port 1025 or run with sudo."
+            elif e.errno == 98:  # Address already in use
+                error_msg = f"Port {port} is already in use. Try a different port or stop the service using it."
+            else:
+                error_msg = f"OS error starting SMTP server: {e}"
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
+        
+        try:
+            # The aiosmtpd Controller manages its own event loop
+            # Just keep the process alive until interrupted
+            import time
+            while True:
+                # Check if controller is still running
+                if server.controller is None:
+                    break
+                if not hasattr(server.controller, 'smtpd') or server.controller.smtpd is None:
+                    break
+                time.sleep(0.5)  # Sleep to avoid CPU spinning
+        except KeyboardInterrupt:
+            self.stdout.write(
+                self.style.WARNING('\n🛑 Keyboard interrupt received. Stopping server...')
+            )
+        except Exception as e:
+            import traceback
+            error_msg = f'❌ Error running server: {e}'
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
+        finally:
+            # Stop the server gracefully
             try:
-                # The aiosmtpd Controller manages its own event loop
-                # Just keep the process alive until interrupted
-                import time
-                while True:
-                    # Check if controller is still running
-                    if server.controller is None:
-                        break
-                    if not hasattr(server.controller, 'smtpd') or server.controller.smtpd is None:
-                        break
-                    time.sleep(0.5)  # Sleep to avoid CPU spinning
-            except KeyboardInterrupt:
-                self.stdout.write(
-                    self.style.WARNING('\n🛑 Keyboard interrupt received. Stopping server...')
-                )
-            except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(f'❌ Error running server: {e}')
-                )
-            finally:
-                # Stop the server gracefully
                 server.stop()
                 self.stdout.write(
                     self.style.SUCCESS('✅ Server stopped successfully.')
                 )
-        else:
-            raise RuntimeError("Failed to start SMTP server")
+            except Exception as e:
+                logger.warning(f"Error stopping server: {e}")
     
     def _load_config(self, options):
         """Load configuration from file or command line options."""

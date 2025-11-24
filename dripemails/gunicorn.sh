@@ -1,13 +1,15 @@
 #!/bin/bash
 NAME="dripemails"                      # Name of the application
 DJANGODIR=/home/dripemails/web       # Path to Django project
-VENV=${VENV:-/home/dripemails/web/dripemails}  # Virtual environment path (default: /home/dripemails/web/dripemails)
+VENV=${VENV:-/home/dripemails/dripemails}  # Virtual environment path (default: /home/dripemails/web/dripemails)
 SOCKFILE=/tmp/gunicorn.sock      # Path to the socket file
 USER=dripemails                                # User to run the process
 GROUP=dripemails                              # Group to run the process
 NUM_WORKERS=12                                # Number of worker processes
 DJANGO_SETTINGS_MODULE=dripemails.live  # Django settings file
 DJANGO_WSGI_MODULE=dripemails.wsgi          # Django WSGI module
+
+export VENV=/home/dripemails/dripemails
 
 # Change to project directory (required for Python to find modules)
 cd $DJANGODIR
@@ -45,7 +47,7 @@ exec $GUNICORN_CMD \
     --user=$USER \
     --group=$GROUP \
     --workers=$NUM_WORKERS \
-    --bind=127.0.0.1:9000 \
+    --bind=0.0.0.0:8005 \
     --log-level=debug \
     --log-file=- \
     $DJANGO_WSGI_MODULE:application

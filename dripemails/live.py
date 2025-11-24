@@ -22,7 +22,7 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable is required for production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True # enabled for now
 
 ALLOWED_HOSTS = [
     'dripemails.org',
@@ -91,19 +91,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dripemails.wsgi.application'
 
 # Database Configuration
-# MySQL for production
+# PostgreSQL for production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'dripemails'),
         'USER': os.environ.get('DB_USER', 'dripemails'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'dripemails'),
-        'HOST': os.environ.get('DB_HOST', '10.124.0.7'),
-        'PORT': os.environ.get('DB_PORT', '3306'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
         'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'autocommit': True,
+            'connect_timeout': 10,
         },
         'CONN_MAX_AGE': 60,
         'CONN_HEALTH_CHECKS': True,

@@ -255,3 +255,4 @@ Adjust these settings in `uwsgi.ini` based on your server:
 - Set proper file permissions
 
 
+

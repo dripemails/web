@@ -199,15 +199,22 @@ class CustomMessageHandler(Message):
             # Update stats
             self.processor.stats['emails_received'] += 1
             
-            # Process the email
-            metadata = self.processor.process_email(email_message)
-            
-            # Debug output
-            if self.debug:
-                self._print_debug_info(metadata)
+            # Process the email (errors in processing should not fail the SMTP transaction)
+            try:
+                metadata = self.processor.process_email(email_message)
+                
+                # Debug output
+                if self.debug:
+                    self._print_debug_info(metadata)
+            except Exception as process_error:
+                # Log processing errors but don't fail the SMTP transaction
+                self.logger.error(f"Error processing email (non-fatal): {process_error}", exc_info=True)
+                # Still update stats to show we received it
+                self.processor.stats['emails_failed'] += 1
             
         except Exception as e:
-            self.logger.error(f"Error handling message: {e}")
+            # Only log parsing errors, but don't fail the SMTP transaction
+            self.logger.error(f"Error parsing message (non-fatal): {e}", exc_info=True)
     
     def _print_debug_info(self, metadata: Dict[str, Any]):
         """Print debug information for received email."""
@@ -400,10 +407,17 @@ class SimpleSMTP(SMTPServer):
         try:
             auth_user = getattr(session, 'auth_user', 'anonymous')
             self.logger.info(f"Processing email from {envelope.mail_from} to {envelope.rcpt_tos} (auth: {auth_user})")
-            return await super().handle_DATA(server, session, envelope)
+            # Call parent handler - it will call our message handler
+            # The message handler catches its own errors, so this should succeed
+            result = await super().handle_DATA(server, session, envelope)
+            return result
         except Exception as e:
-            self.logger.error(f"Error handling DATA: {e}")
-            return '500 Error processing message'
+            # Log the error with full traceback for debugging
+            import traceback
+            self.logger.error(f"Error in handle_DATA: {e}\n{traceback.format_exc()}")
+            # Return success anyway - processing errors should not fail the SMTP transaction
+            # The email was received, even if we couldn't process it
+            return '250 OK'
 
 
 class SMTPServerManager:

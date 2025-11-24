@@ -179,25 +179,28 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 1025))
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'False').lower() == 'true'
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() == 'true'
 
-# Only use authentication if credentials are provided
-# Django will only attempt SMTP AUTH if both EMAIL_HOST_USER and EMAIL_HOST_PASSWORD are truthy
-# If either is empty/None, authentication will be skipped (useful for servers without AUTH support)
+# SMTP Authentication Configuration
+# For production servers that require authentication, set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD
+# in your environment variables. If both are provided, Django will use them for authentication.
+# If either is missing/empty, Django will attempt to send without authentication (useful for
+# servers that don't require auth, but will fail if the server requires it).
 _email_user = os.environ.get('EMAIL_HOST_USER', '').strip()
 _email_password = os.environ.get('EMAIL_HOST_PASSWORD', '').strip()
 
-# Only set credentials if both are provided and non-empty
-# This prevents Django from attempting authentication on servers that don't support it
+# Set credentials if both are provided
 if _email_user and _email_password:
     EMAIL_HOST_USER = _email_user
     EMAIL_HOST_PASSWORD = _email_password
 else:
-    # Explicitly set to empty strings to disable authentication
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
+    # If credentials are not provided, set to None (Django will skip authentication)
+    # NOTE: This will fail if your SMTP server requires authentication!
+    # Make sure to set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your .env file for production.
+    EMAIL_HOST_USER = None
+    EMAIL_HOST_PASSWORD = None
 
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'founders@dripemails.org')
 

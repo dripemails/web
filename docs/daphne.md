@@ -52,6 +52,46 @@ python -c "from docs.asgi_settings import application; print('ASGI app loaded su
 
 ## Configuration
 
+### 0. Set Environment Variables for User (Optional but Recommended)
+
+To make these environment variables available automatically when the `dripemails` user logs in or runs commands, add them to the user's shell profile:
+
+```bash
+# Switch to dripemails user
+sudo su - dripemails
+
+# Add to .profile (recommended - works for all shells)
+echo 'export DJANGO_SETTINGS_MODULE=dripemails.live' >> ~/.profile
+echo 'export PYTHONPATH=/home/dripemails/web' >> ~/.profile
+
+# Or add to .bashrc (if using bash interactively)
+echo 'export DJANGO_SETTINGS_MODULE=dripemails.live' >> ~/.bashrc
+echo 'export PYTHONPATH=/home/dripemails/web' >> ~/.bashrc
+
+# Reload the profile
+source ~/.profile
+# or
+source ~/.bashrc
+```
+
+**Note**: Supervisor already sets these via the `environment` directive in the config, so this is mainly useful for:
+- Manual commands when logged in as the `dripemails` user
+- Running Django management commands
+- Testing Daphne manually
+
+**Alternative**: Create a dedicated environment file:
+
+```bash
+# Create environment file
+sudo -u dripemails tee /home/dripemails/.dripemails_env > /dev/null << 'EOF'
+export DJANGO_SETTINGS_MODULE=dripemails.live
+export PYTHONPATH=/home/dripemails/web
+EOF
+
+# Source it in .profile
+echo 'source ~/.dripemails_env' >> /home/dripemails/.profile
+```
+
 ### 1. ASGI Application Path
 
 You have two options for the ASGI application path:
@@ -102,7 +142,7 @@ Create `/etc/supervisor/conf.d/dripemails-daphne.conf`:
 
 ```ini
 [program:dripemails-daphne]
-command=/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 docs.asgi_settings:application
+command=/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 dripemails.asgi:application
 directory=/home/dripemails/web
 user=dripemails
 autostart=true
@@ -116,18 +156,23 @@ stdout_logfile_maxbytes=50MB
 stdout_logfile_backups=10
 stderr_logfile_maxbytes=50MB
 stderr_logfile_backups=10
-environment=DJANGO_SETTINGS_MODULE="docs.asgi_settings",PYTHONPATH="/home/dripemails/web"
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
 stopsignal=TERM
 stopwaitsecs=10
 killasgroup=true
 priority=1000
 ```
 
-**Alternative**: If you want to use the standard Django ASGI file instead:
+**Alternative**: If you want to use `docs.asgi_settings` instead:
 ```ini
-command=/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 dripemails.asgi:application
-environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+command=/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 docs.asgi_settings:application
+environment=DJANGO_SETTINGS_MODULE="docs.asgi_settings",PYTHONPATH="/home/dripemails/web"
 ```
+
+**Critical Notes:**
+1. **`directory=/home/dripemails/web`** - This sets the working directory so Python can find the `dripemails` module. This is **required**!
+2. **`PYTHONPATH="/home/dripemails/web"`** - This ensures Python can import modules from the project root. Also **required**!
+3. Without both of these, you'll get `ModuleNotFoundError: No module named 'dripemails'`
 
 **Note**: Update the Python path if your venv is in a different location:
 - If venv is at `/home/dripemails/venv`: Change `command` to `/home/dripemails/venv/bin/daphne`
@@ -217,12 +262,35 @@ sudo systemctl reload nginx
 
 ### 1. Test Daphne Manually
 
+**IMPORTANT**: You **must** run Daphne from the project root directory (`/home/dripemails/web`) so Python can find the `dripemails` module.
+
+**Option A: Using `dripemails.asgi:application`**
 ```bash
+# Change to project root directory (REQUIRED!)
 cd /home/dripemails/web
-source /home/dripemails/web/dripemails/bin/activate
-export DJANGO_SETTINGS_MODULE=docs.asgi_settings
-daphne -b 0.0.0.0 -p 8001 docs.asgi_settings:application
+
+# Set environment variables
+export DJANGO_SETTINGS_MODULE=dripemails.live
+export PYTHONPATH=/home/dripemails/web
+
+# Run Daphne (must be run from /home/dripemails/web directory)
+/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 dripemails.asgi:application
 ```
+
+**Option B: Using `docs.asgi_settings:application`**
+```bash
+# Change to project root directory (REQUIRED!)
+cd /home/dripemails/web
+
+# Set environment variables
+export DJANGO_SETTINGS_MODULE=docs.asgi_settings
+export PYTHONPATH=/home/dripemails/web
+
+# Run Daphne (must be run from /home/dripemails/web directory)
+/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 docs.asgi_settings:application
+```
+
+**Why `cd` is required**: When Python runs `-m daphne`, it needs to be able to import `dripemails.asgi`. Python looks for modules relative to the current working directory. By running from `/home/dripemails/web`, Python can find the `dripemails` package.
 
 Visit `http://your-server-ip:8001` to verify it's working.
 
@@ -277,18 +345,24 @@ sudo supervisorctl clear dripemails-daphne
 ### Manual Daphne Commands
 
 ```bash
-# Run Daphne in foreground (for debugging)
+# IMPORTANT: Always change to project root first!
 cd /home/dripemails/web
-source /home/dripemails/web/dripemails/bin/activate
-export DJANGO_SETTINGS_MODULE=docs.asgi_settings
-daphne -b 0.0.0.0 -p 8001 docs.asgi_settings:application
+
+# Set environment variables
+export DJANGO_SETTINGS_MODULE=dripemails.live
+export PYTHONPATH=/home/dripemails/web
+
+# Run Daphne in foreground (for debugging)
+/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 dripemails.asgi:application
 
 # Run with verbose logging
-daphne -b 0.0.0.0 -p 8001 -v 2 docs.asgi_settings:application
+/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 -v 2 dripemails.asgi:application
 
 # Run with specific number of threads
-daphne -b 0.0.0.0 -p 8001 --threads 4 docs.asgi_settings:application
+/home/dripemails/web/dripemails/bin/python -m daphne -b 0.0.0.0 -p 8001 --threads 4 dripemails.asgi:application
 ```
+
+**Remember**: The `cd /home/dripemails/web` is **critical** - without it, Python won't be able to find the `dripemails` module!
 
 ## Troubleshooting
 
@@ -309,12 +383,21 @@ tail -f /home/dripemails/web/logs/daphne-error.log
    sudo lsof -i :8001
    ```
 
-### Issue: "ModuleNotFoundError: No module named 'docs'"
+### Issue: "ModuleNotFoundError: No module named 'dripemails'" or "No module named 'docs'"
 
 **Solution:**
-- Ensure `PYTHONPATH` includes `/home/dripemails/web` in supervisor config
-- Check that `docs/asgi_settings.py` exists
-- Verify the `directory` in supervisor config is `/home/dripemails/web`
+- **CRITICAL #1**: Ensure `directory=/home/dripemails/web` is set in supervisor config - this sets the working directory
+- **CRITICAL #2**: Ensure `PYTHONPATH="/home/dripemails/web"` is set in the supervisor `environment` line
+- When running manually, **always** `cd /home/dripemails/web` first before running the command
+- Check that the module exists:
+  - For `dripemails.asgi`: `/home/dripemails/web/dripemails/asgi.py` must exist
+  - For `docs.asgi_settings`: `/home/dripemails/web/docs/asgi_settings.py` must exist
+- Test manually (must be run from project root):
+  ```bash
+  cd /home/dripemails/web  # REQUIRED!
+  export PYTHONPATH=/home/dripemails/web
+  /home/dripemails/web/dripemails/bin/python -c "import dripemails; print('Module found!')"
+  ```
 
 ### Issue: "Application not found"
 

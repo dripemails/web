@@ -1,4 +1,10 @@
 # Python
+*.bat
+*.exe
+*.ps1
+activate
+*.cfg
+Scripts/
 __pycache__/
 *.py[cod]
 *$py.class

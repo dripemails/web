@@ -178,8 +178,8 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 1025))
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 

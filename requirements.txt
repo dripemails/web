@@ -14,3 +14,5 @@ python-dateutil==2.8.2
 #pandas==2.1.4
 openpyxl==3.1.2
 aiosmtpd==1.4.4
+dotenv
+

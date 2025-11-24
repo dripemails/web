@@ -254,3 +254,4 @@ Adjust these settings in `uwsgi.ini` based on your server:
 - Use HTTPS in production (configured in Nginx)
 - Set proper file permissions
 
+

@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '127.0.0.1:8005',
     '0.0.0.0',
-    '0.0.0.0:8005',
+    '0.0.'0.0.0.0',0.0:8005',
     '10.124.0.8',
     '10.124.0.8:8005',
     '*'
@@ -232,11 +232,11 @@ SECURE_SSL_REDIRECT = False
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Session Security
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 #SESSION_COOKIE_HTTPONLY = True
 #CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_AGE = 3600000000  # 1 hour
+SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # Logging Configuration

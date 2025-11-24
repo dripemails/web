@@ -182,8 +182,23 @@ EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# Only use authentication if credentials are provided
+# Django will only attempt SMTP AUTH if both EMAIL_HOST_USER and EMAIL_HOST_PASSWORD are truthy
+# If either is empty/None, authentication will be skipped (useful for servers without AUTH support)
+_email_user = os.environ.get('EMAIL_HOST_USER', '').strip()
+_email_password = os.environ.get('EMAIL_HOST_PASSWORD', '').strip()
+
+# Only set credentials if both are provided and non-empty
+# This prevents Django from attempting authentication on servers that don't support it
+if _email_user and _email_password:
+    EMAIL_HOST_USER = _email_user
+    EMAIL_HOST_PASSWORD = _email_password
+else:
+    # Explicitly set to empty strings to disable authentication
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'founders@dripemails.org')
 
 # REST Framework Configuration
@@ -315,10 +330,15 @@ CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
 
 # Cache Configuration
+# Note: Django's built-in RedisCache backend does NOT support CLIENT_CLASS
+# CLIENT_CLASS is only for django-redis package, not django.core.cache.backends.redis
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1'),
+        'OPTIONS': {
+            # Do NOT include CLIENT_CLASS here - it's not supported by Django's built-in Redis backend
+        },
         'KEY_PREFIX': 'dripemails',
         'TIMEOUT': 300,  # 5 minutes default
     }

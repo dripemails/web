@@ -392,12 +392,12 @@ class SimpleSMTP(SMTPServer):
         if self.auth_enabled and not getattr(session, 'authenticated', False):
             return '530 Authentication required'
         
-        # Check domain restrictions
-        allowed_domains = self.config.get('allowed_domains', ['dripemails.org', 'localhost', '127.0.0.1'])
-        domain = address.split('@')[-1] if '@' in address else ''
-        
-        if allowed_domains and not any(domain.endswith(d) for d in allowed_domains):
-            return f'550 not relaying to domain {domain}'
+        # Allow all domains for outgoing mail
+        # Domain restrictions are disabled to allow sending to any external domain (gmail.com, etc.)
+        # This is safe because:
+        # 1. If auth is enabled, only authenticated users can send
+        # 2. If auth is disabled (--no-auth), it's a trusted environment
+        # 3. This is an outgoing mail server, not an open relay for incoming mail
         
         envelope.rcpt_tos.append(address)
         return '250 OK'

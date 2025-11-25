@@ -177,9 +177,10 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
 
 # Email Configuration
+# Use Postfix for actual email delivery to external servers (Gmail, etc.)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))  # Use port 25 for Postfix
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'False').lower() == 'true'
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() == 'true'
 

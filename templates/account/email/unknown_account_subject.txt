@@ -1,5 +1,5 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}[DripEmails] Password Reset Email{% endblocktrans %}
+{% blocktrans %}Password Reset Email{% endblocktrans %}
 {% endautoescape %}
 

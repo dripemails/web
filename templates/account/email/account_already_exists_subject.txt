@@ -1,5 +1,5 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}[DripEmails] Account Already Exists{% endblocktrans %}
+{% blocktrans %}Account Already Exists{% endblocktrans %}
 {% endautoescape %}
 

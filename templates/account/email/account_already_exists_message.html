@@ -1,0 +1,22 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% blocktrans with site_domain=current_site.domain %}You are receiving this email because you or someone else tried to signup for an account using email address:{% endblocktrans %}</p>
+
+<div class="highlight-box">
+    <strong>{{ email }}</strong>
+</div>
+
+<p>{% blocktrans %}However, an account using that email address already exists. In case you have forgotten about this, please use the password forgotten procedure to recover your account.{% endblocktrans %}</p>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ password_reset_url }}" class="button">{% trans "Reset Password" %}</a>
+</div>
+
+<p style="font-size: 14px; color: #718096;">
+    {% blocktrans %}Or copy and paste this link into your browser:{% endblocktrans %}<br>
+    <a href="{{ password_reset_url }}" style="color: #667eea; word-break: break-all;">{{ password_reset_url }}</a>
+</p>
+{% endblock content %}
+

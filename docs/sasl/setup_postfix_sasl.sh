@@ -80,32 +80,60 @@ print_info "SASL configuration file created"
 
 # Step 4: Create or update SASL user
 print_info "Step 4: Creating SASL user '$USERNAME'..."
+SASLDB_PATH="/etc/postfix/sasl/sasldb2"
+
 # Check if user already exists
-if sasldblistusers2 -f /etc/postfix/sasl/sasldb2 2>/dev/null | grep -q "^$USERNAME@$DOMAIN"; then
-    print_warn "User $USERNAME@$DOMAIN already exists. Updating password..."
+if [ -f "$SASLDB_PATH" ] && sasldblistusers2 -f "$SASLDB_PATH" 2>/dev/null | grep -q "^$USERNAME@$DOMAIN"; then
+    print_warn "User $USERNAME@$DOMAIN already exists. Deleting old entry..."
     # Delete existing user first
-    echo "$PASSWORD" | saslpasswd2 -p -u "$DOMAIN" -d "$USERNAME" 2>/dev/null || true
+    saslpasswd2 -f "$SASLDB_PATH" -u "$DOMAIN" -d "$USERNAME" 2>/dev/null || true
 fi
 
-# Create the user (this will create sasldb2 if it doesn't exist)
-echo "$PASSWORD" | saslpasswd2 -p -u "$DOMAIN" "$USERNAME"
+# Create the user using the -f flag to specify database location
+# Use printf to avoid issues with echo and newlines
+print_info "Creating SASL user..."
+if printf '%s' "$PASSWORD" | saslpasswd2 -f "$SASLDB_PATH" -p -u "$DOMAIN" "$USERNAME"; then
+    print_info "User creation command succeeded"
+else
+    print_error "saslpasswd2 command failed"
+    print_info "Checking if file was created anyway..."
+fi
 
 # Set proper permissions on sasldb2
-if [ -f /etc/postfix/sasl/sasldb2 ]; then
-    chmod 600 /etc/postfix/sasl/sasldb2
-    chown postfix:postfix /etc/postfix/sasl/sasldb2
+if [ -f "$SASLDB_PATH" ]; then
+    chmod 600 "$SASLDB_PATH"
+    chown postfix:postfix "$SASLDB_PATH"
     print_info "SASL user created/updated successfully"
+    print_info "File exists at: $SASLDB_PATH"
+    ls -la "$SASLDB_PATH"
 else
-    print_error "Failed to create sasldb2 file"
-    exit 1
+    print_error "Failed to create sasldb2 file at $SASLDB_PATH"
+    print_info "Trying to create empty database first..."
+    # Try creating an empty database first using sasldblistusers2
+    touch "$SASLDB_PATH"
+    chmod 600 "$SASLDB_PATH"
+    chown postfix:postfix "$SASLDB_PATH"
+    # Try again with explicit path
+    print_info "Retrying user creation..."
+    if printf '%s' "$PASSWORD" | saslpasswd2 -f "$SASLDB_PATH" -p -u "$DOMAIN" "$USERNAME"; then
+        chmod 600 "$SASLDB_PATH"
+        chown postfix:postfix "$SASLDB_PATH"
+        print_info "User created successfully on retry"
+    else
+        print_error "Still failed to create sasldb2 file"
+        print_error "Please check saslpasswd2 installation and permissions"
+        exit 1
+    fi
 fi
 
 # Step 5: Verify user was created
 print_info "Step 5: Verifying SASL user..."
-if sasldblistusers2 -f /etc/postfix/sasl/sasldb2 | grep -q "^$USERNAME@$DOMAIN"; then
+if sasldblistusers2 -f "$SASLDB_PATH" | grep -q "^$USERNAME@$DOMAIN"; then
     print_info "User $USERNAME@$DOMAIN verified successfully"
 else
     print_error "Failed to verify user creation"
+    print_info "Listing all users in database:"
+    sasldblistusers2 -f "$SASLDB_PATH" || true
     exit 1
 fi
 
@@ -224,7 +252,7 @@ print_info "=========================================="
 print_info "SASL Setup Complete!"
 print_info "=========================================="
 print_info "Username: $USERNAME@$DOMAIN"
-print_info "SASL database: /etc/postfix/sasl/sasldb2"
+print_info "SASL database: $SASLDB_PATH"
 print_info "Configuration backup: $BACKUP_FILE"
 echo
 print_info "To test authentication, use:"
@@ -233,7 +261,7 @@ print_info "  EHLO localhost"
 print_info "  (You should see '250-AUTH PLAIN LOGIN')"
 echo
 print_info "To list SASL users:"
-print_info "  sasldblistusers2 -f /etc/postfix/sasl/sasldb2"
+print_info "  sasldblistusers2 -f $SASLDB_PATH"
 echo
 print_info "To add more users:"
 print_info "  sudo saslpasswd2 -u $DOMAIN username"

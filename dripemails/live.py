@@ -269,8 +269,8 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 # HTTPONLY - Set to False only if you need JavaScript access to cookies (less secure)
 # For most cases, True is recommended for security
-SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = False
 # SameSite attribute - 'Lax' allows cookies in same-site requests (most common)
 # 'None' requires Secure=True and allows cross-site cookies (for subdomains/APIs)
 # 'Strict' is most secure but can break some redirect flows
@@ -282,8 +282,13 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 # If you need subdomain sharing, ensure all access is via a subdomain (e.g., www.dripemails.org)
 SESSION_COOKIE_DOMAIN = None  # Most reliable - use None unless you need subdomain sharing
 CSRF_COOKIE_DOMAIN = None
+SESSION_COOKIE_PATH = '/'  # Explicitly set cookie path
 SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# Save session on every request to ensure it persists (important for cache backend)
+SESSION_SAVE_EVERY_REQUEST = True
+# Save session on every request to ensure it persists (important for cache backend)
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Logging Configuration
 LOGGING = {
@@ -370,6 +375,9 @@ CACHES = {
 }
 
 # Use cache for sessions
+# Note: With cache backend, sessions are stored in Redis but still need a sessionid cookie
+# If sessions aren't working, try switching to database backend temporarily:
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 

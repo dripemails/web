@@ -267,14 +267,20 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Session Security
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+# HTTPONLY - Set to False only if you need JavaScript access to cookies (less secure)
+# For most cases, True is recommended for security
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
-# SameSite attribute - 'Lax' allows cookies to be sent in same-site requests
-# Use 'None' only if you need cross-site cookies (requires Secure=True)
+# SameSite attribute - 'Lax' allows cookies in same-site requests (most common)
+# 'None' requires Secure=True and allows cross-site cookies (for subdomains/APIs)
+# 'Strict' is most secure but can break some redirect flows
 SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_SAMESITE = 'Lax'
-# Cookie domain - leave None to use current domain, or set to '.dripemails.org' for subdomain sharing
-SESSION_COOKIE_DOMAIN = None  # Use None for same-site, or '.dripemails.org' for subdomain sharing
+# Cookie domain - None is most reliable for same-site
+# Use '.dripemails.org' ONLY if you need cookies shared across subdomains (www, api, etc.)
+# IMPORTANT: Setting domain to '.dripemails.org' can cause issues when accessing via 'dripemails.org' directly
+# If you need subdomain sharing, ensure all access is via a subdomain (e.g., www.dripemails.org)
+SESSION_COOKIE_DOMAIN = None  # Most reliable - use None unless you need subdomain sharing
 CSRF_COOKIE_DOMAIN = None
 SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False

@@ -283,9 +283,10 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_DOMAIN = None  # Most reliable - use None unless you need subdomain sharing
 CSRF_COOKIE_DOMAIN = None
 SESSION_COOKIE_PATH = '/'  # Explicitly set cookie path
+SESSION_COOKIE_NAME = 'sessionid'  # Explicitly set cookie name (default, but being explicit)
 SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-# Save session on every request to ensure it persists (important for cache backend)
+# Save session on every request to ensure it persists
 SESSION_SAVE_EVERY_REQUEST = True
 # Save session on every request to ensure it persists (important for cache backend)
 SESSION_SAVE_EVERY_REQUEST = True
@@ -374,12 +375,13 @@ CACHES = {
     }
 }
 
-# Use cache for sessions
-# Note: With cache backend, sessions are stored in Redis but still need a sessionid cookie
-# If sessions aren't working, try switching to database backend temporarily:
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
+# Use database for sessions (more reliable than cache)
+# Cache backend requires Redis to be working perfectly, and session cookies can get lost
+# Database backend is more reliable for session persistence
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# If you want to use cache backend later (requires Redis to be working):
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = 'default'
 
 # Create logs directory if it doesn't exist
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)

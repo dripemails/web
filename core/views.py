@@ -67,6 +67,11 @@ def dashboard_api(request):
     })
 
 @login_required
+def profile(request):
+    """User profile page - redirects to dashboard."""
+    return redirect('core:dashboard')
+
+@login_required
 def dashboard(request):
     """Render the dashboard for authenticated users."""
     # Get user's campaigns

@@ -180,6 +180,10 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
 
+# Login/Logout redirects
+LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect to dashboard after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home after logout
+
 # Email Configuration
 # Use Postfix for actual email delivery to external servers (Gmail, etc.)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -42,6 +42,8 @@ non_prefixed_urlpatterns = [
 
 # URL patterns that SHOULD be prefixed with a language code
 language_prefixed_urlpatterns = i18n_patterns(
+    # Profile page - must come before allauth.urls to override default profile redirect
+    path('accounts/profile/', core_views.profile, name='account_profile'),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls')),
     # Web views only (no API endpoints)

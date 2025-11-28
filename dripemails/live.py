@@ -39,11 +39,15 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://*.dripemails.org',
-                        'http://*.dripemails.org',
-                        'https://*.dripemail.org',
-                        'http://*.dripemail.org',
-                        'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'https://dripemails.org',
+    'https://www.dripemails.org',
+    'https://api.dripemails.org',
+    'https://docs.dripemails.org',
+    'http://dripemails.org',  # For development/testing
+    'http://localhost',
+    'http://127.0.0.1',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -253,14 +257,21 @@ SECURE_CONTENT_TYPE_NOSNIFF = False
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_SSL_REDIRECT = False
-#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Session Security
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-#SESSION_COOKIE_HTTPONLY = True
-#CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+# SameSite attribute - 'Lax' allows cookies to be sent in same-site requests
+# Use 'None' only if you need cross-site cookies (requires Secure=True)
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
+# Cookie domain - leave None to use current domain, or set to '.dripemails.org' for subdomain sharing
+SESSION_COOKIE_DOMAIN = None  # Use None for same-site, or '.dripemails.org' for subdomain sharing
+CSRF_COOKIE_DOMAIN = None
 SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 

@@ -318,8 +318,9 @@
                             searchResultsContent.html('<div class="text-center py-8 text-gray-500"><p class="text-sm">{% trans "No templates found" %}</p></div>');
                         }
                     },
-                    error: function() {
-                        searchResultsContent.html('<div class="text-center py-8 text-red-500"><p class="text-sm">{% trans "Error searching templates" %}</p></div>');
+                    error: function(xhr, status, error) {
+                        console.error('Search error:', xhr.responseText, status, error);
+                        searchResultsContent.html('<div class="text-center py-8 text-red-500"><p class="text-sm">{% trans "Error searching templates" %}</p><p class="text-xs mt-1">' + (xhr.responseJSON?.error || error) + '</p></div>');
                     }
                 });
             }

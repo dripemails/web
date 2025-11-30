@@ -222,6 +222,10 @@ def campaign_template(request, campaign_id=None):
     """Render template creation/edit page."""
     campaign = None
     template = None
+    show_campaign_modal = False
+    
+    # Get all user campaigns
+    all_campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
     
     if campaign_id:
         campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
@@ -229,15 +233,12 @@ def campaign_template(request, campaign_id=None):
         if template_id:
             template = get_object_or_404(Email, id=template_id, campaign=campaign)
     else:
-        # If no campaign_id provided, try to get the first campaign or redirect
-        campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
-        if campaigns.exists():
-            # Redirect to the first campaign's template page
-            return redirect('campaigns:template', campaign_id=campaigns.first().id)
-        else:
+        # If no campaign_id provided from dashboard, show campaign selection modal on save
+        if not all_campaigns.exists():
             # No campaigns exist, show error message
             messages.error(request, _('Please create a campaign first before creating email templates.'))
-            return redirect('campaigns:list')
+            return redirect('core:dashboard')
+        show_campaign_modal = True
     
     # Get user's footers
     from analytics.models import EmailFooter
@@ -247,6 +248,8 @@ def campaign_template(request, campaign_id=None):
         'campaign': campaign,
         'template': template,
         'user_footers': user_footers,
+        'all_campaigns': all_campaigns,
+        'show_campaign_modal': show_campaign_modal,
         'wait_units': [
             ('minutes', _('Minutes')),
             ('hours', _('Hours')),
@@ -452,15 +455,20 @@ def abtest_view(request):
     # Allow selecting campaign/email via querystring or form
     campaign_id = request.GET.get('campaign_id') or request.POST.get('campaign_id')
     if campaign_id:
-        campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
-        emails = campaign.emails.all().order_by('order')
+        try:
+            campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+            emails = campaign.emails.all().order_by('order')
 
-        email_id = request.GET.get('email_id') or request.POST.get('email_id')
-        if email_id:
-            try:
-                email = campaign.emails.get(id=email_id)
-            except Email.DoesNotExist:
-                email = None
+            email_id = request.GET.get('email_id') or request.POST.get('email_id')
+            if email_id:
+                try:
+                    email = campaign.emails.get(id=email_id)
+                except Email.DoesNotExist:
+                    email = None
+        except (Campaign.DoesNotExist, ValueError):
+            # Invalid campaign_id, just show empty state
+            campaign = None
+            emails = []
 
     if request.method == 'POST' and email:
         draft = request.POST.get('draft', '')
@@ -483,6 +491,37 @@ def abtest_view(request):
     except TemplateDoesNotExist:
         # Support templates placed directly under a templates/ folder without app subdir
         return render(request, 'abtest.html', context)
+
+
+@login_required
+def drafts_view(request):
+    """View saved email drafts with campaign filtering."""
+    campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+    campaign = None
+    drafts = []
+    
+    # Get user's footers for the send modal
+    from analytics.models import EmailFooter
+    user_footers = EmailFooter.objects.filter(user=request.user)
+    
+    # Allow selecting campaign via querystring
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id:
+        try:
+            campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+            # Get all emails (drafts) for this campaign
+            drafts = campaign.emails.all().order_by('-updated_at')
+        except (Campaign.DoesNotExist, ValueError):
+            campaign = None
+            drafts = []
+    
+    context = {
+        'campaigns': campaigns,
+        'campaign': campaign,
+        'drafts': drafts,
+        'user_footers': user_footers,
+    }
+    return render(request, 'campaigns/drafts.html', context)
 
 
 @login_required
@@ -626,6 +665,40 @@ def generate_email_with_ai(request, campaign_id):
 @login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+def revise_email_with_ai(request):
+    """Revise email content for grammar and clarity using Ollama llama3.1:8b."""
+    from .ai_utils import revise_email_content
+    
+    email_text = request.data.get('email_text', '')
+    
+    if not email_text or not email_text.strip():
+        return Response({'error': _('Email text is required')}, status=400)
+    
+    try:
+        result = revise_email_content(email_text)
+        
+        if result.get('success'):
+            return Response({
+                'message': _('Email revised successfully'),
+                'revised_text': result.get('revised_text'),
+                'success': True
+            })
+        else:
+            return Response({
+                'error': result.get('error', _('Revision failed')),
+                'success': False
+            }, status=500)
+    
+    except Exception as e:
+        return Response({
+            'error': _('Failed to revise email: {}').format(str(e)),
+            'success': False
+        }, status=500)
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def analyze_campaign_topics(request, campaign_id):
     """Analyze topics across emails in a campaign using LDA."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
@@ -841,3 +914,39 @@ def analyze_campaign_topics(request, campaign_id):
         return Response({
             'error': _('Topic analysis failed: {}').format(str(e))
         }, status=500)
+
+@login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def search_templates(request):
+    """Search through all email templates across campaigns."""
+    query = request.GET.get('q', '').strip()
+    
+    if not query or len(query) < 2:
+        return Response({'results': []})
+    
+    # Search in subject and body_html fields across all user's campaigns
+    from django.db.models import Q
+    emails = Email.objects.filter(
+        campaign__user=request.user
+    ).filter(
+        Q(subject__icontains=query) | Q(body_html__icontains=query)
+    ).select_related('campaign').distinct()[:10]
+    
+    results = []
+    for email in emails:
+        # Create preview by stripping HTML tags
+        import re
+        preview = re.sub(r'<[^>]+>', '', email.body_html or email.body_text or '')
+        preview = preview.strip()[:100] + ('...' if len(preview) > 100 else '')
+        
+        results.append({
+            'id': str(email.id),
+            'subject': email.subject,
+            'preview': preview,
+            'campaign_id': str(email.campaign.id),
+            'campaign_name': email.campaign.name,
+            'order': email.order
+        })
+    
+    return Response({'results': results})

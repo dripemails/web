@@ -6,6 +6,7 @@ Provides functions for generating email content using OpenAI and analyzing email
 import os
 import re
 import json
+import logging
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 
@@ -18,8 +19,14 @@ import gensim.models
 import gensim.corpora as corpora
 
 # AI imports - Using local LLM via Ollama (llama3.1:8b)
-import requests
-import json
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Download required NLTK data (run once)
 try:
@@ -29,8 +36,8 @@ except LookupError:
     nltk.download('punkt')
 
 # Ollama configuration
-OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "llama3.1:8b"
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:8b")
 
 
 def extract_json(text: str) -> str:
@@ -198,6 +205,81 @@ Respond ONLY in valid JSON:
     except requests.exceptions.RequestException as e:
         raise Exception(f"Ollama API error: {str(e)}")
 
+
+
+def revise_email_content(email_text: str) -> Dict[str, str]:
+    """
+    Revise an email for grammar, clarity, and professionalism using Ollama llama3.1:8b.
+    
+    Args:
+        email_text: The original email content (HTML or plain text)
+    
+    Returns:
+        Dictionary with 'revised_text' and 'success' keys
+    """
+    
+    # Strip HTML tags for analysis if present
+    clean_text = re.sub(r'<[^>]+>', ' ', email_text)
+    clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+    
+    if not clean_text:
+        return {'revised_text': email_text, 'success': False, 'error': 'Empty email content'}
+    
+    # Build revision prompt
+    prompt = (
+        "You are an expert email editor. Review the following email and revise it to:\n"
+        "1. Fix any grammar, spelling, or punctuation errors\n"
+        "2. Improve clarity and readability\n"
+        "3. Maintain a professional tone\n"
+        "4. Keep the same general structure and meaning\n"
+        "5. Preserve any HTML formatting if present\n\n"
+        "Do NOT add subject lines, signatures, or metadata. Only output the revised email body.\n\n"
+        f"Original email:\n{email_text}\n\n"
+        "Revised email:"
+    )
+    
+    try:
+        logger.info("Revising email content with Ollama llama3.1:8b...")
+        
+        # Force use of Ollama for revision
+        if not REQUESTS_AVAILABLE:
+            raise ImportError("requests is required for email revision. Install with: pip install requests")
+        
+        url = OLLAMA_URL.rstrip('/') + '/api/generate'
+        payload = {
+            'model': OLLAMA_MODEL,
+            'prompt': prompt,
+            'stream': False,
+        }
+        
+        resp = requests.post(url, json=payload, timeout=120)
+        resp.raise_for_status()
+        data = resp.json()
+        
+        # Extract response text
+        revised = None
+        if isinstance(data, dict):
+            if 'response' in data:
+                revised = data['response']
+            elif 'choices' in data and data['choices']:
+                first = data['choices'][0]
+                revised = first.get('text') or first.get('message') or first.get('content')
+            elif 'text' in data:
+                revised = data['text']
+        
+        if not revised:
+            revised = resp.text
+        
+        revised = revised.strip()
+        
+        # Remove any accidentally added subject/metadata lines
+        revised = re.sub(r'^(Subject:|From:|To:|Date:)[^\n]*\n?', '', revised, flags=re.IGNORECASE | re.MULTILINE)
+        
+        return {'revised_text': revised, 'success': True}
+        
+    except Exception as e:
+        logger.error(f"Email revision error: {str(e)}")
+        return {'revised_text': email_text, 'success': False, 'error': str(e)}
 
 
 def preprocess_text(text: str) -> List[str]:

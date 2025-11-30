@@ -217,7 +217,20 @@ def profile_settings(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     
     if request.method == 'POST':
-        profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+        # Update send_without_unsubscribe if provided
+        if 'send_without_unsubscribe' in request.data:
+            profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+        
+        # Update timezone if provided
+        if 'timezone' in request.data:
+            new_timezone = request.data.get('timezone', 'UTC')
+            # Validate timezone
+            try:
+                pytz.timezone(new_timezone)  # Validate it's a real timezone
+                profile.timezone = new_timezone
+            except pytz.UnknownTimeZoneError:
+                return Response({'error': _('Invalid timezone')}, status=400)
+        
         profile.save()
     
     return Response({

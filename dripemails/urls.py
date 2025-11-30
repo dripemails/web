@@ -42,6 +42,7 @@ non_prefixed_urlpatterns = [
     path('api/send-email/requests/', core_views.send_email_requests_list, name='api-send-email-requests'),
     path('api/send-email/requests/<uuid:request_id>/send-now/', core_views.send_email_request_send_now, name='api-send-email-request-send-now'),
     path('api/send-email/requests/<uuid:request_id>/unsubscribe/', core_views.send_email_request_unsubscribe, name='api-send-email-request-unsubscribe'),
+    path('api/profile/settings/', core_views.profile_settings, name='api-profile-settings'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code

@@ -156,7 +156,12 @@
                     Refresh
                 </button>
             </div>
-            <p id="sendActivityTimezone" class="text-xs text-gray-500 mb-4">Times shown in {{ user_timezone|default:'UTC' }}.</p>
+            <div class="flex items-center gap-2 mb-4">
+                <p class="text-xs text-gray-500">Times shown in</p>
+                <select id="timezoneSelector" class="text-xs border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <!-- Timezones will be populated by JavaScript -->
+                </select>
+            </div>
             <div id="sendEmailActivity" class="space-y-4">
                 <p class="text-sm text-gray-500">Loading activity...</p>
             </div>
@@ -460,7 +465,97 @@ document.addEventListener('DOMContentLoaded', function() {
     const scheduleValueLabel = document.getElementById('schedule_value_label');
     const activityContainer = document.getElementById('sendEmailActivity');
     const refreshSendActivityButton = document.getElementById('refreshSendActivity');
-    const activityTimezoneLabel = document.getElementById('sendActivityTimezone');
+    const timezoneSelector = document.getElementById('timezoneSelector');
+    let currentTimezone = '{{ user_timezone|default:"UTC" }}';
+
+    // Common timezones list (including UTC)
+    const commonTimezones = [
+        'UTC',
+        'America/New_York',
+        'America/Chicago',
+        'America/Denver',
+        'America/Los_Angeles',
+        'America/Phoenix',
+        'America/Anchorage',
+        'America/Honolulu',
+        'Europe/London',
+        'Europe/Paris',
+        'Europe/Berlin',
+        'Europe/Rome',
+        'Europe/Madrid',
+        'Europe/Amsterdam',
+        'Europe/Stockholm',
+        'Europe/Moscow',
+        'Asia/Tokyo',
+        'Asia/Shanghai',
+        'Asia/Hong_Kong',
+        'Asia/Singapore',
+        'Asia/Dubai',
+        'Asia/Kolkata',
+        'Asia/Seoul',
+        'Australia/Sydney',
+        'Australia/Melbourne',
+        'Australia/Perth',
+        'Pacific/Auckland',
+        'America/Toronto',
+        'America/Vancouver',
+        'America/Mexico_City',
+        'America/Sao_Paulo',
+        'America/Buenos_Aires'
+    ];
+
+    // Populate timezone selector
+    if (timezoneSelector) {
+        commonTimezones.forEach(tz => {
+            const option = document.createElement('option');
+            option.value = tz;
+            option.textContent = tz;
+            if (tz === currentTimezone) {
+                option.selected = true;
+            }
+            timezoneSelector.appendChild(option);
+        });
+
+        // Handle timezone change
+        timezoneSelector.addEventListener('change', function() {
+            const selectedTimezone = this.value;
+            saveTimezone(selectedTimezone);
+        });
+    }
+
+    // Save timezone preference
+    function saveTimezone(timezone) {
+        fetch('/api/profile/settings/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ timezone: timezone })
+        })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status >= 200 && status < 300) {
+                currentTimezone = timezone;
+                // Reload activity with new timezone
+                loadSendEmailActivity();
+            } else {
+                alert(body.error || 'Failed to save timezone preference.');
+                // Revert selector to previous value
+                if (timezoneSelector) {
+                    timezoneSelector.value = currentTimezone;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error saving timezone:', error);
+            alert('Error saving timezone preference. Please try again.');
+            // Revert selector to previous value
+            if (timezoneSelector) {
+                timezoneSelector.value = currentTimezone;
+            }
+        });
+    }
 
     const statusBadgeClasses = {
         pending: 'bg-yellow-100 text-yellow-800',
@@ -546,13 +641,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadSendEmailActivity() {
         if (!activityContainer) return;
         activityContainer.innerHTML = '<p class="text-sm text-gray-500">Loading activity...</p>';
+        // Use current timezone from selector or default
+        const tz = timezoneSelector ? timezoneSelector.value : currentTimezone;
         fetch('/api/send-email/requests/')
             .then(response => response.json())
             .then(data => {
                 const requests = data.requests || [];
-                if (activityTimezoneLabel) {
-                    const tz = data.timezone || '{{ user_timezone|default:"UTC" }}';
-                    activityTimezoneLabel.textContent = `Times shown in ${tz}.`;
+                // Update timezone if it changed on server
+                if (data.timezone && timezoneSelector) {
+                    currentTimezone = data.timezone;
+                    timezoneSelector.value = data.timezone;
                 }
                 renderSendEmailActivity(requests);
             })

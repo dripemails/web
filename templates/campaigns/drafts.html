@@ -93,8 +93,24 @@
 
         <div class="grid gap-4">
           {% for draft in drafts %}
-            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition-all duration-200">
+            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition-all duration-200" data-email-id="{{ draft.id }}" data-order="{{ draft.order }}">
               <div class="flex items-start justify-between">
+                <!-- Order Controls -->
+                <div class="flex flex-col space-y-1 mr-3">
+                  <button type="button" class="move-up-btn text-gray-400 hover:text-gray-600 disabled:text-gray-200 disabled:cursor-not-allowed" 
+                          data-email-id="{{ draft.id }}" {% if forloop.first %}disabled{% endif %}>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                    </svg>
+                  </button>
+                  <button type="button" class="move-down-btn text-gray-400 hover:text-gray-600 disabled:text-gray-200 disabled:cursor-not-allowed" 
+                          data-email-id="{{ draft.id }}" {% if forloop.last %}disabled{% endif %}>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                </div>
+                
                 <div class="flex-1 min-w-0 mr-4">
                   <div class="flex items-center space-x-3 mb-2">
                     <h4 class="text-lg font-medium text-gray-900 truncate">
@@ -229,6 +245,65 @@
 
 {% block extra_scripts %}
 <script>
+  // Handle email reordering
+  document.querySelectorAll('.move-up-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const emailId = this.getAttribute('data-email-id');
+      reorderEmail(emailId, 'up');
+    });
+  });
+  
+  document.querySelectorAll('.move-down-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const emailId = this.getAttribute('data-email-id');
+      reorderEmail(emailId, 'down');
+    });
+  });
+  
+  function reorderEmail(emailId, direction) {
+    const campaignId = '{{ campaign.id }}';
+    
+    fetch(`/api/campaigns/${campaignId}/emails/reorder/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify({
+        email_id: emailId,
+        direction: direction
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message) {
+        // Reload the page to show updated order
+        window.location.reload();
+      } else if (data.error) {
+        alert(data.error);
+      }
+    })
+    .catch(error => {
+      console.error('Error reordering email:', error);
+      alert('{% trans "An error occurred while reordering emails" %}');
+    });
+  }
+  
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  
   function openSendModal(campaignId, emailId, subject) {
     document.getElementById('modal_campaign_id').value = campaignId;
     document.getElementById('modal_email_id').value = emailId;

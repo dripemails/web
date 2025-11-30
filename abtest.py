@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Small standalone exporter: generate a static HTML preview for an AB test
 without requiring Streamlit. The script bootstraps Django, pulls the

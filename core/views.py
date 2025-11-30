@@ -172,7 +172,7 @@ def promo_verification(request):
         
         # Validate URL based on promo type
         valid_url = False
-        if promo_type == 'twitter':
+        if promo_type == 'x':
             valid_url = 'twitter.com' in promo_url or 'x.com' in promo_url
         elif promo_type == 'facebook':
             valid_url = 'facebook.com' in promo_url

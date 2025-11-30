@@ -150,13 +150,13 @@ def privacy(request):
     return render(request, 'core/privacy.html')
 
 @login_required
-def promo_verification(request):
-    """Handle promo verification and account settings updates."""
+def account_settings(request):
+    """Account settings page."""
     profile, _created = UserProfile.objects.get_or_create(user=request.user)
     common_timezones = pytz.common_timezones
 
     if request.method == 'POST':
-        form_type = request.POST.get('form_type', 'promo')
+        form_type = request.POST.get('form_type', 'settings')
 
         if form_type == 'timezone':
             selected_timezone = request.POST.get('timezone')
@@ -166,8 +166,30 @@ def promo_verification(request):
                 profile.timezone = selected_timezone
                 profile.save(update_fields=['timezone'])
                 messages.success(request, _("Time zone updated to %(tz)s") % {'tz': selected_timezone})
-            return redirect('core:promo_verification')
+            return redirect('core:settings')
+        
+        elif form_type == 'unsubscribe':
+            profile.send_without_unsubscribe = request.POST.get('send_without_unsubscribe') == 'on'
+            profile.save(update_fields=['send_without_unsubscribe'])
+            if profile.send_without_unsubscribe:
+                messages.warning(request, _("Unsubscribe links are now disabled. This may violate email regulations."))
+            else:
+                messages.success(request, _("Unsubscribe links are now enabled."))
+            return redirect('core:settings')
+    
+    context = {
+        'timezones': common_timezones,
+        'current_timezone': profile.timezone or 'UTC',
+        'send_without_unsubscribe': profile.send_without_unsubscribe,
+    }
+    return render(request, 'core/settings.html', context)
 
+@login_required
+def promo_verification(request):
+    """Handle promo verification."""
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
         promo_url = request.POST.get('promo_url')
         promo_type = request.POST.get('promo_type')
         
@@ -203,11 +225,7 @@ def promo_verification(request):
         messages.success(request, _("Thank you for promoting DripEmails.org! Ads have been disabled for your account."))
         return redirect('core:dashboard')
     
-    context = {
-        'timezones': common_timezones,
-        'current_timezone': profile.timezone or 'UTC',
-    }
-    return render(request, 'core/promo_verification.html', context)
+    return render(request, 'core/promo_verification.html')
 
 @login_required
 @api_view(['GET', 'POST'])

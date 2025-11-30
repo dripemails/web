@@ -21,7 +21,7 @@ class Campaign(models.Model):
     description = models.TextField(_('Description'), blank=True)
     slug = models.SlugField(max_length=150, unique=True)
     subscriber_list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='campaigns', verbose_name=_('Subscriber List'), null=True, blank=True)
-    is_active = models.BooleanField(_('Active'), default=False)
+    is_active = models.BooleanField(_('Active'), default=True)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
     sent_count = models.IntegerField(_('Sent Count'), default=0)

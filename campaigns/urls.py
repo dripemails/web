@@ -11,5 +11,8 @@ urlpatterns = [
     path('template/', views.campaign_template, name='new-template'),
     # Simple pages ported from streamlit utilities
     path('abtest/', views.abtest_view, name='abtest'),
+    path('drafts/', views.drafts_view, name='drafts'),
     path('analysis/', views.campaign_analysis_view, name='analysis'),
+    # Email analysis with AI and topic modeling
+    path('email-analysis/', views.email_analysis_view, name='email-analysis'),
 ]

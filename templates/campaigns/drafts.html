@@ -1,0 +1,327 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Email Templates" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-800">{% trans "Email Templates" %}</h1>
+      <p class="text-gray-600 mt-1">{% trans "View, revise, and send your email templates" %}</p>
+    </div>
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'campaigns:abtest' %}" class="text-indigo-600 hover:text-indigo-800 flex items-center">
+        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+        </svg>
+        {% trans "AB Test" %}
+      </a>
+      <a href="{% url 'core:dashboard' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Dashboard" %}</a>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <!-- Campaign Selector -->
+    <form method="get" class="mb-6">
+      <label class="flex items-center space-x-3">
+        <span class="text-sm font-medium text-gray-700">{% trans "Select Campaign:" %}</span>
+        <select name="campaign_id" onchange="this.form.submit()" class="flex-1 max-w-md border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="">-- {% trans "Choose a campaign" %} --</option>
+          {% for c in campaigns %}
+            <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>
+              {{ c.name }}
+              {% if c.is_active %}
+                <span class="text-green-600">(Active)</span>
+              {% endif %}
+            </option>
+          {% endfor %}
+        </select>
+      </label>
+    </form>
+
+    {% if not campaigns %}
+      <!-- No campaigns state -->
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">{% trans "No campaigns yet" %}</h3>
+        <p class="mt-2 text-sm text-gray-500">{% trans "Create your first campaign to start creating email templates." %}</p>
+        <div class="mt-6">
+          <a href="{% url 'campaigns:create' %}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            {% trans "Create Campaign" %}
+          </a>
+        </div>
+      </div>
+    {% elif not campaign %}
+      <!-- Select campaign prompt -->
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">{% trans "Select a campaign" %}</h3>
+        <p class="mt-2 text-sm text-gray-500">{% trans "Choose a campaign from the dropdown above to view its email templates." %}</p>
+      </div>
+    {% elif not drafts %}
+      <!-- No drafts for selected campaign -->
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+        </svg>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">{% trans "No templates found" %}</h3>
+        <p class="mt-2 text-sm text-gray-500">{% trans "This campaign doesn't have any email templates yet." %}</p>
+        <div class="mt-6">
+          <a href="{% url 'campaigns:template' campaign.id %}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            {% trans "Create Email Template" %}
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <!-- Templates list -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-medium text-gray-900">
+            {{ drafts|length }} {% trans "template" %}{{ drafts|length|pluralize }} {% trans "in" %} <span class="text-indigo-600">{{ campaign.name }}</span>
+          </h3>
+        </div>
+
+        <div class="grid gap-4">
+          {% for draft in drafts %}
+            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 hover:shadow-md transition-all duration-200">
+              <div class="flex items-start justify-between">
+                <div class="flex-1 min-w-0 mr-4">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <h4 class="text-lg font-medium text-gray-900 truncate">
+                      {{ draft.subject|default:"(No subject)" }}
+                    </h4>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      #{{ draft.order }}
+                    </span>
+                  </div>
+                  
+                  <div class="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                    <span class="flex items-center">
+                      <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      {% trans "Updated" %}: {{ draft.updated_at|date:"M d, Y g:i A" }}
+                    </span>
+                    <span class="flex items-center">
+                      <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      {% trans "Created" %}: {{ draft.created_at|date:"M d, Y" }}
+                    </span>
+                  </div>
+
+                  {% if draft.body_html %}
+                    <div class="prose max-w-none text-sm text-gray-600 line-clamp-2">
+                      {{ draft.body_html|striptags|truncatewords:30 }}
+                    </div>
+                  {% elif draft.body_text %}
+                    <div class="text-sm text-gray-600 line-clamp-2">
+                      {{ draft.body_text|truncatewords:30 }}
+                    </div>
+                  {% else %}
+                    <p class="text-sm text-gray-400 italic">{% trans "Empty template" %}</p>
+                  {% endif %}
+                </div>
+
+                <div class="flex-shrink-0 flex space-x-2">
+                  <a href="{% url 'campaigns:abtest' %}?campaign_id={{ campaign.id }}&email_id={{ draft.id }}" 
+                     class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                    <svg class="mr-2 -ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                    {% trans "Revise" %}
+                  </a>
+                  <button onclick="openSendModal('{{ campaign.id }}', '{{ draft.id }}', '{{ draft.subject|escapejs }}')"
+                     class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                    <svg class="mr-2 -ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    {% trans "Send" %}
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Send Email Modal -->
+<div id="sendModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h3 class="text-lg font-medium text-gray-900">{% trans "Send Email Template" %}</h3>
+      <p class="text-sm text-gray-500 mt-1" id="modalSubject"></p>
+    </div>
+    <form id="sendEmailForm" class="p-6">
+      <input type="hidden" id="modal_campaign_id">
+      <input type="hidden" id="modal_email_id">
+      
+      <div class="space-y-4">
+        <div>
+          <label for="recipient_email" class="block text-sm font-medium text-gray-700">{% trans "Recipient Email" %}</label>
+          <input type="email" id="recipient_email" required
+                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                 placeholder="subscriber@example.com">
+        </div>
+        
+        <div>
+          <label for="wait_time" class="block text-sm font-medium text-gray-700">{% trans "Wait Time" %}</label>
+          <div class="mt-1 flex space-x-3">
+            <input type="number" id="wait_time" name="wait_time" min="1" value="1" required
+                   class="block w-24 rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+            <select id="wait_unit" name="wait_unit" required
+                    class="block rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+              <option value="minutes">{% trans "Minutes" %}</option>
+              <option value="hours">{% trans "Hours" %}</option>
+              <option value="days" selected>{% trans "Days" %}</option>
+              <option value="weeks">{% trans "Weeks" %}</option>
+              <option value="months">{% trans "Months" %}</option>
+            </select>
+          </div>
+          <p class="mt-1 text-xs text-gray-500">
+            {% trans "Time to wait before sending this email" %}
+          </p>
+        </div>
+        
+        <div>
+          <label for="footer_select" class="block text-sm font-medium text-gray-700">{% trans "Email Footer" %}</label>
+          <select id="footer_select" name="footer_id"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+            <option value="">{% trans "No footer" %}</option>
+            {% for footer in user_footers %}
+              <option value="{{ footer.id }}" {% if footer.is_default %}selected{% endif %}>{{ footer.name }}</option>
+            {% endfor %}
+          </select>
+          <p class="mt-1 text-xs text-gray-500">
+            {% trans "Select a footer to append to your email" %}
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200 mt-6">
+        <button type="button" onclick="closeSendModal()" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+          {% trans "Cancel" %}
+        </button>
+        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <svg class="mr-2 -ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          {% trans "Send Now" %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  function openSendModal(campaignId, emailId, subject) {
+    document.getElementById('modal_campaign_id').value = campaignId;
+    document.getElementById('modal_email_id').value = emailId;
+    document.getElementById('modalSubject').textContent = subject || '(No subject)';
+    document.getElementById('sendModal').classList.remove('hidden');
+  }
+  
+  function closeSendModal() {
+    document.getElementById('sendModal').classList.add('hidden');
+    document.getElementById('sendEmailForm').reset();
+  }
+  
+  document.getElementById('sendEmailForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const campaignId = document.getElementById('modal_campaign_id').value;
+    const emailId = document.getElementById('modal_email_id').value;
+    const recipientEmail = document.getElementById('recipient_email').value;
+    const waitTime = document.getElementById('wait_time').value;
+    const waitUnit = document.getElementById('wait_unit').value;
+    const footerId = document.getElementById('footer_select').value;
+    
+    if (!recipientEmail) {
+      alert('{% trans "Please enter a recipient email address." %}');
+      return;
+    }
+    
+    // First update the email with wait time and footer
+    try {
+      const updateResponse = await fetch(`/api/campaigns/${campaignId}/emails/${emailId}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+          wait_time: parseInt(waitTime),
+          wait_unit: waitUnit,
+          footer_id: footerId || ''
+        })
+      });
+      
+      if (!updateResponse.ok) {
+        const updateData = await updateResponse.json();
+        throw new Error(updateData.error || 'Failed to update email settings');
+      }
+    } catch (error) {
+      console.error('Error updating email:', error);
+      alert('{% trans "Failed to update email settings: " %}' + error.message);
+      return;
+    }
+    
+    // Now send the email
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    const originalHTML = submitButton.innerHTML;
+    submitButton.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>{% trans "Sending..." %}</span>';
+    
+    try {
+      const response = await fetch(`/api/campaigns/${campaignId}/emails/${emailId}/send/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+          email: recipientEmail,
+          variables: {}
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.message) {
+        alert('{% trans "Email sent successfully to " %}' + recipientEmail + '!');
+        closeSendModal();
+      } else {
+        alert('{% trans "Failed to send email: " %}' + (data.error || '{% trans "Unknown error" %}'));
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('{% trans "Failed to send email. Please check your connection and try again." %}');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalHTML;
+    }
+  });
+  
+  // Close modal when clicking outside
+  document.getElementById('sendModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeSendModal();
+    }
+  });
+</script>
+{% endblock %}

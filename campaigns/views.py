@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Campaign, Email, EmailEvent
+from .models import Campaign, Email, EmailEvent, EmailAIAnalysis
 from django.urls import reverse
 from django.template import TemplateDoesNotExist
 from .serializers import CampaignSerializer, EmailSerializer
@@ -13,6 +13,7 @@ from subscribers.models import List
 import csv
 import io
 from openpyxl import load_workbook
+from .ai_utils import generate_email_content, analyze_email_topics, summarize_topics
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -221,11 +222,23 @@ def campaign_template(request, campaign_id=None):
     """Render template creation/edit page."""
     campaign = None
     template = None
+    show_campaign_modal = False
+    
+    # Get all user campaigns
+    all_campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+    
     if campaign_id:
         campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
         template_id = request.GET.get('template_id')
         if template_id:
             template = get_object_or_404(Email, id=template_id, campaign=campaign)
+    else:
+        # If no campaign_id provided from dashboard, show campaign selection modal on save
+        if not all_campaigns.exists():
+            # No campaigns exist, show error message
+            messages.error(request, _('Please create a campaign first before creating email templates.'))
+            return redirect('core:dashboard')
+        show_campaign_modal = True
     
     # Get user's footers
     from analytics.models import EmailFooter
@@ -235,6 +248,8 @@ def campaign_template(request, campaign_id=None):
         'campaign': campaign,
         'template': template,
         'user_footers': user_footers,
+        'all_campaigns': all_campaigns,
+        'show_campaign_modal': show_campaign_modal,
         'wait_units': [
             ('minutes', _('Minutes')),
             ('hours', _('Hours')),
@@ -440,15 +455,20 @@ def abtest_view(request):
     # Allow selecting campaign/email via querystring or form
     campaign_id = request.GET.get('campaign_id') or request.POST.get('campaign_id')
     if campaign_id:
-        campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
-        emails = campaign.emails.all().order_by('order')
+        try:
+            campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+            emails = campaign.emails.all().order_by('order')
 
-        email_id = request.GET.get('email_id') or request.POST.get('email_id')
-        if email_id:
-            try:
-                email = campaign.emails.get(id=email_id)
-            except Email.DoesNotExist:
-                email = None
+            email_id = request.GET.get('email_id') or request.POST.get('email_id')
+            if email_id:
+                try:
+                    email = campaign.emails.get(id=email_id)
+                except Email.DoesNotExist:
+                    email = None
+        except (Campaign.DoesNotExist, ValueError):
+            # Invalid campaign_id, just show empty state
+            campaign = None
+            emails = []
 
     if request.method == 'POST' and email:
         draft = request.POST.get('draft', '')
@@ -471,6 +491,37 @@ def abtest_view(request):
     except TemplateDoesNotExist:
         # Support templates placed directly under a templates/ folder without app subdir
         return render(request, 'abtest.html', context)
+
+
+@login_required
+def drafts_view(request):
+    """View saved email drafts with campaign filtering."""
+    campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
+    campaign = None
+    drafts = []
+    
+    # Get user's footers for the send modal
+    from analytics.models import EmailFooter
+    user_footers = EmailFooter.objects.filter(user=request.user)
+    
+    # Allow selecting campaign via querystring
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id:
+        try:
+            campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+            # Get all emails (drafts) for this campaign
+            drafts = campaign.emails.all().order_by('-updated_at')
+        except (Campaign.DoesNotExist, ValueError):
+            campaign = None
+            drafts = []
+    
+    context = {
+        'campaigns': campaigns,
+        'campaign': campaign,
+        'drafts': drafts,
+        'user_footers': user_footers,
+    }
+    return render(request, 'campaigns/drafts.html', context)
 
 
 @login_required
@@ -521,3 +572,381 @@ def campaign_analysis_view(request):
         'by_month_items': month_items,
         'email_rows': email_rows,
     })
+
+
+@login_required
+def email_analysis_view(request):
+    """Render email analysis page with topic modeling UI."""
+    campaigns = Campaign.objects.filter(user=request.user)
+    selected_campaign_id = request.GET.get('campaign_id')
+    
+    context = {
+        'campaigns': campaigns,
+        'selected_campaign_id': selected_campaign_id,
+    }
+    
+    try:
+        return render(request, 'campaigns/email_analysis.html', context)
+    except TemplateDoesNotExist:
+        # Support templates placed directly under a templates/ folder without app subdir
+        return render(request, 'email_analysis.html', context)
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def generate_email_with_ai(request, campaign_id):
+    """Generate email subject and body using OpenAI."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    subject_topic = request.data.get('subject_topic')
+    recipient = request.data.get('recipient', 'subscriber')
+    tone = request.data.get('tone', 'professional')
+    length = request.data.get('length', 'medium')
+    context = request.data.get('context', '')
+    email_id = request.data.get('email_id')
+    
+    if not subject_topic:
+        return Response({'error': _('Subject topic is required')}, status=400)
+    
+    try:
+        # Generate content using AI
+        generated = generate_email_content(
+            subject=subject_topic,
+            recipient=recipient,
+            tone=tone,
+            length=length,
+            context=context
+        )
+        
+        # If an email_id is provided, save to database
+        if email_id:
+            try:
+                email = Email.objects.get(id=email_id, campaign=campaign)
+                email.subject = generated.get('subject', email.subject)
+                email.body_html = generated.get('body_html', email.body_html)
+                email.save(update_fields=['subject', 'body_html', 'updated_at'])
+                
+                # Store AI analysis record
+                ai_analysis, created = EmailAIAnalysis.objects.get_or_create(email=email)
+                ai_analysis.generated_subject = generated.get('subject')
+                ai_analysis.generated_body_html = generated.get('body_html')
+                ai_analysis.generation_prompt = f"Topic: {subject_topic}, Tone: {tone}, Length: {length}"
+                ai_analysis.save()
+                
+                return Response({
+                    'message': _('Email generated and saved successfully'),
+                    'subject': generated.get('subject'),
+                    'body_html': generated.get('body_html'),
+                    'saved': True
+                })
+            except Email.DoesNotExist:
+                return Response({'error': _('Email not found')}, status=404)
+        else:
+            # Just return the generated content
+            return Response({
+                'message': _('Email generated successfully'),
+                'subject': generated.get('subject'),
+                'body_html': generated.get('body_html'),
+                'saved': False
+            })
+    
+    except ValueError as e:
+        return Response({
+            'error': str(e),
+            'hint': 'Please set OPENAI_API_KEY environment variable'
+        }, status=400)
+    except Exception as e:
+        return Response({
+            'error': _('Failed to generate email: {}').format(str(e))
+        }, status=500)
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def revise_email_with_ai(request):
+    """Revise email content for grammar and clarity using Ollama llama3.1:8b."""
+    from .ai_utils import revise_email_content
+    
+    email_text = request.data.get('email_text', '')
+    
+    if not email_text or not email_text.strip():
+        return Response({'error': _('Email text is required')}, status=400)
+    
+    try:
+        result = revise_email_content(email_text)
+        
+        if result.get('success'):
+            return Response({
+                'message': _('Email revised successfully'),
+                'revised_text': result.get('revised_text'),
+                'success': True
+            })
+        else:
+            return Response({
+                'error': result.get('error', _('Revision failed')),
+                'success': False
+            }, status=500)
+    
+    except Exception as e:
+        return Response({
+            'error': _('Failed to revise email: {}').format(str(e)),
+            'success': False
+        }, status=500)
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def analyze_campaign_topics(request, campaign_id):
+    """Analyze topics across emails in a campaign using LDA."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    num_topics = request.data.get('num_topics', 5)
+    num_words = request.data.get('num_words', 5)
+    
+    try:
+        num_topics = int(num_topics)
+        num_words = int(num_words)
+    except (ValueError, TypeError):
+        return Response({'error': _('num_topics and num_words must be integers')}, status=400)
+    
+    # Collect all email bodies from the campaign
+    emails = campaign.emails.all()
+    if not emails:
+        return Response({
+            'error': _('No emails in campaign to analyze'),
+            'topics': [],
+            'dominant_topics': [],
+            'email_count': 0
+        })
+    
+    email_texts = [email.body_html or email.body_text or '' for email in emails]
+    email_texts = [text for text in email_texts if text.strip()]  # Filter empty texts
+    
+    if not email_texts:
+        return Response({
+            'error': _('No email content to analyze'),
+            'topics': [],
+            'dominant_topics': [],
+            'email_count': 0
+        })
+    
+    try:
+        # Perform topic analysis
+        result = analyze_email_topics(
+            email_texts=email_texts,
+            num_topics=num_topics,
+            num_words=num_words
+        )
+        
+        if not result.get('success'):
+            return Response({
+                'error': result.get('error', _('Topic analysis failed')),
+                'topics': [],
+                'dominant_topics': [],
+                'email_count': len(email_texts)
+            }, status=400)
+        
+        # Format topics for response
+        formatted_topics = summarize_topics(result.get('topics', []))
+        
+        # Store analysis for first email (representative)
+        if emails:
+            ai_analysis, created = EmailAIAnalysis.objects.get_or_create(email=emails[0])
+            ai_analysis.topics_json = formatted_topics
+            ai_analysis.dominant_topics = result.get('dominant_topic_per_email', [])
+            ai_analysis.topic_analysis_count = len(email_texts)
+            ai_analysis.save()
+        
+        return Response({
+            'message': _('Topic analysis completed successfully'),
+            'topics': formatted_topics,
+            'dominant_topics': result.get('dominant_topic_per_email', []),
+            'email_count': len(email_texts),
+            'success': True
+        })
+    
+    except Exception as e:
+        return Response({
+            'error': _('Topic analysis failed: {}').format(str(e))
+        }, status=500)
+    """Generate email subject and body using OpenAI."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    subject_topic = request.data.get('subject_topic')
+    recipient = request.data.get('recipient', 'subscriber')
+    tone = request.data.get('tone', 'professional')
+    length = request.data.get('length', 'medium')
+    context = request.data.get('context', '')
+    email_id = request.data.get('email_id')
+    
+    if not subject_topic:
+        return Response({'error': _('Subject topic is required')}, status=400)
+    
+    try:
+        # Generate content using AI
+        generated = generate_email_content(
+            subject=subject_topic,
+            recipient=recipient,
+            tone=tone,
+            length=length,
+            context=context
+        )
+        
+        # If an email_id is provided, save to database
+        if email_id:
+            try:
+                email = Email.objects.get(id=email_id, campaign=campaign)
+                email.subject = generated.get('subject', email.subject)
+                email.body_html = generated.get('body_html', email.body_html)
+                email.save(update_fields=['subject', 'body_html', 'updated_at'])
+                
+                # Store AI analysis record
+                ai_analysis, created = EmailAIAnalysis.objects.get_or_create(email=email)
+                ai_analysis.generated_subject = generated.get('subject')
+                ai_analysis.generated_body_html = generated.get('body_html')
+                ai_analysis.generation_prompt = f"Topic: {subject_topic}, Tone: {tone}, Length: {length}"
+                ai_analysis.save()
+                
+                return Response({
+                    'message': _('Email generated and saved successfully'),
+                    'subject': generated.get('subject'),
+                    'body_html': generated.get('body_html'),
+                    'saved': True
+                })
+            except Email.DoesNotExist:
+                return Response({'error': _('Email not found')}, status=404)
+        else:
+            # Just return the generated content
+            return Response({
+                'message': _('Email generated successfully'),
+                'subject': generated.get('subject'),
+                'body_html': generated.get('body_html'),
+                'saved': False
+            })
+    
+    except ValueError as e:
+        return Response({
+            'error': str(e),
+            'hint': 'Please set OPENAI_API_KEY environment variable'
+        }, status=400)
+    except Exception as e:
+        return Response({
+            'error': _('Failed to generate email: {}').format(str(e))
+        }, status=500)
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def analyze_campaign_topics(request, campaign_id):
+    """Analyze topics across emails in a campaign using LDA."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    num_topics = request.data.get('num_topics', 5)
+    num_words = request.data.get('num_words', 5)
+    
+    try:
+        num_topics = int(num_topics)
+        num_words = int(num_words)
+    except (ValueError, TypeError):
+        return Response({'error': _('num_topics and num_words must be integers')}, status=400)
+    
+    # Collect all email bodies from the campaign
+    emails = campaign.emails.all()
+    if not emails:
+        return Response({
+            'error': _('No emails in campaign to analyze'),
+            'topics': [],
+            'dominant_topics': [],
+            'email_count': 0
+        })
+    
+    email_texts = [email.body_html or email.body_text or '' for email in emails]
+    email_texts = [text for text in email_texts if text.strip()]  # Filter empty texts
+    
+    if not email_texts:
+        return Response({
+            'error': _('No email content to analyze'),
+            'topics': [],
+            'dominant_topics': [],
+            'email_count': 0
+        })
+    
+    try:
+        # Perform topic analysis
+        result = analyze_email_topics(
+            email_texts=email_texts,
+            num_topics=num_topics,
+            num_words=num_words
+        )
+        
+        if not result.get('success'):
+            return Response({
+                'error': result.get('error', _('Topic analysis failed')),
+                'topics': [],
+                'dominant_topics': [],
+                'email_count': len(email_texts)
+            }, status=400)
+        
+        # Format topics for response
+        formatted_topics = summarize_topics(result.get('topics', []))
+        
+        # Store analysis for first email (representative)
+        if emails:
+            ai_analysis, created = EmailAIAnalysis.objects.get_or_create(email=emails[0])
+            ai_analysis.topics_json = formatted_topics
+            ai_analysis.dominant_topics = result.get('dominant_topic_per_email', [])
+            ai_analysis.topic_analysis_count = len(email_texts)
+            ai_analysis.save()
+        
+        return Response({
+            'message': _('Topic analysis completed successfully'),
+            'topics': formatted_topics,
+            'dominant_topics': result.get('dominant_topic_per_email', []),
+            'email_count': len(email_texts),
+            'success': True
+        })
+    
+    except Exception as e:
+        return Response({
+            'error': _('Topic analysis failed: {}').format(str(e))
+        }, status=500)
+
+@login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def search_templates(request):
+    """Search through all email templates across campaigns."""
+    query = request.GET.get('q', '').strip()
+    
+    if not query or len(query) < 2:
+        return Response({'results': []})
+    
+    # Search in subject and body_html fields across all user's campaigns
+    from django.db.models import Q
+    emails = Email.objects.filter(
+        campaign__user=request.user
+    ).filter(
+        Q(subject__icontains=query) | Q(body_html__icontains=query)
+    ).select_related('campaign').distinct()[:10]
+    
+    results = []
+    for email in emails:
+        # Create preview by stripping HTML tags
+        import re
+        preview = re.sub(r'<[^>]+>', '', email.body_html or email.body_text or '')
+        preview = preview.strip()[:100] + ('...' if len(preview) > 100 else '')
+        
+        results.append({
+            'id': str(email.id),
+            'subject': email.subject,
+            'preview': preview,
+            'campaign_id': str(email.campaign.id),
+            'campaign_name': email.campaign.name,
+            'order': email.order
+        })
+    
+    return Response({'results': results})

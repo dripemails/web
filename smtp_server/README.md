@@ -86,6 +86,12 @@ python -m core.smtp_server --debug --port 1025
 
 # Run with custom configuration
 python -m core.smtp_server --config smtp_config.json --port 1025
+
+# Run without authentication (allow anonymous access)
+python manage.py run_smtp_server --no-auth --port 1025
+
+# Combine options: no-auth with debug mode
+python manage.py run_smtp_server --no-auth --debug --port 1025
 ```
 
 ## ⚙️ Configuration
@@ -105,7 +111,7 @@ config = {
     ],
     'webhook_url': None,               # Webhook URL for notifications
     'forward_to_webhook': False,       # Enable webhook forwarding
-    'auth_enabled': True,              # Enable authentication
+    'auth_enabled': True,              # Enable authentication (set False for --no-auth)
     'allowed_users': ['founders'],     # Allowed users for auth
 }
 ```
@@ -172,7 +178,11 @@ class Command(BaseCommand):
 ### 4. Run Server
 
 ```bash
+# With authentication (default)
 python manage.py run_smtp_server --debug --port 1025
+
+# Without authentication (for local development)
+python manage.py run_smtp_server --no-auth --debug --port 1025
 ```
 
 ## 📧 Email Processing
@@ -219,7 +229,62 @@ class EmailLog(models.Model):
 
 ## 🔐 Authentication
 
-### Supported Methods
+### Authentication Modes
+
+The SMTP server supports two authentication modes:
+
+1. **With Authentication (Default)**: Requires valid Django user credentials
+2. **Without Authentication (`--no-auth`)**: Allows anonymous email sending
+
+### The `--no-auth` Flag
+
+The `--no-auth` flag disables SMTP authentication, allowing anonymous email sending. This is useful for:
+
+- ✅ **Local Development**: Easier testing without user accounts
+- ✅ **Internal Networks**: When security is handled at the network level
+- ✅ **Development Environments**: Quick setup without authentication configuration
+- ✅ **Production with Alternative Security**: When using other security measures (firewall, VPN, etc.)
+
+**⚠️ Security Warning**: Only use `--no-auth` in production if:
+- The SMTP server is behind a firewall
+- Access is restricted to trusted networks
+- You have other security measures in place
+- You understand the security implications
+
+#### Usage Examples
+
+```bash
+# Run without authentication
+python manage.py run_smtp_server --no-auth --port 25
+
+# No-auth with debug mode
+python manage.py run_smtp_server --no-auth --debug --port 1025
+
+# No-auth in production (with other security measures)
+python manage.py run_smtp_server --no-auth --port 25 --save-to-db --log-to-file
+```
+
+#### Django Email Configuration
+
+When using `--no-auth`, configure Django to send emails without authentication:
+
+```python
+# In your Django settings (e.g., live.py)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+# Leave these empty or unset to disable authentication
+EMAIL_HOST_USER = ''  # Empty string
+EMAIL_HOST_PASSWORD = ''  # Empty string
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+```
+
+The Django email backend will automatically skip authentication if `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` are empty or not set.
+
+### Supported Authentication Methods
+
+When authentication is enabled (default, without `--no-auth`):
 
 - **PLAIN**: Simple username/password authentication
 - **LOGIN**: Base64 encoded credentials
@@ -232,6 +297,14 @@ The server integrates with Django's authentication system:
 # Users must exist in Django and be active
 # Authentication checks against Django's User model
 # Supports user groups and permissions
+# Default allowed users: ['founders']
+```
+
+#### Custom Allowed Users
+
+```bash
+# Specify allowed users for authentication
+python manage.py run_smtp_server --allowed-users founders admin user1 --port 25
 ```
 
 ## 🌐 Webhook Support
@@ -326,15 +399,30 @@ logging.basicConfig(
 
 ### Using Supervisord
 
+**With Authentication (Default):**
 ```ini
 [program:dripemails-smtp]
-command=python manage.py run_smtp_server --port 25
+command=python manage.py run_smtp_server --port 25 --save-to-db --log-to-file
 directory=/path/to/your/project
 user=www-data
 autostart=true
 autorestart=true
 redirect_stderr=true
 stdout_logfile=/var/log/dripemails-smtp.log
+environment=DJANGO_SETTINGS_MODULE="dripemails.live"
+```
+
+**Without Authentication (`--no-auth`):**
+```ini
+[program:dripemails-smtp]
+command=python manage.py run_smtp_server --no-auth --port 25 --save-to-db --log-to-file
+directory=/path/to/your/project
+user=www-data
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/var/log/dripemails-smtp.log
+environment=DJANGO_SETTINGS_MODULE="dripemails.live"
 ```
 
 ### Using Docker

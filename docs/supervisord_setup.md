@@ -153,6 +153,100 @@ killasgroup=true
 priority=1000
 ```
 
+## Gunicorn Configuration
+
+### 1. Create Gunicorn Supervisor Configuration
+
+If you're using Gunicorn as your WSGI server, create a supervisor configuration:
+
+```bash
+sudo nano /etc/supervisor/conf.d/dripemails-gunicorn.conf
+```
+
+Add the following configuration:
+
+```ini
+[program:dripemails-gunicorn]
+command=/home/dripemails/web/gunicorn.sh
+directory=/home/dripemails/web
+user=dripemails
+autostart=true
+autorestart=true
+startsecs=3
+startretries=3
+redirect_stderr=true
+stdout_logfile=/home/dripemails/web/logs/gunicorn.log
+stderr_logfile=/home/dripemails/web/logs/gunicorn-error.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+stderr_logfile_maxbytes=50MB
+stderr_logfile_backups=10
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web",VENV="/home/dripemails/web/dripemails"
+stopsignal=TERM
+stopwaitsecs=10
+killasgroup=true
+priority=1000
+```
+
+**Note**: 
+- Make sure the logs directory exists:
+  ```bash
+  sudo mkdir -p /home/dripemails/web/logs
+  sudo chown dripemails:dripemails /home/dripemails/web/logs
+  ```
+
+- The `VENV` environment variable is optional - if not set, it defaults to `/home/dripemails/web/dripemails`. To use a different virtual environment, set it in the `environment` line:
+  ```ini
+  environment=VENV="/path/to/your/venv",DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+  ```
+
+### 2. Make Gunicorn Script Executable
+
+```bash
+# Make the gunicorn.sh script executable
+sudo chmod +x /home/dripemails/web/gunicorn.sh
+
+# Verify it's executable
+ls -l /home/dripemails/web/gunicorn.sh
+```
+
+### 3. Alternative: Direct Gunicorn Command
+
+If you prefer to run Gunicorn directly without a shell script:
+
+```ini
+[program:dripemails-gunicorn]
+command=/home/dripemails/web/dripemails/bin/gunicorn --bind 127.0.0.1:9000 --workers 12 --user dripemails --group dripemails --log-level debug dripemails.wsgi:application
+directory=/home/dripemails/web
+user=dripemails
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/home/dripemails/web/logs/gunicorn.log
+stderr_logfile=/home/dripemails/web/logs/gunicorn-error.log
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+stopsignal=TERM
+stopwaitsecs=10
+killasgroup=true
+priority=1000
+```
+
+### 4. Load and Start Gunicorn
+
+```bash
+# Reload supervisor configuration
+sudo supervisorctl reread
+
+# Update supervisor with new programs
+sudo supervisorctl update
+
+# Start Gunicorn
+sudo supervisorctl start dripemails-gunicorn
+
+# Check status
+sudo supervisorctl status dripemails-gunicorn
+```
+
 ## Deployment Steps
 
 ### 1. Update Configuration Paths
@@ -210,6 +304,7 @@ sudo supervisorctl status dripemails-smtp
 
 ### Basic Commands
 
+**SMTP Server:**
 ```bash
 # Start the service
 sudo supervisorctl start dripemails-smtp
@@ -225,6 +320,24 @@ sudo supervisorctl status dripemails-smtp
 
 # View logs
 sudo supervisorctl tail dripemails-smtp
+```
+
+**Gunicorn:**
+```bash
+# Start Gunicorn
+sudo supervisorctl start dripemails-gunicorn
+
+# Stop Gunicorn
+sudo supervisorctl stop dripemails-gunicorn
+
+# Restart Gunicorn
+sudo supervisorctl restart dripemails-gunicorn
+
+# Check status
+sudo supervisorctl status dripemails-gunicorn
+
+# View logs
+sudo supervisorctl tail dripemails-gunicorn
 ```
 
 ### Advanced Commands
@@ -354,6 +467,34 @@ sudo systemctl restart supervisor
 ### 3. Access Web Interface
 
 Open your browser and go to: `http://127.0.0.1:9001`
+
+## Running Multiple Services
+
+### Group Configuration
+
+You can group related services together for easier management:
+
+```ini
+[group:dripemails]
+programs=dripemails-gunicorn,dripemails-smtp
+priority=999
+```
+
+Then manage the entire group:
+
+```bash
+# Start all services in the group
+sudo supervisorctl start dripemails:*
+
+# Stop all services in the group
+sudo supervisorctl stop dripemails:*
+
+# Restart all services in the group
+sudo supervisorctl restart dripemails:*
+
+# Check status of all services
+sudo supervisorctl status dripemails:*
+```
 
 ## Multiple SMTP Servers
 

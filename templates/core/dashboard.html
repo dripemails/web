@@ -216,7 +216,9 @@
                                 {% for campaign in campaigns %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ campaign.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ campaign.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ campaign.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -236,7 +238,15 @@
                                         {{ campaign.created_at|date:"M d, Y" }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <div class="flex items-center justify-end gap-2">
+                                            {% if campaign.is_active %}
+                                            <button onclick="toggleCampaignStatus('{{ campaign.id }}', false)" class="text-red-600 hover:text-red-900 font-medium">Deactivate</button>
+                                            {% else %}
+                                            <button onclick="toggleCampaignStatus('{{ campaign.id }}', true)" class="text-green-600 hover:text-green-900 font-medium">Activate</button>
+                                            {% endif %}
+                                            <span class="text-gray-300">|</span>
+                                            <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -289,7 +299,9 @@
                                 {% for list in lists %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ list.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ list.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ list.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -679,20 +691,39 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert('Error: ' + data.error);
-            } else {
-                alert(data.message || 'Email scheduled successfully!');
-                form.reset();
-                scheduleValueContainer.classList.add('hidden');
-                loadSendEmailActivity();
+        .then(async response => {
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                console.warn('Could not parse response as JSON:', jsonError);
+                const textResponse = await response.text();
+                console.warn('Response text:', textResponse);
+                throw new Error('Invalid response from server');
             }
+            
+            if (!response.ok) {
+                const errorMessage = data?.error || data?.detail || JSON.stringify(data) || 'Failed to send email.';
+                throw new Error(errorMessage);
+            }
+            
+            return data;
+        })
+        .then(data => {
+            alert(data.message || 'Email scheduled successfully!');
+            form.reset();
+            scheduleValueContainer.classList.add('hidden');
+            loadSendEmailActivity();
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending email. Please try again.');
+            console.error('Error details:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            if (error.stack) {
+                console.error('Error stack:', error.stack);
+            }
+            const errorMessage = error.message || 'Error sending email. Please try again.';
+            alert('Error: ' + errorMessage);
         });
     });
 
@@ -712,6 +743,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue;
     }
 });
+
+// Toggle campaign status (activate/deactivate) - must be global for onclick handler
+function toggleCampaignStatus(campaignId, activate) {
+    const endpoint = activate 
+        ? `/api/campaigns/${campaignId}/activate/`
+        : `/api/campaigns/${campaignId}/deactivate/`;
+    
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': (function() {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            })()
+        }
+    })
+    .then(response => response.json().then(data => ({ status: response.status, body: data })))
+    .then(({ status, body }) => {
+        if (status >= 200 && status < 300) {
+            alert(body.message || (activate ? 'Campaign activated successfully!' : 'Campaign deactivated successfully!'));
+            // Reload the page to show updated status
+            window.location.reload();
+        } else {
+            alert(body.error || 'Failed to update campaign status. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error toggling campaign status:', error);
+        alert('Error updating campaign status. Please try again.');
+    });
+}
 </script>
 
 {% endblock %}

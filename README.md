@@ -119,7 +119,7 @@ When you select a schedule option (e.g., "Send in 5 minutes") but Celery/Redis i
 
 2. **Set up Python environment**
    ```bash
-   python -m dripemails dripemails
+   python -m venv dripemails
    source dripemails/bin/activate  # Linux/macOS
    # or
    dripemails\Scripts\activate     # Windows

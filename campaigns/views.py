@@ -513,7 +513,7 @@ def drafts_view(request):
         try:
             campaign = Campaign.objects.get(id=campaign_id, user=request.user)
             # Get all emails (drafts) for this campaign
-            drafts = campaign.emails.all().order_by('-updated_at')
+            drafts = campaign.emails.all().order_by('order')
         except (Campaign.DoesNotExist, ValueError):
             campaign = None
             drafts = []

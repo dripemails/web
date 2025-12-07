@@ -1,9 +1,9 @@
 <<<<<<< HEAD
 """
-Small standalone exporter: generate a static HTML preview for an AB test
+Small standalone exporter: generate a static HTML preview for template revision
 without requiring Streamlit. The script bootstraps Django, pulls the
 requested campaign and email (default: first available) and writes an
-HTML file in `static_dashboards/abtest.html` that shows the original
+HTML file in `static_dashboards/template_revision.html` that shows the original
 and revised bodies side-by-side. This uses jQuery in the page (CDN)
 and does not attempt to persist edits back to the DB.
 """
@@ -48,7 +48,7 @@ def get_campaign_and_email(campaign_id=None, email_id=None):
     return campaign, email
 
 
-def render_abtest_html(campaign, email, out_path):
+def render_template_revision_html(campaign, email, out_path):
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     orig_html = (email.body_html or '') if email else ''
@@ -64,7 +64,7 @@ def render_abtest_html(campaign, email, out_path):
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AB Test Preview</title>
+  <title>Template Revision Preview</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body{font-family:Arial,Helvetica,sans-serif;margin:20px}
@@ -77,7 +77,7 @@ def render_abtest_html(campaign, email, out_path):
 </head>
 
 <body>
-  <h1>AB Test Preview</h1>
+  <h1>Template Revision Preview</h1>
   <p>Campaign: {CAMPAIGN_NAME}</p>
 
   <div class="col">
@@ -212,8 +212,8 @@ def main():
     campaign_id = sys.argv[1] if len(sys.argv) > 1 else None
     email_id = sys.argv[2] if len(sys.argv) > 2 else None
     campaign, email = get_campaign_and_email(campaign_id, email_id)
-    out = pathlib.Path('static_dashboards') / 'abtest.html'
-    render_abtest_html(campaign, email, out)
+    out = pathlib.Path('static_dashboards') / 'template_revision.html'
+    render_template_revision_html(campaign, email, out)
     print(f'Wrote {out.resolve()}')
     webbrowser.open_new_tab(out.resolve().as_uri())
 

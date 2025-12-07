@@ -236,6 +236,7 @@
                                         {{ campaign.created_at|date:"M d, Y" }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="{% url 'campaigns:analysis' %}?campaign_id={{ campaign.id }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Analytics</a>
                                         <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>

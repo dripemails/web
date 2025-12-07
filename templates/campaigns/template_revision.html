@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans "AB Test" %} - {{ block.super }}{% endblock %}
+{% load static %}
+
+{% block title %}{% trans "Template Revision" %} - {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+<!-- Quill.js - Free WYSIWYG Editor -->
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
+<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
+<script src="{% static 'js/quill.min.js' %}"></script>
+
+<style>
+  /* Quill editor custom styling */
+  .ql-container {
+    font-family: inherit;
+  }
+  .ql-editor {
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
   <div class="flex items-center justify-between mb-6">
-    <h1 class="text-2xl font-semibold">{% trans "AB Test" %}</h1>
+    <h1 class="text-2xl font-semibold">{% trans "Template Revision" %}</h1>
     <div>
       <a href="{% url 'campaigns:analysis' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Analysis" %}</a>
     </div>
@@ -92,7 +113,15 @@
                 </select>
               </div>
 
-              <textarea name="draft" id="draft-textarea" class="w-full h-64 p-3 border rounded mb-3">{{ email.body_html|default:email.body_text }}</textarea>
+              <div class="mb-3">
+                <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Body" %}</label>
+                <!-- Rich text editor using Quill -->
+                <div id="editor-container">
+                  <div id="draft-editor"></div>
+                </div>
+                <!-- Hidden textarea for form submission -->
+                <textarea name="draft" id="draft-textarea" class="hidden"></textarea>
+              </div>
 
               <div class="mb-4 flex items-center space-x-3">
                 <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center space-x-2">
@@ -125,6 +154,39 @@
 {% block extra_scripts %}
 <script>
   (function(){
+    // Initialize Quill editor
+    let quill;
+    const toolbarOptions = [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      ['link', 'image', 'video'],                       // link, image, video
+      ['clean']                                         // remove formatting button
+    ];
+
+    quill = new Quill('#draft-editor', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow',
+      placeholder: '{% trans "Write your email content here..." %}'
+    });
+
+    // Load initial content if available
+    const initialContent = `{{ email.body_html|default:email.body_text|escapejs }}`;
+    if(initialContent){
+      quill.root.innerHTML = initialContent;
+    }
+
     const textarea = document.getElementById('draft-textarea');
     const preview = document.getElementById('draft-preview');
     const live = document.getElementById('live-preview');
@@ -138,20 +200,36 @@
     const campaignSelect = document.getElementById('save_to_campaign');
 
     function updatePreview(){
-      if(!preview || !textarea) return;
-      const v = textarea.value || '';
-      if(v.trim().startsWith('<') && v.includes('>')){
-        preview.innerHTML = v;
-      } else {
-        preview.textContent = v;
+      if(!preview || !quill) {
+        console.log('Preview or quill not found');
+        return;
       }
+      const htmlContent = quill.root.innerHTML;
+      console.log('Updating preview with content length:', htmlContent.length);
+      preview.innerHTML = htmlContent;
     }
 
-    if(textarea){
+    if(quill && preview){
+      // Initial preview update
       updatePreview();
-      textarea.addEventListener('input', function(){ if(live && live.checked) updatePreview(); });
+      
+      // Live preview on content change
+      quill.on('text-change', function(delta, oldDelta, source) {
+        if(live && live.checked) {
+          console.log('Live preview enabled, updating...');
+          updatePreview(); 
+        }
+      });
     }
-    if(previewBtn){ previewBtn.addEventListener('click', updatePreview); }
+    
+    // Refresh preview button
+    if(previewBtn && quill && preview){ 
+      previewBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        console.log('Refresh preview clicked');
+        updatePreview(); 
+      });
+    }
 
     // Scroll sync between original and preview for easier comparison
     if(orig && preview){
@@ -160,10 +238,10 @@
     }
 
     // AI Revise functionality
-    if(aiReviseBtn && textarea){
+    if(aiReviseBtn && quill){
       aiReviseBtn.addEventListener('click', async function(){
-        const currentText = textarea.value.trim();
-        if(!currentText){
+        const currentText = quill.root.innerHTML.trim();
+        if(!currentText || currentText === '<p><br></p>'){
           alert('{% trans "Please enter some email content first." %}');
           return;
         }
@@ -188,7 +266,7 @@
           const data = await response.json();
 
           if(data.success && data.revised_text){
-            textarea.value = data.revised_text;
+            quill.root.innerHTML = data.revised_text;
             updatePreview();
             alert('{% trans "Email revised successfully! Review the changes in the editor." %}');
           } else {
@@ -212,14 +290,17 @@
         
         const selectedCampaignId = campaignSelect.value;
         const subject = subjectInput.value.trim();
-        const bodyContent = textarea.value;
+        const bodyContent = quill.root.innerHTML;
+        
+        // Update hidden textarea for compatibility
+        textarea.value = bodyContent;
         
         if(!subject){
           alert('{% trans "Please enter an email subject." %}');
           return;
         }
         
-        if(!bodyContent.trim()){
+        if(!bodyContent.trim() || bodyContent === '<p><br></p>'){
           alert('{% trans "Please enter email content." %}');
           return;
         }
@@ -235,7 +316,7 @@
         const requestBody = {
           subject: subject,
           body_html: bodyContent,
-          body_text: bodyContent.replace(/<[^>]*>/g, ''), // Strip HTML tags for body_text
+          body_text: quill.getText().trim(), // Get plain text from Quill
           wait_time: 1,
           wait_unit: 'days'
         };
@@ -281,7 +362,7 @@
     }
 
     // Send Email functionality
-    if(sendEmailBtn){
+    if(sendEmailBtn && quill){
       sendEmailBtn.addEventListener('click', async function(){
         const recipientEmail = prompt('{% trans "Enter the recipient email address:" %}');
         if(!recipientEmail){

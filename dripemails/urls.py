@@ -24,6 +24,7 @@ non_prefixed_urlpatterns = [
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/send/', campaign_views.send_email, name='api-send-email'),
     path('api/campaigns/<uuid:campaign_id>/generate-email/', campaign_views.generate_email_with_ai, name='api-generate-email'),
     path('api/campaigns/revise-email/', campaign_views.revise_email_with_ai, name='api-revise-email'),
+    path('api/campaigns/<uuid:campaign_id>/stats/', campaign_views.campaign_stats_api, name='api-campaign-stats'),
     path('api/campaigns/search-templates/', campaign_views.search_templates, name='api-search-templates'),
     path('api/upload-contacts/', campaign_views.upload_contacts, name='api-upload-contacts'),
     # Analytics API endpoints (no language prefix needed)
@@ -41,6 +42,9 @@ non_prefixed_urlpatterns = [
     path('api/send-email/requests/', core_views.send_email_requests_list, name='api-send-email-requests'),
     path('api/send-email/requests/<uuid:request_id>/send-now/', core_views.send_email_request_send_now, name='api-send-email-request-send-now'),
     path('api/send-email/requests/<uuid:request_id>/unsubscribe/', core_views.send_email_request_unsubscribe, name='api-send-email-request-unsubscribe'),
+    # Email tracking endpoints (no language prefix needed)
+    path('analytics/track/open/<uuid:tracking_id>/', analytics_views.track_open, name='track-open'),
+    path('analytics/track/click/<uuid:tracking_id>/', analytics_views.track_click, name='track-click'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code

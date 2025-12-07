@@ -12,6 +12,7 @@ DripEmails.org is a comprehensive email marketing solution that combines powerfu
 ## ⚡ Quick Highlights
 
 **Perfect for Windows Development:**
+
 - 🪟 **Redis is optional**: Works without Redis on Windows development - no setup complexity!
 - 🤖 **Celery auto-disables**: On Windows with `DEBUG=True`, Celery automatically disables - no configuration needed
 - 📧 **Synchronous email sending**: Emails send immediately without Celery/Redis queues
@@ -23,13 +24,23 @@ Start developing immediately on Windows without installing Redis or configuring 
 ## 🚀 Features
 
 ### 📧 **Email Campaign Management**
+
 - **Drip Campaigns**: Create automated email sequences with customizable delays
 - **Email Templates**: Rich HTML and text email templates with dynamic content
 - **Scheduling**: Advanced email scheduling with timezone support
 - **A/B Testing**: Built-in A/B testing for subject lines and content
 - **Campaign Analytics**: Detailed tracking and reporting
 
+### 🤖 **AI-Powered Email Features**
+
+- **AI Email Generation**: Generate professional email content using Hugging Face API
+- **AI Email Revision**: Automatically improve grammar, clarity, and tone
+- **Smart Content Creation**: Leverage Mistral-7B-Instruct model for high-quality outputs
+- **Customizable Models**: Support for multiple Hugging Face models
+- **Template Revision Page**: Dedicated interface for AI-assisted email editing
+
 ### 👥 **Subscriber Management**
+
 - **Import/Export**: Bulk subscriber import from CSV/Excel files
 - **Segmentation**: Advanced subscriber segmentation and targeting
 - **Subscription Management**: Double opt-in, unsubscribe handling
@@ -37,6 +48,7 @@ Start developing immediately on Windows without installing Redis or configuring 
 - **API Integration**: RESTful API for subscriber management
 
 ### 📊 **Analytics & Reporting**
+
 - **Real-time Analytics**: Live campaign performance tracking
 - **Email Footer Analytics**: Track engagement through custom footers
 - **Conversion Tracking**: Monitor click-through rates and conversions
@@ -44,6 +56,7 @@ Start developing immediately on Windows without installing Redis or configuring 
 - **Export Reports**: Generate detailed reports in multiple formats
 
 ### 🔧 **Custom SMTP Server**
+
 - **Built-in SMTP Server**: Custom `aiosmtpd`-based email server
 - **Authentication**: Secure SMTP authentication
 - **Rate Limiting**: Built-in spam protection and rate limiting
@@ -51,6 +64,7 @@ Start developing immediately on Windows without installing Redis or configuring 
 - **Django Integration**: Seamless integration with Django models
 
 ### 🛡️ **Security & Compliance**
+
 - **GDPR Compliance**: Built-in privacy controls and data protection
 - **Email Authentication**: SPF, DKIM, and DMARC support
 - **Secure Authentication**: Django Allauth integration
@@ -58,6 +72,7 @@ Start developing immediately on Windows without installing Redis or configuring 
 - **Data Encryption**: Secure data storage and transmission
 
 ### 🎨 **Modern UI/UX**
+
 - **Responsive Design**: Mobile-first, responsive interface
 - **Modern Frontend**: Built with React, TypeScript, and Tailwind CSS
 - **Dark Mode**: Optional dark theme support
@@ -90,6 +105,7 @@ dripemails.org/
 ### ⚡ Key Features for Development
 
 **Windows Development Made Easy:**
+
 - ✅ **Redis is optional**: The app works without Redis on Windows development
 - ✅ **Celery auto-disables**: On Windows with `DEBUG=True`, Celery is disabled automatically
 - ✅ **Synchronous email sending**: Works without Celery/Redis; emails send immediately
@@ -97,6 +113,7 @@ dripemails.org/
 
 **No Redis? No Problem!**
 The application automatically falls back to synchronous email sending when Redis/Celery is unavailable. Perfect for:
+
 - Windows development environments
 - Quick local testing
 - Low-volume email sending
@@ -104,71 +121,95 @@ The application automatically falls back to synchronous email sending when Redis
 
 **Scheduled Emails Without Redis:**
 When you select a schedule option (e.g., "Send in 5 minutes") but Celery/Redis is not available:
+
 - ✅ Email is sent immediately (not queued)
-- ✅ You'll see a message: *"Email sent immediately (scheduling requires Celery/Redis, which is not available in this environment)"*
+- ✅ You'll see a message: _"Email sent immediately (scheduling requires Celery/Redis, which is not available in this environment)"_
 - ✅ Email delivery is guaranteed - no emails are lost
 - ✅ Perfect for development and testing on Windows
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/dripemails/web.git
    cd web
    ```
 
 2. **Set up Python environment**
+
    ```bash
    python -m dripemails dripemails
    source dripemails/bin/activate  # Linux/macOS
    # or
    dripemails\Scripts\activate     # Windows
-   
+
    pip install -r requirements.txt
    ```
 
-4. **Configure environment**
+3. **Configure environment**
+
    ```bash
    cp docs/env.example .env
    # Edit .env with your configuration
    ```
 
-5. **Run migrations**
+4. **Run migrations**
+
    ```bash
    python manage.py migrate
    ```
 
-6. **Create superuser**
+5. **Create superuser**
+
    ```bash
    python manage.py createsuperuser
    ```
 
-7. **Start the development server**
+6. **Start the development server**
+
    ```bash
    python manage.py runserver
    ```
-   
+
    **Windows users:** No Redis needed! The app automatically uses synchronous email sending when `DEBUG=True`.
 
+7. **Set up AI features (optional)**
+
+   To enable AI-powered email generation and revision:
+
+   ```bash
+   # Get your free API key from https://huggingface.co/settings/tokens
+   # Set environment variable (Windows PowerShell):
+   $env:HUGGINGFACE_API_KEY = "hf_your_token_here"
+
+   # Or add to .env file:
+   echo "HUGGINGFACE_API_KEY=hf_your_token_here" >> .env
+   ```
+
+   See [HUGGINGFACE_SETUP.md](HUGGINGFACE_SETUP.md) for detailed instructions.
+
 8. **Start the SMTP server** (optional)
+
    ```bash
    # For local development (default port 1025, automatic no-auth on Windows)
    python manage.py run_smtp_server
-   
+
    # Custom port
    python manage.py run_smtp_server --port 2525
-   
+
    # For local development with explicit no-auth flag
    python manage.py run_smtp_server --no-auth
-   
+
    # Custom port with no-auth
    python manage.py run_smtp_server --no-auth --port 2525
-   
+
    # For production or with authentication
    python manage.py run_smtp_server --host 0.0.0.0 --port 25
    ```
 
-**Note:** 
+**Note:**
+
 - Default port is **1025** to avoid conflicts with Postfix (which typically uses port 25)
 - On Windows with `DEBUG=True`, you don't need Redis. The SMTP server automatically runs without authentication, and emails are sent synchronously (immediately) without Celery.
 - Press **Ctrl+C** to gracefully stop the server.
@@ -202,6 +243,7 @@ python manage.py run_smtp_server --no-auth --port 1025
 ```
 
 **Local Testing:**
+
 ```bash
 # Test connection
 telnet localhost 1025
@@ -306,6 +348,7 @@ WantedBy=multi-user.target
 ```
 
 Enable and start:
+
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable dripemails-smtp
@@ -316,12 +359,14 @@ sudo systemctl status dripemails-smtp
 ### Port Configuration
 
 **Default Port (Recommended for development)**
+
 ```bash
 # Default port is 1025 (avoids conflicts with Postfix on port 25)
 python manage.py run_smtp_server
 ```
 
 **Custom Port**
+
 ```bash
 # Use a different port (e.g., 2525)
 python manage.py run_smtp_server --port 2525
@@ -334,12 +379,14 @@ python manage.py run_smtp_server --port 2525 --no-auth --debug
 ```
 
 **Production Port Forwarding (if using port 25)**
+
 ```bash
 # Forward port 25 to 1025 (if you want to use port 25 in production)
 sudo iptables -t nat -A PREROUTING -p tcp --dport 25 -j REDIRECT --to-port 1025
 ```
 
 ### SMTP Server Features
+
 - **Async Performance**: Built with `aiosmtpd` for high performance
 - **Authentication**: PLAIN and LOGIN authentication support (optional)
 - **Rate Limiting**: Built-in spam protection
@@ -354,16 +401,19 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 25 -j REDIRECT --to-port 1025
 The `--no-auth` flag disables SMTP authentication, allowing anonymous email sending. This is useful for local development.
 
 **When to use `--no-auth`:**
+
 - ✅ Local development on Windows
 - ✅ Testing without user accounts
 - ✅ Development environments where security is not a concern
 
 **When NOT to use `--no-auth`:**
+
 - ❌ Production environments
 - ❌ Shared development servers
 - ❌ Any environment exposed to the internet
 
 **Usage:**
+
 ```bash
 # Disable authentication (allow anonymous access)
 python manage.py run_smtp_server --no-auth
@@ -433,6 +483,7 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'founders@dripemails.o
 ```
 
 **Production `.env` example:**
+
 ```bash
 # Email Settings - Production (Authentication Required)
 EMAIL_HOST=localhost
@@ -444,12 +495,14 @@ DEFAULT_FROM_EMAIL=founders@dripemails.org
 ```
 
 **Important Notes:**
+
 - For **no-auth** (local dev): Leave `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` empty in `.env`
 - For **with auth** (production): Set both `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` in `.env`
 - The SMTP server must match: Use `--no-auth` flag when credentials are empty, or provide credentials when authentication is enabled
 - Windows development with `DEBUG=True` automatically uses no-auth mode
 
 ### Documentation
+
 - 📖 [Production Setup Guide](docs/smtp_server_production_setup.md)
 - 📖 [Supervisord Setup Guide](docs/supervisord_setup.md)
 - 📖 [Supervisord Quick Reference](docs/supervisord_quick_reference.md)
@@ -487,6 +540,7 @@ Celery is **not required** for DripEmails to function. The application will auto
 #### 🪟 Windows Development (Automatic)
 
 **On Windows with `DEBUG=True`:**
+
 - ✅ **Celery auto-disables**: No configuration needed
 - ✅ **Redis not required**: Works without Redis installed
 - ✅ **Synchronous email sending**: Emails send immediately
@@ -494,6 +548,7 @@ Celery is **not required** for DripEmails to function. The application will auto
 
 **How it works:**
 The application automatically detects Windows development mode and:
+
 1. Disables Celery (no Redis connection attempts)
 2. Sends emails synchronously (immediate delivery)
 3. Works seamlessly without any additional setup
@@ -501,12 +556,14 @@ The application automatically detects Windows development mode and:
 #### 🐧 Linux/macOS or Production
 
 **When Celery is used:**
+
 - ✅ Production environments with high email volume
 - ✅ Scheduled email campaigns
 - ✅ Background task processing
 - ✅ Requires Redis to be installed and running
 
 **When Celery is NOT used (synchronous mode):**
+
 - ✅ Windows development (automatic when `DEBUG=True`)
 - ✅ Development without Redis
 - ✅ Low-volume email sending
@@ -516,17 +573,20 @@ The application automatically detects Windows development mode and:
 #### 📅 Scheduled Emails Behavior
 
 **When Celery/Redis is NOT available:**
+
 - **Scheduled emails are sent immediately** instead of being queued
 - The application automatically falls back to synchronous sending
-- You'll see a message: *"Email sent immediately (scheduling requires Celery/Redis, which is not available in this environment)"*
+- You'll see a message: _"Email sent immediately (scheduling requires Celery/Redis, which is not available in this environment)"_
 - This ensures emails are always sent, even without Celery/Redis
 
 **Example:**
 If you use the "Send Email" form and select a schedule option (e.g., "Send in 5 minutes"):
+
 - **With Celery/Redis**: Email is scheduled and sent after 5 minutes
 - **Without Celery/Redis**: Email is sent immediately with a notification that scheduling requires Celery/Redis
 
 **Why this behavior?**
+
 - Ensures emails are never lost due to missing Redis/Celery
 - Provides a seamless development experience on Windows
 - Allows immediate testing without additional setup
@@ -568,7 +628,8 @@ celery -A dripemails worker -l info
 celery -A dripemails beat -l info
 ```
 
-**Note:** 
+**Note:**
+
 - On Windows development with `DEBUG=True`, you can skip Redis and Celery entirely. Email sending will work synchronously.
 - The application automatically detects Windows development and disables Celery - no configuration needed!
 - Emails are sent immediately without queuing when Celery is disabled.
@@ -618,6 +679,7 @@ ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 DripEmails provides a comprehensive REST API for integration:
 
 ### Campaigns API
+
 ```bash
 # List campaigns
 GET /api/campaigns/
@@ -636,6 +698,7 @@ POST /api/campaigns/{id}/send/
 ```
 
 ### Subscribers API
+
 ```bash
 # List subscribers
 GET /api/subscribers/
@@ -653,6 +716,7 @@ POST /api/subscribers/import/
 ```
 
 ### Analytics API
+
 ```bash
 # Get campaign analytics
 GET /api/analytics/campaigns/{id}/
@@ -685,6 +749,7 @@ python -m pytest tests/
 ### Production Setup
 
 1. **Set up your server**
+
    ```bash
    # Install system dependencies
    sudo apt update
@@ -692,6 +757,7 @@ python -m pytest tests/
    ```
 
 2. **Configure Nginx**
+
    ```bash
    # Copy nginx configuration
    sudo cp docs/nginx.conf /etc/nginx/sites-available/dripemails
@@ -699,6 +765,7 @@ python -m pytest tests/
    ```
 
 3. **Set up SSL**
+
    ```bash
    sudo certbot --nginx -d yourdomain.com
    ```
@@ -794,4 +861,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ by the DripEmails Team**
 
-*Empowering businesses to take control of their email marketing infrastructure.*
+_Empowering businesses to take control of their email marketing infrastructure._

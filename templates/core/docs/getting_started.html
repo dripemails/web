@@ -1,0 +1,93 @@
+{% extends "core/docs/base_docs.html" %}
+
+{% block doc_title %}Getting Started{% endblock %}
+
+{% block doc_content %}
+<h1 class="text-3xl font-bold text-gray-900 mb-6">Getting Started with DripEmails.org</h1>
+
+<div class="prose max-w-none">
+  <p class="text-lg text-gray-600 mb-6">
+    Welcome to DripEmails.org! This guide will help you create your first email campaign in minutes.
+  </p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Quick Start Guide</h2>
+
+  <div class="space-y-6">
+    <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-indigo-900 mb-3">Step 1: Create an Account</h3>
+      <p class="text-indigo-800 mb-3">If you haven't already, create your account or log in to your dashboard.</p>
+      <a href="{% url 'account_signup' %}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+        Sign Up Now
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-green-900 mb-3">Step 2: Add Subscribers</h3>
+      <p class="text-green-800 mb-3">Import subscribers from a CSV file or add them manually.</p>
+      <p class="text-green-800 mb-2"><strong>Navigate to:</strong> Dashboard → Subscribers → Add Subscribers</p>
+      <a href="{% url 'core:docs_subscribers' %}" class="text-green-700 hover:underline font-semibold">
+        → Learn more about subscriber management
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-purple-900 mb-3">Step 3: Create a Campaign</h3>
+      <p class="text-purple-800 mb-3">Set up your first email campaign with our easy-to-use campaign builder.</p>
+      <p class="text-purple-800 mb-2"><strong>Navigate to:</strong> Dashboard → Campaigns → New Campaign</p>
+      <a href="{% url 'core:docs_campaigns' %}" class="text-purple-700 hover:underline font-semibold">
+        → Learn more about campaign creation
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-blue-900 mb-3">Step 4: Design Your Email</h3>
+      <p class="text-blue-800 mb-3">Use our rich text editor or AI assistance to create beautiful emails.</p>
+      <a href="{% url 'core:docs_templates' %}" class="text-blue-700 hover:underline font-semibold">
+        → Learn about email templates
+      </a>
+      <span class="mx-2">|</span>
+      <a href="{% url 'core:docs_ai_features' %}" class="text-blue-700 hover:underline font-semibold">
+        → Try AI features
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-lg">
+      <h3 class="text-xl font-semibold text-yellow-900 mb-3">Step 5: Send Your Campaign</h3>
+      <p class="text-yellow-800 mb-3">Send immediately or schedule for later. Track opens and clicks in real-time.</p>
+      <a href="{% url 'core:docs_analytics' %}" class="text-yellow-700 hover:underline font-semibold">
+        → Learn about analytics
+      </a>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Video Tutorial</h2>
+  
+  <div class="bg-gray-100 rounded-lg p-8 text-center mb-8">
+    <p class="text-gray-600 mb-4">📹 Watch our 5-minute video tutorial (coming soon)</p>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Next Steps</h2>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <a href="{% url 'core:docs_campaigns' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 transition-colors">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">📧 Campaign Management</h3>
+      <p class="text-gray-600">Learn advanced campaign features and drip sequences</p>
+    </a>
+
+    <a href="{% url 'core:docs_ai_features' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 transition-colors">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">🤖 AI Features</h3>
+      <p class="text-gray-600">Use AI to generate and improve your email content</p>
+    </a>
+
+    <a href="{% url 'core:docs_analytics' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 transition-colors">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">📊 Analytics</h3>
+      <p class="text-gray-600">Track and analyze your campaign performance</p>
+    </a>
+
+    <a href="{% url 'core:docs_deployment' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 transition-colors">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">🚀 Deployment</h3>
+      <p class="text-gray-600">Deploy DripEmails.org to your own server</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

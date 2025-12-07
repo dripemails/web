@@ -1,0 +1,41 @@
+{% extends "core/docs/base_docs.html" %}
+{% block doc_title %}Analytics & Tracking{% endblock %}
+{% block doc_content %}
+<h1 class="text-3xl font-bold text-gray-900 mb-6">Analytics & Tracking</h1>
+<div class="prose max-w-none">
+  <p class="text-lg text-gray-600 mb-6">Track and analyze your campaign performance with real-time analytics.</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Tracking Features</h2>
+  <div class="space-y-4 mb-6">
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-2">📧 Email Opens</h3>
+      <p class="text-gray-700">Track when recipients open your emails using tracking pixels.</p>
+      <p class="text-gray-600 text-sm mt-2"><strong>Note:</strong> Opens are tracked when recipients load images in their email client.</p>
+    </div>
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-2">🔗 Link Clicks</h3>
+      <p class="text-gray-700">Monitor which links subscribers click in your emails.</p>
+    </div>
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-2">📊 Campaign Analytics</h3>
+      <p class="text-gray-700">View comprehensive stats including:</p>
+      <ul class="list-disc pl-6 text-gray-600 mt-2 space-y-1">
+        <li>Total sent</li>
+        <li>Open rate</li>
+        <li>Click-through rate</li>
+        <li>Bounce rate</li>
+        <li>Unsubscribe rate</li>
+        <li>Complaint rate</li>
+      </ul>
+    </div>
+  </div>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Analytics Dashboard</h2>
+  <p class="text-gray-700 mb-4">Access your campaign analytics by clicking the "Analytics" button on any campaign in your dashboard.</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Real-Time Updates</h2>
+  <p class="text-gray-700 mb-4">Stats are updated every 15 seconds when viewing the analytics page.</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding Tracking</h2>
+  <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+    <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ Email Client Limitations</h3>
+    <p class="text-yellow-800">Open tracking requires recipients to load images. Many email clients block images by default, so actual open rates may be higher than reported.</p>
+  </div>
+</div>
+{% endblock %}

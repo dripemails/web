@@ -234,6 +234,46 @@ def feature_email_templates(request):
 def resource_documentation(request):
     return render(request, 'core/resource_documentation.html')
 
+# Documentation subpages
+def docs_getting_started(request):
+    return render(request, 'core/docs/getting_started.html')
+
+def docs_campaigns(request):
+    return render(request, 'core/docs/campaigns.html')
+
+def docs_subscribers(request):
+    return render(request, 'core/docs/subscribers.html')
+
+def docs_templates(request):
+    return render(request, 'core/docs/templates.html')
+
+def docs_analytics(request):
+    return render(request, 'core/docs/analytics.html')
+
+def docs_ai_features(request):
+    return render(request, 'core/docs/ai_features.html')
+
+def docs_smtp_server(request):
+    return render(request, 'core/docs/smtp_server.html')
+
+def docs_deployment(request):
+    return render(request, 'core/docs/deployment.html')
+
+def docs_deployment_prerequisites(request):
+    return render(request, 'core/docs/deployment/prerequisites.html')
+
+def docs_deployment_installation(request):
+    return render(request, 'core/docs/deployment/installation.html')
+
+def docs_deployment_configuration(request):
+    return render(request, 'core/docs/deployment/configuration.html')
+
+def docs_deployment_production(request):
+    return render(request, 'core/docs/deployment/production.html')
+
+def docs_deployment_troubleshooting(request):
+    return render(request, 'core/docs/deployment/troubleshooting.html')
+
 def resource_tutorials(request):
     return render(request, 'core/resource_tutorials.html')
 

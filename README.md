@@ -454,6 +454,182 @@ DEFAULT_FROM_EMAIL=founders@dripemails.org
 - 📖 [Supervisord Setup Guide](docs/supervisord_setup.md)
 - 📖 [Supervisord Quick Reference](docs/supervisord_quick_reference.md)
 
+## 🔍 SPF Record Verification (Cron Script)
+
+DripEmails includes a cron script to automatically check SPF records for user domains to ensure proper email deliverability.
+
+### Overview
+
+The `cron.py` script verifies that users have correctly configured SPF records that include DripEmails.org servers (`dripemails.org`, `web.dripemails.org`, `web1.dripemails.org`). This helps ensure emails sent through DripEmails are properly authenticated and delivered.
+
+### Prerequisites
+
+1. **Install dependencies:**
+   ```bash
+   pip install dnspython==2.6.1
+   ```
+
+2. **Run migrations** to add SPF verification fields to UserProfile:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+### Usage
+
+#### Check All Users
+
+Check SPF records for all active users:
+
+```bash
+python cron.py check_spf --all-users
+```
+
+This will:
+- Extract domains from each user's email address
+- Query DNS for SPF records
+- Verify that required DripEmails.org servers are included
+- Update UserProfile with verification status
+
+#### Check Specific User
+
+Check SPF record for a specific user by ID:
+
+```bash
+python cron.py check_spf --user-id 123
+```
+
+#### Output Example
+
+```
+SPF Check Results for User 123:
+  Email: user@example.com
+  Domain: example.com
+  Has SPF: True
+  SPF Record: v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+  Is Valid: True
+  Found Includes: dripemails.org, web.dripemails.org, web1.dripemails.org
+  Missing Includes: 
+```
+
+### Setting Up Automated Checks
+
+#### Using Cron (Linux/macOS)
+
+Add to your crontab to run daily at 2 AM:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add this line (adjust paths as needed)
+0 2 * * * cd /path/to/dripemails.org && /path/to/python cron.py check_spf --all-users >> /var/log/dripemails-spf-check.log 2>&1
+```
+
+#### Using Systemd Timer (Linux)
+
+Create `/etc/systemd/system/dripemails-spf-check.service`:
+
+```ini
+[Unit]
+Description=DripEmails SPF Record Check
+After=network.target
+
+[Service]
+Type=oneshot
+User=dripemails
+WorkingDirectory=/home/dripemails/web
+Environment="DJANGO_SETTINGS_MODULE=dripemails.live"
+ExecStart=/home/dripemails/venv/bin/python cron.py check_spf --all-users
+```
+
+Create `/etc/systemd/system/dripemails-spf-check.timer`:
+
+```ini
+[Unit]
+Description=Run DripEmails SPF Check Daily
+Requires=dripemails-spf-check.service
+
+[Timer]
+OnCalendar=daily
+OnCalendar=02:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable dripemails-spf-check.timer
+sudo systemctl start dripemails-spf-check.timer
+sudo systemctl status dripemails-spf-check.timer
+```
+
+#### Using Windows Task Scheduler
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger: Daily at 2:00 AM
+4. Set action: Start a program
+   - Program: `C:\path\to\python.exe`
+   - Arguments: `cron.py check_spf --all-users`
+   - Start in: `C:\path\to\dripemails.org`
+
+### What Gets Checked
+
+The script verifies that SPF records include:
+- `dripemails.org`
+- `web.dripemails.org`
+- `web1.dripemails.org`
+
+**Example valid SPF record:**
+```
+v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+```
+
+### Database Storage
+
+SPF verification results are stored in the `UserProfile` model:
+- `spf_verified` - Boolean indicating if SPF is valid
+- `spf_last_checked` - Timestamp of last check
+- `spf_record` - The actual SPF record found
+- `spf_missing_includes` - JSON list of missing required includes
+
+You can query these fields in Django:
+
+```python
+from analytics.models import UserProfile
+
+# Get users with invalid SPF records
+invalid_users = UserProfile.objects.filter(spf_verified=False)
+
+# Get users who haven't been checked recently
+from django.utils import timezone
+from datetime import timedelta
+old_checks = UserProfile.objects.filter(
+    spf_last_checked__lt=timezone.now() - timedelta(days=7)
+)
+```
+
+### Troubleshooting
+
+**No SPF record found:**
+- User's domain may not have an SPF record configured
+- DNS propagation may be delayed
+- Domain may be invalid or expired
+
+**Missing includes:**
+- User's SPF record exists but doesn't include required DripEmails.org servers
+- User needs to update their SPF record to include: `include:dripemails.org include:web.dripemails.org include:web1.dripemails.org`
+
+**DNS errors:**
+- Check network connectivity
+- Verify DNS resolver configuration
+- Ensure `dnspython` is installed correctly
+
 ## 🔧 Configuration
 
 ### Django Settings

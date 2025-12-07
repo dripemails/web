@@ -107,6 +107,54 @@
             </div>
         </div>
         
+        <!-- SPF Record Setup Instructions - Full Width -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow-sm p-6 mb-8">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">SPF Record Setup for Email Deliverability</h3>
+                    <p class="text-gray-700 mb-4">
+                        To ensure your emails are delivered successfully and avoid spam filters, you need to add an SPF (Sender Policy Framework) record to your domain's DNS settings. This authorizes DripEmails.org to send emails on behalf of your domain.
+                    </p>
+                    <div class="bg-white rounded-md p-4 mb-4 border border-gray-200">
+                        <p class="text-sm font-medium text-gray-700 mb-2">Add this TXT record to your domain's DNS:</p>
+                        <div class="bg-gray-50 rounded p-3 font-mono text-sm">
+                            <div class="mb-2">
+                                <span class="text-gray-600">Type:</span> <span class="text-gray-900 font-semibold">TXT</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-gray-600">Name/Host:</span> <span class="text-gray-900 font-semibold">@</span> <span class="text-gray-500 text-xs">(or your domain name)</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-gray-600">Value:</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-300 text-gray-900 break-all">
+                                v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-md p-3 mb-4">
+                        <p class="text-sm text-yellow-800">
+                            <strong>Note:</strong> If you already have an SPF record, you should modify it to include these servers instead of creating a new one. Multiple SPF records are not allowed.
+                        </p>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <p class="mb-2"><strong>How to add this record:</strong></p>
+                        <ol class="list-decimal list-inside space-y-1 ml-2">
+                            <li>Log in to your domain registrar for {% if user_email_domain %}{{ user_email_domain }}{% else %}your domain{% endif %} or DNS provider (e.g., GoDaddy, Namecheap, Cloudflare)</li>
+                            <li>Navigate to DNS management or DNS settings</li>
+                            <li>Add a new TXT record with the values shown above</li>
+                            <li>Save the changes (DNS propagation can take up to 48 hours)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Send Email Form -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Send Email</h3>

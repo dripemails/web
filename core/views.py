@@ -90,6 +90,11 @@ def dashboard(request):
     profile, _created = UserProfile.objects.get_or_create(user=request.user)
     user_timezone = profile.timezone or 'UTC'
     
+    # Extract email domain for SPF instructions
+    user_email_domain = None
+    if request.user.email and '@' in request.user.email:
+        user_email_domain = request.user.email.split('@')[1]
+    
     context = {
         'campaigns': campaigns,
         'lists': lists,
@@ -97,6 +102,7 @@ def dashboard(request):
         'lists_count': lists_count,
         'subscribers_count': subscribers_count,
         'sent_emails_count': sent_emails_count,
+        'user_email_domain': user_email_domain,
         'user_timezone': user_timezone,
     }
     

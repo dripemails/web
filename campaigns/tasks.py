@@ -47,13 +47,18 @@ def _send_test_email_sync(email_id, test_email, variables=None):
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
     
+    # Get user email for From address
+    user_email = email.campaign.user.email
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=user_email,
         to=[test_email]
     )
+    # Set Sender header to DEFAULT_FROM_EMAIL
+    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -96,13 +101,22 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
     
+    # Get user email for From address
+    # Prefer user from request_obj if available, otherwise use campaign user
+    if request_obj and request_obj.user:
+        user_email = request_obj.user.email
+    else:
+        user_email = email.campaign.user.email
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=user_email,
         to=[subscriber_email]
     )
+    # Set Sender header to DEFAULT_FROM_EMAIL
+    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -237,13 +251,18 @@ def send_campaign_email(email_id, subscriber_id):
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     
+    # Get user email for From address
+    user_email = email.campaign.user.email
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=email.subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=user_email,
         to=[subscriber.email]
     )
+    # Set Sender header to DEFAULT_FROM_EMAIL
+    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:

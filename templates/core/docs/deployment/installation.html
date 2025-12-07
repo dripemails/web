@@ -1,0 +1,176 @@
+{% extends "core/docs/base_docs.html" %}
+
+{% block doc_title %}Installation Guide{% endblock %}
+
+{% block doc_content %}
+<h1 class="text-3xl font-bold text-gray-900 mb-6">Installation Guide</h1>
+
+<div class="prose max-w-none">
+  <p class="text-lg text-gray-600 mb-6">
+    Step-by-step guide to install DripEmails.org on your system.
+  </p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Clone the Repository</h2>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>git clone https://github.com/dripemails/web.git
+cd web</code></pre>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Set Up Python Environment</h2>
+  
+  <div class="space-y-4 mb-6">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Linux/macOS</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt</code></pre>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Windows</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Configure Environment</h2>
+  
+  <p class="text-gray-700 mb-4">Create a <code>.env</code> file with your configuration:</p>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>cp docs/env.example .env</code></pre>
+
+  <p class="text-gray-700 mb-4">Edit <code>.env</code> with your settings (see <a href="{% url 'core:docs_deployment_configuration' %}" class="text-indigo-600 hover:underline">Configuration Guide</a>)</p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Run Migrations</h2>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py migrate</code></pre>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Create Superuser</h2>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py createsuperuser</code></pre>
+
+  <p class="text-gray-700 mb-6">Follow the prompts to create your admin account.</p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Collect Static Files (Production Only)</h2>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py collectstatic</code></pre>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Start the Development Server</h2>
+  
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py runserver</code></pre>
+
+  <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
+    <h3 class="text-lg font-semibold text-green-900 mb-2">✅ Success!</h3>
+    <p class="text-green-800">
+      Visit <a href="http://127.0.0.1:8000" class="underline font-semibold">http://127.0.0.1:8000</a> to see your DripEmails installation.
+    </p>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Set Up AI Features (Optional)</h2>
+  
+  <p class="text-gray-700 mb-4">To enable AI-powered email generation:</p>
+
+  <div class="space-y-4 mb-6">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Get Hugging Face API Key</h3>
+      <p class="text-gray-700 mb-2">Sign up at <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">https://huggingface.co/settings/tokens</a></p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Windows PowerShell</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>$env:HUGGINGFACE_API_KEY = "hf_your_token_here"</code></pre>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Linux/macOS</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>export HUGGINGFACE_API_KEY="hf_your_token_here"</code></pre>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">Or add to .env file</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>HUGGINGFACE_API_KEY=hf_your_token_here</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Start SMTP Server (Optional)</h2>
+  
+  <p class="text-gray-700 mb-4">For local email testing:</p>
+
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Basic local development (default port 1025)
+python manage.py run_smtp_server
+
+# Custom port
+python manage.py run_smtp_server --port 2525
+
+# With debug mode
+python manage.py run_smtp_server --debug</code></pre>
+
+  <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
+    <h3 class="text-lg font-semibold text-blue-900 mb-2">💡 Windows Development</h3>
+    <p class="text-blue-800">
+      On Windows with DEBUG=True:
+    </p>
+    <ul class="list-disc pl-6 text-blue-800 mt-2 space-y-1">
+      <li>Redis is NOT required</li>
+      <li>Celery automatically disables</li>
+      <li>SMTP authentication disabled by default</li>
+      <li>Emails send immediately (synchronously)</li>
+    </ul>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Verification Steps</h2>
+
+  <div class="space-y-4 mb-8">
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Check Installation</h3>
+      <ol class="list-decimal pl-6 text-gray-700 space-y-2">
+        <li>Visit <a href="http://127.0.0.1:8000" class="text-indigo-600 hover:underline">http://127.0.0.1:8000</a></li>
+        <li>Log in with your superuser credentials</li>
+        <li>Navigate to the dashboard</li>
+        <li>Try creating a test campaign</li>
+      </ol>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Test Email Sending</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python manage.py shell
+
+>>> from django.core.mail import send_mail
+>>> send_mail('Test', 'Test message', 'from@example.com', ['to@example.com'])</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Common Installation Issues</h2>
+
+  <div class="space-y-4 mb-8">
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ ModuleNotFoundError</h3>
+      <p class="text-yellow-800 mb-2">Make sure your virtual environment is activated:</p>
+      <pre class="bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto text-sm"><code># Linux/macOS
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate</code></pre>
+    </div>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ Database Connection Error</h3>
+      <p class="text-yellow-800">Check your database settings in <code>.env</code> file</p>
+    </div>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ Permission Denied (Port 25)</h3>
+      <p class="text-yellow-800">Use port 1025 for development instead of port 25 (requires root)</p>
+    </div>
+  </div>
+
+  <div class="flex gap-4 mt-8">
+    <a href="{% url 'core:docs_deployment_prerequisites' %}" class="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
+      ← Prerequisites
+    </a>
+    <a href="{% url 'core:docs_deployment_configuration' %}" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
+      Next: Configuration →
+    </a>
+  </div>
+</div>
+{% endblock %}

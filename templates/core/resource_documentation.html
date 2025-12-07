@@ -1,21 +1,130 @@
-{% extends "base.html" %}
-{% load i18n %}
+{% extends "core/docs/base_docs.html" %}
+{% load static %}
 
-{% block title %}{% trans "Documentation" %} - DripEmails.org{% endblock %}
+{% block doc_title %}Documentation Overview{% endblock %}
 
-{% block content %}
-<div class="max-w-4xl mx-auto py-12 px-4">
-    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Documentation" %}</h1>
-    <p class="text-lg text-gray-700 mb-8">{% trans "Find everything you need to get started and master DripEmails.org. Explore guides, FAQs, and best practices." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8">
-        <ul class="list-disc pl-6 text-gray-700 space-y-2">
-            <li>{% trans "Getting Started Guide" %}</li>
-            <li>{% trans "Campaign Setup" %}</li>
-            <li>{% trans "Subscriber Management" %}</li>
-            <li>{% trans "Email Template Design" %}</li>
-            <li>{% trans "API Usage" %}</li>
-            <li>{% trans "Troubleshooting & FAQ" %}</li>
-        </ul>
+{% block doc_content %}
+<div class="prose max-w-none">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">Welcome to DripEmails Documentation</h1>
+  <p class="text-lg text-gray-600 mb-8">Everything you need to know to master email marketing with DripEmails.org</p>
+
+  <!-- Topics Grid -->
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">Documentation Topics</h2>
+  <div class="grid md:grid-cols-2 gap-6 mb-12">
+    <!-- Getting Started -->
+    <a href="{% url 'core:docs_getting_started' %}" class="block bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">🚀</span>
+        <h3 class="text-xl font-semibold text-gray-900">Getting Started</h3>
+      </div>
+      <p class="text-gray-700">Quick start guide to set up your account and send your first campaign</p>
+    </a>
+
+    <!-- Campaigns -->
+    <a href="{% url 'core:docs_campaigns' %}" class="block bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">📧</span>
+        <h3 class="text-xl font-semibold text-gray-900">Campaign Management</h3>
+      </div>
+      <p class="text-gray-700">Create, manage, and optimize your email campaigns</p>
+    </a>
+
+    <!-- Subscribers -->
+    <a href="{% url 'core:docs_subscribers' %}" class="block bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">👥</span>
+        <h3 class="text-xl font-semibold text-gray-900">Subscriber Management</h3>
+      </div>
+      <p class="text-gray-700">Import, organize, and segment your subscriber lists</p>
+    </a>
+
+    <!-- Templates -->
+    <a href="{% url 'core:docs_templates' %}" class="block bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">📝</span>
+        <h3 class="text-xl font-semibold text-gray-900">Email Templates</h3>
+      </div>
+      <p class="text-gray-700">Design beautiful, responsive email templates</p>
+    </a>
+
+    <!-- Analytics -->
+    <a href="{% url 'core:docs_analytics' %}" class="block bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">📊</span>
+        <h3 class="text-xl font-semibold text-gray-900">Analytics & Tracking</h3>
+      </div>
+      <p class="text-gray-700">Track opens, clicks, and campaign performance</p>
+    </a>
+
+    <!-- AI Features -->
+    <a href="{% url 'core:docs_ai_features' %}" class="block bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">🤖</span>
+        <h3 class="text-xl font-semibold text-gray-900">AI Features</h3>
+      </div>
+      <p class="text-gray-700">Generate and optimize email content with AI</p>
+    </a>
+
+    <!-- SMTP Server -->
+    <a href="{% url 'core:docs_smtp_server' %}" class="block bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">📮</span>
+        <h3 class="text-xl font-semibold text-gray-900">SMTP Server</h3>
+      </div>
+      <p class="text-gray-700">Configure and manage the built-in SMTP server</p>
+    </a>
+
+    <!-- Deployment -->
+    <a href="{% url 'core:docs_deployment' %}" class="block bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-3">
+        <span class="text-3xl mr-3">🚀</span>
+        <h3 class="text-xl font-semibold text-gray-900">Deployment</h3>
+      </div>
+      <p class="text-gray-700">Deploy DripEmails to production servers</p>
+    </a>
+  </div>
+
+  <!-- Popular Topics -->
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">Popular Topics</h2>
+  <div class="bg-white border-2 border-gray-200 rounded-lg p-6 mb-8">
+    <ul class="space-y-3">
+      <li>
+        <a href="{% url 'core:docs_getting_started' %}" class="text-indigo-600 hover:underline font-medium">
+          How to create your first campaign
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'core:docs_subscribers' %}" class="text-indigo-600 hover:underline font-medium">
+          Importing subscribers from CSV
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'core:docs_ai_features' %}" class="text-indigo-600 hover:underline font-medium">
+          Using AI to generate email content
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'core:docs_analytics' %}" class="text-indigo-600 hover:underline font-medium">
+          Understanding campaign analytics
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'core:docs_deployment' %}" class="text-indigo-600 hover:underline font-medium">
+          Deploying to production
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Need Help? -->
+  <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded">
+    <h3 class="text-lg font-semibold text-indigo-900 mb-2">Need More Help?</h3>
+    <p class="text-indigo-800 mb-4">Can't find what you're looking for? We're here to help!</p>
+    <div class="flex gap-4">
+      <a href="{% url 'core:resource_tutorials' %}" class="text-indigo-600 hover:underline font-medium">Video Tutorials</a>
+      <a href="{% url 'core:resource_api_reference' %}" class="text-indigo-600 hover:underline font-medium">API Reference</a>
+      <a href="{% url 'core:resource_community' %}" class="text-indigo-600 hover:underline font-medium">Community Forum</a>
     </div>
+  </div>
 </div>
 {% endblock %} 

@@ -1,8 +1,8 @@
-# AB Test & Campaign Analysis Setup Complete
+# Template Revision & Campaign Analysis Setup Complete
 
 ## Overview
 
-The `abtest.py` and `campaignAnalysis.py` files have been converted from Streamlit-based utilities to jQuery/Chart.js-based exporters. The Django web app now provides:
+The `template_revision.py` and `campaignAnalysis.py` files have been converted from Streamlit-based utilities to jQuery/Chart.js-based exporters. The Django web app now provides:
 
 1. **In-app web views** (Django templates using jQuery + Chart.js)
 2. **Standalone HTML exporters** (Python scripts that generate static HTML with charts)
@@ -13,11 +13,11 @@ The `abtest.py` and `campaignAnalysis.py` files have been converted from Streaml
 
 ### Django Web App Files
 
-- **`campaigns/views.py`** — Already contains `abtest_view()` and `campaign_analysis_view()` functions
+- **`campaigns/views.py`** — Already contains `template_revision_view()` and `campaign_analysis_view()` functions
 - **`campaigns/urls.py`** — Already mapped to routes:
-  - `/campaigns/abtest/` → `abtest_view`
+  - `/campaigns/template-revision/` → `template_revision_view`
   - `/campaigns/analysis/` → `campaign_analysis_view`
-- **`templates/campaigns/abtest.html`** — Form-based UI with live preview using jQuery
+- **`templates/campaigns/template_revision.html`** — Form-based UI with live preview using jQuery
 - **`templates/campaigns/campaign_analysis.html`** — Campaign metrics with Chart.js graphs
 
 ### Static Assets (Created)
@@ -27,7 +27,7 @@ The `abtest.py` and `campaignAnalysis.py` files have been converted from Streaml
 
 ### Standalone Exporters (Updated)
 
-- **`abtest.py`** — Bootstrap Django, select campaign/email, write static HTML preview, open in browser
+- **`template_revision.py`** — Bootstrap Django, select campaign/email, write static HTML preview, open in browser
 - **`campaignAnalysis.py`** — Bootstrap Django, generate campaign analysis HTML with Chart.js graphs
 
 ---
@@ -42,7 +42,7 @@ python manage.py runserver
 
 Then visit:
 
-- **AB Test page:** http://127.0.0.1:8000/campaigns/abtest/
+- **Template Revision page:** http://127.0.0.1:8000/campaigns/template-revision/
 - **Campaign Analysis page:** http://127.0.0.1:8000/campaigns/analysis/
 
 **Note:** Both require login. If you don't have a user, create one:
@@ -56,11 +56,11 @@ python manage.py createsuperuser
 Generate and open static HTML files locally (no login required):
 
 ```powershell
-# AB test preview (first campaign/email by default)
-python abtest.py
+# Template revision preview (first campaign/email by default)
+python template_revision.py
 
 # Optional: specify campaign ID and email ID
-python abtest.py <campaign_uuid> <email_uuid>
+python template_revision.py <campaign_uuid> <email_uuid>
 
 # Campaign analysis preview
 python campaignAnalysis.py
@@ -75,7 +75,7 @@ These scripts write HTML files to `static_dashboards/` and open them in your bro
 
 ## Key Features
 
-### abtest.html (In-App View)
+### template_revision.html (In-App View)
 
 - Select campaign and email from dropdowns
 - View original email on left
@@ -137,7 +137,7 @@ All migrations applied successfully. Ready to run!
 3. **Navigate to the pages**:
 
    - Login at http://127.0.0.1:8000/accounts/login/
-   - AB Test: http://127.0.0.1:8000/campaigns/abtest/
+   - Template Revision: http://127.0.0.1:8000/campaigns/template-revision/
    - Analysis: http://127.0.0.1:8000/campaigns/analysis/
 
 4. **Create test campaigns and emails** in the web UI to see charts and data.

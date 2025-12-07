@@ -1,6 +1,6 @@
 """
 AI utilities for email generation and topic analysis.
-Provides functions for generating email content using Ollama (llama3.1:8b) and analyzing email topics using LDA.
+Provides functions for generating email content using Hugging Face API and analyzing email topics using LDA.
 """
 
 import os
@@ -10,7 +10,7 @@ import logging
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 
-# AI imports - Using local LLM via Ollama (llama3.1:8b)
+# AI imports - Using Hugging Face Inference API
 try:
     import requests
     REQUESTS_AVAILABLE = True
@@ -20,9 +20,10 @@ except ImportError:
 # Configure logging
 logger = logging.getLogger(__name__)
 
-# Ollama configuration
-OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:8b")
+# Hugging Face configuration
+HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY", "")
+HUGGINGFACE_MODEL = os.environ.get("HUGGINGFACE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
+HUGGINGFACE_API_URL = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
 
 
 def extract_json(text: str) -> str:
@@ -150,19 +151,38 @@ Respond ONLY in valid JSON:
 }}
 """
 
-    # ----- CALL OLLAMA -----
+    # ----- CALL HUGGING FACE API -----
     try:
         if not REQUESTS_AVAILABLE:
             raise ImportError("requests is required for email generation. Install with: pip install requests")
         
-        url = OLLAMA_URL.rstrip('/') + '/api/generate'
+        if not HUGGINGFACE_API_KEY:
+            raise ValueError("HUGGINGFACE_API_KEY environment variable is required. Get your API key from https://huggingface.co/settings/tokens")
+        
+        headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+        payload = {
+            "inputs": prompt,
+            "parameters": {
+                "max_new_tokens": 1000,
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "return_full_text": False
+            }
+        }
+        
         response = requests.post(
-            url,
-            json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
+            HUGGINGFACE_API_URL,
+            headers=headers,
+            json=payload,
             timeout=120
         )
         response.raise_for_status()
-        raw = response.json().get("response", "").strip()
+        
+        result_data = response.json()
+        if isinstance(result_data, list) and len(result_data) > 0:
+            raw = result_data[0].get("generated_text", "").strip()
+        else:
+            raw = result_data.get("generated_text", "").strip()
 
         # Extract & parse JSON safely
         try:
@@ -192,8 +212,17 @@ Respond ONLY in valid JSON:
             }
 
     except requests.exceptions.RequestException as e:
-        logger.error(f"Ollama API error: {str(e)}")
-        raise ValueError(f"Failed to generate email. Make sure Ollama is running on {OLLAMA_URL}")
+        logger.error(f"Hugging Face API error: {str(e)}")
+        error_msg = f"Failed to generate email. Error: {str(e)}"
+        try:
+            if hasattr(e, 'response') and e.response is not None:
+                if e.response.status_code == 401:
+                    error_msg = "Invalid Hugging Face API key. Please check your HUGGINGFACE_API_KEY environment variable."
+                elif e.response.status_code == 503:
+                    error_msg = "Model is loading. Please try again in a few moments."
+        except:
+            pass
+        raise ValueError(error_msg)
     except ImportError as e:
         logger.error(f"Import error: {str(e)}")
         raise ValueError(str(e))
@@ -202,7 +231,7 @@ Respond ONLY in valid JSON:
 
 def revise_email_content(email_text: str) -> Dict[str, str]:
     """
-    Revise an email for grammar, clarity, and professionalism using Ollama llama3.1:8b.
+    Revise an email for grammar, clarity, and professionalism using Hugging Face API.
     
     Args:
         email_text: The original email content (HTML or plain text)
@@ -232,36 +261,38 @@ def revise_email_content(email_text: str) -> Dict[str, str]:
     )
     
     try:
-        logger.info("Revising email content with Ollama llama3.1:8b...")
+        logger.info(f"Revising email content with Hugging Face model: {HUGGINGFACE_MODEL}...")
         
-        # Force use of Ollama for revision
         if not REQUESTS_AVAILABLE:
             raise ImportError("requests is required for email revision. Install with: pip install requests")
         
-        url = OLLAMA_URL.rstrip('/') + '/api/generate'
+        if not HUGGINGFACE_API_KEY:
+            raise ValueError("HUGGINGFACE_API_KEY environment variable is required. Get your API key from https://huggingface.co/settings/tokens")
+        
+        headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
         payload = {
-            'model': OLLAMA_MODEL,
-            'prompt': prompt,
-            'stream': False,
+            "inputs": prompt,
+            "parameters": {
+                "max_new_tokens": 1500,
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "return_full_text": False
+            }
         }
         
-        resp = requests.post(url, json=payload, timeout=120)
+        resp = requests.post(HUGGINGFACE_API_URL, headers=headers, json=payload, timeout=120)
         resp.raise_for_status()
         data = resp.json()
         
-        # Extract response text
+        # Extract response text from Hugging Face API response
         revised = None
-        if isinstance(data, dict):
-            if 'response' in data:
-                revised = data['response']
-            elif 'choices' in data and data['choices']:
-                first = data['choices'][0]
-                revised = first.get('text') or first.get('message') or first.get('content')
-            elif 'text' in data:
-                revised = data['text']
+        if isinstance(data, list) and len(data) > 0:
+            revised = data[0].get('generated_text', '')
+        elif isinstance(data, dict):
+            revised = data.get('generated_text', '')
         
         if not revised:
-            revised = resp.text
+            raise ValueError("No response generated from model")
         
         revised = revised.strip()
         

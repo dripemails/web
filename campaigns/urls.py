@@ -10,7 +10,7 @@ urlpatterns = [
     path('template/<uuid:campaign_id>/', views.campaign_template, name='template'),
     path('template/', views.campaign_template, name='new-template'),
     # Simple pages ported from streamlit utilities
-    path('abtest/', views.abtest_view, name='abtest'),
+    path('template-revision/', views.template_revision_view, name='template_revision'),
     path('drafts/', views.drafts_view, name='drafts'),
     path('analysis/', views.campaign_analysis_view, name='analysis'),
 ]

@@ -371,7 +371,7 @@ response = http.request(request)</code></pre>
                     
                     <div class="bg-blue-50 border border-blue-200 p-4 rounded-md">
                         <p class="text-sm text-blue-800">
-                            ℹ️ {% trans "AI generation uses your local Ollama model to create email content. The generated subject and body will replace your current email." %}
+                            ℹ️ {% trans "AI generation uses Hugging Face API to create email content. The generated subject and body will replace your current email." %}
                         </p>
                     </div>
                     
@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wait_time: parseInt(document.getElementById('wait_time').value),
             wait_unit: document.getElementById('wait_unit').value,
             body_html: htmlContent,
-            body_text: htmlContent.replace(/<[^>]*>/g, '')
+            body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
         };
         
         // Only add footer_id if a footer is selected
@@ -787,8 +787,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error:', error);
                 let errorMsg = '{% trans "Failed to generate email. " %}';
-                if (error.message.includes('Ollama')) {
-                    errorMsg += '{% trans "Make sure Ollama is running on localhost:11434." %}';
+                if (error.message.includes('API') || error.message.includes('token')) {
+                    errorMsg += '{% trans "Make sure your HUGGINGFACE_API_KEY environment variable is set." %}';
                 } else {
                     errorMsg += error.message;
                 }
@@ -887,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 wait_time: parseInt(document.getElementById('wait_time').value),
                 wait_unit: document.getElementById('wait_unit').value,
                 body_html: htmlContent,
-                body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
+                body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
             };
             
             // Only add footer_id if a footer is selected
@@ -976,12 +976,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+            .then(response => response.json().then(data => ({status: response.status, body: data})))
+            .then(({status, body}) => {
+                if (status !== 200) {
+                    // Show the actual error message from the server
+                    const errorMsg = body.error || '{% trans "An error occurred while sending the test email. Please try again." %}';
+                    alert(errorMsg);
+                } else {
+                    closeTestModal();
+                    alert('{% trans "Test email sent successfully!" %}');
                 }
-                closeTestModal();
-                alert('{% trans "Test email sent successfully!" %}');
             })
             .catch(error => {
                 console.error('Error:', error);

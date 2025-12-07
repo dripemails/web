@@ -7,9 +7,102 @@ from datetime import timedelta
 import logging
 import uuid
 import sys
+import re
 from analytics.models import UserProfile
 
 logger = logging.getLogger(__name__)
+
+
+def _html_to_plain_text(html_content):
+    """Convert HTML to plain text, preserving URLs from links."""
+    if not html_content:
+        return ""
+    
+    # Replace <a href="URL">text</a> with "text (URL)" if URL is different from text
+    def replace_link(match):
+        url = match.group(1)
+        text = match.group(2)
+        # If the link text is different from URL or doesn't contain the full URL, append the URL
+        if url.lower() not in text.lower() or not text.startswith('http'):
+            return f"{text} ({url})"
+        return text
+    
+    # Pattern to match <a> tags with href
+    link_pattern = re.compile(r'<a[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.IGNORECASE | re.DOTALL)
+    html_content = link_pattern.sub(replace_link, html_content)
+    
+    # Replace <br> and <br/> with newlines
+    html_content = re.sub(r'<br\s*/?>', '\n', html_content, flags=re.IGNORECASE)
+    
+    # Replace </p>, </div>, </h1-6> with double newlines
+    html_content = re.sub(r'</(p|div|h[1-6]|li)>', '\n\n', html_content, flags=re.IGNORECASE)
+    
+    # Replace <li> with bullet point
+    html_content = re.sub(r'<li[^>]*>', '\n• ', html_content, flags=re.IGNORECASE)
+    
+    # Remove all other HTML tags
+    html_content = re.sub(r'<[^>]+>', '', html_content)
+    
+    # Decode HTML entities
+    html_content = html_content.replace('&nbsp;', ' ')
+    html_content = html_content.replace('&amp;', '&')
+    html_content = html_content.replace('&lt;', '<')
+    html_content = html_content.replace('&gt;', '>')
+    html_content = html_content.replace('&quot;', '"')
+    
+    # Clean up extra whitespace and newlines
+    html_content = re.sub(r'\n\s*\n\s*\n+', '\n\n', html_content)
+    html_content = re.sub(r'[ \t]+', ' ', html_content)
+    
+    return html_content.strip()
+
+
+def _inject_tracking_pixel(html_content, tracking_id, subscriber_email):
+    """Inject tracking pixel into HTML email content."""
+    from django.conf import settings
+    
+    # Build tracking pixel URL
+    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    tracking_url = f"{base_url}/analytics/track/open/{tracking_id}/?email={subscriber_email}"
+    
+    # Create tracking pixel image tag
+    tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" style="display:none;" />'
+    
+    # Try to inject before closing body tag, otherwise append to end
+    if '</body>' in html_content:
+        html_content = html_content.replace('</body>', f'{tracking_pixel}</body>')
+    else:
+        html_content += tracking_pixel
+    
+    return html_content
+
+
+def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email):
+    """Wrap all links in HTML content with tracking redirects."""
+    from django.conf import settings
+    import re
+    from urllib.parse import quote
+    
+    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Pattern to find <a> tags with href attributes
+    link_pattern = re.compile(r'<a([^>]*?)href=["\']([^"\'>]+)["\']([^>]*?)>', re.IGNORECASE)
+    
+    def replace_link(match):
+        before_href = match.group(1)
+        original_url = match.group(2)
+        after_href = match.group(3)
+        
+        # Skip if it's already a tracking link, mailto, or anchor link
+        if original_url.startswith(('#', 'mailto:', base_url)):
+            return match.group(0)
+        
+        # Create tracking URL
+        tracking_url = f"{base_url}/analytics/track/click/{tracking_id}/?email={subscriber_email}&url={quote(original_url)}"
+        
+        return f'<a{before_href}href="{tracking_url}"{after_href}>'
+    
+    return link_pattern.sub(replace_link, html_content)
 
 
 def _is_celery_available():
@@ -32,13 +125,14 @@ def _send_test_email_sync(email_id, test_email, variables=None):
     try:
         email = Email.objects.select_related('campaign').get(id=email_id)
     except Email.DoesNotExist:
-        logger.error(f"Email {email_id} not found")
-        raise
+        error_msg = f"Email {email_id} not found"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
     
     # Replace variables in content
-    html_content = email.body_html
-    text_content = email.body_text
-    subject = email.subject
+    html_content = email.body_html or ""
+    text_content = email.body_text or ""
+    subject = email.subject or "Test Email"
     
     if variables:
         for key, value in variables.items():
@@ -47,31 +141,33 @@ def _send_test_email_sync(email_id, test_email, variables=None):
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
     
-    # Get user email for From address
-    user_email = email.campaign.user.email
+    # Ensure we have at least some content
+    if not html_content and not text_content:
+        error_msg = "Email has no content (both body_html and body_text are empty)"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
     
-    # Check if user has valid SPF record
-    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
-    has_valid_spf = user_profile.spf_verified
+    # If we have HTML content but no text content, convert HTML to plain text
+    if html_content and not text_content:
+        text_content = _html_to_plain_text(html_content)
     
     # Create and send email
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=text_content,
-        from_email=user_email,
-        to=[test_email]
-    )
-    # Only set Sender header if user doesn't have valid SPF record
-    if not has_valid_spf:
-        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
-    msg.attach_alternative(html_content, "text/html")
-    
     try:
+        msg = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content or "This is a test email.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[test_email]
+        )
+        if html_content:
+            msg.attach_alternative(html_content, "text/html")
+        
         msg.send()
         logger.info(f"Sent test email '{subject}' to {test_email}")
     except Exception as e:
-        logger.error(f"Error sending test email to {test_email}: {str(e)}")
-        raise
+        error_msg = f"Error sending test email to {test_email}: {str(e)}"
+        logger.error(error_msg)
+        raise Exception(error_msg)
 
 
 def _send_single_email_sync(email_id, subscriber_email, variables=None, request_id=None):
@@ -106,18 +202,21 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
     
-    # Get user email for From address
-    # Prefer user from request_obj if available, otherwise use campaign user
-    if request_obj and request_obj.user:
-        user_email = request_obj.user.email
-        user = request_obj.user
-    else:
-        user_email = email.campaign.user.email
-        user = email.campaign.user
+    # Create the sent event first to get tracking ID
+    sent_event = EmailEvent.objects.create(
+        email=email,
+        subscriber_email=subscriber_email,
+        event_type='sent'
+    )
+    tracking_id = str(sent_event.id)
     
-    # Check if user has valid SPF record
-    user_profile, _ = UserProfile.objects.get_or_create(user=user)
-    has_valid_spf = user_profile.spf_verified
+    # Inject tracking pixel and wrap links
+    html_content = _inject_tracking_pixel(html_content, tracking_id, subscriber_email)
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email)
+    
+    # If we have HTML content but no text content, convert HTML to plain text
+    if html_content and not text_content:
+        text_content = _html_to_plain_text(html_content)
     
     # Create and send email
     msg = EmailMultiAlternatives(
@@ -133,13 +232,6 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     
     try:
         msg.send()
-        
-        # Record the event
-        EmailEvent.objects.create(
-            email=email,
-            subscriber_email=subscriber_email,
-            event_type='sent'
-        )
         
         # Update campaign metrics
         campaign = email.campaign
@@ -235,28 +327,24 @@ def send_campaign_email(email_id, subscriber_id):
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
     
-    # Get site information from request context
-    from core.context_processors import site_detection
-    # Create a mock request to get site info
-    class MockRequest:
-        def get_host(self):
-            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    # Create the sent event first to get tracking ID
+    sent_event = EmailEvent.objects.create(
+        email=email,
+        subscriber_email=subscriber.email,
+        event_type='sent'
+    )
+    tracking_id = str(sent_event.id)
     
-    site_info = site_detection(MockRequest())
-    site_url = site_info['site_url']
-    site_name = site_info['site_name']
-    site_logo = site_info['site_logo']
+    # Generate tracking URLs
+    tracking_pixel = f'<img src="{settings.SITE_URL}/analytics/track/open/{tracking_id}/?email={subscriber.email}" width="1" height="1" alt="" style="display:none;" />'
+    unsubscribe_link = f"{settings.SITE_URL}/unsubscribe/{subscriber.uuid}/"
     
-    # Tracking pixel for open tracking
-    tracking_id = uuid.uuid4()
-    tracking_pixel = f'<img src="{site_url}/track/open/{tracking_id}/" width="1" height="1" alt=""/>'
-    
-    # Generate unsubscribe link
-    unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
-    
-    # Prepare email with ads and unsubscribe link as needed
+    # Prepare email with tracking
     html_content = email.body_html
     text_content = email.body_text
+    
+    # Wrap all links with tracking
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email)
     
     # Add tracking pixel to HTML content
     html_content += tracking_pixel
@@ -302,14 +390,7 @@ def send_campaign_email(email_id, subscriber_id):
     try:
         msg.send()
         
-        # Record the event
-        EmailEvent.objects.create(
-            email=email,
-            subscriber_email=subscriber.email,
-            event_type='sent'
-        )
-        
-        # Update campaign metrics
+        # Update campaign metrics (event was already created before sending)
         campaign = email.campaign
         campaign.sent_count += 1
         campaign.save(update_fields=['sent_count'])
@@ -344,19 +425,29 @@ def process_email_open(tracking_id, subscriber_email):
             subscriber_email=subscriber_email
         )
         
-        # Create an open event
-        EmailEvent.objects.create(
+        # Check if open event already exists to avoid duplicates
+        existing_open = EmailEvent.objects.filter(
             email=sent_event.email,
             subscriber_email=subscriber_email,
             event_type='opened'
-        )
+        ).exists()
         
-        # Update campaign metrics
-        campaign = sent_event.email.campaign
-        campaign.open_count += 1
-        campaign.save(update_fields=['open_count'])
-        
-        logger.info(f"Recorded open event for {subscriber_email}")
+        if not existing_open:
+            # Create an open event
+            EmailEvent.objects.create(
+                email=sent_event.email,
+                subscriber_email=subscriber_email,
+                event_type='opened'
+            )
+            
+            # Update campaign metrics
+            campaign = sent_event.email.campaign
+            campaign.open_count += 1
+            campaign.save(update_fields=['open_count'])
+            
+            logger.info(f"Recorded open event for {subscriber_email}")
+        else:
+            logger.debug(f"Open event already exists for {subscriber_email}, skipping duplicate")
     
     except EmailEvent.DoesNotExist:
         logger.error(f"No matching sent event found for tracking ID {tracking_id}")
@@ -377,7 +468,7 @@ def process_email_click(tracking_id, subscriber_email, link_url):
             subscriber_email=subscriber_email
         )
         
-        # Create a click event
+        # Always create click events (even if duplicate link clicks) for accurate tracking
         EmailEvent.objects.create(
             email=sent_event.email,
             subscriber_email=subscriber_email,
@@ -385,7 +476,7 @@ def process_email_click(tracking_id, subscriber_email, link_url):
             link_clicked=link_url
         )
         
-        # Update campaign metrics
+        # Update campaign metrics (count each click)
         campaign = sent_event.email.campaign
         campaign.click_count += 1
         campaign.save(update_fields=['click_count'])

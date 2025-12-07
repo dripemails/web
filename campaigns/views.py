@@ -444,8 +444,8 @@ def campaign_create(request):
 
 
 @login_required
-def abtest_view(request):
-    """Simple web view replacement for the Streamlit AB test utility.
+def template_revision_view(request):
+    """Simple web view for template revision and editing.
 
     - GET: select a campaign and email to preview
     - POST: save an edited draft of an email's HTML body
@@ -479,7 +479,7 @@ def abtest_view(request):
         email.save(update_fields=['body_html', 'updated_at'])
         messages.success(request, 'Draft saved to database.')
         # Redirect back to the same selection
-        url = reverse('campaigns:abtest')
+        url = reverse('campaigns:template_revision')
         params = f'?campaign_id={campaign.id}&email_id={email.id}'
         return redirect(url + params)
 
@@ -490,10 +490,10 @@ def abtest_view(request):
         'email': email,
     }
     try:
-        return render(request, 'campaigns/abtest.html', context)
+        return render(request, 'campaigns/template_revision.html', context)
     except TemplateDoesNotExist:
         # Support templates placed directly under a templates/ folder without app subdir
-        return render(request, 'abtest.html', context)
+        return render(request, 'template_revision.html', context)
 
 
 @login_required
@@ -544,7 +544,7 @@ def campaign_analysis_view(request):
 
         events = EmailEvent.objects.filter(email__campaign=campaign)
         from collections import defaultdict
-        by_month = defaultdict(lambda: {'opened': 0, 'clicked': 0, 'sent': 0})
+        by_month = defaultdict(lambda: {'opened': 0, 'clicked': 0, 'sent': 0, 'bounces': 0, 'unsubscribes': 0, 'complaints': 0})
         for ev in events:
             month = ev.created_at.strftime('%Y-%m')
             if ev.event_type == 'opened':
@@ -553,13 +553,33 @@ def campaign_analysis_view(request):
                 by_month[month]['clicked'] += 1
             elif ev.event_type == 'sent':
                 by_month[month]['sent'] += 1
+            elif ev.event_type == 'bounced':
+                by_month[month]['bounces'] += 1
+            elif ev.event_type == 'unsubscribed':
+                by_month[month]['unsubscribes'] += 1
+            elif ev.event_type == 'complained':
+                by_month[month]['complaints'] += 1
 
-        # Per-email breakdown
+        # Per-email breakdown with unique opens
         for e in campaign.emails.all():
             sent = EmailEvent.objects.filter(email=e, event_type='sent').count()
-            opened = EmailEvent.objects.filter(email=e, event_type='opened').count()
+            # Count unique opens (distinct subscriber emails that opened)
+            unique_opens = EmailEvent.objects.filter(
+                email=e, 
+                event_type='opened'
+            ).values('subscriber_email').distinct().count()
+            # Total clicks
             clicked = EmailEvent.objects.filter(email=e, event_type='clicked').count()
-            email_rows.append({'subject': e.subject, 'sent': sent, 'opened': opened, 'clicked': clicked})
+            open_rate = (unique_opens / sent * 100) if sent > 0 else 0
+            click_rate = (clicked / sent * 100) if sent > 0 else 0
+            email_rows.append({
+                'subject': e.subject,
+                'sent': sent,
+                'opened': unique_opens,  # Use unique opens for display
+                'clicked': clicked,
+                'open_rate': round(open_rate, 2),
+                'click_rate': round(click_rate, 2)
+            })
 
     # Convert defaultdict to a sorted list of (month, values) tuples for the template
     # This avoids relying on the template dictsort filter which may behave differently
@@ -578,10 +598,75 @@ def campaign_analysis_view(request):
 
 
 @login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def campaign_stats_api(request, campaign_id):
+    """API endpoint for real-time campaign statistics."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    # Get overall campaign stats from the model (updated in real-time)
+    overall_stats = {
+        'sent_count': campaign.sent_count,
+        'open_count': campaign.open_count,
+        'click_count': campaign.click_count,
+        'open_rate': round(campaign.open_rate, 2),
+        'click_rate': round(campaign.click_rate, 2),
+    }
+    
+    # Get per-email stats
+    email_stats = []
+    for email in campaign.emails.all().order_by('order'):
+        sent = EmailEvent.objects.filter(email=email, event_type='sent').count()
+        opened = EmailEvent.objects.filter(email=email, event_type='opened').count()
+        clicked = EmailEvent.objects.filter(email=email, event_type='clicked').count()
+        unique_opens = EmailEvent.objects.filter(
+            email=email, 
+            event_type='opened'
+        ).values('subscriber_email').distinct().count()
+        
+        email_stats.append({
+            'id': str(email.id),
+            'subject': email.subject,
+            'order': email.order,
+            'sent': sent,
+            'opened': opened,
+            'clicked': clicked,
+            'unique_opens': unique_opens,
+            'open_rate': round((opened / sent * 100) if sent > 0 else 0, 2),
+            'click_rate': round((clicked / sent * 100) if sent > 0 else 0, 2),
+        })
+    
+    # Get recent events (last 50)
+    recent_events = EmailEvent.objects.filter(
+        email__campaign=campaign
+    ).select_related('email').order_by('-created_at')[:50]
+    
+    events_list = [{
+        'id': str(event.id),
+        'email_subject': event.email.subject,
+        'subscriber_email': event.subscriber_email,
+        'event_type': event.event_type,
+        'link_clicked': event.link_clicked,
+        'created_at': event.created_at.isoformat(),
+    } for event in recent_events]
+    
+    return Response({
+        'campaign': {
+            'id': str(campaign.id),
+            'name': campaign.name,
+            'is_active': campaign.is_active,
+        },
+        'overall_stats': overall_stats,
+        'email_stats': email_stats,
+        'recent_events': events_list,
+    })
+
+
+@login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def generate_email_with_ai(request, campaign_id):
-    """Generate email subject and body using Ollama (llama3.1:8b)."""
+    """Generate email subject and body using Hugging Face API."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     
     subject_topic = request.data.get('subject_topic')
@@ -639,7 +724,7 @@ def generate_email_with_ai(request, campaign_id):
     except ValueError as e:
         return Response({
             'error': str(e),
-            'hint': 'Please ensure Ollama is running at http://localhost:11434'
+            'hint': 'Please ensure HUGGINGFACE_API_KEY environment variable is set. Get your key from https://huggingface.co/settings/tokens'
         }, status=400)
     except Exception as e:
         return Response({
@@ -651,7 +736,7 @@ def generate_email_with_ai(request, campaign_id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def revise_email_with_ai(request):
-    """Revise email content for grammar and clarity using Ollama llama3.1:8b."""
+    """Revise email content for grammar and clarity using Hugging Face API."""
     from .ai_utils import revise_email_content
     
     email_text = request.data.get('email_text', '')

@@ -326,6 +326,70 @@ def docs_deployment_troubleshooting(request):
 def resource_tutorials(request):
     return render(request, 'core/resource_tutorials.html')
 
+# Tutorial detail pages
+def tutorial_quick_start(request):
+    return render(request, 'core/tutorials/quick_start.html')
+
+def tutorial_dashboard_overview(request):
+    return render(request, 'core/tutorials/dashboard_overview.html')
+
+def tutorial_account_setup(request):
+    return render(request, 'core/tutorials/account_setup.html')
+
+def tutorial_creating_campaign(request):
+    return render(request, 'core/tutorials/creating_campaign.html')
+
+def tutorial_drip_campaigns(request):
+    return render(request, 'core/tutorials/drip_campaigns.html')
+
+def tutorial_scheduling_campaigns(request):
+    return render(request, 'core/tutorials/scheduling_campaigns.html')
+
+def tutorial_importing_subscribers(request):
+    return render(request, 'core/tutorials/importing_subscribers.html')
+
+def tutorial_managing_lists(request):
+    return render(request, 'core/tutorials/managing_lists.html')
+
+def tutorial_subscriber_segmentation(request):
+    return render(request, 'core/tutorials/subscriber_segmentation.html')
+
+def tutorial_email_editor(request):
+    return render(request, 'core/tutorials/email_editor.html')
+
+def tutorial_reusable_templates(request):
+    return render(request, 'core/tutorials/reusable_templates.html')
+
+def tutorial_design_best_practices(request):
+    return render(request, 'core/tutorials/design_best_practices.html')
+
+def tutorial_ai_setup(request):
+    return render(request, 'core/tutorials/ai_setup.html')
+
+def tutorial_ai_generation(request):
+    return render(request, 'core/tutorials/ai_generation.html')
+
+def tutorial_ai_optimization(request):
+    return render(request, 'core/tutorials/ai_optimization.html')
+
+def tutorial_email_analytics(request):
+    return render(request, 'core/tutorials/email_analytics.html')
+
+def tutorial_performance_dashboard(request):
+    return render(request, 'core/tutorials/performance_dashboard.html')
+
+def tutorial_data_optimization(request):
+    return render(request, 'core/tutorials/data_optimization.html')
+
+def tutorial_smtp_setup(request):
+    return render(request, 'core/tutorials/smtp_setup.html')
+
+def tutorial_deployment(request):
+    return render(request, 'core/tutorials/deployment.html')
+
+def tutorial_api_integration(request):
+    return render(request, 'core/tutorials/api_integration.html')
+
 def resource_api_reference(request):
     return render(request, 'core/resource_api_reference.html')
 

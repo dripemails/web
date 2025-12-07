@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Deploying to Production - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-gray-700 to-gray-900 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">🚀 Deploying to Production</h1>
+      <p class="text-xl text-white text-opacity-90">Launch DripEmails.org on your server</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ 20 min read</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Production Deployment Guide</h2>
+        <p class="text-gray-700 mb-6">This guide walks through deploying DripEmails.org to a production server with best practices for security, performance, and reliability.</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Test your deployment on a staging environment before going to production.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Prerequisites</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Linux server (Ubuntu 20.04+ recommended)</li>
+          <li>Domain name pointed to your server</li>
+          <li>SSH access to server</li>
+          <li>Root or sudo privileges</li>
+          <li>Basic command line knowledge</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">System Requirements</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <p class="text-gray-700 mb-3"><strong>Minimum:</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700 mb-4">
+            <li>2 CPU cores</li>
+            <li>4GB RAM</li>
+            <li>20GB storage</li>
+            <li>Ubuntu 20.04 or later</li>
+          </ul>
+          <p class="text-gray-700 mb-3"><strong>Recommended:</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700">
+            <li>4+ CPU cores</li>
+            <li>8GB+ RAM</li>
+            <li>50GB+ SSD storage</li>
+            <li>Ubuntu 22.04 LTS</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 1: Server Setup</h3>
+        <p class="text-gray-700 mb-4">Update system and install dependencies:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo apt update && sudo apt upgrade -y<br/>
+sudo apt install python3-pip python3-venv nginx postgresql redis-server -y<br/>
+sudo apt install supervisor git -y
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 2: Create Application User</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo adduser --disabled-password --gecos '' dripemails<br/>
+sudo usermod -aG www-data dripemails
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 3: Clone Repository</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo su - dripemails<br/>
+git clone https://github.com/yourusername/dripemails.git<br/>
+cd dripemails/web<br/>
+python3 -m venv venv<br/>
+source venv/bin/activate<br/>
+pip install -r requirements.txt
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 4: Configure Environment</h3>
+        <p class="text-gray-700 mb-4">Create .env file:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+DEBUG=False<br/>
+SECRET_KEY=your-secret-key-here<br/>
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com<br/>
+<br/>
+DATABASE_URL=postgresql://user:password@localhost/dripemails<br/>
+REDIS_URL=redis://localhost:6379/0<br/>
+<br/>
+EMAIL_HOST=smtp.sendgrid.net<br/>
+EMAIL_PORT=587<br/>
+EMAIL_USE_TLS=True<br/>
+EMAIL_HOST_USER=apikey<br/>
+EMAIL_HOST_PASSWORD=your-api-key
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Generate a strong SECRET_KEY: `python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'`</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 5: Database Setup</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo -u postgres psql<br/>
+CREATE DATABASE dripemails;<br/>
+CREATE USER dripuser WITH PASSWORD 'yourpassword';<br/>
+ALTER ROLE dripuser SET client_encoding TO 'utf8';<br/>
+ALTER ROLE dripuser SET default_transaction_isolation TO 'read committed';<br/>
+ALTER ROLE dripuser SET timezone TO 'UTC';<br/>
+GRANT ALL PRIVILEGES ON DATABASE dripemails TO dripuser;<br/>
+\q
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 6: Run Migrations</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+python manage.py migrate<br/>
+python manage.py collectstatic --noinput<br/>
+python manage.py createsuperuser
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 7: Gunicorn Setup</h3>
+        <p class="text-gray-700 mb-4">Create /etc/supervisor/conf.d/dripemails.conf:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+[program:dripemails]<br/>
+command=/home/dripemails/dripemails/web/venv/bin/gunicorn dripemails.wsgi:application --bind 127.0.0.1:8000<br/>
+directory=/home/dripemails/dripemails/web<br/>
+user=dripemails<br/>
+autostart=true<br/>
+autorestart=true<br/>
+redirect_stderr=true<br/>
+stdout_logfile=/var/log/dripemails/gunicorn.log
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 8: Celery Setup</h3>
+        <p class="text-gray-700 mb-4">Create /etc/supervisor/conf.d/celery.conf:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+[program:celery]<br/>
+command=/home/dripemails/dripemails/web/venv/bin/celery -A dripemails worker -l info<br/>
+directory=/home/dripemails/dripemails/web<br/>
+user=dripemails<br/>
+autostart=true<br/>
+autorestart=true
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 9: Nginx Configuration</h3>
+        <p class="text-gray-700 mb-4">Create /etc/nginx/sites-available/dripemails:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+server {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;listen 80;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;server_name yourdomain.com www.yourdomain.com;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;location /static/ {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias /home/dripemails/dripemails/web/staticfiles/;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;location / {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy_pass http://127.0.0.1:8000;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header Host $host;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy_set_header X-Real-IP $remote_addr;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 10: SSL Certificate</h3>
+        <p class="text-gray-700 mb-4">Install Let's Encrypt SSL:</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo apt install certbot python3-certbot-nginx -y<br/>
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com<br/>
+sudo certbot renew --dry-run
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 11: Start Services</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+sudo mkdir -p /var/log/dripemails<br/>
+sudo chown dripemails:dripemails /var/log/dripemails<br/>
+sudo supervisorctl reread<br/>
+sudo supervisorctl update<br/>
+sudo supervisorctl start all<br/>
+sudo nginx -t<br/>
+sudo systemctl restart nginx
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Post-Deployment Checklist</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>✅ Website loads at https://yourdomain.com</li>
+          <li>✅ Admin panel accessible at /admin</li>
+          <li>✅ Static files loading correctly</li>
+          <li>✅ Can send test email</li>
+          <li>✅ Celery tasks running</li>
+          <li>✅ SSL certificate valid</li>
+          <li>✅ Database backups configured</li>
+          <li>✅ Monitoring set up</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Monitoring and Maintenance</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>Logs:</strong> /var/log/dripemails/</li>
+            <li><strong>Supervisor:</strong> sudo supervisorctl status</li>
+            <li><strong>Nginx:</strong> sudo nginx -t && sudo systemctl status nginx</li>
+            <li><strong>Database:</strong> Regular backups with pg_dump</li>
+            <li><strong>Updates:</strong> git pull && pip install -r requirements.txt</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Security Best Practices</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Enable firewall (ufw) and allow only necessary ports</li>
+          <li>Keep system and packages updated</li>
+          <li>Use strong passwords for all services</li>
+          <li>Disable DEBUG in production</li>
+          <li>Regularly backup database and media files</li>
+          <li>Monitor logs for suspicious activity</li>
+          <li>Set up fail2ban for brute force protection</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_smtp_setup' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+            <h4 class="font-semibold">SMTP Server Setup</h4>
+            <p class="text-sm text-gray-300">Configure email sending</p>
+          </a>
+          <a href="{% url 'core:docs_getting_started' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+            <h4 class="font-semibold">Full Documentation</h4>
+            <p class="text-sm text-gray-300">Detailed technical docs</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

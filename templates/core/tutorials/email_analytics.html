@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Understanding Email Analytics - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-600 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">📊 Understanding Email Analytics</h1>
+      <p class="text-xl text-white text-opacity-90">Track and analyze your campaign performance</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ 14 min read</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Why Analytics Matter</h2>
+        <p class="text-gray-700 mb-6">Data-driven decisions lead to better email marketing results. Understanding your analytics helps you improve every campaign.</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Focus on trends over time rather than individual campaign metrics. Look for patterns to guide strategy.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Metrics Explained</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-blue-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Open Rate</h4>
+            <p class="text-gray-700">Percentage of recipients who opened your email. Average: 15-25%</p>
+            <p class="text-sm text-gray-600 mt-1">Formula: (Emails Opened ÷ Emails Delivered) × 100</p>
+          </div>
+          <div class="border-l-4 border-green-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Click-Through Rate (CTR)</h4>
+            <p class="text-gray-700">Percentage who clicked a link. Average: 2-5%</p>
+            <p class="text-sm text-gray-600 mt-1">Formula: (Unique Clicks ÷ Emails Delivered) × 100</p>
+          </div>
+          <div class="border-l-4 border-purple-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Click-to-Open Rate (CTOR)</h4>
+            <p class="text-gray-700">Of those who opened, how many clicked. Average: 10-15%</p>
+            <p class="text-sm text-gray-600 mt-1">Formula: (Unique Clicks ÷ Unique Opens) × 100</p>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Bounce Rate</h4>
+            <p class="text-gray-700">Percentage that couldn't be delivered. Target: <2%</p>
+            <p class="text-sm text-gray-600 mt-1">Hard bounces = invalid email | Soft bounces = temporary issues</p>
+          </div>
+          <div class="border-l-4 border-red-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Unsubscribe Rate</h4>
+            <p class="text-gray-700">Percentage who opted out. Target: <0.5%</p>
+            <p class="text-sm text-gray-600 mt-1">Formula: (Unsubscribes ÷ Emails Delivered) × 100</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Accessing Analytics</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Go to <strong>Campaigns → Sent</strong></li>
+          <li>Click on any campaign name</li>
+          <li>View the analytics dashboard</li>
+          <li>Scroll down for detailed engagement data</li>
+          <li>Click tabs to see opens, clicks, and geographical data</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">What Each Metric Tells You</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-3 text-gray-700">
+            <li><strong>Low open rate:</strong> Subject line needs work or send time is off</li>
+            <li><strong>High opens, low clicks:</strong> Content or CTA isn't compelling</li>
+            <li><strong>High bounce rate:</strong> List needs cleaning</li>
+            <li><strong>High unsubscribe rate:</strong> Content irrelevant or sending too frequently</li>
+            <li><strong>Good CTOR:</strong> Your email content resonates with opened</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Click Maps</h3>
+        <p class="text-gray-700 mb-4">See which links got the most clicks:</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Visual heatmap shows popular links</li>
+          <li>Identifies what content interests your audience</li>
+          <li>Helps optimize link placement in future emails</li>
+          <li>Shows if CTA buttons outperform text links</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Geographical Data</h3>
+        <p class="text-gray-700 mb-4">See where your subscribers are located:</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li>Map view of opens by country/city</li>
+            <li>Optimize send times for time zones</li>
+            <li>Identify growth opportunities in regions</li>
+            <li>Localize content for major markets</li>
+          </ul>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Open rates may be inflated due to email clients pre-loading images. Focus on click rates for more accurate engagement.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Device and Client Data</h3>
+        <p class="text-gray-700 mb-4">Understand how subscribers read your emails:</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>Mobile vs. Desktop:</strong> Optimize for primary device</li>
+          <li><strong>Email clients:</strong> Gmail, Outlook, Apple Mail, etc.</li>
+          <li><strong>Browser data:</strong> For web-based email readers</li>
+          <li><strong>Operating systems:</strong> iOS, Android, Windows, Mac</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Time-Based Analytics</h3>
+        <p class="text-gray-700 mb-4">When do people engage with your emails?</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>Opens by hour:</strong> Find optimal send times</li>
+            <li><strong>Clicks by day:</strong> Best days for engagement</li>
+            <li><strong>First 24 hours:</strong> Most activity happens here</li>
+            <li><strong>Long tail:</strong> Some opens continue for days/weeks</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Engagement Scoring</h3>
+        <p class="text-gray-700 mb-4">Track individual subscriber engagement:</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Highly engaged: Opens and clicks frequently</li>
+          <li>Moderately engaged: Opens occasionally</li>
+          <li>Low engagement: Rarely opens</li>
+          <li>Inactive: No activity in 90+ days</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Comparing Campaigns</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Go to <strong>Analytics → Campaign Comparison</strong></li>
+          <li>Select 2 or more campaigns to compare</li>
+          <li>View side-by-side performance metrics</li>
+          <li>Identify what worked better in each</li>
+          <li>Apply learnings to future campaigns</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Check analytics 24 hours, 3 days, and 7 days after sending</li>
+          <li>Set benchmarks based on your past performance</li>
+          <li>Don't compare across different industries</li>
+          <li>Focus on improving your own metrics over time</li>
+          <li>Use data to inform, not dictate, creative decisions</li>
+          <li>Track which segments perform best</li>
+          <li>Monitor trends monthly and quarterly</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_performance_dashboard' %}" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+            <h4 class="font-semibold text-blue-900">Campaign Performance Dashboard</h4>
+            <p class="text-sm text-blue-700">View overall metrics</p>
+          </a>
+          <a href="{% url 'core:tutorial_data_optimization' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+            <h4 class="font-semibold text-indigo-900">Optimizing Based on Data</h4>
+            <p class="text-sm text-indigo-700">Turn insights into action</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

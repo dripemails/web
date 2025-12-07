@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Account Setup & Settings - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-purple-400 to-purple-600 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-purple-100 font-medium">
+          ← Back to Tutorials
+        </a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">📖 Account Setup & Settings</h1>
+      <p class="text-xl text-purple-100">Configure your account for optimal performance</p>
+      <p class="text-purple-100 mt-2">⏱️ 6 min read</p>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <p class="text-lg text-gray-700 mb-8">
+          Properly configuring your DripEmails account ensures smooth operation and optimal deliverability. 
+          Follow this guide to set up your account correctly.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Profile Settings</h2>
+        <ol class="list-decimal pl-6 text-gray-700 space-y-3 mb-6">
+          <li>Click on your profile icon in the top right corner</li>
+          <li>Select <strong>"Settings"</strong></li>
+          <li>Update your profile information:
+            <ul class="list-disc pl-6 mt-2 space-y-1">
+              <li>Full name</li>
+              <li>Company name</li>
+              <li>Contact email</li>
+              <li>Time zone</li>
+            </ul>
+          </li>
+          <li>Click <strong>"Save Changes"</strong></li>
+        </ol>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Email Sending Settings</h2>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">From Address</h3>
+        <p class="text-gray-700 mb-4">
+          Set your default "From" email address and name that will appear in recipient inboxes:
+        </p>
+        <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-6">
+          <li>Navigate to <strong>Settings → Email Settings</strong></li>
+          <li>Enter your sender email address</li>
+          <li>Enter your sender name (e.g., "John from Company")</li>
+          <li>Add a reply-to address if different from sender</li>
+        </ol>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded mb-6">
+          <p class="text-yellow-800"><strong>⚠️ Important:</strong> Use an email address from your domain for better deliverability.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Time Zone</h3>
+        <p class="text-gray-700 mb-6">
+          Set your time zone so scheduled campaigns send at the correct time. Go to 
+          <strong>Settings → General</strong> and select your time zone from the dropdown.
+        </p>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Notification Preferences</h2>
+        <p class="text-gray-700 mb-4">
+          Choose which email notifications you want to receive:
+        </p>
+        <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+          <li>Campaign sent confirmations</li>
+          <li>Daily/weekly performance summaries</li>
+          <li>New subscriber notifications</li>
+          <li>Bounce and complaint alerts</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Security Settings</h2>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Change Password</h3>
+        <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-6">
+          <li>Go to <strong>Settings → Security</strong></li>
+          <li>Click <strong>"Change Password"</strong></li>
+          <li>Enter your current password</li>
+          <li>Enter and confirm your new password</li>
+          <li>Click <strong>"Update Password"</strong></li>
+        </ol>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded mb-6">
+          <p class="text-green-800"><strong>✅ Best Practice:</strong> Use a strong, unique password with at least 12 characters.</p>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">API Access</h2>
+        <p class="text-gray-700 mb-4">
+          If you plan to integrate DripEmails with other applications:
+        </p>
+        <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-6">
+          <li>Navigate to <strong>Settings → API</strong></li>
+          <li>Click <strong>"Generate API Key"</strong></li>
+          <li>Copy and store your API key securely</li>
+          <li>Never share your API key publicly</li>
+        </ol>
+
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded mt-8">
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">🎯 Next Steps</h3>
+          <p class="text-indigo-800 mb-4">Now that your account is configured:</p>
+          <div class="flex gap-4">
+            <a href="{% url 'core:tutorial_quick_start' %}" class="text-indigo-600 hover:underline font-medium">Create Your First Campaign</a>
+            <a href="{% url 'core:docs_subscribers' %}" class="text-indigo-600 hover:underline font-medium">Add Subscribers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

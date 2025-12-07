@@ -1,20 +1,411 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load static %}
 
-{% block title %}{% trans "Tutorials" %} - DripEmails.org{% endblock %}
+{% block title %}Tutorials - DripEmails.org{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto py-12 px-4">
-    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Tutorials" %}</h1>
-    <p class="text-lg text-gray-700 mb-8">{% trans "Step-by-step tutorials to help you make the most of DripEmails.org." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8">
-        <ul class="list-disc pl-6 text-gray-700 space-y-2">
-            <li>{% trans "How to Create a Drip Campaign" %}</li>
-            <li>{% trans "Importing Subscribers" %}</li>
-            <li>{% trans "Designing Email Templates" %}</li>
-            <li>{% trans "Using the API" %}</li>
-            <li>{% trans "Analyzing Campaign Performance" %}</li>
-        </ul>
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <div class="bg-indigo-600 text-white py-12">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-4">📚 Tutorials</h1>
+      <p class="text-xl text-indigo-100">Learn DripEmails.org with step-by-step guides</p>
     </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-12">
+    <!-- Getting Started Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-green-100 text-green-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">🚀</span>
+        Getting Started
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 1 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-green-400 to-green-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">5 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Quick Start Guide</h3>
+            <p class="text-gray-600 mb-4">Get up and running with DripEmails in under 6 minutes. Create your account, add subscribers, and send your first campaign.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_quick_start' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 2 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">8 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Dashboard Overview</h3>
+            <p class="text-gray-600 mb-4">Tour of the DripEmails dashboard. Learn where everything is and how to navigate the platform efficiently.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_dashboard_overview' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 3 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">6 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Account Setup & Settings</h3>
+            <p class="text-gray-600 mb-4">Configure your account settings, set up your profile, and customize your sending preferences.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_account_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Campaign Management Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">📧</span>
+        Campaign Management
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 4 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">10 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Creating Your First Campaign</h3>
+            <p class="text-gray-600 mb-4">Step-by-step guide to creating a one-time email campaign. From setup to sending.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_creating_campaign' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 5 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-pink-400 to-pink-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">15 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Building Drip Campaigns</h3>
+            <p class="text-gray-600 mb-4">Learn how to create automated drip campaigns with multiple emails and time delays.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_drip_campaigns' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 6 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-red-400 to-red-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">7 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Scheduling Campaigns</h3>
+            <p class="text-gray-600 mb-4">Schedule your campaigns for optimal send times and manage your email calendar.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_scheduling_campaigns' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Subscriber Management Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">👥</span>
+        Subscriber Management
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 7 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-teal-400 to-teal-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">9 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Importing Subscribers from CSV</h3>
+            <p class="text-gray-600 mb-4">Upload and import your subscriber lists from CSV files. Includes data formatting tips.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_importing_subscribers' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 8 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">6 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Managing Subscriber Lists</h3>
+            <p class="text-gray-600 mb-4">Organize subscribers into lists, manage unsubscribes, and maintain list hygiene.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_managing_lists' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 9 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-orange-400 to-orange-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">8 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Subscriber Segmentation</h3>
+            <p class="text-gray-600 mb-4">Create targeted segments based on subscriber data and engagement for better results.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_subscriber_segmentation' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Email Design Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-pink-100 text-pink-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">📝</span>
+        Email Design & Templates
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 10 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-cyan-400 to-cyan-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">12 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Using the Email Editor</h3>
+            <p class="text-gray-600 mb-4">Master the Quill rich text editor. Format text, add images, links, and create beautiful emails.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_email_editor' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 11 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-lime-400 to-lime-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">10 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Creating Reusable Templates</h3>
+            <p class="text-gray-600 mb-4">Build and save email templates for consistent branding and faster campaign creation.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_reusable_templates' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 12 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-violet-400 to-violet-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">14 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Email Design Best Practices</h3>
+            <p class="text-gray-600 mb-4">Learn design principles for high-converting emails. Mobile optimization, CTAs, and more.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_design_best_practices' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-indigo-100 text-indigo-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">🤖</span>
+        AI-Powered Features
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 13 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">7 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Setting Up AI Features</h3>
+            <p class="text-gray-600 mb-4">Configure Hugging Face API and enable AI-powered email generation and editing.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 14 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-rose-400 to-rose-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">11 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Generating Email Content with AI</h3>
+            <p class="text-gray-600 mb-4">Use AI to generate complete email campaigns from simple prompts. Save hours of writing time.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_generation' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 15 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-amber-400 to-amber-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">9 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">AI Email Revision & Optimization</h3>
+            <p class="text-gray-600 mb-4">Improve existing emails with AI-powered grammar, tone, and clarity enhancements.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_optimization' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-yellow-100 text-yellow-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">📊</span>
+        Analytics & Reporting
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 16 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">8 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Understanding Email Analytics</h3>
+            <p class="text-gray-600 mb-4">Learn what metrics matter: open rates, click rates, bounces, and how to interpret them.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_email_analytics' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 17 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-sky-400 to-sky-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">10 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Campaign Performance Dashboard</h3>
+            <p class="text-gray-600 mb-4">Navigate the analytics dashboard and track real-time campaign performance.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_performance_dashboard' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 18 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-slate-400 to-slate-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">12 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Optimizing Based on Data</h3>
+            <p class="text-gray-600 mb-4">Use analytics insights to improve your campaigns and boost engagement rates.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_data_optimization' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Advanced Topics Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 flex items-center">
+        <span class="bg-red-100 text-red-600 rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">⚡</span>
+        Advanced Topics
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial 19 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-gray-400 to-gray-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">13 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">SMTP Server Setup</h3>
+            <p class="text-gray-600 mb-4">Configure the built-in SMTP server for sending emails. Includes authentication and port setup.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_smtp_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 20 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-stone-400 to-stone-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">18 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Deploying to Production</h3>
+            <p class="text-gray-600 mb-4">Complete guide to deploying DripEmails on a production server with Nginx, SSL, and more.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_deployment' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial 21 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-gradient-to-r from-neutral-400 to-neutral-600 h-48 flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="text-6xl mb-2">📖</div>
+              <p class="text-sm font-medium">15 min read</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">API Integration Guide</h3>
+            <p class="text-gray-600 mb-4">Integrate DripEmails with your applications using our REST API. Includes authentication.</p>
+            <div class="text-right"><a href="{% url 'core:tutorial_api_integration' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+    </section>
+
+    <!-- Need More Help Section -->
+    <section class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-8 border-2 border-indigo-200">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Need More Help?</h2>
+        <p class="text-lg text-gray-700">Can't find the tutorial you're looking for?</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="{% url 'core:resource_documentation' %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+          📚 Read Documentation
+        </a>
+        <a href="{% url 'core:resource_community' %}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+          💬 Join Community
+        </a>
+        <a href="{% url 'core:contact' %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+          📧 Contact Support
+        </a>
+      </div>
+    </section>
+  </div>
 </div>
 {% endblock %} 
+
+
+

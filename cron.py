@@ -6,10 +6,16 @@ This script checks if users have properly configured SPF records
 that include DripEmails.org servers.
 
 Usage:
+    # SPF Record Checking
     python cron.py check_spf --all-users
     python cron.py check_spf --user-id 123
     python cron.py check_spf --all-users --settings=dripemails.live
     python cron.py check_spf --user-id 123 --settings=dripemails.live
+    
+    # Process Scheduled Emails
+    python cron.py send_scheduled_emails
+    python cron.py send_scheduled_emails --settings=dripemails.live
+    python cron.py send_scheduled_emails --limit 100
 """
 
 import os
@@ -47,6 +53,8 @@ django.setup()
 from django.contrib.auth.models import User
 from django.utils import timezone
 from analytics.models import UserProfile
+from campaigns.models import EmailSendRequest
+from campaigns.tasks import _send_single_email_sync
 
 # Setup logging to file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -348,16 +356,78 @@ def check_user_by_id(user_id: int):
         sys.exit(1)
 
 
+def send_scheduled_emails(limit=None):
+    """
+    Process and send scheduled emails that are due to be sent.
+    
+    Finds EmailSendRequest objects with status 'pending' or 'queued'
+    where scheduled_for <= now() and sends them.
+    """
+    now = timezone.now()
+    
+    # Find emails that are due to be sent
+    due_emails = EmailSendRequest.objects.filter(
+        status__in=['pending', 'queued'],
+        scheduled_for__lte=now
+    ).select_related('email', 'campaign', 'user', 'subscriber').order_by('scheduled_for')
+    
+    if limit:
+        due_emails = due_emails[:limit]
+    
+    total = due_emails.count()
+    logger.info(f"Found {total} scheduled emails due to be sent")
+    
+    if total == 0:
+        logger.info("No scheduled emails to send")
+        return
+    
+    sent_count = 0
+    failed_count = 0
+    
+    for send_request in due_emails:
+        try:
+            # Update status to 'queued' to prevent duplicate processing
+            send_request.status = 'queued'
+            send_request.save(update_fields=['status', 'updated_at'])
+            
+            # Send the email using the sync function
+            _send_single_email_sync(
+                str(send_request.email.id),
+                send_request.subscriber_email,
+                send_request.variables,
+                request_id=str(send_request.id)
+            )
+            
+            # The _send_single_email_sync function updates the status to 'sent' on success
+            sent_count += 1
+            logger.info(f"Sent scheduled email {send_request.id} to {send_request.subscriber_email}")
+            
+        except Exception as e:
+            # Update status to 'failed' on error
+            send_request.status = 'failed'
+            send_request.error_message = str(e)
+            send_request.save(update_fields=['status', 'error_message', 'updated_at'])
+            
+            failed_count += 1
+            logger.error(f"Failed to send scheduled email {send_request.id} to {send_request.subscriber_email}: {str(e)}")
+    
+    logger.info(f"Scheduled Email Processing Summary:")
+    logger.info(f"  Total due: {total}")
+    logger.info(f"  Successfully sent: {sent_count}")
+    logger.info(f"  Failed: {failed_count}")
+
+
 def main():
     """Main entry point for the cron script."""
     # Re-parse arguments now that we have the full command line
     # (we already parsed --settings above, but need to handle the rest)
-    parser = argparse.ArgumentParser(description='DripEmails SPF Record Checker')
+    parser = argparse.ArgumentParser(description='DripEmails Cron Script')
     parser.add_argument('--settings', type=str, default='dripemails.settings',
                         help='Django settings module (default: dripemails.settings)')
-    parser.add_argument('command', nargs='?', help='Command to run (check_spf)')
+    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails)')
     parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID')
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users')
+    parser.add_argument('--limit', type=int, help='Limit number of scheduled emails to process')
     
     args = parser.parse_args()
     
@@ -375,6 +445,8 @@ def main():
             logger.error("Please specify --all-users or --user-id <id>")
             parser.print_help()
             sys.exit(1)
+    elif args.command == 'send_scheduled_emails':
+        send_scheduled_emails(limit=args.limit)
     else:
         logger.error(f"Unknown command: {args.command}")
         print(__doc__)

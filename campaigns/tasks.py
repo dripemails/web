@@ -50,6 +50,10 @@ def _send_test_email_sync(email_id, test_email, variables=None):
     # Get user email for From address
     user_email = email.campaign.user.email
     
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
+    has_valid_spf = user_profile.spf_verified
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
@@ -57,8 +61,9 @@ def _send_test_email_sync(email_id, test_email, variables=None):
         from_email=user_email,
         to=[test_email]
     )
-    # Set Sender header to DEFAULT_FROM_EMAIL
-    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -105,8 +110,14 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Prefer user from request_obj if available, otherwise use campaign user
     if request_obj and request_obj.user:
         user_email = request_obj.user.email
+        user = request_obj.user
     else:
         user_email = email.campaign.user.email
+        user = email.campaign.user
+    
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    has_valid_spf = user_profile.spf_verified
     
     # Create and send email
     msg = EmailMultiAlternatives(
@@ -115,8 +126,9 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         from_email=user_email,
         to=[subscriber_email]
     )
-    # Set Sender header to DEFAULT_FROM_EMAIL
-    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -254,6 +266,10 @@ def send_campaign_email(email_id, subscriber_id):
     # Get user email for From address
     user_email = email.campaign.user.email
     
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
+    has_valid_spf = user_profile.spf_verified
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=email.subject,
@@ -261,8 +277,9 @@ def send_campaign_email(email_id, subscriber_id):
         from_email=user_email,
         to=[subscriber.email]
     )
-    # Set Sender header to DEFAULT_FROM_EMAIL
-    msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:

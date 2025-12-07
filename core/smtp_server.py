@@ -199,15 +199,22 @@ class CustomMessageHandler(Message):
             # Update stats
             self.processor.stats['emails_received'] += 1
             
-            # Process the email
-            metadata = self.processor.process_email(email_message)
-            
-            # Debug output
-            if self.debug:
-                self._print_debug_info(metadata)
+            # Process the email (errors in processing should not fail the SMTP transaction)
+            try:
+                metadata = self.processor.process_email(email_message)
+                
+                # Debug output
+                if self.debug:
+                    self._print_debug_info(metadata)
+            except Exception as process_error:
+                # Log processing errors but don't fail the SMTP transaction
+                self.logger.error(f"Error processing email (non-fatal): {process_error}", exc_info=True)
+                # Still update stats to show we received it
+                self.processor.stats['emails_failed'] += 1
             
         except Exception as e:
-            self.logger.error(f"Error handling message: {e}")
+            # Only log parsing errors, but don't fail the SMTP transaction
+            self.logger.error(f"Error parsing message (non-fatal): {e}", exc_info=True)
     
     def _print_debug_info(self, metadata: Dict[str, Any]):
         """Print debug information for received email."""
@@ -228,22 +235,169 @@ class CustomMessageHandler(Message):
 
 
 class SimpleSMTP(SMTPServer):
-    """Simple SMTP server without custom extensions to avoid session.peer issues."""
+    """Simple SMTP server with AUTH support for Django user authentication."""
     
     def __init__(self, handler: CustomMessageHandler, config: Dict[str, Any] = None):
         super().__init__(handler)
         self.config = config or {}
         self.logger = logging.getLogger(__name__)
         self.auth_enabled = self.config.get('auth_enabled', True)
+        self.allowed_users = self.config.get('allowed_users', ['founders'])
+    
+    def _authenticate_user(self, username: str, password: str) -> bool:
+        """Authenticate user against Django user database."""
+        if not DJANGO_AVAILABLE:
+            # If Django is not available, check against allowed users list
+            # This is a simple fallback - in production, always use Django
+            return username in self.allowed_users
+        
+        try:
+            # Authenticate using Django's authentication system
+            user = authenticate(username=username, password=password)
+            if user and user.is_active:
+                # Check if user is in allowed users list
+                if self.allowed_users and user.username not in self.allowed_users:
+                    self.logger.warning(f"User {username} not in allowed users list")
+                    return False
+                self.logger.info(f"User {username} authenticated successfully")
+                return True
+            return False
+        except Exception as e:
+            self.logger.error(f"Error authenticating user {username}: {e}")
+            return False
+    
+    async def handle_EHLO(self, server, session, envelope, hostname):
+        """Handle EHLO command and advertise AUTH capability."""
+        response = await super().handle_EHLO(server, session, envelope, hostname)
+        if self.auth_enabled:
+            # Advertise AUTH PLAIN and AUTH LOGIN support
+            if isinstance(response, tuple):
+                code, lines = response
+                if isinstance(lines, str):
+                    lines = [lines]
+                lines.append('AUTH PLAIN LOGIN')
+                return (code, lines)
+            else:
+                # If response is not a tuple, wrap it
+                return (250, [response, 'AUTH PLAIN LOGIN'])
+        return response
+    
+    async def handle_AUTH(self, server, session, envelope, args):
+        """Handle AUTH command for PLAIN and LOGIN authentication."""
+        if not self.auth_enabled:
+            return '530 Authentication not enabled'
+        
+        # Check if we're in the middle of a LOGIN authentication flow
+        if hasattr(session, 'auth_state'):
+            if session.auth_state == 'waiting_username':
+                # This is the username step of LOGIN auth
+                try:
+                    username = base64.b64decode(args).decode('utf-8')
+                    # Store username and request password
+                    session.auth_username = username
+                    session.auth_state = 'waiting_password'
+                    return '334 UGFzc3dvcmQ6'  # base64("Password:")
+                except Exception as e:
+                    self.logger.error(f"Error decoding LOGIN username: {e}")
+                    # Clear state on error
+                    if hasattr(session, 'auth_state'):
+                        delattr(session, 'auth_state')
+                    return '535 Authentication failed'
+            
+            elif session.auth_state == 'waiting_password':
+                # This is the password step of LOGIN auth
+                try:
+                    password = base64.b64decode(args).decode('utf-8')
+                    username = session.auth_username
+                    # Clear auth state
+                    delattr(session, 'auth_state')
+                    delattr(session, 'auth_username')
+                    
+                    # Authenticate
+                    if self._authenticate_user(username, password):
+                        session.authenticated = True
+                        session.auth_user = username
+                        self.logger.info(f"User {username} authenticated via LOGIN")
+                        return '235 Authentication successful'
+                    else:
+                        self.logger.warning(f"Authentication failed for user {username}")
+                        return '535 Authentication failed'
+                except Exception as e:
+                    self.logger.error(f"Error decoding LOGIN password: {e}")
+                    # Clear state on error
+                    if hasattr(session, 'auth_state'):
+                        delattr(session, 'auth_state')
+                    if hasattr(session, 'auth_username'):
+                        delattr(session, 'auth_username')
+                    return '535 Authentication failed'
+        
+        if not args:
+            return '501 Syntax: AUTH <mechanism>'
+        
+        # Parse AUTH command
+        parts = args.split(None, 1)
+        mechanism = parts[0].upper()
+        
+        if mechanism == 'PLAIN':
+            if len(parts) < 2:
+                return '334 '  # Request credentials
+            # PLAIN auth: credentials are base64 encoded as: \0username\0password
+            try:
+                credentials = base64.b64decode(parts[1]).decode('utf-8')
+                auth_parts = credentials.split('\0')
+                if len(auth_parts) >= 3:
+                    username = auth_parts[1]
+                    password = auth_parts[2]
+                else:
+                    return '535 Authentication failed'
+                
+                # Authenticate
+                if self._authenticate_user(username, password):
+                    session.authenticated = True
+                    session.auth_user = username
+                    self.logger.info(f"User {username} authenticated via PLAIN")
+                    return '235 Authentication successful'
+                else:
+                    self.logger.warning(f"Authentication failed for user {username}")
+                    return '535 Authentication failed'
+            except Exception as e:
+                self.logger.error(f"Error decoding PLAIN auth: {e}")
+                return '535 Authentication failed'
+        
+        elif mechanism == 'LOGIN':
+            if len(parts) < 2:
+                # Initial LOGIN command - request username
+                session.auth_state = 'waiting_username'
+                return '334 VXNlcm5hbWU6'  # base64("Username:")
+            
+            # LOGIN with username provided in same command
+            try:
+                username = base64.b64decode(parts[1]).decode('utf-8')
+                # Store username and request password
+                session.auth_username = username
+                session.auth_state = 'waiting_password'
+                return '334 UGFzc3dvcmQ6'  # base64("Password:")
+            except Exception as e:
+                self.logger.error(f"Error decoding LOGIN username: {e}")
+                if hasattr(session, 'auth_state'):
+                    delattr(session, 'auth_state')
+                return '535 Authentication failed'
+        
+        else:
+            return '504 Unsupported authentication mechanism'
     
     async def handle_RCPT(self, server, session, envelope, address, rcpt_options):
-        """Handle RCPT command with domain validation."""
-        # Check domain restrictions
-        allowed_domains = self.config.get('allowed_domains', ['dripemails.org', 'localhost', '127.0.0.1'])
-        domain = address.split('@')[-1] if '@' in address else ''
+        """Handle RCPT command with domain validation and optional auth check."""
+        # If auth is enabled, require authentication
+        if self.auth_enabled and not getattr(session, 'authenticated', False):
+            return '530 Authentication required'
         
-        if allowed_domains and not any(domain.endswith(d) for d in allowed_domains):
-            return f'550 not relaying to domain {domain}'
+        # Allow all domains for outgoing mail
+        # Domain restrictions are disabled to allow sending to any external domain (gmail.com, etc.)
+        # This is safe because:
+        # 1. If auth is enabled, only authenticated users can send
+        # 2. If auth is disabled (--no-auth), it's a trusted environment
+        # 3. This is an outgoing mail server, not an open relay for incoming mail
         
         envelope.rcpt_tos.append(address)
         return '250 OK'
@@ -251,11 +405,19 @@ class SimpleSMTP(SMTPServer):
     async def handle_DATA(self, server, session, envelope):
         """Handle DATA command with enhanced logging."""
         try:
-            self.logger.info(f"Processing email from {envelope.mail_from} to {envelope.rcpt_tos}")
-            return await super().handle_DATA(server, session, envelope)
+            auth_user = getattr(session, 'auth_user', 'anonymous')
+            self.logger.info(f"Processing email from {envelope.mail_from} to {envelope.rcpt_tos} (auth: {auth_user})")
+            # Call parent handler - it will call our message handler
+            # The message handler catches its own errors, so this should succeed
+            result = await super().handle_DATA(server, session, envelope)
+            return result
         except Exception as e:
-            self.logger.error(f"Error handling DATA: {e}")
-            return '500 Error processing message'
+            # Log the error with full traceback for debugging
+            import traceback
+            self.logger.error(f"Error in handle_DATA: {e}\n{traceback.format_exc()}")
+            # Return success anyway - processing errors should not fail the SMTP transaction
+            # The email was received, even if we couldn't process it
+            return '250 OK'
 
 
 class SMTPServerManager:

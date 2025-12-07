@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Dashboard - DripEmails.org{% endblock %}
 
@@ -23,8 +24,19 @@
 <div class="bg-gray-100 min-h-screen pb-12">
     <div class="bg-indigo-600 text-white py-6">
         <div class="container mx-auto px-4">
-            <h1 class="text-2xl md:text-3xl font-bold">Dashboard</h1>
-            <p class="text-indigo-100">Manage your campaigns and subscribers</p>
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">Dashboard</h1>
+                    <p class="text-indigo-100">Manage your campaigns and subscribers</p>
+                </div>
+                <a href="{% url 'core:settings' %}" class="hidden md:flex items-center space-x-2 px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg transition-all duration-200 text-white font-medium">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>{% trans "Settings" %}</span>
+                </a>
+            </div>
         </div>
     </div>
     
@@ -95,6 +107,54 @@
             </div>
         </div>
         
+        <!-- SPF Record Setup Instructions - Full Width -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow-sm p-6 mb-8">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">SPF Record Setup for Email Deliverability</h3>
+                    <p class="text-gray-700 mb-4">
+                        To ensure your emails are delivered successfully and avoid spam filters, you need to add an SPF (Sender Policy Framework) record to your domain's DNS settings. This authorizes DripEmails.org to send emails on behalf of your domain.
+                    </p>
+                    <div class="bg-white rounded-md p-4 mb-4 border border-gray-200">
+                        <p class="text-sm font-medium text-gray-700 mb-2">Add this TXT record to your domain's DNS:</p>
+                        <div class="bg-gray-50 rounded p-3 font-mono text-sm">
+                            <div class="mb-2">
+                                <span class="text-gray-600">Type:</span> <span class="text-gray-900 font-semibold">TXT</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-gray-600">Name/Host:</span> <span class="text-gray-900 font-semibold">@</span> <span class="text-gray-500 text-xs">(or your domain name)</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-gray-600">Value:</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-300 text-gray-900 break-all">
+                                v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-md p-3 mb-4">
+                        <p class="text-sm text-yellow-800">
+                            <strong>Note:</strong> If you already have an SPF record, you should modify it to include these servers instead of creating a new one. Multiple SPF records are not allowed.
+                        </p>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <p class="mb-2"><strong>How to add this record:</strong></p>
+                        <ol class="list-decimal list-inside space-y-1 ml-2">
+                            <li>Log in to your domain registrar for {% if user_email_domain %}{{ user_email_domain }}{% else %}your domain{% endif %} or DNS provider (e.g., GoDaddy, Namecheap, Cloudflare)</li>
+                            <li>Navigate to DNS management or DNS settings</li>
+                            <li>Add a new TXT record with the values shown above</li>
+                            <li>Save the changes (DNS propagation can take up to 48 hours)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Send Email Form -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Send Email</h3>
@@ -156,7 +216,12 @@
                     Refresh
                 </button>
             </div>
-            <p id="sendActivityTimezone" class="text-xs text-gray-500 mb-4">Times shown in {{ user_timezone|default:'UTC' }}.</p>
+            <div class="flex items-center gap-2 mb-4">
+                <p class="text-xs text-gray-500">Times shown in</p>
+                <select id="timezoneSelector" class="text-xs border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <!-- Timezones will be populated by JavaScript -->
+                </select>
+            </div>
             <div id="sendEmailActivity" class="space-y-4">
                 <p class="text-sm text-gray-500">Loading activity...</p>
             </div>
@@ -216,7 +281,9 @@
                                 {% for campaign in campaigns %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ campaign.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'campaigns:edit' campaign.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ campaign.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ campaign.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -290,7 +357,9 @@
                                 {% for list in lists %}
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ list.name }}</div>
+                                        <div class="font-medium text-gray-900">
+                                            <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ list.name }}</a>
+                                        </div>
                                         <div class="text-sm text-gray-500">{{ list.description|truncatechars:50 }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -404,7 +473,7 @@
                         </div>
                         <div class="pt-4 border-t border-gray-200">
                             <div class="space-y-2">
-                                <a href="{% url 'core:promo_verification' %}" class="block text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                <a href="{% url 'core:settings' %}" class="block text-indigo-600 hover:text-indigo-800 text-sm font-medium">
                                     Manage Account Settings →
                                 </a>
                                 <a href="{% url 'analytics:footer_list' %}" class="block text-indigo-600 hover:text-indigo-800 text-sm font-medium">
@@ -449,7 +518,97 @@ document.addEventListener('DOMContentLoaded', function() {
     const scheduleValueLabel = document.getElementById('schedule_value_label');
     const activityContainer = document.getElementById('sendEmailActivity');
     const refreshSendActivityButton = document.getElementById('refreshSendActivity');
-    const activityTimezoneLabel = document.getElementById('sendActivityTimezone');
+    const timezoneSelector = document.getElementById('timezoneSelector');
+    let currentTimezone = '{{ user_timezone|default:"UTC" }}';
+
+    // Common timezones list (including UTC)
+    const commonTimezones = [
+        'UTC',
+        'America/New_York',
+        'America/Chicago',
+        'America/Denver',
+        'America/Los_Angeles',
+        'America/Phoenix',
+        'America/Anchorage',
+        'America/Honolulu',
+        'Europe/London',
+        'Europe/Paris',
+        'Europe/Berlin',
+        'Europe/Rome',
+        'Europe/Madrid',
+        'Europe/Amsterdam',
+        'Europe/Stockholm',
+        'Europe/Moscow',
+        'Asia/Tokyo',
+        'Asia/Shanghai',
+        'Asia/Hong_Kong',
+        'Asia/Singapore',
+        'Asia/Dubai',
+        'Asia/Kolkata',
+        'Asia/Seoul',
+        'Australia/Sydney',
+        'Australia/Melbourne',
+        'Australia/Perth',
+        'Pacific/Auckland',
+        'America/Toronto',
+        'America/Vancouver',
+        'America/Mexico_City',
+        'America/Sao_Paulo',
+        'America/Buenos_Aires'
+    ];
+
+    // Populate timezone selector
+    if (timezoneSelector) {
+        commonTimezones.forEach(tz => {
+            const option = document.createElement('option');
+            option.value = tz;
+            option.textContent = tz;
+            if (tz === currentTimezone) {
+                option.selected = true;
+            }
+            timezoneSelector.appendChild(option);
+        });
+
+        // Handle timezone change
+        timezoneSelector.addEventListener('change', function() {
+            const selectedTimezone = this.value;
+            saveTimezone(selectedTimezone);
+        });
+    }
+
+    // Save timezone preference
+    function saveTimezone(timezone) {
+        fetch('/api/profile/settings/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ timezone: timezone })
+        })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status >= 200 && status < 300) {
+                currentTimezone = timezone;
+                // Reload activity with new timezone
+                loadSendEmailActivity();
+            } else {
+                alert(body.error || 'Failed to save timezone preference.');
+                // Revert selector to previous value
+                if (timezoneSelector) {
+                    timezoneSelector.value = currentTimezone;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error saving timezone:', error);
+            alert('Error saving timezone preference. Please try again.');
+            // Revert selector to previous value
+            if (timezoneSelector) {
+                timezoneSelector.value = currentTimezone;
+            }
+        });
+    }
 
     const statusBadgeClasses = {
         pending: 'bg-yellow-100 text-yellow-800',
@@ -472,6 +631,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.toLocaleString();
     }
 
+    function toggleEmailPreview(previewId) {
+        const snippet = document.getElementById(previewId + '-snippet');
+        const full = document.getElementById(previewId + '-full');
+        if (snippet && full) {
+            if (full.classList.contains('hidden')) {
+                full.classList.remove('hidden');
+            } else {
+                full.classList.add('hidden');
+            }
+        }
+    }
+
     function renderSendEmailActivity(requests) {
         if (!activityContainer) return;
 
@@ -486,10 +657,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const sentText = formatDisplayDate(req.sent_at, req.sent_at_display);
             const canSendNow = req.status !== 'sent';
 
+            const previewId = `preview-${req.id}`;
+            const previewSnippet = req.email_preview_snippet || 'No preview available';
+            const fullHtml = req.email_preview_html || '';
+            const fullText = req.email_preview_text || '';
+            
             return `
                 <div class="border border-gray-200 rounded-lg p-4">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                        <div>
+                        <div class="flex-1">
                             <div class="flex items-center gap-2">
                                 <h4 class="text-sm font-semibold text-gray-800">${req.email_subject || 'Untitled Email'}</h4>
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${statusClass}">
@@ -503,6 +679,23 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div><span class="font-medium text-gray-600">Scheduled:</span> ${scheduledText}</div>
                                 <div><span class="font-medium text-gray-600">Sent:</span> ${sentText}</div>
                                 ${req.error_message ? `<div class="text-red-600">${req.error_message}</div>` : ''}
+                            </div>
+                            <!-- Email Preview -->
+                            <div class="mt-3 pt-3 border-t border-gray-200">
+                                <div class="text-xs text-gray-600 mb-1">Email Preview:</div>
+                                <div id="${previewId}-snippet" class="text-sm text-gray-700 bg-gray-50 p-2 rounded border border-gray-200">
+                                    ${previewSnippet}
+                                    <button type="button" onclick="toggleEmailPreview('${previewId}')" class="text-indigo-600 hover:text-indigo-800 ml-2 font-medium">...</button>
+                                </div>
+                                <div id="${previewId}-full" class="hidden mt-2">
+                                    <div class="bg-white border border-gray-300 rounded p-3 max-h-96 overflow-y-auto">
+                                        <div class="text-xs text-gray-500 mb-2">HTML Preview:</div>
+                                        <div class="text-xs border-b border-gray-200 pb-2 mb-2" style="max-height: 200px; overflow-y: auto;">${fullHtml}</div>
+                                        <div class="text-xs text-gray-500 mb-1">Text Preview:</div>
+                                        <div class="text-xs whitespace-pre-wrap font-mono bg-gray-50 p-2 rounded">${fullText}</div>
+                                    </div>
+                                    <button type="button" onclick="toggleEmailPreview('${previewId}')" class="mt-2 text-xs text-indigo-600 hover:text-indigo-800">Show less</button>
+                                </div>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
@@ -535,13 +728,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadSendEmailActivity() {
         if (!activityContainer) return;
         activityContainer.innerHTML = '<p class="text-sm text-gray-500">Loading activity...</p>';
+        // Use current timezone from selector or default
+        const tz = timezoneSelector ? timezoneSelector.value : currentTimezone;
         fetch('/api/send-email/requests/')
             .then(response => response.json())
             .then(data => {
                 const requests = data.requests || [];
-                if (activityTimezoneLabel) {
-                    const tz = data.timezone || '{{ user_timezone|default:"UTC" }}';
-                    activityTimezoneLabel.textContent = `Times shown in ${tz}.`;
+                // Update timezone if it changed on server
+                if (data.timezone && timezoneSelector) {
+                    currentTimezone = data.timezone;
+                    timezoneSelector.value = data.timezone;
                 }
                 renderSendEmailActivity(requests);
             })
@@ -680,20 +876,39 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert('Error: ' + data.error);
-            } else {
-                alert(data.message || 'Email scheduled successfully!');
-                form.reset();
-                scheduleValueContainer.classList.add('hidden');
-                loadSendEmailActivity();
+        .then(async response => {
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                console.warn('Could not parse response as JSON:', jsonError);
+                const textResponse = await response.text();
+                console.warn('Response text:', textResponse);
+                throw new Error('Invalid response from server');
             }
+            
+            if (!response.ok) {
+                const errorMessage = data?.error || data?.detail || JSON.stringify(data) || 'Failed to send email.';
+                throw new Error(errorMessage);
+            }
+            
+            return data;
+        })
+        .then(data => {
+            alert(data.message || 'Email scheduled successfully!');
+            form.reset();
+            scheduleValueContainer.classList.add('hidden');
+            loadSendEmailActivity();
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending email. Please try again.');
+            console.error('Error details:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            if (error.stack) {
+                console.error('Error stack:', error.stack);
+            }
+            const errorMessage = error.message || 'Error sending email. Please try again.';
+            alert('Error: ' + errorMessage);
         });
     });
 
@@ -713,6 +928,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue;
     }
 });
+
+// Toggle campaign status (activate/deactivate) - must be global for onclick handler
+function toggleCampaignStatus(campaignId, activate) {
+    const endpoint = activate 
+        ? `/api/campaigns/${campaignId}/activate/`
+        : `/api/campaigns/${campaignId}/deactivate/`;
+    
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': (function() {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            })()
+        }
+    })
+    .then(response => response.json().then(data => ({ status: response.status, body: data })))
+    .then(({ status, body }) => {
+        if (status >= 200 && status < 300) {
+            alert(body.message || (activate ? 'Campaign activated successfully!' : 'Campaign deactivated successfully!'));
+            // Reload the page to show updated status
+            window.location.reload();
+        } else {
+            alert(body.error || 'Failed to update campaign status. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error toggling campaign status:', error);
+        alert('Error updating campaign status. Please try again.');
+    });
+}
 </script>
 
 {% endblock %}

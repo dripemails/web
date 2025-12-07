@@ -12,6 +12,7 @@ urlpatterns = [
     path('send-contact/', views.send_contact, name='send-contact'),
     path('terms/', views.terms, name='terms'),
     path('privacy/', views.privacy, name='privacy'),
+    path('settings/', views.account_settings, name='settings'),
     path('promo-verification/', views.promo_verification, name='promo_verification'),
     # Feature pages
     path('features/drip-campaigns/', views.feature_drip_campaigns, name='feature_drip_campaigns'),

@@ -222,9 +222,12 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=user_email,
         to=[subscriber_email]
     )
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -348,8 +351,13 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add ads if required
     if show_ads:
-        ads_html = render_to_string('emails/ad_footer.html')
-        ads_text = "This email is powered by DripEmails.org - Free email marketing automation"
+        
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
         text_content += f"\n\n{ads_text}"
     
@@ -360,13 +368,23 @@ def send_campaign_email(email_id, subscriber_id):
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     
+    # Get user email for From address
+    user_email = email.campaign.user.email
+    
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
+    has_valid_spf = user_profile.spf_verified
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=email.subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=user_email,
         to=[subscriber.email]
     )
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
     msg.attach_alternative(html_content, "text/html")
     
     try:

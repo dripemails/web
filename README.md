@@ -139,7 +139,7 @@ When you select a schedule option (e.g., "Send in 5 minutes") but Celery/Redis i
 2. **Set up Python environment**
 
    ```bash
-   python -m dripemails dripemails
+   python -m venv dripemails
    source dripemails/bin/activate  # Linux/macOS
    # or
    dripemails\Scripts\activate     # Windows
@@ -506,6 +506,389 @@ DEFAULT_FROM_EMAIL=founders@dripemails.org
 - 📖 [Production Setup Guide](docs/smtp_server_production_setup.md)
 - 📖 [Supervisord Setup Guide](docs/supervisord_setup.md)
 - 📖 [Supervisord Quick Reference](docs/supervisord_quick_reference.md)
+
+## 🔍 SPF Record Verification (Cron Script)
+
+DripEmails includes a cron script to automatically check SPF records for user domains to ensure proper email deliverability.
+
+### Overview
+
+The `cron.py` script verifies that users have correctly configured SPF records that include DripEmails.org servers (`dripemails.org`, `web.dripemails.org`, `web1.dripemails.org`). This helps ensure emails sent through DripEmails are properly authenticated and delivered.
+
+### Prerequisites
+
+1. **Install dependencies:**
+   ```bash
+   pip install dnspython==2.6.1
+   ```
+
+2. **Run migrations** to add SPF verification fields to UserProfile:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+### Usage
+
+#### Check All Users
+
+Check SPF records for all active users:
+
+```bash
+python cron.py check_spf --all-users
+```
+
+This will:
+- Extract domains from each user's email address
+- Query DNS for SPF records
+- Verify that required DripEmails.org servers are included
+- Update UserProfile with verification status
+
+#### Check Specific User
+
+Check SPF record for a specific user by ID:
+
+```bash
+python cron.py check_spf --user-id 123
+```
+
+#### Output Example
+
+```
+SPF Check Results for User 123:
+  Email: user@example.com
+  Domain: example.com
+  Has SPF: True
+  SPF Record: v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+  Is Valid: True
+  Found Includes: dripemails.org, web.dripemails.org, web1.dripemails.org
+  Missing Includes: 
+```
+
+### Setting Up Automated Checks
+
+#### Using Cron (Linux/macOS)
+
+Add to your crontab to run daily at 2 AM:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add this line (adjust paths as needed)
+0 2 * * * cd /path/to/dripemails.org && /path/to/python cron.py check_spf --all-users >> /var/log/dripemails-spf-check.log 2>&1
+```
+
+#### Using Systemd Timer (Linux)
+
+Create `/etc/systemd/system/dripemails-spf-check.service`:
+
+```ini
+[Unit]
+Description=DripEmails SPF Record Check
+After=network.target
+
+[Service]
+Type=oneshot
+User=dripemails
+WorkingDirectory=/home/dripemails/web
+Environment="DJANGO_SETTINGS_MODULE=dripemails.live"
+ExecStart=/home/dripemails/venv/bin/python cron.py check_spf --all-users
+```
+
+Create `/etc/systemd/system/dripemails-spf-check.timer`:
+
+```ini
+[Unit]
+Description=Run DripEmails SPF Check Daily
+Requires=dripemails-spf-check.service
+
+[Timer]
+OnCalendar=daily
+OnCalendar=02:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable dripemails-spf-check.timer
+sudo systemctl start dripemails-spf-check.timer
+sudo systemctl status dripemails-spf-check.timer
+```
+
+#### Using Windows Task Scheduler
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger: Daily at 2:00 AM
+4. Set action: Start a program
+   - Program: `C:\path\to\python.exe`
+   - Arguments: `cron.py check_spf --all-users`
+   - Start in: `C:\path\to\dripemails.org`
+
+### What Gets Checked
+
+The script verifies that SPF records include:
+- `dripemails.org`
+- `web.dripemails.org`
+- `web1.dripemails.org`
+
+**Example valid SPF record:**
+```
+v=spf1 include:dripemails.org include:web.dripemails.org include:web1.dripemails.org ~all
+```
+
+### Database Storage
+
+SPF verification results are stored in the `UserProfile` model:
+- `spf_verified` - Boolean indicating if SPF is valid
+- `spf_last_checked` - Timestamp of last check
+- `spf_record` - The actual SPF record found
+- `spf_missing_includes` - JSON list of missing required includes
+
+You can query these fields in Django:
+
+```python
+from analytics.models import UserProfile
+
+# Get users with invalid SPF records
+invalid_users = UserProfile.objects.filter(spf_verified=False)
+
+# Get users who haven't been checked recently
+from django.utils import timezone
+from datetime import timedelta
+old_checks = UserProfile.objects.filter(
+    spf_last_checked__lt=timezone.now() - timedelta(days=7)
+)
+```
+
+### Troubleshooting
+
+**No SPF record found:**
+- User's domain may not have an SPF record configured
+- DNS propagation may be delayed
+- Domain may be invalid or expired
+
+**Missing includes:**
+- User's SPF record exists but doesn't include required DripEmails.org servers
+- User needs to update their SPF record to include: `include:dripemails.org include:web.dripemails.org include:web1.dripemails.org`
+
+**DNS errors:**
+- Check network connectivity
+- Verify DNS resolver configuration
+- Ensure `dnspython` is installed correctly
+
+## 📧 Scheduled Email Processing (Cron Script)
+
+DripEmails includes a cron script to automatically process and send scheduled emails that are due to be sent.
+
+### Overview
+
+The `cron.py` script processes `EmailSendRequest` objects with status `'pending'` or `'queued'` where `scheduled_for <= now()`. This ensures that emails scheduled for future delivery are sent at the appropriate time.
+
+### Usage
+
+#### Process All Scheduled Emails
+
+Process all scheduled emails that are due to be sent:
+
+```bash
+python cron.py send_scheduled_emails
+```
+
+This will:
+- Find all emails with status `'pending'` or `'queued'` where `scheduled_for <= now()`
+- Send each email using the synchronous email sending function
+- Update the status to `'sent'` on success or `'failed'` on error
+- Log results and provide a summary
+
+#### Process with Limit
+
+Process a limited number of scheduled emails (useful for testing or rate limiting):
+
+```bash
+python cron.py send_scheduled_emails --limit 100
+```
+
+#### Production Usage
+
+For production, use the `--settings` flag to specify the production settings:
+
+```bash
+python cron.py send_scheduled_emails --settings=dripemails.live
+```
+
+#### Combined Usage
+
+```bash
+# Process up to 100 scheduled emails in production
+python cron.py send_scheduled_emails --settings=dripemails.live --limit 100
+```
+
+### Output Example
+
+```
+Found 15 scheduled emails due to be sent
+Sent scheduled email 123e4567-e89b-12d3-a456-426614174000 to user@example.com
+Sent scheduled email 223e4567-e89b-12d3-a456-426614174001 to user2@example.com
+...
+Scheduled Email Processing Summary:
+  Total due: 15
+  Successfully sent: 14
+  Failed: 1
+```
+
+### Setting Up Automated Processing
+
+#### Using Cron (Linux/macOS)
+
+Add to your crontab to run every 5 minutes:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add this line (adjust paths as needed)
+*/5 * * * * cd /path/to/dripemails.org && /path/to/python cron.py send_scheduled_emails --settings=dripemails.live >> /var/log/dripemails-scheduled-emails.log 2>&1
+```
+
+For more frequent processing (every minute):
+
+```bash
+* * * * * cd /path/to/dripemails.org && /path/to/python cron.py send_scheduled_emails --settings=dripemails.live >> /var/log/dripemails-scheduled-emails.log 2>&1
+```
+
+#### Using Systemd Timer (Linux)
+
+Create `/etc/systemd/system/dripemails-scheduled-emails.service`:
+
+```ini
+[Unit]
+Description=DripEmails Scheduled Email Processor
+After=network.target
+
+[Service]
+Type=oneshot
+User=dripemails
+WorkingDirectory=/home/dripemails/web
+Environment="DJANGO_SETTINGS_MODULE=dripemails.live"
+ExecStart=/home/dripemails/venv/bin/python cron.py send_scheduled_emails
+```
+
+Create `/etc/systemd/system/dripemails-scheduled-emails.timer`:
+
+```ini
+[Unit]
+Description=Run DripEmails Scheduled Email Processor Every 5 Minutes
+Requires=dripemails-scheduled-emails.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable dripemails-scheduled-emails.timer
+sudo systemctl start dripemails-scheduled-emails.timer
+sudo systemctl status dripemails-scheduled-emails.timer
+```
+
+#### Using Windows Task Scheduler
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger: Every 5 minutes
+4. Set action: Start a program
+   - Program: `C:\path\to\python.exe`
+   - Arguments: `cron.py send_scheduled_emails --settings=dripemails.live`
+   - Start in: `C:\path\to\dripemails.org`
+
+### How It Works
+
+1. **Query Scheduled Emails**: Finds all `EmailSendRequest` objects with:
+   - Status: `'pending'` or `'queued'`
+   - `scheduled_for <= now()`
+   - Ordered by `scheduled_for` (oldest first)
+
+2. **Update Status**: Sets status to `'queued'` to prevent duplicate processing
+
+3. **Send Email**: Uses `_send_single_email_sync()` to send the email with:
+   - Variable replacement
+   - Footer and advertisement (if applicable)
+   - Unsubscribe links (if enabled)
+   - SPF-aware Sender header
+
+4. **Update Status**: 
+   - On success: Status set to `'sent'`, `sent_at` timestamp recorded
+   - On failure: Status set to `'failed'`, error message recorded
+
+5. **Logging**: All operations are logged to `logs/cron_spf.log` (shared with SPF checking)
+
+### Database Storage
+
+Scheduled email information is stored in the `EmailSendRequest` model:
+- `status` - Current status: `'pending'`, `'queued'`, `'sent'`, or `'failed'`
+- `scheduled_for` - DateTime when the email should be sent
+- `sent_at` - DateTime when the email was actually sent (null if not sent yet)
+- `error_message` - Error message if sending failed
+
+You can query scheduled emails in Django:
+
+```python
+from campaigns.models import EmailSendRequest
+from django.utils import timezone
+
+# Get all pending scheduled emails
+pending = EmailSendRequest.objects.filter(
+    status__in=['pending', 'queued'],
+    scheduled_for__lte=timezone.now()
+)
+
+# Get failed emails
+failed = EmailSendRequest.objects.filter(status='failed')
+
+# Get successfully sent emails
+sent = EmailSendRequest.objects.filter(status='sent')
+```
+
+### Troubleshooting
+
+**No emails being sent:**
+- Check that emails are scheduled with `scheduled_for <= now()`
+- Verify email status is `'pending'` or `'queued'`
+- Check logs in `logs/cron_spf.log` for errors
+
+**Emails failing to send:**
+- Check SMTP server configuration
+- Verify email templates are valid
+- Check subscriber email addresses are valid
+- Review error messages in `EmailSendRequest.error_message` field
+
+**Performance issues:**
+- Use `--limit` flag to process emails in batches
+- Increase cron frequency if you have many scheduled emails
+- Consider using Celery for better performance with high volumes
+
+### Integration with Celery
+
+If Celery is available, scheduled emails can also be processed by Celery workers. The `send_scheduled_emails` cron script provides a fallback for environments without Celery or for ensuring emails are sent even if Celery workers are unavailable.
+
+**Recommended Setup:**
+- Use Celery for high-volume email processing
+- Use `send_scheduled_emails` cron as a backup/fallback
+- Run cron every 5 minutes to catch any emails missed by Celery
 
 ## 🔧 Configuration
 

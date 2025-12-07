@@ -5,15 +5,18 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.template.loader import render_to_string
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from campaigns.models import Campaign, Email, EmailSendRequest
-from subscribers.models import List
+from subscribers.models import List, Subscriber
 from analytics.models import UserProfile
 from django.conf import settings
 import re
 import pytz
+import logging
+import uuid
 from .models import BlogPost
 
 @login_required
@@ -47,13 +50,16 @@ def dashboard_api(request):
     # Get user profile
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
+    # Count unique subscribers across all user's lists (avoid double counting)
+    subscribers_count = Subscriber.objects.filter(lists__user=request.user).distinct().count()
+    
     return Response({
         'campaigns': campaign_data,
         'lists': list_data,
         'stats': {
             'campaigns_count': len(campaign_data),
             'lists_count': len(list_data),
-            'subscribers_count': sum(list_obj.subscribers_count for list_obj in lists),
+            'subscribers_count': subscribers_count,
             'sent_emails_count': sum(campaign.sent_count for campaign in campaigns),
         },
         'profile': {
@@ -61,6 +67,11 @@ def dashboard_api(request):
             'send_without_unsubscribe': profile.send_without_unsubscribe,
         }
     })
+
+@login_required
+def profile(request):
+    """User profile page - redirects to dashboard."""
+    return redirect('core:dashboard')
 
 @login_required
 def dashboard(request):
@@ -74,11 +85,17 @@ def dashboard(request):
     # Calculate stats
     campaigns_count = campaigns.count()
     lists_count = lists.count()
-    subscribers_count = sum(list_obj.subscribers_count for list_obj in lists)
+    # Count unique subscribers across all user's lists (avoid double counting)
+    subscribers_count = Subscriber.objects.filter(lists__user=request.user).distinct().count()
     sent_emails_count = sum(campaign.sent_count for campaign in campaigns)
 
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     user_timezone = profile.timezone or 'UTC'
+    
+    # Extract email domain for SPF instructions
+    user_email_domain = None
+    if request.user.email and '@' in request.user.email:
+        user_email_domain = request.user.email.split('@')[1]
     
     context = {
         'campaigns': campaigns,
@@ -87,6 +104,7 @@ def dashboard(request):
         'lists_count': lists_count,
         'subscribers_count': subscribers_count,
         'sent_emails_count': sent_emails_count,
+        'user_email_domain': user_email_domain,
         'user_timezone': user_timezone,
     }
     
@@ -140,13 +158,13 @@ def privacy(request):
     return render(request, 'core/privacy.html')
 
 @login_required
-def promo_verification(request):
-    """Handle promo verification and account settings updates."""
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+def account_settings(request):
+    """Account settings page."""
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     common_timezones = pytz.common_timezones
 
     if request.method == 'POST':
-        form_type = request.POST.get('form_type', 'promo')
+        form_type = request.POST.get('form_type', 'settings')
 
         if form_type == 'timezone':
             selected_timezone = request.POST.get('timezone')
@@ -156,8 +174,30 @@ def promo_verification(request):
                 profile.timezone = selected_timezone
                 profile.save(update_fields=['timezone'])
                 messages.success(request, _("Time zone updated to %(tz)s") % {'tz': selected_timezone})
-            return redirect('core:promo_verification')
+            return redirect('core:settings')
+        
+        elif form_type == 'unsubscribe':
+            profile.send_without_unsubscribe = request.POST.get('send_without_unsubscribe') == 'on'
+            profile.save(update_fields=['send_without_unsubscribe'])
+            if profile.send_without_unsubscribe:
+                messages.warning(request, _("Unsubscribe links are now disabled. This may violate email regulations."))
+            else:
+                messages.success(request, _("Unsubscribe links are now enabled."))
+            return redirect('core:settings')
+    
+    context = {
+        'timezones': common_timezones,
+        'current_timezone': profile.timezone or 'UTC',
+        'send_without_unsubscribe': profile.send_without_unsubscribe,
+    }
+    return render(request, 'core/settings.html', context)
 
+@login_required
+def promo_verification(request):
+    """Handle promo verification."""
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
         promo_url = request.POST.get('promo_url')
         promo_type = request.POST.get('promo_type')
         
@@ -193,11 +233,7 @@ def promo_verification(request):
         messages.success(request, _("Thank you for promoting DripEmails.org! Ads have been disabled for your account."))
         return redirect('core:dashboard')
     
-    context = {
-        'timezones': common_timezones,
-        'current_timezone': profile.timezone or 'UTC',
-    }
-    return render(request, 'core/promo_verification.html', context)
+    return render(request, 'core/promo_verification.html')
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -207,7 +243,20 @@ def profile_settings(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     
     if request.method == 'POST':
-        profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+        # Update send_without_unsubscribe if provided
+        if 'send_without_unsubscribe' in request.data:
+            profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+        
+        # Update timezone if provided
+        if 'timezone' in request.data:
+            new_timezone = request.data.get('timezone', 'UTC')
+            # Validate timezone
+            try:
+                pytz.timezone(new_timezone)  # Validate it's a real timezone
+                profile.timezone = new_timezone
+            except pytz.UnknownTimeZoneError:
+                return Response({'error': _('Invalid timezone')}, status=400)
+        
         profile.save()
     
     return Response({
@@ -283,7 +332,7 @@ def send_email_api(request):
         }, status=400)
     
     try:
-        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        profile, _created = UserProfile.objects.get_or_create(user=request.user)
         try:
             user_timezone = pytz.timezone(profile.timezone or 'UTC')
         except pytz.UnknownTimeZoneError:
@@ -297,27 +346,40 @@ def send_email_api(request):
         
         # Get the subscriber or create one
         from subscribers.models import Subscriber
-        subscriber, created = Subscriber.objects.get_or_create(
-            email=email,
-            defaults={
-                'first_name': first_name or '',
-                'last_name': last_name or '',
-                'is_active': True
-            }
-        )
-        if not created:
-            updated = False
-            if first_name and subscriber.first_name != first_name:
-                subscriber.first_name = first_name
-                updated = True
-            if last_name and subscriber.last_name != last_name:
-                subscriber.last_name = last_name
-                updated = True
-            if not subscriber.is_active:
-                subscriber.is_active = True
-                updated = True
-            if updated:
-                subscriber.save()
+        try:
+            subscriber, created = Subscriber.objects.get_or_create(
+                email=email,
+                defaults={
+                    'first_name': first_name or '',
+                    'last_name': last_name or '',
+                    'is_active': True
+                }
+            )
+            if not created:
+                updated = False
+                if first_name and subscriber.first_name != first_name:
+                    subscriber.first_name = first_name
+                    updated = True
+                if last_name and subscriber.last_name != last_name:
+                    subscriber.last_name = last_name
+                    updated = True
+                # Check is_active properly - it's a boolean field, not a callable
+                is_active_value = getattr(subscriber, 'is_active', True)
+                if not is_active_value:
+                    subscriber.is_active = True
+                    updated = True
+                if updated:
+                    subscriber.save()
+        except Exception as sub_error:
+            import traceback
+            import logging
+            error_trace = traceback.format_exc()
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error creating/updating subscriber: {str(sub_error)}\n{error_trace}")
+            return Response({
+                'error': _('Failed to create or update subscriber: {}').format(str(sub_error)),
+                'traceback': error_trace if settings.DEBUG else None
+            }, status=500)
         
         # Parse the schedule
         from datetime import timedelta
@@ -474,14 +536,88 @@ def send_email_api(request):
     except Email.DoesNotExist:
         return Response({'error': _('Email template not found')}, status=404)
     except Exception as e:
-        return Response({'error': str(e)}, status=400)
+        import traceback
+        error_trace = traceback.format_exc()
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error in send_email_api: {str(e)}\n{error_trace}")
+        return Response({
+            'error': str(e),
+            'traceback': error_trace if settings.DEBUG else None
+        }, status=400)
+
+def generate_email_preview(email_obj, variables=None, subscriber=None, request_obj=None):
+    """
+    Generate the full email preview including footer and advertisement.
+    Returns both HTML and text versions.
+    """
+    # Get site information from request context
+    from .context_processors import site_detection
+    # Create a mock request to get site info
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
+    # Replace variables in content
+    html_content = email_obj.body_html
+    text_content = email_obj.body_text
+    subject = email_obj.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Get user profile for ad settings
+    user = request_obj.user if request_obj else email_obj.campaign.user
+    user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    show_ads = not user_profile.has_verified_promo
+    show_unsubscribe = not user_profile.send_without_unsubscribe
+    
+    # Generate unsubscribe link
+    if subscriber and hasattr(subscriber, 'uuid'):
+        unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
+    else:
+        unsubscribe_link = f"{site_url}/unsubscribe/"
+    
+    # Add ads if required
+    if show_ads:
+        # Render ad footer with site context
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
+        html_content += ads_html
+        text_content += f"\n\n{ads_text}"
+    
+    # Add unsubscribe link if required
+    if show_unsubscribe:
+        unsubscribe_html = f'<p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
+        unsubscribe_text = f"\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        html_content += unsubscribe_html
+        text_content += unsubscribe_text
+    
+    return {
+        'html': html_content,
+        'text': text_content,
+        'subject': subject,
+    }
+
 
 @login_required
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def send_email_requests_list(request):
     """Return the latest email send requests for the current user."""
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
     try:
         user_timezone = pytz.timezone(profile.timezone or 'UTC')
     except pytz.UnknownTimeZoneError:
@@ -503,6 +639,15 @@ def send_email_requests_list(request):
     for req in requests_qs:
         scheduled_iso, scheduled_display = format_datetime(req.scheduled_for)
         sent_iso, sent_display = format_datetime(req.sent_at)
+        
+        # Generate email preview
+        preview = generate_email_preview(req.email, req.variables, req.subscriber, req)
+        
+        # Create preview snippet (first 200 chars of text, strip HTML)
+        import re as re_module
+        preview_text = re_module.sub(r'<[^>]+>', '', preview['html'])
+        preview_snippet = preview_text[:200] + ('...' if len(preview_text) > 200 else '')
+        
         data.append({
             'id': str(req.id),
             'campaign': req.campaign.name,
@@ -515,6 +660,9 @@ def send_email_requests_list(request):
             'sent_at': sent_iso,
             'sent_at_display': sent_display,
             'error_message': req.error_message or '',
+            'email_preview_html': preview['html'],
+            'email_preview_text': preview['text'],
+            'email_preview_snippet': preview_snippet,
         })
 
     return Response({'requests': data, 'timezone': profile.timezone or 'UTC'})

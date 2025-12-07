@@ -49,6 +49,8 @@ non_prefixed_urlpatterns = [
 
 # URL patterns that SHOULD be prefixed with a language code
 language_prefixed_urlpatterns = i18n_patterns(
+    # Profile page - must come before allauth.urls to override default profile redirect
+    path('accounts/profile/', core_views.profile, name='account_profile'),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls')),
     # Web views only (no API endpoints)
@@ -64,4 +66,6 @@ urlpatterns = non_prefixed_urlpatterns + language_prefixed_urlpatterns
 # Add static and media files for development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Use django.contrib.staticfiles to serve from STATICFILES_DIRS in development
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

@@ -22,7 +22,7 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable is required for production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True # enabled for now
 
 ALLOWED_HOSTS = [
     'dripemails.org',
@@ -31,6 +31,22 @@ ALLOWED_HOSTS = [
     'docs.dripemails.org',
     'localhost',
     '127.0.0.1',
+    '127.0.0.1:8005',
+    '0.0.0.0',
+    '0.0.0.0:8005',
+    '10.124.0.8',
+    '10.124.0.8:8005',
+    '*'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://dripemails.org',
+    'https://www.dripemails.org',
+    'https://api.dripemails.org',
+    'https://docs.dripemails.org',
+    'http://dripemails.org',  # For development/testing
+    'http://localhost',
+    'http://127.0.0.1',
 ]
 
 # Application definition
@@ -83,6 +99,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.current_year',
+                'core.context_processors.site_detection',
             ],
         },
     },
@@ -91,19 +109,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dripemails.wsgi.application'
 
 # Database Configuration
-# MySQL for production
+# PostgreSQL for production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'dripemails'),
         'USER': os.environ.get('DB_USER', 'dripemails'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'dripemails'),
-        'HOST': os.environ.get('DB_HOST', '10.124.0.7'),
-        'PORT': os.environ.get('DB_PORT', '3306'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
         'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'autocommit': True,
+            'connect_timeout': 10,
         },
         'CONN_MAX_AGE': 60,
         'CONN_HEALTH_CHECKS': True,
@@ -166,14 +182,37 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = '[DripEmails] '
 
+# Login/Logout redirects
+LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect to dashboard after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home after logout
+
 # Email Configuration
+# Use Postfix for actual email delivery to external servers (Gmail, etc.)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))  # Use port 25 for Postfix
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'False').lower() == 'true'
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() == 'true'
+
+# SMTP Authentication Configuration
+# For production servers that require authentication, set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD
+# in your environment variables. If both are provided, Django will use them for authentication.
+# If either is missing/empty, Django will attempt to send without authentication (useful for
+# servers that don't require auth, but will fail if the server requires it).
+_email_user = os.environ.get('EMAIL_HOST_USER', '').strip()
+_email_password = os.environ.get('EMAIL_HOST_PASSWORD', '').strip()
+
+# Set credentials if both are provided
+if _email_user and _email_password:
+    EMAIL_HOST_USER = _email_user
+    EMAIL_HOST_PASSWORD = _email_password
+else:
+    # If credentials are not provided, set to None (Django will skip authentication)
+    # NOTE: This will fail if your SMTP server requires authentication!
+    # Make sure to set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your .env file for production.
+    EMAIL_HOST_USER = None
+    EMAIL_HOST_PASSWORD = None
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'founders@dripemails.org')
 
 # REST Framework Configuration
@@ -200,6 +239,7 @@ REST_FRAMEWORK = {
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
     "https://dripemails.org",
+    "http://dripemails.org:8005",
     "https://www.dripemails.org",
     "https://dripemail.org",
     "https://www.dripemail.org",
@@ -217,9 +257,9 @@ CORS_ALLOW_METHODS = [
 ]
 
 # Security Settings
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = False
+SECURE_CONTENT_TYPE_NOSNIFF = False
+#X_FRAME_OPTIONS = 'DENY'
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -229,10 +269,29 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Session Security
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_AGE = 3600  # 1 hour
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# HTTPONLY - Set to False only if you need JavaScript access to cookies (less secure)
+# For most cases, True is recommended for security
+SESSION_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = False
+# SameSite attribute - 'Lax' allows cookies in same-site requests (most common)
+# 'None' requires Secure=True and allows cross-site cookies (for subdomains/APIs)
+# 'Strict' is most secure but can break some redirect flows
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
+# Cookie domain - None is most reliable for same-site
+# Use '.dripemails.org' ONLY if you need cookies shared across subdomains (www, api, etc.)
+# IMPORTANT: Setting domain to '.dripemails.org' can cause issues when accessing via 'dripemails.org' directly
+# If you need subdomain sharing, ensure all access is via a subdomain (e.g., www.dripemails.org)
+SESSION_COOKIE_DOMAIN = None  # Most reliable - use None unless you need subdomain sharing
+CSRF_COOKIE_DOMAIN = None
+SESSION_COOKIE_PATH = '/'  # Explicitly set cookie path
+SESSION_COOKIE_NAME = 'sessionid'  # Explicitly set cookie name (default, but being explicit)
+SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# Save session on every request to ensure it persists
+SESSION_SAVE_EVERY_REQUEST = True
+# Save session on every request to ensure it persists (important for cache backend)
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Logging Configuration
 LOGGING = {
@@ -304,21 +363,27 @@ CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
 
 # Cache Configuration
+# Note: Django's built-in RedisCache backend does NOT support CLIENT_CLASS
+# CLIENT_CLASS is only for django-redis package, not django.core.cache.backends.redis
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1'),
         'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # Do NOT include CLIENT_CLASS here - it's not supported by Django's built-in Redis backend
         },
         'KEY_PREFIX': 'dripemails',
         'TIMEOUT': 300,  # 5 minutes default
     }
 }
 
-# Use cache for sessions
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
+# Use database for sessions (more reliable than cache)
+# Cache backend requires Redis to be working perfectly, and session cookies can get lost
+# Database backend is more reliable for session persistence
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# If you want to use cache backend later (requires Redis to be working):
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = 'default'
 
 # Create logs directory if it doesn't exist
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)

@@ -638,6 +638,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.toLocaleString();
     }
 
+    function toggleEmailPreview(previewId) {
+        const snippet = document.getElementById(previewId + '-snippet');
+        const full = document.getElementById(previewId + '-full');
+        if (snippet && full) {
+            if (full.classList.contains('hidden')) {
+                full.classList.remove('hidden');
+            } else {
+                full.classList.add('hidden');
+            }
+        }
+    }
+
     function renderSendEmailActivity(requests) {
         if (!activityContainer) return;
 
@@ -652,10 +664,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const sentText = formatDisplayDate(req.sent_at, req.sent_at_display);
             const canSendNow = req.status !== 'sent';
 
+            const previewId = `preview-${req.id}`;
+            const previewSnippet = req.email_preview_snippet || 'No preview available';
+            const fullHtml = req.email_preview_html || '';
+            const fullText = req.email_preview_text || '';
+            
             return `
                 <div class="border border-gray-200 rounded-lg p-4">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                        <div>
+                        <div class="flex-1">
                             <div class="flex items-center gap-2">
                                 <h4 class="text-sm font-semibold text-gray-800">${req.email_subject || 'Untitled Email'}</h4>
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${statusClass}">
@@ -669,6 +686,23 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div><span class="font-medium text-gray-600">Scheduled:</span> ${scheduledText}</div>
                                 <div><span class="font-medium text-gray-600">Sent:</span> ${sentText}</div>
                                 ${req.error_message ? `<div class="text-red-600">${req.error_message}</div>` : ''}
+                            </div>
+                            <!-- Email Preview -->
+                            <div class="mt-3 pt-3 border-t border-gray-200">
+                                <div class="text-xs text-gray-600 mb-1">Email Preview:</div>
+                                <div id="${previewId}-snippet" class="text-sm text-gray-700 bg-gray-50 p-2 rounded border border-gray-200">
+                                    ${previewSnippet}
+                                    <button type="button" onclick="toggleEmailPreview('${previewId}')" class="text-indigo-600 hover:text-indigo-800 ml-2 font-medium">...</button>
+                                </div>
+                                <div id="${previewId}-full" class="hidden mt-2">
+                                    <div class="bg-white border border-gray-300 rounded p-3 max-h-96 overflow-y-auto">
+                                        <div class="text-xs text-gray-500 mb-2">HTML Preview:</div>
+                                        <div class="text-xs border-b border-gray-200 pb-2 mb-2" style="max-height: 200px; overflow-y: auto;">${fullHtml}</div>
+                                        <div class="text-xs text-gray-500 mb-1">Text Preview:</div>
+                                        <div class="text-xs whitespace-pre-wrap font-mono bg-gray-50 p-2 rounded">${fullText}</div>
+                                    </div>
+                                    <button type="button" onclick="toggleEmailPreview('${previewId}')" class="mt-2 text-xs text-indigo-600 hover:text-indigo-800">Show less</button>
+                                </div>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">

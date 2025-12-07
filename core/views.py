@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.template.loader import render_to_string
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -15,6 +16,7 @@ from django.conf import settings
 import re
 import pytz
 import logging
+import uuid
 from .models import BlogPost
 
 @login_required
@@ -543,6 +545,73 @@ def send_email_api(request):
             'traceback': error_trace if settings.DEBUG else None
         }, status=400)
 
+def generate_email_preview(email_obj, variables=None, subscriber=None, request_obj=None):
+    """
+    Generate the full email preview including footer and advertisement.
+    Returns both HTML and text versions.
+    """
+    # Get site information from request context
+    from .context_processors import site_detection
+    # Create a mock request to get site info
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
+    # Replace variables in content
+    html_content = email_obj.body_html
+    text_content = email_obj.body_text
+    subject = email_obj.subject
+    
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value))
+            text_content = text_content.replace(placeholder, str(value))
+            subject = subject.replace(placeholder, str(value))
+    
+    # Get user profile for ad settings
+    user = request_obj.user if request_obj else email_obj.campaign.user
+    user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    show_ads = not user_profile.has_verified_promo
+    show_unsubscribe = not user_profile.send_without_unsubscribe
+    
+    # Generate unsubscribe link
+    if subscriber and hasattr(subscriber, 'uuid'):
+        unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
+    else:
+        unsubscribe_link = f"{site_url}/unsubscribe/"
+    
+    # Add ads if required
+    if show_ads:
+        # Render ad footer with site context
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
+        html_content += ads_html
+        text_content += f"\n\n{ads_text}"
+    
+    # Add unsubscribe link if required
+    if show_unsubscribe:
+        unsubscribe_html = f'<p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
+        unsubscribe_text = f"\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        html_content += unsubscribe_html
+        text_content += unsubscribe_text
+    
+    return {
+        'html': html_content,
+        'text': text_content,
+        'subject': subject,
+    }
+
+
 @login_required
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -570,6 +639,15 @@ def send_email_requests_list(request):
     for req in requests_qs:
         scheduled_iso, scheduled_display = format_datetime(req.scheduled_for)
         sent_iso, sent_display = format_datetime(req.sent_at)
+        
+        # Generate email preview
+        preview = generate_email_preview(req.email, req.variables, req.subscriber, req)
+        
+        # Create preview snippet (first 200 chars of text, strip HTML)
+        import re as re_module
+        preview_text = re_module.sub(r'<[^>]+>', '', preview['html'])
+        preview_snippet = preview_text[:200] + ('...' if len(preview_text) > 200 else '')
+        
         data.append({
             'id': str(req.id),
             'campaign': req.campaign.name,
@@ -582,6 +660,9 @@ def send_email_requests_list(request):
             'sent_at': sent_iso,
             'sent_at_display': sent_display,
             'error_message': req.error_message or '',
+            'email_preview_html': preview['html'],
+            'email_preview_text': preview['text'],
+            'email_preview_snippet': preview_snippet,
         })
 
     return Response({'requests': data, 'timezone': profile.timezone or 'UTC'})

@@ -235,12 +235,24 @@ def send_campaign_email(email_id, subscriber_id):
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
     
+    # Get site information from request context
+    from core.context_processors import site_detection
+    # Create a mock request to get site info
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
     # Tracking pixel for open tracking
     tracking_id = uuid.uuid4()
-    tracking_pixel = f'<img src="{settings.SITE_URL}/track/open/{tracking_id}/" width="1" height="1" alt=""/>'
+    tracking_pixel = f'<img src="{site_url}/track/open/{tracking_id}/" width="1" height="1" alt=""/>'
     
     # Generate unsubscribe link
-    unsubscribe_link = f"{settings.SITE_URL}/unsubscribe/{subscriber.uuid}/"
+    unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with ads and unsubscribe link as needed
     html_content = email.body_html
@@ -251,8 +263,13 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add ads if required
     if show_ads:
-        ads_html = render_to_string('emails/ad_footer.html')
-        ads_text = "This email is powered by DripEmails.org - Free email marketing automation"
+        
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
         text_content += f"\n\n{ads_text}"
     

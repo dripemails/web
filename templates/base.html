@@ -34,7 +34,10 @@
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
                 <a href="{% url 'core:home' %}" class="flex items-center space-x-2">
-                    <span class="text-xl font-bold text-gray-800">{% trans "DripEmails.org" %}</span>
+                    {% if site_logo %}
+                    <img src="/static/core/img/{{ site_logo }}" alt="{{ site_name|default:'DripEmails.org' }}" class="h-8 w-auto">
+                    {% endif %}
+                    <span class="text-xl font-bold text-gray-800">{{ site_name|default:"DripEmails.org" }}</span>
                 </a>
                 
                 {% if user.is_authenticated %}

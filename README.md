@@ -630,6 +630,213 @@ old_checks = UserProfile.objects.filter(
 - Verify DNS resolver configuration
 - Ensure `dnspython` is installed correctly
 
+## 📧 Scheduled Email Processing (Cron Script)
+
+DripEmails includes a cron script to automatically process and send scheduled emails that are due to be sent.
+
+### Overview
+
+The `cron.py` script processes `EmailSendRequest` objects with status `'pending'` or `'queued'` where `scheduled_for <= now()`. This ensures that emails scheduled for future delivery are sent at the appropriate time.
+
+### Usage
+
+#### Process All Scheduled Emails
+
+Process all scheduled emails that are due to be sent:
+
+```bash
+python cron.py send_scheduled_emails
+```
+
+This will:
+- Find all emails with status `'pending'` or `'queued'` where `scheduled_for <= now()`
+- Send each email using the synchronous email sending function
+- Update the status to `'sent'` on success or `'failed'` on error
+- Log results and provide a summary
+
+#### Process with Limit
+
+Process a limited number of scheduled emails (useful for testing or rate limiting):
+
+```bash
+python cron.py send_scheduled_emails --limit 100
+```
+
+#### Production Usage
+
+For production, use the `--settings` flag to specify the production settings:
+
+```bash
+python cron.py send_scheduled_emails --settings=dripemails.live
+```
+
+#### Combined Usage
+
+```bash
+# Process up to 100 scheduled emails in production
+python cron.py send_scheduled_emails --settings=dripemails.live --limit 100
+```
+
+### Output Example
+
+```
+Found 15 scheduled emails due to be sent
+Sent scheduled email 123e4567-e89b-12d3-a456-426614174000 to user@example.com
+Sent scheduled email 223e4567-e89b-12d3-a456-426614174001 to user2@example.com
+...
+Scheduled Email Processing Summary:
+  Total due: 15
+  Successfully sent: 14
+  Failed: 1
+```
+
+### Setting Up Automated Processing
+
+#### Using Cron (Linux/macOS)
+
+Add to your crontab to run every 5 minutes:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add this line (adjust paths as needed)
+*/5 * * * * cd /path/to/dripemails.org && /path/to/python cron.py send_scheduled_emails --settings=dripemails.live >> /var/log/dripemails-scheduled-emails.log 2>&1
+```
+
+For more frequent processing (every minute):
+
+```bash
+* * * * * cd /path/to/dripemails.org && /path/to/python cron.py send_scheduled_emails --settings=dripemails.live >> /var/log/dripemails-scheduled-emails.log 2>&1
+```
+
+#### Using Systemd Timer (Linux)
+
+Create `/etc/systemd/system/dripemails-scheduled-emails.service`:
+
+```ini
+[Unit]
+Description=DripEmails Scheduled Email Processor
+After=network.target
+
+[Service]
+Type=oneshot
+User=dripemails
+WorkingDirectory=/home/dripemails/web
+Environment="DJANGO_SETTINGS_MODULE=dripemails.live"
+ExecStart=/home/dripemails/venv/bin/python cron.py send_scheduled_emails
+```
+
+Create `/etc/systemd/system/dripemails-scheduled-emails.timer`:
+
+```ini
+[Unit]
+Description=Run DripEmails Scheduled Email Processor Every 5 Minutes
+Requires=dripemails-scheduled-emails.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable dripemails-scheduled-emails.timer
+sudo systemctl start dripemails-scheduled-emails.timer
+sudo systemctl status dripemails-scheduled-emails.timer
+```
+
+#### Using Windows Task Scheduler
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger: Every 5 minutes
+4. Set action: Start a program
+   - Program: `C:\path\to\python.exe`
+   - Arguments: `cron.py send_scheduled_emails --settings=dripemails.live`
+   - Start in: `C:\path\to\dripemails.org`
+
+### How It Works
+
+1. **Query Scheduled Emails**: Finds all `EmailSendRequest` objects with:
+   - Status: `'pending'` or `'queued'`
+   - `scheduled_for <= now()`
+   - Ordered by `scheduled_for` (oldest first)
+
+2. **Update Status**: Sets status to `'queued'` to prevent duplicate processing
+
+3. **Send Email**: Uses `_send_single_email_sync()` to send the email with:
+   - Variable replacement
+   - Footer and advertisement (if applicable)
+   - Unsubscribe links (if enabled)
+   - SPF-aware Sender header
+
+4. **Update Status**: 
+   - On success: Status set to `'sent'`, `sent_at` timestamp recorded
+   - On failure: Status set to `'failed'`, error message recorded
+
+5. **Logging**: All operations are logged to `logs/cron_spf.log` (shared with SPF checking)
+
+### Database Storage
+
+Scheduled email information is stored in the `EmailSendRequest` model:
+- `status` - Current status: `'pending'`, `'queued'`, `'sent'`, or `'failed'`
+- `scheduled_for` - DateTime when the email should be sent
+- `sent_at` - DateTime when the email was actually sent (null if not sent yet)
+- `error_message` - Error message if sending failed
+
+You can query scheduled emails in Django:
+
+```python
+from campaigns.models import EmailSendRequest
+from django.utils import timezone
+
+# Get all pending scheduled emails
+pending = EmailSendRequest.objects.filter(
+    status__in=['pending', 'queued'],
+    scheduled_for__lte=timezone.now()
+)
+
+# Get failed emails
+failed = EmailSendRequest.objects.filter(status='failed')
+
+# Get successfully sent emails
+sent = EmailSendRequest.objects.filter(status='sent')
+```
+
+### Troubleshooting
+
+**No emails being sent:**
+- Check that emails are scheduled with `scheduled_for <= now()`
+- Verify email status is `'pending'` or `'queued'`
+- Check logs in `logs/cron_spf.log` for errors
+
+**Emails failing to send:**
+- Check SMTP server configuration
+- Verify email templates are valid
+- Check subscriber email addresses are valid
+- Review error messages in `EmailSendRequest.error_message` field
+
+**Performance issues:**
+- Use `--limit` flag to process emails in batches
+- Increase cron frequency if you have many scheduled emails
+- Consider using Celery for better performance with high volumes
+
+### Integration with Celery
+
+If Celery is available, scheduled emails can also be processed by Celery workers. The `send_scheduled_emails` cron script provides a fallback for environments without Celery or for ensuring emails are sent even if Celery workers are unavailable.
+
+**Recommended Setup:**
+- Use Celery for high-volume email processing
+- Use `send_scheduled_emails` cron as a backup/fallback
+- Run cron every 5 minutes to catch any emails missed by Celery
+
 ## 🔧 Configuration
 
 ### Django Settings

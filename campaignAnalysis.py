@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Lightweight campaign analysis exporter that uses the Django ORM to
 produce a static HTML report with jQuery + Chart.js graphs. This is a

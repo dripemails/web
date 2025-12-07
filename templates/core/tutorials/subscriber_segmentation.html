@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Subscriber Segmentation - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-pink-500 to-red-500 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">🎯 Subscriber Segmentation</h1>
+      <p class="text-xl text-white text-opacity-90">Send targeted campaigns to specific audience groups</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ 16 min read</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">What is Segmentation?</h2>
+        <p class="text-gray-700 mb-6">Segmentation divides your subscriber list into smaller, targeted groups based on shared characteristics. This allows you to send more relevant, personalized campaigns.</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Segmented campaigns can have 2-3x higher open rates and click-through rates compared to non-segmented campaigns.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Types of Segmentation</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-blue-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Demographic</h4>
+            <p class="text-gray-700">Age, gender, location, occupation, income</p>
+          </div>
+          <div class="border-l-4 border-green-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Behavioral</h4>
+            <p class="text-gray-700">Purchase history, email engagement, website activity</p>
+          </div>
+          <div class="border-l-4 border-purple-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Engagement Level</h4>
+            <p class="text-gray-700">Highly active, moderately active, inactive, cold</p>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Customer Journey Stage</h4>
+            <p class="text-gray-700">Awareness, consideration, purchase, retention, advocacy</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Creating a Segment</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Go to <strong>Subscribers → Segments</strong></li>
+          <li>Click <strong>"Create New Segment"</strong></li>
+          <li>Name your segment descriptively</li>
+          <li>Add filter conditions</li>
+          <li>Preview the results</li>
+          <li>Save the segment</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Segmentation Filters</h3>
+        <p class="text-gray-700 mb-4">Available filter types:</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>Subscriber info:</strong> Email, name, signup date, location</li>
+            <li><strong>Campaign activity:</strong> Opened, clicked, did not open</li>
+            <li><strong>List membership:</strong> Is/is not on specific lists</li>
+            <li><strong>Tags:</strong> Has/doesn't have specific tags</li>
+            <li><strong>Custom fields:</strong> Any custom data you've collected</li>
+            <li><strong>Engagement score:</strong> Overall activity level</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Segmentation</h3>
+        <p class="text-gray-700 mb-4">Combine multiple conditions:</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <p class="text-gray-700 mb-3"><strong>Example 1: Engaged Local Customers</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700 mb-4">
+            <li>Location is "New York"</li>
+            <li>AND Opened any campaign in last 30 days</li>
+            <li>AND Has tag "Customer"</li>
+          </ul>
+          <p class="text-gray-700 mb-3"><strong>Example 2: Re-engagement Targets</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700">
+            <li>Has not opened any email in 90 days</li>
+            <li>AND Was active before that</li>
+            <li>AND Is not tagged "Unengaged"</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Dynamic vs. Static Segments</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-green-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Dynamic Segments</h4>
+            <p class="text-gray-700">Automatically update as subscribers meet/don't meet criteria. Best for ongoing campaigns.</p>
+          </div>
+          <div class="border-l-4 border-blue-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Static Segments</h4>
+            <p class="text-gray-700">Fixed list of subscribers at a point in time. Best for one-time campaigns.</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Segment Ideas</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>VIP customers:</strong> High purchase value + frequent buyer</li>
+          <li><strong>New subscribers:</strong> Joined in last 30 days</li>
+          <li><strong>At-risk customers:</strong> No purchase in 6 months but was active</li>
+          <li><strong>Product interested:</strong> Clicked Product X link</li>
+          <li><strong>Cart abandoners:</strong> Started checkout but didn't complete</li>
+          <li><strong>Winback targets:</strong> Inactive for 90+ days</li>
+        </ul>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Test your segments with small campaigns before sending to large groups. Verify the segment contains the right subscribers.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Using Segments in Campaigns</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Create your campaign as usual</li>
+          <li>In the Recipients step, select "Segment"</li>
+          <li>Choose your saved segment</li>
+          <li>Review the recipient count</li>
+          <li>Send or schedule your campaign</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Start with simple segments and gradually add complexity</li>
+          <li>Name segments clearly to indicate their purpose</li>
+          <li>Review segment size before sending (too small or too large?)</li>
+          <li>Test different messaging for different segments</li>
+          <li>Use segments to personalize beyond just names</li>
+          <li>Track which segments perform best</li>
+          <li>Update segment criteria based on results</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_managing_lists' %}" class="block p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition">
+            <h4 class="font-semibold text-pink-900">Managing Subscriber Lists</h4>
+            <p class="text-sm text-pink-700">Organize your database</p>
+          </a>
+          <a href="{% url 'core:tutorial_creating_campaign' %}" class="block p-4 bg-red-50 rounded-lg hover:bg-red-100 transition">
+            <h4 class="font-semibold text-red-900">Creating Your First Campaign</h4>
+            <p class="text-sm text-red-700">Send to your segments</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

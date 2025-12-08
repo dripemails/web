@@ -255,12 +255,23 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         except Exception:
             pass
     
+    # Add unsubscribe link to email content if enabled
+    if show_unsubscribe and subscriber_uuid:
+        unsubscribe_url = f"{site_url}/unsubscribe/{subscriber_uuid}/"
+        # Add to HTML content with separator
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_url}">unsubscribe here</a>.</p>'
+        html_content += unsubscribe_html
+        # Add to text content with separator
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}"
+        text_content += unsubscribe_text
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
         from_email=user_email,
-        to=[subscriber_email]
+        to=[subscriber_email],
+        bcc=[user_email]  # BCC the user so they can see emails being sent
     )
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:
@@ -417,8 +428,8 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add unsubscribe link if required
     if show_unsubscribe:
-        unsubscribe_html = f'<p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
-        unsubscribe_text = f"\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     
@@ -434,7 +445,8 @@ def send_campaign_email(email_id, subscriber_id):
         subject=email.subject,
         body=text_content,
         from_email=user_email,
-        to=[subscriber.email]
+        to=[subscriber.email],
+        bcc=[user_email]  # BCC the user so they can see emails being sent
     )
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:

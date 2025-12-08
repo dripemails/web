@@ -22,33 +22,60 @@ logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file using django-environ
 # This ensures the .env file is loaded even if Django isn't fully initialized
-try:
-    import environ
-    # Get the base directory (project root)
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    env_file = os.path.join(base_dir, '.env')
-    
-    # Create environ.Env instance and read .env file if it exists
-    env = environ.Env()
-    if os.path.exists(env_file):
-        env.read_env(env_file)
-    
-    # Get values from environ (which reads from .env file and os.environ)
-    HUGGINGFACE_API_KEY = env('HUGGINGFACE_API_KEY', default='')
-    # Default model: meta-llama/Llama-3.2-1B (requires approval - gated model)
-    # Fallback to HuggingFaceH4/zephyr-7b-beta if Llama access is pending
-    # User can override with HUGGINGFACE_MODEL in .env
-    # Note: meta-llama models require approval. Use HuggingFaceH4/zephyr-7b-beta for immediate access.
-    HUGGINGFACE_MODEL = env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
-except (ImportError, Exception) as e:
-    # Fallback to os.environ if django-environ is not available
-    logger.warning(f"Could not load .env file using django-environ: {e}. Falling back to os.environ.")
-    HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY", "")
-    # Default model: HuggingFaceH4/zephyr-7b-beta (no approval required)
-    # Note: meta-llama models require approval. Use HuggingFaceH4/zephyr-7b-beta for immediate access.
-    HUGGINGFACE_MODEL = os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
+def _load_env_vars():
+    """Load Hugging Face configuration from environment variables."""
+    try:
+        import environ
+        # Get the base directory (project root)
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env_file = os.path.join(base_dir, '.env')
+        
+        # Create environ.Env instance and read .env file if it exists
+        env = environ.Env()
+        if os.path.exists(env_file):
+            env.read_env(env_file)
+            logger.info(f"Loading .env file from: {env_file}")
+        else:
+            logger.warning(f".env file not found at: {env_file}")
+        
+        # Get values from environ (which reads from .env file and os.environ)
+        api_key = env('HUGGINGFACE_API_KEY', default='')
+        # Default model: HuggingFaceH4/zephyr-7b-beta (stable, no approval required, works immediately)
+        # User can override with HUGGINGFACE_MODEL in .env
+        model = env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
+        
+        logger.info(f"Loaded HUGGINGFACE_MODEL: {model}")
+        return api_key, model
+    except (ImportError, Exception) as e:
+        # Fallback to os.environ if django-environ is not available
+        logger.warning(f"Could not load .env file using django-environ: {e}. Falling back to os.environ.")
+        api_key = os.environ.get("HUGGINGFACE_API_KEY", "")
+        model = os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
+        logger.info(f"Using os.environ, HUGGINGFACE_MODEL: {model}")
+        return api_key, model
 
-# Hugging Face configuration
+# Load configuration at module level (will be reloaded on server restart)
+HUGGINGFACE_API_KEY, HUGGINGFACE_MODEL = _load_env_vars()
+
+def get_huggingface_model():
+    """Get the current Hugging Face model, reading from environment each time."""
+    try:
+        import environ
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env_file = os.path.join(base_dir, '.env')
+        env = environ.Env()
+        if os.path.exists(env_file):
+            env.read_env(env_file)
+        return env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
+    except (ImportError, Exception):
+        return os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
+
+def get_huggingface_api_url():
+    """Get the Hugging Face API URL with the current model."""
+    model = get_huggingface_model()
+    return f"https://api-inference.huggingface.co/models/{model}"
+
+# Hugging Face configuration (for backward compatibility, but functions above read dynamically)
 HUGGINGFACE_API_URL = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
 
 
@@ -185,6 +212,12 @@ Respond ONLY in valid JSON:
         if not HUGGINGFACE_API_KEY:
             raise ValueError("HUGGINGFACE_API_KEY environment variable is required. Get your API key from https://huggingface.co/settings/tokens")
         
+        # Get current model dynamically (reads from .env each time)
+        current_model = get_huggingface_model()
+        api_url = get_huggingface_api_url()
+        
+        logger.info(f"Using Hugging Face model: {current_model}")
+        
         headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
         payload = {
             "inputs": prompt,
@@ -197,7 +230,7 @@ Respond ONLY in valid JSON:
         }
         
         response = requests.post(
-            HUGGINGFACE_API_URL,
+            api_url,
             headers=headers,
             json=payload,
             timeout=120
@@ -206,7 +239,7 @@ Respond ONLY in valid JSON:
         # Handle 410 Gone errors (model deprecated/removed)
         if response.status_code == 410:
             error_msg = (
-                f"Model {HUGGINGFACE_MODEL} is no longer available (410 Gone). "
+                f"Model {current_model} is no longer available (410 Gone). "
                 f"Please update HUGGINGFACE_MODEL in your .env file to a different model. "
                 f"Try: mistralai/Mistral-7B-Instruct-v0.1, HuggingFaceH4/zephyr-7b-beta, "
                 f"or check https://huggingface.co/models for available models."
@@ -298,7 +331,11 @@ def revise_email_content(email_text: str) -> Dict[str, str]:
     )
     
     try:
-        logger.info(f"Revising email content with Hugging Face model: {HUGGINGFACE_MODEL}...")
+        # Get current model dynamically (reads from .env each time)
+        current_model = get_huggingface_model()
+        api_url = get_huggingface_api_url()
+        
+        logger.info(f"Revising email content with Hugging Face model: {current_model}...")
         
         if not REQUESTS_AVAILABLE:
             raise ImportError("requests is required for email revision. Install with: pip install requests")
@@ -317,7 +354,7 @@ def revise_email_content(email_text: str) -> Dict[str, str]:
             }
         }
         
-        resp = requests.post(HUGGINGFACE_API_URL, headers=headers, json=payload, timeout=120)
+        resp = requests.post(api_url, headers=headers, json=payload, timeout=120)
         resp.raise_for_status()
         data = resp.json()
         

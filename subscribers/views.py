@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Value, CharField
 from django.db.models.functions import Coalesce, Concat, Trim
 from django.conf import settings
+from django.http import HttpResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -15,6 +16,7 @@ from campaigns.models import Campaign
 import csv
 import json
 from openpyxl import load_workbook
+from datetime import datetime
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -307,9 +309,9 @@ def subscriber_directory(request):
     subscribers = (
         Subscriber.objects.filter(lists__user=request.user)
         .distinct()
-        .prefetch_related('lists')
+        .prefetch_related('lists', 'lists__campaigns')
         .annotate(
-            full_name=Trim(
+            annotated_full_name=Trim(
                 Concat(
                     Coalesce('first_name', Value('')),
                     Value(' '),
@@ -326,7 +328,7 @@ def subscriber_directory(request):
             Q(first_name__icontains=query)
             | Q(last_name__icontains=query)
             | Q(email__icontains=query)
-            | Q(full_name__icontains=query)
+            | Q(annotated_full_name__icontains=query)
         )
 
     paginator = Paginator(subscribers, 25)
@@ -379,3 +381,63 @@ def add_subscriber(request):
         'api_send_email_url': api_send_email_url,
     }
     return render(request, 'subscribers/add.html', context)
+
+
+@login_required
+def export_subscribers_csv(request):
+    """Export all subscribers to CSV file."""
+    # Get all subscribers for the user
+    subscribers = (
+        Subscriber.objects.filter(lists__user=request.user)
+        .distinct()
+        .prefetch_related('lists')
+        .order_by('-created_at')
+    )
+    
+    # Create the HttpResponse object with CSV header
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="subscribers_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv"'
+    
+    # Create CSV writer
+    writer = csv.writer(response)
+    
+    # Write header row
+    writer.writerow([
+        'Email',
+        'First Name',
+        'Last Name',
+        'Full Name',
+        'Lists',
+        'Campaigns',
+        'Status',
+        'Confirmed',
+        'Joined Date'
+    ])
+    
+    # Write subscriber data
+    for subscriber in subscribers:
+        # Get lists as comma-separated string
+        lists = ', '.join([list_obj.name for list_obj in subscriber.lists.all()])
+        
+        # Get campaigns from all lists
+        campaign_names = []
+        for list_obj in subscriber.lists.all():
+            for campaign in list_obj.campaigns.filter(user=request.user):
+                if campaign.name not in campaign_names:
+                    campaign_names.append(campaign.name)
+        campaigns = ', '.join(campaign_names)
+        
+        # Write row
+        writer.writerow([
+            subscriber.email,
+            subscriber.first_name or '',
+            subscriber.last_name or '',
+            subscriber.full_name or '',
+            lists,
+            campaigns,
+            'Active' if subscriber.is_active else 'Inactive',
+            'Yes' if subscriber.confirmed else 'No',
+            subscriber.created_at.strftime('%Y-%m-%d %H:%M:%S') if subscriber.created_at else ''
+        ])
+    
+    return response

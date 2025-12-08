@@ -12,6 +12,9 @@ from core import views as core_views
 non_prefixed_urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')), # Provides 'set_language'
+    # Unsubscribe endpoint (no language prefix needed) - must be early to avoid conflicts
+    path('unsubscribe/<uuid:subscriber_uuid>/', core_views.unsubscribe, name='unsubscribe'),
+    path('unsubscribe/<uuid:subscriber_uuid>', core_views.unsubscribe, name='unsubscribe-no-slash'),
     # API endpoints (no language prefix needed)
     path('api/campaigns/', campaign_views.campaign_list_create, name='api-campaign-list-create'),
     path('api/campaigns/<uuid:campaign_id>/', campaign_views.campaign_detail, name='api-campaign-detail'),

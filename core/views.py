@@ -826,3 +826,44 @@ def send_email_request_unsubscribe(request, request_id):
     )
 
     return Response({'message': _('Subscriber has been unsubscribed.')} )
+
+
+def unsubscribe(request, subscriber_uuid):
+    """Handle unsubscribe requests from email links."""
+    from subscribers.models import Subscriber
+    from campaigns.models import EmailEvent
+    from django.http import Http404
+    
+    try:
+        subscriber = Subscriber.objects.get(uuid=subscriber_uuid)
+    except Subscriber.DoesNotExist:
+        return render(request, 'core/unsubscribe_error.html', {
+            'error_message': _('Invalid unsubscribe link. The subscriber may have already been unsubscribed or the link is invalid.')
+        }, status=404)
+    
+    # Check if already unsubscribed
+    already_unsubscribed = not subscriber.is_active
+    
+    if not already_unsubscribed:
+        # Deactivate the subscriber
+        subscriber.is_active = False
+        subscriber.save(update_fields=['is_active'])
+        
+        # Record unsubscribe event for all emails sent to this subscriber
+        # We'll record it for the most recent email if we can find one
+        from campaigns.models import Email
+        recent_emails = Email.objects.filter(
+            campaign__subscriber_list__subscribers=subscriber
+        ).order_by('-created_at')[:1]
+        
+        if recent_emails.exists():
+            EmailEvent.objects.create(
+                email=recent_emails.first(),
+                subscriber_email=subscriber.email,
+                event_type='unsubscribed'
+            )
+    
+    return render(request, 'core/unsubscribe_success.html', {
+        'subscriber': subscriber,
+        'already_unsubscribed': already_unsubscribed,
+    })

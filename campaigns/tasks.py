@@ -335,9 +335,20 @@ def send_campaign_email(email_id, subscriber_id):
     )
     tracking_id = str(sent_event.id)
     
+    # Get site information for tracking and unsubscribe links
+    from core.context_processors import site_detection
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
     # Generate tracking URLs
-    tracking_pixel = f'<img src="{settings.SITE_URL}/analytics/track/open/{tracking_id}/?email={subscriber.email}" width="1" height="1" alt="" style="display:none;" />'
-    unsubscribe_link = f"{settings.SITE_URL}/unsubscribe/{subscriber.uuid}/"
+    tracking_pixel = f'<img src="{site_url}/analytics/track/open/{tracking_id}/?email={subscriber.email}" width="1" height="1" alt="" style="display:none;" />'
+    unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with tracking
     html_content = email.body_html
@@ -351,7 +362,6 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add ads if required
     if show_ads:
-        
         ads_html = render_to_string('emails/ad_footer.html', {
             'site_url': site_url,
             'site_name': site_name,

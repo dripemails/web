@@ -623,6 +623,35 @@ sudo systemctl start dripemails-spf-check.timer
 sudo systemctl status dripemails-spf-check.timer
 ```
 
+#### Using Supervisord (Alternative to Cron)
+
+If your cron jobs don't work or you prefer using supervisord, you can run SPF checks as part of the cron service. The wrapper script (`cron.sh`) includes daily SPF checks at 2 AM automatically.
+
+Alternatively, you can create a separate supervisord service for SPF checks:
+
+**Create `/etc/supervisor/conf.d/dripemails-spf-check.conf`:**
+
+```ini
+[program:dripemails-spf-check]
+# Run SPF check daily at 2 AM
+command=/bin/bash -c "while true; do CURRENT_HOUR=$(date +%%H); if [ \"$CURRENT_HOUR\" = \"02\" ]; then python /home/dripemails/web/cron.py check_spf --all-users --settings=dripemails.live || true; fi; sleep 3600; done"
+directory=/home/dripemails/web
+user=dripemails
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/home/dripemails/web/logs/cron_spf_supervisord.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+stopsignal=TERM
+stopwaitsecs=10
+killasgroup=true
+priority=1000
+```
+
+**Note:** The wrapper script (`cron.sh`) already includes SPF checks at 2 AM, so you typically don't need a separate SPF service if you're using the wrapper script approach.
+
 #### Using Windows Task Scheduler
 
 1. Open Task Scheduler
@@ -806,6 +835,144 @@ sudo systemctl enable dripemails-scheduled-emails.timer
 sudo systemctl start dripemails-scheduled-emails.timer
 sudo systemctl status dripemails-scheduled-emails.timer
 ```
+
+#### Using Supervisord (Alternative to Cron)
+
+If your cron jobs don't work or you prefer using supervisord for process management, you can run `cron.py` as a supervisord service. This ensures the script runs continuously and automatically restarts if it crashes.
+
+**Prerequisites:**
+- Supervisord installed (see [Supervisord Setup](#production-deployment-with-supervisord))
+- Logs directory created: `mkdir -p /home/dripemails/web/logs`
+
+**1. Create Supervisord Configuration**
+
+Create `/etc/supervisor/conf.d/dripemails-cron.conf`:
+
+**Note:** A template configuration file is available at `docs/supervisord/dripemails-cron.conf`. Copy it to `/etc/supervisor/conf.d/` and update the paths:
+
+```bash
+# Copy the template
+sudo cp docs/supervisord/dripemails-cron.conf /etc/supervisor/conf.d/dripemails-cron.conf
+
+# Edit and update paths
+sudo nano /etc/supervisor/conf.d/dripemails-cron.conf
+```
+
+Or create it manually:
+
+```ini
+[program:dripemails-cron]
+# Option 1: Direct command (runs send_scheduled_emails every 5 minutes)
+command=/bin/bash -c "while true; do python /home/dripemails/web/cron.py send_scheduled_emails --settings=dripemails.live --limit 100 || true; sleep 300; done"
+directory=/home/dripemails/web
+user=dripemails
+autostart=true
+autorestart=true
+startsecs=10
+startretries=3
+redirect_stderr=true
+stdout_logfile=/home/dripemails/web/logs/cron_supervisord.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+stderr_logfile=/home/dripemails/web/logs/cron_supervisord_error.log
+stderr_logfile_maxbytes=50MB
+stderr_logfile_backups=10
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+stopsignal=TERM
+stopwaitsecs=10
+killasgroup=true
+priority=1000
+```
+
+**2. Alternative: Using Wrapper Script**
+
+For more complex scheduling (e.g., SPF checks daily at 2 AM), use the wrapper script:
+
+First, make the wrapper script executable:
+```bash
+# Make the script executable
+chmod +x /home/dripemails/web/cron.sh
+
+# Verify it's executable
+ls -l /home/dripemails/web/cron.sh
+```
+
+**Note:** The wrapper script (`cron.sh`) automatically:
+- Runs `send_scheduled_emails` every 5 minutes
+- Runs `check_spf --all-users` daily at 2 AM (only once per day)
+- Handles errors gracefully and continues running
+
+Then update the supervisord config to use the wrapper:
+```ini
+[program:dripemails-cron]
+command=/home/dripemails/web/cron.sh
+directory=/home/dripemails/web
+user=dripemails
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/home/dripemails/web/logs/cron_supervisord.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+environment=DJANGO_SETTINGS_MODULE="dripemails.live",PYTHONPATH="/home/dripemails/web"
+stopsignal=TERM
+stopwaitsecs=10
+killasgroup=true
+priority=1000
+```
+
+**3. Load and Start Service**
+
+```bash
+# Reload supervisor configuration
+sudo supervisorctl reread
+
+# Update supervisor with new programs
+sudo supervisorctl update
+
+# Start the cron service
+sudo supervisorctl start dripemails-cron
+
+# Check status
+sudo supervisorctl status dripemails-cron
+
+# View logs
+sudo supervisorctl tail -f dripemails-cron
+```
+
+**4. Management Commands**
+
+```bash
+# Start the service
+sudo supervisorctl start dripemails-cron
+
+# Stop the service
+sudo supervisorctl stop dripemails-cron
+
+# Restart the service
+sudo supervisorctl restart dripemails-cron
+
+# Check status
+sudo supervisorctl status dripemails-cron
+
+# View real-time logs
+sudo supervisorctl tail -f dripemails-cron
+
+# View last 100 lines
+sudo supervisorctl tail -100 dripemails-cron
+```
+
+**Benefits of Using Supervisord:**
+- ✅ Automatic restart if the script crashes
+- ✅ Centralized process management with other services (SMTP, Gunicorn)
+- ✅ Easy log management and rotation
+- ✅ Web interface for monitoring (if enabled)
+- ✅ No need to configure system cron or systemd timers
+
+**Note:** The supervisord approach runs `send_scheduled_emails` every 5 minutes continuously. For SPF checks, you can either:
+- Use the wrapper script (`cron.sh`) which includes daily SPF checks at 2 AM
+- Run SPF checks separately via cron or systemd timer
+- Manually run: `python cron.py check_spf --all-users --settings=dripemails.live`
 
 #### Using Windows Task Scheduler
 

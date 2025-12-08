@@ -20,9 +20,35 @@ except ImportError:
 # Configure logging
 logger = logging.getLogger(__name__)
 
+# Load environment variables from .env file using django-environ
+# This ensures the .env file is loaded even if Django isn't fully initialized
+try:
+    import environ
+    # Get the base directory (project root)
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    env_file = os.path.join(base_dir, '.env')
+    
+    # Create environ.Env instance and read .env file if it exists
+    env = environ.Env()
+    if os.path.exists(env_file):
+        env.read_env(env_file)
+    
+    # Get values from environ (which reads from .env file and os.environ)
+    HUGGINGFACE_API_KEY = env('HUGGINGFACE_API_KEY', default='')
+    # Default model: meta-llama/Llama-3.2-1B (requires approval - gated model)
+    # Fallback to HuggingFaceH4/zephyr-7b-beta if Llama access is pending
+    # User can override with HUGGINGFACE_MODEL in .env
+    # Note: meta-llama models require approval. Use HuggingFaceH4/zephyr-7b-beta for immediate access.
+    HUGGINGFACE_MODEL = env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
+except (ImportError, Exception) as e:
+    # Fallback to os.environ if django-environ is not available
+    logger.warning(f"Could not load .env file using django-environ: {e}. Falling back to os.environ.")
+    HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY", "")
+    # Default model: HuggingFaceH4/zephyr-7b-beta (no approval required)
+    # Note: meta-llama models require approval. Use HuggingFaceH4/zephyr-7b-beta for immediate access.
+    HUGGINGFACE_MODEL = os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
+
 # Hugging Face configuration
-HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY", "")
-HUGGINGFACE_MODEL = os.environ.get("HUGGINGFACE_MODEL", "mistralai/Mistral-7B-Instruct-v0.2")
 HUGGINGFACE_API_URL = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
 
 
@@ -176,6 +202,17 @@ Respond ONLY in valid JSON:
             json=payload,
             timeout=120
         )
+        
+        # Handle 410 Gone errors (model deprecated/removed)
+        if response.status_code == 410:
+            error_msg = (
+                f"Model {HUGGINGFACE_MODEL} is no longer available (410 Gone). "
+                f"Please update HUGGINGFACE_MODEL in your .env file to a different model. "
+                f"Try: mistralai/Mistral-7B-Instruct-v0.1, HuggingFaceH4/zephyr-7b-beta, "
+                f"or check https://huggingface.co/models for available models."
+            )
+            raise ValueError(error_msg)
+        
         response.raise_for_status()
         
         result_data = response.json()

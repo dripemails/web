@@ -76,6 +76,13 @@
                     <div>
                         <p class="text-sm text-gray-500">Campaigns</p>
                         <p class="text-2xl font-semibold">{{ campaigns_count }}</p>
+                        <a href="{% url 'campaigns:create' %}"
+                           class="mt-3 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                            Add a new Campaign
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -111,6 +118,13 @@
                     <div>
                         <p class="text-sm text-gray-500">Emails Sent</p>
                         <p class="text-2xl font-semibold">{{ sent_emails_count }}</p>
+                        <a href="{% url 'analytics:dashboard' %}"
+                           class="mt-3 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                            View Analytics
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -125,6 +139,13 @@
                     <div>
                         <p class="text-sm text-gray-500">Lists</p>
                         <p class="text-2xl font-semibold">{{ lists_count }}</p>
+                        <a href="{% url 'subscribers:import' %}"
+                           class="mt-3 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                            Add a List
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

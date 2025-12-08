@@ -606,12 +606,12 @@ def send_email_api(request):
         scheduled_display = scheduled_for_local.strftime('%b %d, %Y %I:%M %p')
 
         if use_sync:
-            # Keep as pending; user can trigger "Send Now"
+            # Keep as pending; cron.py will process it, or user can trigger "Send Now"
             send_request.status = 'pending'
             send_request.error_message = ''
             send_request.save(update_fields=['status', 'error_message', 'updated_at'])
             return Response({
-                'message': _('Email scheduled for {time}. Celery/Redis is not available; use "Send Now" in the activity list to deliver immediately.').format(time=scheduled_display),
+                'message': _('Email scheduled for {time}. It will be sent automatically at the scheduled time.').format(time=scheduled_display),
                 'request_id': str(send_request.id),
                 'scheduled_for': scheduled_for_local.isoformat(),
                 'status': send_request.status,
@@ -628,7 +628,7 @@ def send_email_api(request):
                     'timezone': profile.timezone or 'UTC'
                 })
             return Response({
-                'message': _('Email saved but not scheduled because Celery/Redis is unavailable. Use "Send Now" in the activity list to deliver immediately.'),
+                'message': _('Email scheduled for {time}. It will be sent automatically at the scheduled time.').format(time=scheduled_display),
                 'request_id': str(send_request.id),
                 'scheduled_for': scheduled_for_local.isoformat(),
                 'status': send_request.status,

@@ -94,7 +94,7 @@
                                 <select id="wait_unit" name="wait_unit" required
                                         class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     {% for value, label in wait_units %}
-                                        <option value="{{ value }}">{{ label }}</option>
+                                        <option value="{{ value }}" {% if template and template.wait_unit == value %}selected{% elif not template and value == 'days' %}selected{% endif %}>{{ label }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -588,9 +588,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const footerSelect = document.getElementById('footer_select');
         const selectedFooterId = footerSelect.value;
         
+        // Get wait_time value and ensure it's a valid integer
+        const waitTimeInput = document.getElementById('wait_time');
+        const waitTimeValue = waitTimeInput.value.trim();
+        const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+        
+        // Validate wait_time
+        if (isNaN(waitTime) || waitTime < 1) {
+            alert('{% trans "Wait time must be a number greater than 0." %}');
+            return;
+        }
+        
         const data = {
             subject: document.getElementById('subject').value,
-            wait_time: parseInt(document.getElementById('wait_time').value),
+            wait_time: waitTime,
             wait_unit: document.getElementById('wait_unit').value,
             body_html: htmlContent,
             body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
@@ -882,9 +893,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const footerSelect = document.getElementById('footer_select');
             const selectedFooterId = footerSelect.value;
             
+            // Get wait_time value and ensure it's a valid integer
+            const waitTimeInput = document.getElementById('wait_time');
+            const waitTimeValue = waitTimeInput.value.trim();
+            const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+            
+            // Validate wait_time
+            if (isNaN(waitTime) || waitTime < 1) {
+                alert('{% trans "Wait time must be a number greater than 0." %}');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+            
             const data = {
                 subject: document.getElementById('subject').value,
-                wait_time: parseInt(document.getElementById('wait_time').value),
+                wait_time: waitTime,
                 wait_unit: document.getElementById('wait_unit').value,
                 body_html: htmlContent,
                 body_text: quill.getText().trim() // Use Quill's getText() for proper plain text

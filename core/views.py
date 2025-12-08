@@ -19,6 +19,8 @@ import logging
 import uuid
 from .models import BlogPost
 
+logger = logging.getLogger(__name__)
+
 @login_required
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -240,30 +242,40 @@ def promo_verification(request):
 @permission_classes([IsAuthenticated])
 def profile_settings(request):
     """Get or update profile settings."""
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
-    
-    if request.method == 'POST':
-        # Update send_without_unsubscribe if provided
-        if 'send_without_unsubscribe' in request.data:
-            profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+    try:
+        profile, created = UserProfile.objects.get_or_create(user=request.user)
         
-        # Update timezone if provided
-        if 'timezone' in request.data:
-            new_timezone = request.data.get('timezone', 'UTC')
-            # Validate timezone
-            try:
-                pytz.timezone(new_timezone)  # Validate it's a real timezone
-                profile.timezone = new_timezone
-            except pytz.UnknownTimeZoneError:
-                return Response({'error': _('Invalid timezone')}, status=400)
+        if request.method == 'POST':
+            # Update send_without_unsubscribe if provided
+            if 'send_without_unsubscribe' in request.data:
+                profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
+            
+            # Update timezone if provided
+            if 'timezone' in request.data:
+                new_timezone = request.data.get('timezone', 'UTC')
+                # Validate timezone
+                try:
+                    pytz.timezone(new_timezone)  # Validate it's a real timezone
+                    profile.timezone = new_timezone
+                except pytz.UnknownTimeZoneError:
+                    return Response({'error': _('Invalid timezone')}, status=400)
+            
+            profile.save()
+            return Response({
+                'message': _('Settings updated successfully'),
+                'has_verified_promo': profile.has_verified_promo,
+                'send_without_unsubscribe': profile.send_without_unsubscribe,
+                'timezone': profile.timezone or 'UTC',
+            })
         
-        profile.save()
-    
-    return Response({
-        'has_verified_promo': profile.has_verified_promo,
-        'send_without_unsubscribe': profile.send_without_unsubscribe,
-        'timezone': profile.timezone or 'UTC',
-    })
+        return Response({
+            'has_verified_promo': profile.has_verified_promo,
+            'send_without_unsubscribe': profile.send_without_unsubscribe,
+            'timezone': profile.timezone or 'UTC',
+        })
+    except Exception as e:
+        logger.error(f"Error in profile_settings: {str(e)}", exc_info=True)
+        return Response({'error': _('An error occurred while saving settings')}, status=500)
 
 def feature_drip_campaigns(request):
     return render(request, 'core/feature_drip_campaigns.html')

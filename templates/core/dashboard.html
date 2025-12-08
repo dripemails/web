@@ -720,6 +720,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ${req.campaign} &bull; ${req.subscriber_name || req.subscriber_email}
                             </p>
                             <div class="mt-2 text-xs text-gray-500 space-y-1">
+                                <div><span class="font-medium text-gray-600">To:</span> ${req.subscriber_email || 'N/A'}</div>
                                 <div><span class="font-medium text-gray-600">Scheduled:</span> ${scheduledText}</div>
                                 <div><span class="font-medium text-gray-600">Sent:</span> ${sentText}</div>
                                 ${req.error_message ? `<div class="text-red-600">${req.error_message}</div>` : ''}

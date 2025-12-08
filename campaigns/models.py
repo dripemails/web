@@ -84,9 +84,19 @@ class Email(models.Model):
     
     @property
     def wait_time_display(self):
-        unit = _("hour") if self.wait_unit == "hours" else _("day")
-        if self.wait_time != 1:
-            unit = _("hours") if self.wait_unit == "hours" else _("days")
+        """Display wait time with proper unit (minutes, hours, days, weeks, months)."""
+        unit_map = {
+            'minutes': (_("minute"), _("minutes")),
+            'hours': (_("hour"), _("hours")),
+            'days': (_("day"), _("days")),
+            'weeks': (_("week"), _("weeks")),
+            'months': (_("month"), _("months")),
+        }
+        
+        # Get singular or plural form based on wait_time
+        unit_singular, unit_plural = unit_map.get(self.wait_unit, (_("day"), _("days")))
+        unit = unit_singular if self.wait_time == 1 else unit_plural
+        
         return f"{self.wait_time} {unit}"
 
 

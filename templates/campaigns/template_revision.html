@@ -182,10 +182,14 @@
     });
 
     // Load initial content if available
+    {% if email %}
     const initialContent = `{{ email.body_html|default:email.body_text|escapejs }}`;
-    if(initialContent){
+    if(initialContent && initialContent !== 'None'){
       quill.root.innerHTML = initialContent;
     }
+    {% else %}
+    const initialContent = '';
+    {% endif %}
 
     const textarea = document.getElementById('draft-textarea');
     const preview = document.getElementById('draft-preview');

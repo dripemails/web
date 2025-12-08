@@ -152,6 +152,8 @@ When you select a schedule option (e.g., "Send in 5 minutes") but Celery/Redis i
    ```bash
    cp docs/env.example .env
    # Edit .env with your configuration
+   # Important: Add your HUGGINGFACE_API_KEY for AI features (optional)
+   # Get your API key from https://huggingface.co/settings/tokens
    ```
 
 4. **Run migrations**
@@ -1050,6 +1052,12 @@ CELERY_RESULT_BACKEND=django-db
 
 # Redis (Optional - only needed if CELERY_ENABLED=True)
 REDIS_URL=redis://localhost:6379/0
+
+# Hugging Face AI (Optional - for AI email generation features)
+# Get your API key from https://huggingface.co/settings/tokens
+HUGGINGFACE_API_KEY=hf_your_token_here
+# Optional: Override default model (default is mistralai/Mistral-7B-Instruct-v0.2)
+HUGGINGFACE_MODEL=mistralai/Mistral-7B-Instruct-v0.2
 
 # Django
 SECRET_KEY=your_secret_key

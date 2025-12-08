@@ -218,6 +218,43 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     if html_content and not text_content:
         text_content = _html_to_plain_text(html_content)
     
+    # Get user email for From address
+    # Prefer user from request_obj if available, otherwise use campaign user
+    if request_obj and request_obj.user:
+        user_email = request_obj.user.email
+        user = request_obj.user
+    else:
+        user_email = email.campaign.user.email
+        user = email.campaign.user
+    
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    has_valid_spf = user_profile.spf_verified
+    show_unsubscribe = not user_profile.send_without_unsubscribe
+    
+    # Get site information for unsubscribe links
+    from core.context_processors import site_detection
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    
+    # Get subscriber UUID for unsubscribe link
+    subscriber_uuid = None
+    if request_obj and request_obj.subscriber:
+        subscriber_uuid = request_obj.subscriber.uuid
+    else:
+        # Try to find subscriber by email
+        from subscribers.models import Subscriber
+        try:
+            subscriber = Subscriber.objects.filter(email=subscriber_email).first()
+            if subscriber:
+                subscriber_uuid = subscriber.uuid
+        except Exception:
+            pass
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
@@ -228,6 +265,13 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:
         msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    
+    # Add List-Unsubscribe headers if unsubscribe is enabled
+    if show_unsubscribe and subscriber_uuid:
+        unsubscribe_url = f"{site_url}/unsubscribe/{subscriber_uuid}/"
+        msg.extra_headers['List-Unsubscribe'] = f"<{unsubscribe_url}>"
+        msg.extra_headers['List-Unsubscribe-Post'] = "List-Unsubscribe=One-Click"
+    
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -395,6 +439,12 @@ def send_campaign_email(email_id, subscriber_id):
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:
         msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    
+    # Add List-Unsubscribe headers if unsubscribe is enabled
+    if show_unsubscribe:
+        msg.extra_headers['List-Unsubscribe'] = f"<{unsubscribe_link}>"
+        msg.extra_headers['List-Unsubscribe-Post'] = "List-Unsubscribe=One-Click"
+    
     msg.attach_alternative(html_content, "text/html")
     
     try:

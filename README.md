@@ -1137,6 +1137,9 @@ python -m pytest tests/
    # Install system dependencies
    sudo apt update
    sudo apt install python3.11 python3.11-venv nginx redis-server mysql-server
+   
+   # Install build dependencies (required for Python packages like sentencepiece)
+   sudo apt-get install -y cmake pkg-config build-essential
    ```
 
 2. **Configure Nginx**

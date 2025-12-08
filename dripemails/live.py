@@ -176,7 +176,7 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none' #was mandatory now none
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_SESSION_REMEMBER = True
@@ -242,8 +242,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://dripemails.org:8005",
     "https://www.dripemails.org",
     "https://dripemail.org",
+    "https://web1.dripemail.org",
+    "https://web.dripemail.org",
     "https://www.dripemail.org",
-    "https://api.dripemails.org",
+    "https://web.dripemails.org",
+    "https://web1.dripemails.org",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

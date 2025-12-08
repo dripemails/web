@@ -214,6 +214,7 @@ else:
     EMAIL_HOST_PASSWORD = None
 
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'founders@dripemails.org')
+DEFAULT_URL = os.environ.get('DEFAULT_URL', 'https://dripemails.org')
 
 # REST Framework Configuration
 REST_FRAMEWORK = {

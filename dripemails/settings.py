@@ -21,6 +21,7 @@ env = environ.Env(
     EMAIL_USE_TLS=(bool, False),
     DEFAULT_FROM_EMAIL=(str, 'DripEmails <noreply@dripemails.org>'),
     SITE_URL=(str, 'http://localhost:8000'),
+    DEFAULT_URL=(str, 'http://localhost:8000/'),
     CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
     CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
     CELERY_RESULT_BACKEND=(str, 'django-db'),

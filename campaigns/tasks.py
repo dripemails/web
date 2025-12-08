@@ -57,13 +57,31 @@ def _html_to_plain_text(html_content):
     return html_content.strip()
 
 
-def _inject_tracking_pixel(html_content, tracking_id, subscriber_email):
+def _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=None):
     """Inject tracking pixel into HTML email content."""
     from django.conf import settings
+    from core.context_processors import site_detection
     
-    # Build tracking pixel URL
-    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
-    tracking_url = f"{base_url}/analytics/track/open/{tracking_id}/?email={subscriber_email}"
+    # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
+    if base_url:
+        tracking_base_url = base_url
+    else:
+        # Try to detect site from settings
+        try:
+            class MockRequest:
+                def get_host(self):
+                    return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+            
+            site_info = site_detection(MockRequest())
+            tracking_base_url = site_info['site_url']
+        except Exception:
+            # Fall back to DEFAULT_URL or SITE_URL
+            tracking_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Ensure base_url doesn't end with a slash (we'll add it in the path)
+    tracking_base_url = tracking_base_url.rstrip('/')
+    
+    tracking_url = f"{tracking_base_url}/analytics/track/open/{tracking_id}/?email={subscriber_email}"
     
     # Create tracking pixel image tag
     tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" style="display:none;" />'
@@ -77,13 +95,31 @@ def _inject_tracking_pixel(html_content, tracking_id, subscriber_email):
     return html_content
 
 
-def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email):
+def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=None):
     """Wrap all links in HTML content with tracking redirects."""
     from django.conf import settings
+    from core.context_processors import site_detection
     import re
     from urllib.parse import quote
     
-    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
+    if base_url:
+        tracking_base_url = base_url
+    else:
+        # Try to detect site from settings
+        try:
+            class MockRequest:
+                def get_host(self):
+                    return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+            
+            site_info = site_detection(MockRequest())
+            tracking_base_url = site_info['site_url']
+        except Exception:
+            # Fall back to DEFAULT_URL or SITE_URL
+            tracking_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Ensure base_url doesn't end with a slash (we'll add it in the path)
+    tracking_base_url = tracking_base_url.rstrip('/')
     
     # Pattern to find <a> tags with href attributes
     link_pattern = re.compile(r'<a([^>]*?)href=["\']([^"\'>]+)["\']([^>]*?)>', re.IGNORECASE)
@@ -94,11 +130,11 @@ def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email):
         after_href = match.group(3)
         
         # Skip if it's already a tracking link, mailto, or anchor link
-        if original_url.startswith(('#', 'mailto:', base_url)):
+        if original_url.startswith(('#', 'mailto:', tracking_base_url)):
             return match.group(0)
         
         # Create tracking URL
-        tracking_url = f"{base_url}/analytics/track/click/{tracking_id}/?email={subscriber_email}&url={quote(original_url)}"
+        tracking_url = f"{tracking_base_url}/analytics/track/click/{tracking_id}/?email={subscriber_email}&url={quote(original_url)}"
         
         return f'<a{before_href}href="{tracking_url}"{after_href}>'
     
@@ -210,9 +246,18 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     )
     tracking_id = str(sent_event.id)
     
+    # Get site information for tracking URLs
+    from core.context_processors import site_detection
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    
     # Inject tracking pixel and wrap links
-    html_content = _inject_tracking_pixel(html_content, tracking_id, subscriber_email)
-    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email)
+    html_content = _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=site_url)
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=site_url)
     
     # If we have HTML content but no text content, convert HTML to plain text
     if html_content and not text_content:
@@ -232,14 +277,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     has_valid_spf = user_profile.spf_verified
     show_unsubscribe = not user_profile.send_without_unsubscribe
     
-    # Get site information for unsubscribe links
-    from core.context_processors import site_detection
-    class MockRequest:
-        def get_host(self):
-            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
-    
-    site_info = site_detection(MockRequest())
-    site_url = site_info['site_url']
+    # Get site information for unsubscribe links and tracking (already done above, reuse)
     
     # Get subscriber UUID for unsubscribe link
     subscriber_uuid = None
@@ -410,7 +448,7 @@ def send_campaign_email(email_id, subscriber_id):
     text_content = email.body_text
     
     # Wrap all links with tracking
-    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email)
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email, base_url=site_url)
     
     # Add tracking pixel to HTML content
     html_content += tracking_pixel

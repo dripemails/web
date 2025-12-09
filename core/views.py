@@ -486,6 +486,25 @@ def send_email_api(request):
                     updated = True
                 if updated:
                     subscriber.save()
+            
+            # Always subscribe the user to the campaign's list
+            # If campaign doesn't have a list, create or get a default list for this campaign
+            from subscribers.models import List
+            if not campaign.subscriber_list:
+                # Create a list for this campaign if it doesn't have one
+                campaign_list, list_created = List.objects.get_or_create(
+                    user=request.user,
+                    name=f"Campaign: {campaign.name}",
+                    defaults={
+                        'description': f'Subscribers list for campaign: {campaign.name}'
+                    }
+                )
+                campaign.subscriber_list = campaign_list
+                campaign.save(update_fields=['subscriber_list'])
+            
+            # Add subscriber to the campaign's list
+            if not campaign.subscriber_list.subscribers.filter(id=subscriber.id).exists():
+                campaign.subscriber_list.subscribers.add(subscriber)
         except Exception as sub_error:
             import traceback
             import logging
@@ -695,6 +714,21 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     user_profile, _ = UserProfile.objects.get_or_create(user=user)
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
+    
+    # Add email footer if one is assigned
+    if email_obj.footer:
+        footer_html = email_obj.footer.html_content
+        # Replace variables in footer if needed
+        if variables:
+            for key, value in variables.items():
+                placeholder = f"{{{{{key}}}}}"
+                footer_html = footer_html.replace(placeholder, str(value))
+        html_content += footer_html
+        # Convert footer HTML to text for plain text version using proper HTML to text conversion
+        from campaigns.tasks import _html_to_plain_text
+        footer_text = _html_to_plain_text(footer_html)
+        if footer_text:
+            text_content += f"\n\n{footer_text}"
     
     # Generate unsubscribe link
     if subscriber and hasattr(subscriber, 'uuid'):

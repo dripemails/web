@@ -263,6 +263,20 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     if html_content and not text_content:
         text_content = _html_to_plain_text(html_content)
     
+    # Add email footer if one is assigned
+    if email.footer:
+        footer_html = email.footer.html_content
+        # Replace variables in footer if needed
+        if variables:
+            for key, value in variables.items():
+                placeholder = f"{{{{{key}}}}}"
+                footer_html = footer_html.replace(placeholder, str(value))
+        html_content += footer_html
+        # Convert footer HTML to text for plain text version using proper HTML to text conversion
+        footer_text = _html_to_plain_text(footer_html)
+        if footer_text:
+            text_content += f"\n\n{footer_text}"
+    
     # Get user email for From address
     # Prefer user from request_obj if available, otherwise use campaign user
     if request_obj and request_obj.user:
@@ -452,6 +466,15 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add tracking pixel to HTML content
     html_content += tracking_pixel
+    
+    # Add email footer if one is assigned
+    if email.footer:
+        footer_html = email.footer.html_content
+        html_content += footer_html
+        # Convert footer HTML to text for plain text version using proper HTML to text conversion
+        footer_text = _html_to_plain_text(footer_html)
+        if footer_text:
+            text_content += f"\n\n{footer_text}"
     
     # Add ads if required
     if show_ads:

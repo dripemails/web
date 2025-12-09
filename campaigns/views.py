@@ -170,6 +170,41 @@ def send_email(request, campaign_id, email_id):
     
     variables = request.data.get('variables', {})
     
+    # Get or create subscriber and subscribe to campaign's list
+    from subscribers.models import Subscriber
+    try:
+        subscriber, created = Subscriber.objects.get_or_create(
+            email=subscriber_email,
+            defaults={
+                'first_name': variables.get('first_name', ''),
+                'last_name': variables.get('last_name', ''),
+                'is_active': True
+            }
+        )
+        if not created:
+            # Update subscriber info if provided
+            updated = False
+            if variables.get('first_name') and subscriber.first_name != variables.get('first_name'):
+                subscriber.first_name = variables.get('first_name', '')
+                updated = True
+            if variables.get('last_name') and subscriber.last_name != variables.get('last_name'):
+                subscriber.last_name = variables.get('last_name', '')
+                updated = True
+            if not subscriber.is_active:
+                subscriber.is_active = True
+                updated = True
+            if updated:
+                subscriber.save()
+        
+        # Always subscribe the user to the campaign's list (if campaign has a list)
+        if campaign.subscriber_list:
+            if not campaign.subscriber_list.subscribers.filter(id=subscriber.id).exists():
+                campaign.subscriber_list.subscribers.add(subscriber)
+    except Exception as sub_error:
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Error creating/updating subscriber: {str(sub_error)}")
+        # Continue with email sending even if subscriber creation fails
+    
     # Send email - try Celery first, fall back to synchronous if unavailable
     import sys
     from django.conf import settings

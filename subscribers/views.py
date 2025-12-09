@@ -88,12 +88,29 @@ def subscriber_list_create(request):
     if serializer.is_valid():
         try:
             subscriber = serializer.save()
+            
+            # If no list was provided, ensure subscriber is added to at least one list
+            # so they appear on the subscribers page
+            if not list_obj and subscriber.lists.count() == 0:
+                # Create or get a default list for the user
+                default_list, created = List.objects.get_or_create(
+                    user=request.user,
+                    name='Default List',
+                    defaults={
+                        'description': 'Default list for subscribers without a specific list assignment'
+                    }
+                )
+                subscriber.lists.add(default_list)
+            
             # Update the serializer instance with the saved object to get the response data
             serializer.instance = subscriber
             return Response(serializer.data, status=201)
         except Exception as e:
             import traceback
+            import logging
             error_trace = traceback.format_exc()
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error creating subscriber: {str(e)}\n{error_trace}")
             return Response({
                 'error': str(e),
                 'traceback': error_trace if settings.DEBUG else None

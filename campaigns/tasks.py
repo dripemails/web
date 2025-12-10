@@ -310,11 +310,39 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Add unsubscribe link to email content if enabled
     if show_unsubscribe and subscriber_uuid:
         unsubscribe_url = f"{site_url}/unsubscribe/{subscriber_uuid}/"
+        
+        # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
+        address_lines = []
+        if user_profile.address_line1:
+            address_lines.append(user_profile.address_line1)
+        if user_profile.address_line2:
+            address_lines.append(user_profile.address_line2)
+        city_state = []
+        if user_profile.city:
+            city_state.append(user_profile.city)
+        if user_profile.state:
+            city_state.append(user_profile.state)
+        if city_state:
+            address_lines.append(', '.join(city_state))
+        postal_country = []
+        if user_profile.postal_code:
+            postal_country.append(user_profile.postal_code)
+        if user_profile.country:
+            postal_country.append(user_profile.country)
+        if postal_country:
+            address_lines.append(' '.join(postal_country))
+        
+        address_html = ''
+        address_text = ''
+        if address_lines:
+            address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
+            address_text = '\n' + '\n'.join(address_lines)
+        
         # Add to HTML content with separator
-        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_url}">unsubscribe here</a>.</p>'
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_url}">unsubscribe here</a>.</p>{address_html}'
         html_content += unsubscribe_html
         # Add to text content with separator
-        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}"
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}{address_text}"
         text_content += unsubscribe_text
     
     # Create and send email
@@ -489,8 +517,35 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Add unsubscribe link if required
     if show_unsubscribe:
-        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
-        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
+        address_lines = []
+        if user_profile.address_line1:
+            address_lines.append(user_profile.address_line1)
+        if user_profile.address_line2:
+            address_lines.append(user_profile.address_line2)
+        city_state = []
+        if user_profile.city:
+            city_state.append(user_profile.city)
+        if user_profile.state:
+            city_state.append(user_profile.state)
+        if city_state:
+            address_lines.append(', '.join(city_state))
+        postal_country = []
+        if user_profile.postal_code:
+            postal_country.append(user_profile.postal_code)
+        if user_profile.country:
+            postal_country.append(user_profile.country)
+        if postal_country:
+            address_lines.append(' '.join(postal_country))
+        
+        address_html = ''
+        address_text = ''
+        if address_lines:
+            address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
+            address_text = '\n' + '\n'.join(address_lines)
+        
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>{address_html}'
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}{address_text}"
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     

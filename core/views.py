@@ -168,7 +168,54 @@ def account_settings(request):
     if request.method == 'POST':
         form_type = request.POST.get('form_type', 'settings')
 
-        if form_type == 'timezone':
+        if form_type == 'email':
+            new_email = request.POST.get('email', '').strip()
+            if not new_email:
+                messages.error(request, _("Please provide an email address."))
+            elif new_email == request.user.email:
+                messages.info(request, _("This is already your current email address."))
+            else:
+                # Validate email format
+                from django.core.validators import validate_email
+                from django.core.exceptions import ValidationError
+                try:
+                    validate_email(new_email)
+                    # Check if email is already in use by another user
+                    from django.contrib.auth.models import User
+                    if User.objects.filter(email=new_email).exclude(id=request.user.id).exists():
+                        messages.error(request, _("This email address is already in use by another account."))
+                    else:
+                        # Update user email
+                        request.user.email = new_email
+                        request.user.save(update_fields=['email'])
+                        messages.success(request, _("Email address updated successfully to %(email)s") % {'email': new_email})
+                except ValidationError:
+                    messages.error(request, _("Please provide a valid email address."))
+            return redirect('core:settings')
+
+        elif form_type == 'address':
+            address_line1 = request.POST.get('address_line1', '').strip()
+            city = request.POST.get('city', '').strip()
+            state = request.POST.get('state', '').strip()
+            postal_code = request.POST.get('postal_code', '').strip()
+            country = request.POST.get('country', '').strip()
+            
+            # Validate required fields
+            if not address_line1 or not city or not state or not postal_code or not country:
+                messages.error(request, _("Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country."))
+                return redirect('core:settings')
+            
+            profile.address_line1 = address_line1
+            profile.address_line2 = request.POST.get('address_line2', '').strip()
+            profile.city = city
+            profile.state = state
+            profile.postal_code = postal_code
+            profile.country = country
+            profile.save(update_fields=['address_line1', 'address_line2', 'city', 'state', 'postal_code', 'country'])
+            messages.success(request, _("Address updated successfully."))
+            return redirect('core:settings')
+
+        elif form_type == 'timezone':
             selected_timezone = request.POST.get('timezone')
             if selected_timezone not in common_timezones:
                 messages.error(request, _("Please select a valid time zone."))
@@ -191,6 +238,12 @@ def account_settings(request):
         'timezones': common_timezones,
         'current_timezone': profile.timezone or 'UTC',
         'send_without_unsubscribe': profile.send_without_unsubscribe,
+        'address_line1': profile.address_line1 or '',
+        'address_line2': profile.address_line2 or '',
+        'city': profile.city or '',
+        'state': profile.state or '',
+        'postal_code': profile.postal_code or '',
+        'country': profile.country or '',
     }
     return render(request, 'core/settings.html', context)
 
@@ -260,18 +313,49 @@ def profile_settings(request):
                 except pytz.UnknownTimeZoneError:
                     return Response({'error': _('Invalid timezone')}, status=400)
             
+            # Update address fields if provided
+            if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data:
+                # Validate required fields when updating address
+                address_line1 = request.data.get('address_line1', '').strip() if 'address_line1' in request.data else profile.address_line1
+                city = request.data.get('city', '').strip() if 'city' in request.data else profile.city
+                state = request.data.get('state', '').strip() if 'state' in request.data else profile.state
+                postal_code = request.data.get('postal_code', '').strip() if 'postal_code' in request.data else profile.postal_code
+                country = request.data.get('country', '').strip() if 'country' in request.data else profile.country
+                
+                if not address_line1 or not city or not state or not postal_code or not country:
+                    return Response({'error': _('Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country.')}, status=400)
+                
+                profile.address_line1 = address_line1
+                profile.address_line2 = request.data.get('address_line2', '').strip() if 'address_line2' in request.data else profile.address_line2
+                profile.city = city
+                profile.state = state
+                profile.postal_code = postal_code
+                profile.country = country
+            
             profile.save()
             return Response({
                 'message': _('Settings updated successfully'),
                 'has_verified_promo': profile.has_verified_promo,
                 'send_without_unsubscribe': profile.send_without_unsubscribe,
                 'timezone': profile.timezone or 'UTC',
+                'address_line1': profile.address_line1 or '',
+                'address_line2': profile.address_line2 or '',
+                'city': profile.city or '',
+                'state': profile.state or '',
+                'postal_code': profile.postal_code or '',
+                'country': profile.country or '',
             })
         
         return Response({
             'has_verified_promo': profile.has_verified_promo,
             'send_without_unsubscribe': profile.send_without_unsubscribe,
             'timezone': profile.timezone or 'UTC',
+            'address_line1': profile.address_line1 or '',
+            'address_line2': profile.address_line2 or '',
+            'city': profile.city or '',
+            'state': profile.state or '',
+            'postal_code': profile.postal_code or '',
+            'country': profile.country or '',
         })
     except Exception as e:
         logger.error(f"Error in profile_settings: {str(e)}", exc_info=True)
@@ -750,8 +834,35 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     
     # Add unsubscribe link if required
     if show_unsubscribe:
-        unsubscribe_html = f'<p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
-        unsubscribe_text = f"\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
+        address_lines = []
+        if user_profile.address_line1:
+            address_lines.append(user_profile.address_line1)
+        if user_profile.address_line2:
+            address_lines.append(user_profile.address_line2)
+        city_state = []
+        if user_profile.city:
+            city_state.append(user_profile.city)
+        if user_profile.state:
+            city_state.append(user_profile.state)
+        if city_state:
+            address_lines.append(', '.join(city_state))
+        postal_country = []
+        if user_profile.postal_code:
+            postal_country.append(user_profile.postal_code)
+        if user_profile.country:
+            postal_country.append(user_profile.country)
+        if postal_country:
+            address_lines.append(' '.join(postal_country))
+        
+        address_html = ''
+        address_text = ''
+        if address_lines:
+            address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
+            address_text = '\n' + '\n'.join(address_lines)
+        
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>{address_html}'
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}{address_text}"
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     

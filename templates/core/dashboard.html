@@ -99,7 +99,7 @@
                         <p class="text-2xl font-semibold">{{ subscribers_count }}</p>
                         <a href="{% url 'subscribers:list' %}"
                            class="mt-3 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                            View subscribers
+                            View Subscribers
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
@@ -551,6 +551,55 @@
     </div>
 </div>
 
+<!-- Address Collection Modal -->
+<div id="addressModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Physical Address Required</h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+                Your physical address is required by email regulations (CAN-SPAM, GDPR, etc.) and will be included in the footer of emails near the unsubscribe link.
+            </p>
+            <form id="addressForm" class="space-y-4">
+                <div>
+                    <label for="modal_address_line1" class="block text-sm font-medium text-gray-700 mb-1">Address Line 1 <span class="text-red-500">*</span></label>
+                    <input type="text" id="modal_address_line1" name="address_line1" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                </div>
+                <div>
+                    <label for="modal_address_line2" class="block text-sm font-medium text-gray-700 mb-1">Address Line 2 (Optional)</label>
+                    <input type="text" id="modal_address_line2" name="address_line2" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="modal_city" class="block text-sm font-medium text-gray-700 mb-1">City <span class="text-red-500">*</span></label>
+                        <input type="text" id="modal_city" name="city" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                    </div>
+                    <div>
+                        <label for="modal_state" class="block text-sm font-medium text-gray-700 mb-1">State/Province <span class="text-red-500">*</span></label>
+                        <input type="text" id="modal_state" name="state" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="modal_postal_code" class="block text-sm font-medium text-gray-700 mb-1">Postal Code <span class="text-red-500">*</span></label>
+                        <input type="text" id="modal_postal_code" name="postal_code" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                    </div>
+                    <div>
+                        <label for="modal_country" class="block text-sm font-medium text-gray-700 mb-1">Country <span class="text-red-500">*</span></label>
+                        <input type="text" id="modal_country" name="country" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+                        Save Address
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
 // Make toggleEmailPreview globally accessible
 function toggleEmailPreview(previewId) {
@@ -567,7 +616,100 @@ function toggleEmailPreview(previewId) {
     }
 }
 
+// Address Modal Functions
+function showAddressModal() {
+    const modal = document.getElementById('addressModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeAddressModal() {
+    const modal = document.getElementById('addressModal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+// Check if address is needed and show modal
+function checkAddressRequired() {
+    fetch('/api/profile/settings/')
+        .then(response => response.json())
+        .then(data => {
+            // Check if all required address fields are missing
+            if (!data.address_line1 || !data.city || !data.state || !data.postal_code || !data.country) {
+                showAddressModal();
+            }
+        })
+        .catch(error => {
+            console.error('Error checking address:', error);
+        });
+}
+
+// Helper function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if address is required on page load
+    checkAddressRequired();
+    
+    // Handle address form submission
+    const addressForm = document.getElementById('addressForm');
+    if (addressForm) {
+        addressForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                address_line1: document.getElementById('modal_address_line1').value.trim(),
+                address_line2: document.getElementById('modal_address_line2').value.trim(),
+                city: document.getElementById('modal_city').value.trim(),
+                state: document.getElementById('modal_state').value.trim(),
+                postal_code: document.getElementById('modal_postal_code').value.trim(),
+                country: document.getElementById('modal_country').value.trim(),
+            };
+            
+            // Validate that all required fields are filled
+            if (!formData.address_line1 || !formData.city || !formData.state || !formData.postal_code || !formData.country) {
+                alert('Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country. This information is required by email regulations.');
+                return;
+            }
+            
+            fetch('/api/profile/settings/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    closeAddressModal();
+                    alert('Address saved successfully!');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving address:', error);
+                alert('Error saving address. Please try again.');
+            });
+        });
+    }
+    
     const form = document.getElementById('sendEmailForm');
     const campaignSelect = document.getElementById('send_campaign');
     const emailTemplateSelect = document.getElementById('send_email_template');

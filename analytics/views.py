@@ -181,42 +181,52 @@ def subscriber_analytics(request, list_id):
 
 
 @csrf_exempt
-def track_open(request, tracking_id):
+def track_open(request, tracking_id, encoded_email):
     """Track email opens using a transparent 1x1 pixel."""
-    subscriber_email = request.GET.get('email')
+    from urllib.parse import unquote
+    subscriber_email = unquote(encoded_email)
     if subscriber_email:
         # Use synchronous processing on Windows/DEBUG mode
         import sys
         from django.conf import settings
         if sys.platform == 'win32' and settings.DEBUG:
-            # Import synchronous version
-            from campaigns.tasks import process_email_open
+            # Process synchronously (not as a Celery task) for Windows/DEBUG mode
             try:
-                # Call synchronously (not as a Celery task)
                 from campaigns.models import EmailEvent, Campaign
-                try:
-                    # Check if already opened
-                    already_opened = EmailEvent.objects.filter(
-                        id=tracking_id,
-                        opened_at__isnull=False
-                    ).exists()
+                # Find the sent event with the same tracking ID
+                sent_event = EmailEvent.objects.get(
+                    id=tracking_id, 
+                    event_type='sent',
+                    subscriber_email=subscriber_email
+                )
+                
+                # Check if open event already exists to avoid duplicates
+                existing_open = EmailEvent.objects.filter(
+                    email=sent_event.email,
+                    subscriber_email=subscriber_email,
+                    event_type='opened'
+                ).exists()
+                
+                if not existing_open:
+                    # Create an open event
+                    EmailEvent.objects.create(
+                        email=sent_event.email,
+                        subscriber_email=subscriber_email,
+                        event_type='opened'
+                    )
                     
-                    if not already_opened:
-                        sent_event = EmailEvent.objects.get(
-                            id=tracking_id,
-                            event_type='sent',
-                            subscriber_email=subscriber_email
-                        )
-                        sent_event.opened_at = timezone.now()
-                        sent_event.save(update_fields=['opened_at'])
-                        
-                        campaign = sent_event.email.campaign
-                        campaign.open_count += 1
-                        campaign.save(update_fields=['open_count'])
-                except EmailEvent.DoesNotExist:
-                    pass
-            except Exception:
-                pass
+                    # Update campaign metrics
+                    campaign = sent_event.email.campaign
+                    campaign.open_count += 1
+                    campaign.save(update_fields=['open_count'])
+            except EmailEvent.DoesNotExist:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"No matching sent event found for tracking ID {tracking_id}")
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to process email open: {str(e)}", exc_info=True)
         else:
             # Process the open event asynchronously on production
             process_email_open.delay(str(tracking_id), subscriber_email)

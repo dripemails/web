@@ -81,10 +81,13 @@ def _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url
     # Ensure base_url doesn't end with a slash (we'll add it in the path)
     tracking_base_url = tracking_base_url.rstrip('/')
     
-    tracking_url = f"{tracking_base_url}/analytics/track/open/{tracking_id}/?email={subscriber_email}"
+    # URL-encode the email and include it in the path instead of query string
+    from urllib.parse import quote
+    encoded_email = quote(subscriber_email, safe='')
+    tracking_url = f"{tracking_base_url}/analytics/track/open/{tracking_id}/{encoded_email}/"
     
-    # Create tracking pixel image tag
-    tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" style="display:none;" />'
+    # Create tracking pixel image tag (removed display:none to ensure tracking works)
+    tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" />'
     
     # Try to inject before closing body tag, otherwise append to end
     if '</body>' in html_content:
@@ -495,8 +498,10 @@ def send_campaign_email(email_id, subscriber_id):
     site_name = site_info['site_name']
     site_logo = site_info['site_logo']
     
-    # Generate tracking URLs
-    tracking_pixel = f'<img src="{site_url}/analytics/track/open/{tracking_id}/?email={subscriber.email}" width="1" height="1" alt="" style="display:none;" />'
+    # Generate tracking URLs (email in path, not query string)
+    from urllib.parse import quote
+    encoded_email = quote(subscriber.email, safe='')
+    tracking_pixel = f'<img src="{site_url}/analytics/track/open/{tracking_id}/{encoded_email}/" width="1" height="1" alt="" />'
     unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with tracking

@@ -47,7 +47,7 @@ non_prefixed_urlpatterns = [
     path('api/send-email/requests/<uuid:request_id>/unsubscribe/', core_views.send_email_request_unsubscribe, name='api-send-email-request-unsubscribe'),
     path('api/profile/settings/', core_views.profile_settings, name='api-profile-settings'),
     # Email tracking endpoints (no language prefix needed)
-    path('analytics/track/open/<uuid:tracking_id>/', analytics_views.track_open, name='track-open'),
+    path('analytics/track/open/<uuid:tracking_id>/<str:encoded_email>/', analytics_views.track_open, name='track-open'),
     path('analytics/track/click/<uuid:tracking_id>/', analytics_views.track_click, name='track-click'),
 ]
 

@@ -289,9 +289,12 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Check if user has valid SPF record
     user_profile, _ = UserProfile.objects.get_or_create(user=user)
     has_valid_spf = user_profile.spf_verified
+    show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
     
     # Get site information for unsubscribe links and tracking (already done above, reuse)
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
     
     # Get subscriber UUID for unsubscribe link
     subscriber_uuid = None
@@ -344,6 +347,17 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         # Add to text content with separator
         unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}{address_text}"
         text_content += unsubscribe_text
+    
+    # Add ads if required
+    if show_ads:
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
+        html_content += ads_html
+        text_content += f"\n\n{ads_text}"
     
     # Create and send email
     msg = EmailMultiAlternatives(

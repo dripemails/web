@@ -13,7 +13,7 @@ from django.db import models
 from .models import UserProfile, EmailFooter
 from campaigns.models import Campaign, EmailEvent
 from subscribers.models import List
-from campaigns.tasks import process_email_open, process_email_click
+from campaigns.tasks import process_email_click
 
 
 @login_required
@@ -184,52 +184,48 @@ def subscriber_analytics(request, list_id):
 def track_open(request, tracking_id, encoded_email):
     """Track email opens using a transparent 1x1 pixel."""
     from urllib.parse import unquote
+    import logging
+    logger = logging.getLogger(__name__)
+    
     subscriber_email = unquote(encoded_email)
     if subscriber_email:
-        # Use synchronous processing on Windows/DEBUG mode
-        import sys
-        from django.conf import settings
-        if sys.platform == 'win32' and settings.DEBUG:
-            # Process synchronously (not as a Celery task) for Windows/DEBUG mode
-            try:
-                from campaigns.models import EmailEvent, Campaign
-                # Find the sent event with the same tracking ID
-                sent_event = EmailEvent.objects.get(
-                    id=tracking_id, 
-                    event_type='sent',
-                    subscriber_email=subscriber_email
-                )
-                
-                # Check if open event already exists to avoid duplicates
-                existing_open = EmailEvent.objects.filter(
+        # Always process synchronously (no Celery)
+        try:
+            from campaigns.models import EmailEvent, Campaign
+            # Find the sent event with the same tracking ID
+            sent_event = EmailEvent.objects.get(
+                id=tracking_id, 
+                event_type='sent',
+                subscriber_email=subscriber_email
+            )
+            
+            # Check if open event already exists to avoid duplicates
+            existing_open = EmailEvent.objects.filter(
+                email=sent_event.email,
+                subscriber_email=subscriber_email,
+                event_type='opened'
+            ).exists()
+            
+            if not existing_open:
+                # Create an open event
+                EmailEvent.objects.create(
                     email=sent_event.email,
                     subscriber_email=subscriber_email,
                     event_type='opened'
-                ).exists()
+                )
                 
-                if not existing_open:
-                    # Create an open event
-                    EmailEvent.objects.create(
-                        email=sent_event.email,
-                        subscriber_email=subscriber_email,
-                        event_type='opened'
-                    )
-                    
-                    # Update campaign metrics
-                    campaign = sent_event.email.campaign
-                    campaign.open_count += 1
-                    campaign.save(update_fields=['open_count'])
-            except EmailEvent.DoesNotExist:
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"No matching sent event found for tracking ID {tracking_id}")
-            except Exception as e:
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"Failed to process email open: {str(e)}", exc_info=True)
-        else:
-            # Process the open event asynchronously on production
-            process_email_open.delay(str(tracking_id), subscriber_email)
+                # Update campaign metrics
+                campaign = sent_event.email.campaign
+                campaign.open_count += 1
+                campaign.save(update_fields=['open_count'])
+                
+                logger.info(f"Recorded open event for {subscriber_email}")
+            else:
+                logger.debug(f"Open event already exists for {subscriber_email}, skipping duplicate")
+        except EmailEvent.DoesNotExist:
+            logger.error(f"No matching sent event found for tracking ID {tracking_id}, email: {subscriber_email}")
+        except Exception as e:
+            logger.error(f"Failed to process email open: {str(e)}", exc_info=True)
     
     # Return a transparent 1x1 pixel
     transparent_pixel = b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02\x44\x01\x00\x3B'

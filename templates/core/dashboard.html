@@ -163,7 +163,7 @@
                 </div>
                 <div class="ml-3 flex-1">
                     <p class="text-sm font-medium text-green-800">
-                        Thanks for including {{ site.domain }} SPF records in your domain DNS settings!
+                        Thanks for including {{ site_domain }} SPF records in your domain DNS settings!
                     </p>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                 <div class="ml-4 flex-1">
                     <h3 class="text-lg font-semibold text-gray-800 mb-3">SPF Record Setup for Email Deliverability</h3>
                     <p class="text-gray-700 mb-4">
-                        To ensure your emails are delivered successfully and avoid spam filters, you need to add an SPF (Sender Policy Framework) record to your domain's DNS settings. This authorizes {{ site.name }} to send emails on behalf of your domain.
+                        To ensure your emails are delivered successfully and avoid spam filters, you need to add an SPF (Sender Policy Framework) record to your domain's DNS settings. This authorizes {{ site_name }} to send emails on behalf of your domain.
                     </p>
                     <div class="bg-white rounded-md p-4 mb-4 border border-gray-200">
                         <p class="text-sm font-medium text-gray-700 mb-2">Add this TXT record to your domain's DNS:</p>
@@ -195,7 +195,7 @@
                                 <span class="text-gray-600">Value:</span>
                             </div>
                             <div class="bg-white p-2 rounded border border-gray-300 text-gray-900 break-all">
-                                v=spf1 include:{{ site.domain }} include:web.{{ site.domain }} include:web1.{{ site.domain }} ~all
+                                v=spf1 include:{{ site_domain }} include:web.{{ site_domain }} include:web1.{{ site_domain }} ~all
                             </div>
                         </div>
                     </div>

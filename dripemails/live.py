@@ -219,6 +219,7 @@ DEFAULT_URL = os.environ.get('DEFAULT_URL', 'https://dripemails.org')
 # REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'core.authentication.BearerTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],

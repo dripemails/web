@@ -32,24 +32,51 @@
         </ol>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 2: Add Email Sequences</h3>
-        <p class="text-gray-700 mb-4">Build your sequence by adding multiple emails:</p>
+        <p class="text-gray-700 mb-4">Build your sequence by adding multiple emails. The order field determines the sequence:</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-3 text-gray-700">
-            <li><strong>Email 1:</strong> Welcome email (Day 0 - immediately)</li>
-            <li><strong>Email 2:</strong> Value proposition (Day 3)</li>
-            <li><strong>Email 3:</strong> Educational content (Day 7)</li>
-            <li><strong>Email 4:</strong> Social proof (Day 10)</li>
-            <li><strong>Email 5:</strong> Call to action (Day 14)</li>
+            <li><strong>Email 1</strong> (order 0, wait 1 day) - Welcome email sent 1 day after subscription</li>
+            <li><strong>Email 2</strong> (order 1, wait 2 days) - Value proposition sent 2 days after Email 1</li>
+            <li><strong>Email 3</strong> (order 2, wait 3 days) - Educational content sent 3 days after Email 2</li>
+            <li><strong>Email 4</strong> (order 3, wait 1 week) - Social proof sent 1 week after Email 3</li>
+            <li><strong>Email 5</strong> (order 4, wait 2 weeks) - Call to action sent 2 weeks after Email 4</li>
           </ul>
+          <p class="text-sm text-gray-600 mt-3 italic">
+            Note: The wait time for each email determines when the <strong>next</strong> email will be sent automatically.
+          </p>
         </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 3: Set Timing Delays</h3>
         <p class="text-gray-700 mb-4">For each email, specify:</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>Delay:</strong> Days/hours after the previous email</li>
-          <li><strong>Send Time:</strong> Specific time of day to send (e.g., 10:00 AM)</li>
+          <li><strong>Wait Time:</strong> How long to wait before sending this email (e.g., 2 days, 1 week)</li>
+          <li><strong>Wait Unit:</strong> Minutes, hours, days, weeks, or months</li>
           <li><strong>Time Zone:</strong> Use recipient's time zone or your default</li>
         </ul>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
+          <h4 class="font-semibold text-green-900 mb-2">✨ Automatic Email Sequencing</h4>
+          <p class="text-green-900 mb-3">
+            <strong>DripEmails.org automatically schedules the next email in your sequence!</strong> When an email is sent, 
+            the system automatically finds the next email in the campaign (by order) and schedules it based on that email's wait time.
+          </p>
+          <div class="bg-white rounded-lg p-4 mb-3">
+            <h5 class="font-semibold text-gray-900 mb-2">How It Works:</h5>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700 text-sm">
+              <li>You send <strong>Email 1</strong> (order 0, wait 1 day) to a subscriber</li>
+              <li>Email 1 is sent successfully</li>
+              <li>System automatically finds <strong>Email 2</strong> (order 1, wait 2 days)</li>
+              <li>Email 2 is scheduled to be sent <strong>2 days after Email 1 was sent</strong></li>
+              <li>When Email 2 is sent, Email 3 is automatically scheduled, and so on...</li>
+            </ol>
+          </div>
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+            <p class="text-sm text-yellow-900">
+              <strong>💡 Key Point:</strong> Each email's wait time determines when the <strong>next</strong> email will be sent. 
+              The wait time is relative to when the previous email was successfully sent, not when the campaign started.
+            </p>
+          </div>
+        </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 4: Add Conditions (Advanced)</h3>
         <p class="text-gray-700 mb-4">Create intelligent sequences with conditional logic:</p>
@@ -72,6 +99,22 @@
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
           <p class="text-yellow-900"><strong>⚠️ Important:</strong> Once a drip campaign is active, subscribers already in the sequence won't see changes. Only new subscribers get the updated version.</p>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <h4 class="font-semibold text-blue-900 mb-2">🆕 Adding Emails to Active Campaigns</h4>
+          <p class="text-blue-900 mb-2">
+            If you add a new email template to a campaign that has already sent emails, the system will automatically:
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-blue-900 text-sm">
+            <li>Schedule the new email to all active subscribers in the campaign's subscriber list</li>
+            <li>Use the new email's wait time to determine when it should be sent</li>
+            <li>Exclude unsubscribed subscribers automatically</li>
+            <li>Show the scheduled emails in "Recent Send Activity" on your dashboard</li>
+          </ul>
+          <p class="text-sm text-blue-800 mt-2 italic">
+            This makes it easy to extend your drip campaigns without manually scheduling emails for each subscriber!
+          </p>
         </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Drip Campaign Types</h3>

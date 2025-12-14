@@ -25,7 +25,8 @@ Start developing immediately on Windows without installing Redis or configuring 
 
 ### 📧 **Email Campaign Management**
 
-- **Drip Campaigns**: Create automated email sequences with customizable delays
+- **Drip Campaigns**: Create automated email sequences with customizable delays and automatic progression
+- **Automatic Email Sequencing**: When an email is sent, the next email in the sequence is automatically scheduled based on its wait time - no manual intervention needed!
 - **Email Templates**: Rich HTML and text email templates with dynamic content
 - **Scheduling**: Advanced email scheduling with timezone support
 - **A/B Testing**: Built-in A/B testing for subject lines and content

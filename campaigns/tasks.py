@@ -398,6 +398,13 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             request_obj.save(update_fields=['status', 'error_message', 'sent_at', 'updated_at'])
         
         logger.info(f"Sent single email '{subject}' to {subscriber_email}")
+        
+        # Schedule the next email in the campaign sequence
+        try:
+            schedule_next_email_in_sequence(email, request_obj, subscriber_email, variables)
+        except Exception as next_email_error:
+            # Log but don't fail the current email send if scheduling next email fails
+            logger.warning(f"Failed to schedule next email in sequence: {str(next_email_error)}")
     except Exception as e:
         logger.error(f"Error sending single email to {subscriber_email}: {str(e)}")
         if request_obj:
@@ -405,6 +412,85 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             request_obj.error_message = str(e)
             request_obj.save(update_fields=['status', 'error_message', 'updated_at'])
         raise
+
+
+def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email, variables):
+    """
+    Schedule the next email in the campaign sequence after an email is sent.
+    
+    Args:
+        current_email: The Email object that was just sent
+        request_obj: The EmailSendRequest object for the email that was sent
+        subscriber_email: The email address of the subscriber
+        variables: Variables dictionary for personalization
+    """
+    from .models import Email, EmailSendRequest
+    from subscribers.models import Subscriber
+    from datetime import timedelta
+    
+    # Get the campaign and current email order
+    campaign = current_email.campaign
+    
+    # Find the next email in the sequence (by order)
+    next_email = Email.objects.filter(
+        campaign=campaign,
+        order__gt=current_email.order
+    ).order_by('order').first()
+    
+    if not next_email:
+        logger.debug(f"No next email found in campaign '{campaign.name}' after email order {current_email.order}")
+        return
+    
+    # Get the subscriber object
+    subscriber = None
+    if request_obj and request_obj.subscriber:
+        subscriber = request_obj.subscriber
+    else:
+        # Try to find subscriber by email
+        try:
+            subscriber = Subscriber.objects.filter(email=subscriber_email).first()
+        except Exception:
+            pass
+    
+    if not subscriber:
+        logger.warning(f"Could not find subscriber for email {subscriber_email} to schedule next email")
+        return
+    
+    # Calculate scheduled time based on next email's wait_time and wait_unit
+    wait_time = next_email.wait_time or 1
+    wait_unit = next_email.wait_unit or 'days'
+    
+    send_delay = timedelta(0)
+    if wait_unit == 'minutes':
+        send_delay = timedelta(minutes=wait_time)
+    elif wait_unit == 'hours':
+        send_delay = timedelta(hours=wait_time)
+    elif wait_unit == 'days':
+        send_delay = timedelta(days=wait_time)
+    elif wait_unit == 'weeks':
+        send_delay = timedelta(weeks=wait_time)
+    elif wait_unit == 'months':
+        send_delay = timedelta(days=wait_time * 30)
+    
+    scheduled_for = timezone.now() + send_delay
+    
+    # Get user from request_obj or campaign
+    user = request_obj.user if request_obj else campaign.user
+    
+    # Create EmailSendRequest for the next email
+    next_send_request = EmailSendRequest.objects.create(
+        user=user,
+        campaign=campaign,
+        email=next_email,
+        subscriber=subscriber,
+        subscriber_email=subscriber_email,
+        variables=variables or {},
+        scheduled_for=scheduled_for,
+        status='pending'
+    )
+    
+    logger.info(f"Scheduled next email '{next_email.subject}' (order {next_email.order}) in campaign '{campaign.name}' "
+                f"for {subscriber_email} to be sent at {scheduled_for}")
 
 
 @shared_task

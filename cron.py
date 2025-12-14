@@ -113,8 +113,10 @@ logger.addHandler(console_handler)
 logger.info(f"Logging to file: {LOG_FILE}")
 
 # Required SPF includes for DripEmails.org
+# Users should include: web.dripemails.org and web1.dripemails.org
+# Note: We removed 'dripemails.org' from the required list as the new format
+# only requires the web and web1 subdomains
 REQUIRED_SPF_INCLUDES = [
-    'dripemails.org',
     'web.dripemails.org',
     'web1.dripemails.org'
 ]

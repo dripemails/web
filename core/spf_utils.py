@@ -13,7 +13,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Required SPF includes for DripEmails.org
-REQUIRED_SPF_INCLUDES = ['dripemails.org', 'web.dripemails.org', 'web1.dripemails.org']
+# Users should include: web.dripemails.org and web1.dripemails.org
+# Note: We removed 'dripemails.org' from the required list as the new format
+# only requires the web and web1 subdomains
+REQUIRED_SPF_INCLUDES = ['web.dripemails.org', 'web1.dripemails.org']
 
 
 def extract_domain(email: str) -> Optional[str]:

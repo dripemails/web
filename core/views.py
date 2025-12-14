@@ -99,6 +99,37 @@ def dashboard(request):
     if request.user.email and '@' in request.user.email:
         user_email_domain = request.user.email.split('@')[1]
     
+    # Get SPF verification status (refresh from DB to get latest value)
+    profile.refresh_from_db()
+    spf_verified = profile.spf_verified
+    
+    # If SPF is marked as verified, do a quick re-check to ensure it's still valid
+    # This handles cases where the user deleted the SPF record or moved domains
+    if spf_verified and request.user.email:
+        try:
+            from core.spf_utils import quick_spf_check
+            is_still_valid, current_spf_record = quick_spf_check(request.user.email)
+            
+            if not is_still_valid:
+                # SPF record was removed or is no longer valid - update the profile
+                profile.spf_verified = False
+                profile.spf_record = current_spf_record or ''
+                profile.save(update_fields=['spf_verified', 'spf_record'])
+                spf_verified = False
+                logger.info(f"Dashboard - User {request.user.id} SPF record no longer valid, updated status to False")
+            else:
+                # Update the stored SPF record in case it changed
+                if current_spf_record and current_spf_record != profile.spf_record:
+                    profile.spf_record = current_spf_record
+                    profile.save(update_fields=['spf_record'])
+                    logger.debug(f"Dashboard - User {request.user.id} SPF record updated")
+        except Exception as e:
+            # If DNS check fails, don't update the status (might be a temporary DNS issue)
+            logger.warning(f"Dashboard - Failed to re-check SPF for user {request.user.id}: {str(e)}")
+    
+    # Debug logging
+    logger.debug(f"Dashboard - User {request.user.id} SPF verified: {spf_verified}, SPF record: {profile.spf_record}")
+    
     context = {
         'campaigns': campaigns,
         'lists': lists,
@@ -108,6 +139,7 @@ def dashboard(request):
         'sent_emails_count': sent_emails_count,
         'user_email_domain': user_email_domain,
         'user_timezone': user_timezone,
+        'spf_verified': spf_verified,
     }
     
     return render(request, 'core/dashboard.html', context)

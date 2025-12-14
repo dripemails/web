@@ -56,6 +56,19 @@ from analytics.models import UserProfile
 from campaigns.models import EmailSendRequest
 from campaigns.tasks import _send_single_email_sync
 
+# Import SPF utilities from core module
+try:
+    from core.spf_utils import (
+        extract_domain as spf_extract_domain,
+        get_spf_record as spf_get_spf_record,
+        check_spf_includes as spf_check_spf_includes,
+        REQUIRED_SPF_INCLUDES as SPF_REQUIRED_INCLUDES
+    )
+    USE_SHARED_SPF_UTILS = True
+except ImportError:
+    # Fallback to local functions if import fails
+    USE_SHARED_SPF_UTILS = False
+
 # Setup logging to file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')
@@ -119,25 +132,68 @@ def get_spf_record(domain: str) -> Optional[str]:
     Get SPF record for a domain via DNS TXT lookup.
     
     Returns the SPF record string if found, None otherwise.
+    Checks all TXT records and returns the first valid SPF record.
     """
     try:
         # Try to get TXT records
         txt_records = dns.resolver.resolve(domain, 'TXT')
         
-        # Look for SPF record (starts with "v=spf1")
+        logger.info(f"Found {len(txt_records)} TXT record(s) for {domain}")
+        
+        spf_records = []
+        
+        # Look for all SPF records (starts with "v=spf1")
         for record in txt_records:
-            record_str = ''.join([str(part) for part in record.strings])
-            if record_str.startswith('v=spf1'):
-                return record_str
+            # Join all string parts - decode bytes to strings properly
+            record_parts = []
+            for part in record.strings:
+                if isinstance(part, bytes):
+                    # Decode bytes to string
+                    try:
+                        decoded = part.decode('utf-8')
+                        record_parts.append(decoded)
+                    except UnicodeDecodeError:
+                        # Fallback to latin-1 if utf-8 fails
+                        decoded = part.decode('latin-1')
+                        record_parts.append(decoded)
+                else:
+                    record_parts.append(str(part))
+            record_str = ''.join(record_parts)
+            # Remove surrounding quotes if present
+            record_str = record_str.strip('"').strip("'").strip()
+            
+            # Remove any 'b' prefix that might be left from string representation
+            if record_str.startswith("b'") and record_str.endswith("'"):
+                record_str = record_str[2:-1].strip()
+            elif record_str.startswith('b"') and record_str.endswith('"'):
+                record_str = record_str[2:-1].strip()
+            
+            # Log what we found for debugging
+            logger.info(f"Found TXT record for {domain}: {record_str}")
+            
+            # Check if it starts with v=spf1 (case insensitive)
+            record_lower = record_str.lower().strip()
+            if record_lower.startswith('v=spf1'):
+                logger.info(f"Found SPF record for {domain}: {record_str}")
+                spf_records.append(record_str)
+            else:
+                logger.debug(f"TXT record does not start with 'v=spf1': {record_str[:100]}...")
+        
+        # Return the first SPF record found, or None if none found
+        if spf_records:
+            logger.info(f"Found {len(spf_records)} SPF record(s) for {domain}, using first one")
+            return spf_records[0]
+        
     except dns.resolver.NoAnswer:
-        logger.debug(f"No TXT records found for {domain}")
+        logger.warning(f"No TXT records found for {domain}")
     except dns.resolver.NXDOMAIN:
-        logger.debug(f"Domain {domain} does not exist")
+        logger.warning(f"Domain {domain} does not exist (NXDOMAIN)")
     except dns.exception.DNSException as e:
         logger.warning(f"DNS error for {domain}: {str(e)}")
     except Exception as e:
-        logger.error(f"Unexpected error checking SPF for {domain}: {str(e)}")
+        logger.error(f"Unexpected error checking SPF for {domain}: {str(e)}", exc_info=True)
     
+    logger.warning(f"No SPF record found for {domain}")
     return None
 
 
@@ -193,15 +249,24 @@ def check_spf_includes(spf_record: str) -> Tuple[bool, List[str], List[str]]:
     Returns:
         (is_valid, missing_includes, found_includes)
     """
+    # Clean up the SPF record string
+    spf_record = spf_record.strip()
+    
+    logger.info(f"Checking SPF record: {spf_record}")
+    
     parsed = parse_spf_record(spf_record)
     found_includes = []
     missing_includes = []
+    
+    logger.info(f"Parsed includes: {parsed['includes']}")
+    logger.info(f"Required includes: {REQUIRED_SPF_INCLUDES}")
     
     # Check each required include
     for required in REQUIRED_SPF_INCLUDES:
         # Check if it's directly included
         if required in parsed['includes']:
             found_includes.append(required)
+            logger.info(f"Found required include: {required}")
         else:
             # Also check if it might be included via a subdomain match
             # (e.g., if dripemails.org is included, web.dripemails.org might be covered)
@@ -210,12 +275,15 @@ def check_spf_includes(spf_record: str) -> Tuple[bool, List[str], List[str]]:
                 if required.endswith('.' + included) or required == included:
                     found = True
                     found_includes.append(required)
+                    logger.info(f"Found required include via subdomain match: {required} (matched {included})")
                     break
             
             if not found:
                 missing_includes.append(required)
+                logger.warning(f"Missing required include: {required}")
     
     is_valid = len(missing_includes) == 0
+    logger.info(f"SPF validation result: valid={is_valid}, missing={missing_includes}, found={found_includes}")
     return is_valid, missing_includes, found_includes
 
 
@@ -257,10 +325,13 @@ def check_user_spf(user: User) -> Dict:
     
     result['domain'] = domain
     
+    logger.info(f"Checking SPF for user {user.id} ({user.email}), domain: {domain}")
+    
     # Get SPF record
     spf_record = get_spf_record(domain)
     if not spf_record:
-        result['error'] = 'No SPF record found for domain'
+        result['error'] = f'No SPF record found for domain {domain}'
+        logger.warning(f"User {user.id} ({user.email}): {result['error']}")
         return result
     
     result['has_spf'] = True
@@ -291,8 +362,11 @@ def update_user_spf_status(user: User, result: Dict):
     profile.spf_missing_includes = result['missing_includes']
     profile.save(update_fields=['spf_verified', 'spf_last_checked', 'spf_record', 'spf_missing_includes'])
     
+    # Verify the save worked
+    profile.refresh_from_db()
     logger.info(f"User {user.id} ({user.email}): SPF valid={result['is_valid']}, "
                 f"missing={result['missing_includes']}, found={result['found_includes']}")
+    logger.info(f"User {user.id} ({user.email}): Saved spf_verified={profile.spf_verified} (verified in DB)")
 
 
 def check_all_users():

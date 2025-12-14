@@ -61,6 +61,13 @@ def campaign_detail(request, campaign_id):
 @permission_classes([IsAuthenticated])
 def email_list_create(request, campaign_id):
     """List all emails in a campaign or create a new one."""
+    from django.utils import timezone
+    from datetime import timedelta
+    from campaigns.models import EmailSendRequest
+    from subscribers.models import Subscriber
+    import logging
+    
+    logger = logging.getLogger(__name__)
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     
     if request.method == 'GET':
@@ -76,6 +83,63 @@ def email_list_create(request, campaign_id):
         serializer = EmailSerializer(data=data, context={'request': request})
         if serializer.is_valid():
             email = serializer.save(campaign=campaign)
+            
+            # Check if campaign has already sent any emails
+            has_sent_emails = EmailSendRequest.objects.filter(
+                campaign=campaign,
+                status='sent'
+            ).exists()
+            
+            # If campaign has sent emails, automatically schedule this new email to all active subscribers
+            if has_sent_emails and campaign.subscriber_list:
+                # Get all active subscribers from the campaign's subscriber list
+                active_subscribers = Subscriber.objects.filter(
+                    lists=campaign.subscriber_list,
+                    is_active=True
+                ).distinct()
+                
+                if active_subscribers.exists():
+                    # Calculate scheduled_for time based on email's wait_time and wait_unit
+                    wait_time = email.wait_time or 1
+                    wait_unit = email.wait_unit or 'days'
+                    
+                    send_delay = timedelta(0)
+                    if wait_unit == 'minutes':
+                        send_delay = timedelta(minutes=wait_time)
+                    elif wait_unit == 'hours':
+                        send_delay = timedelta(hours=wait_time)
+                    elif wait_unit == 'days':
+                        send_delay = timedelta(days=wait_time)
+                    elif wait_unit == 'weeks':
+                        send_delay = timedelta(weeks=wait_time)
+                    elif wait_unit == 'months':
+                        send_delay = timedelta(days=wait_time * 30)
+                    
+                    scheduled_for = timezone.now() + send_delay
+                    
+                    # Create EmailSendRequest for each active subscriber
+                    send_requests = []
+                    for subscriber in active_subscribers:
+                        variables = {
+                            'first_name': subscriber.first_name or '',
+                            'last_name': subscriber.last_name or '',
+                            'email': subscriber.email
+                        }
+                        
+                        send_request = EmailSendRequest.objects.create(
+                            user=request.user,
+                            campaign=campaign,
+                            email=email,
+                            subscriber=subscriber,
+                            subscriber_email=subscriber.email,
+                            variables=variables,
+                            scheduled_for=scheduled_for,
+                            status='pending'
+                        )
+                        send_requests.append(send_request)
+                    
+                    logger.info(f"Auto-scheduled email '{email.subject}' to {len(send_requests)} active subscribers in campaign '{campaign.name}'")
+            
             return Response(serializer.data, status=201)
         return Response({'error': 'Validation failed', 'details': serializer.errors}, status=400)
 

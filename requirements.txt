@@ -30,4 +30,5 @@ huggingface-hub==0.20.1
 safetensors==0.4.1
 tokenizers==0.15.0
 dnspython==2.6.1
-
+pytest==7.4.0
+pytest-django==4.5.2

@@ -496,6 +496,25 @@ response = http.request(request)</code></pre>
 let quill;
 let footerQuill;
 
+// Function to clean HTML content by removing empty paragraph tags with breaks
+// This removes leading/trailing empty paragraphs and collapses consecutive ones,
+// but preserves single empty paragraphs between content (intentional spacing)
+function cleanQuillContent(html) {
+    if (!html) return html;
+    
+    // Remove leading empty paragraphs
+    html = html.replace(/^(<p><br\s*\/?><\/p>\s*)+/gi, '');
+    
+    // Remove trailing empty paragraphs
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*)+$/gi, '');
+    
+    // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
+    // This replaces 2+ consecutive empty paragraphs with just one
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
+    
+    return html;
+}
+
 // Function to copy variable to clipboard and insert into editor
 function copyVariable(variable, element) {
     // Copy to clipboard
@@ -553,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.showCampaignModal = function() {
         // Validate form first
         const subject = document.getElementById('subject').value.trim();
-        const bodyContent = quill.root.innerHTML.trim();
+        const bodyContent = cleanQuillContent(quill.root.innerHTML.trim());
         
         if (!subject) {
             alert('{% trans "Please enter an email subject." %}');
@@ -584,7 +603,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideCampaignModal();
         
         // Get form data
-        const htmlContent = quill.root.innerHTML;
+        const htmlContent = cleanQuillContent(quill.root.innerHTML);
         const footerSelect = document.getElementById('footer_select');
         const selectedFooterId = footerSelect.value;
         
@@ -698,7 +717,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('wait_unit').value = data.wait_unit;
                 
                 // Set content in Quill editor
-                quill.root.innerHTML = data.body_html;
+                quill.root.innerHTML = cleanQuillContent(data.body_html);
                 
                 // Set footer if available
                 if (data.footer_id) {
@@ -787,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.subject) {
                     document.getElementById('subject').value = data.subject;
-                    quill.root.innerHTML = data.body_html;
+                    quill.root.innerHTML = cleanQuillContent(data.body_html);
                     aiModal.classList.add('hidden');
                     aiGenerateForm.reset();
                     alert('{% trans "Email generated successfully! Review and save when ready." %}');
@@ -815,7 +834,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preview functionality
     if (previewBtn) {
         previewBtn.addEventListener('click', function() {
-            const content = quill.root.innerHTML;
+            const content = cleanQuillContent(quill.root.innerHTML);
             
             // Get selected footer content
             const footerSelect = document.getElementById('footer_select');
@@ -887,7 +906,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             // Get content from Quill editor
-            const htmlContent = quill.root.innerHTML;
+            const htmlContent = cleanQuillContent(quill.root.innerHTML);
             
             // Get selected footer
             const footerSelect = document.getElementById('footer_select');
@@ -1113,7 +1132,7 @@ document.getElementById('newFooterForm').addEventListener('submit', function(e) 
     e.preventDefault();
     
     const name = document.getElementById('footerName').value;
-    const htmlContent = footerQuill.root.innerHTML;
+    const htmlContent = cleanQuillContent(footerQuill.root.innerHTML);
     const isDefault = document.getElementById('isDefault').checked;
     
     if (!name.trim()) {

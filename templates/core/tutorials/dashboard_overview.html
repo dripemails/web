@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Dashboard Overview - DripEmails.org{% endblock %}
@@ -12,9 +13,9 @@
           ← Back to Tutorials
         </a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">📖 Dashboard Overview</h1>
-      <p class="text-xl text-blue-100">Tour of the DripEmails dashboard and key features</p>
-      <p class="text-blue-100 mt-2">⏱️ 8 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "📖 Dashboard Overview" %}</h1>
+      <p class="text-xl text-blue-100">{% trans "Tour of the DripEmails dashboard and key features" %}</p>
+      <p class="text-blue-100 mt-2">{% trans "⏱️ 8 min read" %}</p>
     </div>
   </div>
 
@@ -26,60 +27,60 @@
           This guide will help you navigate and understand each section of the dashboard.
         </p>
 
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Dashboard Layout</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Dashboard Layout" %}</h2>
         <p class="text-gray-700 mb-6">
           The dashboard is organized into several key sections to help you manage your email campaigns efficiently.
         </p>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">1. Top Navigation Bar</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "1. Top Navigation Bar" %}</h3>
         <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
-          <li><strong>Dashboard:</strong> Your home page with overview statistics</li>
-          <li><strong>Campaigns:</strong> Create and manage email campaigns</li>
-          <li><strong>Subscribers:</strong> Manage your subscriber lists</li>
-          <li><strong>Analytics:</strong> View detailed campaign performance</li>
-          <li><strong>Settings:</strong> Configure account preferences</li>
+          <li><strong>{% trans "Dashboard:" %}</strong> Your home page with overview statistics</li>
+          <li><strong>{% trans "Campaigns:" %}</strong> Create and manage email campaigns</li>
+          <li><strong>{% trans "Subscribers:" %}</strong> Manage your subscriber lists</li>
+          <li><strong>{% trans "Analytics:" %}</strong> View detailed campaign performance</li>
+          <li><strong>{% trans "Settings:" %}</strong> Configure account preferences</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">2. Statistics Overview</h3>
-        <p class="text-gray-700 mb-4">At the top of your dashboard, you'll see key metrics:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "2. Statistics Overview" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "At the top of your dashboard, you'll see key metrics:" %}</p>
         <div class="grid md:grid-cols-4 gap-4 mb-6">
           <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
-            <p class="text-sm text-gray-600 mb-1">Total Campaigns</p>
+            <p class="text-sm text-gray-600 mb-1">{% trans "Total Campaigns" %}</p>
             <p class="text-2xl font-bold text-blue-600">--</p>
           </div>
           <div class="bg-green-50 p-4 rounded-lg border-2 border-green-200">
-            <p class="text-sm text-gray-600 mb-1">Subscriber Lists</p>
+            <p class="text-sm text-gray-600 mb-1">{% trans "Subscriber Lists" %}</p>
             <p class="text-2xl font-bold text-green-600">--</p>
           </div>
           <div class="bg-purple-50 p-4 rounded-lg border-2 border-purple-200">
-            <p class="text-sm text-gray-600 mb-1">Total Subscribers</p>
+            <p class="text-sm text-gray-600 mb-1">{% trans "Total Subscribers" %}</p>
             <p class="text-2xl font-bold text-purple-600">--</p>
           </div>
           <div class="bg-yellow-50 p-4 rounded-lg border-2 border-yellow-200">
-            <p class="text-sm text-gray-600 mb-1">Emails Sent</p>
+            <p class="text-sm text-gray-600 mb-1">{% trans "Emails Sent" %}</p>
             <p class="text-2xl font-bold text-yellow-600">--</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Recent Campaigns</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "3. Recent Campaigns" %}</h3>
         <p class="text-gray-700 mb-6">
           View your most recent campaigns with quick access to analytics, edit options, and campaign status.
         </p>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Quick Actions</h3>
-        <p class="text-gray-700 mb-4">Use these buttons for common tasks:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "4. Quick Actions" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Use these buttons for common tasks:" %}</p>
         <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
-          <li><strong>New Campaign:</strong> Start creating a new email campaign</li>
-          <li><strong>Add Subscribers:</strong> Quickly add new contacts to your lists</li>
-          <li><strong>Import CSV:</strong> Bulk import subscribers from a file</li>
+          <li><strong>{% trans "New Campaign:" %}</strong> Start creating a new email campaign</li>
+          <li><strong>{% trans "Add Subscribers:" %}</strong> Quickly add new contacts to your lists</li>
+          <li><strong>{% trans "Import CSV:" %}</strong> Bulk import subscribers from a file</li>
         </ul>
 
         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded mt-8">
-          <h3 class="text-lg font-semibold text-indigo-900 mb-2">💡 Pro Tips</h3>
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">{% trans "💡 Pro Tips" %}</h3>
           <ul class="text-indigo-800 space-y-2">
-            <li>• Customize your dashboard view in Settings</li>
-            <li>• Use keyboard shortcuts for faster navigation</li>
-            <li>• Pin frequently used campaigns for quick access</li>
+            <li>{% trans "• Customize your dashboard view in Settings" %}</li>
+            <li>{% trans "• Use keyboard shortcuts for faster navigation" %}</li>
+            <li>{% trans "• Pin frequently used campaigns for quick access" %}</li>
           </ul>
         </div>
       </div>

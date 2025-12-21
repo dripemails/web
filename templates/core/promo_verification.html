@@ -1,21 +1,21 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Remove Ads - DripEmails.org{% endblock %}
+{% block title %}{% trans "Remove Ads" %} - DripEmails.org{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-100 py-12">
     <div class="container mx-auto px-4">
         <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
             <div class="bg-indigo-600 py-6 px-8 text-white">
-                <h1 class="text-2xl font-bold">Remove Advertisements</h1>
-                <p class="text-indigo-100">Share about DripEmails.org to remove ads from your emails</p>
+                <h1 class="text-2xl font-bold">{% trans "Remove Advertisements" %}</h1>
+                <p class="text-indigo-100">{% trans "Share about DripEmails.org to remove ads from your emails" %}</p>
             </div>
             
             <div class="p-8">
                 <div class="mb-8">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">How It Works</h2>
-                    <p class="text-gray-600 mb-4">DripEmails.org is completely free, but we add a small advertisement to the bottom of emails sent through our platform. You can remove these ads by simply sharing about us on social media or writing a blog post.</p>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">{% trans "How It Works" %}</h2>
+                    <p class="text-gray-600 mb-4">{% trans "DripEmails.org is completely free, but we add a small advertisement to the bottom of emails sent through our platform. You can remove these ads by simply sharing about us on social media or writing a blog post." %}</p>
                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r">
                         <div class="flex">
                             <div class="flex-shrink-0">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-sm text-yellow-700">
-                                    Once verified, your account will be permanently upgraded and all ads will be removed from your emails.
+                                    {% trans "Once verified, your account will be permanently upgraded and all ads will be removed from your emails." %}
                                 </p>
                             </div>
                         </div>
@@ -39,14 +39,14 @@
                                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Share on X</h3>
-                        <p class="text-gray-600 mb-4">Write a tweet about DripEmails.org and why you like it. Include a link back to our website.</p>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">{% trans "Share on X" %}</h3>
+                        <p class="text-gray-600 mb-4">{% trans "Write a tweet about DripEmails.org and why you like it. Include a link back to our website." %}</p>
                         <div class="mb-4">
                             <div class="p-4 bg-gray-50 rounded-md text-sm text-gray-700 mb-2">
-                                I'm using @DripEmails for my email marketing automation. It's free and has all the features I need! Check it out at https://dripemails.org #EmailMarketing
+                                {% trans "I'm using @DripEmails for my email marketing automation. It's free and has all the features I need! Check it out at https://dripemails.org #EmailMarketing" %}
                             </div>
                             <a href="https://twitter.com/intent/tweet?text=I'm%20using%20@DripEmails%20for%20my%20email%20marketing%20automation.%20It's%20free%20and%20has%20all%20the%20features%20I%20need!%20Check%20it%20out%20at%20https://dripemails.org%20%23EmailMarketing" target="_blank" class="text-blue-500 text-sm hover:text-blue-700">
-                                Use this template →
+                                {% trans "Use this template" %} →
                             </a>
                         </div>
                     </div>
@@ -57,16 +57,16 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Write a Blog Post</h3>
-                        <p class="text-gray-600 mb-4">Write about your experience with DripEmails.org on your blog or website. Include a link back to our website.</p>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">{% trans "Write a Blog Post" %}</h3>
+                        <p class="text-gray-600 mb-4">{% trans "Write about your experience with DripEmails.org on your blog or website. Include a link back to our website." %}</p>
                         <div class="mb-4">
                             <p class="text-sm text-gray-700 mb-2">
-                                Your post should:
+                                {% trans "Your post should:" %}
                             </p>
                             <ul class="list-disc list-inside text-sm text-gray-700 mb-2 space-y-1">
-                                <li>Include a link to https://dripemails.org</li>
-                                <li>Mention at least 3 features you like</li>
-                                <li>Be at least 300 words</li>
+                                <li>{% trans "Include a link to https://dripemails.org" %}</li>
+                                <li>{% trans "Mention at least 3 features you like" %}</li>
+                                <li>{% trans "Be at least 300 words" %}</li>
                             </ul>
                         </div>
                     </div>
@@ -74,27 +74,27 @@
                 
                 <form method="post" class="border border-gray-200 rounded-lg p-6">
                     {% csrf_token %}
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Verify Your Promotion</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">{% trans "Verify Your Promotion" %}</h3>
                     
                     <div class="mb-4">
-                        <label for="promo_type" class="block text-sm font-medium text-gray-700 mb-1">Promotion Type</label>
+                        <label for="promo_type" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Promotion Type" %}</label>
                         <select id="promo_type" name="promo_type" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="x">X Post</option>
-                            <option value="blog">Blog Post</option>
-                            <option value="linkedin">LinkedIn Post</option>
-                            <option value="facebook">Facebook Post</option>
-                            <option value="other">Other</option>
+                            <option value="x">{% trans "X Post" %}</option>
+                            <option value="blog">{% trans "Blog Post" %}</option>
+                            <option value="linkedin">{% trans "LinkedIn Post" %}</option>
+                            <option value="facebook">{% trans "Facebook Post" %}</option>
+                            <option value="other">{% trans "Other" %}</option>
                         </select>
                     </div>
                     
                     <div class="mb-6">
-                        <label for="promo_url" class="block text-sm font-medium text-gray-700 mb-1">URL to Your Post</label>
+                        <label for="promo_url" class="block text-sm font-medium text-gray-700 mb-1">{% trans "URL to Your Post" %}</label>
                         <input type="url" id="promo_url" name="promo_url" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="https://...">
-                        <p class="mt-1 text-sm text-gray-500">Paste the direct URL to your tweet, blog post, or social media post.</p>
+                        <p class="mt-1 text-sm text-gray-500">{% trans "Paste the direct URL to your tweet, blog post, or social media post." %}</p>
                     </div>
                     
                     <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors">
-                        Verify & Remove Ads
+                        {% trans "Verify & Remove Ads" %}
                     </button>
                 </form>
             </div>

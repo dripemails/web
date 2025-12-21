@@ -1,9 +1,10 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 
 {% block doc_title %}Production Setup{% endblock %}
 
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Production Setup</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Production Setup" %}</h1>
 
 <div class="prose max-w-none">
   <p class="text-lg text-gray-600 mb-6">
@@ -12,14 +13,14 @@
 
   <!-- Video 3: Server Configuration -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h3 class="text-xl font-semibold text-indigo-900 mb-2">📹 Video 3: Server Configuration</h3>
-    <p class="text-indigo-800 mb-4">Watch this video to learn how to configure your server with Nginx, Gunicorn, and SSL:</p>
+    <h3 class="text-xl font-semibold text-indigo-900 mb-2">{% trans "📹 Video 3: Server Configuration" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Watch this video to learn how to configure your server with Nginx, Gunicorn, and SSL:" %}</p>
     <div class="aspect-video max-w-3xl">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/29ynYh8bWHc?si=IHo1bdtK6ulAnIEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Server Setup</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "1. Server Setup" %}</h2>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Update system
 sudo apt update && sudo apt upgrade -y
@@ -32,12 +33,12 @@ sudo apt install nginx
 sudo apt install supervisor
 sudo apt install certbot python3-certbot-nginx</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Create Application User</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "2. Create Application User" %}</h2>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo adduser dripemails
 sudo usermod -aG www-data dripemails</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Configure Database</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "3. Configure Database" %}</h2>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Switch to postgres user
 sudo -u postgres psql
@@ -51,7 +52,7 @@ ALTER ROLE dripemails SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE dripemails TO dripemails;
 \q</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Deploy Application</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "4. Deploy Application" %}</h2>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Switch to application user
 sudo su - dripemails
@@ -81,9 +82,9 @@ python manage.py createsuperuser
 # Collect static files
 python manage.py collectstatic --noinput</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Configure Gunicorn</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "5. Configure Gunicorn" %}</h2>
 
-  <p class="text-gray-700 mb-4">Create <code>/etc/systemd/system/dripemails.service</code>:</p>
+  <p class="text-gray-700 mb-4">{% trans "Create" %} <code>/etc/systemd/system/dripemails.service</code>:</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>[Unit]
 Description=DripEmails Gunicorn Daemon
@@ -102,16 +103,16 @@ ExecStart=/home/dripemails/web/venv/bin/gunicorn \
 [Install]
 WantedBy=multi-user.target</code></pre>
 
-  <p class="text-gray-700 mb-4">Enable and start the service:</p>
+  <p class="text-gray-700 mb-4">{% trans "Enable and start the service:" %}</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo systemctl daemon-reload
 sudo systemctl enable dripemails
 sudo systemctl start dripemails
 sudo systemctl status dripemails</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Configure Nginx</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "6. Configure Nginx" %}</h2>
 
-  <p class="text-gray-700 mb-4">Create <code>/etc/nginx/sites-available/dripemails</code>:</p>
+  <p class="text-gray-700 mb-4">{% trans "Create" %} <code>/etc/nginx/sites-available/dripemails</code>:</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>server {
     listen 80;
@@ -133,28 +134,28 @@ sudo systemctl status dripemails</code></pre>
     }
 }</code></pre>
 
-  <p class="text-gray-700 mb-4">Enable the site:</p>
+  <p class="text-gray-700 mb-4">{% trans "Enable the site:" %}</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo ln -s /etc/nginx/sites-available/dripemails /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Configure SSL with Let's Encrypt</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "7. Configure SSL with Let's Encrypt" %}</h2>
 
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com" %}</code></pre>
 
   <!-- Video 4: Email & Services -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h3 class="text-xl font-semibold text-indigo-900 mb-2">📹 Video 4: Email & Services</h3>
-    <p class="text-indigo-800 mb-4">Watch this video to learn how to configure Postfix, SMTP server, and email services:</p>
+    <h3 class="text-xl font-semibold text-indigo-900 mb-2">{% trans "📹 Video 4: Email & Services" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Watch this video to learn how to configure Postfix, SMTP server, and email services:" %}</p>
     <div class="aspect-video max-w-3xl">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/G7P6MeJMBoA?si=zq5RbAW6EvmxM3gI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Configure SMTP Server with Supervisord</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "8. Configure SMTP Server with Supervisord" %}</h2>
 
-  <p class="text-gray-700 mb-4">Create <code>/etc/supervisor/conf.d/dripemails-smtp.conf</code>:</p>
+  <p class="text-gray-700 mb-4">{% trans "Create" %} <code>/etc/supervisor/conf.d/dripemails-smtp.conf</code>:</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>[program:dripemails-smtp]
 command=/home/dripemails/web/venv/bin/python manage.py run_smtp_server --host 0.0.0.0 --port 1025 --save-to-db --log-to-file
@@ -170,7 +171,7 @@ environment=DJANGO_SETTINGS_MODULE="dripemails.settings"
 stopsignal=TERM
 stopwaitsecs=10</code></pre>
 
-  <p class="text-gray-700 mb-4">Start the SMTP server:</p>
+  <p class="text-gray-700 mb-4">{% trans "Start the SMTP server:" %}</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo supervisorctl reread
 sudo supervisorctl update
@@ -179,7 +180,7 @@ sudo supervisorctl status dripemails-smtp</code></pre>
 
   <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Configure Celery (Optional)</h2>
 
-  <p class="text-gray-700 mb-4">Create <code>/etc/supervisor/conf.d/dripemails-celery.conf</code>:</p>
+  <p class="text-gray-700 mb-4">{% trans "Create" %} <code>/etc/supervisor/conf.d/dripemails-celery.conf</code>:</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>[program:dripemails-celery-worker]
 command=/home/dripemails/web/venv/bin/celery -A dripemails worker -l info
@@ -199,7 +200,7 @@ autorestart=true
 redirect_stderr=true
 stdout_logfile=/var/log/supervisor/dripemails-celery-beat.log</code></pre>
 
-  <p class="text-gray-700 mb-4">Start Celery workers:</p>
+  <p class="text-gray-700 mb-4">{% trans "Start Celery workers:" %}</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>sudo supervisorctl reread
 sudo supervisorctl update
@@ -208,18 +209,18 @@ sudo supervisorctl start dripemails-celery-beat</code></pre>
 
   <!-- Video 5: Final Steps & Testing -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h3 class="text-xl font-semibold text-indigo-900 mb-2">📹 Video 5: Final Steps & Testing</h3>
-    <p class="text-indigo-800 mb-4">Watch this video to learn how to verify your deployment and test all services:</p>
+    <h3 class="text-xl font-semibold text-indigo-900 mb-2">{% trans "📹 Video 5: Final Steps & Testing" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Watch this video to learn how to verify your deployment and test all services:" %}</p>
     <div class="aspect-video max-w-3xl">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/N2bRx6JzzP0?si=2KZOr9uJf2RfZD83" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Verify Deployment</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "10. Verify Deployment" %}</h2>
 
   <div class="space-y-4 mb-8">
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Check Services</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "✅ Check Services" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check Gunicorn
 sudo systemctl status dripemails
 
@@ -231,17 +232,17 @@ sudo supervisorctl status</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Test Application</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "✅ Test Application" %}</h3>
       <ol class="list-decimal pl-6 text-gray-700 space-y-2">
         <li>Visit https://yourdomain.com</li>
-        <li>Log in with your superuser credentials</li>
-        <li>Create a test campaign</li>
-        <li>Send a test email</li>
+        <li>{% trans "Log in with your superuser credentials" %}</li>
+        <li>{% trans "Create a test campaign" %}</li>
+        <li>{% trans "Send a test email" %}</li>
       </ol>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Maintenance Commands</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Maintenance Commands" %}</h2>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Restart application
 sudo systemctl restart dripemails
@@ -258,7 +259,7 @@ sudo supervisorctl tail dripemails-smtp
 tail -f /var/log/nginx/access.log</code></pre>
 
   <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
-    <h3 class="text-lg font-semibold text-green-900 mb-2">🎉 Deployment Complete!</h3>
+    <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "🎉 Deployment Complete!" %}</h3>
     <p class="text-green-800">
       Your DripEmails.org installation is now running in production with SSL, 
       process management, and email services.

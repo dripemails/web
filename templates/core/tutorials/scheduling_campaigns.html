@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Scheduling Campaigns - DripEmails.org{% endblock %}
 {% block content %}
@@ -8,96 +9,96 @@
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">⏰ Scheduling Campaigns</h1>
-      <p class="text-xl text-white text-opacity-90">Perfect timing for maximum engagement</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 12 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "⏰ Scheduling Campaigns" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Perfect timing for maximum engagement" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 12 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Why Timing Matters</h2>
-        <p class="text-gray-700 mb-6">Sending emails at the right time can significantly improve open rates and engagement. This guide covers everything about scheduling your campaigns effectively.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Why Timing Matters" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Sending emails at the right time can significantly improve open rates and engagement. This guide covers everything about scheduling your campaigns effectively." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> The best send time varies by audience. Test different times and use analytics to find your optimal window.</p>
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> The best send time varies by audience. Test different times and use analytics to find your optimal window.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Times to Send</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Times to Send" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
-          <p class="text-gray-700 mb-4"><strong>General Guidelines:</strong></p>
+          <p class="text-gray-700 mb-4"><strong>{% trans "General Guidelines:" %}</strong></p>
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>B2B:</strong> Tuesday-Thursday, 10 AM - 2 PM</li>
-            <li><strong>B2C:</strong> Weekends, 8-10 AM or 6-8 PM</li>
-            <li><strong>Newsletters:</strong> Weekend mornings</li>
-            <li><strong>Promotional:</strong> Weekdays, late morning</li>
+            <li><strong>B2B:</strong> {% trans "Tuesday-Thursday, 10 AM - 2 PM" %}</li>
+            <li><strong>B2C:</strong> {% trans "Weekends, 8-10 AM or 6-8 PM" %}</li>
+            <li><strong>{% trans "Newsletters:" %}</strong> Weekend mornings</li>
+            <li><strong>{% trans "Promotional:" %}</strong> Weekdays, late morning</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">How to Schedule a Campaign</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "How to Schedule a Campaign" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Create your campaign as usual</li>
-          <li>Instead of "Send Now", click <strong>"Schedule"</strong></li>
-          <li>Select your desired date and time</li>
+          <li>{% trans "Create your campaign as usual" %}</li>
+          <li>{% trans "Instead of "Send Now", click" %} <strong>"Schedule"</strong></li>
+          <li>{% trans "Select your desired date and time" %}</li>
           <li>Choose the time zone (recipient's or yours)</li>
-          <li>Review and confirm the schedule</li>
+          <li>{% trans "Review and confirm the schedule" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Time Zone Options</h3>
-        <p class="text-gray-700 mb-4">You have two options:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Time Zone Options" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "You have two options:" %}</p>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Recipient's Time Zone</h4>
-            <p class="text-gray-700">Send at the same local time for each subscriber. Best for global audiences.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Recipient's Time Zone" %}</h4>
+            <p class="text-gray-700">{% trans "Send at the same local time for each subscriber. Best for global audiences." %}</p>
           </div>
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Your Time Zone</h4>
-            <p class="text-gray-700">Send at one specific time. Best for local or regional audiences.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Your Time Zone" %}</h4>
+            <p class="text-gray-700">{% trans "Send at one specific time. Best for local or regional audiences." %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Managing Scheduled Campaigns</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Managing Scheduled Campaigns" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>View scheduled:</strong> Go to Campaigns → Scheduled</li>
-          <li><strong>Edit:</strong> Click the campaign and modify (before send time)</li>
-          <li><strong>Reschedule:</strong> Change the send time</li>
-          <li><strong>Cancel:</strong> Stop a scheduled campaign from sending</li>
-          <li><strong>Send now:</strong> Override schedule and send immediately</li>
+          <li><strong>{% trans "View scheduled:" %}</strong> Go to Campaigns → Scheduled</li>
+          <li><strong>{% trans "Edit:" %}</strong> Click the campaign and modify (before send time)</li>
+          <li><strong>{% trans "Reschedule:" %}</strong> Change the send time</li>
+          <li><strong>{% trans "Cancel:" %}</strong> Stop a scheduled campaign from sending</li>
+          <li><strong>{% trans "Send now:" %}</strong> Override schedule and send immediately</li>
         </ul>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Changes to scheduled campaigns must be made at least 30 minutes before the send time.</p>
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> Changes to scheduled campaigns must be made at least 30 minutes before the send time.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Scheduling Features</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Advanced Scheduling Features" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-3 text-gray-700">
-            <li><strong>Recurring Campaigns:</strong> Automatically send weekly or monthly</li>
-            <li><strong>Send Time Optimization:</strong> AI picks the best time for each subscriber</li>
-            <li><strong>Throttling:</strong> Spread sends over hours to avoid spam filters</li>
-            <li><strong>Batch Sending:</strong> Send in groups to manage server load</li>
+            <li><strong>{% trans "Recurring Campaigns:" %}</strong> Automatically send weekly or monthly</li>
+            <li><strong>{% trans "Send Time Optimization:" %}</strong> AI picks the best time for each subscriber</li>
+            <li><strong>{% trans "Throttling:" %}</strong> Spread sends over hours to avoid spam filters</li>
+            <li><strong>{% trans "Batch Sending:" %}</strong> Send in groups to manage server load</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Schedule at least 24 hours in advance when possible</li>
-          <li>Avoid holidays and major events</li>
-          <li>Consider your audience's work schedule</li>
-          <li>Test different days and times</li>
-          <li>Use recipient time zones for better engagement</li>
-          <li>Schedule follow-ups strategically</li>
+          <li>{% trans "Schedule at least 24 hours in advance when possible" %}</li>
+          <li>{% trans "Avoid holidays and major events" %}</li>
+          <li>{% trans "Consider your audience's work schedule" %}</li>
+          <li>{% trans "Test different days and times" %}</li>
+          <li>{% trans "Use recipient time zones for better engagement" %}</li>
+          <li>{% trans "Schedule follow-ups strategically" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:tutorial_creating_campaign' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
-            <h4 class="font-semibold text-indigo-900">Creating Your First Campaign</h4>
-            <p class="text-sm text-indigo-700">Learn campaign basics</p>
+            <h4 class="font-semibold text-indigo-900">{% trans "Creating Your First Campaign" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Learn campaign basics" %}</p>
           </a>
           <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
-            <h4 class="font-semibold text-purple-900">Understanding Email Analytics</h4>
-            <p class="text-sm text-purple-700">Analyze campaign performance</p>
+            <h4 class="font-semibold text-purple-900">{% trans "Understanding Email Analytics" %}</h4>
+            <p class="text-sm text-purple-700">{% trans "Analyze campaign performance" %}</p>
           </a>
         </div>
       </div>

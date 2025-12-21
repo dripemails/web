@@ -1,9 +1,10 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 
 {% block doc_title %}Deployment Guide{% endblock %}
 
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Deployment Guide</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Deployment Guide" %}</h1>
 
 <div class="prose max-w-none">
   <p class="text-lg text-gray-600 mb-6">
@@ -11,7 +12,7 @@
   </p>
 
   <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-    <h3 class="text-lg font-semibold text-blue-900 mb-2">📋 Deployment Overview</h3>
+    <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "📋 Deployment Overview" %}</h3>
     <p class="text-blue-800">
       This section covers everything you need to deploy DripEmails.org from development to production, 
       including server setup, configuration, and best practices.
@@ -20,13 +21,13 @@
 
   <!-- Video Tutorial Series -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-indigo-900 mb-4">📹 Complete Video Tutorial Series</h2>
-    <p class="text-indigo-800 mb-4">Watch our comprehensive 5-part video series on deploying DripEmails.org with Django, PostgreSQL, Postfix, Gunicorn, and more on Ubuntu Server:</p>
+    <h2 class="text-2xl font-semibold text-indigo-900 mb-4">{% trans "📹 Complete Video Tutorial Series" %}</h2>
+    <p class="text-indigo-800 mb-4">{% trans "Watch our comprehensive 5-part video series on deploying DripEmails.org with Django, PostgreSQL, Postfix, Gunicorn, and more on Ubuntu Server:" %}</p>
     
     <div class="grid md:grid-cols-2 gap-6">
       <!-- Video 1 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 1: Introduction & Setup</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 1: Introduction & Setup" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/sc22fRIDzMc?si=JBwAWyy4V2VpkuyO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -34,7 +35,7 @@
 
       <!-- Video 2 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 2: Database & Configuration</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 2: Database & Configuration" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/PMHiIKwFuTY?si=R7SnNidaIzKQR5tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -42,7 +43,7 @@
 
       <!-- Video 3 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 3: Server Configuration</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 3: Server Configuration" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/29ynYh8bWHc?si=IHo1bdtK6ulAnIEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -50,7 +51,7 @@
 
       <!-- Video 4 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 4: Email & Services</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 4: Email & Services" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/G7P6MeJMBoA?si=zq5RbAW6EvmxM3gI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -58,7 +59,7 @@
 
       <!-- Video 5 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 5: Final Steps & Testing</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 5: Final Steps & Testing" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/N2bRx6JzzP0?si=2KZOr9uJf2RfZD83" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -66,47 +67,47 @@
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Deployment Topics</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Deployment Topics" %}</h2>
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
     <a href="{% url 'core:docs_deployment_prerequisites' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">📋 Prerequisites</h3>
-      <p class="text-gray-600">System requirements and dependencies needed before deployment</p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "📋 Prerequisites" %}</h3>
+      <p class="text-gray-600">{% trans "System requirements and dependencies needed before deployment" %}</p>
     </a>
 
     <a href="{% url 'core:docs_deployment_installation' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">⚙️ Installation</h3>
-      <p class="text-gray-600">Step-by-step installation guide for setting up the application</p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "⚙️ Installation" %}</h3>
+      <p class="text-gray-600">{% trans "Step-by-step installation guide for setting up the application" %}</p>
     </a>
 
     <a href="{% url 'core:docs_deployment_configuration' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">🔧 Configuration</h3>
-      <p class="text-gray-600">Configure environment variables, database, and email settings</p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🔧 Configuration" %}</h3>
+      <p class="text-gray-600">{% trans "Configure environment variables, database, and email settings" %}</p>
     </a>
 
     <a href="{% url 'core:docs_deployment_production' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">🚀 Production Setup</h3>
-      <p class="text-gray-600">Deploy to production with Nginx, SSL, and process management</p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🚀 Production Setup" %}</h3>
+      <p class="text-gray-600">{% trans "Deploy to production with Nginx, SSL, and process management" %}</p>
     </a>
 
     <a href="{% url 'core:docs_deployment_troubleshooting' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">🔍 Troubleshooting</h3>
-      <p class="text-gray-600">Common issues and solutions for deployment problems</p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🔍 Troubleshooting" %}</h3>
+      <p class="text-gray-600">{% trans "Common issues and solutions for deployment problems" %}</p>
     </a>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Quick Deployment Options</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Quick Deployment Options" %}</h2>
 
   <div class="space-y-4 mb-8">
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">🐳 Docker Deployment</h3>
-      <p class="text-gray-700 mb-3">Easiest way to deploy with Docker Compose:</p>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>docker-compose up -d</code></pre>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "🐳 Docker Deployment" %}</h3>
+      <p class="text-gray-700 mb-3">{% trans "Easiest way to deploy with Docker Compose:" %}</p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "docker-compose up -d" %}</code></pre>
     </div>
 
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">🖥️ Traditional Server</h3>
-      <p class="text-gray-700 mb-3">Deploy on Ubuntu/Debian with Nginx:</p>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "🖥️ Traditional Server" %}</h3>
+      <p class="text-gray-700 mb-3">{% trans "Deploy on Ubuntu/Debian with Nginx:" %}</p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>git clone https://github.com/dripemails/web.git
 cd web
 python -m venv venv
@@ -117,26 +118,26 @@ python manage.py collectstatic</code></pre>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Environment-Specific Notes</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Environment-Specific Notes" %}</h2>
 
   <div class="space-y-4">
     <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
-      <h3 class="text-lg font-semibold text-yellow-900 mb-2">🪟 Windows Development</h3>
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "🪟 Windows Development" %}</h3>
       <ul class="list-disc pl-6 text-yellow-800 space-y-1">
-        <li>Redis is optional - works without it</li>
-        <li>Celery auto-disables in DEBUG mode</li>
-        <li>SMTP authentication disabled by default</li>
-        <li>Perfect for local testing</li>
+        <li>{% trans "Redis is optional - works without it" %}</li>
+        <li>{% trans "Celery auto-disables in DEBUG mode" %}</li>
+        <li>{% trans "SMTP authentication disabled by default" %}</li>
+        <li>{% trans "Perfect for local testing" %}</li>
       </ul>
     </div>
 
     <div class="bg-green-50 border-l-4 border-green-500 p-6">
-      <h3 class="text-lg font-semibold text-green-900 mb-2">🐧 Linux Production</h3>
+      <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "🐧 Linux Production" %}</h3>
       <ul class="list-disc pl-6 text-green-800 space-y-1">
-        <li>Redis recommended for Celery</li>
-        <li>Nginx for reverse proxy</li>
-        <li>Supervisord for process management</li>
-        <li>SSL/TLS with Let's Encrypt</li>
+        <li>{% trans "Redis recommended for Celery" %}</li>
+        <li>{% trans "Nginx for reverse proxy" %}</li>
+        <li>{% trans "Supervisord for process management" %}</li>
+        <li>{% trans "SSL/TLS with Let's Encrypt" %}</li>
       </ul>
     </div>
   </div>

@@ -1,23 +1,24 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 {% block doc_title %}Email Templates{% endblock %}
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Email Templates</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Email Templates" %}</h1>
 <div class="prose max-w-none">
-  <p class="text-lg text-gray-600 mb-6">Design beautiful, responsive email templates with our editor.</p>
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Template Editor</h2>
-  <p class="text-gray-700 mb-4">Use our rich text editor powered by Quill.js for advanced formatting:</p>
+  <p class="text-lg text-gray-600 mb-6">{% trans "Design beautiful, responsive email templates with our editor." %}</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Template Editor" %}</h2>
+  <p class="text-gray-700 mb-4">{% trans "Use our rich text editor powered by Quill.js for advanced formatting:" %}</p>
   <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-6">
-    <li>Bold, italic, underline</li>
-    <li>Headings and lists</li>
-    <li>Links and images</li>
-    <li>Colors and alignment</li>
-    <li>Code blocks</li>
+    <li>{% trans "Bold, italic, underline" %}</li>
+    <li>{% trans "Headings and lists" %}</li>
+    <li>{% trans "Links and images" %}</li>
+    <li>{% trans "Colors and alignment" %}</li>
+    <li>{% trans "Code blocks" %}</li>
   </ul>
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">AI-Powered Editing</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "AI-Powered Editing" %}</h2>
   <p class="text-gray-700 mb-4">Use AI to generate and improve your email content. See <a href="{% url 'core:docs_ai_features' %}" class="text-indigo-600 hover:underline">AI Features</a> for details.</p>
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">HTML & Plain Text</h2>
-  <p class="text-gray-700 mb-4">DripEmails automatically generates plain text versions of your HTML emails for better deliverability.</p>
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Dynamic Content</h2>
-  <p class="text-gray-700 mb-4">Personalize emails with subscriber data using template variables.</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "HTML & Plain Text" %}</h2>
+  <p class="text-gray-700 mb-4">{% trans "DripEmails automatically generates plain text versions of your HTML emails for better deliverability." %}</p>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Dynamic Content" %}</h2>
+  <p class="text-gray-700 mb-4">{% trans "Personalize emails with subscriber data using template variables." %}</p>
 </div>
 {% endblock %}

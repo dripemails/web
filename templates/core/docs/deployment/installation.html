@@ -1,9 +1,10 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 
 {% block doc_title %}Installation Guide{% endblock %}
 
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Installation Guide</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Installation Guide" %}</h1>
 
 <div class="prose max-w-none">
   <p class="text-lg text-gray-600 mb-6">
@@ -12,13 +13,13 @@
 
   <!-- Video Tutorial Series -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h2 class="text-xl font-semibold text-indigo-900 mb-4">📹 Video Tutorial Series</h2>
-    <p class="text-indigo-800 mb-4">Watch our step-by-step video series on deploying DripEmails.org with Django, PostgreSQL, Postfix, Gunicorn, and more on Ubuntu Server:</p>
+    <h2 class="text-xl font-semibold text-indigo-900 mb-4">{% trans "📹 Video Tutorial Series" %}</h2>
+    <p class="text-indigo-800 mb-4">{% trans "Watch our step-by-step video series on deploying DripEmails.org with Django, PostgreSQL, Postfix, Gunicorn, and more on Ubuntu Server:" %}</p>
     
     <div class="grid md:grid-cols-2 gap-6">
       <!-- Video 1 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 1: Introduction & Setup</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 1: Introduction & Setup" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/sc22fRIDzMc?si=JBwAWyy4V2VpkuyO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -26,7 +27,7 @@
 
       <!-- Video 2 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 2: Database & Configuration</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 2: Database & Configuration" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/PMHiIKwFuTY?si=R7SnNidaIzKQR5tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -34,7 +35,7 @@
 
       <!-- Video 3 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 3: Server Configuration</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 3: Server Configuration" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/29ynYh8bWHc?si=IHo1bdtK6ulAnIEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -42,7 +43,7 @@
 
       <!-- Video 4 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 4: Email & Services</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 4: Email & Services" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/G7P6MeJMBoA?si=zq5RbAW6EvmxM3gI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -50,7 +51,7 @@
 
       <!-- Video 5 -->
       <div class="bg-white rounded-lg p-4 shadow-sm">
-        <h4 class="font-semibold text-gray-900 mb-2">Video 5: Final Steps & Testing</h4>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "Video 5: Final Steps & Testing" %}</h4>
         <div class="aspect-video mb-2">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/N2bRx6JzzP0?si=2KZOr9uJf2RfZD83" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
         </div>
@@ -58,57 +59,57 @@
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Clone the Repository</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "1. Clone the Repository" %}</h2>
   
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>git clone https://github.com/dripemails/web.git
 cd web</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Set Up Python Environment</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "2. Set Up Python Environment" %}</h2>
   
   <div class="space-y-4 mb-6">
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Linux/macOS</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Linux/macOS" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt</code></pre>
     </div>
 
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Windows</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Windows" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt</code></pre>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Configure Environment</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "3. Configure Environment" %}</h2>
   
-  <p class="text-gray-700 mb-4">Create a <code>.env</code> file with your configuration:</p>
+  <p class="text-gray-700 mb-4">{% trans "Create a" %} <code>.env</code> file with your configuration:</p>
   
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>cp docs/env.example .env</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "cp docs/env.example .env" %}</code></pre>
 
   <p class="text-gray-700 mb-4">Edit <code>.env</code> with your settings (see <a href="{% url 'core:docs_deployment_configuration' %}" class="text-indigo-600 hover:underline">Configuration Guide</a>)</p>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Run Migrations</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "4. Run Migrations" %}</h2>
   
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py migrate</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "python manage.py migrate" %}</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Create Superuser</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "5. Create Superuser" %}</h2>
   
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py createsuperuser</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "python manage.py createsuperuser" %}</code></pre>
 
-  <p class="text-gray-700 mb-6">Follow the prompts to create your admin account.</p>
+  <p class="text-gray-700 mb-6">{% trans "Follow the prompts to create your admin account." %}</p>
 
   <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Collect Static Files (Production Only)</h2>
   
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py collectstatic</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "python manage.py collectstatic" %}</code></pre>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Start the Development Server</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "7. Start the Development Server" %}</h2>
   
-  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>python manage.py runserver</code></pre>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "python manage.py runserver" %}</code></pre>
 
   <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
-    <h3 class="text-lg font-semibold text-green-900 mb-2">✅ Success!</h3>
+    <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "✅ Success!" %}</h3>
     <p class="text-green-800">
       Visit <a href="http://127.0.0.1:8000" class="underline font-semibold">http://127.0.0.1:8000</a> to see your DripEmails installation.
     </p>
@@ -116,33 +117,33 @@ pip install -r requirements.txt</code></pre>
 
   <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Set Up AI Features (Optional)</h2>
   
-  <p class="text-gray-700 mb-4">To enable AI-powered email generation:</p>
+  <p class="text-gray-700 mb-4">{% trans "To enable AI-powered email generation:" %}</p>
 
   <div class="space-y-4 mb-6">
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Get Hugging Face API Key</h3>
-      <p class="text-gray-700 mb-2">Sign up at <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">https://huggingface.co/settings/tokens</a></p>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Get Hugging Face API Key" %}</h3>
+      <p class="text-gray-700 mb-2">{% trans "Sign up at" %} <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">https://huggingface.co/settings/tokens</a></p>
     </div>
 
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Windows PowerShell</h3>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>$env:HUGGINGFACE_API_KEY = "hf_your_token_here"</code></pre>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Windows PowerShell" %}</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "$env:HUGGINGFACE_API_KEY = "hf_your_token_here"" %}</code></pre>
     </div>
 
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Linux/macOS</h3>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>export HUGGINGFACE_API_KEY="hf_your_token_here"</code></pre>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Linux/macOS" %}</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "export HUGGINGFACE_API_KEY="hf_your_token_here"" %}</code></pre>
     </div>
 
     <div>
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Or add to .env file</h3>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>HUGGINGFACE_API_KEY=hf_your_token_here</code></pre>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Or add to .env file" %}</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "HUGGINGFACE_API_KEY=hf_your_token_here" %}</code></pre>
     </div>
   </div>
 
   <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Start SMTP Server (Optional)</h2>
   
-  <p class="text-gray-700 mb-4">For local email testing:</p>
+  <p class="text-gray-700 mb-4">{% trans "For local email testing:" %}</p>
 
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Basic local development (default port 1025)
 python manage.py run_smtp_server
@@ -154,33 +155,33 @@ python manage.py run_smtp_server --port 2525
 python manage.py run_smtp_server --debug</code></pre>
 
   <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-    <h3 class="text-lg font-semibold text-blue-900 mb-2">💡 Windows Development</h3>
+    <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "💡 Windows Development" %}</h3>
     <p class="text-blue-800">
       On Windows with DEBUG=True:
     </p>
     <ul class="list-disc pl-6 text-blue-800 mt-2 space-y-1">
-      <li>Redis is NOT required</li>
-      <li>Celery automatically disables</li>
-      <li>SMTP authentication disabled by default</li>
+      <li>{% trans "Redis is NOT required" %}</li>
+      <li>{% trans "Celery automatically disables" %}</li>
+      <li>{% trans "SMTP authentication disabled by default" %}</li>
       <li>Emails send immediately (synchronously)</li>
     </ul>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Verification Steps</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Verification Steps" %}</h2>
 
   <div class="space-y-4 mb-8">
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Check Installation</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "✅ Check Installation" %}</h3>
       <ol class="list-decimal pl-6 text-gray-700 space-y-2">
-        <li>Visit <a href="http://127.0.0.1:8000" class="text-indigo-600 hover:underline">http://127.0.0.1:8000</a></li>
-        <li>Log in with your superuser credentials</li>
-        <li>Navigate to the dashboard</li>
-        <li>Try creating a test campaign</li>
+        <li>{% trans "Visit" %} <a href="http://127.0.0.1:8000" class="text-indigo-600 hover:underline">http://127.0.0.1:8000</a></li>
+        <li>{% trans "Log in with your superuser credentials" %}</li>
+        <li>{% trans "Navigate to the dashboard" %}</li>
+        <li>{% trans "Try creating a test campaign" %}</li>
       </ol>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">✅ Test Email Sending</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "✅ Test Email Sending" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>python manage.py shell
 
 >>> from django.core.mail import send_mail
@@ -188,12 +189,12 @@ python manage.py run_smtp_server --debug</code></pre>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Common Installation Issues</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Common Installation Issues" %}</h2>
 
   <div class="space-y-4 mb-8">
     <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
-      <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ ModuleNotFoundError</h3>
-      <p class="text-yellow-800 mb-2">Make sure your virtual environment is activated:</p>
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "⚠️ ModuleNotFoundError" %}</h3>
+      <p class="text-yellow-800 mb-2">{% trans "Make sure your virtual environment is activated:" %}</p>
       <pre class="bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto text-sm"><code># Linux/macOS
 source venv/bin/activate
 
@@ -202,13 +203,13 @@ venv\Scripts\activate</code></pre>
     </div>
 
     <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
-      <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ Database Connection Error</h3>
-      <p class="text-yellow-800">Check your database settings in <code>.env</code> file</p>
+      <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "⚠️ Database Connection Error" %}</h3>
+      <p class="text-yellow-800">{% trans "Check your database settings in" %} <code>.env</code> file</p>
     </div>
 
     <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
       <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚠️ Permission Denied (Port 25)</h3>
-      <p class="text-yellow-800">Use port 1025 for development instead of port 25 (requires root)</p>
+      <p class="text-yellow-800">{% trans "Use port 1025 for development instead of port 25 (requires root)" %}</p>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Quick Start Guide - DripEmails.org{% endblock %}
+{% block title %}{% trans "Quick Start Guide" %} - DripEmails.org{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-50">
@@ -10,12 +10,12 @@
     <div class="container mx-auto px-4">
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-green-100 font-medium">
-          ← Back to Tutorials
+          ← {% trans "Back to Tutorials" %}
         </a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">📖 Quick Start Guide</h1>
-      <p class="text-xl text-green-100">Get up and running with DripEmails in under 6 minutes</p>
-      <p class="text-green-100 mt-2">⏱️ 5 min read</p>
+      <h1 class="text-4xl font-bold mb-4">📖 {% trans "Quick Start Guide" %}</h1>
+      <p class="text-xl text-green-100">{% trans "Get up and running with DripEmails in under 6 minutes" %}</p>
+      <p class="text-green-100 mt-2">⏱️ {% trans "5 min read" %}</p>
     </div>
   </div>
 
@@ -25,9 +25,11 @@
       <!-- Introduction -->
       <div class="prose max-w-none mb-8">
         <p class="text-lg text-gray-700 leading-relaxed">
+          {% blocktrans %}
           Welcome to DripEmails! This guide will walk you through the essential steps to get your account set up 
           and send your first email campaign. By the end of this tutorial, you'll have created an account, 
           added subscribers, and sent your first campaign.
+          {% endblocktrans %}
         </p>
       </div>
 
@@ -35,20 +37,20 @@
       <section class="mb-12">
         <div class="flex items-center mb-6">
           <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">1</div>
-          <h2 class="text-2xl font-bold text-gray-900">Create Your Account</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{% trans "Create Your Account" %}</h2>
         </div>
         <div class="pl-16">
           <p class="text-gray-700 mb-4">
-            First, you'll need to create a free account on DripEmails.org:
+            {% trans "First, you'll need to create a free account on DripEmails.org:" %}
           </p>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-4">
-            <li>Navigate to the <a href="{% url 'account_signup' %}" class="text-indigo-600 hover:underline">Sign Up page</a></li>
-            <li>Enter your email address and create a strong password</li>
-            <li>Verify your email address by clicking the link sent to your inbox</li>
-            <li>Log in to your new account</li>
+            <li>{% trans "Navigate to the" %} <a href="{% url 'account_signup' %}" class="text-indigo-600 hover:underline">{% trans "Sign Up page" %}</a></li>
+            <li>{% trans "Enter your email address and create a strong password" %}</li>
+            <li>{% trans "Verify your email address by clicking the link sent to your inbox" %}</li>
+            <li>{% trans "Log in to your new account" %}</li>
           </ol>
           <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-            <p class="text-blue-800"><strong>💡 Pro Tip:</strong> Use a work email address to keep your campaigns organized and professional.</p>
+            <p class="text-blue-800"><strong>💡 {% trans "Pro Tip:" %}</strong> {% trans "Use a work email address to keep your campaigns organized and professional." %}</p>
           </div>
         </div>
       </section>
@@ -57,18 +59,18 @@
       <section class="mb-12">
         <div class="flex items-center mb-6">
           <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">2</div>
-          <h2 class="text-2xl font-bold text-gray-900">Access Your Dashboard</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{% trans "Access Your Dashboard" %}</h2>
         </div>
         <div class="pl-16">
           <p class="text-gray-700 mb-4">
-            Once logged in, you'll be taken to your dashboard. This is your central hub for managing campaigns, subscribers, and analytics.
+            {% trans "Once logged in, you'll be taken to your dashboard. This is your central hub for managing campaigns, subscribers, and analytics." %}
           </p>
-          <p class="text-gray-700 mb-4">Key areas of the dashboard include:</p>
+          <p class="text-gray-700 mb-4">{% trans "Key areas of the dashboard include:" %}</p>
           <ul class="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-            <li><strong>Campaigns:</strong> View and manage all your email campaigns</li>
-            <li><strong>Lists:</strong> Organize your subscribers into different lists</li>
-            <li><strong>Analytics:</strong> Track campaign performance and engagement</li>
-            <li><strong>Quick Actions:</strong> Create new campaigns or add subscribers</li>
+            <li><strong>{% trans "Campaigns:" %}</strong> {% trans "View and manage all your email campaigns" %}</li>
+            <li><strong>{% trans "Lists:" %}</strong> {% trans "Organize your subscribers into different lists" %}</li>
+            <li><strong>{% trans "Analytics:" %}</strong> {% trans "Track campaign performance and engagement" %}</li>
+            <li><strong>{% trans "Quick Actions:" %}</strong> {% trans "Create new campaigns or add subscribers" %}</li>
           </ul>
         </div>
       </section>
@@ -77,21 +79,21 @@
       <section class="mb-12">
         <div class="flex items-center mb-6">
           <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">3</div>
-          <h2 class="text-2xl font-bold text-gray-900">Create Your First Subscriber List</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{% trans "Create Your First Subscriber List" %}</h2>
         </div>
         <div class="pl-16">
           <p class="text-gray-700 mb-4">
-            Before sending emails, you need subscribers! Let's create your first list:
+            {% trans "Before sending emails, you need subscribers! Let's create your first list:" %}
           </p>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-4">
-            <li>Click on <strong>"Subscribers"</strong> in the navigation menu</li>
-            <li>Click the <strong>"New List"</strong> button</li>
-            <li>Give your list a name (e.g., "Newsletter Subscribers")</li>
-            <li>Add a description (optional but recommended)</li>
-            <li>Click <strong>"Create List"</strong></li>
+            <li>{% trans "Click on" %} <strong>"{% trans "Subscribers" %}"</strong> {% trans "in the navigation menu" %}</li>
+            <li>{% trans "Click the" %} <strong>"{% trans "New List" %}"</strong> {% trans "button" %}</li>
+            <li>{% blocktrans %}Give your list a name (e.g., "Newsletter Subscribers"){% endblocktrans %}</li>
+            <li>{% trans "Add a description (optional but recommended)" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "Create List" %}"</strong></li>
           </ol>
           <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
-            <p class="text-yellow-800"><strong>⚠️ Note:</strong> You can create multiple lists to segment your audience (e.g., customers, prospects, partners).</p>
+            <p class="text-yellow-800"><strong>⚠️ {% trans "Note:" %}</strong> {% trans "You can create multiple lists to segment your audience (e.g., customers, prospects, partners)." %}</p>
           </div>
         </div>
       </section>
@@ -100,27 +102,27 @@
       <section class="mb-12">
         <div class="flex items-center mb-6">
           <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">4</div>
-          <h2 class="text-2xl font-bold text-gray-900">Add Subscribers</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{% trans "Add Subscribers" %}</h2>
         </div>
         <div class="pl-16">
           <p class="text-gray-700 mb-4">
-            Now let's add some subscribers to your list. You have two options:
+            {% trans "Now let's add some subscribers to your list. You have two options:" %}
           </p>
           
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Option A: Add Manually</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Option A: Add Manually" %}</h3>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-6">
-            <li>Open your newly created list</li>
-            <li>Click <strong>"Add Subscriber"</strong></li>
-            <li>Enter the subscriber's email address and name</li>
-            <li>Click <strong>"Save"</strong></li>
+            <li>{% trans "Open your newly created list" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "Add Subscriber" %}"</strong></li>
+            <li>{% trans "Enter the subscriber's email address and name" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "Save" %}"</strong></li>
           </ol>
 
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Option B: Import from CSV</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Option B: Import from CSV" %}</h3>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-4">
-            <li>Prepare a CSV file with columns: email, first_name, last_name</li>
-            <li>Click <strong>"Import Subscribers"</strong></li>
-            <li>Upload your CSV file</li>
-            <li>Map the columns and click <strong>"Import"</strong></li>
+            <li>{% trans "Prepare a CSV file with columns: email, first_name, last_name" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "Import Subscribers" %}"</strong></li>
+            <li>{% trans "Upload your CSV file" %}</li>
+            <li>{% trans "Map the columns and click" %} <strong>"{% trans "Import" %}"</strong></li>
           </ol>
         </div>
       </section>
@@ -129,59 +131,59 @@
       <section class="mb-12">
         <div class="flex items-center mb-6">
           <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4">5</div>
-          <h2 class="text-2xl font-bold text-gray-900">Create Your First Campaign</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{% trans "Create Your First Campaign" %}</h2>
         </div>
         <div class="pl-16">
           <p class="text-gray-700 mb-4">
-            Time to create and send your first email campaign:
+            {% trans "Time to create and send your first email campaign:" %}
           </p>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-4">
-            <li>Navigate to <strong>"Campaigns"</strong> in the menu</li>
-            <li>Click <strong>"New Campaign"</strong></li>
-            <li>Enter a campaign name (e.g., "Welcome Email")</li>
-            <li>Select the list you created earlier</li>
-            <li>Write your email subject line</li>
-            <li>Use the email editor to compose your message</li>
-            <li>Preview your email to make sure it looks good</li>
-            <li>Click <strong>"Send Now"</strong> or <strong>"Schedule"</strong> for later</li>
+            <li>{% trans "Navigate to" %} <strong>"{% trans "Campaigns" %}"</strong> {% trans "in the menu" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "New Campaign" %}"</strong></li>
+            <li>{% blocktrans %}Enter a campaign name (e.g., "Welcome Email"){% endblocktrans %}</li>
+            <li>{% trans "Select the list you created earlier" %}</li>
+            <li>{% trans "Write your email subject line" %}</li>
+            <li>{% trans "Use the email editor to compose your message" %}</li>
+            <li>{% trans "Preview your email to make sure it looks good" %}</li>
+            <li>{% trans "Click" %} <strong>"{% trans "Send Now" %}"</strong> {% trans "or" %} <strong>"{% trans "Schedule" %}"</strong> {% trans "for later" %}</li>
           </ol>
           <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-            <p class="text-green-800"><strong>✅ Success!</strong> You've just sent your first email campaign with DripEmails!</p>
+            <p class="text-green-800"><strong>✅ {% trans "Success!" %}</strong> {% trans "You've just sent your first email campaign with DripEmails!" %}</p>
           </div>
         </div>
       </section>
 
       <!-- Next Steps -->
       <section class="mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">🎯 What's Next?</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">🎯 {% trans "What's Next?" %}</h2>
         <div class="grid md:grid-cols-2 gap-6">
           <a href="{% url 'core:docs_campaigns' %}" class="block bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">📧 Learn About Campaigns</h3>
-            <p class="text-gray-700">Discover advanced campaign features like drip sequences and scheduling</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">📧 {% trans "Learn About Campaigns" %}</h3>
+            <p class="text-gray-700">{% trans "Discover advanced campaign features like drip sequences and scheduling" %}</p>
           </a>
           <a href="{% url 'core:docs_ai_features' %}" class="block bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">🤖 Try AI Features</h3>
-            <p class="text-gray-700">Use AI to generate and optimize your email content automatically</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">🤖 {% trans "Try AI Features" %}</h3>
+            <p class="text-gray-700">{% trans "Use AI to generate and optimize your email content automatically" %}</p>
           </a>
           <a href="{% url 'core:docs_analytics' %}" class="block bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">📊 Track Performance</h3>
-            <p class="text-gray-700">Learn how to analyze opens, clicks, and campaign effectiveness</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">📊 {% trans "Track Performance" %}</h3>
+            <p class="text-gray-700">{% trans "Learn how to analyze opens, clicks, and campaign effectiveness" %}</p>
           </a>
           <a href="{% url 'core:docs_templates' %}" class="block bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">📝 Design Templates</h3>
-            <p class="text-gray-700">Create reusable email templates for consistent branding</p>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">📝 {% trans "Design Templates" %}</h3>
+            <p class="text-gray-700">{% trans "Create reusable email templates for consistent branding" %}</p>
           </a>
         </div>
       </section>
 
       <!-- Help Section -->
       <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded">
-        <h3 class="text-lg font-semibold text-indigo-900 mb-2">Need Help?</h3>
-        <p class="text-indigo-800 mb-4">If you run into any issues or have questions:</p>
+        <h3 class="text-lg font-semibold text-indigo-900 mb-2">{% trans "Need Help?" %}</h3>
+        <p class="text-indigo-800 mb-4">{% trans "If you run into any issues or have questions:" %}</p>
         <div class="flex gap-4">
-          <a href="{% url 'core:resource_documentation' %}" class="text-indigo-600 hover:underline font-medium">📚 Documentation</a>
-          <a href="{% url 'core:resource_community' %}" class="text-indigo-600 hover:underline font-medium">💬 Community</a>
-          <a href="{% url 'core:contact' %}" class="text-indigo-600 hover:underline font-medium">📧 Contact Support</a>
+          <a href="{% url 'core:resource_documentation' %}" class="text-indigo-600 hover:underline font-medium">📚 {% trans "Documentation" %}</a>
+          <a href="{% url 'core:resource_community' %}" class="text-indigo-600 hover:underline font-medium">💬 {% trans "Community" %}</a>
+          <a href="{% url 'core:contact' %}" class="text-indigo-600 hover:underline font-medium">📧 {% trans "Contact Support" %}</a>
         </div>
       </div>
     </div>

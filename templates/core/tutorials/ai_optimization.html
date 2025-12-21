@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}AI Email Revision & Optimization - DripEmails.org{% endblock %}
 {% block content %}
@@ -8,105 +9,105 @@
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">🔧 AI Email Revision & Optimization</h1>
-      <p class="text-xl text-white text-opacity-90">Improve existing emails with AI-powered suggestions</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 10 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "🔧 AI Email Revision & Optimization" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Improve existing emails with AI-powered suggestions" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 10 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">AI-Powered Email Improvement</h2>
-        <p class="text-gray-700 mb-6">Use AI to revise, optimize, and enhance your existing email content for better engagement and conversion rates.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "AI-Powered Email Improvement" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Use AI to revise, optimize, and enhance your existing email content for better engagement and conversion rates." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> AI optimization works best when you give it specific goals like "improve clarity" or "make it more persuasive".</p>
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> AI optimization works best when you give it specific goals like "improve clarity" or "make it more persuasive".</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">What AI Can Optimize</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "What AI Can Optimize" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>Clarity:</strong> Make your message easier to understand</li>
-            <li><strong>Conciseness:</strong> Reduce word count while keeping meaning</li>
-            <li><strong>Tone:</strong> Adjust formality, urgency, or friendliness</li>
-            <li><strong>Persuasiveness:</strong> Strengthen calls-to-action</li>
-            <li><strong>Grammar & spelling:</strong> Fix errors and improve flow</li>
-            <li><strong>Engagement:</strong> Make content more interesting</li>
+            <li><strong>{% trans "Clarity:" %}</strong> Make your message easier to understand</li>
+            <li><strong>{% trans "Conciseness:" %}</strong> Reduce word count while keeping meaning</li>
+            <li><strong>{% trans "Tone:" %}</strong> Adjust formality, urgency, or friendliness</li>
+            <li><strong>{% trans "Persuasiveness:" %}</strong> Strengthen calls-to-action</li>
+            <li><strong>{% trans "Grammar & spelling:" %}</strong> Fix errors and improve flow</li>
+            <li><strong>{% trans "Engagement:" %}</strong> Make content more interesting</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Using the AI Revision Feature</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Using the AI Revision Feature" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Select the text you want to improve in the email editor</li>
-          <li>Click the <strong>"Optimize with AI"</strong> button</li>
-          <li>Choose an optimization type or enter a custom instruction</li>
-          <li>Review the AI's suggested revision</li>
-          <li>Accept, reject, or manually combine with your original</li>
+          <li>{% trans "Select the text you want to improve in the email editor" %}</li>
+          <li>{% trans "Click the" %} <strong>"Optimize with AI"</strong> button</li>
+          <li>{% trans "Choose an optimization type or enter a custom instruction" %}</li>
+          <li>{% trans "Review the AI's suggested revision" %}</li>
+          <li>{% trans "Accept, reject, or manually combine with your original" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Optimization Types</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Optimization Types" %}</h3>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Make it Shorter</h4>
-            <p class="text-gray-700">Condense without losing key information. Perfect for mobile readers.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Make it Shorter" %}</h4>
+            <p class="text-gray-700">{% trans "Condense without losing key information. Perfect for mobile readers." %}</p>
           </div>
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Make it More Professional</h4>
-            <p class="text-gray-700">Elevate tone for B2B or formal communications.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Make it More Professional" %}</h4>
+            <p class="text-gray-700">{% trans "Elevate tone for B2B or formal communications." %}</p>
           </div>
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Make it More Casual</h4>
-            <p class="text-gray-700">Friendly, conversational tone for consumer brands.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Make it More Casual" %}</h4>
+            <p class="text-gray-700">{% trans "Friendly, conversational tone for consumer brands." %}</p>
           </div>
           <div class="border-l-4 border-orange-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Add Urgency</h4>
-            <p class="text-gray-700">Create FOMO for time-sensitive offers.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Add Urgency" %}</h4>
+            <p class="text-gray-700">{% trans "Create FOMO for time-sensitive offers." %}</p>
           </div>
           <div class="border-l-4 border-red-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Strengthen CTA</h4>
-            <p class="text-gray-700">Make call-to-action more compelling.</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Strengthen CTA" %}</h4>
+            <p class="text-gray-700">{% trans "Make call-to-action more compelling." %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Subject Line Optimization</h3>
-        <p class="text-gray-700 mb-4">Improve subject lines for higher open rates:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Subject Line Optimization" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Improve subject lines for higher open rates:" %}</p>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Enter your current subject line</li>
-          <li>Click <strong>"Optimize Subject Line"</strong></li>
-          <li>AI suggests 5 improved versions</li>
-          <li>Each optimized for: clarity, curiosity, urgency, or benefit</li>
-          <li>Choose the best or combine elements</li>
+          <li>{% trans "Enter your current subject line" %}</li>
+          <li>{% trans "Click" %} <strong>"Optimize Subject Line"</strong></li>
+          <li>{% trans "AI suggests 5 improved versions" %}</li>
+          <li>{% trans "Each optimized for: clarity, curiosity, urgency, or benefit" %}</li>
+          <li>{% trans "Choose the best or combine elements" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">A/B Testing with AI</h3>
-        <p class="text-gray-700 mb-4">Create variations for testing:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "A/B Testing with AI" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Create variations for testing:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ol class="list-decimal list-inside space-y-2 text-gray-700">
-            <li>Write your email as Version A</li>
-            <li>Use AI to create a variation with different approach</li>
-            <li>Test both versions with segment of your list</li>
-            <li>Send winning version to remaining subscribers</li>
-            <li>Learn which approach works best</li>
+            <li>{% trans "Write your email as Version A" %}</li>
+            <li>{% trans "Use AI to create a variation with different approach" %}</li>
+            <li>{% trans "Test both versions with segment of your list" %}</li>
+            <li>{% trans "Send winning version to remaining subscribers" %}</li>
+            <li>{% trans "Learn which approach works best" %}</li>
           </ol>
         </div>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> AI suggestions are starting points. Always verify they match your brand voice and message accuracy.</p>
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> AI suggestions are starting points. Always verify they match your brand voice and message accuracy.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Custom Optimization Prompts</h3>
-        <p class="text-gray-700 mb-4">Give AI specific instructions:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Custom Optimization Prompts" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Give AI specific instructions:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li>"Make this more benefit-focused, less feature-focused"</li>
-            <li>"Add more social proof and credibility"</li>
-            <li>"Simplify this for a non-technical audience"</li>
-            <li>"Make this sound more exciting and energetic"</li>
-            <li>"Remove jargon and use simpler language"</li>
+            <li>{% trans ""Make this more benefit-focused, less feature-focused"" %}</li>
+            <li>{% trans ""Add more social proof and credibility"" %}</li>
+            <li>{% trans ""Simplify this for a non-technical audience"" %}</li>
+            <li>{% trans ""Make this sound more exciting and energetic"" %}</li>
+            <li>{% trans ""Remove jargon and use simpler language"" %}</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Before & After Examples</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Before & After Examples" %}</h3>
         <div class="space-y-6 mb-6">
           <div>
             <p class="text-gray-700 mb-2"><strong>Original (Weak):</strong></p>
@@ -120,47 +121,47 @@
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Optimization Workflow</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Optimization Workflow" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li><strong>Draft:</strong> Write your email first (human creativity)</li>
-          <li><strong>AI Review:</strong> Let AI suggest improvements</li>
-          <li><strong>Selective Apply:</strong> Choose which suggestions to use</li>
-          <li><strong>Personal Touch:</strong> Add your unique voice back</li>
-          <li><strong>Final Review:</strong> Read through as a recipient would</li>
+          <li><strong>{% trans "Draft:" %}</strong> Write your email first (human creativity)</li>
+          <li><strong>{% trans "AI Review:" %}</strong> Let AI suggest improvements</li>
+          <li><strong>{% trans "Selective Apply:" %}</strong> Choose which suggestions to use</li>
+          <li><strong>{% trans "Personal Touch:" %}</strong> Add your unique voice back</li>
+          <li><strong>{% trans "Final Review:" %}</strong> Read through as a recipient would</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Use AI as a second opinion, not the final word</li>
-          <li>Optimize subject lines for your specific audience</li>
-          <li>Test AI-optimized content against your original</li>
-          <li>Don't over-optimize – maintain authenticity</li>
-          <li>Keep your brand voice even when using AI suggestions</li>
-          <li>Focus on one optimization goal at a time</li>
-          <li>Track performance to see if AI changes improve results</li>
+          <li>{% trans "Use AI as a second opinion, not the final word" %}</li>
+          <li>{% trans "Optimize subject lines for your specific audience" %}</li>
+          <li>{% trans "Test AI-optimized content against your original" %}</li>
+          <li>{% trans "Don't over-optimize – maintain authenticity" %}</li>
+          <li>{% trans "Keep your brand voice even when using AI suggestions" %}</li>
+          <li>{% trans "Focus on one optimization goal at a time" %}</li>
+          <li>{% trans "Track performance to see if AI changes improve results" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">When to Use AI Optimization</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "When to Use AI Optimization" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li>Your emails are too long</li>
-            <li>Open rates are declining</li>
-            <li>CTAs aren't getting clicks</li>
-            <li>Tone doesn't match your brand</li>
-            <li>You need fresh variations for testing</li>
-            <li>Content feels stale or repetitive</li>
+            <li>{% trans "Your emails are too long" %}</li>
+            <li>{% trans "Open rates are declining" %}</li>
+            <li>{% trans "CTAs aren't getting clicks" %}</li>
+            <li>{% trans "Tone doesn't match your brand" %}</li>
+            <li>{% trans "You need fresh variations for testing" %}</li>
+            <li>{% trans "Content feels stale or repetitive" %}</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:tutorial_ai_generation' %}" class="block p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition">
-            <h4 class="font-semibold text-teal-900">Generating Email Content with AI</h4>
-            <p class="text-sm text-teal-700">Create new content from scratch</p>
+            <h4 class="font-semibold text-teal-900">{% trans "Generating Email Content with AI" %}</h4>
+            <p class="text-sm text-teal-700">{% trans "Create new content from scratch" %}</p>
           </a>
           <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition">
-            <h4 class="font-semibold text-cyan-900">Understanding Email Analytics</h4>
-            <p class="text-sm text-cyan-700">Measure optimization impact</p>
+            <h4 class="font-semibold text-cyan-900">{% trans "Understanding Email Analytics" %}</h4>
+            <p class="text-sm text-cyan-700">{% trans "Measure optimization impact" %}</p>
           </a>
         </div>
       </div>

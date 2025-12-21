@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load i18n static %}
 
 {% block title %}{% if is_create %}{% trans "Create Footer" %}{% else %}{% trans "Edit Footer" %}{% endif %} - DripEmails.org{% endblock %}
@@ -91,8 +92,8 @@
                         {% if footer %}
                             {{ footer.html_content|safe }}
                         {% else %}
-                            <p>Thank you for subscribing to our newsletter!</p>
-                            <p>Best regards,<br>The Team</p>
+                            <p>{% trans "Thank you for subscribing to our newsletter!" %}</p>
+                            <p>Best regards,<br>{% trans "The Team" %}</p>
                         {% endif %}
                     </div>
                 </div>

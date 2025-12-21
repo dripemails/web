@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Optimizing Based on Data - DripEmails.org{% endblock %}
 {% block content %}
@@ -8,182 +9,182 @@
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">🎯 Optimizing Based on Data</h1>
-      <p class="text-xl text-white text-opacity-90">Turn analytics insights into actionable improvements</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 16 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "🎯 Optimizing Based on Data" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Turn analytics insights into actionable improvements" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 16 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Data-Driven Optimization</h2>
-        <p class="text-gray-700 mb-6">The best email marketers don't guess—they test, measure, and optimize based on what the data tells them. This guide shows you how.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Data-Driven Optimization" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "The best email marketers don't guess—they test, measure, and optimize based on what the data tells them. This guide shows you how." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Make one change at a time so you know exactly what caused improvement or decline.</p>
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> Make one change at a time so you know exactly what caused improvement or decline.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">The Optimization Cycle</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "The Optimization Cycle" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ol class="list-decimal list-inside space-y-3 text-gray-700">
-            <li><strong>Measure:</strong> Track current performance</li>
-            <li><strong>Analyze:</strong> Identify what's working and what isn't</li>
-            <li><strong>Hypothesize:</strong> Form theory about what to change</li>
-            <li><strong>Test:</strong> Implement change and measure results</li>
-            <li><strong>Learn:</strong> Analyze results and repeat</li>
+            <li><strong>{% trans "Measure:" %}</strong> Track current performance</li>
+            <li><strong>{% trans "Analyze:" %}</strong> Identify what's working and what isn't</li>
+            <li><strong>{% trans "Hypothesize:" %}</strong> Form theory about what to change</li>
+            <li><strong>{% trans "Test:" %}</strong> Implement change and measure results</li>
+            <li><strong>{% trans "Learn:" %}</strong> Analyze results and repeat</li>
           </ol>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Low Open Rates? Try These</h3>
-        <p class="text-gray-700 mb-4">If open rates are below 15%:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Low Open Rates? Try These" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "If open rates are below 15%:" %}</p>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-red-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Test Subject Lines</h4>
-            <p class="text-gray-700">A/B test different styles: questions, numbers, emojis, urgency, curiosity</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Test Subject Lines" %}</h4>
+            <p class="text-gray-700">{% trans "A/B test different styles: questions, numbers, emojis, urgency, curiosity" %}</p>
           </div>
           <div class="border-l-4 border-orange-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Optimize Send Times</h4>
-            <p class="text-gray-700">Test Tuesday vs. Thursday, 10 AM vs. 2 PM, find your audience's sweet spot</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Optimize Send Times" %}</h4>
+            <p class="text-gray-700">{% trans "Test Tuesday vs. Thursday, 10 AM vs. 2 PM, find your audience's sweet spot" %}</p>
           </div>
           <div class="border-l-4 border-yellow-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Improve From Name</h4>
-            <p class="text-gray-700">Test company name vs. person's name vs. combination</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Improve From Name" %}</h4>
+            <p class="text-gray-700">{% trans "Test company name vs. person's name vs. combination" %}</p>
           </div>
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Clean Your List</h4>
-            <p class="text-gray-700">Remove inactive subscribers to improve overall rates</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Clean Your List" %}</h4>
+            <p class="text-gray-700">{% trans "Remove inactive subscribers to improve overall rates" %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Low Click Rates? Try These</h3>
-        <p class="text-gray-700 mb-4">If click rates are below 2%:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Low Click Rates? Try These" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "If click rates are below 2%:" %}</p>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Strengthen Your CTA</h4>
-            <p class="text-gray-700">Make buttons bigger, use action verbs, create urgency</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Strengthen Your CTA" %}</h4>
+            <p class="text-gray-700">{% trans "Make buttons bigger, use action verbs, create urgency" %}</p>
           </div>
           <div class="border-l-4 border-teal-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Simplify Content</h4>
-            <p class="text-gray-700">One clear message and one primary CTA per email</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Simplify Content" %}</h4>
+            <p class="text-gray-700">{% trans "One clear message and one primary CTA per email" %}</p>
           </div>
           <div class="border-l-4 border-cyan-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Improve Relevance</h4>
-            <p class="text-gray-700">Segment more precisely so content matches interests</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Improve Relevance" %}</h4>
+            <p class="text-gray-700">{% trans "Segment more precisely so content matches interests" %}</p>
           </div>
           <div class="border-l-4 border-indigo-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Test Placement</h4>
-            <p class="text-gray-700">Move CTA higher in email, add multiple CTAs, test button vs. text link</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Test Placement" %}</h4>
+            <p class="text-gray-700">{% trans "Move CTA higher in email, add multiple CTAs, test button vs. text link" %}</p>
           </div>
         </div>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Industry benchmarks vary widely. Focus on beating your own previous performance.</p>
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> Industry benchmarks vary widely. Focus on beating your own previous performance.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">A/B Testing Strategy</h3>
-        <p class="text-gray-700 mb-4">Scientific approach to improvement:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "A/B Testing Strategy" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Scientific approach to improvement:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ol class="list-decimal list-inside space-y-3 text-gray-700">
-            <li><strong>Choose one variable:</strong> Subject line, send time, CTA, etc.</li>
-            <li><strong>Create two versions:</strong> Original (A) and variant (B)</li>
-            <li><strong>Split your list:</strong> Send A to 50%, B to 50%</li>
-            <li><strong>Wait for results:</strong> At least 24 hours</li>
-            <li><strong>Declare winner:</strong> Use the better performer going forward</li>
+            <li><strong>{% trans "Choose one variable:" %}</strong> Subject line, send time, CTA, etc.</li>
+            <li><strong>{% trans "Create two versions:" %}</strong> Original (A) and variant (B)</li>
+            <li><strong>{% trans "Split your list:" %}</strong> Send A to 50%, B to 50%</li>
+            <li><strong>{% trans "Wait for results:" %}</strong> At least 24 hours</li>
+            <li><strong>{% trans "Declare winner:" %}</strong> Use the better performer going forward</li>
           </ol>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">What to A/B Test</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "What to A/B Test" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>Subject lines:</strong> Highest impact on open rates</li>
-          <li><strong>Send time:</strong> Day of week and time of day</li>
-          <li><strong>From name:</strong> Company vs. person</li>
-          <li><strong>Email length:</strong> Short vs. long format</li>
-          <li><strong>CTA text:</strong> "Buy Now" vs. "Get Started" vs. "Learn More"</li>
-          <li><strong>CTA color:</strong> Test against your brand colors</li>
-          <li><strong>Images:</strong> With vs. without, different styles</li>
-          <li><strong>Personalization:</strong> Generic vs. personalized</li>
+          <li><strong>{% trans "Subject lines:" %}</strong> Highest impact on open rates</li>
+          <li><strong>{% trans "Send time:" %}</strong> Day of week and time of day</li>
+          <li><strong>{% trans "From name:" %}</strong> Company vs. person</li>
+          <li><strong>{% trans "Email length:" %}</strong> Short vs. long format</li>
+          <li><strong>{% trans "CTA text:" %}</strong> "Buy Now" vs. "Get Started" vs. "Learn More"</li>
+          <li><strong>{% trans "CTA color:" %}</strong> Test against your brand colors</li>
+          <li><strong>{% trans "Images:" %}</strong> With vs. without, different styles</li>
+          <li><strong>{% trans "Personalization:" %}</strong> Generic vs. personalized</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Segment-Based Optimization</h3>
-        <p class="text-gray-700 mb-4">Different segments need different approaches:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Segment-Based Optimization" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Different segments need different approaches:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>Engaged users:</strong> Send more frequently, detailed content</li>
-            <li><strong>Casual users:</strong> Less frequency, concise content</li>
-            <li><strong>Inactive users:</strong> Win-back campaigns, special offers</li>
-            <li><strong>New subscribers:</strong> Educational, onboarding content</li>
+            <li><strong>{% trans "Engaged users:" %}</strong> Send more frequently, detailed content</li>
+            <li><strong>{% trans "Casual users:" %}</strong> Less frequency, concise content</li>
+            <li><strong>{% trans "Inactive users:" %}</strong> Win-back campaigns, special offers</li>
+            <li><strong>{% trans "New subscribers:" %}</strong> Educational, onboarding content</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Frequency Optimization</h3>
-        <p class="text-gray-700 mb-4">Finding the right sending cadence:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Frequency Optimization" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Finding the right sending cadence:" %}</p>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Track unsubscribe rates relative to send frequency</li>
-          <li>Test increasing or decreasing email frequency</li>
-          <li>Watch for fatigue: declining open rates over time</li>
-          <li>Let subscribers choose their preferred frequency</li>
-          <li>Different segments may want different frequencies</li>
+          <li>{% trans "Track unsubscribe rates relative to send frequency" %}</li>
+          <li>{% trans "Test increasing or decreasing email frequency" %}</li>
+          <li>{% trans "Watch for fatigue: declining open rates over time" %}</li>
+          <li>{% trans "Let subscribers choose their preferred frequency" %}</li>
+          <li>{% trans "Different segments may want different frequencies" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Re-engagement Campaigns</h3>
-        <p class="text-gray-700 mb-4">Win back inactive subscribers:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Re-engagement Campaigns" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Win back inactive subscribers:" %}</p>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Step 1: "We Miss You"</h4>
-            <p class="text-gray-700">Friendly reminder of your value proposition</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Step 1: "We Miss You"" %}</h4>
+            <p class="text-gray-700">{% trans "Friendly reminder of your value proposition" %}</p>
           </div>
           <div class="border-l-4 border-pink-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Step 2: Special Offer</h4>
+            <h4 class="font-semibold text-gray-900">{% trans "Step 2: Special Offer" %}</h4>
             <p class="text-gray-700">Incentive to re-engage (discount, free content)</p>
           </div>
           <div class="border-l-4 border-red-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Step 3: Final Chance</h4>
-            <p class="text-gray-700">Last email before removing them from active list</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Step 3: Final Chance" %}</h4>
+            <p class="text-gray-700">{% trans "Last email before removing them from active list" %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Mobile Optimization</h3>
-        <p class="text-gray-700 mb-4">If most subscribers use mobile:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Mobile Optimization" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "If most subscribers use mobile:" %}</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Keep subject lines under 40 characters</li>
-          <li>Use single-column layouts</li>
-          <li>Make text at least 14px</li>
+          <li>{% trans "Keep subject lines under 40 characters" %}</li>
+          <li>{% trans "Use single-column layouts" %}</li>
+          <li>{% trans "Make text at least 14px" %}</li>
           <li>Large, tappable buttons (44x44px minimum)</li>
-          <li>Front-load important content</li>
+          <li>{% trans "Front-load important content" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Tracking Improvements</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Tracking Improvements" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
-          <p class="text-gray-700 mb-4"><strong>Create a spreadsheet tracking:</strong></p>
+          <p class="text-gray-700 mb-4"><strong>{% trans "Create a spreadsheet tracking:" %}</strong></p>
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li>Date of change</li>
-            <li>What you changed</li>
+            <li>{% trans "Date of change" %}</li>
+            <li>{% trans "What you changed" %}</li>
             <li>Hypothesis (why you thought it would help)</li>
             <li>Results (actual impact)</li>
             <li>Decision (keep, modify, or revert)</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Test one variable at a time</li>
-          <li>Wait for statistically significant results</li>
-          <li>Document every test and result</li>
-          <li>Don't over-optimize—diminishing returns exist</li>
-          <li>Balance data with creativity and intuition</li>
-          <li>Re-test periodically—audiences change</li>
-          <li>Focus on metrics that matter to your goals</li>
+          <li>{% trans "Test one variable at a time" %}</li>
+          <li>{% trans "Wait for statistically significant results" %}</li>
+          <li>{% trans "Document every test and result" %}</li>
+          <li>{% trans "Don't over-optimize—diminishing returns exist" %}</li>
+          <li>{% trans "Balance data with creativity and intuition" %}</li>
+          <li>{% trans "Re-test periodically—audiences change" %}</li>
+          <li>{% trans "Focus on metrics that matter to your goals" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
-            <h4 class="font-semibold text-blue-900">Understanding Email Analytics</h4>
-            <p class="text-sm text-blue-700">Review key metrics</p>
+            <h4 class="font-semibold text-blue-900">{% trans "Understanding Email Analytics" %}</h4>
+            <p class="text-sm text-blue-700">{% trans "Review key metrics" %}</p>
           </a>
           <a href="{% url 'core:tutorial_subscriber_segmentation' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
-            <h4 class="font-semibold text-indigo-900">Subscriber Segmentation</h4>
-            <p class="text-sm text-indigo-700">Target more precisely</p>
+            <h4 class="font-semibold text-indigo-900">{% trans "Subscriber Segmentation" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Target more precisely" %}</p>
           </a>
         </div>
       </div>

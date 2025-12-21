@@ -1,9 +1,10 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 
 {% block doc_title %}Deployment Prerequisites{% endblock %}
 
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Deployment Prerequisites</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Deployment Prerequisites" %}</h1>
 
 <div class="prose max-w-none">
   <p class="text-lg text-gray-600 mb-6">
@@ -12,22 +13,22 @@
 
   <!-- Video 1: Introduction & Setup -->
   <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
-    <h3 class="text-xl font-semibold text-indigo-900 mb-2">📹 Video 1: Introduction & Setup</h3>
-    <p class="text-indigo-800 mb-4">Watch this video to get started with the deployment process and understand the prerequisites:</p>
+    <h3 class="text-xl font-semibold text-indigo-900 mb-2">{% trans "📹 Video 1: Introduction & Setup" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Watch this video to get started with the deployment process and understand the prerequisites:" %}</p>
     <div class="aspect-video max-w-3xl">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/sc22fRIDzMc?si=JBwAWyy4V2VpkuyO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">System Requirements</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "System Requirements" %}</h2>
 
   <div class="bg-white border-2 border-gray-200 rounded-lg p-6 mb-6">
-    <h3 class="text-xl font-semibold text-gray-900 mb-4">Required Software</h3>
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Required Software" %}</h3>
     
     <div class="space-y-4">
       <div>
-        <h4 class="font-semibold text-gray-900 mb-2">✅ Python 3.11+</h4>
-        <p class="text-gray-700 mb-2">Python 3.12.3 recommended</p>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "✅ Python 3.11+" %}</h4>
+        <p class="text-gray-700 mb-2">{% trans "Python 3.12.3 recommended" %}</p>
         <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-2"><code># Check Python version
 python --version
 
@@ -35,32 +36,32 @@ python --version
       </div>
 
       <div>
-        <h4 class="font-semibold text-gray-900 mb-2">✅ Database</h4>
-        <p class="text-gray-700 mb-2">Choose one:</p>
+        <h4 class="font-semibold text-gray-900 mb-2">{% trans "✅ Database" %}</h4>
+        <p class="text-gray-700 mb-2">{% trans "Choose one:" %}</p>
         <ul class="list-disc pl-6 text-gray-700 space-y-1">
-          <li><strong>PostgreSQL</strong> (recommended for production)</li>
-          <li><strong>MySQL</strong> (also supported)</li>
-          <li><strong>SQLite</strong> (development only)</li>
+          <li><strong>{% trans "PostgreSQL" %}</strong> (recommended for production)</li>
+          <li><strong>{% trans "MySQL" %}</strong> (also supported)</li>
+          <li><strong>{% trans "SQLite" %}</strong> (development only)</li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-gray-900 mb-2">⚠️ Redis (Optional)</h4>
-        <p class="text-gray-700 mb-2">Only required if using Celery for asynchronous tasks</p>
+        <p class="text-gray-700 mb-2">{% trans "Only required if using Celery for asynchronous tasks" %}</p>
         <ul class="list-disc pl-6 text-gray-700 space-y-1">
-          <li><strong>Not required</strong> for Windows development</li>
-          <li><strong>Recommended</strong> for production environments</li>
-          <li><strong>Optional</strong> if using synchronous email sending</li>
+          <li><strong>{% trans "Not required" %}</strong> for Windows development</li>
+          <li><strong>{% trans "Recommended" %}</strong> for production environments</li>
+          <li><strong>{% trans "Optional" %}</strong> if using synchronous email sending</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Installation Commands</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Installation Commands" %}</h2>
 
   <div class="space-y-6">
     <div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">Ubuntu/Debian</h3>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Ubuntu/Debian" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>sudo apt update
 sudo apt install python3.11 python3.11-venv python3-pip
 sudo apt install postgresql postgresql-contrib
@@ -69,7 +70,7 @@ sudo apt install nginx  # For production</code></pre>
     </div>
 
     <div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">CentOS/RHEL</h3>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "CentOS/RHEL" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>sudo yum install python3.11 python3.11-venv
 sudo yum install postgresql postgresql-server
 sudo yum install redis  # Optional
@@ -77,43 +78,43 @@ sudo yum install nginx  # For production</code></pre>
     </div>
 
     <div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">Windows</h3>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Windows" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Download Python 3.11+ from python.org
 # Redis is NOT required for Windows development
 # SQLite is included with Python</code></pre>
       <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
         <p class="text-blue-800">
-          <strong>Windows Development:</strong> No Redis needed! DripEmails automatically works without Redis on Windows in DEBUG mode.
+          <strong>{% trans "Windows Development:" %}</strong> No Redis needed! DripEmails automatically works without Redis on Windows in DEBUG mode.
         </p>
       </div>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Hardware Requirements</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Hardware Requirements" %}</h2>
 
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-900 mb-3">Development</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">{% trans "Development" %}</h3>
       <ul class="space-y-2 text-gray-700">
-        <li>• <strong>CPU:</strong> 2 cores</li>
+        <li>• <strong>CPU:</strong> {% trans "2 cores" %}</li>
         <li>• <strong>RAM:</strong> 4 GB</li>
-        <li>• <strong>Storage:</strong> 10 GB</li>
-        <li>• <strong>OS:</strong> Windows 10+, Linux, macOS</li>
+        <li>• <strong>{% trans "Storage:" %}</strong> 10 GB</li>
+        <li>• <strong>OS:</strong> {% trans "Windows 10+, Linux, macOS" %}</li>
       </ul>
     </div>
 
     <div class="bg-green-50 p-6 rounded-lg">
-      <h3 class="text-lg font-semibold text-gray-900 mb-3">Production</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">{% trans "Production" %}</h3>
       <ul class="space-y-2 text-gray-700">
-        <li>• <strong>CPU:</strong> 4+ cores</li>
-        <li>• <strong>RAM:</strong> 8 GB minimum</li>
-        <li>• <strong>Storage:</strong> 50 GB+ SSD</li>
-        <li>• <strong>OS:</strong> Ubuntu 20.04+ / Debian 10+</li>
+        <li>• <strong>CPU:</strong> {% trans "4+ cores" %}</li>
+        <li>• <strong>RAM:</strong> {% trans "8 GB minimum" %}</li>
+        <li>• <strong>{% trans "Storage:" %}</strong> 50 GB+ SSD</li>
+        <li>• <strong>OS:</strong> {% trans "Ubuntu 20.04+ / Debian 10+" %}</li>
       </ul>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Optional Components</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Optional Components" %}</h2>
 
   <div class="space-y-4">
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
@@ -122,14 +123,14 @@ sudo yum install nginx  # For production</code></pre>
         For asynchronous email sending and scheduled tasks. Not required for Windows development.
       </p>
       <ul class="list-disc pl-6 text-gray-700 space-y-1">
-        <li>Requires Redis</li>
-        <li>Auto-disabled on Windows in DEBUG mode</li>
-        <li>Recommended for production</li>
+        <li>{% trans "Requires Redis" %}</li>
+        <li>{% trans "Auto-disabled on Windows in DEBUG mode" %}</li>
+        <li>{% trans "Recommended for production" %}</li>
       </ul>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-2">Supervisor/Systemd</h3>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Supervisor/Systemd" %}</h3>
       <p class="text-gray-700 mb-3">
         Process management for production deployments
       </p>
@@ -144,20 +145,20 @@ sudo apt install supervisor
       <p class="text-gray-700 mb-3">
         Reverse proxy and static file serving for production
       </p>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>sudo apt install nginx</code></pre>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "sudo apt install nginx" %}</code></pre>
     </div>
   </div>
 
   <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8">
-    <h3 class="text-lg font-semibold text-yellow-900 mb-2">⚡ Quick Start for Development</h3>
+    <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "⚡ Quick Start for Development" %}</h3>
     <p class="text-yellow-800 mb-3">
       For local development, you only need:
     </p>
     <ul class="list-disc pl-6 text-yellow-800 space-y-1">
-      <li>Python 3.11+</li>
+      <li>{% trans "Python 3.11+" %}</li>
       <li>SQLite (included with Python)</li>
-      <li>No Redis required on Windows!</li>
-      <li>No Nginx required</li>
+      <li>{% trans "No Redis required on Windows!" %}</li>
+      <li>{% trans "No Nginx required" %}</li>
     </ul>
   </div>
 

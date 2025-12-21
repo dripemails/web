@@ -30,4 +30,5 @@ huggingface-hub==0.20.1
 safetensors==0.4.1
 tokenizers==0.15.0
 dnspython==2.6.1
+markdown==3.7
 

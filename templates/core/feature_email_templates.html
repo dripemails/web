@@ -7,22 +7,199 @@
 <div class="max-w-4xl mx-auto py-12 px-4">
     <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Email Templates" %}</h1>
     <p class="text-lg text-gray-700 mb-8">{% trans "Design beautiful, reusable email templates. Save time and ensure brand consistency across all your campaigns." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
-        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "Template Features" %}</h2>
-            <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                <li>{% trans "Drag-and-drop or code your own templates." %}</li>
-                <li>{% trans "Personalize emails with dynamic variables." %}</li>
-                <li>{% trans "Preview and test before sending." %}</li>
-                <li>{% trans "Save templates for future campaigns." %}</li>
-            </ul>
-        </div>
-        <div class="flex-1 flex justify-center">
-            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
-                <rect x="20" y="20" width="60" height="60" rx="8" stroke-width="6" class="text-indigo-200" />
-                <rect x="35" y="35" width="30" height="30" rx="4" stroke-width="6" />
-            </svg>
+    
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Template Features" %}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Rich Text Editor" %}</h3>
+                <p class="text-gray-700">{% trans "Powerful WYSIWYG editor powered by Quill.js. Format text, add links, insert images, and style your emails without knowing HTML." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "AI Content Generation" %}</h3>
+                <p class="text-gray-700">{% trans "Use AI to generate email content quickly. Provide a topic and let AI create professional, engaging email copy for you." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Personalization Variables" %}</h3>
+                <p class="text-gray-700">{% trans "Add dynamic content with merge tags like {first_name}, {last_name}, {email}, and {company}. Each subscriber sees personalized content." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Footer Library" %}</h3>
+                <p class="text-gray-700">{% trans "Create reusable email footers and add them to any template. Maintain consistent branding and include unsubscribe links automatically." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Live Preview" %}</h3>
+                <p class="text-gray-700">{% trans "Preview your emails before sending. See exactly how they'll look to recipients, including personalized content with sample data." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Template Revisions" %}</h3>
+                <p class="text-gray-700">{% trans "Save multiple versions of templates. Compare revisions, revert to previous versions, and track changes over time." %}</p>
+            </div>
         </div>
     </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "How to Create Email Templates" %}</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 1: Access the Template Editor" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Create a campaign first, or open an existing campaign" %}</li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Add Email" %}"</strong> {% trans "or navigate to the template editor" %}</li>
+                    <li>{% trans "You'll see the email template creation form" %}</li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/template/&lt;campaign_id&gt;/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 2: Configure Template Settings" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Enter the" %} <strong>"{% trans "Email Subject" %}"</strong> {% trans "line" %}</li>
+                    <li>{% trans "Set" %} <strong>"{% trans "Wait Time" %}"</strong> {% trans "and" %} <strong>"{% trans "Wait Unit" %}"</strong> {% trans "for drip campaigns:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Wait Time: Number (e.g., 1, 2, 7)" %}</li>
+                            <li>{% trans "Wait Unit: Minutes, Hours, Days, Weeks, or Months" %}</li>
+                            <li>{% trans "This determines when this email sends in the sequence" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Set the" %} <strong>"{% trans "Order" %}</strong> {% trans "field to determine sequence position (0 = first, 1 = second, etc.)" %}</li>
+                </ol>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 3: Design Your Email Content" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Use the WYSIWYG editor toolbar to format your content:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Bold, italic, underline, strikethrough" %}</li>
+                            <li>{% trans "Headings (H1, H2, H3)" %}</li>
+                            <li>{% trans "Bullet and numbered lists" %}</li>
+                            <li>{% trans "Text alignment (left, center, right, justify)" %}</li>
+                            <li>{% trans "Text and background colors" %}</li>
+                            <li>{% trans "Links and images" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Add personalization variables:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">{first_name}</code> - {% trans "Subscriber's first name" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">{last_name}</code> - {% trans "Subscriber's last name" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">{email}</code> - {% trans "Subscriber's email address" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">{company}</code> - {% trans "Company name (if collected)" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Example:" %} <code class="bg-gray-100 px-2 py-1 rounded">Hi {first_name}, thanks for joining!</code></li>
+                </ol>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 4: Use AI to Generate Content (Optional)" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Click the" %} <strong>"✨ {% trans "AI Generate" %}"</strong> {% trans "button in the editor" %}</li>
+                    <li>{% trans "Fill in the AI generation form:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Topic: What is the email about?" %}</li>
+                            <li>{% trans "Tone: Professional, casual, friendly, etc." %}</li>
+                            <li>{% trans "Length: Short, medium, or long" %}</li>
+                            <li>{% trans "Include call-to-action: Yes or no" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Generate" %}"</strong> {% trans "and AI will create the content" %}</li>
+                    <li>{% trans "Review and edit the generated content as needed" %}</li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Use This Content" %}"</strong> {% trans "to insert it into the editor" %}</li>
+                </ol>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 5: Add a Footer (Optional)" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Click" %} <strong>"{% trans "Select Footer" %}"</strong> {% trans "button" %}</li>
+                    <li>{% trans "Choose from your footer library or create a new one" %}</li>
+                    <li>{% trans "Footers can include:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Company information" %}</li>
+                            <li>{% trans "Social media links" %}</li>
+                            <li>{% trans "Unsubscribe link (automatically added)" %}</li>
+                            <li>{% trans "Custom HTML content" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Manage footers at" %} <strong>{% trans "Analytics → Email Footers" %}</strong></li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/analytics/footers/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Step 6: Preview and Save" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Click" %} <strong>"{% trans "Preview" %}"</strong> {% trans "to see how your email will look" %}</li>
+                    <li>{% trans "Review the preview with sample personalization data" %}</li>
+                    <li>{% trans "Make any final adjustments" %}</li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Save Template" %}"</strong> {% trans "to save your template" %}</li>
+                    <li>{% trans "The template is now part of your campaign and ready to use" %}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Editor Features" %}</h2>
+        <div class="space-y-4">
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Rich Text Formatting" %}</h3>
+                <p class="text-gray-700">{% trans "Format text with bold, italic, underline, strikethrough. Use headings (H1, H2, H3) for structure. Create bullet points and numbered lists for better readability." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Links and Images" %}</h3>
+                <p class="text-gray-700">{% trans "Add clickable links to any text. Insert images by URL or upload. All links are automatically tracked for analytics. Images can be resized and aligned." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Colors and Alignment" %}</h3>
+                <p class="text-gray-700">{% trans "Change text and background colors to match your brand. Align content left, center, right, or justify. Maintain consistent styling across all emails." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Variable Insertion" %}</h3>
+                <p class="text-gray-700">{% trans "Click the variable buttons to insert merge tags like {first_name}, {last_name}, {email}, and {company}. Variables are replaced with actual subscriber data when emails are sent." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Template Management" %}</h2>
+        <div class="space-y-4">
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "View Template Revisions" %}</h3>
+                <p class="text-gray-700 mb-2">{% trans "Access the template revision page to see all versions of your templates, compare changes, and revert to previous versions if needed." %}</p>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/template-revision/</code></p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "View Drafts" %}</h3>
+                <p class="text-gray-700 mb-2">{% trans "See all your draft templates in one place. Continue editing or delete drafts you no longer need." %}</p>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/drafts/</code></p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Edit Existing Templates" %}</h3>
+                <p class="text-gray-700 mb-2">{% trans "Open any template from your campaign to edit. Changes apply to future sends, not emails already scheduled or sent." %}</p>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/template/&lt;campaign_id&gt;/</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r mb-8">
+        <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "💡 Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-yellow-900">
+            <li>{% trans "Keep subject lines clear and compelling (under 50 characters)" %}</li>
+            <li>{% trans "Use personalization variables to make emails feel more personal" %}</li>
+            <li>{% trans "Include a clear call-to-action in every email" %}</li>
+            <li>{% trans "Test your templates by sending preview emails to yourself" %}</li>
+            <li>{% trans "Use consistent branding and colors across all templates" %}</li>
+            <li>{% trans "Keep email content focused on one main message" %}</li>
+            <li>{% trans "Always include an unsubscribe link (automatically added in footers)" %}</li>
+        </ul>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="{% url 'campaigns:create' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+            {% trans "Create Your First Template" %}
+        </a>
+    </div>
 </div>
-{% endblock %} 
+{% endblock %}

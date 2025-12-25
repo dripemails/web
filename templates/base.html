@@ -1,13 +1,75 @@
 {% load i18n %}
 {% load i18n_utils %}
 {% load static %}
+{% load seo_tags %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% trans "DripEmails.org" %}{% endblock %}</title>
-    <meta name="description" content="{% trans 'Free drip email marketing software with unlimited campaigns' %}">
+    
+    {% get_site_url as site_url %}
+    
+    <!-- Primary Meta Tags -->
+    <title>{% block title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}</title>
+    <meta name="title" content="{% block meta_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{% get_seo_keywords %}{% endblock %}">
+    <meta name="author" content="DripEmails.org">
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+    <meta name="language" content="{{ LANGUAGE_CODE }}">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical_url %}{{ site_url }}{{ request.path }}{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ site_url }}{{ request.path }}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ site_url }}{% static 'core/img/logo_dripemails.org.png' %}{% endblock %}">
+    <meta property="og:site_name" content="DripEmails.org">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+    <meta name="twitter:url" content="{% block twitter_url %}{{ site_url }}{{ request.path }}{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ site_url }}{% static 'core/img/logo_dripemails.org.png' %}{% endblock %}">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DripEmails.org">
+    
+    <!-- Schema.org JSON-LD -->
+    {% block schema_org %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{% block schema_type %}WebApplication{% endblock %}",
+        "name": "DripEmails.org",
+        "description": "{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences" %}",
+        "url": "{{ site_url }}",
+        "applicationCategory": "MarketingApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "ratingCount": "1"
+        }
+    }
+    </script>
+    {% endblock %}
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,61 +119,27 @@
                 {% endif %}
                 
                 <nav class="hidden md:flex items-center space-x-6">
-                    <a href="{% url 'core:home' %}#features" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Features" %}</a>
-                    <a href="{% url 'core:pricing' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Pricing" %}</a>
-                    <a href="{% url 'core:about' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "About" %}</a>
-                    <a href="{% url 'core:contact' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Contact" %}</a>
-                    
-                    <!-- Language Selector -->
-                    <form action="{% url 'set_language' %}" method="post" class="inline-block">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{% get_path_without_language %}">
-                        <select name="language" onchange="this.form.submit()" class="bg-transparent text-gray-600 border-none focus:ring-0">
-                            {% get_current_language as LANGUAGE_CODE %}
-                            {% get_available_languages as LANGUAGES %}
-                            {% get_language_info_list for LANGUAGES as languages %}
-                            {% for language in languages %}
-                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                                    {{ language.name_local }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </form>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'core:dashboard' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Dashboard" %}</a>
+                        <a href="{% url 'core:settings' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Settings" %}</a>
+                        <a href="{% url 'account_logout' %}" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">{% trans "Logout" %}</a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="text-gray-600 hover:text-indigo-600 transition-colors">{% trans "Login" %}</a>
+                        <a href="{% url 'account_signup' %}" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">{% trans "Sign Up Free" %}</a>
+                    {% endif %}
                 </nav>
                 
-                <div class="flex items-center space-x-4">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'core:dashboard' %}" class="hidden md:block text-indigo-600 hover:text-indigo-800 font-medium">{% trans "Dashboard" %}</a>
-                        <a href="{% url 'core:settings' %}" class="hidden md:block text-gray-600 hover:text-indigo-600 transition-colors">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </a>
-                        <a href="{% url 'account_logout' %}" class="hidden md:block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 font-medium">{% trans "Logout" %}</a>
-                    {% else %}
-                        <a href="{% url 'account_login' %}" class="hidden md:block text-indigo-600 hover:text-indigo-800 font-medium">{% trans "Login" %}</a>
-                        <a href="{% url 'account_signup' %}" class="hidden md:block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 font-medium">{% trans "Sign Up Free" %}</a>
-                    {% endif %}
-                    
-                    <!-- Mobile menu button -->
-                    <button type="button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
-                        <span class="sr-only">{% trans "Menu" %}</span>
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
+                <!-- Mobile menu button -->
+                <button id="mobileMenuButton" class="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
             
             <!-- Mobile menu -->
-            <div class="md:hidden hidden" id="mobile-menu">
-                <div class="py-3 border-t border-gray-200 space-y-1">
-                    <a href="{% url 'core:home' %}#features" class="block px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-md">{% trans "Features" %}</a>
-                    <a href="{% url 'core:pricing' %}" class="block px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-md">{% trans "Pricing" %}</a>
-                    <a href="{% url 'core:about' %}" class="block px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-md">{% trans "About" %}</a>
-                    <a href="{% url 'core:contact' %}" class="block px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-md">{% trans "Contact" %}</a>
-                    
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="px-2 pt-2 pb-3 space-y-1">
                     {% if user.is_authenticated %}
                         <a href="{% url 'core:dashboard' %}" class="block px-3 py-2 text-indigo-600 hover:bg-gray-50 hover:text-indigo-800 rounded-md font-medium">{% trans "Dashboard" %}</a>
                         <a href="{% url 'core:settings' %}" class="block px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-md">{% trans "Settings" %}</a>
@@ -176,7 +204,6 @@
                         <li><a href="{% url 'core:feature_email_scheduling' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Scheduling" %}</a></li>
                         <li><a href="{% url 'core:feature_analytics' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Analytics" %}</a></li>
                         <li><a href="{% url 'core:feature_subscriber_management' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Subscriber Management" %}</a></li>
-                        <li><a href="{% url 'core:feature_email_templates' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Email Templates" %}</a></li>
                     </ul>
                 </div>
                 
@@ -184,247 +211,43 @@
                     <h3 class="text-lg font-semibold mb-4">{% trans "Resources" %}</h3>
                     <ul class="space-y-2">
                         <li><a href="{% url 'core:resource_documentation' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Documentation" %}</a></li>
-                        <li><a href="{% url 'core:blog_index' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Blog" %}</a></li>
                         <li><a href="{% url 'core:resource_tutorials' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Tutorials" %}</a></li>
                         <li><a href="{% url 'core:resource_api_reference' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "API Reference" %}</a></li>
                         <li><a href="{% url 'core:resource_community' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Community" %}</a></li>
+                        <li><a href="{% url 'core:blog_index' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Blog" %}</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">{% trans "Company" %}</h3>
                     <ul class="space-y-2">
-                        <li><a href="{% url 'core:about' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "About Us" %}</a></li>
+                        <li><a href="{% url 'core:about' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "About" %}</a></li>
                         <li><a href="{% url 'core:contact' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Contact" %}</a></li>
-                        <li><a href="{% url 'core:terms' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Terms of Service" %}</a></li>
                         <li><a href="{% url 'core:privacy' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Privacy Policy" %}</a></li>
+                        <li><a href="{% url 'core:terms' %}" class="text-gray-400 hover:text-white transition-colors">{% trans "Terms of Service" %}</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>{% blocktrans with year=current_year %}© {{ year }} DripEmails.org. All rights reserved.{% endblocktrans %}</p>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; {% now "Y" %} {{ site_name|default:"DripEmails.org" }}. {% trans "All rights reserved." %}</p>
             </div>
         </div>
     </footer>
     
-    {% if user.is_authenticated %}
-    <!-- Send Email Modal -->
-    <div id="globalSendModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900">{% trans "Send Email Template" %}</h3>
-                <p class="text-sm text-gray-500 mt-1" id="globalModalSubject"></p>
-            </div>
-            <form id="globalSendEmailForm" class="p-6">
-                <input type="hidden" id="global_campaign_id">
-                <input type="hidden" id="global_email_id">
-                
-                <div class="space-y-4">
-                    <div>
-                        <label for="global_recipient_email" class="block text-sm font-medium text-gray-700">{% trans "Recipient Email" %}</label>
-                        <input type="email" id="global_recipient_email" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                               placeholder="subscriber@example.com">
-                    </div>
-                </div>
-                
-                <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200 mt-6">
-                    <button type="button" onclick="closeGlobalSendModal()" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        {% trans "Cancel" %}
-                    </button>
-                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        <svg class="mr-2 -ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        {% trans "Send Now" %}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {% endif %}
-    
     <script>
-        $(document).ready(function() {
-            // Mobile menu toggle
-            $('#mobile-menu-button').click(function() {
-                $('#mobile-menu').toggleClass('hidden');
-            });
-            
-            // Close mobile menu when clicking outside
-            $(document).click(function(e) {
-                if (!$(e.target).closest('#mobile-menu, #mobile-menu-button').length) {
-                    $('#mobile-menu').addClass('hidden');
-                }
-            });
-            
-            {% if user.is_authenticated %}
-            // Template Search Functionality
-            let searchTimeout;
-            const searchInput = $('#templateSearch');
-            const searchResults = $('#searchResults');
-            const searchResultsContent = $('#searchResultsContent');
-            
-            searchInput.on('input', function() {
-                clearTimeout(searchTimeout);
-                const query = $(this).val().trim();
-                
-                if (query.length < 2) {
-                    searchResults.addClass('hidden');
-                    return;
-                }
-                
-                searchTimeout = setTimeout(function() {
-                    searchTemplates(query);
-                }, 300);
-            });
-            
-            function searchTemplates(query) {
-                searchResultsContent.html('<div class="text-center py-4"><svg class="animate-spin h-6 w-6 mx-auto text-indigo-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>');
-                searchResults.removeClass('hidden');
-                
-                $.ajax({
-                    url: '/api/campaigns/search-templates/',
-                    method: 'GET',
-                    data: { q: query },
-                    success: function(data) {
-                        if (data.results && data.results.length > 0) {
-                            let html = '';
-                            data.results.forEach(function(template) {
-                                html += `
-                                    <div class="p-3 hover:bg-gray-50 rounded-lg border-b border-gray-100 last:border-0">
-                                        <div class="flex items-start justify-between">
-                                            <div class="flex-1 min-w-0 mr-3">
-                                                <div class="flex items-center space-x-2 mb-1">
-                                                    <h4 class="text-sm font-medium text-gray-900 truncate">${template.subject || '(No subject)'}</h4>
-                                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
-                                                        ${template.campaign_name}
-                                                    </span>
-                                                </div>
-                                                <p class="text-xs text-gray-500 truncate">${template.preview}</p>
-                                            </div>
-                                            <div class="flex-shrink-0 flex space-x-1">
-                                                <a href="/campaigns/template-revision/?campaign_id=${template.campaign_id}&email_id=${template.id}" 
-                                                   class="inline-flex items-center px-2 py-1 text-xs font-medium rounded text-white bg-indigo-600 hover:bg-indigo-700">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                                    </svg>
-                                                    {% trans "Revise" %}
-                                                </a>
-                                                <button onclick="openGlobalSendModal('${template.campaign_id}', '${template.id}', '${template.subject.replace(/'/g, "\\'")}'); event.stopPropagation();"
-                                                   class="inline-flex items-center px-2 py-1 text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                                    </svg>
-                                                    {% trans "Send" %}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                            });
-                            searchResultsContent.html(html);
-                        } else {
-                            searchResultsContent.html('<div class="text-center py-8 text-gray-500"><p class="text-sm">{% trans "No templates found" %}</p></div>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Search error:', xhr.responseText, status, error);
-                        searchResultsContent.html('<div class="text-center py-8 text-red-500"><p class="text-sm">{% trans "Error searching templates" %}</p><p class="text-xs mt-1">' + (xhr.responseJSON?.error || error) + '</p></div>');
-                    }
-                });
+        // Mobile menu toggle
+        document.getElementById('mobileMenuButton')?.addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
             }
-            
-            // Close search results when clicking outside
-            $(document).click(function(e) {
-                if (!$(e.target).closest('#templateSearch, #searchResults').length) {
-                    searchResults.addClass('hidden');
-                }
-            });
-            
-            // Global send modal functions
-            window.openGlobalSendModal = function(campaignId, emailId, subject) {
-                $('#global_campaign_id').val(campaignId);
-                $('#global_email_id').val(emailId);
-                $('#globalModalSubject').text(subject || '(No subject)');
-                $('#globalSendModal').removeClass('hidden');
-                searchResults.addClass('hidden');
-            };
-            
-            window.closeGlobalSendModal = function() {
-                $('#globalSendModal').addClass('hidden');
-                $('#globalSendEmailForm')[0].reset();
-            };
-            
-            $('#globalSendEmailForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                const campaignId = $('#global_campaign_id').val();
-                const emailId = $('#global_email_id').val();
-                const recipientEmail = $('#global_recipient_email').val();
-                
-                if (!recipientEmail) {
-                    alert('{% trans "Please enter a recipient email address." %}');
-                    return;
-                }
-                
-                const submitButton = $(this).find('button[type="submit"]');
-                submitButton.prop('disabled', true);
-                const originalHTML = submitButton.html();
-                submitButton.html('<svg class="animate-spin h-4 w-4 mr-2 inline" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>{% trans "Sending..." %}</span>');
-                
-                $.ajax({
-                    url: `/api/campaigns/${campaignId}/emails/${emailId}/send/`,
-                    method: 'POST',
-                    contentType: 'application/json',
-                    headers: {
-                        'X-CSRFToken': getCookie('csrftoken')
-                    },
-                    data: JSON.stringify({
-                        email: recipientEmail,
-                        variables: {}
-                    }),
-                    success: function(data) {
-                        alert('{% trans "Email sent successfully to " %}' + recipientEmail + '!');
-                        closeGlobalSendModal();
-                    },
-                    error: function(xhr) {
-                        const data = xhr.responseJSON || {};
-                        alert('{% trans "Failed to send email: " %}' + (data.error || '{% trans "Unknown error" %}'));
-                    },
-                    complete: function() {
-                        submitButton.prop('disabled', false);
-                        submitButton.html(originalHTML);
-                    }
-                });
-            });
-            
-            // Close modal when clicking outside
-            $('#globalSendModal').click(function(e) {
-                if (e.target === this) {
-                    closeGlobalSendModal();
-                }
-            });
-            
-            function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-            {% endif %}
         });
+        
+        // Template search functionality (if needed)
+        {% if user.is_authenticated %}
+        // Template search can be implemented here if needed
+        {% endif %}
     </script>
-    
-    {% block extra_scripts %}{% endblock %}
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

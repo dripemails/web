@@ -17,7 +17,8 @@ import re
 import pytz
 import logging
 import uuid
-from .models import BlogPost
+from .models import BlogPost, ForumPost, SuccessStory
+from .forms import ForumPostForm, SuccessStoryForm
 
 logger = logging.getLogger(__name__)
 
@@ -159,6 +160,10 @@ def about(request):
 def contact(request):
     """Render contact page."""
     return render(request, 'core/contact.html')
+
+def send_contact_redirect(request):
+    """Redirect /send-contact/ to /contact/"""
+    return redirect('core:contact')
 
 @api_view(['POST'])
 def send_contact(request):
@@ -534,13 +539,88 @@ def blog_post_detail(request, slug):
     return render(request, 'blog/blog_post_detail.html', {'post': post})
 
 def community_user_forum(request):
-    return render(request, 'core/community_user_forum.html')
+    """User forum page - allows logged in users to post."""
+    posts = ForumPost.objects.all().select_related('user')
+    
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request, _('You must be logged in to post.'))
+            return redirect('account_login')
+        
+        form = ForumPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            
+            # Send email notification to founders
+            founders_email = getattr(settings, 'FOUNDERS_EMAIL', 'founders@dripemails.org')
+            try:
+                send_mail(
+                    f'New Forum Post: {post.title}',
+                    f'A new forum post has been created by {post.user.username} ({post.user.email}):\n\n'
+                    f'Title: {post.title}\n\n'
+                    f'Content:\n{post.content}\n\n'
+                    f'View at: {request.build_absolute_uri(f"/resources/community/user-forum/")}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [founders_email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                logger.error(f'Error sending forum post notification: {e}')
+            
+            messages.success(request, _('Your post has been submitted successfully!'))
+            return redirect('core:community_user_forum')
+    else:
+        form = ForumPostForm()
+    
+    context = {
+        'posts': posts,
+        'form': form,
+    }
+    return render(request, 'core/community_user_forum.html', context)
 
 def community_feature_requests(request):
     return render(request, 'core/community_feature_requests.html')
 
 def community_success_stories(request):
-    return render(request, 'core/community_success_stories.html')
+    """Success stories page - allows users to submit success stories with logo upload."""
+    # Show only approved stories
+    stories = SuccessStory.objects.filter(approved=True)
+    
+    if request.method == 'POST':
+        form = SuccessStoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            story = form.save()
+            
+            # Send email notification to founders
+            founders_email = getattr(settings, 'FOUNDERS_EMAIL', 'founders@dripemails.org')
+            try:
+                send_mail(
+                    f'New Success Story Submission: {story.company_name}',
+                    f'A new success story has been submitted:\n\n'
+                    f'Company: {story.company_name}\n'
+                    f'Contact: {story.contact_name} ({story.contact_email})\n\n'
+                    f'Story:\n{story.story}\n\n'
+                    f'Logo uploaded: {"Yes" if story.logo else "No"}\n\n'
+                    f'Review at: {request.build_absolute_uri("/admin/core/successstory/")}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [founders_email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                logger.error(f'Error sending success story notification: {e}')
+            
+            messages.success(request, _('Thank you for sharing your success story! We\'ll review it and may feature it on our site.'))
+            return redirect('core:community_success_stories')
+    else:
+        form = SuccessStoryForm()
+    
+    context = {
+        'stories': stories,
+        'form': form,
+    }
+    return render(request, 'core/community_success_stories.html', context)
 
 def community_social(request):
     return render(request, 'core/community_social.html')

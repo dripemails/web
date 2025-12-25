@@ -20,6 +20,7 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, ''),
     EMAIL_USE_TLS=(bool, False),
     DEFAULT_FROM_EMAIL=(str, 'DripEmails <noreply@dripemails.org>'),
+    FOUNDERS_EMAIL=(str, 'founders@dripemails.org'),
     SITE_URL=(str, 'http://localhost:8000'),
     DEFAULT_URL=(str, 'http://localhost:8000/'),
     CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
@@ -191,6 +192,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+FOUNDERS_EMAIL = env('FOUNDERS_EMAIL', default='founders@dripemails.org')
 
 # For local development on Windows, make authentication optional
 # If EMAIL_HOST_USER is empty, Django won't use authentication

@@ -1,17 +1,35 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import get_language
 from campaigns import views as campaign_views
 from analytics import views as analytics_views
 from subscribers import views as subscriber_views
 from core import views as core_views
 
+def api_docs_redirect(request):
+    """Redirect /api/docs/ to /resources/api-reference/."""
+    # Use reverse to get the proper URL with language prefix if needed
+    from django.urls import reverse
+    try:
+        url = reverse('core:resource_api_reference')
+        return HttpResponseRedirect(url)
+    except:
+        # Fallback if reverse fails
+        lang = get_language() or ''
+        prefix = f'/{lang}' if lang else ''
+        return HttpResponseRedirect(f'{prefix}/resources/api-reference/')
+
 # URL patterns that should NOT be prefixed with a language code
 non_prefixed_urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')), # Provides 'set_language'
+    # Redirect /api/docs/ to /resources/api-reference/
+    path('api/docs/', api_docs_redirect, name='api-docs-redirect'),
+    path('api/docs', api_docs_redirect, name='api-docs-redirect-no-slash'),
     # Unsubscribe endpoint (no language prefix needed) - must be early to avoid conflicts
     path('unsubscribe/<uuid:subscriber_uuid>/', core_views.unsubscribe, name='unsubscribe'),
     path('unsubscribe/<uuid:subscriber_uuid>', core_views.unsubscribe, name='unsubscribe-no-slash'),

@@ -271,6 +271,10 @@ def account_settings(request):
                 messages.success(request, _("Unsubscribe links are now enabled."))
             return redirect('core:settings')
     
+    # Get or create user's API token
+    from rest_framework.authtoken.models import Token
+    token, _created = Token.objects.get_or_create(user=request.user)
+    
     context = {
         'timezones': common_timezones,
         'current_timezone': profile.timezone or 'UTC',
@@ -281,6 +285,7 @@ def account_settings(request):
         'state': profile.state or '',
         'postal_code': profile.postal_code or '',
         'country': profile.country or '',
+        'api_token': token.key,
     }
     return render(request, 'core/settings.html', context)
 

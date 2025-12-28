@@ -402,3 +402,11 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
 ADMIN_SITE_HEADER = "DripEmails Administration"
 ADMIN_SITE_TITLE = "DripEmails Admin Portal"
 ADMIN_INDEX_TITLE = "Welcome to DripEmails Administration" 
+
+
+# CSRF settings for language-prefixed URLs
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access
+CSRF_USE_SESSIONS = False  # Use cookie-based CSRF tokens
+CSRF_COOKIE_SAMESITE = 'Lax'  # Allow CSRF token to work across language prefixes
+CSRF_COOKIE_PATH = '/'  # Make CSRF cookie available for all paths including language prefixes

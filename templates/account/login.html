@@ -17,8 +17,7 @@
         <p class="text-gray-600">{% trans "Log in to manage your email campaigns." %}</p>
       </div>
 
-      {% url 'account_login' as login_url %}
-      <form method="POST" action="{{ login_url }}" class="space-y-6">
+      <form method="POST" action="{% url 'account_login' %}" class="space-y-6" id="loginForm">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -124,14 +123,33 @@
 <script>
   // Add Tailwind classes to Django Allauth form fields
   document.addEventListener('DOMContentLoaded', function() {
-    const formInputs = document.querySelectorAll('form input[type="text"], form input[type="email"], form input[type="password"], form select');
+    // Exclude CSRF token input from styling
+    const formInputs = document.querySelectorAll('#loginForm input[type="text"], #loginForm input[type="email"], #loginForm input[type="password"], #loginForm select');
     formInputs.forEach(function(input) {
+      // Skip CSRF token input
+      if (input.name === 'csrfmiddlewaretoken') {
+        return;
+      }
       input.classList.add('appearance-none', 'block', 'w-full', 'px-3', 'py-2', 'border', 'border-gray-300', 'rounded-md', 'shadow-sm', 'placeholder-gray-400', 'focus:outline-none', 'focus:ring-indigo-500', 'focus:border-indigo-500', 'sm:text-sm');
     });
     // Style the remember me checkbox
-    const rememberMeInput = document.querySelector('form input[name="remember"]');
+    const rememberMeInput = document.querySelector('#loginForm input[name="remember"]');
     if (rememberMeInput) {
         rememberMeInput.classList.add('h-4', 'w-4', 'text-indigo-600', 'focus:ring-indigo-500', 'border-gray-300', 'rounded');
+    }
+    
+    // Verify CSRF token is present before form submission
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+      loginForm.addEventListener('submit', function(e) {
+        const csrfInput = this.querySelector('input[name="csrfmiddlewaretoken"]');
+        if (!csrfInput || !csrfInput.value) {
+          console.error('CSRF token missing!');
+          e.preventDefault();
+          alert('{% trans "Security error: Please refresh the page and try again." %}');
+          return false;
+        }
+      });
     }
   });
 </script>

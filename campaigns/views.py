@@ -972,10 +972,9 @@ def revise_email_with_ai(request):
 
 
 @login_required
-
 @csrf_exempt
 def search_templates(request):
-    """Search through all email templates across campaigns."""
+    """Search through all email templates and campaigns."""
     if request.method != 'GET':
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
@@ -987,28 +986,53 @@ def search_templates(request):
     if not query or len(query) < 2:
         return JsonResponse({'results': []})
     
-    # Search in subject and body_html fields across all user's campaigns
     from django.db.models import Q
+    import re
+    
+    results = []
+    
+    # Search campaigns
+    campaigns = Campaign.objects.filter(
+        user=request.user
+    ).filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    )[:5]
+    
+    for campaign in campaigns:
+        results.append({
+            'type': 'campaign',
+            'id': str(campaign.id),
+            'name': campaign.name,
+            'description': campaign.description or '',
+            'is_active': campaign.is_active,
+            'emails_count': campaign.emails_count,
+            'url': reverse('campaigns:edit', args=[campaign.id])
+        })
+    
+    # Search email templates
     emails = Email.objects.filter(
         campaign__user=request.user
     ).filter(
-        Q(subject__icontains=query) | Q(body_html__icontains=query)
+        Q(subject__icontains=query) | Q(body_html__icontains=query) | Q(body_text__icontains=query)
     ).select_related('campaign').distinct()[:10]
     
-    results = []
     for email in emails:
         # Create preview by stripping HTML tags
-        import re
         preview = re.sub(r'<[^>]+>', '', email.body_html or email.body_text or '')
         preview = preview.strip()[:100] + ('...' if len(preview) > 100 else '')
         
+        template_url = reverse('campaigns:template', args=[email.campaign.id])
+        template_url += f'?template_id={email.id}'
+        
         results.append({
+            'type': 'template',
             'id': str(email.id),
-            'subject': email.subject,
+            'subject': email.subject or 'Untitled Email',
             'preview': preview,
             'campaign_id': str(email.campaign.id),
             'campaign_name': email.campaign.name,
-            'order': email.order
+            'order': email.order,
+            'url': template_url
         })
     
     return JsonResponse({'results': results})

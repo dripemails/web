@@ -33,5 +33,14 @@ dnspython==2.6.1
 markdown==3.7
 googletrans==4.0.0rc1 
 polib
-python-gettext
+
+# NOTE: GNU gettext tools (msgfmt, xgettext) are required for Django's i18n commands
+# These are SYSTEM dependencies, not Python packages. Install on your server:
+# 
+# Ubuntu/Debian: sudo apt-get install gettext
+# CentOS/RHEL: sudo yum install gettext
+# macOS: brew install gettext
+# Windows: Download from https://mlocati.github.io/articles/gettext-iconv-windows.html
+# 
+# Verify installation: msgfmt --version
 

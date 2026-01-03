@@ -57,14 +57,15 @@ def _html_to_plain_text(html_content):
     return html_content.strip()
 
 
-def _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=None):
-    """Inject tracking pixel into HTML email content."""
+def _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=None):
+    """Replace <hr/> tags with decorative separator image that also tracks opens."""
     from django.conf import settings
     from core.context_processors import site_detection
+    import re
     
     # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
     if base_url:
-        tracking_base_url = base_url
+        site_base_url = base_url
     else:
         # Try to detect site from settings
         try:
@@ -73,27 +74,35 @@ def _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url
                     return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
             
             site_info = site_detection(MockRequest())
-            tracking_base_url = site_info['site_url']
+            site_base_url = site_info['site_url']
         except Exception:
             # Fall back to DEFAULT_URL or SITE_URL
-            tracking_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+            site_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
     
     # Ensure base_url doesn't end with a slash (we'll add it in the path)
-    tracking_base_url = tracking_base_url.rstrip('/')
+    site_base_url = site_base_url.rstrip('/')
     
     # URL-encode the email and include it in the path instead of query string
     from urllib.parse import quote
     encoded_email = quote(subscriber_email, safe='')
-    tracking_url = f"{tracking_base_url}/analytics/track/open/{tracking_id}/{encoded_email}/"
+    # Clean URL that doesn't mention tracking or pixel - looks like a regular image
+    separator_url = f"{site_base_url}/analytics/message_split.gif?t={tracking_id}&e={encoded_email}"
     
-    # Create tracking pixel image tag (removed display:none to ensure tracking works)
-    tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" />'
+    # Create decorative separator image (looks like an HR line, not a tracking pixel)
+    # This is a visible separator that also tracks opens
+    separator_img = f'<img src="{separator_url}" alt="" style="display:block; width:100%; height:2px; border:none; margin:20px 0; background:linear-gradient(to right, transparent, #e2e8f0, transparent);" />'
     
-    # Try to inject before closing body tag, otherwise append to end
-    if '</body>' in html_content:
-        html_content = html_content.replace('</body>', f'{tracking_pixel}</body>')
-    else:
-        html_content += tracking_pixel
+    # Replace all <hr> and <hr/> tags with the separator
+    # Match various HR tag formats: <hr>, <hr/>, <hr />, <HR>, etc.
+    hr_pattern = re.compile(r'<hr\s*/?>', re.IGNORECASE)
+    html_content = hr_pattern.sub(separator_img, html_content)
+    
+    # If no HR tags were found, inject separator before closing body tag for tracking
+    if not hr_pattern.search(html_content):
+        if '</body>' in html_content:
+            html_content = html_content.replace('</body>', f'{separator_img}</body>')
+        else:
+            html_content += separator_img
     
     return html_content
 
@@ -258,8 +267,8 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     site_info = site_detection(MockRequest())
     site_url = site_info['site_url']
     
-    # Inject tracking pixel and wrap links
-    html_content = _inject_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=site_url)
+    # Replace HR tags with separator image and wrap links
+    html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=site_url)
     
     # If we have HTML content but no text content, convert HTML to plain text
@@ -584,21 +593,18 @@ def send_campaign_email(email_id, subscriber_id):
     site_name = site_info['site_name']
     site_logo = site_info['site_logo']
     
-    # Generate tracking URLs (email in path, not query string)
+    # Generate URLs (clean, no mention of tracking or pixel)
     from urllib.parse import quote
     encoded_email = quote(subscriber.email, safe='')
-    tracking_pixel = f'<img src="{site_url}/analytics/track/open/{tracking_id}/{encoded_email}/" width="1" height="1" alt="" />'
     unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with tracking
     html_content = email.body_html
     text_content = email.body_text
     
-    # Wrap all links with tracking
+    # Replace HR tags with separator image and wrap all links with tracking
+    html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email, base_url=site_url)
-    
-    # Add tracking pixel to HTML content
-    html_content += tracking_pixel
     
     # Add email footer if one is assigned
     if email.footer:

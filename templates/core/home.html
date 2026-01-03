@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}DripEmails.org - {% trans "Free Email Marketing Automation" %}{% endblock %}
+{% block title %}DripEmails.org - {% trans "Free Drip Email Marketing Automation" %}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-white">
@@ -58,7 +58,7 @@
                 </h1>
                 
                 <p class="mt-6 max-w-3xl mx-auto text-xl sm:text-2xl text-indigo-100 leading-relaxed">
-                    {% trans "Automated email sequences that nurture leads, onboard users, and drive conversions. Set it once, and watch your revenue grow." %}
+                    {% trans "Automated email drip sequences that nurture leads, onboard users, and drive conversions. Set it once, and watch your revenue grow.  Our application is completely free." %}
                 </p>
                 
                 <!-- CTA Buttons -->
@@ -81,6 +81,12 @@
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
                         <span class="text-sm">{% trans "Unlimited Campaigns" %}</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm">{% trans "Unlimited Drip Emails" %}</span>
                     </div>
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-300" fill="currentColor" viewBox="0 0 20 20">
@@ -196,7 +202,7 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" style="overflow-x:hidden;">
                 <!-- Feature 1 -->
                 <div class="group relative p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 hover:border-indigo-300 transition-all duration-300 hover:shadow-xl">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-200 rounded-full -mr-16 -mt-16 opacity-20 group-hover:opacity-30 transition-opacity"></div>
@@ -206,7 +212,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Smart Drip Sequences" %}</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Smart Drip Email Sequences" %}</h3>
                         <p class="text-gray-600 leading-relaxed">
                             {% trans "Create multi-step email sequences that automatically send based on timing, behavior, or triggers." %}
                         </p>
@@ -231,7 +237,6 @@
 
                 <!-- Feature 3 -->
                 <div class="group relative p-8 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl border border-yellow-100 hover:border-yellow-300 transition-all duration-300 hover:shadow-xl">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-200 rounded-full -mr-16 -mt-16 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div class="relative">
                         <div class="w-14 h-14 bg-yellow-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -279,7 +284,6 @@
 
                 <!-- Feature 6 -->
                 <div class="group relative p-8 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-xl">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-200 rounded-full -mr-16 -mt-16 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div class="relative">
                         <div class="w-14 h-14 bg-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -31,4 +31,7 @@ safetensors==0.4.1
 tokenizers==0.15.0
 dnspython==2.6.1
 markdown==3.7
+googletrans==4.0.0rc1 
+polib
+gettext
 

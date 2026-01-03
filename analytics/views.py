@@ -182,7 +182,9 @@ def subscriber_analytics(request, list_id):
 
 @csrf_exempt
 def track_open(request, tracking_id, encoded_email):
-    """Track email opens using a transparent 1x1 pixel."""
+    """Legacy tracking endpoint - backwards compatibility wrapper for old tracking pixel URLs."""
+    # This is the old URL format: /analytics/track/open/<uuid>/<email>/
+    # Process tracking the same way as message_split_gif but return old-style pixel
     from urllib.parse import unquote
     import logging
     logger = logging.getLogger(__name__)
@@ -227,9 +229,78 @@ def track_open(request, tracking_id, encoded_email):
         except Exception as e:
             logger.error(f"Failed to process email open: {str(e)}", exc_info=True)
     
-    # Return a transparent 1x1 pixel
+    # Return a transparent 1x1 pixel (old format for backwards compatibility)
     transparent_pixel = b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02\x44\x01\x00\x3B'
     return HttpResponse(transparent_pixel, content_type='image/gif')
+
+
+def message_split_gif(request):
+    """Serve a decorative separator image that also tracks email opens."""
+    from urllib.parse import unquote
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Get tracking parameters from query string (clean URL, no mention of tracking)
+    tracking_id = request.GET.get('t')
+    encoded_email = request.GET.get('e')
+    
+    if tracking_id and encoded_email:
+        subscriber_email = unquote(encoded_email)
+        if subscriber_email:
+            # Always process synchronously (no Celery)
+            try:
+                from campaigns.models import EmailEvent, Campaign
+                # Find the sent event with the same tracking ID
+                sent_event = EmailEvent.objects.get(
+                    id=tracking_id, 
+                    event_type='sent',
+                    subscriber_email=subscriber_email
+                )
+                
+                # Check if open event already exists to avoid duplicates
+                existing_open = EmailEvent.objects.filter(
+                    email=sent_event.email,
+                    subscriber_email=subscriber_email,
+                    event_type='opened'
+                ).exists()
+                
+                if not existing_open:
+                    # Create an open event
+                    EmailEvent.objects.create(
+                        email=sent_event.email,
+                        subscriber_email=subscriber_email,
+                        event_type='opened'
+                    )
+                    
+                    # Update campaign metrics
+                    campaign = sent_event.email.campaign
+                    campaign.open_count += 1
+                    campaign.save(update_fields=['open_count'])
+                    
+                    logger.info(f"Recorded open event for {subscriber_email}")
+                else:
+                    logger.debug(f"Open event already exists for {subscriber_email}, skipping duplicate")
+            except EmailEvent.DoesNotExist:
+                logger.error(f"No matching sent event found for tracking ID {tracking_id}, email: {subscriber_email}")
+            except Exception as e:
+                logger.error(f"Failed to process email open: {str(e)}", exc_info=True)
+    
+    # Return a decorative separator GIF (2px high, gradient line)
+    # This is a visible separator that looks like an HR line, not a tracking pixel
+    # GIF format: 600x2px gradient line (transparent to gray to transparent)
+    separator_gif = (
+        b'\x47\x49\x46\x38\x39\x61'  # GIF89a header
+        b'\x58\x02\x00\x02'  # Width: 600 (0x0258), Height: 2
+        b'\x80\x00\x00'  # Global Color Table: 128 colors, no sort, 0
+        b'\xFF\xFF\xFF'  # Color 0: White
+        b'\xE2\xE8\xF0'  # Color 1: Light gray (#e2e8f0)
+        b'\x00\x00\x00'  # Color 2: Black (for gradient)
+        b'\x21\xF9\x04\x01\x00\x00\x00\x00'  # Graphic Control Extension: transparent, no delay
+        b'\x2C\x00\x00\x00\x00\x58\x02\x00\x02\x00\x00'  # Image descriptor: 600x2, no local color table
+        b'\x02\x02\x44\x01\x00'  # Image data: minimal gradient
+        b'\x3B'  # Trailer
+    )
+    return HttpResponse(separator_gif, content_type='image/gif')
 
 
 @csrf_exempt

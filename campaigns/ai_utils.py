@@ -180,14 +180,24 @@ Respond ONLY in valid JSON:
             timeout=OLLAMA_TIMEOUT
         )
         
-        # Handle 410 Gone errors (model deprecated/removed)
+        # Handle specific error status codes before raising
         if response.status_code == 410:
             error_msg = (
-                f"Model {current_model} is no longer available (410 Gone). "
-                f"Please update HUGGINGFACE_MODEL in your .env file to a different model. "
-                f"Try: mistralai/Mistral-7B-Instruct-v0.1, HuggingFaceH4/zephyr-7b-beta, "
-                f"or check https://huggingface.co/models for available models."
+                f"Model {OLLAMA_MODEL} is no longer available (410 Gone). "
+                f"Please update OLLAMA_MODEL in your .env file to a different model."
             )
+            logger.error(f"Ollama 410 error: {error_msg}")
+            raise ValueError(error_msg)
+        elif response.status_code == 500:
+            # Try to get detailed error from response
+            try:
+                error_data = response.json()
+                ollama_error = error_data.get('error', 'Unknown server error')
+                error_msg = f"Ollama server error (500): {ollama_error}"
+                logger.error(f"Ollama 500 error: {error_msg}, Response: {error_data}")
+            except:
+                error_msg = f"Ollama server error (500). Response text: {response.text[:200]}"
+                logger.error(f"Ollama 500 error: {error_msg}")
             raise ValueError(error_msg)
         
         response.raise_for_status()
@@ -230,9 +240,17 @@ Respond ONLY in valid JSON:
                 if e.response.status_code == 404:
                     error_msg = f"Ollama server not found. Please ensure Ollama is running at {OLLAMA_BASE_URL}"
                 elif e.response.status_code == 500:
-                    error_msg = "Ollama server error. The model may need to be pulled first. Run: ollama pull llama3.1:8b"
-        except:
-            pass
+                    # Try to get detailed error from response
+                    try:
+                        error_data = e.response.json()
+                        ollama_error = error_data.get('error', 'Unknown server error')
+                        error_msg = f"Ollama server error (500): {ollama_error}"
+                        logger.error(f"Ollama 500 error details: {error_data}")
+                    except:
+                        error_msg = f"Ollama server error (500). Check Ollama logs for details."
+                        logger.error(f"Ollama 500 error, response text: {e.response.text[:500]}")
+        except Exception as ex:
+            logger.error(f"Error parsing Ollama error response: {ex}")
         raise ValueError(error_msg)
     except ImportError as e:
         logger.error(f"Import error: {str(e)}")

@@ -495,6 +495,13 @@ CONN_MAX_AGE = 60
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
 
+# Ollama Configuration for AI Email Generation (Production)
+# Set OLLAMA_BASE_URL in environment to point to your Ollama server
+# Example: OLLAMA_BASE_URL=http://192.168.1.100:11434
+# See docs/ai/ollama_remote_setup.md for setup instructions
+OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+
 # Admin site customization
 ADMIN_SITE_HEADER = "DripEmails Administration"
 ADMIN_SITE_TITLE = "DripEmails Admin Portal"

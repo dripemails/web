@@ -74,6 +74,94 @@ def analytics_dashboard(request):
 
 @login_required
 @api_view(['GET'])
+def weekly_analytics(request):
+    """Get analytics for the past 7 days."""
+    from datetime import datetime, timedelta
+    from django.db.models import Q, Count
+    from django.db.models.functions import TruncDate
+    
+    # Get campaign_id from query params if provided
+    campaign_id = request.GET.get('campaign_id')
+    
+    # Get campaigns for this user
+    if campaign_id:
+        campaigns = Campaign.objects.filter(user=request.user, id=campaign_id)
+    else:
+        campaigns = Campaign.objects.filter(user=request.user)
+    
+    # Calculate date range for the past 7 days
+    end_date = timezone.now()
+    start_date = end_date - timedelta(days=6)  # 6 days ago + today = 7 days
+    
+    # Initialize data structure for all 7 days
+    daily_data = {}
+    for i in range(7):
+        date = (start_date + timedelta(days=i)).date()
+        daily_data[str(date)] = {
+            'date': str(date),
+            'sent': 0,
+            'delivered': 0,
+            'opened': 0,
+            'clicked': 0,
+            'bounced': 0,
+            'delivery_rate': 0,
+            'open_rate': 0,
+            'click_rate': 0,
+        }
+    
+    # Get all email events for user's campaigns in the past 7 days
+    events = EmailEvent.objects.filter(
+        email__campaign__in=campaigns,
+        created_at__gte=start_date
+    ).annotate(
+        date=TruncDate('created_at')
+    ).values('date', 'event_type').annotate(
+        count=Count('id')
+    ).order_by('date')
+    
+    # Aggregate events by date and type
+    for event in events:
+        date_str = str(event['date'])
+        if date_str in daily_data:
+            event_type = event['event_type']
+            count = event['count']
+            
+            if event_type == 'sent':
+                daily_data[date_str]['sent'] += count
+            elif event_type == 'opened':
+                daily_data[date_str]['opened'] += count
+            elif event_type == 'clicked':
+                daily_data[date_str]['clicked'] += count
+            elif event_type == 'bounced':
+                daily_data[date_str]['bounced'] += count
+    
+    # Calculate delivery and rates for each day
+    for date_str, data in daily_data.items():
+        sent = data['sent']
+        bounced = data['bounced']
+        delivered = sent - bounced
+        opened = data['opened']
+        clicked = data['clicked']
+        
+        data['delivered'] = delivered
+        
+        # Calculate rates
+        if sent > 0:
+            data['delivery_rate'] = round((delivered / sent) * 100, 2)
+        if delivered > 0:
+            data['open_rate'] = round((opened / delivered) * 100, 2)
+            data['click_rate'] = round((clicked / delivered) * 100, 2)
+    
+    # Convert to sorted list
+    result = sorted(daily_data.values(), key=lambda x: x['date'])
+    
+    return Response({
+        'weekly_data': result
+    })
+
+
+@login_required
+@api_view(['GET'])
 def campaign_analytics(request, campaign_id):
     """Get analytics for a specific campaign."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)

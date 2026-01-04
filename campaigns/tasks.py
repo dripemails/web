@@ -230,6 +230,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     
     try:
         email = Email.objects.select_related('campaign').get(id=email_id)
+        logger.info(f"Sending email {email_id} for campaign: {email.campaign.id} - {email.campaign.name}")
     except Email.DoesNotExist:
         logger.error(f"Email {email_id} not found")
         if request_obj:
@@ -257,6 +258,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         event_type='sent'
     )
     tracking_id = str(sent_event.id)
+    logger.info(f"Created EmailEvent {tracking_id} for email {email.id}, campaign {email.campaign.id}, subscriber {subscriber_email}")
     
     # Get site information for tracking URLs
     from core.context_processors import site_detection

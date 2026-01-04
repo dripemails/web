@@ -16,8 +16,11 @@ from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
 import csv
 import io
+import logging
 from openpyxl import load_workbook
 from .ai_utils import generate_email_content
+
+logger = logging.getLogger(__name__)
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -809,13 +812,49 @@ def campaign_stats_api(request, campaign_id):
     """API endpoint for real-time campaign statistics."""
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     
-    # Get overall campaign stats from the model (updated in real-time)
+    logger.info(f"Fetching stats for campaign {campaign_id} - {campaign.name}")
+    
+    # Get real-time counts directly from EmailEvent for accuracy
+    sent_count = EmailEvent.objects.filter(
+        email__campaign=campaign, 
+        event_type='sent'
+    ).count()
+    logger.info(f"Campaign {campaign_id}: Found {sent_count} sent events")
+    bounce_count = EmailEvent.objects.filter(
+        email__campaign=campaign, 
+        event_type='bounced'
+    ).count()
+    unsubscribe_count = EmailEvent.objects.filter(
+        email__campaign=campaign, 
+        event_type='unsubscribed'
+    ).count()
+    complaint_count = EmailEvent.objects.filter(
+        email__campaign=campaign, 
+        event_type='complained'
+    ).count()
+    
+    # Get opens and clicks from campaign model (these are incremented via signals)
+    campaign.refresh_from_db()
+    open_count = campaign.open_count
+    click_count = campaign.click_count
+    
+    # Calculate rates
+    delivered_count = sent_count - bounce_count
+    delivery_rate = (delivered_count / sent_count * 100) if sent_count > 0 else 0
+    open_rate = (open_count / sent_count * 100) if sent_count > 0 else 0
+    click_rate = (click_count / sent_count * 100) if sent_count > 0 else 0
+    
+    # Get overall campaign stats
     overall_stats = {
-        'sent_count': campaign.sent_count,
-        'open_count': campaign.open_count,
-        'click_count': campaign.click_count,
-        'open_rate': round(campaign.open_rate, 2),
-        'click_rate': round(campaign.click_rate, 2),
+        'sent_count': sent_count,
+        'open_count': open_count,
+        'click_count': click_count,
+        'open_rate': round(open_rate, 2),
+        'click_rate': round(click_rate, 2),
+        'delivery_rate': round(delivery_rate, 2),
+        'bounce_count': bounce_count,
+        'unsubscribe_count': unsubscribe_count,
+        'complaint_count': complaint_count,
     }
     
     # Get per-email stats
@@ -929,7 +968,7 @@ def generate_email_with_ai(request, campaign_id):
     except ValueError as e:
         return Response({
             'error': str(e),
-            'hint': 'Please ensure HUGGINGFACE_API_KEY environment variable is set. Get your key from https://huggingface.co/settings/tokens'
+            'hint': 'Please ensure Ollama is running (ollama serve) and the llama3.1:8b model is available (ollama pull llama3.1:8b)'
         }, status=400)
     except Exception as e:
         return Response({

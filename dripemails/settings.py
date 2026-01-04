@@ -346,9 +346,8 @@ REST_FRAMEWORK = {
 # Site URL for absolute URLs
 SITE_URL = env('SITE_URL')
 
-# CSRF settings for language-prefixed URLs
-CSRF_COOKIE_NAME = 'csrftoken'
-CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access
-CSRF_USE_SESSIONS = False  # Use cookie-based CSRF tokens
-CSRF_COOKIE_SAMESITE = 'Lax'  # Allow CSRF token to work across language prefixes
-CSRF_COOKIE_PATH = '/'  # Make CSRF cookie available for all paths including language prefixes
+# Ollama Configuration for AI Email Generation (Local Development)
+# For local development, Ollama should be running on localhost
+# To use a remote Ollama server, update OLLAMA_BASE_URL in .env file
+OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
+OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')

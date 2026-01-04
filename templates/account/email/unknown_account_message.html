@@ -1,0 +1,22 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% blocktrans with site_domain=current_site.domain %}You are receiving this email because you or someone else has requested a password reset for your user account. However, we do not have any record of a user with email <strong>{{ email }}</strong> in our database on {{ site_domain }}.{% endblocktrans %}</p>
+
+<div class="highlight-box">
+    <p style="margin: 0; color: #718096; font-size: 14px;">{% blocktrans %}This mail can be safely ignored if you did not request a password reset.{% endblocktrans %}</p>
+</div>
+
+<p>{% blocktrans %}If it was you, you can sign up for an account using the button below:{% endblocktrans %}</p>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ signup_url }}" class="button">{% trans "Sign Up" %}</a>
+</div>
+
+<p style="font-size: 14px; color: #718096;">
+    {% blocktrans %}Or copy and paste this link into your browser:{% endblocktrans %}<br>
+    <a href="{{ signup_url }}" style="color: #667eea; word-break: break-all;">{{ signup_url }}</a>
+</p>
+{% endblock content %}
+

@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load markdown_extras %}
 
 {% block title %}{{ post.title }} - DripEmails.org{% endblock %}
+
+{% block extra_head %}
+<style>
+    .blog-content p {
+        margin-bottom: 1.5em !important;
+    }
+    .blog-content p:last-child {
+        margin-bottom: 0 !important;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="max-w-3xl mx-auto py-12 px-4">
     <h1 class="text-4xl font-bold text-indigo-700 mb-4">{{ post.title }}</h1>
     <p class="text-sm text-gray-400 mb-6">{{ post.date }}</p>
-    <div class="prose max-w-none text-gray-800">
-        {{ post.content|safe }}
+    <div class="prose prose-lg max-w-none text-gray-800 blog-content">
+        {{ post.content|markdownify }}
     </div>
     <div class="mt-8">
         <a href="{% url 'core:blog_index' %}" class="text-indigo-600 hover:underline">&larr; {% trans "Back to Blog" %}</a>

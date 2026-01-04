@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load i18n static %}
 
 {% block title %}{% trans "Email Template" %} - DripEmails.org{% endblock %}
@@ -94,7 +95,7 @@
                                 <select id="wait_unit" name="wait_unit" required
                                         class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     {% for value, label in wait_units %}
-                                        <option value="{{ value }}">{{ label }}</option>
+                                        <option value="{{ value }}" {% if template and template.wait_unit == value %}selected{% elif not template and value == 'days' %}selected{% endif %}>{{ label }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -496,6 +497,25 @@ response = http.request(request)</code></pre>
 let quill;
 let footerQuill;
 
+// Function to clean HTML content by removing empty paragraph tags with breaks
+// This removes leading/trailing empty paragraphs and collapses consecutive ones,
+// but preserves single empty paragraphs between content (intentional spacing)
+function cleanQuillContent(html) {
+    if (!html) return html;
+    
+    // Remove leading empty paragraphs
+    html = html.replace(/^(<p><br\s*\/?><\/p>\s*)+/gi, '');
+    
+    // Remove trailing empty paragraphs
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*)+$/gi, '');
+    
+    // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
+    // This replaces 2+ consecutive empty paragraphs with just one
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
+    
+    return html;
+}
+
 // Function to copy variable to clipboard and insert into editor
 function copyVariable(variable, element) {
     // Copy to clipboard
@@ -553,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.showCampaignModal = function() {
         // Validate form first
         const subject = document.getElementById('subject').value.trim();
-        const bodyContent = quill.root.innerHTML.trim();
+        const bodyContent = cleanQuillContent(quill.root.innerHTML.trim());
         
         if (!subject) {
             alert('{% trans "Please enter an email subject." %}');
@@ -584,13 +604,24 @@ document.addEventListener('DOMContentLoaded', function() {
         hideCampaignModal();
         
         // Get form data
-        const htmlContent = quill.root.innerHTML;
+        const htmlContent = cleanQuillContent(quill.root.innerHTML);
         const footerSelect = document.getElementById('footer_select');
         const selectedFooterId = footerSelect.value;
         
+        // Get wait_time value and ensure it's a valid integer
+        const waitTimeInput = document.getElementById('wait_time');
+        const waitTimeValue = waitTimeInput.value.trim();
+        const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+        
+        // Validate wait_time
+        if (isNaN(waitTime) || waitTime < 1) {
+            alert('{% trans "Wait time must be a number greater than 0." %}');
+            return;
+        }
+        
         const data = {
             subject: document.getElementById('subject').value,
-            wait_time: parseInt(document.getElementById('wait_time').value),
+            wait_time: waitTime,
             wait_unit: document.getElementById('wait_unit').value,
             body_html: htmlContent,
             body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
@@ -687,7 +718,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('wait_unit').value = data.wait_unit;
                 
                 // Set content in Quill editor
-                quill.root.innerHTML = data.body_html;
+                quill.root.innerHTML = cleanQuillContent(data.body_html);
                 
                 // Set footer if available
                 if (data.footer_id) {
@@ -776,7 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.subject) {
                     document.getElementById('subject').value = data.subject;
-                    quill.root.innerHTML = data.body_html;
+                    quill.root.innerHTML = cleanQuillContent(data.body_html);
                     aiModal.classList.add('hidden');
                     aiGenerateForm.reset();
                     alert('{% trans "Email generated successfully! Review and save when ready." %}');
@@ -804,7 +835,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preview functionality
     if (previewBtn) {
         previewBtn.addEventListener('click', function() {
-            const content = quill.root.innerHTML;
+            const content = cleanQuillContent(quill.root.innerHTML);
             
             // Get selected footer content
             const footerSelect = document.getElementById('footer_select');
@@ -816,7 +847,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
                 if (footerOption) {
                     // This is a simplified approach - in a real implementation, you'd fetch the footer content
-                    footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">[Footer content would appear here]</div>';
+                    footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">{% trans "[Footer content would appear here]" %}</div>';
                 }
             }
             
@@ -876,15 +907,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             // Get content from Quill editor
-            const htmlContent = quill.root.innerHTML;
+            const htmlContent = cleanQuillContent(quill.root.innerHTML);
             
             // Get selected footer
             const footerSelect = document.getElementById('footer_select');
             const selectedFooterId = footerSelect.value;
             
+            // Get wait_time value and ensure it's a valid integer
+            const waitTimeInput = document.getElementById('wait_time');
+            const waitTimeValue = waitTimeInput.value.trim();
+            const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+            
+            // Validate wait_time
+            if (isNaN(waitTime) || waitTime < 1) {
+                alert('{% trans "Wait time must be a number greater than 0." %}');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+            
             const data = {
                 subject: document.getElementById('subject').value,
-                wait_time: parseInt(document.getElementById('wait_time').value),
+                wait_time: waitTime,
                 wait_unit: document.getElementById('wait_unit').value,
                 body_html: htmlContent,
                 body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
@@ -1089,7 +1133,7 @@ document.getElementById('newFooterForm').addEventListener('submit', function(e) 
     e.preventDefault();
     
     const name = document.getElementById('footerName').value;
-    const htmlContent = footerQuill.root.innerHTML;
+    const htmlContent = cleanQuillContent(footerQuill.root.innerHTML);
     const isDefault = document.getElementById('isDefault').checked;
     
     if (!name.trim()) {

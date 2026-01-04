@@ -1,118 +1,159 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Building Drip Campaigns - DripEmails.org{% endblock %}
+{% load static i18n %}
+{% block title %}{% trans "Building Drip Campaigns" %} - DripEmails.org{% endblock %}
 {% block content %}
 <div class="min-h-screen bg-gray-50">
   <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">💧 Building Drip Campaigns</h1>
-      <p class="text-xl text-white text-opacity-90">Create automated email sequences that nurture leads</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 18 min read</p>
+      <h1 class="text-4xl font-bold mb-4">💧 {% trans "Building Drip Campaigns" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Create automated email sequences that nurture leads" %}</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ {% trans "18 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">What Are Drip Campaigns?</h2>
-        <p class="text-gray-700 mb-6">Drip campaigns are automated email sequences sent on a schedule. They're perfect for onboarding new users, nurturing leads, or re-engaging inactive subscribers.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "What Are Drip Campaigns?" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Drip campaigns are automated email sequences sent on a schedule. They're perfect for onboarding new users, nurturing leads, or re-engaging inactive subscribers." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Plan your entire drip sequence before creating it. Map out the journey you want subscribers to take.</p>
+          <p class="text-blue-900"><strong>💡 {% trans "Pro Tip:" %}</strong> {% trans "Plan your entire drip sequence before creating it. Map out the journey you want subscribers to take." %}</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 1: Create a Drip Campaign</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 1: Create a Drip Campaign" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Go to <strong>Campaigns → Create New Campaign</strong></li>
-          <li>Select <strong>"Drip Campaign"</strong> as the campaign type</li>
-          <li>Give your drip campaign a descriptive name</li>
-          <li>Choose the trigger (e.g., "When subscriber joins list")</li>
+          <li>{% trans "Go to" %} <strong>{% trans "Campaigns → Create New Campaign" %}</strong></li>
+          <li>{% trans "Select" %} <strong>"{% trans "Drip Campaign" %}"</strong> {% trans "as the campaign type" %}</li>
+          <li>{% trans "Give your drip campaign a descriptive name" %}</li>
+          <li>{% blocktrans %}Choose the trigger (e.g., "When subscriber joins list"){% endblocktrans %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 2: Add Email Sequences</h3>
-        <p class="text-gray-700 mb-4">Build your sequence by adding multiple emails:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 2: Add Email Sequences" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Build your sequence by adding multiple emails. The order field determines the sequence:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-3 text-gray-700">
-            <li><strong>Email 1:</strong> Welcome email (Day 0 - immediately)</li>
-            <li><strong>Email 2:</strong> Value proposition (Day 3)</li>
-            <li><strong>Email 3:</strong> Educational content (Day 7)</li>
-            <li><strong>Email 4:</strong> Social proof (Day 10)</li>
-            <li><strong>Email 5:</strong> Call to action (Day 14)</li>
+            <li><strong>{% trans "Email 1" %}</strong> {% trans "(order 0, wait 1 day) - Welcome email sent 1 day after subscription" %}</li>
+            <li><strong>{% trans "Email 2" %}</strong> {% trans "(order 1, wait 2 days) - Value proposition sent 2 days after Email 1" %}</li>
+            <li><strong>{% trans "Email 3" %}</strong> {% trans "(order 2, wait 3 days) - Educational content sent 3 days after Email 2" %}</li>
+            <li><strong>{% trans "Email 4" %}</strong> {% trans "(order 3, wait 1 week) - Social proof sent 1 week after Email 3" %}</li>
+            <li><strong>{% trans "Email 5" %}</strong> {% trans "(order 4, wait 2 weeks) - Call to action sent 2 weeks after Email 4" %}</li>
           </ul>
+          <p class="text-sm text-gray-600 mt-3 italic">
+            {% trans "Note: The wait time for each email determines when the" %} <strong>{% trans "next" %}</strong> {% trans "email will be sent automatically." %}
+          </p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 3: Set Timing Delays</h3>
-        <p class="text-gray-700 mb-4">For each email, specify:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 3: Set Timing Delays" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "For each email, specify:" %}</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>Delay:</strong> Days/hours after the previous email</li>
-          <li><strong>Send Time:</strong> Specific time of day to send (e.g., 10:00 AM)</li>
-          <li><strong>Time Zone:</strong> Use recipient's time zone or your default</li>
+          <li><strong>{% trans "Wait Time:" %}</strong> {% trans "How long to wait before sending this email (e.g., 2 days, 1 week)" %}</li>
+          <li><strong>{% trans "Wait Unit:" %}</strong> {% trans "Minutes, hours, days, weeks, or months" %}</li>
+          <li><strong>{% trans "Time Zone:" %}</strong> {% trans "Use recipient's time zone or your default" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 4: Add Conditions (Advanced)</h3>
-        <p class="text-gray-700 mb-4">Create intelligent sequences with conditional logic:</p>
+        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
+          <h4 class="font-semibold text-green-900 mb-2">✨ {% trans "Automatic Email Sequencing" %}</h4>
+          <p class="text-green-900 mb-3">
+            <strong>{% trans "DripEmails.org automatically schedules the next email in your sequence!" %}</strong> {% trans "When an email is sent, the system automatically finds the next email in the campaign (by order) and schedules it based on that email's wait time." %}
+          </p>
+          <div class="bg-white rounded-lg p-4 mb-3">
+            <h5 class="font-semibold text-gray-900 mb-2">{% trans "How It Works:" %}</h5>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700 text-sm">
+              <li>{% blocktrans %}You send <strong>Email 1</strong> (order 0, wait 1 day) to a subscriber{% endblocktrans %}</li>
+              <li>{% trans "Email 1 is sent successfully" %}</li>
+              <li>{% blocktrans %}System automatically finds <strong>Email 2</strong> (order 1, wait 2 days){% endblocktrans %}</li>
+              <li>{% blocktrans %}Email 2 is scheduled to be sent <strong>2 days after Email 1 was sent</strong>{% endblocktrans %}</li>
+              <li>{% trans "When Email 2 is sent, Email 3 is automatically scheduled, and so on..." %}</li>
+            </ol>
+          </div>
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+            <p class="text-sm text-yellow-900">
+              <strong>💡 {% trans "Key Point:" %}</strong> {% trans "Each email's wait time determines when the" %} <strong>{% trans "next" %}</strong> {% trans "email will be sent. The wait time is relative to when the previous email was successfully sent, not when the campaign started." %}
+            </p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 4: Add Conditions (Advanced)" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Create intelligent sequences with conditional logic:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>If opened:</strong> Send follow-up content</li>
-            <li><strong>If clicked:</strong> Send special offer</li>
-            <li><strong>If not opened:</strong> Send re-engagement email</li>
-            <li><strong>If unsubscribed:</strong> Stop the sequence</li>
+            <li><strong>{% trans "If opened:" %}</strong> {% trans "Send follow-up content" %}</li>
+            <li><strong>{% trans "If clicked:" %}</strong> {% trans "Send special offer" %}</li>
+            <li><strong>{% trans "If not opened:" %}</strong> {% trans "Send re-engagement email" %}</li>
+            <li><strong>{% trans "If unsubscribed:" %}</strong> {% trans "Stop the sequence" %}</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Step 5: Test Your Sequence</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 5: Test Your Sequence" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Add yourself as a test subscriber</li>
-          <li>Run through the entire sequence</li>
-          <li>Check timing, formatting, and links</li>
-          <li>Make adjustments as needed</li>
+          <li>{% trans "Add yourself as a test subscriber" %}</li>
+          <li>{% trans "Run through the entire sequence" %}</li>
+          <li>{% trans "Check timing, formatting, and links" %}</li>
+          <li>{% trans "Make adjustments as needed" %}</li>
         </ol>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Once a drip campaign is active, subscribers already in the sequence won't see changes. Only new subscribers get the updated version.</p>
+          <p class="text-yellow-900"><strong>⚠️ {% trans "Important:" %}</strong> {% trans "Once a drip campaign is active, subscribers already in the sequence won't see changes. Only new subscribers get the updated version." %}</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Drip Campaign Types</h3>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <h4 class="font-semibold text-blue-900 mb-2">🆕 {% trans "Adding Emails to Active Campaigns" %}</h4>
+          <p class="text-blue-900 mb-2">
+            {% trans "If you add a new email template to a campaign that has already sent emails, the system will automatically:" %}
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-blue-900 text-sm">
+            <li>{% trans "Schedule the new email to all active subscribers in the campaign's subscriber list" %}</li>
+            <li>{% trans "Use the new email's wait time to determine when it should be sent" %}</li>
+            <li>{% trans "Exclude unsubscribed subscribers automatically" %}</li>
+            <li>{% trans "Show the scheduled emails in \"Recent Send Activity\" on your dashboard" %}</li>
+          </ul>
+          <p class="text-sm text-blue-800 mt-2 italic">
+            {% trans "This makes it easy to extend your drip campaigns without manually scheduling emails for each subscriber!" %}
+          </p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Common Drip Campaign Types" %}</h3>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-indigo-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Welcome Series</h4>
-            <p class="text-gray-700">Introduce new subscribers to your brand (3-5 emails over 2 weeks)</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Welcome Series" %}</h4>
+            <p class="text-gray-700">{% trans "Introduce new subscribers to your brand (3-5 emails over 2 weeks)" %}</p>
           </div>
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Lead Nurturing</h4>
-            <p class="text-gray-700">Educate prospects about your solution (5-7 emails over 1 month)</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Lead Nurturing" %}</h4>
+            <p class="text-gray-700">{% trans "Educate prospects about your solution (5-7 emails over 1 month)" %}</p>
           </div>
           <div class="border-l-4 border-pink-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Onboarding</h4>
-            <p class="text-gray-700">Help new users get started (4-6 emails over 2 weeks)</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Onboarding" %}</h4>
+            <p class="text-gray-700">{% trans "Help new users get started (4-6 emails over 2 weeks)" %}</p>
           </div>
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Re-engagement</h4>
-            <p class="text-gray-700">Win back inactive subscribers (3-4 emails over 10 days)</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Re-engagement" %}</h4>
+            <p class="text-gray-700">{% trans "Win back inactive subscribers (3-4 emails over 10 days)" %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Start with a clear goal for your sequence</li>
-          <li>Keep emails focused on one main message</li>
-          <li>Use consistent branding across all emails</li>
-          <li>Test different timings to find what works best</li>
-          <li>Monitor open rates and adjust content accordingly</li>
-          <li>Allow subscribers to skip ahead or opt-out</li>
+          <li>{% trans "Start with a clear goal for your sequence" %}</li>
+          <li>{% trans "Keep emails focused on one main message" %}</li>
+          <li>{% trans "Use consistent branding across all emails" %}</li>
+          <li>{% trans "Test different timings to find what works best" %}</li>
+          <li>{% trans "Monitor open rates and adjust content accordingly" %}</li>
+          <li>{% trans "Allow subscribers to skip ahead or opt-out" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:tutorial_scheduling_campaigns' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
-            <h4 class="font-semibold text-indigo-900">Scheduling Campaigns</h4>
-            <p class="text-sm text-indigo-700">Master timing and scheduling</p>
+            <h4 class="font-semibold text-indigo-900">{% trans "Scheduling Campaigns" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Master timing and scheduling" %}</p>
           </a>
           <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
-            <h4 class="font-semibold text-purple-900">Understanding Email Analytics</h4>
-            <p class="text-sm text-purple-700">Track your campaign performance</p>
+            <h4 class="font-semibold text-purple-900">{% trans "Understanding Email Analytics" %}</h4>
+            <p class="text-sm text-purple-700">{% trans "Track your campaign performance" %}</p>
           </a>
         </div>
       </div>

@@ -21,7 +21,7 @@ class Campaign(models.Model):
     description = models.TextField(_('Description'), blank=True)
     slug = models.SlugField(max_length=150, unique=True)
     subscriber_list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='campaigns', verbose_name=_('Subscriber List'), null=True, blank=True)
-    is_active = models.BooleanField(_('Active'), default=False)
+    is_active = models.BooleanField(_('Active'), default=True)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
     sent_count = models.IntegerField(_('Sent Count'), default=0)
@@ -84,9 +84,19 @@ class Email(models.Model):
     
     @property
     def wait_time_display(self):
-        unit = _("hour") if self.wait_unit == "hours" else _("day")
-        if self.wait_time != 1:
-            unit = _("hours") if self.wait_unit == "hours" else _("days")
+        """Display wait time with proper unit (minutes, hours, days, weeks, months)."""
+        unit_map = {
+            'minutes': (_("minute"), _("minutes")),
+            'hours': (_("hour"), _("hours")),
+            'days': (_("day"), _("days")),
+            'weeks': (_("week"), _("weeks")),
+            'months': (_("month"), _("months")),
+        }
+        
+        # Get singular or plural form based on wait_time
+        unit_singular, unit_plural = unit_map.get(self.wait_unit, (_("day"), _("days")))
+        unit = unit_singular if self.wait_time == 1 else unit_plural
+        
         return f"{self.wait_time} {unit}"
 
 

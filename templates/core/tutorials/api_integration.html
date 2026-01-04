@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}API Integration Guide - DripEmails.org{% endblock %}
 {% block content %}
@@ -8,62 +9,62 @@
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">🔌 API Integration Guide</h1>
-      <p class="text-xl text-white text-opacity-90">Connect external applications to DripEmails.org</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 16 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "🔌 API Integration Guide" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Connect external applications to DripEmails.org" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 16 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">REST API Overview</h2>
-        <p class="text-gray-700 mb-6">DripEmails.org provides a RESTful API for programmatic access to campaigns, subscribers, and analytics. Perfect for integrations, automation, and custom applications.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "REST API Overview" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "DripEmails.org provides a RESTful API for programmatic access to campaigns, subscribers, and analytics. Perfect for integrations, automation, and custom applications." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> Always use API keys for authentication, never hardcode passwords. Store keys securely as environment variables.</p>
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> Always use API keys for authentication, never hardcode passwords. Store keys securely as environment variables.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Getting Your API Key</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Getting Your API Key" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Log into DripEmails.org</li>
-          <li>Go to <strong>Settings → API Access</strong></li>
-          <li>Click <strong>"Generate New API Key"</strong></li>
+          <li>{% trans "Log into DripEmails.org" %}</li>
+          <li>Go to <strong>{% trans "Settings → API Access" %}</strong></li>
+          <li>{% trans "Click" %} <strong>"Generate New API Key"</strong></li>
           <li>Copy the key (shown only once)</li>
-          <li>Store securely - treat like a password</li>
+          <li>{% trans "Store securely - treat like a password" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">API Base URL</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "API Base URL" %}</h3>
         <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
 https://yourdomain.com/api/v1/
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Authentication</h3>
-        <p class="text-gray-700 mb-4">Include your API key in the Authorization header:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Authentication" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Include your API key in the Authorization header:" %}</p>
         <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
 Authorization: Bearer YOUR_API_KEY_HERE
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Available Endpoints</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Available Endpoints" %}</h3>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Subscribers</h4>
-            <p class="text-sm text-gray-700">GET /api/v1/subscribers/ - List all subscribers</p>
-            <p class="text-sm text-gray-700">POST /api/v1/subscribers/ - Add new subscriber</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Subscribers" %}</h4>
+            <p class="text-sm text-gray-700">{% trans "GET /api/v1/subscribers/ - List all subscribers" %}</p>
+            <p class="text-sm text-gray-700">{% trans "POST /api/v1/subscribers/ - Add new subscriber" %}</p>
             <p class="text-sm text-gray-700">GET /api/v1/subscribers/{id}/ - Get subscriber details</p>
             <p class="text-sm text-gray-700">PATCH /api/v1/subscribers/{id}/ - Update subscriber</p>
             <p class="text-sm text-gray-700">DELETE /api/v1/subscribers/{id}/ - Delete subscriber</p>
           </div>
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Campaigns</h4>
-            <p class="text-sm text-gray-700">GET /api/v1/campaigns/ - List all campaigns</p>
-            <p class="text-sm text-gray-700">POST /api/v1/campaigns/ - Create campaign</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Campaigns" %}</h4>
+            <p class="text-sm text-gray-700">{% trans "GET /api/v1/campaigns/ - List all campaigns" %}</p>
+            <p class="text-sm text-gray-700">{% trans "POST /api/v1/campaigns/ - Create campaign" %}</p>
             <p class="text-sm text-gray-700">GET /api/v1/campaigns/{id}/ - Get campaign details</p>
             <p class="text-sm text-gray-700">GET /api/v1/campaigns/{id}/analytics/ - Campaign stats</p>
           </div>
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Lists</h4>
-            <p class="text-sm text-gray-700">GET /api/v1/lists/ - List all subscriber lists</p>
-            <p class="text-sm text-gray-700">POST /api/v1/lists/ - Create new list</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Lists" %}</h4>
+            <p class="text-sm text-gray-700">{% trans "GET /api/v1/lists/ - List all subscriber lists" %}</p>
+            <p class="text-sm text-gray-700">{% trans "POST /api/v1/lists/ - Create new list" %}</p>
             <p class="text-sm text-gray-700">GET /api/v1/lists/{id}/subscribers/ - Get list members</p>
           </div>
         </div>
@@ -100,7 +101,7 @@ fetch('https://yourdomain.com/api/v1/campaigns/', {<br/>
         </div>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> API keys have full account access. Rotate them regularly and revoke immediately if compromised.</p>
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> API keys have full account access. Rotate them regularly and revoke immediately if compromised.</p>
         </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Example: Get Campaign Analytics (cURL)</h3>
@@ -111,8 +112,8 @@ curl -X GET \<br/>
 &nbsp;&nbsp;-H "Content-Type: application/json"
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Response Format</h3>
-        <p class="text-gray-700 mb-4">All responses are JSON:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Response Format" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "All responses are JSON:" %}</p>
         <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
 {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;"success": true,<br/>
@@ -125,36 +126,36 @@ curl -X GET \<br/>
 }
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Error Handling</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Error Handling" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>400 Bad Request:</strong> Invalid data in request</li>
-            <li><strong>401 Unauthorized:</strong> Missing or invalid API key</li>
-            <li><strong>403 Forbidden:</strong> API key lacks required permissions</li>
-            <li><strong>404 Not Found:</strong> Resource doesn't exist</li>
-            <li><strong>429 Too Many Requests:</strong> Rate limit exceeded</li>
-            <li><strong>500 Server Error:</strong> Internal server issue</li>
+            <li><strong>{% trans "400 Bad Request:" %}</strong> Invalid data in request</li>
+            <li><strong>{% trans "401 Unauthorized:" %}</strong> Missing or invalid API key</li>
+            <li><strong>{% trans "403 Forbidden:" %}</strong> API key lacks required permissions</li>
+            <li><strong>{% trans "404 Not Found:" %}</strong> Resource doesn't exist</li>
+            <li><strong>{% trans "429 Too Many Requests:" %}</strong> Rate limit exceeded</li>
+            <li><strong>{% trans "500 Server Error:" %}</strong> Internal server issue</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Rate Limits</h3>
-        <p class="text-gray-700 mb-4">API requests are limited to prevent abuse:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Rate Limits" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "API requests are limited to prevent abuse:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>Free tier:</strong> 1,000 requests/hour</li>
-            <li><strong>Pro tier:</strong> 10,000 requests/hour</li>
-            <li><strong>Enterprise:</strong> Custom limits</li>
-            <li>Headers include rate limit info: X-RateLimit-Remaining</li>
+            <li><strong>{% trans "Free tier:" %}</strong> 1,000 requests/hour</li>
+            <li><strong>{% trans "Pro tier:" %}</strong> 10,000 requests/hour</li>
+            <li><strong>{% trans "Enterprise:" %}</strong> Custom limits</li>
+            <li>{% trans "Headers include rate limit info: X-RateLimit-Remaining" %}</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Pagination</h3>
-        <p class="text-gray-700 mb-4">List endpoints return paginated results:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Pagination" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "List endpoints return paginated results:" %}</p>
         <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
 GET /api/v1/subscribers/?page=2&page_size=50
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Filtering and Sorting</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Filtering and Sorting" %}</h3>
         <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
 # Filter by status<br/>
 GET /api/v1/subscribers/?status=subscribed<br/><br/>
@@ -164,62 +165,62 @@ GET /api/v1/subscribers/?email__contains=example.com<br/><br/>
 GET /api/v1/campaigns/?ordering=-created_at
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Webhooks</h3>
-        <p class="text-gray-700 mb-4">Receive real-time notifications for events:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Webhooks" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Receive real-time notifications for events:" %}</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>subscriber.created:</strong> New subscriber added</li>
-          <li><strong>subscriber.unsubscribed:</strong> Someone opted out</li>
-          <li><strong>campaign.sent:</strong> Campaign finished sending</li>
-          <li><strong>campaign.opened:</strong> Email opened</li>
-          <li><strong>campaign.clicked:</strong> Link clicked</li>
+          <li><strong>{% trans "subscriber.created:" %}</strong> New subscriber added</li>
+          <li><strong>{% trans "subscriber.unsubscribed:" %}</strong> Someone opted out</li>
+          <li><strong>{% trans "campaign.sent:" %}</strong> Campaign finished sending</li>
+          <li><strong>{% trans "campaign.opened:" %}</strong> Email opened</li>
+          <li><strong>{% trans "campaign.clicked:" %}</strong> Link clicked</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Integration Scenarios</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Common Integration Scenarios" %}</h3>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Sync CRM Contacts</h4>
-            <p class="text-gray-700">Automatically add new CRM contacts to email lists</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Sync CRM Contacts" %}</h4>
+            <p class="text-gray-700">{% trans "Automatically add new CRM contacts to email lists" %}</p>
           </div>
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">E-commerce Integration</h4>
-            <p class="text-gray-700">Trigger campaigns based on purchase behavior</p>
+            <h4 class="font-semibold text-gray-900">{% trans "E-commerce Integration" %}</h4>
+            <p class="text-gray-700">{% trans "Trigger campaigns based on purchase behavior" %}</p>
           </div>
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Custom Dashboards</h4>
-            <p class="text-gray-700">Pull analytics into your own reporting tools</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Custom Dashboards" %}</h4>
+            <p class="text-gray-700">{% trans "Pull analytics into your own reporting tools" %}</p>
           </div>
           <div class="border-l-4 border-orange-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Form Submissions</h4>
-            <p class="text-gray-700">Add form leads directly to subscriber lists</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Form Submissions" %}</h4>
+            <p class="text-gray-700">{% trans "Add form leads directly to subscriber lists" %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Best Practices</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li>Use environment variables for API keys</li>
-          <li>Implement exponential backoff for retries</li>
-          <li>Cache responses when appropriate</li>
-          <li>Respect rate limits and use batch endpoints</li>
-          <li>Handle errors gracefully</li>
-          <li>Use webhooks for real-time updates instead of polling</li>
-          <li>Log all API interactions for debugging</li>
+          <li>{% trans "Use environment variables for API keys" %}</li>
+          <li>{% trans "Implement exponential backoff for retries" %}</li>
+          <li>{% trans "Cache responses when appropriate" %}</li>
+          <li>{% trans "Respect rate limits and use batch endpoints" %}</li>
+          <li>{% trans "Handle errors gracefully" %}</li>
+          <li>{% trans "Use webhooks for real-time updates instead of polling" %}</li>
+          <li>{% trans "Log all API interactions for debugging" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">API Documentation</h3>
-        <p class="text-gray-700 mb-6">Full API reference with interactive docs available at:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "API Documentation" %}</h3>
+        <p class="text-gray-700 mb-6">{% trans "Full API reference with interactive docs available at:" %}</p>
         <div class="bg-gray-100 p-4 rounded-lg mb-6">
           <a href="/api/docs/" class="text-blue-600 hover:underline font-mono">https://yourdomain.com/api/docs/</a>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:docs_getting_started' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
-            <h4 class="font-semibold">Full Documentation</h4>
-            <p class="text-sm text-gray-300">Complete technical docs</p>
+            <h4 class="font-semibold">{% trans "Full Documentation" %}</h4>
+            <p class="text-sm text-gray-300">{% trans "Complete technical docs" %}</p>
           </a>
           <a href="{% url 'core:tutorial_deployment' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
-            <h4 class="font-semibold">Deploying to Production</h4>
-            <p class="text-sm text-gray-300">Launch your instance</p>
+            <h4 class="font-semibold">{% trans "Deploying to Production" %}</h4>
+            <p class="text-sm text-gray-300">{% trans "Launch your instance" %}</p>
           </a>
         </div>
       </div>

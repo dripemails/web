@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load i18n static %}
 
 {% block title %}{% trans "Add Subscriber" %} - DripEmails.org{% endblock %}
@@ -20,7 +21,7 @@
                 <div class="px-6 py-5 border-b border-gray-200">
                     <h1 class="text-2xl font-bold text-gray-900">{% trans "Add a Subscriber" %}</h1>
                     <p class="text-sm text-gray-600 mt-1">
-                        {% trans "Create a new subscriber, attach them to a list, and schedule the first campaign email via the API." %}
+                        {% trans "Create a new subscriber, attach them to a list, and optionally send the first campaign email." %}
                     </p>
                 </div>
 
@@ -63,12 +64,13 @@
                         </fieldset>
 
                         <fieldset class="space-y-4">
-                            <legend class="text-lg font-semibold text-gray-800">{% trans "Initial campaign email" %}</legend>
+                            <legend class="text-lg font-semibold text-gray-800">{% trans "Initial campaign email (optional)" %}</legend>
+                            <p class="text-sm text-gray-600">{% trans "Optionally send the first email from a campaign to this subscriber." %}</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="campaign" class="block text-sm font-medium text-gray-700">{% trans "Campaign" %}</label>
-                                    <select id="campaign" name="campaign" required class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        <option value="">{% trans "Select a campaign..." %}</option>
+                                    <select id="campaign" name="campaign" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="">{% trans "No campaign (optional)" %}</option>
                                         {% for campaign in campaigns %}
                                             <option value="{{ campaign.id }}">{{ campaign.name }}</option>
                                         {% endfor %}
@@ -76,7 +78,7 @@
                                 </div>
                                 <div>
                                     <label for="email_template" class="block text-sm font-medium text-gray-700">{% trans "Email template" %}</label>
-                                    <select id="email_template" name="email_template" required disabled class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <select id="email_template" name="email_template" disabled class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         <option value="">{% trans "Select a campaign first..." %}</option>
                                     </select>
                                 </div>
@@ -254,17 +256,17 @@
                 showStatus('{{ _("Please provide an email address.") }}', 'error');
                 return;
             }
-            if (!campaignId) {
-                showStatus('{{ _("Select a campaign to send the first email from.") }}', 'error');
-                return;
-            }
-            if (!emailId) {
-                showStatus('{{ _("Choose an email template to send.") }}', 'error');
-                return;
-            }
-            if (schedule !== 'now' && !scheduleValue) {
-                showStatus('{{ _("Provide a delay value for the send timer.") }}', 'error');
-                return;
+            
+            // Validate campaign fields if campaign is selected
+            if (campaignId) {
+                if (!emailId) {
+                    showStatus('{{ _("Choose an email template to send.") }}', 'error');
+                    return;
+                }
+                if (schedule !== 'now' && !scheduleValue) {
+                    showStatus('{{ _("Provide a delay value for the send timer.") }}', 'error');
+                    return;
+                }
             }
 
             setSubmittingState(true);
@@ -276,7 +278,7 @@
             };
 
             try {
-                const subscriberResponse = await fetch('{% url "api-subscriber-create" %}', {
+                const subscriberResponse = await fetch('{{ api_subscriber_create_url }}', {
                     method: 'POST',
                     headers,
                     body: JSON.stringify({
@@ -288,37 +290,68 @@
                     }),
                 });
 
+                let subscriberData = null;
+                try {
+                    subscriberData = await subscriberResponse.json();
+                } catch (jsonError) {
+                    console.warn('Could not parse subscriber response as JSON:', jsonError);
+                    const textResponse = await subscriberResponse.text();
+                    console.warn('Response text:', textResponse);
+                }
+
                 if (!subscriberResponse.ok) {
-                    const errorData = await subscriberResponse.json().catch(() => ({}));
-                    const errorMessage = errorData.error || JSON.stringify(errorData);
-                    throw new Error(errorMessage || 'Unable to create subscriber.');
+                    const errorMessage = subscriberData?.error || subscriberData?.detail || JSON.stringify(subscriberData) || 'Unable to create subscriber.';
+                    throw new Error(errorMessage);
                 }
 
-                const sendResponse = await fetch('/api/send-email/', {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({
-                        email,
-                        first_name: form.first_name.value.trim(),
-                        last_name: form.last_name.value.trim(),
-                        campaign_id: campaignId,
-                        email_id: emailId,
-                        schedule,
-                        schedule_value: schedule === 'now' ? '0' : scheduleValue,
-                    }),
-                });
+                // If campaign is selected, send the email
+                if (campaignId && emailId) {
+                    const sendResponse = await fetch('{{ api_send_email_url }}', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            email,
+                            first_name: form.first_name.value.trim(),
+                            last_name: form.last_name.value.trim(),
+                            campaign_id: campaignId,
+                            email_id: emailId,
+                            schedule,
+                            schedule_value: schedule === 'now' ? '0' : scheduleValue,
+                        }),
+                    });
 
-                if (!sendResponse.ok) {
-                    const errorData = await sendResponse.json().catch(() => ({}));
-                    const errorMessage = errorData.error || JSON.stringify(errorData);
-                    throw new Error(errorMessage || 'Unable to schedule the email.');
+                    let sendData = null;
+                    try {
+                        sendData = await sendResponse.json();
+                    } catch (jsonError) {
+                        console.warn('Could not parse send email response as JSON:', jsonError);
+                        const textResponse = await sendResponse.text();
+                        console.warn('Response text:', textResponse);
+                    }
+
+                    if (!sendResponse.ok) {
+                        const errorMessage = sendData?.error || sendData?.detail || JSON.stringify(sendData) || 'Unable to schedule the email.';
+                        throw new Error(errorMessage);
+                    }
+
+                    resetForm();
+                    showStatus('{{ _("Subscriber created and first email scheduled successfully!") }}', 'success');
+                } else {
+                    resetForm();
+                    showStatus('{{ _("Subscriber created successfully!") }}', 'success');
                 }
-
-                resetForm();
-                showStatus('{{ _("Subscriber created and first email scheduled successfully!") }}', 'success');
             } catch (error) {
-                console.error(error);
-                showStatus(error.message || '{{ _("Something went wrong. Please try again.") }}', 'error');
+                console.error('Error details:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                if (error.stack) {
+                    console.error('Error stack:', error.stack);
+                }
+                let errorMessage = error.message || '{{ _("Something went wrong. Please try again.") }}';
+                if (error.name === 'TypeError' && (error.message.includes('fetch') || error.message.includes('network'))) {
+                    errorMessage = '{{ _("Network error: Could not connect to server. Please check if the server is running.") }}';
+                }
+                showStatus(errorMessage, 'error');
             } finally {
                 setSubmittingState(false);
             }

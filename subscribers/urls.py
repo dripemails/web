@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.subscriber_directory, name='list'),
     path('add/', views.add_subscriber, name='add'),
     path('import/', views.import_subscribers, name='import'),
+    path('export/', views.export_subscribers_csv, name='export'),
     path('lists/', views.list_list_create, name='list-list-create'),
     path('lists/<uuid:pk>/', views.list_detail, name='list-detail'),
     

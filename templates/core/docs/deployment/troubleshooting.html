@@ -1,22 +1,23 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 
 {% block doc_title %}Deployment Troubleshooting{% endblock %}
 
 {% block doc_content %}
-<h1 class="text-3xl font-bold text-gray-900 mb-6">Deployment Troubleshooting</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Deployment Troubleshooting" %}</h1>
 
 <div class="prose max-w-none">
   <p class="text-lg text-gray-600 mb-6">
     Common deployment issues and their solutions.
   </p>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">Common Issues</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Common Issues" %}</h2>
 
   <div class="space-y-6">
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ 502 Bad Gateway</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Gunicorn is not running or socket file doesn't exist</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ 502 Bad Gateway" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Gunicorn is not running or socket file doesn't exist</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check Gunicorn status
 sudo systemctl status dripemails
 
@@ -31,9 +32,9 @@ sudo journalctl -u dripemails -n 50</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ Static Files Not Loading</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Static files not collected or Nginx misconfigured</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Static Files Not Loading" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Static files not collected or Nginx misconfigured</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Collect static files
 python manage.py collectstatic --noinput
 
@@ -46,9 +47,9 @@ sudo systemctl restart nginx</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ Database Connection Error</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Database credentials or host incorrect</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Database Connection Error" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Database credentials or host incorrect</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Test PostgreSQL connection
 sudo -u postgres psql -c "SELECT version();"
 
@@ -65,9 +66,9 @@ python manage.py shell
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ SMTP Server Not Starting</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Port conflict or permission issues</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ SMTP Server Not Starting" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Port conflict or permission issues</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check if port is in use
 sudo netstat -tulpn | grep 1025
 
@@ -84,9 +85,9 @@ sudo supervisorctl update</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ Celery Not Processing Tasks</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Redis not running or Celery worker down</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Celery Not Processing Tasks" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Redis not running or Celery worker down</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check Redis status
 sudo systemctl status redis-server
 
@@ -105,9 +106,9 @@ sudo supervisorctl tail dripemails-celery-worker</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ Permission Denied Errors</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Incorrect file permissions or ownership</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Permission Denied Errors" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Incorrect file permissions or ownership</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Fix ownership
 sudo chown -R dripemails:www-data /home/dripemails/web
 
@@ -121,9 +122,9 @@ sudo chmod 660 /home/dripemails/web/dripemails.sock</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ SSL Certificate Issues</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> Let's Encrypt failed or certificate expired</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ SSL Certificate Issues" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Let's Encrypt failed or certificate expired</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check certificate status
 sudo certbot certificates
 
@@ -138,9 +139,9 @@ sudo certbot renew --dry-run</code></pre>
     </div>
 
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 class="text-xl font-semibold text-gray-900 mb-3">❌ Emails Not Sending</h3>
-      <p class="text-gray-700 mb-3"><strong>Cause:</strong> SMTP server not configured or firewall blocking</p>
-      <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Emails Not Sending" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> SMTP server not configured or firewall blocking</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Test SMTP connection
 telnet localhost 1025
 
@@ -158,11 +159,11 @@ python manage.py shell
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Debugging Tips</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Debugging Tips" %}</h2>
 
   <div class="space-y-4">
     <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
-      <h3 class="text-lg font-semibold text-blue-900 mb-2">📋 Check All Logs</h3>
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "📋 Check All Logs" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Gunicorn logs
 sudo journalctl -u dripemails -f
 
@@ -180,14 +181,14 @@ sudo supervisorctl tail -f dripemails-celery-worker</code></pre>
     </div>
 
     <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
-      <h3 class="text-lg font-semibold text-blue-900 mb-2">🔍 Enable Debug Mode Temporarily</h3>
-      <p class="text-blue-800 mb-2">Edit .env file:</p>
-      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>DEBUG=True</code></pre>
-      <p class="text-blue-800 mt-2"><strong>⚠️ Remember to disable debug mode after troubleshooting!</strong></p>
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "🔍 Enable Debug Mode Temporarily" %}</h3>
+      <p class="text-blue-800 mb-2">{% trans "Edit .env file:" %}</p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "DEBUG=True" %}</code></pre>
+      <p class="text-blue-800 mt-2"><strong>{% trans "⚠️ Remember to disable debug mode after troubleshooting!" %}</strong></p>
     </div>
 
     <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
-      <h3 class="text-lg font-semibold text-blue-900 mb-2">🔄 Restart All Services</h3>
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "🔄 Restart All Services" %}</h3>
       <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Restart everything
 sudo systemctl restart dripemails
 sudo systemctl restart nginx
@@ -196,14 +197,14 @@ sudo systemctl restart redis-server</code></pre>
     </div>
   </div>
 
-  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Getting Help</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Getting Help" %}</h2>
 
   <div class="bg-green-50 border-l-4 border-green-500 p-6">
-    <h3 class="text-lg font-semibold text-green-900 mb-2">💬 Need More Help?</h3>
+    <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "💬 Need More Help?" %}</h3>
     <ul class="list-disc pl-6 text-green-800 space-y-2">
       <li>Check the <a href="{% url 'core:resource_community' %}" class="underline font-semibold">community forums</a></li>
-      <li>Report issues on <a href="https://github.com/dripemails/web/issues" target="_blank" class="underline font-semibold">GitHub</a></li>
-      <li>Email us at <a href="mailto:founders@dripemails.org" class="underline font-semibold">founders@dripemails.org</a></li>
+      <li>Report issues on <a href="https://github.com/dripemails/web/issues" target="_blank" class="underline font-semibold">{% trans "GitHub" %}</a></li>
+      <li>Email us at <a href="mailto:{% trans "founders@dripemails.org" %}" class="underline font-semibold">founders@dripemails.org</a></li>
     </ul>
   </div>
 

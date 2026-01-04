@@ -57,33 +57,81 @@ def _html_to_plain_text(html_content):
     return html_content.strip()
 
 
-def _inject_tracking_pixel(html_content, tracking_id, subscriber_email):
-    """Inject tracking pixel into HTML email content."""
+def _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=None):
+    """Replace <hr/> tags with decorative separator image that also tracks opens."""
     from django.conf import settings
+    from core.context_processors import site_detection
+    import re
     
-    # Build tracking pixel URL
-    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
-    tracking_url = f"{base_url}/analytics/track/open/{tracking_id}/?email={subscriber_email}"
-    
-    # Create tracking pixel image tag
-    tracking_pixel = f'<img src="{tracking_url}" width="1" height="1" alt="" style="display:none;" />'
-    
-    # Try to inject before closing body tag, otherwise append to end
-    if '</body>' in html_content:
-        html_content = html_content.replace('</body>', f'{tracking_pixel}</body>')
+    # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
+    if base_url:
+        site_base_url = base_url
     else:
-        html_content += tracking_pixel
+        # Try to detect site from settings
+        try:
+            class MockRequest:
+                def get_host(self):
+                    return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+            
+            site_info = site_detection(MockRequest())
+            site_base_url = site_info['site_url']
+        except Exception:
+            # Fall back to DEFAULT_URL or SITE_URL
+            site_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Ensure base_url doesn't end with a slash (we'll add it in the path)
+    site_base_url = site_base_url.rstrip('/')
+    
+    # URL-encode the email and include it in the path instead of query string
+    from urllib.parse import quote
+    encoded_email = quote(subscriber_email, safe='')
+    # Clean URL that doesn't mention tracking or pixel - looks like a regular image
+    separator_url = f"{site_base_url}/analytics/message_split.gif?t={tracking_id}&e={encoded_email}"
+    
+    # Create decorative separator image (looks like an HR line, not a tracking pixel)
+    # This is a visible separator that also tracks opens
+    separator_img = f'<img src="{separator_url}" alt="" style="display:block; width:100%; height:2px; border:none; margin:20px 0; background:linear-gradient(to right, transparent, #e2e8f0, transparent);" />'
+    
+    # Replace all <hr> and <hr/> tags with the separator
+    # Match various HR tag formats: <hr>, <hr/>, <hr />, <HR>, etc.
+    hr_pattern = re.compile(r'<hr\s*/?>', re.IGNORECASE)
+    html_content = hr_pattern.sub(separator_img, html_content)
+    
+    # If no HR tags were found, inject separator before closing body tag for tracking
+    if not hr_pattern.search(html_content):
+        if '</body>' in html_content:
+            html_content = html_content.replace('</body>', f'{separator_img}</body>')
+        else:
+            html_content += separator_img
     
     return html_content
 
 
-def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email):
+def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=None):
     """Wrap all links in HTML content with tracking redirects."""
     from django.conf import settings
+    from core.context_processors import site_detection
     import re
     from urllib.parse import quote
     
-    base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
+    if base_url:
+        tracking_base_url = base_url
+    else:
+        # Try to detect site from settings
+        try:
+            class MockRequest:
+                def get_host(self):
+                    return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+            
+            site_info = site_detection(MockRequest())
+            tracking_base_url = site_info['site_url']
+        except Exception:
+            # Fall back to DEFAULT_URL or SITE_URL
+            tracking_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Ensure base_url doesn't end with a slash (we'll add it in the path)
+    tracking_base_url = tracking_base_url.rstrip('/')
     
     # Pattern to find <a> tags with href attributes
     link_pattern = re.compile(r'<a([^>]*?)href=["\']([^"\'>]+)["\']([^>]*?)>', re.IGNORECASE)
@@ -94,11 +142,11 @@ def _wrap_links_with_tracking(html_content, tracking_id, subscriber_email):
         after_href = match.group(3)
         
         # Skip if it's already a tracking link, mailto, or anchor link
-        if original_url.startswith(('#', 'mailto:', base_url)):
+        if original_url.startswith(('#', 'mailto:', tracking_base_url)):
             return match.group(0)
         
         # Create tracking URL
-        tracking_url = f"{base_url}/analytics/track/click/{tracking_id}/?email={subscriber_email}&url={quote(original_url)}"
+        tracking_url = f"{tracking_base_url}/analytics/track/click/{tracking_id}/?email={subscriber_email}&url={quote(original_url)}"
         
         return f'<a{before_href}href="{tracking_url}"{after_href}>'
     
@@ -210,21 +258,137 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     )
     tracking_id = str(sent_event.id)
     
-    # Inject tracking pixel and wrap links
-    html_content = _inject_tracking_pixel(html_content, tracking_id, subscriber_email)
-    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email)
+    # Get site information for tracking URLs
+    from core.context_processors import site_detection
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    
+    # Replace HR tags with separator image and wrap links
+    html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=site_url)
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=site_url)
     
     # If we have HTML content but no text content, convert HTML to plain text
     if html_content and not text_content:
         text_content = _html_to_plain_text(html_content)
     
+    # Add email footer if one is assigned
+    if email.footer:
+        footer_html = email.footer.html_content
+        # Replace variables in footer if needed
+        if variables:
+            for key, value in variables.items():
+                placeholder = f"{{{{{key}}}}}"
+                footer_html = footer_html.replace(placeholder, str(value))
+        html_content += footer_html
+        # Convert footer HTML to text for plain text version using proper HTML to text conversion
+        footer_text = _html_to_plain_text(footer_html)
+        if footer_text:
+            text_content += f"\n\n{footer_text}"
+    
+    # Get user email for From address
+    # Prefer user from request_obj if available, otherwise use campaign user
+    if request_obj and request_obj.user:
+        user_email = request_obj.user.email
+        user = request_obj.user
+    else:
+        user_email = email.campaign.user.email
+        user = email.campaign.user
+    
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    has_valid_spf = user_profile.spf_verified
+    show_ads = not user_profile.has_verified_promo
+    show_unsubscribe = not user_profile.send_without_unsubscribe
+    
+    # Get site information for unsubscribe links and tracking (already done above, reuse)
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
+    # Get subscriber UUID for unsubscribe link
+    subscriber_uuid = None
+    if request_obj and request_obj.subscriber:
+        subscriber_uuid = request_obj.subscriber.uuid
+    else:
+        # Try to find subscriber by email
+        from subscribers.models import Subscriber
+        try:
+            subscriber = Subscriber.objects.filter(email=subscriber_email).first()
+            if subscriber:
+                subscriber_uuid = subscriber.uuid
+        except Exception:
+            pass
+    
+    # Add unsubscribe link to email content if enabled
+    if show_unsubscribe and subscriber_uuid:
+        unsubscribe_url = f"{site_url}/unsubscribe/{subscriber_uuid}/"
+        
+        # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
+        address_lines = []
+        if user_profile.address_line1:
+            address_lines.append(user_profile.address_line1)
+        if user_profile.address_line2:
+            address_lines.append(user_profile.address_line2)
+        city_state = []
+        if user_profile.city:
+            city_state.append(user_profile.city)
+        if user_profile.state:
+            city_state.append(user_profile.state)
+        if city_state:
+            address_lines.append(', '.join(city_state))
+        postal_country = []
+        if user_profile.postal_code:
+            postal_country.append(user_profile.postal_code)
+        if user_profile.country:
+            postal_country.append(user_profile.country)
+        if postal_country:
+            address_lines.append(' '.join(postal_country))
+        
+        address_html = ''
+        address_text = ''
+        if address_lines:
+            address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
+            address_text = '\n' + '\n'.join(address_lines)
+        
+        # Add to HTML content with separator
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_url}">unsubscribe here</a>.</p>{address_html}'
+        html_content += unsubscribe_html
+        # Add to text content with separator
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}{address_text}"
+        text_content += unsubscribe_text
+    
+    # Add ads if required
+    if show_ads:
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
+        html_content += ads_html
+        text_content += f"\n\n{ads_text}"
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[subscriber_email]
+        from_email=user_email,
+        to=[subscriber_email],
+        bcc=[user_email]  # BCC the user so they can see emails being sent
     )
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    
+    # Add List-Unsubscribe headers if unsubscribe is enabled
+    if show_unsubscribe and subscriber_uuid:
+        unsubscribe_url = f"{site_url}/unsubscribe/{subscriber_uuid}/"
+        msg.extra_headers['List-Unsubscribe'] = f"<{unsubscribe_url}>"
+        msg.extra_headers['List-Unsubscribe-Post'] = "List-Unsubscribe=One-Click"
+    
     msg.attach_alternative(html_content, "text/html")
     
     try:
@@ -243,6 +407,13 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             request_obj.save(update_fields=['status', 'error_message', 'sent_at', 'updated_at'])
         
         logger.info(f"Sent single email '{subject}' to {subscriber_email}")
+        
+        # Schedule the next email in the campaign sequence
+        try:
+            schedule_next_email_in_sequence(email, request_obj, subscriber_email, variables)
+        except Exception as next_email_error:
+            # Log but don't fail the current email send if scheduling next email fails
+            logger.warning(f"Failed to schedule next email in sequence: {str(next_email_error)}")
     except Exception as e:
         logger.error(f"Error sending single email to {subscriber_email}: {str(e)}")
         if request_obj:
@@ -250,6 +421,85 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             request_obj.error_message = str(e)
             request_obj.save(update_fields=['status', 'error_message', 'updated_at'])
         raise
+
+
+def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email, variables):
+    """
+    Schedule the next email in the campaign sequence after an email is sent.
+    
+    Args:
+        current_email: The Email object that was just sent
+        request_obj: The EmailSendRequest object for the email that was sent
+        subscriber_email: The email address of the subscriber
+        variables: Variables dictionary for personalization
+    """
+    from .models import Email, EmailSendRequest
+    from subscribers.models import Subscriber
+    from datetime import timedelta
+    
+    # Get the campaign and current email order
+    campaign = current_email.campaign
+    
+    # Find the next email in the sequence (by order)
+    next_email = Email.objects.filter(
+        campaign=campaign,
+        order__gt=current_email.order
+    ).order_by('order').first()
+    
+    if not next_email:
+        logger.debug(f"No next email found in campaign '{campaign.name}' after email order {current_email.order}")
+        return
+    
+    # Get the subscriber object
+    subscriber = None
+    if request_obj and request_obj.subscriber:
+        subscriber = request_obj.subscriber
+    else:
+        # Try to find subscriber by email
+        try:
+            subscriber = Subscriber.objects.filter(email=subscriber_email).first()
+        except Exception:
+            pass
+    
+    if not subscriber:
+        logger.warning(f"Could not find subscriber for email {subscriber_email} to schedule next email")
+        return
+    
+    # Calculate scheduled time based on next email's wait_time and wait_unit
+    wait_time = next_email.wait_time or 1
+    wait_unit = next_email.wait_unit or 'days'
+    
+    send_delay = timedelta(0)
+    if wait_unit == 'minutes':
+        send_delay = timedelta(minutes=wait_time)
+    elif wait_unit == 'hours':
+        send_delay = timedelta(hours=wait_time)
+    elif wait_unit == 'days':
+        send_delay = timedelta(days=wait_time)
+    elif wait_unit == 'weeks':
+        send_delay = timedelta(weeks=wait_time)
+    elif wait_unit == 'months':
+        send_delay = timedelta(days=wait_time * 30)
+    
+    scheduled_for = timezone.now() + send_delay
+    
+    # Get user from request_obj or campaign
+    user = request_obj.user if request_obj else campaign.user
+    
+    # Create EmailSendRequest for the next email
+    next_send_request = EmailSendRequest.objects.create(
+        user=user,
+        campaign=campaign,
+        email=next_email,
+        subscriber=subscriber,
+        subscriber_email=subscriber_email,
+        variables=variables or {},
+        scheduled_for=scheduled_for,
+        status='pending'
+    )
+    
+    logger.info(f"Scheduled next email '{next_email.subject}' (order {next_email.order}) in campaign '{campaign.name}' "
+                f"for {subscriber_email} to be sent at {scheduled_for}")
 
 
 @shared_task
@@ -332,41 +582,108 @@ def send_campaign_email(email_id, subscriber_id):
     )
     tracking_id = str(sent_event.id)
     
-    # Generate tracking URLs
-    tracking_pixel = f'<img src="{settings.SITE_URL}/analytics/track/open/{tracking_id}/?email={subscriber.email}" width="1" height="1" alt="" style="display:none;" />'
-    unsubscribe_link = f"{settings.SITE_URL}/unsubscribe/{subscriber.uuid}/"
+    # Get site information for tracking and unsubscribe links
+    from core.context_processors import site_detection
+    class MockRequest:
+        def get_host(self):
+            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+    
+    site_info = site_detection(MockRequest())
+    site_url = site_info['site_url']
+    site_name = site_info['site_name']
+    site_logo = site_info['site_logo']
+    
+    # Generate URLs (clean, no mention of tracking or pixel)
+    from urllib.parse import quote
+    encoded_email = quote(subscriber.email, safe='')
+    unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with tracking
     html_content = email.body_html
     text_content = email.body_text
     
-    # Wrap all links with tracking
-    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email)
+    # Replace HR tags with separator image and wrap all links with tracking
+    html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)
+    html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email, base_url=site_url)
     
-    # Add tracking pixel to HTML content
-    html_content += tracking_pixel
+    # Add email footer if one is assigned
+    if email.footer:
+        footer_html = email.footer.html_content
+        html_content += footer_html
+        # Convert footer HTML to text for plain text version using proper HTML to text conversion
+        footer_text = _html_to_plain_text(footer_html)
+        if footer_text:
+            text_content += f"\n\n{footer_text}"
     
     # Add ads if required
     if show_ads:
-        ads_html = render_to_string('emails/ad_footer.html')
-        ads_text = "This email is powered by DripEmails.org - Free email marketing automation"
+        ads_html = render_to_string('emails/ad_footer.html', {
+            'site_url': site_url,
+            'site_name': site_name,
+            'site_logo': site_logo,
+        })
+        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
         text_content += f"\n\n{ads_text}"
     
     # Add unsubscribe link if required
     if show_unsubscribe:
-        unsubscribe_html = f'<p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>'
-        unsubscribe_text = f"\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}"
+        # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
+        address_lines = []
+        if user_profile.address_line1:
+            address_lines.append(user_profile.address_line1)
+        if user_profile.address_line2:
+            address_lines.append(user_profile.address_line2)
+        city_state = []
+        if user_profile.city:
+            city_state.append(user_profile.city)
+        if user_profile.state:
+            city_state.append(user_profile.state)
+        if city_state:
+            address_lines.append(', '.join(city_state))
+        postal_country = []
+        if user_profile.postal_code:
+            postal_country.append(user_profile.postal_code)
+        if user_profile.country:
+            postal_country.append(user_profile.country)
+        if postal_country:
+            address_lines.append(' '.join(postal_country))
+        
+        address_html = ''
+        address_text = ''
+        if address_lines:
+            address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
+            address_text = '\n' + '\n'.join(address_lines)
+        
+        unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>{address_html}'
+        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}{address_text}"
         html_content += unsubscribe_html
         text_content += unsubscribe_text
+    
+    # Get user email for From address
+    user_email = email.campaign.user.email
+    
+    # Check if user has valid SPF record
+    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
+    has_valid_spf = user_profile.spf_verified
     
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=email.subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[subscriber.email]
+        from_email=user_email,
+        to=[subscriber.email],
+        bcc=[user_email]  # BCC the user so they can see emails being sent
     )
+    # Only set Sender header if user doesn't have valid SPF record
+    if not has_valid_spf:
+        msg.extra_headers['Sender'] = settings.DEFAULT_FROM_EMAIL
+    
+    # Add List-Unsubscribe headers if unsubscribe is enabled
+    if show_unsubscribe:
+        msg.extra_headers['List-Unsubscribe'] = f"<{unsubscribe_link}>"
+        msg.extra_headers['List-Unsubscribe-Post'] = "List-Unsubscribe=One-Click"
+    
     msg.attach_alternative(html_content, "text/html")
     
     try:

@@ -1,0 +1,20 @@
+{% extends "account/email/base_message.html" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}
+{% user_display user as user_display %}
+<p>{% blocktrans with site_domain=current_site.domain %}You're receiving this email because user <strong>{{ user_display }}</strong> has given your email address to register an account on {{ site_domain }}.{% endblocktrans %}</p>
+
+<p>{% blocktrans %}To confirm this is correct, please click the button below:{% endblocktrans %}</p>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ activate_url }}" class="button">{% trans "Confirm Email Address" %}</a>
+</div>
+
+<p style="font-size: 14px; color: #718096;">
+    {% blocktrans %}Or copy and paste this link into your browser:{% endblocktrans %}<br>
+    <a href="{{ activate_url }}" style="color: #667eea; word-break: break-all;">{{ activate_url }}</a>
+</p>
+{% endblock content %}
+

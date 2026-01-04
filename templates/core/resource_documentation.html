@@ -1,91 +1,92 @@
 {% extends "core/docs/base_docs.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block doc_title %}Documentation Overview{% endblock %}
 
 {% block doc_content %}
 <div class="prose max-w-none">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">Welcome to DripEmails Documentation</h1>
-  <p class="text-lg text-gray-600 mb-8">Everything you need to know to master email marketing with DripEmails.org</p>
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Welcome to DripEmails Documentation" %}</h1>
+  <p class="text-lg text-gray-600 mb-8">{% trans "Everything you need to know to master email marketing with DripEmails.org" %}</p>
 
   <!-- Topics Grid -->
-  <h2 class="text-2xl font-bold text-gray-900 mb-6">Documentation Topics</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">{% trans "Documentation Topics" %}</h2>
   <div class="grid md:grid-cols-2 gap-6 mb-12">
     <!-- Getting Started -->
     <a href="{% url 'core:docs_getting_started' %}" class="block bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">🚀</span>
-        <h3 class="text-xl font-semibold text-gray-900">Getting Started</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Getting Started" %}</h3>
       </div>
-      <p class="text-gray-700">Quick start guide to set up your account and send your first campaign</p>
+      <p class="text-gray-700">{% trans "Quick start guide to set up your account and send your first campaign" %}</p>
     </a>
 
     <!-- Campaigns -->
     <a href="{% url 'core:docs_campaigns' %}" class="block bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">📧</span>
-        <h3 class="text-xl font-semibold text-gray-900">Campaign Management</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Campaign Management" %}</h3>
       </div>
-      <p class="text-gray-700">Create, manage, and optimize your email campaigns</p>
+      <p class="text-gray-700">{% trans "Create, manage, and optimize your email campaigns" %}</p>
     </a>
 
     <!-- Subscribers -->
     <a href="{% url 'core:docs_subscribers' %}" class="block bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">👥</span>
-        <h3 class="text-xl font-semibold text-gray-900">Subscriber Management</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Subscriber Management" %}</h3>
       </div>
-      <p class="text-gray-700">Import, organize, and segment your subscriber lists</p>
+      <p class="text-gray-700">{% trans "Import, organize, and segment your subscriber lists" %}</p>
     </a>
 
     <!-- Templates -->
     <a href="{% url 'core:docs_templates' %}" class="block bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">📝</span>
-        <h3 class="text-xl font-semibold text-gray-900">Email Templates</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Email Templates" %}</h3>
       </div>
-      <p class="text-gray-700">Design beautiful, responsive email templates</p>
+      <p class="text-gray-700">{% trans "Design beautiful, responsive email templates" %}</p>
     </a>
 
     <!-- Analytics -->
     <a href="{% url 'core:docs_analytics' %}" class="block bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">📊</span>
-        <h3 class="text-xl font-semibold text-gray-900">Analytics & Tracking</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Analytics & Tracking" %}</h3>
       </div>
-      <p class="text-gray-700">Track opens, clicks, and campaign performance</p>
+      <p class="text-gray-700">{% trans "Track opens, clicks, and campaign performance" %}</p>
     </a>
 
     <!-- AI Features -->
     <a href="{% url 'core:docs_ai_features' %}" class="block bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">🤖</span>
-        <h3 class="text-xl font-semibold text-gray-900">AI Features</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "AI Features" %}</h3>
       </div>
-      <p class="text-gray-700">Generate and optimize email content with AI</p>
+      <p class="text-gray-700">{% trans "Generate and optimize email content with AI" %}</p>
     </a>
 
     <!-- SMTP Server -->
     <a href="{% url 'core:docs_smtp_server' %}" class="block bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">📮</span>
-        <h3 class="text-xl font-semibold text-gray-900">SMTP Server</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "SMTP Server" %}</h3>
       </div>
-      <p class="text-gray-700">Configure and manage the built-in SMTP server</p>
+      <p class="text-gray-700">{% trans "Configure and manage the built-in SMTP server" %}</p>
     </a>
 
     <!-- Deployment -->
     <a href="{% url 'core:docs_deployment' %}" class="block bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       <div class="flex items-center mb-3">
         <span class="text-3xl mr-3">🚀</span>
-        <h3 class="text-xl font-semibold text-gray-900">Deployment</h3>
+        <h3 class="text-xl font-semibold text-gray-900">{% trans "Deployment" %}</h3>
       </div>
-      <p class="text-gray-700">Deploy DripEmails to production servers</p>
+      <p class="text-gray-700">{% trans "Deploy DripEmails to production servers" %}</p>
     </a>
   </div>
 
   <!-- Popular Topics -->
-  <h2 class="text-2xl font-bold text-gray-900 mb-6">Popular Topics</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">{% trans "Popular Topics" %}</h2>
   <div class="bg-white border-2 border-gray-200 rounded-lg p-6 mb-8">
     <ul class="space-y-3">
       <li>
@@ -118,8 +119,8 @@
 
   <!-- Need Help? -->
   <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded">
-    <h3 class="text-lg font-semibold text-indigo-900 mb-2">Need More Help?</h3>
-    <p class="text-indigo-800 mb-4">Can't find what you're looking for? We're here to help!</p>
+    <h3 class="text-lg font-semibold text-indigo-900 mb-2">{% trans "Need More Help?" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Can't find what you're looking for? We're here to help!" %}</p>
     <div class="flex gap-4">
       <a href="{% url 'core:resource_tutorials' %}" class="text-indigo-600 hover:underline font-medium">Video Tutorials</a>
       <a href="{% url 'core:resource_api_reference' %}" class="text-indigo-600 hover:underline font-medium">API Reference</a>

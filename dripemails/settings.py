@@ -20,7 +20,9 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, ''),
     EMAIL_USE_TLS=(bool, False),
     DEFAULT_FROM_EMAIL=(str, 'DripEmails <noreply@dripemails.org>'),
+    FOUNDERS_EMAIL=(str, 'founders@dripemails.org'),
     SITE_URL=(str, 'http://localhost:8000'),
+    DEFAULT_URL=(str, 'http://localhost:8000/'),
     CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
     CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
     CELERY_RESULT_BACKEND=(str, 'django-db'),
@@ -92,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.current_year',
+                'core.context_processors.site_detection',
             ],
         },
     },
@@ -137,6 +140,87 @@ LANGUAGES = [
     ('es', _('Spanish')),
     ('fr', _('French')),
     ('de', _('German')),
+    ('it', _('Italian')),
+    ('pt', _('Portuguese')),
+    ('pt-br', _('Portuguese (Brazil)')),
+    ('ru', _('Russian')),
+    ('zh-hans', _('Chinese (Simplified)')),
+    ('zh-hant', _('Chinese (Traditional)')),
+    ('ja', _('Japanese')),
+    ('ko', _('Korean')),
+    ('ar', _('Arabic')),
+    ('hi', _('Hindi')),
+    ('tr', _('Turkish')),
+    ('pl', _('Polish')),
+    ('nl', _('Dutch')),
+    ('sv', _('Swedish')),
+    ('da', _('Danish')),
+    ('no', _('Norwegian')),
+    ('fi', _('Finnish')),
+    ('cs', _('Czech')),
+    ('ro', _('Romanian')),
+    ('hu', _('Hungarian')),
+    ('el', _('Greek')),
+    ('he', _('Hebrew')),
+    ('th', _('Thai')),
+    ('vi', _('Vietnamese')),
+    ('id', _('Indonesian')),
+    ('ms', _('Malay')),
+    ('uk', _('Ukrainian')),
+    ('bg', _('Bulgarian')),
+    ('hr', _('Croatian')),
+    ('sr', _('Serbian')),
+    ('sk', _('Slovak')),
+    ('sl', _('Slovenian')),
+    ('lt', _('Lithuanian')),
+    ('lv', _('Latvian')),
+    ('et', _('Estonian')),
+    ('is', _('Icelandic')),
+    ('ga', _('Irish')),
+    ('mt', _('Maltese')),
+    ('ca', _('Catalan')),
+    ('eu', _('Basque')),
+    ('gl', _('Galician')),
+    ('cy', _('Welsh')),
+    ('fa', _('Persian')),
+    ('ur', _('Urdu')),
+    ('bn', _('Bengali')),
+    ('ta', _('Tamil')),
+    ('te', _('Telugu')),
+    ('mr', _('Marathi')),
+    ('gu', _('Gujarati')),
+    ('kn', _('Kannada')),
+    ('ml', _('Malayalam')),
+    ('pa', _('Punjabi')),
+    ('ne', _('Nepali')),
+    ('si', _('Sinhala')),
+    ('my', _('Burmese')),
+    ('km', _('Khmer')),
+    ('lo', _('Lao')),
+    ('ka', _('Georgian')),
+    ('hy', _('Armenian')),
+    ('az', _('Azerbaijani')),
+    ('kk', _('Kazakh')),
+    ('ky', _('Kyrgyz')),
+    ('uz', _('Uzbek')),
+    ('mn', _('Mongolian')),
+    ('sw', _('Swahili')),
+    ('af', _('Afrikaans')),
+    ('zu', _('Zulu')),
+    ('xh', _('Xhosa')),
+    ('am', _('Amharic')),
+    ('ha', _('Hausa')),
+    ('yo', _('Yoruba')),
+    ('ig', _('Igbo')),
+    ('sn', _('Shona')),
+    ('st', _('Sotho')),
+    ('tn', _('Tswana')),
+    ('ve', _('Venda')),
+    ('ts', _('Tsonga')),
+    ('ss', _('Swati')),
+    ('nr', _('Ndebele')),
+    ('nso', _('Northern Sotho')),
+    ('eo', _('Esperanto')),
 ]
 
 # Location of translation files
@@ -172,7 +256,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # For development, make email verification optional; for production use 'mandatory'
-ACCOUNT_EMAIL_VERIFICATION = 'optional' if DEBUG else 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none' #was mandatory now none
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -189,6 +273,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+FOUNDERS_EMAIL = env('FOUNDERS_EMAIL', default='founders@dripemails.org')
 
 # For local development on Windows, make authentication optional
 # If EMAIL_HOST_USER is empty, Django won't use authentication
@@ -247,6 +332,7 @@ CORS_ALLOWED_ORIGINS = [
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'core.authentication.BearerTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
@@ -259,3 +345,10 @@ REST_FRAMEWORK = {
 
 # Site URL for absolute URLs
 SITE_URL = env('SITE_URL')
+
+# CSRF settings for language-prefixed URLs
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access
+CSRF_USE_SESSIONS = False  # Use cookie-based CSRF tokens
+CSRF_COOKIE_SAMESITE = 'Lax'  # Allow CSRF token to work across language prefixes
+CSRF_COOKIE_PATH = '/'  # Make CSRF cookie available for all paths including language prefixes

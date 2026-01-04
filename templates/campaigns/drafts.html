@@ -31,7 +31,7 @@
             <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>
               {{ c.name }}
               {% if c.is_active %}
-                <span class="text-green-600">(Active)</span>
+                <span class="text-green-600">{% trans "(Active)" %}</span>
               {% endif %}
             </option>
           {% endfor %}

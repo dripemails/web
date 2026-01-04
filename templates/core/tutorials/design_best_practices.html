@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Email Design Best Practices - DripEmails.org{% endblock %}
 {% block content %}
@@ -8,152 +9,152 @@
       <div class="mb-4">
         <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
-      <h1 class="text-4xl font-bold mb-4">🎨 Email Design Best Practices</h1>
-      <p class="text-xl text-white text-opacity-90">Create emails that look great and drive results</p>
-      <p class="text-white text-opacity-80 mt-2">⏱️ 15 min read</p>
+      <h1 class="text-4xl font-bold mb-4">{% trans "🎨 Email Design Best Practices" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Create emails that look great and drive results" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 15 min read" %}</p>
     </div>
   </div>
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
       <div class="prose max-w-none">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">The Foundation of Great Email Design</h2>
-        <p class="text-gray-700 mb-6">Well-designed emails get opened, read, and clicked. This guide covers proven principles for creating emails that perform.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "The Foundation of Great Email Design" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Well-designed emails get opened, read, and clicked. This guide covers proven principles for creating emails that perform." %}</p>
 
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <p class="text-blue-900"><strong>💡 Pro Tip:</strong> 60% of emails are opened on mobile devices. Always design mobile-first.</p>
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> 60% of emails are opened on mobile devices. Always design mobile-first.</p>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Layout and Structure</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Layout and Structure" %}</h3>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-3 text-gray-700">
-            <li><strong>Single column layout:</strong> Works best on all devices</li>
-            <li><strong>Clear hierarchy:</strong> Use headings to guide readers</li>
-            <li><strong>Logical flow:</strong> Most important content first</li>
-            <li><strong>White space:</strong> Don't cram too much content</li>
-            <li><strong>Scannable:</strong> Use bullets, short paragraphs</li>
+            <li><strong>{% trans "Single column layout:" %}</strong> Works best on all devices</li>
+            <li><strong>{% trans "Clear hierarchy:" %}</strong> Use headings to guide readers</li>
+            <li><strong>{% trans "Logical flow:" %}</strong> Most important content first</li>
+            <li><strong>{% trans "White space:" %}</strong> Don't cram too much content</li>
+            <li><strong>{% trans "Scannable:" %}</strong> Use bullets, short paragraphs</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Color and Branding</h3>
-        <p class="text-gray-700 mb-4">Consistent branding builds recognition and trust:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Color and Branding" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Consistent branding builds recognition and trust:" %}</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
           <li>Use your brand colors (2-3 primary colors)</li>
-          <li>Ensure sufficient contrast for readability</li>
-          <li>Avoid bright backgrounds that hurt eyes</li>
-          <li>Use color strategically to highlight CTAs</li>
+          <li>{% trans "Ensure sufficient contrast for readability" %}</li>
+          <li>{% trans "Avoid bright backgrounds that hurt eyes" %}</li>
+          <li>{% trans "Use color strategically to highlight CTAs" %}</li>
           <li>Keep background simple (usually white or light gray)</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Typography</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Typography" %}</h3>
         <div class="space-y-4 mb-6">
           <div class="border-l-4 border-blue-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Font Choices</h4>
-            <p class="text-gray-700">Stick to web-safe fonts: Arial, Georgia, Helvetica, Times New Roman, Verdana</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Font Choices" %}</h4>
+            <p class="text-gray-700">{% trans "Stick to web-safe fonts: Arial, Georgia, Helvetica, Times New Roman, Verdana" %}</p>
           </div>
           <div class="border-l-4 border-green-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Font Sizes</h4>
-            <p class="text-gray-700">Body text: 14-16px | Headlines: 22-28px | Minimum: 14px for readability</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Font Sizes" %}</h4>
+            <p class="text-gray-700">{% trans "Body text: 14-16px | Headlines: 22-28px | Minimum: 14px for readability" %}</p>
           </div>
           <div class="border-l-4 border-purple-500 pl-4">
-            <h4 class="font-semibold text-gray-900">Line Height</h4>
-            <p class="text-gray-700">Use 1.5-1.7 line height for comfortable reading</p>
+            <h4 class="font-semibold text-gray-900">{% trans "Line Height" %}</h4>
+            <p class="text-gray-700">{% trans "Use 1.5-1.7 line height for comfortable reading" %}</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Images</h3>
-        <p class="text-gray-700 mb-4">Use images wisely:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Images" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Use images wisely:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
-            <li><strong>Optimize size:</strong> Keep under 1MB per image</li>
-            <li><strong>Alt text:</strong> Always include descriptive alt text</li>
-            <li><strong>Relevant:</strong> Images should support your message</li>
-            <li><strong>Responsive:</strong> Images should resize on mobile</li>
-            <li><strong>Format:</strong> Use JPG for photos, PNG for graphics</li>
-            <li><strong>Balance:</strong> Don't make emails image-only (spam filters)</li>
+            <li><strong>{% trans "Optimize size:" %}</strong> Keep under 1MB per image</li>
+            <li><strong>{% trans "Alt text:" %}</strong> Always include descriptive alt text</li>
+            <li><strong>{% trans "Relevant:" %}</strong> Images should support your message</li>
+            <li><strong>{% trans "Responsive:" %}</strong> Images should resize on mobile</li>
+            <li><strong>{% trans "Format:" %}</strong> Use JPG for photos, PNG for graphics</li>
+            <li><strong>{% trans "Balance:" %}</strong> Don't make emails image-only (spam filters)</li>
           </ul>
         </div>
 
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
-          <p class="text-yellow-900"><strong>⚠️ Important:</strong> Many email clients block images by default. Your email should make sense without images.</p>
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> Many email clients block images by default. Your email should make sense without images.</p>
         </div>
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Call-to-Action (CTA) Design</h3>
-        <p class="text-gray-700 mb-4">Your CTA is the most important element:</p>
+        <p class="text-gray-700 mb-4">{% trans "Your CTA is the most important element:" %}</p>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>One primary CTA:</strong> Don't confuse readers with multiple options</li>
-          <li><strong>Button style:</strong> Use button-styled links, not plain text</li>
-          <li><strong>Contrasting color:</strong> Make it stand out</li>
-          <li><strong>Action-oriented text:</strong> "Get Started", "Download Now", "Shop Sale"</li>
-          <li><strong>Size:</strong> Large enough to tap on mobile (44x44px minimum)</li>
-          <li><strong>Placement:</strong> Above the fold and repeated if email is long</li>
+          <li><strong>{% trans "One primary CTA:" %}</strong> Don't confuse readers with multiple options</li>
+          <li><strong>{% trans "Button style:" %}</strong> Use button-styled links, not plain text</li>
+          <li><strong>{% trans "Contrasting color:" %}</strong> Make it stand out</li>
+          <li><strong>{% trans "Action-oriented text:" %}</strong> "Get Started", "Download Now", "Shop Sale"</li>
+          <li><strong>{% trans "Size:" %}</strong> Large enough to tap on mobile (44x44px minimum)</li>
+          <li><strong>{% trans "Placement:" %}</strong> Above the fold and repeated if email is long</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Mobile Optimization</h3>
-        <p class="text-gray-700 mb-4">Essential mobile design principles:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Mobile Optimization" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Essential mobile design principles:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ol class="list-decimal list-inside space-y-2 text-gray-700">
-            <li>Use single-column layouts</li>
-            <li>Make text at least 14px</li>
+            <li>{% trans "Use single-column layouts" %}</li>
+            <li>{% trans "Make text at least 14px" %}</li>
             <li>Use large, tappable buttons (minimum 44x44px)</li>
-            <li>Keep subject lines under 40 characters</li>
-            <li>Front-load important content</li>
-            <li>Test on actual mobile devices</li>
+            <li>{% trans "Keep subject lines under 40 characters" %}</li>
+            <li>{% trans "Front-load important content" %}</li>
+            <li>{% trans "Test on actual mobile devices" %}</li>
           </ol>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Content Guidelines</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Content Guidelines" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
-          <li><strong>Concise:</strong> Get to the point quickly</li>
-          <li><strong>Scannable:</strong> Use headings, bullets, short paragraphs</li>
-          <li><strong>Personal:</strong> Use "you" and personalization tags</li>
-          <li><strong>Value-focused:</strong> Lead with benefits, not features</li>
-          <li><strong>Clear:</strong> Avoid jargon and complexity</li>
-          <li><strong>Urgent (when appropriate):</strong> Create FOMO with limited offers</li>
+          <li><strong>{% trans "Concise:" %}</strong> Get to the point quickly</li>
+          <li><strong>{% trans "Scannable:" %}</strong> Use headings, bullets, short paragraphs</li>
+          <li><strong>{% trans "Personal:" %}</strong> Use "you" and personalization tags</li>
+          <li><strong>{% trans "Value-focused:" %}</strong> Lead with benefits, not features</li>
+          <li><strong>{% trans "Clear:" %}</strong> Avoid jargon and complexity</li>
+          <li><strong>Urgent (when appropriate):</strong> {% trans "Create FOMO with limited offers" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Accessibility</h3>
-        <p class="text-gray-700 mb-4">Make emails accessible to everyone:</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Accessibility" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Make emails accessible to everyone:" %}</p>
         <div class="bg-gray-50 p-4 rounded-lg mb-6">
           <ul class="list-disc list-inside space-y-2 text-gray-700">
             <li>Use sufficient color contrast (4.5:1 ratio)</li>
-            <li>Add alt text to all images</li>
-            <li>Use semantic HTML headings</li>
-            <li>Avoid all-caps text</li>
+            <li>{% trans "Add alt text to all images" %}</li>
+            <li>{% trans "Use semantic HTML headings" %}</li>
+            <li>{% trans "Avoid all-caps text" %}</li>
             <li>Make links descriptive (not "click here")</li>
-            <li>Test with screen readers when possible</li>
+            <li>{% trans "Test with screen readers when possible" %}</li>
           </ul>
         </div>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Mistakes to Avoid</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Common Mistakes to Avoid" %}</h3>
         <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
           <li>❌ Too much text (keep it under 200 words)</li>
-          <li>❌ Multiple CTAs competing for attention</li>
-          <li>❌ Images without alt text</li>
+          <li>{% trans "❌ Multiple CTAs competing for attention" %}</li>
+          <li>{% trans "❌ Images without alt text" %}</li>
           <li>❌ Tiny fonts (under 14px)</li>
-          <li>❌ Too many different fonts or colors</li>
-          <li>❌ No mobile testing before sending</li>
-          <li>❌ Ignoring email client differences</li>
+          <li>{% trans "❌ Too many different fonts or colors" %}</li>
+          <li>{% trans "❌ No mobile testing before sending" %}</li>
+          <li>{% trans "❌ Ignoring email client differences" %}</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Testing Your Designs</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Testing Your Designs" %}</h3>
         <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
-          <li>Send test emails to yourself</li>
+          <li>{% trans "Send test emails to yourself" %}</li>
           <li>Check on multiple devices (phone, tablet, desktop)</li>
           <li>Test in different email clients (Gmail, Outlook, Apple Mail)</li>
-          <li>Verify all links work</li>
-          <li>Check image display and alt text</li>
-          <li>Read through for typos and errors</li>
+          <li>{% trans "Verify all links work" %}</li>
+          <li>{% trans "Check image display and alt text" %}</li>
+          <li>{% trans "Read through for typos and errors" %}</li>
         </ol>
 
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h3>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <a href="{% url 'core:tutorial_email_editor' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
-            <h4 class="font-semibold text-purple-900">Using the Email Editor</h4>
-            <p class="text-sm text-purple-700">Apply these principles</p>
+            <h4 class="font-semibold text-purple-900">{% trans "Using the Email Editor" %}</h4>
+            <p class="text-sm text-purple-700">{% trans "Apply these principles" %}</p>
           </a>
           <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
-            <h4 class="font-semibold text-indigo-900">Understanding Email Analytics</h4>
-            <p class="text-sm text-indigo-700">Measure design effectiveness</p>
+            <h4 class="font-semibold text-indigo-900">{% trans "Understanding Email Analytics" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Measure design effectiveness" %}</p>
           </a>
         </div>
       </div>

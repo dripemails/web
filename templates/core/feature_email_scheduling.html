@@ -7,23 +7,129 @@
 <div class="max-w-4xl mx-auto py-12 px-4">
     <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Email Scheduling" %}</h1>
     <p class="text-lg text-gray-700 mb-8">{% trans "Plan and schedule your emails in advance. Ensure your messages reach your audience at the perfect time, every time." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
-        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "Why Schedule Emails?" %}</h2>
-            <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                <li>{% trans "Maximize open rates by sending at optimal times." %}</li>
-                <li>{% trans "Never miss a holiday, event, or important date." %}</li>
-                <li>{% trans "Automate recurring newsletters and announcements." %}</li>
-                <li>{% trans "Save time and reduce manual work." %}</li>
-            </ul>
-        </div>
-        <div class="flex-1 flex justify-center">
-            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
-                <circle cx="50" cy="50" r="45" stroke-width="6" class="text-indigo-200" />
-                <rect x="40" y="30" width="20" height="40" rx="4" stroke-width="6" />
-                <circle cx="50" cy="50" r="6" fill="currentColor" />
-            </svg>
+    
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Why Schedule Emails?" %}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Maximize Open Rates" %}</h3>
+                <p class="text-gray-700">{% trans "Send emails at optimal times when your audience is most likely to open and engage. Schedule for specific time zones or business hours." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Never Miss Important Dates" %}</h3>
+                <p class="text-gray-700">{% trans "Plan ahead for holidays, product launches, events, or announcements. Set it and forget it - your emails will send automatically." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Automate Recurring Content" %}</h3>
+                <p class="text-gray-700">{% trans "Schedule weekly newsletters, monthly updates, or regular reminders. Maintain consistent communication without manual work." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Save Time" %}</h3>
+                <p class="text-gray-700">{% trans "Batch your email creation and schedule them all at once. Work ahead and let the system handle delivery at the right time." %}</p>
+            </div>
         </div>
     </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "How to Schedule Emails" %}</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Method 1: Quick Send Form (Dashboard)" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Go to your" %} <strong>{% trans "Dashboard" %}</strong></li>
+                    <li>{% trans "Use the" %} <strong>"{% trans "Send Email" %}"</strong> {% trans "form" %}</li>
+                    <li>{% trans "Select a campaign and email template" %}</li>
+                    <li>{% trans "Choose your scheduling option:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li><strong>{% trans "Send Now" %}</strong> - {% trans "Immediate delivery" %}</li>
+                            <li><strong>{% trans "Send in X Minutes" %}</strong> - {% trans "Delay by minutes (1-59)" %}</li>
+                            <li><strong>{% trans "Send in X Hours" %}</strong> - {% trans "Delay by hours (1-23)" %}</li>
+                            <li><strong>{% trans "Send in X Days" %}</strong> - {% trans "Delay by days (1-365)" %}</li>
+                            <li><strong>{% trans "Send in X Weeks" %}</strong> - {% trans "Delay by weeks (1-52)" %}</li>
+                            <li><strong>{% trans "Send in X Months" %}</strong> - {% trans "Delay by months (1-12)" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Enter the delay value (if not sending now)" %}</li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Send Email" %}"</strong></li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/dashboard/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Method 2: Drip Campaign Wait Times" %}</h3>
+                <p class="text-gray-700 mb-4">{% trans "When creating email templates in drip campaigns, you can set wait times that automatically schedule emails in the sequence:" %}</p>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Campaigns → Template Editor" %}</strong></li>
+                    <li>{% trans "Set the" %} <strong>"{% trans "Wait Time" %}"</strong> {% trans "field (number)" %}</li>
+                    <li>{% trans "Select the" %} <strong>"{% trans "Wait Unit" %}</strong> {% trans "from:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Minutes" %}</li>
+                            <li>{% trans "Hours" %}</li>
+                            <li>{% trans "Days" %}</li>
+                            <li>{% trans "Weeks" %}</li>
+                            <li>{% trans "Months" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Set the" %} <strong>"{% trans "Order" %}"</strong> {% trans "to determine sequence position" %}</li>
+                    <li>{% trans "When the previous email is sent, the next email automatically schedules based on its wait time" %}</li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/template/&lt;campaign_id&gt;/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Method 3: API Scheduling" %}</h3>
+                <p class="text-gray-700 mb-4">{% trans "Use the REST API to schedule emails programmatically:" %}</p>
+                <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto">
+                    <pre>POST /api/send-email/
+{
+  "campaign_id": "uuid",
+  "email_template_id": "uuid",
+  "subscriber_email": "user@example.com",
+  "schedule": "days",
+  "schedule_value": 3
+}</pre>
+                </div>
+                <p class="text-sm text-gray-600">{% trans "Schedule options: 'now', 'minutes', 'hours', 'days', 'weeks', 'months', 'seconds'" %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Scheduling Features" %}</h2>
+        <div class="space-y-4">
+            <div class="border-l-4 border-green-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Flexible Time Units" %}</h3>
+                <p class="text-gray-700">{% trans "Schedule emails in minutes, hours, days, weeks, or months. Perfect for any campaign timeline, from immediate follow-ups to long-term nurturing." %}</p>
+            </div>
+            <div class="border-l-4 border-blue-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Automatic Processing" %}</h3>
+                <p class="text-gray-700">{% trans "Scheduled emails are processed automatically by the system. No manual intervention needed - emails send at the scheduled time." %}</p>
+            </div>
+            <div class="border-l-4 border-purple-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Queue Management" %}</h3>
+                <p class="text-gray-700">{% trans "All scheduled emails appear in your dashboard's \"Recent Send Activity\" section. Monitor scheduled sends and track delivery status." %}</p>
+            </div>
+            <div class="border-l-4 border-orange-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Fallback Support" %}</h3>
+                <p class="text-gray-700">{% trans "If Celery/Redis is not available (e.g., Windows development), emails scheduled for the future will send immediately with a notification. Production environments with Celery/Redis use proper scheduling." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r mb-8">
+        <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "💡 Pro Tips" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-yellow-900">
+            <li>{% trans "Test your scheduled emails by sending to yourself first" %}</li>
+            <li>{% trans "Consider time zones when scheduling - emails send based on server time" %}</li>
+            <li>{% trans "Use drip campaign wait times for automated sequences rather than manual scheduling" %}</li>
+            <li>{% trans "Monitor scheduled emails in the dashboard to ensure they're processing correctly" %}</li>
+        </ul>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="{% url 'core:dashboard' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+            {% trans "Schedule an Email Now" %}
+        </a>
+    </div>
 </div>
-{% endblock %} 
+{% endblock %}

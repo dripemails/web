@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from core.authentication import BearerTokenAuthentication
 from rest_framework.response import Response
 from .models import Campaign, Email, EmailEvent, EmailAIAnalysis
 from django.urls import reverse
@@ -61,6 +62,13 @@ def campaign_detail(request, campaign_id):
 @permission_classes([IsAuthenticated])
 def email_list_create(request, campaign_id):
     """List all emails in a campaign or create a new one."""
+    from django.utils import timezone
+    from datetime import timedelta
+    from campaigns.models import EmailSendRequest
+    from subscribers.models import Subscriber
+    import logging
+    
+    logger = logging.getLogger(__name__)
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     
     if request.method == 'GET':
@@ -76,6 +84,63 @@ def email_list_create(request, campaign_id):
         serializer = EmailSerializer(data=data, context={'request': request})
         if serializer.is_valid():
             email = serializer.save(campaign=campaign)
+            
+            # Check if campaign has already sent any emails
+            has_sent_emails = EmailSendRequest.objects.filter(
+                campaign=campaign,
+                status='sent'
+            ).exists()
+            
+            # If campaign has sent emails, automatically schedule this new email to all active subscribers
+            if has_sent_emails and campaign.subscriber_list:
+                # Get all active subscribers from the campaign's subscriber list
+                active_subscribers = Subscriber.objects.filter(
+                    lists=campaign.subscriber_list,
+                    is_active=True
+                ).distinct()
+                
+                if active_subscribers.exists():
+                    # Calculate scheduled_for time based on email's wait_time and wait_unit
+                    wait_time = email.wait_time or 1
+                    wait_unit = email.wait_unit or 'days'
+                    
+                    send_delay = timedelta(0)
+                    if wait_unit == 'minutes':
+                        send_delay = timedelta(minutes=wait_time)
+                    elif wait_unit == 'hours':
+                        send_delay = timedelta(hours=wait_time)
+                    elif wait_unit == 'days':
+                        send_delay = timedelta(days=wait_time)
+                    elif wait_unit == 'weeks':
+                        send_delay = timedelta(weeks=wait_time)
+                    elif wait_unit == 'months':
+                        send_delay = timedelta(days=wait_time * 30)
+                    
+                    scheduled_for = timezone.now() + send_delay
+                    
+                    # Create EmailSendRequest for each active subscriber
+                    send_requests = []
+                    for subscriber in active_subscribers:
+                        variables = {
+                            'first_name': subscriber.first_name or '',
+                            'last_name': subscriber.last_name or '',
+                            'email': subscriber.email
+                        }
+                        
+                        send_request = EmailSendRequest.objects.create(
+                            user=request.user,
+                            campaign=campaign,
+                            email=email,
+                            subscriber=subscriber,
+                            subscriber_email=subscriber.email,
+                            variables=variables,
+                            scheduled_for=scheduled_for,
+                            status='pending'
+                        )
+                        send_requests.append(send_request)
+                    
+                    logger.info(f"Auto-scheduled email '{email.subject}' to {len(send_requests)} active subscribers in campaign '{campaign.name}'")
+            
             return Response(serializer.data, status=201)
         return Response({'error': 'Validation failed', 'details': serializer.errors}, status=400)
 
@@ -92,9 +157,86 @@ def email_detail(request, campaign_id, email_id):
         return Response(serializer.data)
     
     elif request.method == 'PUT':
+        from .models import EmailSendRequest
+        from subscribers.models import Subscriber
+        from django.utils import timezone
+        from datetime import timedelta
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
         serializer = EmailSerializer(email, data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            email = serializer.save()
+            
+            # Check if campaign has already sent any emails
+            has_sent_emails = EmailSendRequest.objects.filter(
+                campaign=campaign,
+                status='sent'
+            ).exists()
+            
+            # Check if this email has already been sent or scheduled to all active subscribers
+            # If not, and campaign has sent emails, schedule it to all active subscribers
+            if has_sent_emails and campaign.subscriber_list:
+                # Get all active subscribers from the campaign's subscriber list
+                active_subscribers = Subscriber.objects.filter(
+                    lists=campaign.subscriber_list,
+                    is_active=True
+                ).distinct()
+                
+                if active_subscribers.exists():
+                    # Check if this email has already been sent/scheduled to all active subscribers
+                    existing_requests = EmailSendRequest.objects.filter(
+                        email=email,
+                        subscriber__in=active_subscribers,
+                        status__in=['sent', 'pending', 'queued']
+                    ).values_list('subscriber_id', flat=True)
+                    
+                    # Find subscribers who haven't received this email yet
+                    subscribers_to_schedule = active_subscribers.exclude(id__in=existing_requests)
+                    
+                    if subscribers_to_schedule.exists():
+                        # Calculate scheduled_for time based on email's wait_time and wait_unit
+                        wait_time = email.wait_time or 1
+                        wait_unit = email.wait_unit or 'days'
+                        
+                        send_delay = timedelta(0)
+                        if wait_unit == 'minutes':
+                            send_delay = timedelta(minutes=wait_time)
+                        elif wait_unit == 'hours':
+                            send_delay = timedelta(hours=wait_time)
+                        elif wait_unit == 'days':
+                            send_delay = timedelta(days=wait_time)
+                        elif wait_unit == 'weeks':
+                            send_delay = timedelta(weeks=wait_time)
+                        elif wait_unit == 'months':
+                            send_delay = timedelta(days=wait_time * 30)
+                        
+                        scheduled_for = timezone.now() + send_delay
+                        
+                        # Create EmailSendRequest for each subscriber who hasn't received this email
+                        send_requests = []
+                        for subscriber in subscribers_to_schedule:
+                            variables = {
+                                'first_name': subscriber.first_name or '',
+                                'last_name': subscriber.last_name or '',
+                                'email': subscriber.email
+                            }
+                            
+                            send_request = EmailSendRequest.objects.create(
+                                user=request.user,
+                                campaign=campaign,
+                                email=email,
+                                subscriber=subscriber,
+                                subscriber_email=subscriber.email,
+                                variables=variables,
+                                scheduled_for=scheduled_for,
+                                status='pending'
+                            )
+                            send_requests.append(send_request)
+                        
+                        logger.info(f"Auto-scheduled updated email '{email.subject}' to {len(send_requests)} active subscribers in campaign '{campaign.name}'")
+            
             return Response(serializer.data)
         return Response({'error': 'Validation failed', 'details': serializer.errors}, status=400)
     
@@ -155,8 +297,8 @@ def test_email(request, campaign_id, email_id):
                     'error': _('Failed to send test email: {}').format(str(sync_error))
                 }, status=500)
 
-@login_required
 @api_view(['POST'])
+@authentication_classes([BearerTokenAuthentication, TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def send_email(request, campaign_id, email_id):
     """Send an email to a specific subscriber."""
@@ -170,43 +312,106 @@ def send_email(request, campaign_id, email_id):
     
     variables = request.data.get('variables', {})
     
-    # Send email - try Celery first, fall back to synchronous if unavailable
-    import sys
-    from django.conf import settings
-    from .tasks import send_single_email, _send_single_email_sync
+    # Get or create subscriber and subscribe to campaign's list
+    from subscribers.models import Subscriber
+    try:
+        subscriber, created = Subscriber.objects.get_or_create(
+            email=subscriber_email,
+            defaults={
+                'first_name': variables.get('first_name', ''),
+                'last_name': variables.get('last_name', ''),
+                'is_active': True
+            }
+        )
+        if not created:
+            # Update subscriber info if provided
+            updated = False
+            if variables.get('first_name') and subscriber.first_name != variables.get('first_name'):
+                subscriber.first_name = variables.get('first_name', '')
+                updated = True
+            if variables.get('last_name') and subscriber.last_name != variables.get('last_name'):
+                subscriber.last_name = variables.get('last_name', '')
+                updated = True
+            if not subscriber.is_active:
+                subscriber.is_active = True
+                updated = True
+            if updated:
+                subscriber.save()
+        
+        # Always subscribe the user to the campaign's list (if campaign has a list)
+        if campaign.subscriber_list:
+            if not campaign.subscriber_list.subscribers.filter(id=subscriber.id).exists():
+                campaign.subscriber_list.subscribers.add(subscriber)
+    except Exception as sub_error:
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Error creating/updating subscriber: {str(sub_error)}")
+        # Continue with email sending even if subscriber creation fails
+    
+    # Create EmailSendRequest record with scheduled time based on email's wait_time
+    from campaigns.models import EmailSendRequest
+    from django.utils import timezone
+    from datetime import timedelta
+    from .tasks import _send_single_email_sync
+    
+    # Calculate scheduled_for time based on email's wait_time and wait_unit
+    wait_time = email.wait_time or 1
+    wait_unit = email.wait_unit or 'days'
+    
+    send_delay = timedelta(0)
+    if wait_unit == 'minutes':
+        send_delay = timedelta(minutes=wait_time)
+    elif wait_unit == 'hours':
+        send_delay = timedelta(hours=wait_time)
+    elif wait_unit == 'days':
+        send_delay = timedelta(days=wait_time)
+    elif wait_unit == 'weeks':
+        send_delay = timedelta(weeks=wait_time)
+    elif wait_unit == 'months':
+        send_delay = timedelta(days=wait_time * 30)
+    
+    scheduled_for = timezone.now() + send_delay
+    
+    send_request = EmailSendRequest.objects.create(
+        user=request.user,
+        campaign=campaign,
+        email=email,
+        subscriber=subscriber,
+        subscriber_email=subscriber_email,
+        variables=variables or {},
+        scheduled_for=scheduled_for,
+        status='pending'
+    )
+    
+    # Send email synchronously (no Celery)
     logger = logging.getLogger(__name__)
     
-    # For Windows development, prefer synchronous sending if DEBUG is True
-    use_sync = (sys.platform == 'win32' and settings.DEBUG)
-    
-    if use_sync:
-        # On Windows dev, send synchronously by default
+    # If scheduled for now or in the past, send immediately
+    if scheduled_for <= timezone.now():
         try:
-            _send_single_email_sync(str(email.id), subscriber_email, variables)
-            return Response({'message': _('Email sent successfully')})
+            _send_single_email_sync(str(email.id), subscriber_email, variables, request_id=str(send_request.id))
+            send_request.refresh_from_db()
+            return Response({
+                'message': _('Email sent successfully'),
+                'request_id': str(send_request.id),
+                'status': send_request.status
+            })
         except Exception as sync_error:
+            send_request.status = 'failed'
+            send_request.error_message = str(sync_error)
+            send_request.save(update_fields=['status', 'error_message', 'updated_at'])
             return Response({
                 'error': _('Failed to send email: {}').format(str(sync_error))
             }, status=500)
     else:
-        # Try to use Celery, fall back to sync if it fails
-        try:
-            send_single_email.delay(str(email.id), subscriber_email, variables)
-            return Response({'message': _('Email sent successfully')})
-        except (ConnectionError, OSError, Exception) as e:
-            # If Celery is not available (e.g., Redis not running), send synchronously
-            error_msg = str(e)
-            if '6379' in error_msg or 'redis' in error_msg.lower() or 'Connection refused' in error_msg:
-                logger.warning(f"Redis/Celery unavailable (likely on Windows dev), sending email synchronously: {error_msg}")
-            else:
-                logger.warning(f"Celery unavailable, sending email synchronously: {error_msg}")
-            try:
-                _send_single_email_sync(str(email.id), subscriber_email, variables)
-                return Response({'message': _('Email sent successfully')})
-            except Exception as sync_error:
-                return Response({
-                    'error': _('Failed to send email: {}').format(str(sync_error))
-                }, status=500)
+        # Scheduled for future - cron.py will pick it up
+        # Format the scheduled time for the response
+        scheduled_display = scheduled_for.strftime('%b %d, %Y %I:%M %p')
+        return Response({
+            'message': _('Email scheduled for {time}. It will be sent automatically at the scheduled time.').format(time=scheduled_display),
+            'request_id': str(send_request.id),
+            'scheduled_for': scheduled_for.isoformat(),
+            'status': 'pending'
+        })
 
 @login_required
 def campaign_edit(request, campaign_id):
@@ -767,10 +972,9 @@ def revise_email_with_ai(request):
 
 
 @login_required
-
 @csrf_exempt
 def search_templates(request):
-    """Search through all email templates across campaigns."""
+    """Search through all email templates and campaigns."""
     if request.method != 'GET':
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
@@ -782,28 +986,53 @@ def search_templates(request):
     if not query or len(query) < 2:
         return JsonResponse({'results': []})
     
-    # Search in subject and body_html fields across all user's campaigns
     from django.db.models import Q
+    import re
+    
+    results = []
+    
+    # Search campaigns
+    campaigns = Campaign.objects.filter(
+        user=request.user
+    ).filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    )[:5]
+    
+    for campaign in campaigns:
+        results.append({
+            'type': 'campaign',
+            'id': str(campaign.id),
+            'name': campaign.name,
+            'description': campaign.description or '',
+            'is_active': campaign.is_active,
+            'emails_count': campaign.emails_count,
+            'url': reverse('campaigns:edit', args=[campaign.id])
+        })
+    
+    # Search email templates
     emails = Email.objects.filter(
         campaign__user=request.user
     ).filter(
-        Q(subject__icontains=query) | Q(body_html__icontains=query)
+        Q(subject__icontains=query) | Q(body_html__icontains=query) | Q(body_text__icontains=query)
     ).select_related('campaign').distinct()[:10]
     
-    results = []
     for email in emails:
         # Create preview by stripping HTML tags
-        import re
         preview = re.sub(r'<[^>]+>', '', email.body_html or email.body_text or '')
         preview = preview.strip()[:100] + ('...' if len(preview) > 100 else '')
         
+        template_url = reverse('campaigns:template', args=[email.campaign.id])
+        template_url += f'?template_id={email.id}'
+        
         results.append({
+            'type': 'template',
             'id': str(email.id),
-            'subject': email.subject,
+            'subject': email.subject or 'Untitled Email',
             'preview': preview,
             'campaign_id': str(email.campaign.id),
             'campaign_name': email.campaign.name,
-            'order': email.order
+            'order': email.order,
+            'url': template_url
         })
     
     return JsonResponse({'results': results})

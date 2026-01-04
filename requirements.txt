@@ -1,4 +1,4 @@
-Django==5.2.4
+Django==5.2.7
 django-environ==0.11.2
 django-crispy-forms==2.1
 crispy-tailwind==0.5.0
@@ -19,13 +19,28 @@ gunicorn==21.2.0
 whitenoise==6.6.0
 Pillow==10.2.0
 django-quill-editor==0.1.40
-
-# Hugging Face and AI dependencies
 transformers==4.36.2
-torch==2.1.2
+torch>=2.2.0,<2.3.0
 accelerate==0.25.0
-sentencepiece==0.1.99
+# sentencepiece>=0.2.0  # Optional: Only needed for specific tokenizers (T5, BART, etc.)
+#                      # Install separately if needed: pip install sentencepiece
+#                      # Requires build tools: cmake, pkg-config, build-essential
 protobuf==4.25.1
 huggingface-hub==0.20.1
 safetensors==0.4.1
 tokenizers==0.15.0
+dnspython==2.6.1
+markdown==3.7
+googletrans==4.0.0rc1 
+polib
+
+# NOTE: GNU gettext tools (msgfmt, xgettext) are required for Django's i18n commands
+# These are SYSTEM dependencies, not Python packages. Install on your server:
+# 
+# Ubuntu/Debian: sudo apt-get install gettext
+# CentOS/RHEL: sudo yum install gettext
+# macOS: brew install gettext
+# Windows: Download from https://mlocati.github.io/articles/gettext-iconv-windows.html
+# 
+# Verify installation: msgfmt --version
+

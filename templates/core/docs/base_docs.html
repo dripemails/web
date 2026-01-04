@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}{% block doc_title %}Documentation{% endblock %} - DripEmails.org{% endblock %}
+{% block title %}{% block doc_title %}{% trans "Documentation" %}{% endblock %} - DripEmails.org{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
   <div class="bg-indigo-600 text-white py-8">
     <div class="container mx-auto px-4">
-      <h1 class="text-3xl font-bold mb-2">Documentation</h1>
-      <p class="text-indigo-100">Complete guide to using DripEmails.org</p>
+      <h1 class="text-3xl font-bold mb-2">{% trans "Documentation" %}</h1>
+      <p class="text-indigo-100">{% trans "Complete guide to using DripEmails.org" %}</p>
     </div>
   </div>
 
@@ -20,57 +20,57 @@
         <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
           <nav class="space-y-2">
             <a href="{% url 'core:resource_documentation' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if request.path == '/resources/documentation/' %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              📚 Overview
+              📚 {% trans "Overview" %}
             </a>
             
             <a href="{% url 'core:docs_getting_started' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'getting-started' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              🚀 Getting Started
+              🚀 {% trans "Getting Started" %}
             </a>
             
             <a href="{% url 'core:docs_campaigns' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'campaigns' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              📧 Campaign Management
+              📧 {% trans "Campaign Management" %}
             </a>
             
             <a href="{% url 'core:docs_subscribers' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'subscribers' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              👥 Subscriber Management
+              👥 {% trans "Subscriber Management" %}
             </a>
             
             <a href="{% url 'core:docs_templates' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'templates' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              📝 Email Templates
+              📝 {% trans "Email Templates" %}
             </a>
             
             <a href="{% url 'core:docs_analytics' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'analytics' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              📊 Analytics & Tracking
+              📊 {% trans "Analytics & Tracking" %}
             </a>
             
             <a href="{% url 'core:docs_ai_features' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'ai-features' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              🤖 AI Features
+              🤖 {% trans "AI Features" %}
             </a>
             
             <a href="{% url 'core:docs_smtp_server' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'smtp-server' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-              🔧 SMTP Server
+              🔧 {% trans "SMTP Server" %}
             </a>
             
             <div class="mt-4 pt-4 border-t">
               <a href="{% url 'core:docs_deployment' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'deployment' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                🚀 Deployment
+                🚀 {% trans "Deployment" %}
               </a>
               {% if 'deployment' in request.path %}
               <div class="ml-4 mt-2 space-y-1">
                 <a href="{% url 'core:docs_deployment_prerequisites' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'prerequisites' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                  Prerequisites
+                  {% trans "Prerequisites" %}
                 </a>
                 <a href="{% url 'core:docs_deployment_installation' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'installation' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                  Installation
+                  {% trans "Installation" %}
                 </a>
                 <a href="{% url 'core:docs_deployment_configuration' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'configuration' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                  Configuration
+                  {% trans "Configuration" %}
                 </a>
                 <a href="{% url 'core:docs_deployment_production' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'production' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                  Production Setup
+                  {% trans "Production Setup" %}
                 </a>
                 <a href="{% url 'core:docs_deployment_troubleshooting' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'troubleshooting' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
-                  Troubleshooting
+                  {% trans "Troubleshooting" %}
                 </a>
               </div>
               {% endif %}

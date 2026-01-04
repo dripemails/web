@@ -5,6 +5,7 @@ app_name = 'analytics'
 
 urlpatterns = [
     path('analytics/dashboard/', views.analytics_dashboard, name='dashboard'),
+    path('analytics/weekly/', views.weekly_analytics, name='weekly'),
     path('analytics/campaigns/<uuid:campaign_id>/', views.campaign_analytics, name='campaign'),
     path('analytics/subscribers/<uuid:list_id>/', views.subscriber_analytics, name='subscribers'),
     path('message_split.gif', views.message_split_gif, name='message-split'),

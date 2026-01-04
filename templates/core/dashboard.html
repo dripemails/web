@@ -529,7 +529,7 @@
                             </svg>
                             {% trans "Add Subscribers" %}
                         </a>
-                        <a href="{% url 'core:feature_analytics' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
+                        <a href="{% url 'campaigns:analysis' %}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-50 text-gray-800 hover:text-indigo-700 rounded-lg transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
@@ -732,53 +732,7 @@ function getCookie(name) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if address is required on page load
-    checkAddressRequired();
-    
-    // Handle address form submission
-    const addressForm = document.getElementById('addressForm');
-    if (addressForm) {
-        addressForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = {
-                address_line1: document.getElementById('modal_address_line1').value.trim(),
-                address_line2: document.getElementById('modal_address_line2').value.trim(),
-                city: document.getElementById('modal_city').value.trim(),
-                state: document.getElementById('modal_state').value.trim(),
-                postal_code: document.getElementById('modal_postal_code').value.trim(),
-                country: document.getElementById('modal_country').value.trim(),
-            };
-            
-            // Validate that all required fields are filled
-            if (!formData.address_line1 || !formData.city || !formData.state || !formData.postal_code || !formData.country) {
-                alert('Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country. This information is required by email regulations.');
-                return;
-            }
-            
-            fetch('/api/profile/settings/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('Error: ' + data.error);
-                } else {
-                    closeAddressModal();
-                    alert('Address saved successfully!');
-                }
-            })
-            .catch(error => {
-                console.error('Error saving address:', error);
-                alert('Error saving address. Please try again.');
-            });
-        });
-    }
-    
+    // Initialize weekly analytics charts
     const form = document.getElementById('sendEmailForm');
     const campaignSelect = document.getElementById('send_campaign');
     const emailTemplateSelect = document.getElementById('send_email_template');

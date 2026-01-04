@@ -72,10 +72,37 @@
 <div class="min-h-screen bg-gray-100 py-12">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
+            {% if not campaign %}
+            <!-- Campaign Selection Alert -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm text-yellow-700">
+                            <strong>{% trans "No campaign selected." %}</strong> {% trans "You'll be prompted to select a campaign when you save this template." %}
+                        </p>
+                        <div class="mt-2">
+                            <label for="campaign_selector" class="block text-sm font-medium text-yellow-900 mb-1">{% trans "Or select a campaign now:" %}</label>
+                            <select id="campaign_selector" class="block w-full md:w-1/2 rounded-md border-yellow-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500">
+                                <option value="">-- {% trans "Select a campaign (optional)" %} --</option>
+                                {% for c in all_campaigns %}
+                                    <option value="{{ c.id }}">{{ c.name }}{% if c.is_active %} ({% trans "Active" %}){% endif %}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <div class="bg-indigo-600 py-6 px-8 text-white">
                     <h1 class="text-2xl font-bold">{% trans "Email Template" %}</h1>
-                    <p class="text-indigo-100">{% trans "Design your email template" %}</p>
+                    <p class="text-indigo-100">{% if campaign %}{{ campaign.name }}{% else %}{% trans "Design your email template" %}{% endif %}</p>
                 </div>
                 
                 <form id="templateForm" class="p-8" method="POST" action="{% if template %}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
@@ -569,8 +596,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Campaign modal functions
     const showCampaignModal = "{{ show_campaign_modal|default:False|lower }}" === "true";
     
+    // Handle campaign selector at top of page
+    const campaignSelector = document.getElementById('campaign_selector');
+    if (campaignSelector && showCampaignModal) {
+        campaignSelector.addEventListener('change', function() {
+            if (this.value) {
+                // Redirect to template page with selected campaign
+                window.location.href = `/campaigns/template/${this.value}/`;
+            }
+        });
+    }
+    
     if (showCampaignModal) {
         window.showCampaignModal = function() {
+        // Check if user selected a campaign from the top selector
+        const topCampaignSelector = document.getElementById('campaign_selector');
+        if (topCampaignSelector && topCampaignSelector.value) {
+            // Use the selected campaign from top selector
+            submitWithSpecificCampaign(topCampaignSelector.value);
+            return;
+        }
+        
+        // Otherwise show modal for selection
         // Validate form first
         const subject = document.getElementById('subject').value.trim();
         const bodyContent = cleanQuillContent(quill.root.innerHTML.trim());
@@ -600,7 +647,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Close modal and show loading
+        submitWithSpecificCampaign(selectedCampaignId);
+    };
+    
+    window.submitWithSpecificCampaign = function(selectedCampaignId) {
+        // Close modal if open
+        const modal = document.getElementById('campaignModal');
+        if (modal && !modal.classList.contains('hidden')) {
+            hideCampaignModal();
+        }
         hideCampaignModal();
         
         // Get form data
@@ -819,7 +874,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
                 let errorMsg = '{% trans "Failed to generate email. " %}';
                 if (error.message.includes('API') || error.message.includes('token')) {
-                    errorMsg += '{% trans "Make sure your HUGGINGFACE_API_KEY environment variable is set." %}';
+                    errorMsg += '{% trans "Make sure Ollama is running (ollama serve) and the llama3.1:8b model is available (ollama pull llama3.1:8b)." %}';
                 } else {
                     errorMsg += error.message;
                 }

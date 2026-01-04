@@ -182,14 +182,16 @@
     });
 
     // Load initial content if available
-    {% if email %}
-    const initialContent = `{{ email.body_html|default:email.body_text|escapejs }}`;
-    if(initialContent && initialContent !== 'None'){
-      quill.root.innerHTML = initialContent;
-    }
+    {% if email.body_html %}
+    const initialContent = `{{ email.body_html|escapejs }}`;
+    {% elif email.body_text %}
+    const initialContent = `{{ email.body_text|escapejs }}`;
     {% else %}
     const initialContent = '';
     {% endif %}
+    if(initialContent){
+      quill.root.innerHTML = initialContent;
+    }
 
     const textarea = document.getElementById('draft-textarea');
     const preview = document.getElementById('draft-preview');

@@ -4,6 +4,10 @@
 
 {% block title %}{% trans "Campaign Analysis" %} - {{ block.super }}{% endblock %}
 
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container mx-auto px-4 py-8">
   <div class="flex items-center justify-between mb-6">
@@ -60,46 +64,46 @@
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Delivery Rate" %}</div>
-          <div class="text-xl font-semibold">{{ campaign.delivery_rate|default:"0%" }}</div>
+          <div class="text-xl font-semibold" data-metric="delivery_rate">{{ campaign.delivery_rate|default:"0%" }}</div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Bounces" %}</div>
-          <div class="text-xl font-semibold">{{ campaign.bounce_count|default:0 }}</div>
+          <div class="text-xl font-semibold" data-metric="bounces">{{ campaign.bounce_count|default:0 }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Unsubscribes" %}</div>
-          <div class="text-xl font-semibold">{{ campaign.unsubscribe_count|default:0 }}</div>
+          <div class="text-xl font-semibold" data-metric="unsubscribes">{{ campaign.unsubscribe_count|default:0 }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Complaints" %}</div>
-          <div class="text-xl font-semibold">{{ campaign.complaint_count|default:0 }}</div>
+          <div class="text-xl font-semibold" data-metric="complaints">{{ campaign.complaint_count|default:0 }}</div>
         </div>
       </div>
 
       <!-- Metrics chart -->
       <div class="mb-6">
-        <h2 class="text-lg font-medium mb-2">{% trans "Metrics Overview" %}</h2>
-        <!-- Additional small rate charts (placeholders) -->
+        <h2 class="text-lg font-medium mb-2">{% trans "Past 7 Days Trends" %}</h2>
+        <!-- Rate charts with data -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-2 bg-white rounded border text-center">
-            <h3 class="text-sm text-gray-600">{% trans "Open Rate (trend)" %}</h3>
-            <div class="h-32 flex items-center justify-center text-gray-400">
-              <p class="text-sm">{% trans "Coming soon" %}</p>
+          <div class="p-4 bg-white rounded border">
+            <h3 class="text-sm text-gray-600 mb-2">{% trans "Delivery Rate" %}</h3>
+            <div style="height: 150px; position: relative;">
+              <canvas id="deliveryRateChart"></canvas>
             </div>
           </div>
-          <div class="p-2 bg-white rounded border text-center">
-            <h3 class="text-sm text-gray-600">{% trans "Click Rate (trend)" %}</h3>
-            <div class="h-32 flex items-center justify-center text-gray-400">
-              <p class="text-sm">{% trans "Coming soon" %}</p>
+          <div class="p-4 bg-white rounded border">
+            <h3 class="text-sm text-gray-600 mb-2">{% trans "Open Rate" %}</h3>
+            <div style="height: 150px; position: relative;">
+              <canvas id="openRateChart"></canvas>
             </div>
           </div>
-          <div class="p-2 bg-white rounded border text-center">
-            <h3 class="text-sm text-gray-600">{% trans "Delivery Rate (trend)" %}</h3>
-            <div class="h-32 flex items-center justify-center text-gray-400">
-              <p class="text-sm">{% trans "Coming soon" %}</p>
+          <div class="p-4 bg-white rounded border">
+            <h3 class="text-sm text-gray-600 mb-2">{% trans "Click-Through Rate" %}</h3>
+            <div style="height: 150px; position: relative;">
+              <canvas id="clickRateChart"></canvas>
             </div>
           </div>
         </div>
@@ -171,12 +175,206 @@
 </div>
 {% endblock %}
 
-{% block extra_scripts %}
+{% block extra_js %}
   <script>
+    console.log('Script loaded');
+    
     // Real-time statistics auto-refresh
     let lastUpdated = new Date();
     let refreshInterval = 15000; // 15 seconds
-    let campaignId = '{{ campaign.id }}';
+    let campaignId = '{{ campaign.id|default:"" }}';
+    
+    console.log('Campaign ID from template:', campaignId);
+    
+    // Store chart instances globally so we can update them
+    let deliveryChart = null;
+    let openChart = null;
+    let clickChart = null;
+
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM Content Loaded');
+      console.log('Campaign ID:', campaignId);
+      
+      // Initialize weekly analytics charts for this campaign
+      if (campaignId) {
+        console.log('Calling initWeeklyAnalyticsCharts...');
+        initWeeklyAnalyticsCharts(campaignId);
+      } else {
+        console.warn('No campaign ID available');
+      }
+      
+      // Start auto-refresh if campaign is active
+      if (campaignId) {
+        // Update timestamp every second
+        setInterval(updateTimestamp, 1000);
+        
+        // Refresh statistics every 15 seconds
+        setInterval(updateStatistics, refreshInterval);
+        
+        // Initial update after 5 seconds
+        setTimeout(updateStatistics, 5000);
+      }
+    });
+
+    function initWeeklyAnalyticsCharts(campaignId) {
+      console.log('Initializing charts for campaign:', campaignId);
+      
+      // Fetch weekly analytics data for this specific campaign
+      fetch(`/analytics/weekly/?campaign_id=${campaignId}`)
+        .then(response => {
+          console.log('Response status:', response.status);
+          return response.json();
+        })
+        .then(data => {
+          console.log('Weekly data received:', data);
+          const weeklyData = data.weekly_data || [];
+          console.log('Processed weekly data:', weeklyData);
+          
+          // Extract data for charts
+          const dates = weeklyData.map(d => {
+            const date = new Date(d.date);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          });
+          const deliveryRates = weeklyData.map(d => d.delivery_rate);
+          const openRates = weeklyData.map(d => d.open_rate);
+          const clickRates = weeklyData.map(d => d.click_rate);
+          
+          console.log('Chart data:', { dates, deliveryRates, openRates, clickRates });
+          
+          // Common chart options
+          const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  callback: function(value) {
+                    return value + '%';
+                  },
+                  font: {
+                    size: 10
+                  }
+                },
+                grid: {
+                  display: true
+                }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 10
+                  }
+                },
+                grid: {
+                  display: false
+                }
+              }
+            }
+          };
+          
+          // Delivery Rate Chart
+          const deliveryRateCtx = document.getElementById('deliveryRateChart');
+          console.log('Delivery Rate Canvas:', deliveryRateCtx);
+          if (deliveryRateCtx) {
+            if (deliveryChart) {
+              deliveryChart.destroy();
+            }
+            console.log('Creating delivery rate chart...');
+            deliveryChart = new Chart(deliveryRateCtx.getContext('2d'), {
+              type: 'line',
+              data: {
+                labels: dates,
+                datasets: [{
+                  label: 'Delivery Rate',
+                  data: deliveryRates,
+                  borderColor: 'rgb(59, 130, 246)',
+                  backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                  borderWidth: 2,
+                  fill: true,
+                  tension: 0.4
+                }]
+              },
+              options: commonOptions
+            });
+            console.log('Delivery chart created:', deliveryChart);
+          } else {
+            console.error('Delivery Rate Canvas not found!');
+          }
+          
+          // Open Rate Chart
+          const openRateCtx = document.getElementById('openRateChart');
+          console.log('Open Rate Canvas:', openRateCtx);
+          if (openRateCtx) {
+            if (openChart) {
+              openChart.destroy();
+            }
+            console.log('Creating open rate chart...');
+            openChart = new Chart(openRateCtx.getContext('2d'), {
+              type: 'line',
+              data: {
+                labels: dates,
+                datasets: [{
+                  label: 'Open Rate',
+                  data: openRates,
+                  borderColor: 'rgb(16, 185, 129)',
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  borderWidth: 2,
+                  fill: true,
+                  tension: 0.4
+                }]
+              },
+              options: commonOptions
+            });
+            console.log('Open chart created:', openChart);
+          } else {
+            console.error('Open Rate Canvas not found!');
+          }
+          
+          // Click-Through Rate Chart
+          const clickRateCtx = document.getElementById('clickRateChart');
+          console.log('Click Rate Canvas:', clickRateCtx);
+          if (clickRateCtx) {
+            if (clickChart) {
+              clickChart.destroy();
+            }
+            console.log('Creating click rate chart...');
+            clickChart = new Chart(clickRateCtx.getContext('2d'), {
+              type: 'line',
+              data: {
+                labels: dates,
+                datasets: [{
+                  label: 'Click-Through Rate',
+                  data: clickRates,
+                  borderColor: 'rgb(245, 158, 11)',
+                  backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                  borderWidth: 2,
+                  fill: true,
+                  tension: 0.4
+                }]
+              },
+              options: commonOptions
+            });
+            console.log('Click chart created:', clickChart);
+          } else {
+            console.error('Click Rate Canvas not found!');
+          }
+        })
+        .catch(error => {
+          console.error('Error loading weekly analytics:', error);
+        });
+    }
 
     function updateStatistics() {
       fetch(`/api/campaigns/${campaignId}/stats/`)
@@ -191,16 +389,29 @@
           const clicksEl = document.querySelector('[data-metric="clicks"]');
           const openRateEl = document.querySelector('[data-metric="open_rate"]');
           const clickRateEl = document.querySelector('[data-metric="click_rate"]');
+          const deliveryRateEl = document.querySelector('[data-metric="delivery_rate"]');
+          const bouncesEl = document.querySelector('[data-metric="bounces"]');
+          const unsubscribesEl = document.querySelector('[data-metric="unsubscribes"]');
+          const complaintsEl = document.querySelector('[data-metric="complaints"]');
 
           if (sentEl) sentEl.textContent = data.overall_stats.sent_count || 0;
           if (opensEl) opensEl.textContent = data.overall_stats.open_count || 0;
           if (clicksEl) clicksEl.textContent = data.overall_stats.click_count || 0;
           if (openRateEl) openRateEl.textContent = `${(data.overall_stats.open_rate || 0).toFixed(1)}%`;
           if (clickRateEl) clickRateEl.textContent = `${(data.overall_stats.click_rate || 0).toFixed(1)}%`;
+          if (deliveryRateEl) deliveryRateEl.textContent = `${(data.overall_stats.delivery_rate || 0).toFixed(1)}%`;
+          if (bouncesEl) bouncesEl.textContent = data.overall_stats.bounce_count || 0;
+          if (unsubscribesEl) unsubscribesEl.textContent = data.overall_stats.unsubscribe_count || 0;
+          if (complaintsEl) complaintsEl.textContent = data.overall_stats.complaint_count || 0;
 
           // Update last updated timestamp
           lastUpdated = new Date();
           updateTimestamp();
+          
+          // Refresh charts with latest data
+          if (campaignId) {
+            initWeeklyAnalyticsCharts(campaignId);
+          }
 
           console.log('Campaign stats refreshed:', data);
         })
@@ -222,18 +433,6 @@
           timestampEl.textContent = `Updated ${minutesAgo}m ago`;
         }
       }
-    }
-
-    // Start auto-refresh if campaign is active
-    if (campaignId) {
-      // Update timestamp every second
-      setInterval(updateTimestamp, 1000);
-      
-      // Refresh statistics every 15 seconds
-      setInterval(updateStatistics, refreshInterval);
-      
-      // Initial update after 5 seconds
-      setTimeout(updateStatistics, 5000);
     }
   </script>
 {% endblock %}

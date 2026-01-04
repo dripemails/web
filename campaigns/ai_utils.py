@@ -1,6 +1,6 @@
 """
 AI utilities for email generation and topic analysis.
-Provides functions for generating email content using Hugging Face API and analyzing email topics using LDA.
+Provides functions for generating email content using Ollama with local llama3.1:8b model.
 """
 
 import os
@@ -10,7 +10,7 @@ import logging
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 
-# AI imports - Using Hugging Face Inference API
+# AI imports - Using Ollama for local LLM inference
 try:
     import requests
     REQUESTS_AVAILABLE = True
@@ -20,63 +20,9 @@ except ImportError:
 # Configure logging
 logger = logging.getLogger(__name__)
 
-# Load environment variables from .env file using django-environ
-# This ensures the .env file is loaded even if Django isn't fully initialized
-def _load_env_vars():
-    """Load Hugging Face configuration from environment variables."""
-    try:
-        import environ
-        # Get the base directory (project root)
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        env_file = os.path.join(base_dir, '.env')
-        
-        # Create environ.Env instance and read .env file if it exists
-        env = environ.Env()
-        if os.path.exists(env_file):
-            env.read_env(env_file)
-            logger.info(f"Loading .env file from: {env_file}")
-        else:
-            logger.warning(f".env file not found at: {env_file}")
-        
-        # Get values from environ (which reads from .env file and os.environ)
-        api_key = env('HUGGINGFACE_API_KEY', default='')
-        # Default model: HuggingFaceH4/zephyr-7b-beta (stable, no approval required, works immediately)
-        # User can override with HUGGINGFACE_MODEL in .env
-        model = env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
-        
-        logger.info(f"Loaded HUGGINGFACE_MODEL: {model}")
-        return api_key, model
-    except (ImportError, Exception) as e:
-        # Fallback to os.environ if django-environ is not available
-        logger.warning(f"Could not load .env file using django-environ: {e}. Falling back to os.environ.")
-        api_key = os.environ.get("HUGGINGFACE_API_KEY", "")
-        model = os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
-        logger.info(f"Using os.environ, HUGGINGFACE_MODEL: {model}")
-        return api_key, model
-
-# Load configuration at module level (will be reloaded on server restart)
-HUGGINGFACE_API_KEY, HUGGINGFACE_MODEL = _load_env_vars()
-
-def get_huggingface_model():
-    """Get the current Hugging Face model, reading from environment each time."""
-    try:
-        import environ
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        env_file = os.path.join(base_dir, '.env')
-        env = environ.Env()
-        if os.path.exists(env_file):
-            env.read_env(env_file)
-        return env('HUGGINGFACE_MODEL', default='HuggingFaceH4/zephyr-7b-beta')
-    except (ImportError, Exception):
-        return os.environ.get("HUGGINGFACE_MODEL", "HuggingFaceH4/zephyr-7b-beta")
-
-def get_huggingface_api_url():
-    """Get the Hugging Face API URL with the current model."""
-    model = get_huggingface_model()
-    return f"https://api-inference.huggingface.co/models/{model}"
-
-# Hugging Face configuration (for backward compatibility, but functions above read dynamically)
-HUGGINGFACE_API_URL = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
+# Ollama configuration
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:8b")
 
 
 def extract_json(text: str) -> str:
@@ -204,34 +150,24 @@ Respond ONLY in valid JSON:
 }}
 """
 
-    # ----- CALL HUGGING FACE API -----
+    # ----- CALL OLLAMA API -----
     try:
         if not REQUESTS_AVAILABLE:
             raise ImportError("requests is required for email generation. Install with: pip install requests")
         
-        if not HUGGINGFACE_API_KEY:
-            raise ValueError("HUGGINGFACE_API_KEY environment variable is required. Get your API key from https://huggingface.co/settings/tokens")
-        
-        # Get current model dynamically (reads from .env each time)
-        current_model = get_huggingface_model()
-        api_url = get_huggingface_api_url()
-        
-        logger.info(f"Using Hugging Face model: {current_model}")
-        
-        headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
         payload = {
-            "inputs": prompt,
-            "parameters": {
-                "max_new_tokens": 1000,
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+            "options": {
                 "temperature": 0.7,
                 "top_p": 0.95,
-                "return_full_text": False
+                "num_predict": 1000
             }
         }
         
         response = requests.post(
-            api_url,
-            headers=headers,
+            f"{OLLAMA_BASE_URL}/api/generate",
             json=payload,
             timeout=120
         )
@@ -249,10 +185,7 @@ Respond ONLY in valid JSON:
         response.raise_for_status()
         
         result_data = response.json()
-        if isinstance(result_data, list) and len(result_data) > 0:
-            raw = result_data[0].get("generated_text", "").strip()
-        else:
-            raw = result_data.get("generated_text", "").strip()
+        raw = result_data.get("response", "").strip()
 
         # Extract & parse JSON safely
         try:
@@ -282,14 +215,14 @@ Respond ONLY in valid JSON:
             }
 
     except requests.exceptions.RequestException as e:
-        logger.error(f"Hugging Face API error: {str(e)}")
+        logger.error(f"Ollama API error: {str(e)}")
         error_msg = f"Failed to generate email. Error: {str(e)}"
         try:
             if hasattr(e, 'response') and e.response is not None:
-                if e.response.status_code == 401:
-                    error_msg = "Invalid Hugging Face API key. Please check your HUGGINGFACE_API_KEY environment variable."
-                elif e.response.status_code == 503:
-                    error_msg = "Model is loading. Please try again in a few moments."
+                if e.response.status_code == 404:
+                    error_msg = f"Ollama server not found. Please ensure Ollama is running at {OLLAMA_BASE_URL}"
+                elif e.response.status_code == 500:
+                    error_msg = "Ollama server error. The model may need to be pulled first. Run: ollama pull llama3.1:8b"
         except:
             pass
         raise ValueError(error_msg)
@@ -301,7 +234,7 @@ Respond ONLY in valid JSON:
 
 def revise_email_content(email_text: str) -> Dict[str, str]:
     """
-    Revise an email for grammar, clarity, and professionalism using Hugging Face API.
+    Revise an email for grammar, clarity, and professionalism using Ollama.
     
     Args:
         email_text: The original email content (HTML or plain text)
@@ -331,39 +264,28 @@ def revise_email_content(email_text: str) -> Dict[str, str]:
     )
     
     try:
-        # Get current model dynamically (reads from .env each time)
-        current_model = get_huggingface_model()
-        api_url = get_huggingface_api_url()
-        
-        logger.info(f"Revising email content with Hugging Face model: {current_model}...")
+        logger.info(f"Revising email content with Ollama model: {OLLAMA_MODEL}...")
         
         if not REQUESTS_AVAILABLE:
             raise ImportError("requests is required for email revision. Install with: pip install requests")
         
-        if not HUGGINGFACE_API_KEY:
-            raise ValueError("HUGGINGFACE_API_KEY environment variable is required. Get your API key from https://huggingface.co/settings/tokens")
-        
-        headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
         payload = {
-            "inputs": prompt,
-            "parameters": {
-                "max_new_tokens": 1500,
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+            "options": {
                 "temperature": 0.7,
                 "top_p": 0.95,
-                "return_full_text": False
+                "num_predict": 1500
             }
         }
         
-        resp = requests.post(api_url, headers=headers, json=payload, timeout=120)
+        resp = requests.post(f"{OLLAMA_BASE_URL}/api/generate", json=payload, timeout=120)
         resp.raise_for_status()
         data = resp.json()
         
-        # Extract response text from Hugging Face API response
-        revised = None
-        if isinstance(data, list) and len(data) > 0:
-            revised = data[0].get('generated_text', '')
-        elif isinstance(data, dict):
-            revised = data.get('generated_text', '')
+        # Extract response text from Ollama API response
+        revised = data.get('response', '')
         
         if not revised:
             raise ValueError("No response generated from model")

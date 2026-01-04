@@ -26,6 +26,9 @@ env = environ.Env(
     CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
     CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
     CELERY_RESULT_BACKEND=(str, 'django-db'),
+    OLLAMA_BASE_URL=(str, 'http://localhost:11434'),
+    OLLAMA_MODEL=(str, 'llama3.1:8b'),
+    OLLAMA_TIMEOUT=(int, 300),  # 5 minutes timeout for AI generation
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -349,5 +352,7 @@ SITE_URL = env('SITE_URL')
 # Ollama Configuration for AI Email Generation (Local Development)
 # For local development, Ollama should be running on localhost
 # To use a remote Ollama server, update OLLAMA_BASE_URL in .env file
-OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+# See docs/ai/ollama_remote_setup.md for setup instructions
+OLLAMA_BASE_URL = env('OLLAMA_BASE_URL')
+OLLAMA_MODEL = env('OLLAMA_MODEL')
+OLLAMA_TIMEOUT = env('OLLAMA_TIMEOUT')  # Timeout in seconds (default: 300 = 5 minutes)

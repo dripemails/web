@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Custom footer HTML for emails"
 msgid "Time Zone"
 msgstr "Horzono"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Address Line 1"
@@ -64,22 +64,22 @@ msgstr "Adreslinio 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Apartment, suite, etc. (optional)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "City"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Ŝtato/Provinco"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Poŝta Kodo"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Country"
@@ -166,36 +166,36 @@ msgstr "Retpoŝto Piedo"
 msgid "Email Footers"
 msgstr "Retpoŝtaj Piedoj"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API-ŝlosilo regeneriĝis sukcese!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Piedo kreita sukcese!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Bonvolu doni kaj nomon kaj enhavon."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "La nomo de la piedlinio estas postulata"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Enhavo de la piedlinio estas postulata"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Piedo sukcese ĝisdatigita!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "La piedlinio sukcese forigita!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Defaŭlta piedlinio sukcese ĝisdatigita!"
 
@@ -242,8 +242,8 @@ msgstr "Listo de Abonantoj"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktiva"
 
@@ -263,7 +263,7 @@ msgstr "Klaku Nombri"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kampanjo"
 
@@ -328,7 +328,7 @@ msgstr "Piedo"
 msgid "Email"
 msgstr "Retpoŝto"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Retpoŝtoj"
 
@@ -376,7 +376,7 @@ msgstr "monatoj"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Sent"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Variabloj"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Statuso"
 
@@ -1175,12 +1175,12 @@ msgid "Lists"
 msgstr "Listoj"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Antaŭnomo"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Familia Nomo"
 
@@ -1197,7 +1197,7 @@ msgid "Confirmed At"
 msgstr "Konfirmita Je"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1556,6 +1556,7 @@ msgid "Remember Me"
 msgstr "Memoru Min"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Ensalutu"
 
@@ -1793,8 +1794,8 @@ msgid "Preview:"
 msgstr "Antaŭrigardo:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Kreita"
 
@@ -1875,6 +1876,7 @@ msgid "Logout"
 msgstr "Elsaluti"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Registriĝi Senpage"
 
@@ -1984,7 +1986,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Neniuj ŝablonoj aŭ kampanjoj trovitaj kongruaj"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Neaktiva"
 
@@ -2045,7 +2047,7 @@ msgid "Campaign Statistics"
 msgstr "Kampanjo-Statistiko"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Ŝarĝante..."
 
@@ -2183,7 +2185,7 @@ msgstr "Ankoraŭ neniuj retpoŝtoj aldoniĝis al ĉi tiu kampanjo."
 msgid "Create Campaign"
 msgstr "Krei Kampanjon"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Krei Novan Kampanjon"
@@ -2250,7 +2252,7 @@ msgstr "Elektu kampanjon"
 msgid "(Active)"
 msgstr "(Aktiva)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Ankoraŭ neniuj kampanjoj"
 
@@ -2276,7 +2278,7 @@ msgstr "Neniuj ŝablonoj trovitaj"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Ĉi tiu kampanjo ankoraŭ ne havas retpoŝtajn ŝablonojn."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Krei Retpoŝtan Ŝablonon"
 
@@ -2318,8 +2320,8 @@ msgstr "Neniu piedlinio"
 msgid "Select a footer to append to your email"
 msgstr "Elektu piedlinion por aldoni al via retpoŝto"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2545,7 +2547,7 @@ msgid "Number of Emails"
 msgstr "Nombro da Retpoŝtoj"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Retpoŝta Ŝablono"
 
@@ -2764,7 +2766,7 @@ msgid "Generate Email"
 msgstr "Generu Retpoŝton"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Retpoŝta Antaŭrigardo"
 
@@ -2777,7 +2779,7 @@ msgid "Send Test Email"
 msgstr "Sendu Testan Retpoŝton"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Retpoŝta Adreso"
@@ -3145,7 +3147,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Calenvy-akiro de Google kaj Mikrosofto"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3451,7 +3455,7 @@ msgstr "Vidi Listojn"
 msgid "Emails Sent"
 msgstr "Retpoŝtoj Senditaj"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Rigardu Analytics"
 
@@ -3459,112 +3463,124 @@ msgstr "Rigardu Analytics"
 msgid "Add a List"
 msgstr "Aldonu Liston"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Montrante %(start)s-%(end)s el %(total)s abonantoj"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "SPF-Rekorda Agordo por Retpoŝta Liverebleco"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Aldonu ĉi tiun TXT-rekordon al la DNS de via domajno:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Tipo:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Nomo/Gastiganto:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Valoro:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Notu:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Kiel aldoni ĉi tiun rekordon:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Iru al DNS-administrado aŭ DNS-agordoj"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Aldonu novan TXT-rekordon kun la valoroj montritaj supre"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Sendu Retpoŝton & Abonu"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Elektu kampanjon..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Unue elektu kampanjon..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Horaro"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Sendu en X Minutoj"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Sendu en X Horoj"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Sendu en X Tagoj"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Sendu en X Semajnoj"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Sendu en X Monatoj"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Lastatempa Senda Agado"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Spuri viajn retpoŝtajn sendadojn kaj liveraĵojn"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Refreŝigi"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Tempoj montritaj en"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Ŝarĝante agadon..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Forigu Reklamojn de Viaj Retpoŝtoj"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3572,15 +3588,15 @@ msgstr ""
 "Viaj retpoŝtoj nuntempe inkluzivas nian markon.Kunhavigu pri DripEmails.org "
 "sur X aŭ via blogo por forigi reklamojn de ĉiuj viaj retpoŝtoj."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Viaj Kampanjoj"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Agoj"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3588,135 +3604,158 @@ msgstr ""
 "Kreu vian unuan kampanjon por komenci sendi aŭtomatajn retpoŝtojn al viaj "
 "abonantoj."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Viaj Abonantoj-Listoj"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Ankoraŭ neniuj listoj de abonantoj"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Kreu vian unuan liston de abonantoj por komenci organizi viajn kontaktojn."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Rapidaj Agoj"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Aldonu Abonantojn"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Retpoŝtaj Ŝablonoj"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Kontaj agordoj"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Ad Forigo"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Malaboni Ligilojn"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Horzono"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Kontaj agordoj"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Retpoŝtaj Piedoj"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Konsiloj & Rimedoj"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Komenca Gvidilo"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Lernu kiel agordi vian unuan retpoŝtan kampanjon en minutoj."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Retpoŝto Plej Bonaj Praktikoj"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Konsiloj por krei retpoŝtojn kiuj konvertas."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Kreskigu Vian Liston de Abonantoj"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategioj por pliigi viajn abonantojn."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Fizika Adreso Bezonata"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Adreslinio 2 (Laŭvola)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && stato"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Ankoraŭ neniu senda agado"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Uzu la ĉi-supran formularon por sendi retmesaĝon kaj vidi vian agadon ĉi "
 "tie."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Al"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Planita"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Eraro"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Plena HTML Antaŭrigardo"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Teksta Versio"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Montru malpli"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Malaboniĝi"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Malsukcesis ŝargi agadon"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Bonvolu provi denove."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Reprovi"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Elektu retpoŝtan ŝablonon..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Eraro dum ŝarĝo de retpoŝtoj"
 
@@ -7113,7 +7152,9 @@ msgid "Manage Your Subscribers"
 msgstr "Administri Viajn Abonantojn"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
 
 #: .\templates\core\home.html:18
@@ -7143,12 +7184,24 @@ msgstr "Lojalaj Klientoj"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Aŭtomatigitaj retpoŝtaj sekvencoj, kiuj nutras kondukojn, enŝipigitajn "
-"uzantojn kaj kondukas konvertiĝojn.Agordu ĝin unufoje, kaj rigardu vian "
-"enspezon kreski."
+"La plej bona senpaga programaro pri retpoŝta merkatado por aŭtomatigitaj "
+"retpoŝtaj sekvencoj, retpoŝtaj kampanjoj kaj retpoŝta merkatada "
+"aŭtomatigo.Kreu potencajn retpoŝtajn gutajn kampanjojn, nutru kondukojn per "
+"aŭtomatigitaj retpoŝtaj sekvencoj kaj konduku konvertiĝojn per nia retpoŝta "
+"merkatada platformo.Perfekta por retpoŝta merkatado de SaaS, retkomerca "
+"retpoŝta merkatado, B2B retpoŝta merkatado kaj malgranda komerca retpoŝta "
+"merkatado.Agordu vian retpoŝtan aŭtomatigon en minutoj - tute senpaga "
+"retpoŝta merkatado-programaro kun senlimaj kampanjoj, senlimaj abonantoj kaj"
+" senlimaj retpoŝtoj."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7158,74 +7211,180 @@ msgstr "Komencu Senpage Hodiaŭ"
 msgid "Unlimited Campaigns"
 msgstr "Senlimaj Kampanjoj"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Senlimaj Kampanjoj"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Senlimaj Abonantoj"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Neniu Kreditkarto"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Agordu en 5 Minutoj"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Pli alta ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Pli da Engaĝiĝo"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Pli Rapida Kresko"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Aŭtomatigo"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Kial Drip Kampanjoj Funkcias"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Kiel Krei Retpoŝtajn Ŝablonojn"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Male al ununuraj retpoŝtaj eksplodoj, gutaj kampanjoj konstruas rilatojn "
-"laŭlonge de la tempo"
+"Agordo de retpoŝtaj aŭtomatigo kaj retpoŝtaj gutaj kampanjoj neniam estis "
+"pli facila.Nia retpoŝta merkatada aŭtomatiga programaro faciligas krei "
+"aŭtomatigitajn retpoŝtajn sekvencojn, plani retpoŝtojn kaj spuri retpoŝtajn "
+"analizojn."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Kreu Vian Unuan Kampanjon"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Konstruu vian retpoŝtan guta kampanjon per nia intuicia retpoŝta merkata "
+"ilo.Elektu el belaj retpoŝtaj ŝablonoj aŭ kreu kutimajn retpoŝtajn merkatajn"
+" kampanjojn."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Retpoŝta Sekvenco"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Desegnu aŭtomatigitajn retpoŝtajn sekvencojn per personigitaj "
+"retpoŝtoj.Agordu retpoŝtan programadon, retpoŝtajn nutrajn sekvencojn kaj "
+"bonvenajn seriojn por viaj retpoŝtaj abonantoj."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Administrado de Abonantoj"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Importu vian retpoŝtan liston, segmentu abonantojn per retpoŝta administrado"
+" kaj organizu vian retpoŝtan publikon.Perfekta por retpoŝta administrado de "
+"abonantoj kaj retpoŝta segmentado."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Kion AI Povas Optimumigi"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Monitoru retpoŝtajn malfermajn tarifojn, retpoŝtajn klakprocentojn kaj "
+"retpoŝtan engaĝiĝon per realtempa retpoŝta analizo.Plibonigu la ROI pri "
+"retpoŝta merkatado kun datumoj gviditaj."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Kial Retpoŝtaj Gutaj Kampanjoj Funkcias Pli Bone Ol Unuopaj Retpoŝtaj "
+"Eksplodoj"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Male al ununuraj retpoŝtaj eksplodoj, aŭtomatigitaj retpoŝtaj kampanjoj "
+"konstruas rilatojn laŭlonge de la tempo.Retpoŝta merkatada aŭtomatigo helpas"
+" vin sendi la ĝustajn retpoŝtajn merkatajn mesaĝojn en la ĝusta tempo, "
+"plibonigante retpoŝtan engaĝiĝon kaj retpoŝtan merkatan ROI."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Aŭtomatigita Nutrado"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Sendu la ĝustan mesaĝon en la ĝusta tempo.Aŭtomate gvidu kondukojn tra via "
 "funelo sen mana interveno."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Personigitaj Vojaĝoj"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentado de abonantoj"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Kreu unikajn spertojn por ĉiu abonanto.Segmentu vian publikon kaj liveru "
-"enhavon kiu resonas."
+"Kreu unikajn retpoŝtajn spertojn por ĉiu abonanto per personigitaj "
+"retpoŝtoj.Uzu retpoŝtan segmentadon kaj retpoŝtlistadministradon por liveri "
+"celitajn retpoŝtajn merkatajn kampanjojn, kiuj resonas kun via retpoŝta "
+"publiko."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Provitaj Rezultoj"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7233,19 +7392,21 @@ msgstr ""
 "Gutaj kampanjoj generas trioble pli da enspezo ol unuopaj retpoŝtoj.Vidu "
 "mezurebla ROI de la unua tago."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Ĉio, kion Vi Bezonas por Sukcesi"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Potencaj funkcioj, kiuj faras retpoŝtan merkatadon senpene"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Smart Drip Sekvoj"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7253,11 +7414,11 @@ msgstr ""
 "Kreu plurpaŝajn retpoŝtajn sekvencojn, kiuj aŭtomate sendas laŭ tempo, "
 "konduto aŭ ellasiloj."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Realtempa Analizo"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7265,11 +7426,11 @@ msgstr ""
 "Trako malfermiĝas, klakojn, konvertiĝojn kaj enspezojn.Faru datumajn "
 "decidojn per belaj paneloj."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Belaj Ŝablonoj"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7277,14 +7438,14 @@ msgstr ""
 "Elektu el profesiaj ŝablonoj aŭ kreu viajn proprajn.Drag-and-dropredaktilo "
 "faciligas dezajnon."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentado de abonantoj"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7292,11 +7453,11 @@ msgstr ""
 "Organizu abonantojn en listojn, etikedu ilin kaj sendu celitajn kampanjojn "
 "al la ĝusta publiko."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-Powered Enhavo"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7304,11 +7465,11 @@ msgstr ""
 "Generu konvinkan retpoŝtan enhavon per AI.Ŝparu tempon dum kreado de "
 "profesiaj, allogaj mesaĝoj."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Entreprena Sekureco"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7316,16 +7477,16 @@ msgstr ""
 "Konforma al GDPR, sekura infrastrukturo kaj fidinda livero.Viaj datumoj kaj "
 "abonantoj estas protektitaj."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Fidata de Kreskantaj Komercoj"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Aliĝu al miloj da merkatistoj, kiuj transformis sian retpoŝtan strategion"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7334,11 +7495,11 @@ msgstr ""
 "Nia konverta indico pliiĝis je 340%% post efektivigo de gutaj kampanjoj.La "
 "aŭtomatigo ŝparas al ni horojn ĉiusemajne."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Merkata Direktoro"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7346,11 +7507,11 @@ msgstr ""
 "La plej bona parto?Ĝi estas tute senpaga.Ni sendis pli ol 50,000 retpoŝtojn "
 "sen pagi unu groŝon.Ludŝanĝilo."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Komenca Fondinto"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7358,15 +7519,464 @@ msgstr ""
 "Instalado daŭris 5 minutojn.La interfaco estas intuicia, kaj la rezultoj "
 "parolas por si mem.Nia retpoŝta engaĝiĝo duobliĝis."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "E-komerca Administranto"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Senpaga retpoŝta merkatada aŭtomatigo por ĉiuj"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Ĉu vi funkcias per retpoŝta merkatado de SaaS, retkomerca retpoŝta "
+"merkatado, B2B retpoŝta merkatado aŭ B2C retpoŝta merkatado kampanjoj, nia "
+"senpaga retpoŝta merkatado de aŭtomatigo programaro adaptiĝas al viaj "
+"bezonoj."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Enŝipigitaj uzantoj kun aŭtomatigitaj retpoŝtaj sekvencoj, bonvenaj serioj "
+"kaj nutraj kampanjoj.Perfekta por komenca retpoŝta merkatado kaj programaraj"
+" kompanioj."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Komencu Senpage Hodiaŭ"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "E-komerca Administranto"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Stiru vendojn per forlasitaj ĉarretpoŝtoj, produktaj rekomendoj kaj "
+"transakciaj retpoŝtoj.Plifortigu vian retpoŝtan merkatan ROI per celitaj "
+"kampanjoj."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Komencante"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Nutru kondukojn per retpoŝta merkatada aŭtomatigo, retpoŝta segmentigo kaj "
+"personecigitaj retpoŝtaj kampanjoj.Perfekta por B2B retpoŝtaj merkataj "
+"strategioj."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Provu AI-Trajtojn"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Malgranda Komerca Retpoŝta Merkatado"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Senpaga programaro pri retpoŝta merkatado kun senlimaj kampanjoj, abonantoj "
+"kaj aŭtomatigitaj retpoŝtaj sekvencoj"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "La Plej Bona Senpaga Alternativo al Pagitaj Retpoŝtaj Merkataj Iloj"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Kial pagi por Mailchimp, Konstanta Kontakto, Sendinblue aŭ GetResponse kiam "
+"vi povas ricevi la samajn retpoŝtajn merkatajn aŭtomatigajn funkciojn "
+"senpage?Nia retpoŝta merkatada platformo ofertas senlimajn retpoŝtajn "
+"kampanjojn, senlimajn abonantojn kaj potencan retpoŝtan aŭtomatigon - ĉio "
+"sen kosto."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Senpaga Drip Retpoŝta Merkatado-Programaro"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Senpaga Eterne Plano"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Neniuj kaŝitaj kotizoj, neniu kreditkarto bezonata.Male al alternativo de "
+"Mailchimp aŭ alternativaj servoj de Konstanta Kontakto, ni estas tute "
+"senpaga programaro pri retpoŝta merkatado."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Senlimaj Kampanjoj"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Senlimaj retpoŝtaj kampanjoj, senlimaj retpoŝtoj, senlimaj abonantoj, "
+"senlima retpoŝta aŭtomatigo.Neniuj limoj por via retpoŝta merkatada kresko."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Kompletaj retpoŝtaj aŭtomatigaj funkcioj: retpoŝtaj gutaj kampanjoj, "
+"retpoŝta programado, retpoŝta analizo, retpoŝta spurado, retpoŝta segmentigo"
+" kaj retpoŝta personigo."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Senpaga Drip Retpoŝta Merkatado-Programaro"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Retpoŝtaj ŝablonoj, retpoŝtaj bultenoj, retpoŝta administrado de abonantoj, "
+"retpoŝta listo-administrado, retpoŝtaj malfermaj tarifoj-spurado, retpoŝtaj "
+"klaktarifoj kaj retpoŝta merkatada ROI-analitiko."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Ĉu vi pretas ŝanĝi?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Aliĝu al miloj da entreprenoj, kiuj ŝanĝis de multekostaj retpoŝtaj "
+"merkatservoj al nia senpaga retpoŝta merkatado platformo.Komencu per "
+"retpoŝta aŭtomatigo en minutoj - ne necesas kreditkarto."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Krei Senpaga Konto"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Ĉu jam havas konton?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Retpoŝta Dezajno Plej Bonaj Praktikoj"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Lernu kiel plibonigi retpoŝtajn malfermajn tarifojn, pliigi retpoŝtan "
+"engaĝiĝon kaj maksimumigi vian retpoŝtan merkatan ROI kun provitaj retpoŝtaj"
+" merkataj strategioj kaj retpoŝtaj merkataj konsiletoj."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Meza Malferma Indico"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Uzu personecigitajn retpoŝtajn temliniojn, sendu retpoŝtojn en optimumaj "
+"tempoj kaj segmentu vian retpoŝtan liston.Spuri retpoŝtajn malfermajn "
+"tarifojn per niaj retpoŝtaj analizoj por optimumigi viajn retpoŝtajn "
+"merkatajn kampanjojn."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Spurado de Pliboniĝoj"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Resalta administrado"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Kreu engaĝan retpoŝtan enhavon per retpoŝta personigo, uzu retpoŝtan "
+"aŭtomatigon por sendi ĝustatempajn mesaĝojn kaj monitori retpoŝtajn "
+"klakprocentojn.Nia retpoŝta merkatada aŭtomatigo helpas vin sendi la ĝustan "
+"mesaĝon en la ĝusta tempo."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Pli da Engaĝiĝo"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Senpaga Retpoŝta Merkata Aŭtomatigo"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Uzu retpoŝtajn gutajn kampanjojn por plumba nutrado, efektivigu retpoŝtan "
+"segmentadon por celitaj kampanjoj kaj spuru retpoŝtan merkatan ROI per "
+"ampleksa retpoŝta analizo.Senpaga retpoŝta merkatado programaro kiu liveras "
+"rezultojn."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Vidu Vian ROI"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Ĉu vi pretas efektivigi ĉi tiujn retpoŝtajn merkatajn plej bonajn "
+"praktikojn?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Komencu aŭtomatigi vian retpoŝtan merkatadon senpage."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Oftaj Demandoj"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Ĉio, kion vi bezonas por aŭtomatigi vian retpoŝtan merkatadon"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Kio Estas Gutaj Kampanjoj?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Guta retpoŝta kampanjo, ankaŭ konata kiel aŭtomatigita retpoŝta sekvenco aŭ "
+"retpoŝta retpoŝta kampanjo, estas serio de aŭtomatigitaj retpoŝtoj senditaj "
+"al abonantoj laŭlonge de la tempo.Ĉi tiuj retpoŝtaj merkatkampanjoj helpas "
+"nutri kondukojn, enŝipajn uzantojn kaj stiri konvertiĝojn per strategia "
+"retpoŝta aŭtomatigo.Nia retpoŝta merkatada platformo faciligas krei "
+"potencajn retpoŝtajn kampanjojn."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Lernu kiel krei kaj sendi vian unuan retpoŝtan kampanjon"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Krei guta retpoŝta kampanjo estas simpla kun nia retpoŝta merkatada "
+"aŭtomatiga programaro.Registriĝu senpage, kreu vian retpoŝtan kampanjon, "
+"aldonu retpoŝtajn sekvencojn kun planitaj retpoŝtoj, kaj lasu nian retpoŝtan"
+" aŭtomatigon prizorgi la reston.Vi povas uzi niajn retpoŝtajn ŝablonojn aŭ "
+"krei kutimajn retpoŝtajn merkatajn kampanjojn.Komencu post minutoj!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Kreu Vian Unuan Kampanjon"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Senpaga Drip Retpoŝta Merkatado-Programaro"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Jes!Nia retpoŝta merkatada platformo estas 100%% senpaga por ĉiam.Male al "
+"alternativoj de Mailchimp, Konstanta Kontakto, Sendinblue aŭ GetResponse, ni"
+" ofertas senlimajn retpoŝtajn kampanjojn, senlimajn abonantojn, senlimajn "
+"retpoŝtojn kaj plenajn retpoŝtajn merkatajn aŭtomatigajn funkciojn sen "
+"kosto.Neniu kreditkarto bezonata, neniuj kaŝitaj kotizoj."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Kiuj retpoŝtaj merkataj funkcioj estas inkluzivitaj?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Nia senpaga retpoŝta merkatada programaro inkluzivas: retpoŝtajn gutantajn "
+"kampanjojn, aŭtomatigitajn retpoŝtajn sekvencojn, retpoŝtajn planadon, "
+"retpoŝtajn analizojn kaj retpoŝtajn spurojn (retpoŝtaj malfermaj tarifoj, "
+"retpoŝtaj klaktarifoj), retpoŝta administrado de abonantoj, retpoŝta "
+"listadministrado, retpoŝta segmentigo, retpoŝta personigo, retpoŝtaj "
+"ŝablonoj, retpoŝtaj bultenoj kaj ampleksa retpoŝta merkatada aŭtomatigo.Ĉio,"
+" kion vi bezonas por sukcesa retpoŝta merkatado!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Individuaj retpoŝtaj malfermaj tarifoj"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Plibonigu retpoŝtajn malfermajn tarifojn uzante personecigitajn retpoŝtajn "
+"temliniojn, sendante retpoŝtojn en optimumaj tempoj, segmentante vian "
+"retpoŝtan liston kaj kreante allogan retpoŝtan enhavon.Niaj retpoŝtaj "
+"analizaj iloj helpas vin spuri retpoŝtajn malfermajn tarifojn kaj optimumigi"
+" viajn retpoŝtajn merkatajn kampanjojn por pli bona rendimento."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Komencu Importon"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Ĉu Ankoraŭ Havas Demandojn?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Komencu kun nia senpaga retpoŝta merkatado kaj malkovru kiom facila povas "
+"esti retpoŝta aŭtomatigo!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Preta Transformi Vian Retpoŝtan Merkaton?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7374,15 +7984,15 @@ msgstr ""
 "Aliĝu al miloj da entreprenoj uzante gutajn kampanjojn por kreskigi "
 "enspezojn, nutri kondukojn kaj konstrui daŭrajn klientajn rilatojn."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Komencu Vian Senpagan Konton"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Lernu Pli"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "Ne necesas kreditkarto • Agordu en 5 minutoj • Nuligi iam ajn"
 
@@ -12864,10 +13474,6 @@ msgstr ""
 "Vi povas krei plurajn listojn por segmenti vian publikon (ekz. klientoj, "
 "perspektivoj, partneroj)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Aldonu Abonantojn"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Nun ni aldonu kelkajn abonantojn al via listo.Vi havas du eblojn:"
@@ -12907,10 +13513,6 @@ msgstr "Mapu la kolumnojn kaj alklaku"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Importi"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Kreu Vian Unuan Kampanjon"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13946,6 +14548,28 @@ msgstr ""
 "Se vi malabonis erare aŭ ŝatus ricevi retmesaĝojn denove, bonvolu kontakti "
 "nin aŭ registriĝi denove."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Retpoŝto Enhavo"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "peti informojn"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Formato de Respondo"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Piedo"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Reen al abonantoj"
@@ -14262,3 +14886,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Importu kontaktojn aŭ aldonu abonantojn permane por vidi ilin listigitaj ĉi "
 "tie."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Aŭtomatigitaj retpoŝtaj sekvencoj, kiuj nutras kondukojn, enŝipigitajn "
+#~ "uzantojn kaj kondukas konvertiĝojn.Agordu ĝin unufoje, kaj rigardu vian "
+#~ "enspezon kreski."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Kial Drip Kampanjoj Funkcias"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Male al ununuraj retpoŝtaj eksplodoj, gutaj kampanjoj konstruas rilatojn "
+#~ "laŭlonge de la tempo"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Personigitaj Vojaĝoj"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Kreu unikajn spertojn por ĉiu abonanto.Segmentu vian publikon kaj liveru "
+#~ "enhavon kiu resonas."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "HTML ส่วนท้ายที่กำหนดเองสำห�
 msgid "Time Zone"
 msgstr "โซนเวลา"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "ที่อยู่บรรทัดที่ 1"
@@ -64,22 +64,22 @@ msgstr "ที่อยู่บรรทัดที่ 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "อพาร์ทเมนต์ ห้องชุด ฯลฯ (ไม่บังคับ)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "เมือง"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "รัฐ/จังหวัด"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "รหัสไปรษณีย์"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "ประเทศ"
@@ -166,36 +166,36 @@ msgstr "ส่วนท้ายอีเมล"
 msgid "Email Footers"
 msgstr "ส่วนท้ายอีเมล"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "สร้างคีย์ API ใหม่สำเร็จแล้ว!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "สร้างส่วนท้ายสำเร็จแล้ว!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "กรุณาระบุทั้งชื่อและเนื้อหา"
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "ต้องระบุชื่อส่วนท้าย"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "จำเป็นต้องมีเนื้อหาส่วนท้าย"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "อัปเดตส่วนท้ายสำเร็จแล้ว!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "ลบส่วนท้ายสำเร็จแล้ว!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "อัปเดตส่วนท้ายเริ่มต้นเรียบร้อยแล้ว!"
 
@@ -242,8 +242,8 @@ msgstr "รายชื่อสมาชิก"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "คล่องแคล่ว"
 
@@ -263,7 +263,7 @@ msgstr "คลิกนับ"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "แคมเปญ"
 
@@ -328,7 +328,7 @@ msgstr "ส่วนท้าย"
 msgid "Email"
 msgstr "อีเมล"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "อีเมล"
 
@@ -376,7 +376,7 @@ msgstr "เดือน"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "ส่งแล้ว"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "ตัวแปร"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "สถานะ"
 
@@ -1170,12 +1170,12 @@ msgid "Lists"
 msgstr "รายการ"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "ชื่อ"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "นามสกุล"
 
@@ -1192,7 +1192,7 @@ msgid "Confirmed At"
 msgstr "ยืนยัน ณ"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1548,6 +1548,7 @@ msgid "Remember Me"
 msgstr "จำฉันไว้"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "เข้าสู่ระบบ"
 
@@ -1784,8 +1785,8 @@ msgid "Preview:"
 msgstr "ดูตัวอย่าง:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "สร้าง"
 
@@ -1864,6 +1865,7 @@ msgid "Logout"
 msgstr "ออกจากระบบ"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "ลงทะเบียนฟรี"
 
@@ -1973,7 +1975,7 @@ msgid "No templates or campaigns found matching"
 msgstr "ไม่พบเทมเพลตหรือแคมเปญที่ตรงกัน"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "ไม่ได้ใช้งาน"
 
@@ -2033,7 +2035,7 @@ msgid "Campaign Statistics"
 msgstr "สถิติแคมเปญ"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "กำลังโหลด..."
 
@@ -2171,7 +2173,7 @@ msgstr "ยังไม่มีการเพิ่มอีเมลในแ
 msgid "Create Campaign"
 msgstr "สร้างแคมเปญ"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "สร้างแคมเปญใหม่"
@@ -2238,7 +2240,7 @@ msgstr "เลือกแคมเปญ"
 msgid "(Active)"
 msgstr "(คล่องแคล่ว)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "ยังไม่มีแคมเปญ"
 
@@ -2263,7 +2265,7 @@ msgstr "ไม่พบเทมเพลต"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "แคมเปญนี้ยังไม่มีเทมเพลตอีเมล"
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "สร้างเทมเพลตอีเมล"
 
@@ -2305,8 +2307,8 @@ msgstr "ไม่มีส่วนท้าย"
 msgid "Select a footer to append to your email"
 msgstr "เลือกส่วนท้ายที่จะต่อท้ายอีเมลของคุณ"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2530,7 +2532,7 @@ msgid "Number of Emails"
 msgstr "จำนวนอีเมล"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "เทมเพลตอีเมล"
 
@@ -2744,7 +2746,7 @@ msgid "Generate Email"
 msgstr "สร้างอีเมล"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "ดูตัวอย่างอีเมล"
 
@@ -2757,7 +2759,7 @@ msgid "Send Test Email"
 msgstr "ส่งอีเมลทดสอบ"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "ที่อยู่อีเมล"
@@ -3125,7 +3127,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "การเข้าซื้อกิจการ Calenvy โดย Google และ Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "ไอเดน ทูร์กุต"
 
 #: .\templates\core\about.html:69
@@ -3428,7 +3432,7 @@ msgstr "ดูรายการ"
 msgid "Emails Sent"
 msgstr "ส่งอีเมลแล้ว"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "ดูการวิเคราะห์"
 
@@ -3436,112 +3440,124 @@ msgstr "ดูการวิเคราะห์"
 msgid "Add a List"
 msgstr "เพิ่มรายการ"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "กำลังแสดง %(start)s-%(end)s จาก %(total)s สมาชิก"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "การตั้งค่าบันทึก SPF สำหรับการส่งอีเมล"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "เพิ่มระเบียน TXT นี้ลงใน DNS ของโดเมนของคุณ:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "พิมพ์:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "ชื่อ/โฮสต์:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "ค่า:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "บันทึก:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "วิธีเพิ่มบันทึกนี้:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "ไปที่การจัดการ DNS หรือการตั้งค่า DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "เพิ่มระเบียน TXT ใหม่ด้วยค่าที่แสดงด้านบน"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "ส่งอีเมลและสมัครสมาชิก"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "เลือกแคมเปญ..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "เลือกแคมเปญก่อน..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "กำหนดการ"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "ส่งใน X นาที"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "ส่งใน X ชั่วโมง"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "ส่งใน X วัน"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "ส่งใน X สัปดาห์"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "ส่งภายใน X เดือน"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "กิจกรรมการส่งล่าสุด"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "ติดตามการส่งและการส่งมอบอีเมลของคุณ"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "รีเฟรช"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "เวลาที่แสดงใน"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "กำลังโหลดกิจกรรม..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "ลบโฆษณาออกจากอีเมลของคุณ"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3549,146 +3565,169 @@ msgstr ""
 "ขณะนี้อีเมลของคุณมีการสร้างแบรนด์ของเราด้วยแบ่งปันเกี่ยวกับ DripEmails.org "
 "บน X หรือบล็อกของคุณเพื่อลบโฆษณาออกจากอีเมลทั้งหมดของคุณ"
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "แคมเปญของคุณ"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "การดำเนินการ"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
 msgstr "สร้างแคมเปญแรกของคุณเพื่อเริ่มส่งอีเมลอัตโนมัติไปยังสมาชิกของคุณ"
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "รายชื่อสมาชิกของคุณ"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "ยังไม่มีรายชื่อสมาชิก"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "สร้างรายชื่อสมาชิกแรกของคุณเพื่อเริ่มจัดระเบียบผู้ติดต่อของคุณ"
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "การดำเนินการด่วน"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "เพิ่มสมาชิก"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "เทมเพลตอีเมล"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "การตั้งค่าบัญชี"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "การลบโฆษณา"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "ยกเลิกการสมัครลิงค์"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "เขตเวลา"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "การตั้งค่าบัญชี"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "ส่วนท้ายอีเมล"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "เคล็ดลับและแหล่งข้อมูล"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "คู่มือการเริ่มต้นใช้งาน"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "เรียนรู้วิธีตั้งค่าแคมเปญอีเมลแรกของคุณในไม่กี่นาที"
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "แนวทางปฏิบัติที่ดีที่สุดทางอีเมล"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "เคล็ดลับในการสร้างอีเมลที่ทำให้เกิด Conversion"
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "เพิ่มรายชื่อสมาชิกของคุณ"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "กลยุทธ์ในการเพิ่มสมาชิกของคุณ"
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "จำเป็นต้องระบุที่อยู่ทางกายภาพ"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "ที่อยู่บรรทัด 2 (ไม่บังคับ)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && สถานะ"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "ยังไม่มีกิจกรรมส่ง"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr "ใช้แบบฟอร์มด้านบนเพื่อส่งอีเมลและดูกิจกรรมของคุณที่นี่"
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "ถึง"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "กำหนดเวลาแล้ว"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "ข้อผิดพลาด"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "ดูตัวอย่าง HTML แบบเต็ม"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "เวอร์ชันข้อความ"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "แสดงน้อยลง"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "ยกเลิกการสมัคร"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "โหลดกิจกรรมไม่สำเร็จ"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "โปรดลองอีกครั้ง"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "ลองอีกครั้ง"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "เลือกเทมเพลตอีเมล..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "เกิดข้อผิดพลาดในการโหลดอีเมล"
 
@@ -7045,7 +7084,9 @@ msgid "Manage Your Subscribers"
 msgstr "จัดการสมาชิกของคุณ"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
 
 #: .\templates\core\home.html:18
@@ -7075,11 +7116,24 @@ msgstr "ลูกค้าประจำ"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"ลำดับอีเมลอัตโนมัติที่ดูแลลูกค้าเป้าหมาย การเริ่มต้นใช้งานผู้ใช้ "
-"และกระตุ้นการเปลี่ยนแปลงตั้งค่าเพียงครั้งเดียวและดูรายได้ของคุณเติบโต"
+"ซอฟต์แวร์การตลาดผ่านอีเมลแบบหยดที่ดีที่สุดฟรีสำหรับลำดับอีเมลอัตโนมัติ "
+"แคมเปญอีเมล "
+"และระบบการตลาดผ่านอีเมลอัตโนมัติสร้างแคมเปญการส่งอีเมล์ที่มีประสิทธิภาพ "
+"ดูแลลูกค้าเป้าหมายด้วยลำดับอีเมลอัตโนมัติ "
+"และกระตุ้นคอนเวอร์ชันด้วยแพลตฟอร์มการตลาดผ่านอีเมลของเราเหมาะสำหรับการตลาดผ่านอีเมล"
+" SaaS, การตลาดผ่านอีเมลอีคอมเมิร์ซ, การตลาดผ่านอีเมล B2B "
+"และการตลาดผ่านอีเมลสำหรับธุรกิจขนาดเล็กตั้งค่าอีเมลอัตโนมัติของคุณในไม่กี่นาที"
+" - ซอฟต์แวร์การตลาดผ่านอีเมลฟรีพร้อมแคมเปญไม่จำกัด สมาชิกไม่จำกัด "
+"และอีเมลแบบหยดไม่จำกัด"
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7089,72 +7143,167 @@ msgstr "เริ่มฟรีวันนี้"
 msgid "Unlimited Campaigns"
 msgstr "แคมเปญไม่จำกัด"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "แคมเปญไม่จำกัด"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "สมาชิกไม่จำกัด"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "ไม่มีบัตรเครดิต"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "ตั้งค่าใน 5 นาที"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI ที่สูงขึ้น"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "การมีส่วนร่วมมากขึ้น"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "การเจริญเติบโตเร็วขึ้น"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "ระบบอัตโนมัติ"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "เหตุใดแคมเปญ Drip จึงทำงาน"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "วิธีสร้างเทมเพลตอีเมล"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"ต่างจากการส่งอีเมล์เพียงครั้งเดียว "
-"แคมเปญแบบหยดสร้างความสัมพันธ์เมื่อเวลาผ่านไป"
+"การตั้งค่าอีเมลอัตโนมัติและแคมเปญอีเมลหยดง่ายกว่าที่เคยซอฟต์แวร์การตลาดผ่านอีเมลอัตโนมัติของเราทำให้การสร้างลำดับอีเมลอัตโนมัติ"
+" กำหนดเวลาอีเมล และติดตามการวิเคราะห์อีเมลเป็นเรื่องง่าย"
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "สร้างแคมเปญแรกของคุณ"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"สร้างแคมเปญอีเมลแบบหยดของคุณด้วยเครื่องมือการตลาดผ่านอีเมลที่ใช้งานง่ายของเราเลือกจากเทมเพลตอีเมลที่สวยงามหรือสร้างแคมเปญการตลาดผ่านอีเมลแบบกำหนดเอง"
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "ลำดับอีเมล"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"ออกแบบลำดับอีเมลอัตโนมัติด้วยอีเมลส่วนบุคคลตั้งค่าการกำหนดเวลาอีเมล "
+"ลำดับการดูแลอีเมล และซีรีส์ต้อนรับสำหรับสมาชิกอีเมลของคุณ"
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "การจัดการสมาชิก"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"นำเข้ารายชื่ออีเมลของคุณ แบ่งกลุ่มสมาชิกด้วยการจัดการรายชื่ออีเมล "
+"และจัดระเบียบกลุ่มเป้าหมายอีเมลของคุณเหมาะสำหรับการจัดการสมาชิกอีเมลและการแบ่งส่วนอีเมล"
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "สิ่งที่ AI สามารถเพิ่มประสิทธิภาพได้"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"ตรวจสอบอัตราการเปิดอีเมล อัตราการคลิกอีเมล "
+"และการมีส่วนร่วมของอีเมลด้วยการวิเคราะห์อีเมลแบบเรียลไทม์ปรับปรุง ROI "
+"การตลาดผ่านอีเมลด้วยข้อมูลเชิงลึกที่ขับเคลื่อนด้วยข้อมูล"
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"เหตุใดแคมเปญ Email Drip จึงทำงานได้ดีกว่าการระเบิดอีเมลเพียงครั้งเดียว"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"แคมเปญอีเมลแบบหยดอัตโนมัติต่างจากการระเบิดอีเมลเพียงครั้งเดียวสร้างความสัมพันธ์เมื่อเวลาผ่านไประบบอัตโนมัติทางการตลาดผ่านอีเมลช่วยให้คุณส่งข้อความการตลาดทางอีเมลที่ถูกต้องในเวลาที่เหมาะสม"
+" ปรับปรุงการมีส่วนร่วมทางอีเมลและ ROI การตลาดผ่านอีเมล"
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "การเลี้ยงดูแบบอัตโนมัติ"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "ส่งข้อความที่ถูกต้องในเวลาที่เหมาะสมนำทางลูกค้าเป้าหมายผ่านช่องทางของคุณโดยอัตโนมัติโดยไม่ต้องมีการแทรกแซงด้วยตนเอง"
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "การเดินทางส่วนบุคคล"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "การแบ่งกลุ่มสมาชิก"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"สร้างประสบการณ์ที่ไม่เหมือนใครให้กับสมาชิกแต่ละคนแบ่งกลุ่มผู้ชมของคุณและนำเสนอเนื้อหาที่ตรงใจ"
+"สร้างประสบการณ์อีเมลที่ไม่ซ้ำใครสำหรับสมาชิกแต่ละคนด้วยอีเมลส่วนตัวใช้การแบ่งส่วนอีเมลและการจัดการรายชื่ออีเมลเพื่อนำเสนอแคมเปญการตลาดผ่านอีเมลที่ตรงเป้าหมายซึ่งโดนใจผู้ชมอีเมลของคุณ"
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "ผลลัพธ์ที่พิสูจน์แล้ว"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7162,30 +7311,32 @@ msgstr ""
 "แคมเปญ Drip สร้างรายได้มากกว่าอีเมลฉบับเดียวถึง 3 เท่าดู ROI "
 "ที่วัดได้ตั้งแต่วันแรก"
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "ทุกสิ่งที่คุณต้องการเพื่อความสำเร็จ"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "คุณสมบัติอันทรงพลังที่ทำให้การตลาดผ่านอีเมลเป็นเรื่องง่าย"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "ลำดับหยดอัจฉริยะ"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
 msgstr ""
 "สร้างลำดับอีเมลหลายขั้นตอนที่ส่งโดยอัตโนมัติตามเวลา พฤติกรรม หรือสิ่งกระตุ้น"
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "การวิเคราะห์แบบเรียลไทม์"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7193,25 +7344,25 @@ msgstr ""
 "ติดตามการเปิด การคลิก คอนเวอร์ชัน "
 "และรายได้ตัดสินใจโดยอาศัยข้อมูลด้วยแดชบอร์ดที่สวยงาม"
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "เทมเพลตที่สวยงาม"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
 msgstr ""
 "เลือกจากเทมเพลตมืออาชีพหรือสร้างของคุณเองเครื่องมือแก้ไขแบบลากและวางทำให้การออกแบบเป็นเรื่องง่าย"
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "การแบ่งกลุ่มสมาชิก"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7219,11 +7370,11 @@ msgstr ""
 "จัดระเบียบสมาชิกเป็นรายการ แท็ก "
 "และส่งแคมเปญที่ตรงเป้าหมายไปยังผู้ชมที่เหมาะสม"
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "เนื้อหาที่ขับเคลื่อนด้วย AI"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7231,11 +7382,11 @@ msgstr ""
 "สร้างเนื้อหาอีเมลที่น่าสนใจด้วย "
 "AIประหยัดเวลาในขณะที่สร้างข้อความที่น่าดึงดูดและเป็นมืออาชีพ"
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "การรักษาความปลอดภัยระดับองค์กร"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7243,15 +7394,15 @@ msgstr ""
 "เป็นไปตาม GDPR โครงสร้างพื้นฐานที่ปลอดภัย "
 "และการส่งมอบที่เชื่อถือได้ข้อมูลและสมาชิกของคุณได้รับการคุ้มครอง"
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "ได้รับความไว้วางใจจากธุรกิจที่กำลังเติบโต"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "เข้าร่วมกับนักการตลาดหลายพันคนที่ได้เปลี่ยนแปลงกลยุทธ์อีเมลของตน"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7260,11 +7411,11 @@ msgstr ""
 "อัตราการแปลงของเราเพิ่มขึ้น 340%% "
 "หลังจากใช้งานแคมเปญแบบหยดระบบอัตโนมัติช่วยเราประหยัดเวลาหลายชั่วโมงทุกสัปดาห์"
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "ผู้อำนวยการฝ่ายการตลาด"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7272,11 +7423,11 @@ msgstr ""
 "ส่วนที่ดีที่สุด?มันฟรีอย่างสมบูรณ์เราได้ส่งอีเมลไปมากกว่า 50,000 "
 "ฉบับโดยไม่ต้องเสียเงินสักเล็กน้อยผู้เปลี่ยนเกม"
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "ผู้ก่อตั้งสตาร์ทอัพ"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7284,15 +7435,445 @@ msgstr ""
 "การตั้งค่าใช้เวลา 5 "
 "นาทีอินเทอร์เฟซใช้งานง่ายและผลลัพธ์ก็พูดได้ด้วยตนเองการมีส่วนร่วมทางอีเมลของเราเพิ่มขึ้นสองเท่า"
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "ผู้จัดการอีคอมเมิร์ซ"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรีสำหรับทุกคน"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"ไม่ว่าคุณจะใช้งานการตลาดผ่านอีเมล SaaS การตลาดผ่านอีเมลอีคอมเมิร์ซ "
+"การตลาดผ่านอีเมล B2B หรือแคมเปญการตลาดผ่านอีเมล B2C "
+"ซอฟต์แวร์ระบบอัตโนมัติทางการตลาดผ่านอีเมลฟรีของเราจะปรับให้เข้ากับความต้องการของคุณ"
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"ผู้ใช้เริ่มต้นใช้งานด้วยลำดับอีเมลอัตโนมัติ ชุดต้อนรับ "
+"และแคมเปญการดูแลเหมาะสำหรับบริษัทสตาร์ทอัพด้านการตลาดผ่านอีเมลและซอฟต์แวร์"
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "เริ่มฟรีวันนี้"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "ผู้จัดการอีคอมเมิร์ซ"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"กระตุ้นยอดขายด้วยอีเมลตะกร้าสินค้าที่ถูกละทิ้ง คำแนะนำผลิตภัณฑ์ "
+"และอีเมลธุรกรรมเพิ่ม ROI การตลาดผ่านอีเมลของคุณด้วยแคมเปญที่ตรงเป้าหมาย"
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "เริ่มต้นใช้งาน"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"ดูแลลูกค้าเป้าหมายด้วยระบบอัตโนมัติทางการตลาดผ่านอีเมล การแบ่งส่วนอีเมล "
+"และแคมเปญอีเมลส่วนบุคคลเหมาะสำหรับกลยุทธ์การตลาดผ่านอีเมล B2B"
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "ลองใช้คุณสมบัติ AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "การตลาดทางอีเมลสำหรับธุรกิจขนาดเล็ก"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"ซอฟต์แวร์การตลาดผ่านอีเมลแบบหยดฟรีพร้อมแคมเปญ สมาชิก "
+"และลำดับอีเมลอัตโนมัติไม่จำกัด"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "ทางเลือกฟรีที่ดีที่สุดสำหรับเครื่องมือการตลาดผ่านอีเมลแบบชำระเงิน"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"เหตุใดจึงต้องจ่ายค่า Mailchimp, Constant Contact, Sendinblue หรือ "
+"GetResponse "
+"ในเมื่อคุณสามารถรับฟีเจอร์การตลาดผ่านอีเมลอัตโนมัติแบบเดียวกันได้ฟรีแพลตฟอร์มการตลาดผ่านอีเมลของเรานำเสนอแคมเปญอีเมลไม่จำกัด"
+" สมาชิกไม่จำกัด และระบบอีเมลอัตโนมัติอันทรงพลัง ทั้งหมดนี้ไม่มีค่าใช้จ่าย"
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "ซอฟต์แวร์การตลาดทางอีเมล Drip ฟรี"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "แผนตลอดไปฟรี"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"ไม่มีค่าธรรมเนียมแอบแฝง ไม่ต้องใช้บัตรเครดิตไม่เหมือนกับบริการทางเลือก "
+"Mailchimp หรือบริการทางเลือก Constant Contact "
+"เราเป็นซอฟต์แวร์การตลาดผ่านอีเมลฟรีโดยสมบูรณ์"
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "แคมเปญไม่จำกัด"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"แคมเปญอีเมลไม่จำกัด, อีเมลแบบหยดไม่จำกัด, สมาชิกไม่จำกัด, "
+"อีเมลอัตโนมัติไม่จำกัดไม่มีขีดจำกัดในการเติบโตของการตลาดผ่านอีเมลของคุณ"
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"คุณสมบัติระบบอัตโนมัติของอีเมลที่สมบูรณ์: แคมเปญแบบหยดอีเมล, "
+"การตั้งเวลาอีเมล, การวิเคราะห์อีเมล, การติดตามอีเมล, การแบ่งส่วนอีเมล "
+"และการปรับแต่งอีเมลในแบบของคุณ"
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "ซอฟต์แวร์การตลาดทางอีเมล Drip ฟรี"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"เทมเพลตอีเมล จดหมายข่าวทางอีเมล การจัดการสมาชิกอีเมล การจัดการรายชื่ออีเมล "
+"การติดตามอัตราการเปิดอีเมล อัตราการคลิกอีเมล และการวิเคราะห์ ROI "
+"ทางการตลาดผ่านอีเมล"
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "พร้อมที่จะเปลี่ยนแล้วหรือยัง?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"เข้าร่วมกับธุรกิจนับพันที่เปลี่ยนจากบริการการตลาดผ่านอีเมลราคาแพงมาเป็นแพลตฟอร์มการตลาดผ่านอีเมลฟรีของเราเริ่มต้นใช้งานอีเมลอัตโนมัติภายในไม่กี่นาที"
+" - ไม่ต้องใช้บัตรเครดิต"
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "สร้างบัญชีฟรี"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "มีบัญชีอยู่แล้ว?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "แนวทางปฏิบัติที่ดีที่สุดในการออกแบบอีเมล"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"เรียนรู้วิธีปรับปรุงอัตราการเปิดอ่านอีเมล เพิ่มการมีส่วนร่วมของอีเมล "
+"และเพิ่ม ROI "
+"การตลาดผ่านอีเมลของคุณด้วยกลยุทธ์การตลาดผ่านอีเมลที่ได้รับการพิสูจน์แล้วและเคล็ดลับการตลาดผ่านอีเมล"
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "อัตราการเปิดเฉลี่ย"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"ใช้หัวเรื่องอีเมลส่วนบุคคล ส่งอีเมลในเวลาที่เหมาะสม "
+"และแบ่งกลุ่มรายชื่ออีเมลของคุณติดตามอัตราการเปิดอีเมลด้วยการวิเคราะห์อีเมลของเราเพื่อเพิ่มประสิทธิภาพแคมเปญการตลาดผ่านอีเมลของคุณ"
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "การปรับปรุงการติดตาม"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "การจัดการการตีกลับ"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"สร้างเนื้อหาอีเมลที่น่าสนใจด้วยการปรับแต่งอีเมลส่วนบุคคล "
+"ใช้อีเมลอัตโนมัติเพื่อส่งข้อความทันเวลา "
+"และตรวจสอบอัตราการคลิกอีเมลระบบการตลาดผ่านอีเมลอัตโนมัติของเราช่วยให้คุณส่งข้อความที่ถูกต้องในเวลาที่เหมาะสม"
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "การมีส่วนร่วมมากขึ้น"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "ระบบการตลาดผ่านอีเมลอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"ใช้แคมเปญแบบหยดอีเมลเพื่อดูแลลูกค้าเป้าหมาย "
+"ใช้การแบ่งส่วนอีเมลสำหรับแคมเปญเป้าหมาย และติดตาม ROI "
+"การตลาดผ่านอีเมลด้วยการวิเคราะห์อีเมลที่ครอบคลุมซอฟต์แวร์การตลาดผ่านอีเมลฟรีที่ให้ผลลัพธ์"
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "ดู ROI ของคุณ"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"พร้อมที่จะใช้แนวทางปฏิบัติที่ดีที่สุดด้านการตลาดผ่านอีเมลเหล่านี้แล้วหรือยัง?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "เริ่มทำการตลาดผ่านอีเมลของคุณโดยอัตโนมัติฟรี"
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "คำถามที่พบบ่อย"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "ทุกสิ่งที่คุณต้องการเพื่อทำให้การตลาดผ่านอีเมลของคุณเป็นแบบอัตโนมัติ"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "แคมเปญ Drip คืออะไร?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"แคมเปญอีเมลแบบหยดหรือที่เรียกว่าลำดับอีเมลอัตโนมัติหรือแคมเปญอีเมลแบบหยดคือชุดอีเมลอัตโนมัติที่ส่งถึงสมาชิกเมื่อเวลาผ่านไปแคมเปญการตลาดผ่านอีเมลเหล่านี้ช่วยรักษาลูกค้าเป้าหมาย"
+" ต้อนรับผู้ใช้ "
+"และกระตุ้นการเปลี่ยนแปลงผ่านระบบอีเมลอัตโนมัติเชิงกลยุทธ์แพลตฟอร์มการตลาดผ่านอีเมลของเราทำให้การสร้างแคมเปญอีเมลแบบหยดที่มีประสิทธิภาพเป็นเรื่องง่าย"
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "เรียนรู้วิธีสร้างและส่งแคมเปญอีเมลแรกของคุณ"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"การสร้างแคมเปญอีเมลแบบหยดนั้นง่ายดายด้วยซอฟต์แวร์อัตโนมัติการตลาดผ่านอีเมลของเราลงทะเบียนฟรี"
+" สร้างแคมเปญอีเมลของคุณ เพิ่มลำดับอีเมลด้วยอีเมลที่กำหนดเวลาไว้ "
+"และปล่อยให้อีเมลอัตโนมัติของเราจัดการส่วนที่เหลือคุณสามารถใช้เทมเพลตอีเมลของเราหรือสร้างแคมเปญการตลาดผ่านอีเมลแบบกำหนดเองได้เริ่มต้นในไม่กี่นาที!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "สร้างแคมเปญแรกของคุณ"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "ซอฟต์แวร์การตลาดทางอีเมล Drip ฟรี"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"ใช่!แพลตฟอร์มการตลาดผ่านอีเมลของเราฟรี 100% ตลอดไปต่างจากทางเลือกอื่นของ "
+"Mailchimp, Constant Contact, Sendinblue หรือ GetResponse "
+"เรานำเสนอแคมเปญอีเมลไม่จำกัด สมาชิกไม่จำกัด อีเมลแบบหยดไม่จำกัด "
+"และฟีเจอร์อัตโนมัติทางการตลาดผ่านอีเมลเต็มรูปแบบโดยไม่มีค่าใช้จ่ายไม่ต้องใช้บัตรเครดิต"
+" ไม่มีค่าธรรมเนียมแอบแฝง"
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "มีฟีเจอร์การตลาดผ่านอีเมลอะไรบ้าง?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"ซอฟต์แวร์การตลาดผ่านอีเมลฟรีของเราประกอบด้วย: แคมเปญอีเมลแบบหยด "
+"ลำดับอีเมลอัตโนมัติ การตั้งเวลาอีเมล การวิเคราะห์อีเมลและการติดตามอีเมล "
+"(อัตราการเปิดอีเมล อัตราการคลิกอีเมล) การจัดการสมาชิกอีเมล "
+"การจัดการรายชื่ออีเมล การแบ่งส่วนอีเมล การปรับแต่งอีเมลส่วนบุคคล "
+"เทมเพลตอีเมล จดหมายข่าวทางอีเมล "
+"และระบบอัตโนมัติทางการตลาดผ่านอีเมลที่ครอบคลุมทุกสิ่งที่คุณต้องการสำหรับการตลาดผ่านอีเมลที่ประสบความสำเร็จ!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "อัตราการเปิดอีเมลส่วนบุคคล"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"ปรับปรุงอัตราการเปิดอ่านอีเมลโดยใช้หัวเรื่องอีเมลส่วนบุคคล "
+"การส่งอีเมลในเวลาที่เหมาะสม การแบ่งส่วนรายการอีเมลของคุณ "
+"และสร้างเนื้อหาอีเมลที่น่าสนใจเครื่องมือวิเคราะห์อีเมลของเราช่วยให้คุณติดตามอัตราการเปิดอ่านอีเมลและเพิ่มประสิทธิภาพแคมเปญการตลาดผ่านอีเมลของคุณเพื่อประสิทธิภาพที่ดีขึ้น"
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "เริ่มการนำเข้า"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "ยังมีคำถามอยู่ใช่ไหม?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"เริ่มต้นใช้งานซอฟต์แวร์การตลาดผ่านอีเมลฟรีของเรา "
+"และค้นพบว่าระบบอีเมลอัตโนมัตินั้นง่ายดายเพียงใด!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "พร้อมที่จะเปลี่ยนแปลงการตลาดผ่านอีเมลของคุณแล้วหรือยัง?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7300,15 +7881,15 @@ msgstr ""
 "เข้าร่วมกับธุรกิจนับพันที่ใช้แคมเปญแบบหยดเพื่อเพิ่มรายได้ ดูแลลูกค้าเป้าหมาย"
 " และสร้างความสัมพันธ์กับลูกค้าที่ยั่งยืน"
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "เริ่มบัญชีฟรีของคุณ"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "เรียนรู้เพิ่มเติม"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "ไม่ต้องใช้บัตรเครดิต • ตั้งค่าใน 5 นาที • ยกเลิกได้ตลอดเวลา"
 
@@ -12736,10 +13317,6 @@ msgstr ""
 "คุณสามารถสร้างได้หลายรายการเพื่อแบ่งกลุ่มผู้ชมของคุณ (เช่น ลูกค้า "
 "ผู้มีโอกาสเป็นลูกค้า พันธมิตร)"
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "เพิ่มสมาชิก"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "ตอนนี้เรามาเพิ่มสมาชิกบางส่วนในรายการของคุณคุณมีสองทางเลือก:"
@@ -12779,10 +13356,6 @@ msgstr "แมปคอลัมน์แล้วคลิก"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "นำเข้า"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "สร้างแคมเปญแรกของคุณ"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13808,6 +14381,28 @@ msgstr ""
 "หากคุณยกเลิกการสมัครโดยไม่ได้ตั้งใจหรือต้องการรับอีเมลอีกครั้ง "
 "โปรดติดต่อเราหรือสมัครใหม่อีกครั้ง"
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "เนื้อหาอีเมล"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "ขอข้อมูล"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "รูปแบบการตอบกลับ"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "ส่วนท้าย"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "กลับไปที่สมาชิก"
@@ -14119,3 +14714,28 @@ msgstr "ลองใช้ชื่อหรือที่อยู่อีเ
 #: .\templates\subscribers\list.html:213
 msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr "นำเข้าผู้ติดต่อหรือเพิ่มสมาชิกด้วยตนเองเพื่อดูรายชื่อที่นี่"
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "ลำดับอีเมลอัตโนมัติที่ดูแลลูกค้าเป้าหมาย การเริ่มต้นใช้งานผู้ใช้ "
+#~ "และกระตุ้นการเปลี่ยนแปลงตั้งค่าเพียงครั้งเดียวและดูรายได้ของคุณเติบโต"
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "เหตุใดแคมเปญ Drip จึงทำงาน"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "ต่างจากการส่งอีเมล์เพียงครั้งเดียว "
+#~ "แคมเปญแบบหยดสร้างความสัมพันธ์เมื่อเวลาผ่านไป"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "การเดินทางส่วนบุคคล"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "สร้างประสบการณ์ที่ไม่เหมือนใครให้กับสมาชิกแต่ละคนแบ่งกลุ่มผู้ชมของคุณและนำเสนอเนื้อหาที่ตรงใจ"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "HTML footer maka ozi-e"
 msgid "Time Zone"
 msgstr "Mpaghara Oge"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Ahịrị Adreesị 1"
@@ -64,22 +64,22 @@ msgstr "Ahịrị adreesị 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Ụlọ, ụlọ, wdg (nhọrọ)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Obodo"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Steeti/ Ógbè"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Koodu Nzipu ozi"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Obodo"
@@ -166,36 +166,36 @@ msgstr "Onye n'okpuru email"
 msgid "Email Footers"
 msgstr "Ndị na-eso email"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Emegharịrị igodo API nke ọma!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Emepụtara n'okpuru nke ọma!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Biko nye ma aha na ọdịnaya."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Achọrọ aha n'okpuru"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Achọrọ ọdịnaya okpuru ala"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Emelitere n'okpuru nke ọma!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "ehichapụrụ n'ụkwụ nke ọma!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Emelitere n'okpuru nke ọma nke ọma!"
 
@@ -242,8 +242,8 @@ msgstr "Ndepụta ndị debanyere aha"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Na-arụ ọrụ"
 
@@ -263,7 +263,7 @@ msgstr "Pịa Gụọ"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Mgbasa ozi"
 
@@ -328,7 +328,7 @@ msgstr "Onye n'okpuru"
 msgid "Email"
 msgstr "Email"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Ozi ịntanetị"
 
@@ -376,7 +376,7 @@ msgstr "ọnwa"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "E zigara ya"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Mgbanwe"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Ọnọdụ"
 
@@ -1175,12 +1175,12 @@ msgid "Lists"
 msgstr "Ndepụta"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Aha mbụ"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Aha ikpeazụ"
 
@@ -1197,7 +1197,7 @@ msgid "Confirmed At"
 msgstr "Ekwenyere na"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1561,6 +1561,7 @@ msgid "Remember Me"
 msgstr "Cheta m"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Banye"
 
@@ -1797,8 +1798,8 @@ msgid "Preview:"
 msgstr "Nhụchalụ:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Emepụtara"
 
@@ -1877,6 +1878,7 @@ msgid "Logout"
 msgstr "Wepụ"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Debanye aha n'efu"
 
@@ -1986,7 +1988,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Ọnweghị ndebiri ma ọ bụ mkpọsa ahụrụ dakọtara"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Arụghị ọrụ"
 
@@ -2046,7 +2048,7 @@ msgid "Campaign Statistics"
 msgstr "Mgbakọ Mgbasa Ozi"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Na-ebu..."
 
@@ -2184,7 +2186,7 @@ msgstr "Ọnweghị ozi-e agbakwunyere na mkpọsa a."
 msgid "Create Campaign"
 msgstr "Mepụta mkpọsa"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Mepụta Mgbasa Ozi Ọhụrụ"
@@ -2251,7 +2253,7 @@ msgstr "Họrọ mkpọsa"
 msgid "(Active)"
 msgstr "(Na-arụ ọrụ)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Enweghị mgbasa ozi ma"
 
@@ -2276,7 +2278,7 @@ msgstr "Ọnweghị ndebiri ahụrụ"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Mgbasa ozi a enwebeghị ndebiri email ọ bụla."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Mepụta ndebiri email"
 
@@ -2318,8 +2320,8 @@ msgstr "Enweghị ụkwụ"
 msgid "Select a footer to append to your email"
 msgstr "Họrọ otu n'okpuru iji tinye na email gị"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2543,7 +2545,7 @@ msgid "Number of Emails"
 msgstr "Ọnụọgụ nke ozi-e"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Ndebiri email"
 
@@ -2761,7 +2763,7 @@ msgid "Generate Email"
 msgstr "Mepụta ozi-e"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Nleba anya email"
 
@@ -2774,7 +2776,7 @@ msgid "Send Test Email"
 msgstr "Zipu ozi-e ule"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Adreesị ozi ịntanetị"
@@ -3139,7 +3141,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Nnweta Calenvy nke Google na Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3441,7 +3445,7 @@ msgstr "Lelee Ndepụta"
 msgid "Emails Sent"
 msgstr "E zigara ozi-e"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Lelee nyocha"
 
@@ -3449,112 +3453,124 @@ msgstr "Lelee nyocha"
 msgid "Add a List"
 msgstr "Tinye Ndepụta"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Na-egosi %(start)s-%(end)s nke ndị debanyere aha %(total)s"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Ntọala ndekọ SPF maka nnyefe email"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Tinye ndekọ TXT a na DNS ngalaba gị:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Ụdị:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Aha/Onye ọbịa:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Uru:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Mara:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Otu esi etinye ndekọ a:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Gaa na njikwa DNS ma ọ bụ ntọala DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Tinye ndekọ TXT ọhụrụ yana ụkpụrụ egosiri n'elu"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Zipu ozi-e & denye aha"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Họrọ mkpọsa..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Buru ụzọ họrọ mkpọsa..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Nhazi oge"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Ziga na nkeji X"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Ziga na elekere X"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Ziga n'ime ụbọchị X"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Ziga na izu X"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Ziga n'ime ọnwa X"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Mmemme izipu nso nso a"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Sochie izipu na mbupu email gị"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Weghachite ume"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Oge egosiri na"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Na-ebu ọrụ..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Wepụ mgbasa ozi na ozi-e gị"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3562,147 +3578,170 @@ msgstr ""
 "Email gị ugbu a gụnyere akara ngosi anyị.Kekọrịta maka DripEmails.org na X "
 "ma ọ bụ blọọgụ gị iji wepụ mgbasa ozi na ozi-e gị niile."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Mgbasa ozi gị"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Omume"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
 msgstr ""
 "Mepụta mkpọsa mbụ gị ka ịmalite izipu ozi-e akpaaka na ndị debanyere aha gị."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Ndepụta ndị debanyere aha gị"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Enweghị ndepụta ndị debanyere aha"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "Mepụta ndepụta ndebanye aha mbụ gị ka ịmalite ịhazi kọntaktị gị."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Omume ngwa ngwa"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Tinye ndị debanyere aha"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Ndebiri email"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Ntọala akaụntụ"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Mwepụ mgbasa ozi"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Wepu aha njikọ"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Mpaghara oge"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Ntọala akaụntụ"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Ndị na-eso email"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Ndụmọdụ & akụrụngwa"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Ntuziaka mmalite"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Mụta otu esi ahazi mkpọsa ozi-e izizi gị n'ime nkeji."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Omume kacha mma email"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Ndụmọdụ maka ịmepụta ozi-e ndị na-atụgharị."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Zụlite Ndepụta ndị debanyere aha gị"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Atụmatụ ịbawanye ndị debanyere aha gị."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Adreesị anụ ahụ achọrọ"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Ahịrị adreesị 2 (Nhọrọ)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && ọkwa"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Enweghị ọrụ izipu ma"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr "Jiri fọm dị n'elu zipu ozi-e wee hụ ọrụ gị ebe a."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Iji"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Haziri ya"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Njehie"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Nlele HTML zuru oke"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Ụdị ederede"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Gosi obere"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Wepụ aha"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Ịbunye ọrụ agaghị eme"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Biko nwaa ọzọ."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Gbalịa ọzọ"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Họrọ ndebiri email..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Enwere mperi itinye ozi-e"
 
@@ -7087,7 +7126,9 @@ msgid "Manage Your Subscribers"
 msgstr "Jikwaa ndị debanyere aha gị"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Automation ire ahịa email efu"
 
 #: .\templates\core\home.html:18
@@ -7117,11 +7158,22 @@ msgstr "Ndị ahịa kwesịrị ntụkwasị obi"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Usoro email akpaaka nke na-azụlite ndu, ndị ọrụ nọ n'ụgbọ mmiri, yana "
-"ntugharị ebugharị.Tọọ ya otu ugboro, hụkwa na ego ị na-enweta na-eto."
+"Ngwa ahịa ahịa email drip efu kacha mma maka usoro email akpaaka, mkpọsa ozi"
+" email na akpaaka ịre ahịa email.Mepụta mkpọsa mgbasa ozi email siri ike, "
+"jiri usoro email na-akpaghị aka na-edu, wee jiri ikpo okwu ahịa email anyị "
+"mee mgbanwe.Zuru oke maka ịre ahịa email SaaS, ahịa email ecommerce, ahịa "
+"email B2B, na obere ahịa email azụmaahịa.Hazie akpaaka email gị n'ime nkeji "
+"- sọftụwia ịre ahịa email n'efu yana mkpọsa na-akparaghị ókè, ndị debanyere "
+"aha na-akparaghị ókè, yana ozi ịntanetị na-akparaghị ókè."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7131,74 +7183,175 @@ msgstr "Malite Free Taa"
 msgid "Unlimited Campaigns"
 msgstr "Mgbasa ozi na-akparaghị ókè"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Mgbasa ozi na-akparaghị ókè"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Ndị debanyere aha na-akparaghị ókè"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Enweghị kaadị kredit"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Tọọ n'ime nkeji 5"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI dị elu"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Mmekọrịta ndị ọzọ"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Ọsọ ọsọ"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Akpaaka"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Ihe kpatara mkpọsa ntapu na-arụ ọrụ"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Otu esi emepụta ndebiri email"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"N'adịghị ka otu mgbawa ozi-e, mkpọsa ntapu na-ewulite mmekọrịta ka oge na-"
-"aga"
+"Ịmepụta akpaaka email na mkpọsa ntapu email adịbeghị mfe.Akụrụngwa akpaaka "
+"ahịa email anyị na-eme ka ọ dị mfe ịmepụta usoro email akpaghị aka, nhazi "
+"ozi-e, yana soro nchịkọta email."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Mepụta Mgbasa Ozi Mbụ Gị"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Jiri ngwa ahịa ahịa email anyị nwere nghọta wulite mgbasa ozi ntapu email "
+"gị.Họrọ site na ndebiri email mara mma ma ọ bụ mepụta mkpọsa ahịa email "
+"omenala."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Usoro email"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Jiri ozi-e ahaziri ahazi usoro email akpaghị aka.Hazie usoro nhazi ozi-e, "
+"usoro ịzụlite ozi-e, na usoro nnabata maka ndị debanyere aha email gị."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Ijikwa ndị debanyere aha"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Bubata ndepụta email gị, ndị debanyere aha ngalaba nwere njikwa ndepụta "
+"email, ma hazie ndị na-ege email gị.Zuru oke maka njikwa ndị debanyere aha "
+"email na ngalaba email."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Kedu ihe AI ​​nwere ike ịkwalite"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Nyochaa ọnụego mepere emepe email, ọnụego pịa email, yana ntinye aka email "
+"na nyocha ozi-e ozugbo.Melite ROI ahịa email site na nghota na-ebute data."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Ihe kpatara mkpọsa ntanye email na-arụ ọrụ ka mma karịa mgbawa ozi email otu"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"N'adịghị ka otu mgbawa ozi-e, mkpọsa ozi-e ntapu akpaaka na-ewulite "
+"mmekọrịta ka oge na-aga.Automation ahịa email na-enyere gị aka izipu ozi "
+"ahịa email ziri ezi n'oge kwesịrị ekwesị, na-eme ka ntinye aka email na ahịa"
+" ahịa email ROI."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Nzụlite akpaaka"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Ziga ozi ziri ezi n'oge kwesịrị ekwesị.Na-eduzi ntuziaka na-akpaghị aka site"
 " na ọwara gị na-enweghị enyemaka aka."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Njem ahaziri ahazi"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Ngalaba ndị debanyere aha"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Mepụta ahụmịhe pụrụ iche maka onye ọ bụla debanyere aha.Kewaa ndị na-ege gị "
-"ntị wee wepụta ọdịnaya na-atọ ụtọ."
+"Mepụta ahụmịhe email pụrụ iche maka onye debanyere aha ya na ozi-e ahaziri "
+"onwe ya.Jiri ngalaba email na njikwa ndepụta email iji wepụta mgbasa ozi "
+"email ezubere iche nke na-adabara ndị na-ege gị ntị email."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Nsonaazụ egosipụtara"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7206,19 +7359,21 @@ msgstr ""
 "Mgbasa ntapu na-ewepụta ego 3x karịa otu ozi-e.Hụ ROI nke enwere ike ịlele "
 "site na ụbọchị mbụ."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Ihe niile I Kwesịrị Ịga nke Ọma"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Atụmatụ siri ike na-eme ka ahịa email na-enweghị mgbalị"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Usoro ntapu Smart"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7226,11 +7381,11 @@ msgstr ""
 "Mepụta usoro email nwere ọtụtụ nzọụkwụ na-eziga na-akpaghị aka dabere na "
 "oge, omume, ma ọ bụ ihe na-akpalite."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Ntụle oge dị adị"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7238,11 +7393,11 @@ msgstr ""
 "Track na-emepe, ọpịpị, ntụgharị na ego enwetara.Jiri dashboard mara mma mee "
 "mkpebi ndị dabere na data."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Templates mara mma"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7250,14 +7405,14 @@ msgstr ""
 "Họrọ site na ndebiri ọkachamara ma ọ bụ mepụta nke gị.Onye nchịkọta akụkọ "
 "ịdọrọ na dobe na-eme ka imewe dị mfe."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Ngalaba ndị debanyere aha"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7265,11 +7420,11 @@ msgstr ""
 "Hazie ndị debanyere aha n'ime listi, kpado ha, ma ziga mkpọsa ezubere iche "
 "nye ndị na-ege ntị ziri ezi."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Ọdịnaya nke AI kwadoro"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7277,11 +7432,11 @@ msgstr ""
 "Mepụta ọdịnaya email na-adọrọ adọrọ na AI.Chekwa oge ka ị na-ekepụta "
 "ọkachamara, ozi na-etinye aka."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Nchekwa ụlọ ọrụ"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7289,15 +7444,15 @@ msgstr ""
 "GDPR kwadoro, akụrụngwa echekwara yana nnyefe a pụrụ ịdabere na ya.A na-"
 "echekwa data gị na ndị debanyere aha gị."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Azụmahịa na-eto eto tụkwasịrị obi"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "Soro puku kwuru puku ndị na-ere ahịa bụ ndị gbanwere atụmatụ email ha"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7306,11 +7461,11 @@ msgstr ""
 "Ọnụego ntughari anyị mụbara site na 340% mgbe emechara mkpọsa ntapu.Akpaaka "
 "na-echekwa anyị awa kwa izu."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Onye isi ahịa ahịa"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7318,11 +7473,11 @@ msgstr ""
 "Nke kacha mma?Ọ bụ kpam kpam free.Anyị ezipụla ozi-e karịrị 50,000 na-"
 "akwụghị ụgwọ ọ bụla.Onye na-agbanwe egwuregwu."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Onye malitere mmalite"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7330,15 +7485,452 @@ msgstr ""
 "Nhazi were nkeji 5.The interface bụ kensinammuo, na nsonaazụ na-ekwu maka "
 "onwe ha.Nkwekọrịta email anyị mụbara okpukpu abụọ."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Onye njikwa azụmaahịa e-commerce"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Automation ahịa email efu maka onye ọ bụla"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Ma ị na-agba ọsọ ahịa email SaaS, ahịa email ecommerce, ahịa email B2B, ma ọ"
+" bụ mgbasa ozi email B2C, ngwa ahịa akpaaka email anyị n'efu dabara na mkpa "
+"gị."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Automation ire ahịa email efu"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Ndị ọrụ nọ n'ụgbọ mmiri nwere usoro email akpaghị aka, usoro nnabata, na "
+"ịkwalite mkpọsa.Zuru oke maka mmalite email ahịa na ụlọ ọrụ ngwanrọ."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Malite Free Taa"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Onye njikwa azụmaahịa e-commerce"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Jiri ozi-e ụgbọ ibu agbahapụla, ndụmọdụ ngwaahịa, na ozi-e azụmahịa kwọọ "
+"ahịa.Jiri mgbasa ozi edoro anya kwalite ROI email gị."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Na-amalite"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Automation ire ahịa email efu"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Nzụlite na-eduga na akpaaka ịre ahịa email, ngalaba email, yana mkpọsa ozi "
+"email ahaziri iche.Zuru oke maka atụmatụ ahịa email B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Gbalịa atụmatụ AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Obere azụmahịa Email Marketing"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Ngwa ahịa email na-asọpu efu nwere mkpọsa na-akparaghị ókè, ndị debanyere "
+"aha na usoro email akpaaka."
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Automation ire ahịa email efu"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "Nhọrọ kacha mma maka ngwa ahịa email akwụ ụgwọ"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Kedu ihe kpatara ịkwụ ụgwọ maka Mailchimp, Contact Constant, Sendinblue, ma "
+"ọ bụ GetResponse mgbe ị nwere ike nweta otu njirimara akpaaka ahịa email "
+"n'efu?Ikpokoro ahịa email anyị na-enye mkpọsa ozi email na-akparaghị ókè, "
+"ndị debanyere aha na-akparaghị ókè, yana akpaaka email siri ike - ha niile "
+"na-akwụghị ụgwọ."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Ngwanrọ ahịa ahịa email ntapu efu"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Atụmatụ ebighi ebi efu"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Enweghị ụgwọ zoro ezo, enweghị kaadị kredit achọrọ.N'adịghị ka Mailchimp ọzọ"
+" ma ọ bụ ọrụ kọntaktị kọntaktị mgbe niile, anyị bụ ngwa ahịa email n'efu "
+"kpamkpam."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Mgbasa ozi na-akparaghị ókè"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Mgbasa ozi email na-akparaghị ókè, ozi-e na-akparaghị ókè, ndị debanyere aha"
+" na-akparaghị ókè, akpaaka email na-akparaghị ókè.Enweghị oke na uto ahịa "
+"ahịa email gị."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Automation ire ahịa email efu"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Njirimara akpaaka ozi-e zuru ezu: mkpọsa ntapu email, nhazi oge email, "
+"nyocha email, nsochi email, ngalaba email, na nhazi email."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Ngwanrọ ahịa ahịa email ntapu efu"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Ndebiri email, akwụkwọ akụkọ ozi-e, njikwa ndị debanyere aha email, njikwa "
+"ndepụta email, nsochi ọnụ ahịa mepere emepe email, ọnụego pịa email, na "
+"nyocha ROI ahịa email."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Ọ dịla njikere ịgbanwe?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Soro puku kwuru puku ụlọ ọrụ gbanwere site na ọrụ ịre ahịa email dị oke ọnụ "
+"gaa na ikpo okwu ahịa email anyị n'efu.Bido na akpaaka email n'ime nkeji - "
+"enweghị kaadị kredit achọrọ."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Mepụta Akaụntụ efu"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Ị nwere akaụntụ?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Imepụta email kacha mma"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Mụta otu esi emeziwanye ọnụego mepere emepe email, ịbawanye ntinye aka "
+"email, wee bulie ahịa ahịa email ROI gị site na iji atụmatụ azụmaahịa email "
+"pụtara ìhè yana ndụmọdụ ịre ahịa email."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Nkezi Ọnụ Ọgụgụ mepere emepe"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Jiri ahịrị isiokwu email ahaziri iche, zipu ozi-e n'oge kacha mma, wee kewaa"
+" ndepụta email gị.Sochie ọnụego mepere emepe site na iji nyocha email anyị "
+"iji bulie mgbasa ozi ahịa email gị."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Mmelite nsochi"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "njikwa bounce"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Mepụta ọdịnaya email na-etinye aka na nhazi email, jiri akpaaka email izipu "
+"ozi oge, wee nyochaa ọnụego ọpịpị email.Automation ahịa email anyị na-enyere"
+" gị aka izipu ozi ziri ezi n'oge kwesịrị ekwesị."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Mmekọrịta ndị ọzọ"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Automation ire ahịa email efu"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Jiri mgbasa ozi ntapu email maka ịzụlite ndu, mejuputa ngalaba email maka "
+"mkpọsa ezubere iche, wee soro ahịa ahịa email ROI jiri nyocha email zuru "
+"oke.Ngwa ahịa email efu na-enye nsonaazụ."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Hụ ROI gị"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "Ị dịla njikere imejuputa omume kacha mma ahịa email ndị a?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Bido akpaaka ahịa email gị n'efu."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Ajụjụ a na-ajụkarị"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Ihe niile ịchọrọ iji megharịa ahịa email gị"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Kedu ihe bụ mkpọsa ntapu?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Mgbasa ozi email drip, nke a makwaara dị ka usoro email akpaghị aka ma ọ bụ "
+"mgbasa ozi ntapu email, bụ usoro ozi-e akpaghị aka ezigara ndị debanyere aha"
+" ka oge na-aga.Mgbasa ozi ịre ahịa email ndị a na-enyere aka ịzụlite ụzọ, "
+"ndị ọrụ nọ n'ụgbọ mmiri, na chụpụ mgbanwe site na akpaaka email dabara "
+"adaba.Ikpokoro ahịa email anyị na-eme ka ọ dị mfe ịmepụta mkpọsa ozi email "
+"dị ike."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Mụta otu esi emepụta na zipu mkpọsa ozi-e mbụ gị"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Ịmepụta mkpọsa email ntapu dị mfe site na ngwa ngwa ahịa email anyị.Debanye "
+"aha n'efu, mepụta mgbasa ozi email gị, tinye usoro email na ozi-e akwadoro, "
+"ma mee ka akpaaka email anyị jikwaa ndị ọzọ.Ị nwere ike iji ndebiri email "
+"anyị ma ọ bụ mepụta mkpọsa ahịa email omenala.Bido na nkeji nkeji!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Mepụta Mgbasa Ozi Mbụ Gị"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Ngwanrọ ahịa ahịa email ntapu efu"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Ee!Anyị email ahịa ikpo okwu bụ 100%% free ruo mgbe ebighị ebi.N'adịghị ka "
+"Mailchimp, Kọntaktị Kọntaktị, Sendinblue, ma ọ bụ GetResponse ọzọ, anyị na-"
+"enye mkpọsa ozi email na-akparaghị ókè, ndị debanyere aha na-akparaghị ókè, "
+"ozi ịntanetị na-akparaghị ókè, yana njirimara akpaaka azụmaahịa email zuru "
+"oke.Enweghị kaadị kredit achọrọ, enweghị ụgwọ zoro ezo."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Kedu njirimara ịre ahịa email agụnyere?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Akụrụngwa ahịa email anyị na-akwụghị ụgwọ gụnyere: mgbasa ozi ntapu email, "
+"usoro email akpaaka, nhazi ozi email, nyocha email na nsochi email (ọnụego "
+"mmeghe email, ọnụ ahịa pịa email), njikwa ndenye aha email, njikwa ndepụta "
+"email, ngalaba email, nhazi email, ndebiri email, akwụkwọ akụkọ email, na "
+"akpaaka ahịa email zuru oke.Ihe niile ịchọrọ maka ire ahịa email na-aga nke "
+"ọma!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Ọnụ ego mepere emepe nke onye ọ bụla"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Melite ọnụego mepere emepe email site na iji ahịrị isiokwu email ahaziri "
+"iche, izipu ozi-e n'oge kacha mma, na-ekewa ndepụta email gị, na imepụta "
+"ọdịnaya email na-etinye aka.Ngwá ọrụ nyocha email anyị na-enyere gị aka soro"
+" ọnụego mepere emepe email wee bulie mkpọsa ahịa email gị maka ịrụ ọrụ ka "
+"mma."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Malite mbubata"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Ị ka nwere ajụjụ?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Bido na ngwa ahịa email anyị n'efu wee chọpụta ka akpaaka email siri dị mfe!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Ị dịla njikere ịgbanwe ahịa ahịa email gị?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7346,15 +7938,15 @@ msgstr ""
 "Soro puku kwuru puku ụlọ ọrụ na-eji mkpọsa ntapu iji zụlite ego ha nwetara, "
 "zụọ ụzọ, na wulite mmekọrịta ndị ahịa na-adịgide adịgide."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Malite Akaụntụ efu gị"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Mụtakwuo"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "Enweghị kaadị kredit achọrọ • Tọọ na nkeji 5 • Kagbuo oge ọ bụla"
 
@@ -12810,10 +13402,6 @@ msgstr ""
 "Ị nwere ike ịmepụta ọtụtụ ndepụta iji kewaa ndị na-ege gị ntị (dịka, ndị "
 "ahịa, atụmanya, ndị mmekọ)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Tinye ndị debanyere aha"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -12855,10 +13443,6 @@ msgstr "Map ogidi wee pịa"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Bubata"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Mepụta Mgbasa Ozi Mbụ Gị"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13897,6 +14481,28 @@ msgstr ""
 "Ọ bụrụ na ị debanyere aha n'amaghị ama ma ọ bụ chọọ ịnata ozi-e ọzọ, biko "
 "kpọtụrụ anyị ma ọ bụ debanye aha ọzọ."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Ọdịnaya Email"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "rịọ ozi"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Usoro nzaghachi"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Onye n'okpuru"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Laghachi na ndị debanyere aha"
@@ -14214,3 +14820,29 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Bubata kọntaktị ma ọ bụ tinye ndị debanyere aha iji aka hụ ka edepụtara ha "
 "ebe a."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Usoro email akpaaka nke na-azụlite ndu, ndị ọrụ nọ n'ụgbọ mmiri, yana "
+#~ "ntugharị ebugharị.Tọọ ya otu ugboro, hụkwa na ego ị na-enweta na-eto."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Ihe kpatara mkpọsa ntapu na-arụ ọrụ"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "N'adịghị ka otu mgbawa ozi-e, mkpọsa ntapu na-ewulite mmekọrịta ka oge na-"
+#~ "aga"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Njem ahaziri ahazi"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Mepụta ahụmịhe pụrụ iche maka onye ọ bụla debanyere aha.Kewaa ndị na-ege gị "
+#~ "ntị wee wepụta ọdịnaya na-atọ ụtọ."

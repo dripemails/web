@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Custom footer HTML ar gyfer e-byst"
 msgid "Time Zone"
 msgstr "Parth Amser"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Llinell Cyfeiriad 1"
@@ -64,22 +64,22 @@ msgstr "Llinell Cyfeiriad 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Fflat, swît, ac ati (dewisol)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Dinas"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Talaith/Talaith"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Côd Post"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Gwlad"
@@ -166,36 +166,36 @@ msgstr "Troedyn E-bost"
 msgid "Email Footers"
 msgstr "Troedynnau E-bost"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Allwedd API wedi'i adfywio'n llwyddiannus!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Troedyn wedi'i greu yn llwyddiannus!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Rhowch enw a chynnwys."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Mae angen enw'r troedyn"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Mae angen cynnwys y troedyn"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Troedyn wedi'i ddiweddaru'n llwyddiannus!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Troedyn wedi'i ddileu yn llwyddiannus!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Diweddarwyd y troedyn diofyn yn llwyddiannus!"
 
@@ -242,8 +242,8 @@ msgstr "Rhestr Tanysgrifwyr"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Actif"
 
@@ -263,7 +263,7 @@ msgstr "Cliciwch Cyfrif"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Ymgyrch"
 
@@ -328,7 +328,7 @@ msgstr "Troedyn"
 msgid "Email"
 msgstr "Ebost"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "E-byst"
 
@@ -376,7 +376,7 @@ msgstr "misoedd"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Anfonwyd"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Newidynnau"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Statws"
 
@@ -1178,12 +1178,12 @@ msgid "Lists"
 msgstr "Rhestrau"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Enw Cyntaf"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Enw olaf"
 
@@ -1200,7 +1200,7 @@ msgid "Confirmed At"
 msgstr "Cadarnhawyd At"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1568,6 +1568,7 @@ msgid "Remember Me"
 msgstr "Cofiwch Fi"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Mewngofnodwch"
 
@@ -1809,8 +1810,8 @@ msgid "Preview:"
 msgstr "Rhagolwg:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Wedi creu"
 
@@ -1890,6 +1891,7 @@ msgid "Logout"
 msgstr "Allgofnodi"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Cofrestrwch Am Ddim"
 
@@ -1999,7 +2001,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Ni chanfuwyd unrhyw dempledi nac ymgyrchoedd yn cyfateb"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Anactif"
 
@@ -2061,7 +2063,7 @@ msgid "Campaign Statistics"
 msgstr "Ystadegau Ymgyrch"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Wrthi'n llwytho..."
 
@@ -2199,7 +2201,7 @@ msgstr "Nid oes unrhyw e-byst wedi'u hychwanegu at yr ymgyrch hon eto."
 msgid "Create Campaign"
 msgstr "Creu Ymgyrch"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Creu Ymgyrch Newydd"
@@ -2266,7 +2268,7 @@ msgstr "Dewiswch ymgyrch"
 msgid "(Active)"
 msgstr "(Gweithredol)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Dim ymgyrchoedd eto"
 
@@ -2291,7 +2293,7 @@ msgstr "Heb ganfod templedi"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Nid oes gan yr ymgyrch hon unrhyw dempledi e-bost eto."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Creu Templed E-bost"
 
@@ -2333,8 +2335,8 @@ msgstr "Dim troedyn"
 msgid "Select a footer to append to your email"
 msgstr "Dewiswch droedyn i'w atodi i'ch e-bost"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2560,7 +2562,7 @@ msgid "Number of Emails"
 msgstr "Nifer E-byst"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Templed E-bost"
 
@@ -2782,7 +2784,7 @@ msgid "Generate Email"
 msgstr "Cynhyrchu E-bost"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Rhagolwg E-bost"
 
@@ -2795,7 +2797,7 @@ msgid "Send Test Email"
 msgstr "Anfon E-bost Prawf"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Cyfeiriad Ebost"
@@ -3166,7 +3168,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Caffaeliad Calenvy gan Google a Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3475,7 +3479,7 @@ msgstr "Gweld Rhestrau"
 msgid "Emails Sent"
 msgstr "E-byst a Anfonwyd"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Gweld Dadansoddeg"
 
@@ -3483,112 +3487,124 @@ msgstr "Gweld Dadansoddeg"
 msgid "Add a List"
 msgstr "Ychwanegu Rhestr"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Yn dangos %(start)s-%(end)s o %(total)s o danysgrifwyr"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Gosod Cofnod SPF ar gyfer Cyflenwi E-bost"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Ychwanegwch y cofnod TXT hwn at DNS eich parth:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Math:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Enw / gwesteiwr:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Gwerth:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Nodyn:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Sut i ychwanegu'r cofnod hwn:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Llywiwch i reoli DNS neu osodiadau DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Ychwanegu cofnod TXT newydd gyda'r gwerthoedd a ddangosir uchod"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Anfon E-bost a Tanysgrifio"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Dewiswch ymgyrch..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Dewiswch ymgyrch yn gyntaf..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Atodlen"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Anfonwch X Munud i mewn"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Anfonwch X Oriau i mewn"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Anfonwch X Days i mewn"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Anfonwch X Weeks i mewn"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Anfon X Misoedd"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Gweithgaredd Anfon Diweddar"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Traciwch eich anfoniadau a'ch danfoniadau e-bost"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Adnewyddu"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Amseroedd a ddangosir yn"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Wrthi'n llwytho gweithgaredd..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Dileu Hysbysebion o'ch E-byst"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3596,15 +3612,15 @@ msgstr ""
 "Mae eich e-byst ar hyn o bryd yn cynnwys ein brandio.Rhannwch am "
 "DripEmails.org ar X neu'ch blog i ddileu hysbysebion o'ch holl e-byst."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Eich Ymgyrchoedd"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Gweithredoedd"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3612,134 +3628,157 @@ msgstr ""
 "Creu eich ymgyrch gyntaf i ddechrau anfon e-byst awtomataidd at eich "
 "tanysgrifwyr."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Eich Rhestrau Tanysgrifwyr"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Dim rhestrau tanysgrifwyr eto"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Creu eich rhestr tanysgrifwyr cyntaf i ddechrau trefnu eich cysylltiadau."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Camau Cyflym"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Ychwanegu Tanysgrifwyr"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Templedi E-bost"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Gosodiadau Cyfrif"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Dileu Hysbysebion"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Dolenni dad-danysgrifio"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Cylchfa Amser"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Gosodiadau Cyfrif"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Troedynnau E-bost"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Awgrymiadau ac Adnoddau"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Canllaw Cychwyn Arni"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Dysgwch sut i sefydlu eich ymgyrch e-bost gyntaf mewn munudau."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "E-bostio Arferion Gorau"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Awgrymiadau ar gyfer creu e-byst sy'n trosi."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Tyfu Eich Rhestr Tanysgrifwyr"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategaethau i gynyddu eich tanysgrifwyr."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Cyfeiriad Corfforol Angenrheidiol"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Llinell Cyfeiriad 2 (Dewisol)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && statws"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Dim gweithgaredd anfon eto"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Defnyddiwch y ffurflen uchod i anfon e-bost a gweld eich gweithgaredd yma."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "I"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Wedi'i drefnu"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Gwall"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Rhagolwg HTML Llawn"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Fersiwn Testun"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Dangos llai"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Dad-danysgrifio"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Wedi methu llwytho gweithgaredd"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Ceisiwch eto."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Ceisiwch eto"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Dewiswch dempled e-bost..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Gwall wrth lwytho e-byst"
 
@@ -7174,7 +7213,9 @@ msgid "Manage Your Subscribers"
 msgstr "Rheoli Eich Tanysgrifwyr"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
 
 #: .\templates\core\home.html:18
@@ -7204,12 +7245,24 @@ msgstr "Cwsmeriaid ffyddlon"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Dilyniannau e-bost awtomataidd sy'n meithrin arweinwyr, defnyddwyr ar y "
-"bwrdd, ac yn gyrru trawsnewidiadau.Gosodwch ef unwaith, a gwyliwch eich "
-"refeniw yn tyfu."
+"Y meddalwedd marchnata e-bost diferu gorau am ddim ar gyfer dilyniannau "
+"e-bost awtomataidd, ymgyrchoedd e-bost, ac awtomeiddio marchnata e-bost.Creu"
+" ymgyrchoedd diferu e-bost pwerus, meithrin arweinwyr gyda dilyniannau "
+"e-bost awtomataidd, a gyrru trawsnewidiadau gyda'n platfform marchnata "
+"e-bost.Perffaith ar gyfer marchnata e-bost SaaS, marchnata e-bost e-fasnach,"
+" marchnata e-bost B2B, a marchnata e-bost busnesau bach.Sefydlwch eich "
+"awtomeiddio e-bost mewn munudau - meddalwedd marchnata e-bost hollol rhad ac"
+" am ddim gydag ymgyrchoedd diderfyn, tanysgrifwyr diderfyn, ac e-byst diferu"
+" diderfyn."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7219,74 +7272,180 @@ msgstr "Dechrau am Ddim Heddiw"
 msgid "Unlimited Campaigns"
 msgstr "Ymgyrchoedd Anghyfyngedig"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Ymgyrchoedd Anghyfyngedig"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Tanysgrifwyr Diderfyn"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Dim Cerdyn Credyd"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Gosod mewn 5 Munud"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI uwch"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Mwy o Ymgysylltiad"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Twf Cyflymach"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Awtomatiaeth"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Pam mae Ymgyrchoedd Diferu yn Gweithio"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Sut i Greu Templedi E-bost"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Yn wahanol i ffrwydradau e-bost sengl, mae ymgyrchoedd diferu yn adeiladu "
-"perthnasoedd dros amser"
+"Ni fu erioed yn haws sefydlu awtomatiaeth e-bost ac ymgyrchoedd diferu "
+"e-bost.Mae ein meddalwedd awtomeiddio marchnata e-bost yn ei gwneud hi'n "
+"hawdd creu dilyniannau e-bost awtomataidd, amserlennu e-byst, ac olrhain "
+"dadansoddeg e-bost."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Creu Eich Ymgyrch Gyntaf"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Adeiladwch eich ymgyrch diferu e-bost gyda'n hofferyn marchnata e-bost "
+"greddfol.Dewiswch o dempledi e-bost hardd neu crëwch ymgyrchoedd marchnata "
+"e-bost wedi'u teilwra."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Dilyniant E-bost"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Dylunio dilyniannau e-bost awtomataidd gyda negeseuon e-bost "
+"personol.Sefydlu amserlennu e-bost, dilyniannau meithrin e-bost, a chyfresi "
+"croeso ar gyfer eich tanysgrifwyr e-bost."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Rheoli Tanysgrifwyr"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Mewnforiwch eich rhestr e-bost, segmentwch danysgrifwyr gyda rheolaeth "
+"rhestr e-bost, a threfnwch eich cynulleidfa e-bost.Perffaith ar gyfer rheoli"
+" tanysgrifwyr e-bost a segmentu e-bost."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Yr hyn y gall AI ei Optimeiddio"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Monitro cyfraddau e-bost agored, cyfraddau clicio e-bost, ac ymgysylltu "
+"e-bost â dadansoddeg e-bost amser real.Gwella ROI marchnata e-bost gyda "
+"mewnwelediadau sy'n cael eu gyrru gan ddata."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Pam Mae Ymgyrchoedd Diferu E-bost yn Gweithio'n Well Na Chwythiadau E-bost "
+"Unigol"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Yn wahanol i ffrwydradau e-bost sengl, mae ymgyrchoedd e-bost diferu "
+"awtomataidd yn meithrin perthnasoedd dros amser.Mae awtomeiddio marchnata "
+"e-bost yn eich helpu i anfon y negeseuon marchnata e-bost cywir ar yr amser "
+"cywir, gan wella ymgysylltiad e-bost a ROI marchnata e-bost."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Meithrin Awtomataidd"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Anfonwch y neges gywir ar yr amser iawn.Arweiniwch arweinwyr yn awtomatig "
 "trwy'ch twndis heb ymyrraeth â llaw."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Teithiau Personol"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentu Tanysgrifwyr"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Creu profiadau unigryw ar gyfer pob tanysgrifiwr.Segmentwch eich cynulleidfa"
-" a chyflwyno cynnwys sy'n atseinio."
+"Creu profiadau e-bost unigryw ar gyfer pob tanysgrifiwr gyda negeseuon "
+"e-bost personol.Defnyddiwch segmentu e-bost a rheoli rhestr e-bost i "
+"gyflwyno ymgyrchoedd marchnata e-bost wedi'u targedu sy'n atseinio gyda'ch "
+"cynulleidfa e-bost."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Canlyniadau Profedig"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7294,19 +7453,21 @@ msgstr ""
 "Mae ymgyrchoedd diferu yn cynhyrchu 3 gwaith yn fwy o refeniw na negeseuon "
 "e-bost unigol.Gweler ROI mesuradwy o'r diwrnod cyntaf."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Popeth Sydd Ei Angen I Lwyddo"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Nodweddion pwerus sy'n gwneud marchnata e-bost yn ddiymdrech"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Dilyniannau Diferu Clyfar"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7314,11 +7475,11 @@ msgstr ""
 "Creu dilyniannau e-bost aml-gam sy'n anfon yn awtomatig yn seiliedig ar "
 "amseriad, ymddygiad, neu sbardunau."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Dadansoddeg Amser Real"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7326,11 +7487,11 @@ msgstr ""
 "Trac yn agor, cliciau, trawsnewidiadau, a refeniw.Gwneud penderfyniadau sy'n"
 " cael eu gyrru gan ddata gyda dangosfyrddau hardd."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Templedi Hardd"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7338,14 +7499,14 @@ msgstr ""
 "Dewiswch o dempledi proffesiynol neu crëwch eich un eich hun.Mae golygydd "
 "llusgo a gollwng yn ei gwneud hi'n hawdd dylunio."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentu Tanysgrifwyr"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7353,11 +7514,11 @@ msgstr ""
 "Trefnwch danysgrifwyr i restrau, eu tagio, ac anfon ymgyrchoedd wedi'u "
 "targedu at y gynulleidfa gywir."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Cynnwys AI-Power"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7365,11 +7526,11 @@ msgstr ""
 "Cynhyrchu cynnwys e-bost cymhellol gydag AI.Arbed amser wrth greu negeseuon "
 "proffesiynol, deniadol."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Diogelwch Menter"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7377,16 +7538,16 @@ msgstr ""
 "Cydymffurfio â GDPR, seilwaith diogel, a darpariaeth ddibynadwy.Mae eich "
 "data a'ch tanysgrifwyr wedi'u diogelu."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Mae Tyfu Busnesau yn ymddiried ynddo"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Ymunwch â miloedd o farchnatwyr sydd wedi trawsnewid eu strategaeth e-bost"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7395,11 +7556,11 @@ msgstr ""
 "Cynyddodd ein cyfradd trosi 340%% ar ôl gweithredu ymgyrchoedd diferu.Mae'r "
 "awtomeiddio yn arbed oriau i ni bob wythnos."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Cyfarwyddwr Marchnata"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7407,11 +7568,11 @@ msgstr ""
 "Y rhan orau?Mae'n hollol rhad ac am ddim.Rydym wedi anfon dros 50,000 o "
 "negeseuon e-bost heb dalu dime.Newidiwr gêm."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Sylfaenydd Cychwyn"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7419,15 +7580,462 @@ msgstr ""
 "Cymerodd y gosodiad 5 munud.Mae'r rhyngwyneb yn reddfol, ac mae'r "
 "canlyniadau'n siarad drostynt eu hunain.Dyblodd ein hymgysylltiad e-bost."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Rheolwr e-fasnach"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Awtomatiaeth marchnata e-bost am ddim i bawb"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"P'un a ydych chi'n rhedeg marchnata e-bost SaaS, marchnata e-bost e-fasnach,"
+" marchnata e-bost B2B, neu ymgyrchoedd marchnata e-bost B2C, mae ein "
+"meddalwedd awtomeiddio marchnata e-bost rhad ac am ddim yn addasu i'ch "
+"anghenion."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Defnyddwyr ar fwrdd gyda dilyniannau e-bost awtomataidd, cyfresi croeso, ac "
+"ymgyrchoedd meithrin.Perffaith ar gyfer marchnata e-bost cychwynnol a "
+"chwmnïau meddalwedd."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Dechrau am Ddim Heddiw"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Rheolwr e-fasnach"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Gyrrwch werthiannau gydag e-byst cart wedi'u gadael, argymhellion cynnyrch, "
+"ac e-byst trafodion.Rhowch hwb i'ch ROI marchnata e-bost gydag ymgyrchoedd "
+"wedi'u targedu."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Cychwyn Arni"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Mae Nurture yn arwain gydag awtomeiddio marchnata e-bost, segmentu e-bost, "
+"ac ymgyrchoedd e-bost personol.Perffaith ar gyfer strategaethau marchnata "
+"e-bost B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Rhowch gynnig ar Nodweddion AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Marchnata E-bost Busnesau Bach"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Meddalwedd marchnata e-bost diferu am ddim gydag ymgyrchoedd diderfyn, "
+"tanysgrifwyr, a dilyniannau e-bost awtomataidd"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "Y Dewis Amgen Gorau Am Ddim i Offer Marchnata E-bost Taledig"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Pam talu am Mailchimp, Constant Contact, Sendinblue, neu GetResponse pan "
+"allwch chi gael yr un nodweddion awtomeiddio marchnata e-bost am ddim?Mae "
+"ein platfform marchnata e-bost yn cynnig ymgyrchoedd e-bost diderfyn, "
+"tanysgrifwyr diderfyn, ac awtomeiddio e-bost pwerus - i gyd am ddim."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Meddalwedd Marchnata E-bost Diferu Am Ddim"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Cynllun Am Byth Am Ddim"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Dim ffioedd cudd, dim angen cerdyn credyd.Yn wahanol i Mailchimp amgen neu "
+"wasanaethau amgen Constant Contact, rydym yn feddalwedd marchnata e-bost "
+"hollol rhad ac am ddim."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Ymgyrchoedd Anghyfyngedig"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Ymgyrchoedd e-bost diderfyn, e-byst diferu diderfyn, tanysgrifwyr diderfyn, "
+"awtomeiddio e-bost diderfyn.Dim cyfyngiadau ar eich twf marchnata e-bost."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Nodweddion awtomeiddio e-bost cyflawn: ymgyrchoedd diferu e-bost, amserlennu"
+" e-bost, dadansoddeg e-bost, olrhain e-bost, segmentu e-bost, a phersonoli "
+"e-bost."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Meddalwedd Marchnata E-bost Diferu Am Ddim"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Templedi e-bost, cylchlythyrau e-bost, rheoli tanysgrifwyr e-bost, rheoli "
+"rhestr e-bost, olrhain cyfraddau agored e-bost, cyfraddau clicio e-bost, a "
+"dadansoddiadau ROI marchnata e-bost."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Barod i Newid?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Ymunwch â miloedd o fusnesau sydd wedi newid o wasanaethau marchnata e-bost "
+"drud i'n platfform marchnata e-bost rhad ac am ddim.Dechreuwch gydag "
+"awtomeiddio e-bost mewn munudau - nid oes angen cerdyn credyd."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Creu Cyfrif Am Ddim"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Oes gennych chi gyfrif yn barod?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Arferion Gorau Dylunio E-bost"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Dysgwch sut i wella cyfraddau agor e-bost, cynyddu ymgysylltiad e-bost, a "
+"gwneud y mwyaf o'ch ROI marchnata e-bost gyda strategaethau marchnata e-bost"
+" profedig ac awgrymiadau marchnata e-bost."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Cyfradd Agored Cyfartalog"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Defnyddiwch linellau pwnc e-bost personol, anfonwch e-byst ar yr adegau "
+"gorau posibl, a rhannwch eich rhestr e-bost.Traciwch gyfraddau agored e-bost"
+" gyda'n dadansoddeg e-bost i wneud y gorau o'ch ymgyrchoedd marchnata "
+"e-bost."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Gwelliannau Olrhain"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Rheoli bownsio"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Creu cynnwys e-bost deniadol gyda phersonoli e-bost, defnyddio awtomeiddio "
+"e-bost i anfon negeseuon amserol, a monitro cyfraddau clicio e-bost.Mae ein "
+"awtomeiddio marchnata e-bost yn eich helpu i anfon y neges gywir ar yr amser"
+" iawn."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Mwy o Ymgysylltiad"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Awtomeiddio Marchnata E-bost Am Ddim"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Defnyddio ymgyrchoedd diferu e-bost ar gyfer meithrin plwm, gweithredu "
+"segmentu e-bost ar gyfer ymgyrchoedd wedi'u targedu, ac olrhain ROI "
+"marchnata e-bost gyda dadansoddiadau e-bost cynhwysfawr.Meddalwedd marchnata"
+" e-bost am ddim sy'n sicrhau canlyniadau."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Gweler Eich ROI"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "Yn barod i weithredu'r arferion gorau marchnata e-bost hyn?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Dechreuwch awtomeiddio'ch marchnata e-bost am ddim."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Cwestiynau Cyffredin"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Popeth sydd ei angen arnoch i awtomeiddio'ch marchnata e-bost"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Beth Yw Ymgyrchoedd Diferu?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Mae ymgyrch e-bost drip, a elwir hefyd yn ddilyniant e-bost awtomataidd neu "
+"ymgyrch drip e-bost, yn gyfres o negeseuon e-bost awtomataidd a anfonir at "
+"danysgrifwyr dros amser.Mae'r ymgyrchoedd marchnata e-bost hyn yn helpu i "
+"feithrin arweinwyr, defnyddwyr ar y bwrdd, a gyrru trosiadau trwy "
+"awtomeiddio e-bost strategol.Mae ein platfform marchnata e-bost yn ei gwneud"
+" hi'n hawdd creu ymgyrchoedd e-bost diferu pwerus."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Dysgwch sut i greu ac anfon eich ymgyrch e-bost gyntaf"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Mae creu ymgyrch e-bost drip yn syml gyda'n meddalwedd awtomeiddio marchnata"
+" e-bost.Cofrestrwch am ddim, crëwch eich ymgyrch e-bost, ychwanegwch "
+"ddilyniannau e-bost gyda negeseuon e-bost wedi'u hamserlennu, a gadewch i'n "
+"awtomeiddio e-bost drin y gweddill.Gallwch ddefnyddio ein templedi e-bost "
+"neu greu ymgyrchoedd marchnata e-bost wedi'u teilwra.Dechreuwch mewn "
+"munudau!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Creu Eich Ymgyrch Gyntaf"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Meddalwedd Marchnata E-bost Diferu Am Ddim"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Oes!Mae ein platfform marchnata e-bost 100% am ddim am byth.Yn wahanol i "
+"ddewisiadau amgen Mailchimp, Constant Contact, Sendinblue, neu GetResponse, "
+"rydym yn cynnig ymgyrchoedd e-bost diderfyn, tanysgrifwyr diderfyn, e-byst "
+"diferu diderfyn, a nodweddion awtomeiddio marchnata e-bost llawn heb unrhyw "
+"gost.Nid oes angen cerdyn credyd, dim ffioedd cudd."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Pa nodweddion marchnata e-bost sydd wedi'u cynnwys?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Mae ein meddalwedd marchnata e-bost am ddim yn cynnwys: ymgyrchoedd diferu "
+"e-bost, dilyniannau e-bost awtomataidd, amserlennu e-bost, dadansoddeg "
+"e-bost ac olrhain e-bost (cyfraddau agored e-bost, cyfraddau clicio e-bost),"
+" rheoli tanysgrifwyr e-bost, rheoli rhestr e-bost, segmentu e-bost, "
+"personoli e-bost, templedi e-bost, cylchlythyrau e-bost, ac awtomeiddio "
+"marchnata e-bost cynhwysfawr.Popeth sydd ei angen arnoch ar gyfer marchnata "
+"e-bost llwyddiannus!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Cyfraddau agored e-bost unigol"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Gwella cyfraddau e-bost agored trwy ddefnyddio llinellau pwnc e-bost "
+"personol, anfon e-byst ar yr adegau gorau posibl, rhannu eich rhestr e-bost,"
+" a chreu cynnwys e-bost deniadol.Mae ein hoffer dadansoddeg e-bost yn eich "
+"helpu i olrhain cyfraddau e-bost agored a gwneud y gorau o'ch ymgyrchoedd "
+"marchnata e-bost i sicrhau perfformiad gwell."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Cychwyn Mewnforio"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Mae gennych gwestiynau o hyd?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Dechreuwch gyda'n meddalwedd marchnata e-bost rhad ac am ddim a "
+"darganfyddwch pa mor hawdd y gall awtomeiddio e-bost fod!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Yn barod i drawsnewid eich marchnata e-bost?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7435,15 +8043,15 @@ msgstr ""
 "Ymunwch â miloedd o fusnesau gan ddefnyddio ymgyrchoedd diferu i dyfu "
 "refeniw, meithrin arweinwyr, a meithrin perthnasoedd parhaol â chwsmeriaid."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Dechreuwch Eich Cyfrif Am Ddim"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Dysgwch Mwy"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "Nid oes angen cerdyn credyd • Gosod mewn 5 munud • Canslo unrhyw bryd"
 
@@ -12974,10 +13582,6 @@ msgstr ""
 "Gallwch greu rhestrau lluosog i segmentu'ch cynulleidfa (e.e., cwsmeriaid, "
 "rhagolygon, partneriaid)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Ychwanegu Tanysgrifwyr"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13019,10 +13623,6 @@ msgstr "Mapiwch y colofnau a chliciwch"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Mewnforio"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Creu Eich Ymgyrch Gyntaf"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14069,6 +14669,28 @@ msgstr ""
 "Os gwnaethoch ddad-danysgrifio trwy gamgymeriad neu os hoffech dderbyn "
 "e-byst eto, cysylltwch â ni neu cofrestrwch eto."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Cynnwys E-bost"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "gofyn am wybodaeth"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Fformat Ymateb"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Troedyn"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Yn ôl i danysgrifwyr"
@@ -14387,3 +15009,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Mewnforio cysylltiadau neu ychwanegu tanysgrifwyr â llaw i'w gweld wedi'u "
 "rhestru yma."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Dilyniannau e-bost awtomataidd sy'n meithrin arweinwyr, defnyddwyr ar y "
+#~ "bwrdd, ac yn gyrru trawsnewidiadau.Gosodwch ef unwaith, a gwyliwch eich "
+#~ "refeniw yn tyfu."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Pam mae Ymgyrchoedd Diferu yn Gweithio"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Yn wahanol i ffrwydradau e-bost sengl, mae ymgyrchoedd diferu yn adeiladu "
+#~ "perthnasoedd dros amser"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Teithiau Personol"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Creu profiadau unigryw ar gyfer pob tanysgrifiwr.Segmentwch eich cynulleidfa"
+#~ " a chyflwyno cynnwys sy'n atseinio."

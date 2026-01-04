@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "電子メールのカスタム フッター HTML"
 msgid "Time Zone"
 msgstr "タイムゾーン"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "住所1"
@@ -64,22 +64,22 @@ msgstr "住所 2 行目"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "アパートメント、スイートなど（オプション）"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "市"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "州/県"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "郵便番号"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "国"
@@ -166,36 +166,36 @@ msgstr "電子メールのフッター"
 msgid "Email Footers"
 msgstr "電子メールのフッター"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API キーが正常に再生成されました。"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "フッターが正常に作成されました。"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "名前と内容の両方を入力してください。"
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "フッター名は必須です"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "フッターの内容は必須です"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "フッターが正常に更新されました。"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "フッターが正常に削除されました。"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "デフォルトのフッターが正常に更新されました。"
 
@@ -242,8 +242,8 @@ msgstr "購読者リスト"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "アクティブ"
 
@@ -263,7 +263,7 @@ msgstr "クリック数"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "キャンペーン"
 
@@ -328,7 +328,7 @@ msgstr "フッター"
 msgid "Email"
 msgstr "電子メール"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "メール"
 
@@ -376,7 +376,7 @@ msgstr "月"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "送信済み"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "変数"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "状態"
 
@@ -1164,12 +1164,12 @@ msgid "Lists"
 msgstr "リスト"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "ファーストネーム"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "苗字"
 
@@ -1186,7 +1186,7 @@ msgid "Confirmed At"
 msgstr "確認済み"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1538,6 +1538,7 @@ msgid "Remember Me"
 msgstr "私を覚えてますか"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "サインイン"
 
@@ -1768,8 +1769,8 @@ msgid "Preview:"
 msgstr "プレビュー:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "作成されました"
 
@@ -1845,6 +1846,7 @@ msgid "Logout"
 msgstr "ログアウト"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "無料でサインアップ"
 
@@ -1954,7 +1956,7 @@ msgid "No templates or campaigns found matching"
 msgstr "一致するテンプレートまたはキャンペーンが見つかりませんでした"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "非アクティブ"
 
@@ -2014,7 +2016,7 @@ msgid "Campaign Statistics"
 msgstr "キャンペーン統計"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "読み込み中..."
 
@@ -2152,7 +2154,7 @@ msgstr "このキャンペーンにはまだメールが追加されていませ
 msgid "Create Campaign"
 msgstr "キャンペーンの作成"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "新しいキャンペーンの作成"
@@ -2219,7 +2221,7 @@ msgstr "キャンペーンを選択してください"
 msgid "(Active)"
 msgstr "（アクティブ）"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "まだキャンペーンはありません"
 
@@ -2244,7 +2246,7 @@ msgstr "テンプレートが見つかりません"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "このキャンペーンにはまだメール テンプレートがありません。"
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "メールテンプレートの作成"
 
@@ -2286,8 +2288,8 @@ msgstr "フッターなし"
 msgid "Select a footer to append to your email"
 msgstr "メールに追加するフッターを選択してください"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2508,7 +2510,7 @@ msgid "Number of Emails"
 msgstr "メールの数"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "メールテンプレート"
 
@@ -2717,7 +2719,7 @@ msgid "Generate Email"
 msgstr "電子メールの生成"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "電子メールのプレビュー"
 
@@ -2730,7 +2732,7 @@ msgid "Send Test Email"
 msgstr "テストメールを送信する"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "電子メールアドレス"
@@ -3085,7 +3087,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "GoogleとMicrosoftによるCalenvy買収"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "エイデン・トゥルグット"
 
 #: .\templates\core\about.html:69
@@ -3379,7 +3383,7 @@ msgstr "リストを見る"
 msgid "Emails Sent"
 msgstr "送信されたメール"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "分析を見る"
 
@@ -3387,112 +3391,124 @@ msgstr "分析を見る"
 msgid "Add a List"
 msgstr "リストを追加する"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "%(total)s 件中 %(start)s-%(end)s 件の購読者を表示しています"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "電子メールの到達性のための SPF レコードの設定"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "この TXT レコードをドメインの DNS に追加します。"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "タイプ："
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "名前/ホスト:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "価値："
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "注記："
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "このレコードを追加する方法:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "DNS管理またはDNS設定に移動します"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "上記の値を使用して新しい TXT レコードを追加します。"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "メールを送信して購読する"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "キャンペーンを選択してください..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "最初にキャンペーンを選択してください..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "スケジュール"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "X分以内に送信"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "X時間以内に送信"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "X日以内に送信"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "X週間以内に送信してください"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Xか月以内に送信"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "最近の送信アクティビティ"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "電子メールの送信と配信を追跡する"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "リフレッシュ"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "で示されている時間"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "アクティビティを読み込み中..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "メールから広告を削除する"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3500,146 +3516,169 @@ msgstr ""
 "現在、あなたのメールには当社のブランドが含まれています。すべてのメールから広告を削除するには、X またはブログで DripEmails.org "
 "について共有してください。"
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "あなたのキャンペーン"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "アクション"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
 msgstr "最初のキャンペーンを作成して、購読者への自動メールの送信を開始します。"
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "あなたの購読者リスト"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "購読者リストはまだありません"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "最初の購読者リストを作成して、連絡先の整理を始めます。"
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "クイックアクション"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "購読者の追加"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "メールテンプレート"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "アカウント設定"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "広告の削除"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "購読解除リンク"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "タイムゾーン"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "アカウント設定"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "電子メールのフッター"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "ヒントとリソース"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "スタートガイド"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "最初の電子メール キャンペーンを数分で設定する方法を学びましょう。"
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "電子メールのベストプラクティス"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "コンバージョンにつながるメールを作成するためのヒント。"
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "購読者リストを増やす"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "チャンネル登録者を増やすための戦略。"
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "物理アドレスが必要です"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "住所行 2 (オプション)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && ステータス"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "まだ送信アクティビティがありません"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr "上のフォームを使用してメールを送信すると、ここであなたのアクティビティを確認できます。"
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "に"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "予定されている"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "エラー"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "完全な HTML プレビュー"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "テキスト版"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "表示を少なくする"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "購読を解除する"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "アクティビティの読み込みに失敗しました"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "もう一度試してください。"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "リトライ"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "メールテンプレートを選択してください..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "メールの読み込みエラー"
 
@@ -6905,7 +6944,9 @@ msgid "Manage Your Subscribers"
 msgstr "購読者を管理する"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "無料の電子メールマーケティングオートメーション"
 
 #: .\templates\core\home.html:18
@@ -6935,10 +6976,21 @@ msgstr "忠実な顧客"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"リードを育成し、ユーザーをオンボーディングし、コンバージョンを促進する自動化された電子メール シーケンス。一度設定すれば、収益の増加を確認できます。"
+"自動化された電子メール シーケンス、電子メール キャンペーン、電子メール マーケティングの自動化に最適な無料のドリップ電子メール マーケティング "
+"ソフトウェア。強力な電子メール ドリップ キャンペーンを作成し、自動化された電子メール シーケンスでリードを育成し、電子メール マーケティング "
+"プラットフォームでコンバージョンを促進します。SaaS 電子メール マーケティング、e コマース電子メール マーケティング、B2B 電子メール "
+"マーケティング、中小企業の電子メール "
+"マーケティングに最適です。電子メールの自動化を数分でセットアップできます。無制限のキャンペーン、無制限の購読者、無制限のドリップ "
+"メールを備えた完全に無料の電子メール マーケティング ソフトウェアです。"
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -6948,203 +7000,723 @@ msgstr "今すぐ無料で始めましょう"
 msgid "Unlimited Campaigns"
 msgstr "無制限のキャンペーン"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "無制限のキャンペーン"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "無制限の購読者"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "クレジットカードなし"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "5 分でセットアップ"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "より高いROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "さらなるエンゲージメント"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "より速い成長"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "オートメーション"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "点滴キャンペーンが効果的な理由"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "メールテンプレートの作成方法"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
-msgstr "1 回のメールの一斉送信とは異なり、ドリップ キャンペーンは時間をかけて関係を構築します"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
+msgstr ""
+"電子メールの自動化と電子メール ドリップ キャンペーンの設定が、かつてないほど簡単になりました。当社の電子メール マーケティング オートメーション "
+"ソフトウェアを使用すると、自動化された電子メール シーケンスの作成、電子メールのスケジュール設定、電子メール分析の追跡が簡単になります。"
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "最初のキャンペーンを作成する"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"直感的な電子メール マーケティング ツールを使用して、電子メール ドリップ キャンペーンを構築します。美しい電子メール "
+"テンプレートから選択するか、カスタムの電子メール マーケティング キャンペーンを作成します。"
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "電子メールのシーケンス"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"パーソナライズされた電子メールを使用して自動化された電子メール "
+"シーケンスを設計します。電子メールのスケジュール、電子メールの育成シーケンス、電子メール購読者向けのウェルカム シリーズを設定します。"
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "購読者の管理"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"メール リストをインポートし、メール "
+"リスト管理で購読者をセグメント化し、メールの対象ユーザーを整理します。電子メール購読者の管理と電子メールのセグメント化に最適です。"
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "AI が最適化できるもの"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"リアルタイムの電子メール分析を使用して、電子メールの開封率、電子メールのクリック率、電子メールのエンゲージメントを監視します。データ駆動型の洞察により電子メール"
+" マーケティングの ROI を向上させます。"
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr "電子メールのドリップ キャンペーンが 1 回の電子メールの一斉送信より効果がある理由"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"単一の電子メールの大量送信とは異なり、自動ドリップ電子メール キャンペーンは時間をかけて関係を構築します。電子メール "
+"マーケティングの自動化により、適切な電子メール マーケティング メッセージを適切なタイミングで送信できるようになり、電子メール "
+"エンゲージメントと電子メール マーケティングの ROI が向上します。"
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "自動育成"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr "適切なタイミングで適切なメッセージを送信します。手動介入を必要とせずに、リードを目標到達プロセスに自動的に導きます。"
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "パーソナライズされた旅"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "加入者のセグメンテーション"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
-msgstr "各加入者に独自のエクスペリエンスを作成します。視聴者をセグメント化し、共感を呼ぶコンテンツを配信します。"
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
+msgstr ""
+"パーソナライズされた電子メールを使用して、購読者ごとに独自の電子メール エクスペリエンスを作成します。電子メールのセグメンテーションと電子メール "
+"リスト管理を使用して、電子メール視聴者の共感を呼ぶターゲットを絞った電子メール マーケティング キャンペーンを配信します。"
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "実証済みの結果"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
 msgstr "ドリップ キャンペーンは、単一メールの 3 倍の収益を生み出します。初日から測定可能な ROI を確認してください。"
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "成功するために必要なものすべて"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "電子メールマーケティングを簡単にする強力な機能"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "スマートなドリップシーケンス"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
 msgstr "タイミング、動作、トリガーに基づいて自動的に送信する複数ステップの電子メール シーケンスを作成します。"
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "リアルタイム分析"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
 msgstr "開封、クリック、コンバージョン、収益を追跡します。美しいダッシュボードでデータに基づいた意思決定を行います。"
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "美しいテンプレート"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
 msgstr "プロのテンプレートから選択するか、独自のテンプレートを作成します。ドラッグアンドドロップエディターで簡単にデザインできます。"
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "加入者のセグメンテーション"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
 msgstr "購読者をリストに整理し、タグを付けて、適切な対象者にターゲットを絞ったキャンペーンを送信します。"
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AIを活用したコンテンツ"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
 msgstr "AI を使用して魅力的なメール コンテンツを生成します。プロフェッショナルで魅力的なメッセージを作成しながら時間を節約できます。"
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "エンタープライズセキュリティ"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
 msgstr "GDPR 準拠、安全なインフラストラクチャ、信頼性の高い配信。あなたのデータと購読者は保護されます。"
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "成長する企業からの信頼"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "電子メール戦略を変革した何千人ものマーケティング担当者に加わりましょう"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
 "The automation saves us hours every week."
 msgstr "ドリップ キャンペーンの導入後、コンバージョン率は 340%% 増加しました。自動化により、毎週何時間も節約されます。"
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "マーケティングディレクター"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
 msgstr "一番いいところは？完全に無料です。私たちは一銭も支払わずに 50,000 通以上のメールを送信してきました。ゲームチェンジャー。"
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "スタートアップ創設者"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
 msgstr ""
 "セットアップには 5 分かかりました。インターフェースは直感的で、結果がすべてを物語っています。電子メールでのエンゲージメントは 2 倍になりました。"
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Eコマースマネージャー"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "誰でも無料の電子メール マーケティング オートメーション"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"SaaS 電子メール マーケティング、e コマース 電子メール マーケティング、B2B 電子メール マーケティング、B2C 電子メール マーケティング "
+"キャンペーンのいずれを実行している場合でも、当社の無料電子メール マーケティング自動化ソフトウェアはお客様のニーズに適応します。"
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "無料の電子メールマーケティングオートメーション"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"自動化された電子メール シーケンス、ウェルカム シリーズ、育成キャンペーンを使用してユーザーをオンボーディングします。スタートアップの電子メール "
+"マーケティングやソフトウェア会社に最適です。"
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "今すぐ無料で始めましょう"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Eコマースマネージャー"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"カート放棄メール、製品の推奨メール、トランザクション メールで売上を促進します。ターゲットを絞ったキャンペーンで電子メール マーケティングの ROI "
+"を高めます。"
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "はじめる"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "無料の電子メールマーケティングオートメーション"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"電子メール マーケティングの自動化、電子メールのセグメンテーション、パーソナライズされた電子メール キャンペーンを使用してリードを育成します。B2B "
+"の電子メール マーケティング戦略に最適です。"
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "AI 機能を試す"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "中小企業向け電子メール マーケティング"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr "無制限のキャンペーン、購読者、自動化された電子メール シーケンスを備えた無料のドリップ メール マーケティング ソフトウェア"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "無料の電子メールマーケティングオートメーション"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "有料電子メール マーケティング ツールに代わる最高の無料代替ツール"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"同じ電子メール マーケティング オートメーション機能を無料で利用できるのに、Mailchimp、Constant "
+"Contact、Sendinblue、または GetResponse にお金を払う必要はありません。当社の電子メール マーケティング "
+"プラットフォームは、無制限の電子メール キャンペーン、無制限の購読者、強力な電子メールの自動化をすべて無料で提供します。"
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "無料の Drip 電子メール マーケティング ソフトウェア"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "永久無料プラン"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"隠れた手数料やクレジットカードは必要ありません。Mailchimp の代替サービスや Constant Contact "
+"の代替サービスとは異なり、当社は完全に無料の電子メール マーケティング ソフトウェアです。"
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "無制限のキャンペーン"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"無制限の電子メール キャンペーン、無制限のドリップ メール、無制限の購読者、無制限の電子メール自動化。電子メール "
+"マーケティングの成長に制限はありません。"
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "無料の電子メールマーケティングオートメーション"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"完全な電子メール自動化機能: 電子メール ドリップ キャンペーン、電子メール スケジュール、電子メール分析、電子メール追跡、電子メール "
+"セグメンテーション、電子メール パーソナライゼーション。"
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "無料の Drip 電子メール マーケティング ソフトウェア"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"電子メール テンプレート、電子メール ニュースレター、電子メール購読者管理、電子メール リスト管理、電子メール開封率追跡、電子メール "
+"クリック率、および電子メール マーケティング ROI 分析。"
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "切り替える準備はできていますか?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"高価な電子メール マーケティング サービスから無料の電子メール マーケティング プラットフォームに切り替えた何千もの企業に加わりましょう。クレジット "
+"カードは必要なく、数分で電子メールの自動化を開始できます。"
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "無料アカウントを作成する"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "すでにアカウントをお持ちですか?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "電子メール設計のベスト プラクティス"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"実証済みの電子メール マーケティング戦略と電子メール "
+"マーケティングのヒントを使用して、電子メールの開封率を向上させ、電子メールのエンゲージメントを高め、電子メール マーケティングの ROI "
+"を最大化する方法を学びます。"
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "平均開封率"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"パーソナライズされた電子メールの件名を使用し、最適なタイミングで電子メールを送信し、電子メール "
+"リストを分割します。電子メール分析で電子メールの開封率を追跡し、電子メール マーケティング キャンペーンを最適化します。"
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "追跡の改善"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "バウンス管理"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"電子メールのパーソナライゼーションを使用して魅力的な電子メール "
+"コンテンツを作成し、電子メールの自動化を使用してタイムリーなメッセージを送信し、電子メールのクリック率を監視します。当社の電子メール マーケティング "
+"オートメーションは、適切なメッセージを適切なタイミングで送信するのに役立ちます。"
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "さらなるエンゲージメント"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "無料の電子メールマーケティングオートメーション"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"リード育成に電子メール ドリップ キャンペーンを使用し、ターゲットを絞ったキャンペーンに電子メール "
+"セグメンテーションを実装し、包括的な電子メール分析で電子メール マーケティングの ROI を追跡します。結果をもたらす無料の電子メール マーケティング "
+"ソフトウェア。"
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "ROI を確認する"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "これらの電子メール マーケティングのベスト プラクティスを実装する準備はできていますか?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "電子メール マーケティングの自動化を無料で始めましょう。"
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "よくある質問"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "電子メールマーケティングを自動化するために必要なものすべて"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "点滴キャンペーンとは何ですか?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"ドリップ メール キャンペーンは、自動電子メール シーケンスまたは電子メール ドリップ "
+"キャンペーンとも呼ばれ、一定期間にわたって購読者に送信される一連の自動電子メールです。これらの電子メール マーケティング "
+"キャンペーンは、戦略的な電子メールの自動化を通じてリードの育成、ユーザーの登録、コンバージョンの促進に役立ちます。当社の電子メール マーケティング "
+"プラットフォームを使用すると、強力なドリップ電子メール キャンペーンを簡単に作成できます。"
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "初めての電子メール キャンペーンを作成して送信する方法を学ぶ"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"当社の電子メール マーケティング オートメーション ソフトウェアを使用すると、ドリップ電子メール "
+"キャンペーンの作成が簡単になります。無料でサインアップし、電子メール キャンペーンを作成し、スケジュールされた電子メールを含む電子メール "
+"シーケンスを追加すれば、残りの作業は電子メールの自動化に任せることができます。電子メール テンプレートを使用したり、カスタムの電子メール マーケティング"
+" キャンペーンを作成したりできます。数分で始められます。"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "最初のキャンペーンを作成する"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "無料の Drip 電子メール マーケティング ソフトウェア"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"はい！当社の電子メール マーケティング プラットフォームは完全に永久に無料です。Mailchimp、Constant "
+"Contact、Sendinblue、または GetResponse の代替手段とは異なり、無制限の電子メール "
+"キャンペーン、無制限の購読者、無制限のドリップ メール、および完全な電子メール "
+"マーケティング自動化機能を無料で提供します。クレジットカードは必要なく、隠れた手数料もかかりません。"
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "どのような電子メール マーケティング機能が含まれていますか?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"当社の無料電子メール マーケティング ソフトウェアには、電子メール ドリップ キャンペーン、自動電子メール シーケンス、電子メール "
+"スケジュール、電子メール分析および電子メール追跡 (電子メール開封率、電子メール クリック率)、電子メール購読者管理、電子メール リスト管理、電子メール"
+" セグメンテーション、電子メール パーソナライゼーション、電子メール テンプレート、電子メール ニュースレター、包括的な電子メール "
+"マーケティング自動化が含まれます。電子メールマーケティングを成功させるために必要なものがすべて揃っています。"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "個人メールの開封率"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"パーソナライズされた電子メールの件名を使用し、最適なタイミングで電子メールを送信し、電子メール リストをセグメント化し、魅力的な電子メール "
+"コンテンツを作成することで、電子メールの開封率を向上させます。当社の電子メール分析ツールは、電子メールの開封率を追跡し、電子メール マーケティング "
+"キャンペーンを最適化してパフォーマンスを向上させるのに役立ちます。"
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "インポートの開始"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "まだご質問がありますか?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr "無料の電子メール マーケティング ソフトウェアを使い始めて、電子メールの自動化がいかに簡単かを体験してください。"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "電子メール マーケティングを変革する準備はできていますか?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
 msgstr "ドリップ キャンペーンを使用して何千もの企業に加わり、収益を拡大し、リードを育成し、永続的な顧客関係を構築しましょう。"
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "無料アカウントを開始する"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "もっと詳しく知る"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "クレジット カードは不要 • 5 分でセットアップ • いつでもキャンセル可能"
 
@@ -12440,10 +13012,6 @@ msgid ""
 "prospects, partners)."
 msgstr "複数のリストを作成して対象者 (顧客、見込み客、パートナーなど) をセグメント化できます。"
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "購読者の追加"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "次に、リストに購読者を追加しましょう。次の 2 つのオプションがあります。"
@@ -12483,10 +13051,6 @@ msgstr "列をマッピングして、"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "輸入"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "最初のキャンペーンを作成する"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13505,6 +14069,28 @@ msgid ""
 " contact us or sign up again."
 msgstr "誤って配信を停止した場合や、再度メールの受信をご希望の場合は、お問い合わせいただくか、再度ご登録ください。"
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "メールの内容"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "情報をリクエストする"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "応答フォーマット"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "フッター"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "購読者に戻る"
@@ -13813,3 +14399,24 @@ msgstr "別の名前または電子メール アドレスを試してくださ�
 #: .\templates\subscribers\list.html:213
 msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr "連絡先をインポートするか、購読者を手動で追加して、ここにリストされるようにします。"
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "リードを育成し、ユーザーをオンボーディングし、コンバージョンを促進する自動化された電子メール シーケンス。一度設定すれば、収益の増加を確認できます。"
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "点滴キャンペーンが効果的な理由"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr "1 回のメールの一斉送信とは異なり、ドリップ キャンペーンは時間をかけて関係を構築します"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "パーソナライズされた旅"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr "各加入者に独自のエクスペリエンスを作成します。視聴者をセグメント化し、共感を呼ぶコンテンツを配信します。"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "HTML pengaki tersuai untuk e-mel"
 msgid "Time Zone"
 msgstr "Zon Masa"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Talian Alamat 1"
@@ -64,22 +64,22 @@ msgstr "Talian Alamat 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Pangsapuri, suite, dsb. (pilihan)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Bandar"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Negeri/Wilayah"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Poskod"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Negara"
@@ -166,36 +166,36 @@ msgstr "Pengaki E-mel"
 msgid "Email Footers"
 msgstr "Pengaki E-mel"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Kunci API berjaya dijana semula!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Pengaki berjaya dibuat!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Sila berikan kedua-dua nama dan kandungan."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Nama pengaki diperlukan"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Kandungan pengaki diperlukan"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Pengaki berjaya dikemas kini!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Pengaki berjaya dipadamkan!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Pengaki lalai berjaya dikemas kini!"
 
@@ -242,8 +242,8 @@ msgstr "Senarai Pelanggan"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktif"
 
@@ -263,7 +263,7 @@ msgstr "Klik Kira"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kempen"
 
@@ -328,7 +328,7 @@ msgstr "Pengaki"
 msgid "Email"
 msgstr "E-mel"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "E-mel"
 
@@ -376,7 +376,7 @@ msgstr "bulan"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Dihantar"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Pembolehubah"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Status"
 
@@ -1176,12 +1176,12 @@ msgid "Lists"
 msgstr "Senarai"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Nama Pertama"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Nama Akhir"
 
@@ -1198,7 +1198,7 @@ msgid "Confirmed At"
 msgstr "Disahkan Pada"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1563,6 +1563,7 @@ msgid "Remember Me"
 msgstr "Ingat Saya"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Log Masuk"
 
@@ -1803,8 +1804,8 @@ msgid "Preview:"
 msgstr "Pratonton:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Dicipta"
 
@@ -1885,6 +1886,7 @@ msgid "Logout"
 msgstr "Log keluar"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Daftar Percuma"
 
@@ -1994,7 +1996,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Tiada templat atau kempen ditemui sepadan"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Tidak aktif"
 
@@ -2054,7 +2056,7 @@ msgid "Campaign Statistics"
 msgstr "Perangkaan Kempen"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Memuatkan..."
 
@@ -2192,7 +2194,7 @@ msgstr "Tiada e-mel telah ditambahkan pada kempen ini."
 msgid "Create Campaign"
 msgstr "Buat Kempen"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Buat Kempen Baharu"
@@ -2259,7 +2261,7 @@ msgstr "Pilih kempen"
 msgid "(Active)"
 msgstr "(Aktif)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Tiada kempen lagi"
 
@@ -2285,7 +2287,7 @@ msgstr "Tiada templat ditemui"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Kempen ini belum mempunyai sebarang templat e-mel lagi."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Cipta Templat E-mel"
 
@@ -2327,8 +2329,8 @@ msgstr "Tiada pengaki"
 msgid "Select a footer to append to your email"
 msgstr "Pilih pengaki untuk ditambahkan pada e-mel anda"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2554,7 +2556,7 @@ msgid "Number of Emails"
 msgstr "Bilangan E-mel"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Templat E-mel"
 
@@ -2777,7 +2779,7 @@ msgid "Generate Email"
 msgstr "Hasilkan E-mel"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Pratonton E-mel"
 
@@ -2790,7 +2792,7 @@ msgid "Send Test Email"
 msgstr "Hantar E-mel Ujian"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Alamat E-mel"
@@ -3166,7 +3168,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Pemerolehan Calenvy oleh Google dan Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3475,7 +3479,7 @@ msgstr "Lihat Senarai"
 msgid "Emails Sent"
 msgstr "E-mel Dihantar"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Lihat Analitis"
 
@@ -3483,112 +3487,124 @@ msgstr "Lihat Analitis"
 msgid "Add a List"
 msgstr "Tambah Senarai"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Menunjukkan %(start)s-%(end)s daripada %(total)s pelanggan"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Persediaan Rekod SPF untuk Kebolehhantaran E-mel"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Tambahkan rekod TXT ini pada DNS domain anda:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Jenis:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Nama/Hos:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Nilai:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Nota:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Bagaimana untuk menambah rekod ini:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Navigasi ke pengurusan DNS atau tetapan DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Tambahkan rekod TXT baharu dengan nilai yang ditunjukkan di atas"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Hantar E-mel & Langgan"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Pilih kempen..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Pilih kempen dahulu..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Jadual"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Hantar dalam X Minit"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Hantar dalam X Jam"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Hantar dalam X Hari"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Hantar dalam X Minggu"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Hantar dalam X Bulan"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Aktiviti Hantar Terkini"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Jejaki penghantaran dan penghantaran e-mel anda"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Segarkan semula"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Masa ditunjukkan dalam"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Memuatkan aktiviti..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Alih keluar Iklan daripada E-mel Anda"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3597,15 +3613,15 @@ msgstr ""
 "DripEmails.org di X atau blog anda untuk mengalih keluar iklan daripada "
 "semua e-mel anda."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Kempen Anda"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Tindakan"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3613,135 +3629,158 @@ msgstr ""
 "Buat kempen pertama anda untuk mula menghantar e-mel automatik kepada "
 "pelanggan anda."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Senarai Pelanggan Anda"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Tiada senarai pelanggan lagi"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "Buat senarai pelanggan pertama anda untuk mula mengatur kenalan anda."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Tindakan Pantas"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Tambah Pelanggan"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Templat E-mel"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Tetapan Akaun"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Pembuangan Iklan"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Nyahlanggan Pautan"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Zon waktu"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Tetapan Akaun"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Pengaki E-mel"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Petua & Sumber"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Panduan Bermula"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Ketahui cara menyediakan kempen e-mel pertama anda dalam beberapa minit."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Amalan Terbaik E-mel"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Petua untuk membuat e-mel yang menukar."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Kembangkan Senarai Pelanggan Anda"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategi untuk meningkatkan pelanggan anda."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Alamat Fizikal Diperlukan"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Alamat Baris 2 (Pilihan)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && status"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Tiada aktiviti hantar lagi"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Gunakan borang di atas untuk menghantar e-mel dan melihat aktiviti anda di "
 "sini."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Kepada"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Dijadualkan"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Ralat"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Pratonton HTML Penuh"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Versi Teks"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Tunjukkan lebih sedikit"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Nyahlanggan"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Gagal memuatkan aktiviti"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Sila cuba lagi."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Cuba semula"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Pilih templat e-mel..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Ralat memuatkan e-mel"
 
@@ -7171,7 +7210,9 @@ msgid "Manage Your Subscribers"
 msgstr "Urus Pelanggan Anda"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
 #: .\templates\core\home.html:18
@@ -7201,11 +7242,23 @@ msgstr "Pelanggan Setia"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Urutan e-mel automatik yang memupuk petunjuk, pengguna atas kapal dan "
-"mendorong penukaran.Tetapkan sekali dan lihat hasil anda berkembang."
+"Perisian pemasaran e-mel titisan percuma terbaik untuk urutan e-mel "
+"automatik, kempen e-mel dan automasi pemasaran e-mel.Buat kempen titisan "
+"e-mel yang hebat, pupuk petunjuk dengan urutan e-mel automatik dan dorong "
+"penukaran dengan platform pemasaran e-mel kami.Sesuai untuk pemasaran e-mel "
+"SaaS, pemasaran e-mel e-dagang, pemasaran e-mel B2B dan pemasaran e-mel "
+"perniagaan kecil.Sediakan automasi e-mel anda dalam beberapa minit - "
+"perisian pemasaran e-mel percuma sepenuhnya dengan kempen tanpa had, "
+"pelanggan tanpa had dan e-mel titisan tanpa had."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7215,74 +7268,179 @@ msgstr "Mulakan Percuma Hari Ini"
 msgid "Unlimited Campaigns"
 msgstr "Kempen tanpa had"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Kempen tanpa had"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Pelanggan tanpa had"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Tiada Kad Kredit"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Persediaan dalam 5 Minit"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI yang lebih tinggi"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Lagi Penglibatan"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Pertumbuhan Lebih Cepat"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Automasi"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Mengapa Kempen Titis Berfungsi"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Cara Membuat Templat E-mel"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Tidak seperti letupan e-mel tunggal, kempen titisan membina hubungan dari "
-"semasa ke semasa"
+"Menyediakan automasi e-mel dan kempen titisan e-mel tidak pernah semudah "
+"ini.Perisian automasi pemasaran e-mel kami memudahkan untuk membuat urutan "
+"e-mel automatik, menjadualkan e-mel dan menjejak analitis e-mel."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Buat Kempen Pertama Anda"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Bina kempen titisan e-mel anda dengan alat pemasaran e-mel intuitif "
+"kami.Pilih daripada templat e-mel yang cantik atau buat kempen pemasaran "
+"e-mel tersuai."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Urutan E-mel"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Reka bentuk urutan e-mel automatik dengan e-mel yang diperibadikan.Sediakan "
+"penjadualan e-mel, urutan asuhan e-mel dan siri alu-aluan untuk pelanggan "
+"e-mel anda."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Menguruskan Pelanggan"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Import senarai e-mel anda, segmen pelanggan dengan pengurusan senarai e-mel "
+"dan atur khalayak e-mel anda.Sesuai untuk pengurusan pelanggan e-mel dan "
+"pembahagian e-mel."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Apa AI Boleh Optimumkan"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Pantau kadar buka e-mel, kadar klik e-mel dan penglibatan e-mel dengan "
+"analitis e-mel masa nyata.Tingkatkan ROI pemasaran e-mel dengan cerapan "
+"terdorong data."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Mengapa Kempen Titisan E-mel Berfungsi Lebih Baik Daripada Letupan E-mel "
+"Tunggal"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Tidak seperti letupan e-mel tunggal, kempen e-mel titisan automatik membina "
+"hubungan dari semasa ke semasa.Automasi pemasaran e-mel membantu anda "
+"menghantar mesej pemasaran e-mel yang betul pada masa yang sesuai, "
+"meningkatkan penglibatan e-mel dan ROI pemasaran e-mel."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Asuhan Automatik"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Hantar mesej yang betul pada masa yang betul.Bimbing petunjuk secara "
 "automatik melalui corong anda tanpa campur tangan manual."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Perjalanan Diperibadikan"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentasi Pelanggan"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Cipta pengalaman unik untuk setiap pelanggan.Bahagikan khalayak anda dan "
-"hantarkan kandungan yang bergema."
+"Cipta pengalaman e-mel yang unik untuk setiap pelanggan dengan e-mel yang "
+"diperibadikan.Gunakan pembahagian e-mel dan pengurusan senarai e-mel untuk "
+"menyampaikan kempen pemasaran e-mel yang disasarkan yang bergema dengan "
+"khalayak e-mel anda."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Keputusan Terbukti"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7290,19 +7448,21 @@ msgstr ""
 "Kempen titisan menjana hasil 3x lebih banyak daripada e-mel tunggal.Lihat "
 "ROI yang boleh diukur dari hari pertama."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Semua yang Anda Perlukan untuk Berjaya"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Ciri berkuasa yang menjadikan pemasaran e-mel mudah"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Urutan Titisan Pintar"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7310,11 +7470,11 @@ msgstr ""
 "Buat jujukan e-mel berbilang langkah yang dihantar secara automatik "
 "berdasarkan masa, gelagat atau pencetus."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Analitis Masa Nyata"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7322,11 +7482,11 @@ msgstr ""
 "Jejak dibuka, klik, penukaran dan hasil.Buat keputusan berdasarkan data "
 "dengan papan pemuka yang cantik."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Templat Cantik"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7334,14 +7494,14 @@ msgstr ""
 "Pilih daripada templat profesional atau buat sendiri.Editor seret dan lepas "
 "menjadikan reka bentuk mudah."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentasi Pelanggan"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7349,11 +7509,11 @@ msgstr ""
 "Susun pelanggan ke dalam senarai, tandakan nama mereka dan hantar kempen "
 "yang disasarkan kepada khalayak yang betul."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Kandungan Dikuasakan AI"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7361,11 +7521,11 @@ msgstr ""
 "Hasilkan kandungan e-mel yang menarik dengan AI.Jimat masa semasa membuat "
 "mesej profesional dan menarik."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Keselamatan Perusahaan"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7373,15 +7533,15 @@ msgstr ""
 "Mematuhi GDPR, infrastruktur selamat dan penghantaran yang boleh "
 "dipercayai.Data dan pelanggan anda dilindungi."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Dipercayai oleh Perniagaan yang Berkembang"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "Sertai beribu-ribu pemasar yang telah mengubah strategi e-mel mereka"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7390,11 +7550,11 @@ msgstr ""
 "Kadar penukaran kami meningkat sebanyak 340%% selepas melaksanakan kempen "
 "titisan.Automasi menjimatkan masa kami setiap minggu."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Pengarah Pemasaran"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7402,11 +7562,11 @@ msgstr ""
 "Bahagian yang terbaik?Ia percuma sepenuhnya.Kami telah menghantar lebih "
 "50,000 e-mel tanpa membayar sepeser pun.Penukar permainan."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Pengasas Permulaan"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7415,15 +7575,456 @@ msgstr ""
 "bercakap untuk diri mereka sendiri.Penglibatan e-mel kami meningkat dua kali"
 " ganda."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Pengurus E-dagang"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Automasi pemasaran e-mel percuma untuk semua orang"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Sama ada anda menjalankan pemasaran e-mel SaaS, pemasaran e-mel e-dagang, "
+"pemasaran e-mel B2B atau kempen pemasaran e-mel B2C, perisian automasi "
+"pemasaran e-mel percuma kami menyesuaikan diri dengan keperluan anda."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Automasi Pemasaran E-mel Percuma"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Pengguna atas kapal dengan urutan e-mel automatik, siri alu-aluan dan kempen"
+" asuhan.Sesuai untuk pemasaran e-mel permulaan dan syarikat perisian."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Mulakan Percuma Hari Ini"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Pengurus E-dagang"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Dorong jualan dengan e-mel troli terbengkalai, pengesyoran produk dan e-mel "
+"transaksi.Tingkatkan ROI pemasaran e-mel anda dengan kempen yang disasarkan."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Bermula"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Automasi Pemasaran E-mel Percuma"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Pupuk petunjuk dengan automasi pemasaran e-mel, pembahagian e-mel dan kempen"
+" e-mel yang diperibadikan.Sesuai untuk strategi pemasaran e-mel B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Cuba Ciri AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Pemasaran E-mel Perniagaan Kecil"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Perisian pemasaran e-mel titisan percuma dengan kempen tanpa had, pelanggan "
+"dan urutan e-mel automatik"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Automasi Pemasaran E-mel Percuma"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "Alternatif Percuma Terbaik kepada Alat Pemasaran E-mel Berbayar"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Mengapa membayar untuk Mailchimp, Constant Contact, Sendinblue atau "
+"GetResponse apabila anda boleh mendapatkan ciri automasi pemasaran e-mel "
+"yang sama secara percuma?Platform pemasaran e-mel kami menawarkan kempen "
+"e-mel tanpa had, pelanggan tanpa had dan automasi e-mel yang berkuasa - "
+"semuanya tanpa kos."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Perisian Pemasaran E-mel Drip Percuma"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Pelan Forever Percuma"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Tiada yuran tersembunyi, tiada kad kredit diperlukan.Tidak seperti "
+"perkhidmatan alternatif Mailchimp atau Constant Contact, kami adalah "
+"perisian pemasaran e-mel percuma sepenuhnya."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Kempen tanpa had"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Kempen e-mel tanpa had, e-mel titisan tanpa had, pelanggan tanpa had, "
+"automasi e-mel tanpa had.Tiada had pada pertumbuhan pemasaran e-mel anda."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Automasi Pemasaran E-mel Percuma"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Ciri automasi e-mel yang lengkap: kempen titisan e-mel, penjadualan e-mel, "
+"analisis e-mel, penjejakan e-mel, pembahagian e-mel dan pemperibadian e-mel."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Perisian Pemasaran E-mel Drip Percuma"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Templat e-mel, surat berita e-mel, pengurusan pelanggan e-mel, pengurusan "
+"senarai e-mel, penjejakan kadar terbuka e-mel, kadar klik e-mel dan analisis"
+" ROI pemasaran e-mel."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Bersedia untuk Bertukar?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Sertai beribu-ribu perniagaan yang telah beralih daripada perkhidmatan "
+"pemasaran e-mel yang mahal kepada platform pemasaran e-mel percuma "
+"kami.Bermula dengan automasi e-mel dalam beberapa minit - tiada kad kredit "
+"diperlukan."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Buat Akaun Percuma"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Sudah mempunyai akaun?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Amalan Terbaik Reka Bentuk E-mel"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Ketahui cara untuk meningkatkan kadar buka e-mel, meningkatkan penglibatan "
+"e-mel dan memaksimumkan ROI pemasaran e-mel anda dengan strategi pemasaran "
+"e-mel yang terbukti dan petua pemasaran e-mel."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Purata Kadar Terbuka"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Gunakan baris subjek e-mel yang diperibadikan, hantar e-mel pada masa yang "
+"optimum dan bahagikan senarai e-mel anda.Jejaki kadar buka e-mel dengan "
+"analitis e-mel kami untuk mengoptimumkan kempen pemasaran e-mel anda."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Penambahbaikan Penjejakan"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Pengurusan lantunan"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Cipta kandungan e-mel yang menarik dengan pemperibadian e-mel, gunakan "
+"automasi e-mel untuk menghantar mesej tepat pada masanya dan pantau kadar "
+"klik e-mel.Automasi pemasaran e-mel kami membantu anda menghantar mesej yang"
+" betul pada masa yang sesuai."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Lagi Penglibatan"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Automasi Pemasaran E-mel Percuma"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Gunakan kempen titisan e-mel untuk memupuk petunjuk, laksanakan pembahagian "
+"e-mel untuk kempen yang disasarkan dan jejak ROI pemasaran e-mel dengan "
+"analisis e-mel yang komprehensif.Perisian pemasaran e-mel percuma yang "
+"memberikan hasil."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Lihat ROI Anda"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "Bersedia untuk melaksanakan amalan terbaik pemasaran e-mel ini?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Mula mengautomasikan pemasaran e-mel anda secara percuma."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Soalan Lazim"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Semua yang anda perlukan untuk mengautomasikan pemasaran e-mel anda"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Apakah Kempen Drip?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Kempen e-mel titisan, juga dikenali sebagai jujukan e-mel automatik atau "
+"kempen titisan e-mel, ialah satu siri e-mel automatik yang dihantar kepada "
+"pelanggan dari semasa ke semasa.Kempen pemasaran e-mel ini membantu memupuk "
+"petunjuk, pengguna onboard dan mendorong penukaran melalui automasi e-mel "
+"strategik.Platform pemasaran e-mel kami memudahkan untuk mencipta kempen "
+"e-mel titisan yang berkuasa."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Ketahui cara membuat dan menghantar kempen e-mel pertama anda"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Mencipta kempen e-mel titisan adalah mudah dengan perisian automasi "
+"pemasaran e-mel kami.Daftar secara percuma, buat kempen e-mel anda, "
+"tambahkan urutan e-mel dengan e-mel berjadual dan biarkan automasi e-mel "
+"kami mengendalikan selebihnya.Anda boleh menggunakan templat e-mel kami atau"
+" membuat kempen pemasaran e-mel tersuai.Bermula dalam beberapa minit!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Buat Kempen Pertama Anda"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Perisian Pemasaran E-mel Drip Percuma"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Ya!Platform pemasaran e-mel kami adalah 100%% percuma selama-lamanya.Tidak "
+"seperti alternatif Mailchimp, Constant Contact, Sendinblue atau GetResponse,"
+" kami menawarkan kempen e-mel tanpa had, pelanggan tanpa had, e-mel titisan "
+"tanpa had dan ciri automasi pemasaran e-mel penuh tanpa sebarang kos.Tiada "
+"kad kredit diperlukan, tiada yuran tersembunyi."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Apakah ciri pemasaran e-mel yang disertakan?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Perisian pemasaran e-mel percuma kami termasuk: kempen titisan e-mel, urutan"
+" e-mel automatik, penjadualan e-mel, analitik e-mel dan penjejakan e-mel "
+"(kadar terbuka e-mel, kadar klik e-mel), pengurusan pelanggan e-mel, "
+"pengurusan senarai e-mel, pembahagian e-mel, pemperibadian e-mel, templat "
+"e-mel, surat berita e-mel dan automasi pemasaran e-mel yang "
+"komprehensif.Semua yang anda perlukan untuk pemasaran e-mel yang berjaya!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Kadar buka e-mel individu"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Tingkatkan kadar buka e-mel dengan menggunakan baris subjek e-mel yang "
+"diperibadikan, menghantar e-mel pada masa yang optimum, membahagikan senarai"
+" e-mel anda dan mencipta kandungan e-mel yang menarik.Alat analitis e-mel "
+"kami membantu anda menjejaki kadar buka e-mel dan mengoptimumkan kempen "
+"pemasaran e-mel anda untuk prestasi yang lebih baik."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Mula Import"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Masih Ada Soalan?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Mulakan dengan perisian pemasaran e-mel percuma kami dan temui betapa "
+"mudahnya automasi e-mel!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Bersedia untuk Mengubah Pemasaran E-mel Anda?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7431,15 +8032,15 @@ msgstr ""
 "Sertai beribu-ribu perniagaan menggunakan kempen titisan untuk mengembangkan"
 " hasil, memupuk petunjuk dan membina hubungan pelanggan yang berkekalan."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Mulakan Akaun Percuma Anda"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Ketahui Lebih Lanjut"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Tiada kad kredit diperlukan • Persediaan dalam masa 5 minit • Batalkan bila-"
@@ -12969,10 +13570,6 @@ msgstr ""
 "Anda boleh membuat berbilang senarai untuk membahagikan khalayak anda (mis.,"
 " pelanggan, prospek, rakan kongsi)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Tambah Pelanggan"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13014,10 +13611,6 @@ msgstr "Petakan lajur dan klik"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Import"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Buat Kempen Pertama Anda"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14068,6 +14661,28 @@ msgstr ""
 "Jika anda tersilap menyahlanggan atau ingin menerima e-mel lagi, sila "
 "hubungi kami atau daftar semula."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Kandungan E-mel"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "minta maklumat"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Format Respons"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Pengaki"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Kembali kepada pelanggan"
@@ -14388,3 +15003,29 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Import kenalan atau tambah pelanggan secara manual untuk melihat mereka "
 "disenaraikan di sini."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Urutan e-mel automatik yang memupuk petunjuk, pengguna atas kapal dan "
+#~ "mendorong penukaran.Tetapkan sekali dan lihat hasil anda berkembang."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Mengapa Kempen Titis Berfungsi"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Tidak seperti letupan e-mel tunggal, kempen titisan membina hubungan dari "
+#~ "semasa ke semasa"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Perjalanan Diperibadikan"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Cipta pengalaman unik untuk setiap pelanggan.Bahagikan khalayak anda dan "
+#~ "hantarkan kandungan yang bergema."

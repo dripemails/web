@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "HTML personalizat de subsol pentru e-mailuri"
 msgid "Time Zone"
 msgstr "Fus orar"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Adresa Rândul 1"
@@ -64,22 +64,22 @@ msgstr "Linia de adresă 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Apartament, apartament etc. (opțional)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Oraş"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Stat/Provincie"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Cod poștal"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Ţară"
@@ -166,36 +166,36 @@ msgstr "Subsolul e-mailului"
 msgid "Email Footers"
 msgstr "Subsolurile de e-mail"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Cheia API a fost regenerată cu succes!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Subsolul creat cu succes!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Vă rugăm să furnizați atât numele, cât și conținutul."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Numele de subsol este obligatoriu"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Conținutul subsolului este necesar"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Subsolul a fost actualizat cu succes!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Subsolul a fost șters cu succes!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Subsolul implicit a fost actualizat cu succes!"
 
@@ -242,8 +242,8 @@ msgstr "Lista de abonați"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Activ"
 
@@ -263,7 +263,7 @@ msgstr "Faceți clic pe Număr"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Campanie"
 
@@ -328,7 +328,7 @@ msgstr "Subsol"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "E-mailuri"
 
@@ -376,7 +376,7 @@ msgstr "luni"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Trimis"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Variabile"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Stare"
 
@@ -1181,12 +1181,12 @@ msgid "Lists"
 msgstr "Liste"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Prenume"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Nume"
 
@@ -1203,7 +1203,7 @@ msgid "Confirmed At"
 msgstr "Confirmat la"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1571,6 +1571,7 @@ msgid "Remember Me"
 msgstr "Ține-mă minte"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Conectare"
 
@@ -1810,8 +1811,8 @@ msgid "Preview:"
 msgstr "Previzualizare:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Creat"
 
@@ -1892,6 +1893,7 @@ msgid "Logout"
 msgstr "Deconectare"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Înscrieți-vă gratuit"
 
@@ -2001,7 +2003,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Nu s-au găsit șabloane sau campanii care să se potrivească"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Inactiv"
 
@@ -2062,7 +2064,7 @@ msgid "Campaign Statistics"
 msgstr "Statistica campaniei"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Încărcare..."
 
@@ -2200,7 +2202,7 @@ msgstr "Nu au fost adăugate e-mailuri la această campanie încă."
 msgid "Create Campaign"
 msgstr "Creați o campanie"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Creați o nouă campanie"
@@ -2267,7 +2269,7 @@ msgstr "Alegeți o campanie"
 msgid "(Active)"
 msgstr "(Activ)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Nu există încă campanii"
 
@@ -2294,7 +2296,7 @@ msgstr "Nu s-au găsit șabloane"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Această campanie nu are încă niciun șablon de e-mail."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Creați șablon de e-mail"
 
@@ -2336,8 +2338,8 @@ msgstr "Fără subsol"
 msgid "Select a footer to append to your email"
 msgstr "Selectați un subsol pe care să îl adăugați la e-mailul dvs"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2566,7 +2568,7 @@ msgid "Number of Emails"
 msgstr "Numărul de e-mailuri"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Șablon de e-mail"
 
@@ -2789,7 +2791,7 @@ msgid "Generate Email"
 msgstr "Generați e-mail"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Previzualizare e-mail"
 
@@ -2802,7 +2804,7 @@ msgid "Send Test Email"
 msgstr "Trimite un e-mail de testare"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Adresa de e-mail"
@@ -3181,7 +3183,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Achiziția Calenvy de către Google și Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3491,7 +3495,7 @@ msgstr "Vizualizați liste"
 msgid "Emails Sent"
 msgstr "E-mailuri trimise"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Vedeți Analytics"
 
@@ -3499,112 +3503,124 @@ msgstr "Vedeți Analytics"
 msgid "Add a List"
 msgstr "Adăugați o listă"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Se afișează %(start)s-%(end)s din %(total)s abonați"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Configurare înregistrare SPF pentru livrarea e-mailului"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Adăugați această înregistrare TXT la DNS-ul domeniului dvs.:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Tip:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Nume/gazdă:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Valoare:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Nota:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Cum să adăugați această înregistrare:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Navigați la gestionarea DNS sau setările DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Adăugați o nouă înregistrare TXT cu valorile afișate mai sus"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Trimite e-mail și abonează-te"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Selectați o campanie..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Selectați mai întâi o campanie..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Programa"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Trimite în X minute"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Trimite în X ore"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Trimite în X zile"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Trimite în X săptămâni"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Trimite în X luni"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Activitate recentă de trimitere"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Urmăriți-vă trimiterile și livrările de e-mail"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Reîmprospăta"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Orele afișate în"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Se încarcă activitatea..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Eliminați reclamele din e-mailurile dvs"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3613,15 +3629,15 @@ msgstr ""
 "DripEmails.org pe X sau pe blogul tău pentru a elimina reclamele din toate "
 "e-mailurile tale."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Campaniile dvs"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Acțiuni"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3629,136 +3645,159 @@ msgstr ""
 "Creați prima campanie pentru a începe să trimiteți e-mailuri automate către "
 "abonații dvs."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Listele dvs. de abonați"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Nicio listă de abonați încă"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Creați-vă prima listă de abonați pentru a începe să vă organizați "
 "contactele."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Acțiuni rapide"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Adăugați abonați"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Șabloane de e-mail"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Setările contului"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Eliminarea anunțului"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Linkuri de dezabonare"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "fus orar"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Setările contului"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Subsolurile de e-mail"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Sfaturi și resurse"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Ghid introductiv"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Aflați cum să configurați prima campanie de e-mail în câteva minute."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Cele mai bune practici prin e-mail"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Sfaturi pentru crearea de e-mailuri care convertesc."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Creșteți-vă lista de abonați"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategii de creștere a numărului de abonați."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Adresa fizică obligatorie"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Linia de adresă 2 (Opțional)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && stare"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Nicio activitate de trimitere încă"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Folosește formularul de mai sus pentru a trimite un e-mail și a vedea "
 "activitatea ta aici."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "La"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Programat"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Eroare"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Previzualizare HTML completă"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Versiune text"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Arată mai puțin"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Dezabonați-vă"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Activitatea nu a fost încărcată"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Vă rugăm să încercați din nou."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Reîncercați"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Selectați un șablon de e-mail..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Eroare la încărcarea e-mailurilor"
 
@@ -7202,7 +7241,9 @@ msgid "Manage Your Subscribers"
 msgstr "Gestionați-vă abonații"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Automatizare gratuită de marketing prin e-mail"
 
 #: .\templates\core\home.html:18
@@ -7232,12 +7273,24 @@ msgstr "Clienți fideli"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Secvențe automate de e-mail care hrănesc clienții potențiali, integrează "
-"utilizatorii și generează conversii.Setează-l o dată și vezi cum crește "
-"veniturile."
+"Cel mai bun software gratuit de marketing prin e-mail pentru secvențe "
+"automate de e-mail, campanii de e-mail și automatizare de marketing prin "
+"e-mail.Creați campanii puternice de e-mail, hrăniți clienții potențiali cu "
+"secvențe automate de e-mail și generați conversii cu platforma noastră de "
+"marketing prin e-mail.Perfect pentru marketing prin e-mail SaaS, marketing "
+"prin e-mail pentru comerț electronic, marketing prin e-mail B2B și marketing"
+" prin e-mail pentru întreprinderi mici.Configurați-vă automatizarea "
+"e-mailului în câteva minute - software de marketing prin e-mail complet "
+"gratuit, cu campanii nelimitate, abonați nelimitați și e-mailuri nelimitate."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7247,74 +7300,182 @@ msgstr "Începeți gratuit astăzi"
 msgid "Unlimited Campaigns"
 msgstr "Campanii nelimitate"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Campanii nelimitate"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Abonați nelimitați"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Fără card de credit"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Configurați în 5 minute"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI mai mare"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Mai multă implicare"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Creștere mai rapidă"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Automatizare"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "De ce funcționează campaniile Drip"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Cum se creează șabloane de e-mail"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Spre deosebire de exploziile unice de e-mail, campaniile de picurare "
-"construiesc relații în timp"
+"Configurarea automatizării e-mailului și a campaniilor de e-mail prin "
+"picurare nu a fost niciodată mai ușoară.Software-ul nostru de automatizare a"
+" marketingului prin e-mail simplifică crearea de secvențe automate de "
+"e-mail, programarea e-mailurilor și urmărirea analizelor de e-mail."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Creați-vă prima campanie"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Construiește-ți campania de e-mail cu instrumentul nostru intuitiv de "
+"marketing prin e-mail.Alegeți dintre șabloane frumoase de e-mail sau creați "
+"campanii personalizate de marketing prin e-mail."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Secvență de e-mail"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Proiectați secvențe de e-mail automatizate cu e-mailuri "
+"personalizate.Configurați programarea e-mailurilor, secvențele de îngrijire "
+"a e-mailului și seriale de bun venit pentru abonații dvs. de e-mail."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Gestionarea abonaților"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Importă-ți lista de e-mail, segmentează abonații cu gestionarea listei de "
+"e-mail și organizează-ți publicul de e-mail.Perfect pentru gestionarea "
+"abonaților de e-mail și segmentarea e-mailului."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Ce poate optimiza AI"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Monitorizați ratele de deschidere a e-mailurilor, ratele de clic pe e-mail "
+"și interacțiunea prin e-mail cu analize de e-mail în timp real.Îmbunătățiți "
+"rentabilitatea investiției prin e-mail marketing cu informații bazate pe "
+"date."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"De ce campaniile de e-mail prin picurare funcționează mai bine decât "
+"exploziile unice de e-mail"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Spre deosebire de exploziile unice de e-mail, campaniile automate de e-mail "
+"prin picurare construiesc relații în timp.Automatizarea marketingului prin "
+"e-mail vă ajută să trimiteți mesajele potrivite de marketing prin e-mail la "
+"momentul potrivit, îmbunătățind implicarea prin e-mail și rentabilitatea "
+"investiției prin e-mail marketing."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Hrănire automată"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Trimite mesajul potrivit la momentul potrivit.Ghidați automat clienții "
 "potențiali prin pâlnie fără intervenție manuală."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Călătorii personalizate"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentarea abonaților"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Creează experiențe unice pentru fiecare abonat.Segmentează-ți publicul și "
-"oferă conținut care rezonează."
+"Creați experiențe unice de e-mail pentru fiecare abonat cu e-mailuri "
+"personalizate.Utilizați segmentarea e-mailului și gestionarea listelor de "
+"e-mail pentru a livra campanii de marketing prin e-mail care rezonează cu "
+"publicul dvs. de e-mail."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Rezultate dovedite"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7322,19 +7483,21 @@ msgstr ""
 "Campaniile drip generează de trei ori mai multe venituri decât e-mailurile "
 "individuale.Vedeți rentabilitatea investiției măsurabilă din prima zi."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Tot ce ai nevoie pentru a reuși"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Funcții puternice care fac marketingul prin e-mail fără efort"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Secvențe de picurare inteligente"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7342,11 +7505,11 @@ msgstr ""
 "Creați secvențe de e-mail în mai mulți pași care se trimit automat în "
 "funcție de sincronizare, comportament sau declanșatoare."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Analiză în timp real"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7354,11 +7517,11 @@ msgstr ""
 "Urmăriți deschiderile, clicurile, conversiile și veniturile.Luați decizii "
 "bazate pe date cu tablouri de bord frumoase."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Șabloane frumoase"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7366,14 +7529,14 @@ msgstr ""
 "Alegeți dintre șabloane profesionale sau creați-vă propriile.Editorul drag-"
 "and-drop facilitează designul."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentarea abonaților"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7381,11 +7544,11 @@ msgstr ""
 "Organizați abonații în liste, etichetați-i și trimiteți campanii "
 "direcționate către publicul potrivit."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Conținut alimentat de AI"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7393,11 +7556,11 @@ msgstr ""
 "Generați conținut de e-mail convingător cu AI.Economisiți timp în timp ce "
 "creați mesaje profesionale și captivante."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Securitatea întreprinderii"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7405,17 +7568,17 @@ msgstr ""
 "Conform GDPR, infrastructură sigură și livrare fiabilă.Datele și abonații "
 "dvs. sunt protejați."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "De încredere companiile în creștere"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Alăturați-vă miilor de agenți de marketing care și-au transformat strategia "
 "de e-mail"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7424,11 +7587,11 @@ msgstr ""
 "Rata noastră de conversie a crescut cu 340%% după implementarea campaniilor "
 "drip.Automatizarea ne economisește ore în fiecare săptămână."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Director de marketing"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7436,11 +7599,11 @@ msgstr ""
 "Cea mai bună parte?Este complet gratuit.Am trimis peste 50.000 de e-mailuri "
 "fără să plătim un ban.Schimbător de joc."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Fondator startup"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7448,15 +7611,475 @@ msgstr ""
 "Configurarea a durat 5 minute.Interfața este intuitivă, iar rezultatele "
 "vorbesc de la sine.Angajamentul nostru prin e-mail s-a dublat."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Manager e-commerce"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Automatizare gratuită de marketing prin e-mail pentru toată lumea"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Indiferent dacă desfășurați campanii de marketing prin e-mail SaaS, "
+"marketing prin e-mail pentru comerț electronic, marketing prin e-mail B2B "
+"sau campanii de marketing prin e-mail B2C, software-ul nostru gratuit de "
+"automatizare a marketingului prin e-mail se adaptează nevoilor "
+"dumneavoastră."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Automatizare gratuită de marketing prin e-mail"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Includeți utilizatorii cu secvențe automate de e-mail, serii de bun venit și"
+" campanii de nutrire.Perfect pentru startup-uri de marketing prin e-mail și "
+"companii de software."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Începeți gratuit astăzi"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Manager e-commerce"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Stimulați vânzările cu e-mailuri de coș abandonate, recomandări de produse "
+"și e-mailuri tranzacționale.Creșteți-vă rentabilitatea investiției prin "
+"e-mail marketing cu campanii direcționate."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Noțiuni de bază"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Automatizare gratuită de marketing prin e-mail"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Hrăniți clienții potențiali cu automatizarea marketingului prin e-mail, "
+"segmentarea e-mailului și campanii de e-mail personalizate.Perfect pentru "
+"strategiile de marketing prin e-mail B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Încercați funcțiile AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Marketing prin e-mail pentru întreprinderi mici"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Software gratuit de marketing prin e-mail cu campanii, abonați și secvențe "
+"automate de e-mail nelimitate"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Automatizare gratuită de marketing prin e-mail"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Cea mai bună alternativă gratuită la instrumentele de marketing prin e-mail "
+"plătite"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"De ce să plătiți pentru Mailchimp, Constant Contact, Sendinblue sau "
+"GetResponse când puteți obține aceleași funcții de automatizare a "
+"marketingului prin e-mail gratuit?Platforma noastră de marketing prin e-mail"
+" oferă campanii de e-mail nelimitate, abonați nelimitați și automatizare "
+"puternică a e-mailului - totul fără costuri."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Software gratuit de marketing prin e-mail prin picurare"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Plan gratuit pentru totdeauna"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Fără comisioane ascunse, fără card de credit necesar.Spre deosebire de "
+"serviciile alternative Mailchimp sau Constant Contact, suntem un software de"
+" marketing prin e-mail complet gratuit."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Campanii nelimitate"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Campanii de e-mail nelimitate, e-mail-uri nelimitate, abonați nelimitați, "
+"automatizare nelimitată a e-mailului.Fără limite pentru creșterea "
+"marketingului prin e-mail."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Automatizare gratuită de marketing prin e-mail"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Funcții complete de automatizare a e-mailului: campanii de e-mail, "
+"programare e-mail, analiză e-mail, urmărire e-mail, segmentare e-mail și "
+"personalizare e-mail."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Software gratuit de marketing prin e-mail prin picurare"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Șabloane de e-mail, buletine informative prin e-mail, gestionarea abonaților"
+" prin e-mail, gestionarea listelor de e-mail, urmărirea ratelor de "
+"deschidere a e-mailului, ratele de clic pe e-mail și analiza rentabilității "
+"investiției prin e-mail marketing."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Sunteți gata să comutați?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Alăturați-vă miilor de companii care au trecut de la serviciile costisitoare"
+" de marketing prin e-mail la platforma noastră gratuită de marketing prin "
+"e-mail.Începeți cu automatizarea e-mailului în câteva minute - nu este "
+"necesar un card de credit."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Creează cont gratuit"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Aveți deja un cont?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Cele mai bune practici de design de e-mail"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Aflați cum să îmbunătățiți ratele de deschidere a e-mailului, să creșteți "
+"implicarea prin e-mail și să maximizați rentabilitatea investiției prin "
+"e-mail marketing cu strategii de marketing prin e-mail și sfaturi de "
+"marketing prin e-mail dovedite."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Rata medie de deschidere"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Utilizați linii de subiect personalizate pentru e-mailuri, trimiteți "
+"e-mailuri la momente optime și segmentați lista de e-mailuri.Urmăriți ratele"
+" de deschidere a e-mailurilor cu ajutorul analizelor noastre de e-mail "
+"pentru a vă optimiza campaniile de marketing prin e-mail."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Îmbunătățiri de urmărire"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Managementul sărituri"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Creați conținut captivant de e-mail cu personalizarea e-mailului, utilizați "
+"automatizarea e-mailului pentru a trimite mesaje în timp util și "
+"monitorizați ratele de clic pe e-mail.Automatizarea noastră de marketing "
+"prin e-mail vă ajută să trimiteți mesajul potrivit la momentul potrivit."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Mai multă implicare"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Automatizare gratuită de marketing prin e-mail"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Folosiți campanii de e-mail pentru creșterea clienților potențiali, "
+"implementați segmentarea e-mailurilor pentru campanii vizate și urmăriți "
+"rentabilitatea investiției prin e-mail marketing cu analize cuprinzătoare "
+"ale e-mailului.Software gratuit de marketing prin e-mail care oferă "
+"rezultate."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Vedeți rentabilitatea investiției dvs"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Sunteți gata să implementați aceste bune practici de marketing prin e-mail?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Începeți să vă automatizați marketingul prin e-mail gratuit."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Întrebări frecvente"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Tot ce aveți nevoie pentru a vă automatiza marketingul prin e-mail"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Ce sunt campaniile prin picurare?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"O campanie de e-mail prin picurare, cunoscută și sub numele de secvență "
+"automată de e-mail sau campanie de e-mail prin picurare, este o serie de "
+"e-mailuri automate trimise abonaților de-a lungul timpului.Aceste campanii "
+"de marketing prin e-mail ajută la creșterea clienților potențiali, la "
+"integrarea utilizatorilor și la creșterea conversiilor prin automatizarea "
+"strategică a e-mailului.Platforma noastră de marketing prin e-mail "
+"facilitează crearea de campanii puternice de e-mail prin picurare."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Aflați cum să creați și să trimiteți prima campanie prin e-mail"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Crearea unei campanii de e-mail prin picurare este simplă cu software-ul "
+"nostru de automatizare a marketingului prin e-mail.Înscrieți-vă gratuit, "
+"creați-vă campania de e-mail, adăugați secvențe de e-mail cu e-mailuri "
+"programate și lăsați automatizarea noastră de e-mail să se ocupe de "
+"restul.Puteți folosi șabloanele noastre de e-mail sau puteți crea campanii "
+"personalizate de marketing prin e-mail.Începeți în câteva minute!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Creați-vă prima campanie"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Software gratuit de marketing prin e-mail prin picurare"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Da!Platforma noastră de marketing prin e-mail este 100%% gratuită pentru "
+"totdeauna.Spre deosebire de alternativele Mailchimp, Constant Contact, "
+"Sendinblue sau GetResponse, oferim campanii de e-mail nelimitate, abonați "
+"nelimitați, e-mailuri nelimitate și funcții complete de automatizare a "
+"marketingului prin e-mail fără costuri.Nu este nevoie de card de credit, "
+"fără comisioane ascunse."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Ce funcții de marketing prin e-mail sunt incluse?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Software-ul nostru gratuit de marketing prin e-mail include: campanii de "
+"e-mail, secvențe automate de e-mail, programare e-mail, analiză e-mail și "
+"urmărire e-mail (rata de deschidere a e-mailului, rate de clic pe e-mail), "
+"gestionarea abonaților de e-mail, gestionarea listei de e-mail, segmentarea "
+"e-mail-urilor, personalizarea e-mail-urilor, șabloane de e-mail, buletine "
+"informative prin e-mail și automatizare completă a marketingului prin "
+"e-mail.Tot ce ai nevoie pentru un email marketing de succes!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Tarife individuale de deschidere a e-mailului"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Îmbunătățiți ratele de deschidere a e-mailurilor utilizând linii de subiect "
+"personalizate pentru e-mail, trimițând e-mailuri la momente optime, "
+"segmentând lista de e-mailuri și creând conținut captivant de "
+"e-mail.Instrumentele noastre de analiză a e-mailului vă ajută să urmăriți "
+"ratele de deschidere a e-mailului și să vă optimizați campaniile de "
+"marketing prin e-mail pentru o performanță mai bună."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Începeți importul"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Mai aveți întrebări?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Începeți cu software-ul nostru gratuit de marketing prin e-mail și "
+"descoperiți cât de ușoară poate fi automatizarea e-mailului!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Sunteți gata să vă transformați marketingul prin e-mail?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7465,15 +8088,15 @@ msgstr ""
 "crește veniturile, a cultiva clienții potențiali și a construi relații de "
 "durată cu clienții."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Porniți contul dvs. gratuit"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Află mai multe"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Nu este nevoie de card de credit • Configurare în 5 minute • Anulați oricând"
@@ -13047,10 +13670,6 @@ msgstr ""
 "Puteți crea mai multe liste pentru a vă segmenta publicul (de exemplu, "
 "clienți, potențiali, parteneri)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Adăugați abonați"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Acum să adăugăm câțiva abonați la lista ta.Aveți două opțiuni:"
@@ -13090,10 +13709,6 @@ msgstr "Hartați coloanele și faceți clic"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Import"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Creați-vă prima campanie"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14145,6 +14760,28 @@ msgstr ""
 "Dacă v-ați dezabonat din greșeală sau doriți să primiți din nou e-mailuri, "
 "vă rugăm să ne contactați sau să vă înscrieți din nou."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Conținut de e-mail"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "solicita informatii"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Format de răspuns"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Subsol"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Înapoi la abonați"
@@ -14465,3 +15102,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Importați contacte sau adăugați manual abonați pentru a le vedea listate "
 "aici."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Secvențe automate de e-mail care hrănesc clienții potențiali, integrează "
+#~ "utilizatorii și generează conversii.Setează-l o dată și vezi cum crește "
+#~ "veniturile."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "De ce funcționează campaniile Drip"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Spre deosebire de exploziile unice de e-mail, campaniile de picurare "
+#~ "construiesc relații în timp"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Călătorii personalizate"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Creează experiențe unice pentru fiecare abonat.Segmentează-ți publicul și "
+#~ "oferă conținut care rezonează."

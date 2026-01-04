@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "HTML ສ່ວນທ້າຍແບບກຳນົດເອງສຳລ�
 msgid "Time Zone"
 msgstr "ເຂດເວລາ"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "ແຖວທີ່ຢູ່ 1"
@@ -64,22 +64,22 @@ msgstr "ແຖວທີ່ຢູ່ 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "ອາພາດເມັນ, ຊຸດ, ແລະອື່ນໆ (ທາງເລືອກ)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "ເມືອງ"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "ລັດ/ແຂວງ"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "ລະຫັດໄປສະນີ"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "ປະເທດ"
@@ -166,36 +166,36 @@ msgstr "ສ່ວນທ້າຍອີເມລ໌"
 msgid "Email Footers"
 msgstr "ສ່ວນທ້າຍອີເມລ໌"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "ລະຫັດ API ຟື້ນຟູສຳເລັດແລ້ວ!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "ສ້າງສ່ວນທ້າຍສຳເລັດແລ້ວ!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "ກະລຸນາລະບຸທັງຊື່ ແລະເນື້ອຫາ."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "ຕ້ອງລະບຸຊື່ສ່ວນທ້າຍ"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "ຕ້ອງການເນື້ອຫາສ່ວນທ້າຍ"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "ອັບເດດສ່ວນທ້າຍສຳເລັດແລ້ວ!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "ລຶບສ່ວນທ້າຍສຳເລັດແລ້ວ!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "ອັບເດດສ່ວນທ້າຍເລີ່ມຕົ້ນສຳເລັດແລ້ວ!"
 
@@ -242,8 +242,8 @@ msgstr "ລາຍຊື່ສະມາຊິກ"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "ເຄື່ອນໄຫວ"
 
@@ -263,7 +263,7 @@ msgstr "ຄລິກນັບ"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "ແຄມເປນ"
 
@@ -328,7 +328,7 @@ msgstr "ສ່ວນທ້າຍ"
 msgid "Email"
 msgstr "ອີເມວ"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "ອີເມວ"
 
@@ -376,7 +376,7 @@ msgstr "ເດືອນ"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "ສົ່ງແລ້ວ"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "ຕົວແປ"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "ສະຖານະ"
 
@@ -1172,12 +1172,12 @@ msgid "Lists"
 msgstr "ລາຍການ"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "ຊື່"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "ນາມສະກຸນ"
 
@@ -1194,7 +1194,7 @@ msgid "Confirmed At"
 msgstr "ຢືນຢັນຢູ່ທີ່"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1553,6 +1553,7 @@ msgid "Remember Me"
 msgstr "ຈື່ຂ້ອຍ"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "ເຂົ້າສູ່ລະບົບ"
 
@@ -1792,8 +1793,8 @@ msgid "Preview:"
 msgstr "ຕົວຢ່າງ:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "ສ້າງແລ້ວ"
 
@@ -1873,6 +1874,7 @@ msgid "Logout"
 msgstr "ອອກຈາກລະບົບ"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "ລົງທະບຽນຟຣີ"
 
@@ -1982,7 +1984,7 @@ msgid "No templates or campaigns found matching"
 msgstr "ບໍ່ພົບແມ່ແບບ ຫຼືແຄມເປນທີ່ກົງກັນ"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "ບໍ່ເຄື່ອນໄຫວ"
 
@@ -2042,7 +2044,7 @@ msgid "Campaign Statistics"
 msgstr "ສະຖິຕິແຄມເປນ"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "ກຳລັງໂຫລດ..."
 
@@ -2180,7 +2182,7 @@ msgstr "ຍັງບໍ່ມີອີເມວຖືກເພີ່ມໃສ່
 msgid "Create Campaign"
 msgstr "ສ້າງແຄມເປນ"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "ສ້າງແຄມເປນໃຫມ່"
@@ -2247,7 +2249,7 @@ msgstr "ເລືອກແຄມເປນ"
 msgid "(Active)"
 msgstr "(ເຄື່ອນໄຫວ)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "ບໍ່ມີແຄມເປນເທື່ອ"
 
@@ -2272,7 +2274,7 @@ msgstr "ບໍ່ພົບແມ່ແບບ"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "ແຄມເປນນີ້ຍັງບໍ່ມີແມ່ແບບອີເມວເທື່ອ."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "ສ້າງແມ່ແບບອີເມວ"
 
@@ -2314,8 +2316,8 @@ msgstr "ບໍ່ມີສ່ວນທ້າຍ"
 msgid "Select a footer to append to your email"
 msgstr "ເລືອກສ່ວນທ້າຍເພື່ອຕໍ່ທ້າຍກັບອີເມວຂອງທ່ານ"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2540,7 +2542,7 @@ msgid "Number of Emails"
 msgstr "ຈໍານວນອີເມວ"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "ແມ່ແບບອີເມວ"
 
@@ -2756,7 +2758,7 @@ msgid "Generate Email"
 msgstr "ສ້າງອີເມວ"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "ຕົວຢ່າງອີເມວ"
 
@@ -2769,7 +2771,7 @@ msgid "Send Test Email"
 msgstr "ສົ່ງອີເມວທົດສອບ"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "ທີ່ຢູ່ອີເມວ"
@@ -3139,7 +3141,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "ການຊື້ Calenvy ໂດຍ Google ແລະ Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3445,7 +3449,7 @@ msgstr "ເບິ່ງລາຍຊື່"
 msgid "Emails Sent"
 msgstr "ສົ່ງອີເມວແລ້ວ"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "ເບິ່ງການວິເຄາະ"
 
@@ -3453,112 +3457,124 @@ msgstr "ເບິ່ງການວິເຄາະ"
 msgid "Add a List"
 msgstr "ເພີ່ມລາຍຊື່"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "ກຳລັງສະແດງ %(start)s-%(end)s ຂອງ %(total)s ຜູ້ສະໝັກໃຊ້"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "ການຕັ້ງຄ່າບັນທຶກ SPF ສໍາລັບການຈັດສົ່ງອີເມວ"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "ເພີ່ມບັນທຶກ TXT ນີ້ໃສ່ DNS ຂອງໂດເມນຂອງທ່ານ:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "ປະເພດ:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "ຊື່/ເຈົ້າພາບ:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "ມູນຄ່າ:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "ໝາຍເຫດ:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "ວິທີການເພີ່ມບັນທຶກນີ້:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "ໄປທີ່ການຈັດການ DNS ຫຼືການຕັ້ງຄ່າ DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "ເພີ່ມບັນທຶກ TXT ໃໝ່ດ້ວຍຄ່າທີ່ສະແດງຂ້າງເທິງ"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "ສົ່ງອີເມວ ແລະສະໝັກສະມາຊິກ"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "ເລືອກແຄມເປນ..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "ເລືອກແຄມເປນກ່ອນ..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "ຕາຕະລາງ"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "ສົ່ງໃນ X ນາທີ"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "ສົ່ງໃນ X ຊົ່ວໂມງ"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "ສົ່ງໃນ X ມື້"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "ສົ່ງໃນ X ອາທິດ"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "ສົ່ງໃນ X ເດືອນ"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "ການເຄື່ອນໄຫວສົ່ງຫຼ້າສຸດ"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "ຕິດຕາມການສົ່ງອີເມວແລະການຈັດສົ່ງຂອງທ່ານ"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "ໂຫຼດຂໍ້ມູນຄືນໃໝ່"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "ເວລາສະແດງໃຫ້ເຫັນໃນ"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "ກຳລັງໂຫຼດການເຄື່ອນໄຫວ..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "ເອົາການໂຄສະນາອອກຈາກອີເມວຂອງທ່ານ"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3566,148 +3582,171 @@ msgstr ""
 "ອີເມວຂອງທ່ານປະຈຸບັນປະກອບມີຍີ່ຫໍ້ຂອງພວກເຮົາ.ແບ່ງປັນກ່ຽວກັບ DripEmails.org ໃນ "
 "X ຫຼື blog ຂອງທ່ານເພື່ອເອົາໂຄສະນາອອກຈາກທຸກອີເມວຂອງທ່ານ."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "ແຄມເປນຂອງທ່ານ"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "ການກະທໍາ"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
 msgstr ""
 "ສ້າງແຄມເປນທໍາອິດຂອງທ່ານເພື່ອເລີ່ມຕົ້ນການສົ່ງອີເມວອັດຕະໂນມັດໄປຫາຜູ້ຈອງຂອງທ່ານ."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "ລາຍຊື່ສະມາຊິກຂອງທ່ານ"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "ບໍ່ມີລາຍຊື່ຜູ້ສະໝັກໃຊ້ເທື່ອ"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "ສ້າງລາຍຊື່ຜູ້ສະຫມັກທໍາອິດຂອງທ່ານເພື່ອເລີ່ມຕົ້ນການຈັດລະບຽບຜູ້ຕິດຕໍ່ຂອງທ່ານ."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "ການປະຕິບັດດ່ວນ"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "ເພີ່ມຜູ້ຕິດຕາມ"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "ແມ່ແບບອີເມວ"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "ການຕັ້ງຄ່າບັນຊີ"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "ການລຶບໂຄສະນາ"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Unsubscribe Links"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "ເຂດເວລາ"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "ການຕັ້ງຄ່າບັນຊີ"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "ສ່ວນທ້າຍອີເມລ໌"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "ເຄັດລັບ & ຊັບພະຍາກອນ"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "ຄູ່ມືເລີ່ມຕົ້ນ"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "ຮຽນຮູ້ວິທີຕັ້ງຄ່າແຄມເປນອີເມວທໍາອິດຂອງທ່ານໃນນາທີ."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "ອີເມວການປະຕິບັດທີ່ດີທີ່ສຸດ"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "ຄໍາແນະນໍາສໍາລັບການສ້າງອີເມວທີ່ແປງ."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "ຂະຫຍາຍລາຍຊື່ສະມາຊິກຂອງທ່ານ"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "ຍຸດທະສາດເພື່ອເພີ່ມຜູ້ຈອງຂອງທ່ານ."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "ຕ້ອງການທີ່ຢູ່ທາງດ້ານຮ່າງກາຍ"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "ທີ່ຢູ່ແຖວ 2 (ທາງເລືອກ)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && ສະຖານະພາບ"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "ບໍ່ມີການເຄື່ອນໄຫວສົ່ງເທື່ອ"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr "ໃຊ້ແບບຟອມຂ້າງເທິງເພື່ອສົ່ງອີເມວ ແລະເບິ່ງການເຄື່ອນໄຫວຂອງທ່ານທີ່ນີ້."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "ເຖິງ"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "ກຳນົດເວລາ"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "ຜິດພາດ"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "ຕົວຢ່າງ HTML ເຕັມ"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "ສະບັບຂໍ້ຄວາມ"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "ສະແດງໜ້ອຍລົງ"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "ເຊົາຕິດຕາມ"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "ໂຫຼດການເຄື່ອນໄຫວບໍ່ສຳເລັດ"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "ກະລຸນາລອງອີກຄັ້ງ."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "ລອງໃໝ່"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "ເລືອກແມ່ແບບອີເມວ..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫລດອີເມວ"
 
@@ -7088,7 +7127,9 @@ msgid "Manage Your Subscribers"
 msgstr "ຈັດການສະມາຊິກຂອງທ່ານ"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
 
 #: .\templates\core\home.html:18
@@ -7118,11 +7159,23 @@ msgstr "ລູກຄ້າທີ່ຊື່ສັດ"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"ລໍາດັບອີເມລ໌ອັດຕະໂນມັດທີ່ບໍາລຸງລ້ຽງຜູ້ນໍາ, ຜູ້ໃຊ້ເທິງເຮືອ, "
-"ແລະຊຸກຍູ້ການແປງ.ຕັ້ງມັນຄັ້ງດຽວ, ແລະເບິ່ງລາຍໄດ້ຂອງທ່ານເພີ່ມຂຶ້ນ."
+"ຊອບແວການຕະຫຼາດອີເມລ໌ drip ຟຣີທີ່ດີທີ່ສຸດສໍາລັບລໍາດັບອີເມລ໌ອັດຕະໂນມັດ, "
+"ແຄມເປນອີເມລ໌, ແລະການຕະຫຼາດອີເມລ໌ອັດຕະໂນມັດ.ສ້າງແຄມເປນອີເມລ໌ທີ່ມີປະສິດທິພາບ, "
+"ບໍາລຸງລ້ຽງຜູ້ນໍາດ້ວຍລໍາດັບອີເມລ໌ອັດຕະໂນມັດ, "
+"ແລະຊຸກຍູ້ການແປງກັບເວທີການຕະຫຼາດອີເມວຂອງພວກເຮົາ.ທີ່ສົມບູນແບບສໍາລັບການຕະຫຼາດອີເມລ໌"
+" SaaS, ການຕະຫຼາດອີຄອມເມີຊ, ການຕະຫຼາດອີເມລ໌ B2B, "
+"ແລະການຕະຫຼາດອີເມລ໌ທຸລະກິດຂະຫນາດນ້ອຍ.ຕັ້ງຄ່າອັດຕະໂນມັດອີເມລ໌ຂອງທ່ານໃນນາທີ - "
+"ຊອບແວການຕະຫຼາດອີເມລ໌ຟຣີຫມົດທີ່ມີແຄມເປນບໍ່ຈໍາກັດ, ຈອງບໍ່ຈໍາກັດ, ແລະອີເມລ໌ "
+"drip ບໍ່ຈໍາກັດ."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7132,71 +7185,170 @@ msgstr "ເລີ່ມຟຣີມື້ນີ້"
 msgid "Unlimited Campaigns"
 msgstr "ແຄມເປນບໍ່ຈໍາກັດ"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "ແຄມເປນບໍ່ຈໍາກັດ"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "ຈອງບໍ່ຈໍາກັດ"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "ບໍ່ມີບັດເຄຣດິດ"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "ຕັ້ງຄ່າໃນ 5 ນາທີ"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "ROI ສູງຂຶ້ນ"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "ການມີສ່ວນພົວພັນເພີ່ມເຕີມ"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "ການເຕີບໂຕໄວຂຶ້ນ"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "ອັດຕະໂນມັດ"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "ເປັນຫຍັງແຄມເປນ Drip ເຮັດວຽກ"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "ວິທີການສ້າງແມ່ແບບອີເມວ"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
-msgstr "ບໍ່ຄືກັບການລະເບີດອີເມວດຽວ, ແຄມເປນ drip ສ້າງຄວາມສໍາພັນໃນໄລຍະເວລາ"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
+msgstr ""
+"ການຕັ້ງຄ່າລະບົບອັດຕະໂນມັດຂອງອີເມລ໌ແລະແຄມເປນອີເມລ໌ drip "
+"ບໍ່ເຄີຍງ່າຍຂຶ້ນ.ຊອບແວອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌ຂອງພວກເຮົາເຮັດໃຫ້ມັນງ່າຍດາຍທີ່ຈະສ້າງລໍາດັບອີເມລ໌ອັດຕະໂນມັດ,"
+" ກໍານົດເວລາອີເມລ໌, ແລະຕິດຕາມການວິເຄາະອີເມລ໌."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "ສ້າງແຄມເປນທໍາອິດຂອງທ່ານ"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"ສ້າງແຄມເປນ drip ອີເມວຂອງທ່ານດ້ວຍເຄື່ອງມືການຕະຫຼາດອີເມວ intuitive "
+"ຂອງພວກເຮົາ.ເລືອກຈາກແມ່ແບບອີເມວທີ່ສວຍງາມຫຼືສ້າງແຄມເປນກາລະຕະຫຼາດອີເມວທີ່ກໍາຫນົດເອງ."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "ລໍາດັບອີເມລ໌"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"ອອກແບບລໍາດັບອີເມລ໌ອັດຕະໂນມັດດ້ວຍອີເມວສ່ວນຕົວ.ຕັ້ງຄ່າການກໍານົດເວລາອີເມລ໌, "
+"ລໍາດັບການບໍາລຸງລ້ຽງອີເມລ໌, ແລະຊຸດຍິນດີຕ້ອນຮັບສໍາລັບຜູ້ຈອງອີເມລ໌ຂອງທ່ານ."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "ການຄຸ້ມຄອງຜູ້ຕິດຕາມ"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"ນໍາເຂົ້າລາຍຊື່ອີເມລ໌ຂອງທ່ານ, ແບ່ງສ່ວນຜູ້ຈອງທີ່ມີການຈັດການລາຍຊື່ອີເມວ, "
+"ແລະຈັດກຸ່ມຜູ້ຊົມອີເມວຂອງທ່ານ.ທີ່ສົມບູນແບບສໍາລັບການຄຸ້ມຄອງຜູ້ຈອງອີເມລ໌ແລະການແບ່ງສ່ວນອີເມວ."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "ສິ່ງທີ່ AI ສາມາດເພີ່ມປະສິດທິພາບໄດ້"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"ຕິດຕາມອັດຕາການເປີດອີເມວ, ອັດຕາການຄລິກຜ່ານອີເມລ໌, "
+"ແລະການມີສ່ວນພົວພັນອີເມລ໌ກັບການວິເຄາະອີເມລ໌ແບບສົດໆ.ປັບປຸງ ROI "
+"ການຕະຫຼາດອີເມວດ້ວຍຄວາມເຂົ້າໃຈທີ່ຂັບເຄື່ອນດ້ວຍຂໍ້ມູນ."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr "ເປັນຫຍັງແຄມເປນ Email Drip ເຮັດວຽກດີກວ່າການລະເບີດອີເມວດຽວ"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"ບໍ່ຄືກັບການລະເບີດອີເມວດຽວ, ແຄມເປນອີເມລ໌ drip "
+"ອັດຕະໂນມັດສ້າງຄວາມສໍາພັນໃນໄລຍະເວລາ.ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌ຊ່ວຍໃຫ້ທ່ານສົ່ງຂໍ້ຄວາມການຕະຫຼາດອີເມລ໌ທີ່ຖືກຕ້ອງໃນເວລາທີ່ເຫມາະສົມ,"
+" ປັບປຸງການພົວພັນກັບອີເມວແລະ ROI ການຕະຫຼາດອີເມວ."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "ການລ້ຽງດູອັດຕະໂນມັດ"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "ສົ່ງຂໍ້ຄວາມທີ່ຖືກຕ້ອງໃນເວລາທີ່ເຫມາະສົມ.ນໍາພາອັດຕະໂນມັດຜ່ານຊ່ອງທາງຂອງທ່ານໂດຍບໍ່ມີການແຊກແຊງດ້ວຍຕົນເອງ."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "ການເດີນທາງສ່ວນບຸກຄົນ"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "ການແບ່ງສ່ວນສະມາຊິກ"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"ສ້າງປະສົບການທີ່ເປັນເອກະລັກສໍາລັບຜູ້ສະຫມັກແຕ່ລະຄົນ.ແບ່ງກຸ່ມຜູ້ຊົມຂອງທ່ານແລະສົ່ງເນື້ອຫາທີ່"
-" resonate."
+"ສ້າງປະສົບການອີເມວທີ່ເປັນເອກະລັກສໍາລັບຜູ້ຈອງແຕ່ລະຄົນດ້ວຍອີເມວສ່ວນບຸກຄົນ.ໃຊ້ການແບ່ງສ່ວນອີເມລ໌ແລະການຈັດການລາຍຊື່ອີເມວເພື່ອສົ່ງການໂຄສະນາການຕະຫຼາດອີເມວເປົ້າຫມາຍທີ່"
+" resonate ກັບຜູ້ຊົມອີເມວຂອງທ່ານ."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "ຜົນການພິສູດ"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7204,19 +7356,21 @@ msgstr ""
 "ແຄມເປນ Drip ສ້າງລາຍໄດ້ຫຼາຍກວ່າອີເມວດຽວ 3 ເທົ່າ.ເບິ່ງ ROI "
 "ທີ່ສາມາດວັດແທກໄດ້ຈາກມື້ຫນຶ່ງ."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "ທຸກ​ສິ່ງ​ທຸກ​ຢ່າງ​ທີ່​ທ່ານ​ຕ້ອງ​ການ​ສໍາ​ເລັດ​"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "ຄຸນສົມບັດທີ່ມີປະສິດທິພາບທີ່ເຮັດໃຫ້ການຕະຫຼາດອີເມວບໍ່ຫຍຸ້ງຍາກ"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "ລໍາດັບອັດສະລິຍະ Drip"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7224,11 +7378,11 @@ msgstr ""
 "ສ້າງລໍາດັບອີເມລ໌ຫຼາຍຂັ້ນຕອນທີ່ສົ່ງອັດຕະໂນມັດໂດຍອີງໃສ່ເວລາ, ພຶດຕິກໍາ, "
 "ຫຼືຜົນກະທົບຕໍ່."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "ການວິເຄາະເວລາຈິງ"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7236,11 +7390,11 @@ msgstr ""
 "ຕິດຕາມການເປີດ, ການຄລິກ, ການແປງ, ແລະລາຍຮັບ.ເຮັດການຕັດສິນໃຈທີ່ອີງໃສ່ຂໍ້ມູນດ້ວຍ"
 " dashboards ທີ່ສວຍງາມ."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "ແມ່ແບບທີ່ສວຍງາມ"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7248,14 +7402,14 @@ msgstr ""
 "ເລືອກຈາກແມ່ແບບມືອາຊີບຫຼືສ້າງຂອງທ່ານເອງ.Drag-and-drop editor "
 "ເຮັດໃຫ້ການອອກແບບງ່າຍ."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "ການແບ່ງສ່ວນສະມາຊິກ"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7263,11 +7417,11 @@ msgstr ""
 "ຈັດຕັ້ງຜູ້ຈອງເຂົ້າໄປໃນລາຍຊື່, ແທັກພວກເຂົາ, "
 "ແລະສົ່ງແຄມເປນເປົ້າຫມາຍໄປຫາຜູ້ຊົມທີ່ຖືກຕ້ອງ."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-Powed ເນື້ອໃນ"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7275,11 +7429,11 @@ msgstr ""
 "ສ້າງເນື້ອຫາອີເມວທີ່ໜ້າສົນໃຈດ້ວຍ "
 "AI.ປະຫຍັດເວລາໃນຂະນະທີ່ສ້າງຂໍ້ຄວາມທີ່ເປັນມືອາຊີບ, ມີສ່ວນຮ່ວມ."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "ຄວາມປອດໄພວິສາຫະກິດ"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7287,15 +7441,15 @@ msgstr ""
 "GDPR ສອດຄ່ອງ, ໂຄງສ້າງພື້ນຖານທີ່ປອດໄພ, ແລະການຈັດສົ່ງທີ່ເຊື່ອຖືໄດ້.ຂໍ້ມູນ "
 "ແລະຜູ້ສະໝັກໃຊ້ຂອງທ່ານຖືກປົກປ້ອງ."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "ເຊື່ອຖືໄດ້ໂດຍທຸລະກິດທີ່ເຕີບໃຫຍ່"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "ເຂົ້າຮ່ວມຫລາຍພັນຄົນຂອງນັກກາລະຕະຫຼາດທີ່ປ່ຽນຍຸດທະສາດອີເມວຂອງພວກເຂົາ"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7304,11 +7458,11 @@ msgstr ""
 "ອັດຕາການປ່ຽນແປງຂອງພວກເຮົາເພີ່ມຂຶ້ນ 340%% ຫຼັງຈາກການປະຕິບັດແຄມເປນ "
 "drip.ອັດຕະໂນມັດຈະຊ່ວຍປະຢັດພວກເຮົາຊົ່ວໂມງທຸກໆອາທິດ."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "ຜູ້ອໍານວຍການຕະຫຼາດ"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7316,11 +7470,11 @@ msgstr ""
 "ສ່ວນທີ່ດີທີ່ສຸດ?ມັນຟຣີຫມົດ.ພວກເຮົາໄດ້ສົ່ງອີເມວຫຼາຍກວ່າ 50,000 "
 "ສະບັບໂດຍບໍ່ໄດ້ຈ່າຍເງິນໜ້ອຍໜຶ່ງ.ຕົວປ່ຽນເກມ."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "ຜູ້ກໍ່ຕັ້ງ Startup"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7328,15 +7482,448 @@ msgstr ""
 "ການຕັ້ງຄ່າໃຊ້ເວລາ 5 ນາທີ.ການໂຕ້ຕອບແມ່ນ intuitive, "
 "ແລະຜົນໄດ້ຮັບເວົ້າສໍາລັບຕົນເອງ.ການມີສ່ວນພົວພັນທາງອີເມວຂອງພວກເຮົາເພີ່ມຂຶ້ນສອງເທົ່າ."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "ຜູ້ຈັດການອີຄອມເມີຊ"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌ຟຣີສໍາລັບທຸກຄົນ"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"ບໍ່ວ່າທ່ານກໍາລັງດໍາເນີນການການຕະຫຼາດອີເມວ SaaS, ການຕະຫຼາດອີຄອມເມີຊ, "
+"ການຕະຫຼາດອີເມລ໌ B2B, ຫຼືການໂຄສະນາການຕະຫຼາດອີເມລ໌ B2C, "
+"ຊອບແວອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌ຂອງພວກເຮົາປັບຕົວກັບຄວາມຕ້ອງການຂອງທ່ານ."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"ຜູ້ໃຊ້ Onboard ທີ່ມີລໍາດັບອີເມລ໌ອັດຕະໂນມັດ, ຊຸດຍິນດີຕ້ອນຮັບ, "
+"ແລະແຄມເປນບໍາລຸງລ້ຽງ.ທີ່ສົມບູນແບບສໍາລັບການເລີ່ມຕົ້ນການຕະຫຼາດອີເມລ໌ແລະບໍລິສັດຊອບແວ."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "ເລີ່ມຟຣີມື້ນີ້"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "ຜູ້ຈັດການອີຄອມເມີຊ"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"ກະຕຸ້ນການຂາຍດ້ວຍອີເມລ໌ລົດເຂັນທີ່ປະຖິ້ມໄວ້, ການແນະນຳຜະລິດຕະພັນ ແລະ "
+"ອີເມວທຸລະກຳ.ເພີ່ມ ROI ການຕະຫຼາດອີເມລ໌ຂອງທ່ານກັບແຄມເປນເປົ້າຫມາຍ."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "ການເລີ່ມຕົ້ນ"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"ການບໍາລຸງລ້ຽງນໍາພາດ້ວຍອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌, ການແບ່ງສ່ວນອີເມລ໌, "
+"ແລະການໂຄສະນາອີເມວສ່ວນບຸກຄົນ.ທີ່ສົມບູນແບບສໍາລັບຍຸດທະສາດການຕະຫຼາດອີເມວ B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "ລອງໃຊ້ຄຸນສົມບັດ AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "ການຕະຫຼາດອີເມລ໌ທຸລະກິດຂະຫນາດນ້ອຍ"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"ຊອບ​ແວ​ການ​ຕະ​ຫຼາດ​ອີ​ເມລ drip ຟຣີ​ທີ່​ມີ​ການ​ໂຄ​ສະ​ນາ​ບໍ່​ຈໍາ​ກັດ​, ຈອງ​, "
+"ແລະ​ລໍາ​ດັບ​ອີ​ເມລ​໌​ອັດ​ຕະ​ໂນ​ມັດ"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "ທາງເລືອກທີ່ດີທີ່ສຸດຟຣີທີ່ຈະຈ່າຍເຄື່ອງມືການຕະຫຼາດອີເມວ"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"ເປັນຫຍັງຕ້ອງຈ່າຍໃຫ້ກັບ Mailchimp, Constant Contact, Sendinblue, ຫຼື "
+"GetResponse "
+"ເມື່ອເຈົ້າສາມາດໄດ້ຮັບຄຸນສົມບັດອັດຕະໂນມັດການຕະຫຼາດອີເມວແບບດຽວກັນໂດຍບໍ່ເສຍຄ່າ?ແພລະຕະຟອມການຕະຫຼາດອີເມລ໌ຂອງພວກເຮົາສະເຫນີແຄມເປນອີເມລ໌ທີ່ບໍ່ຈໍາກັດ,"
+" ຜູ້ຈອງບໍ່ຈໍາກັດ, ແລະອັດຕະໂນມັດອີເມລ໌ທີ່ມີປະສິດທິພາບ - "
+"ທັງຫມົດໂດຍບໍ່ມີຄ່າໃຊ້ຈ່າຍ."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "ຊອບແວການຕະຫຼາດອີເມລ໌ Drip ຟຣີ"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "ແຜນການຕະຫຼອດການຟຣີ"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"ບໍ່ມີຄ່າທໍານຽມທີ່ເຊື່ອງໄວ້, "
+"ບໍ່ມີບັດເຄຣດິດທີ່ຕ້ອງການ.ບໍ່ເຫມືອນກັບການບໍລິການທາງເລືອກ Mailchimp ຫຼື "
+"Constant Contact, ພວກເຮົາແມ່ນຊອບແວການຕະຫຼາດອີເມລ໌ຟຣີຫມົດ."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "ແຄມເປນບໍ່ຈໍາກັດ"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"ແຄມເປນອີເມລ໌ບໍ່ຈໍາກັດ, ອີເມວ drip ບໍ່ຈໍາກັດ, ຈອງບໍ່ຈໍາກັດ, "
+"ອັດຕະໂນມັດອີເມລ໌ບໍ່ຈໍາກັດ.ບໍ່ມີຂໍ້ຈໍາກັດກ່ຽວກັບການເຕີບໂຕຂອງການຕະຫຼາດອີເມວຂອງທ່ານ."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"ຄຸນສົມບັດອັດຕະໂນມັດຂອງອີເມລ໌ທີ່ສົມບູນ: ແຄມເປນອີເມລ໌ drip, "
+"ການຈັດຕາຕະລາງອີເມວ, ການວິເຄາະອີເມວ, ການຕິດຕາມອີເມວ, "
+"ການແບ່ງສ່ວນອີເມວແລະການປັບແຕ່ງອີເມວ."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "ຊອບແວການຕະຫຼາດອີເມລ໌ Drip ຟຣີ"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"ແມ່ແບບອີເມລ໌, ຈົດຫມາຍຂ່າວອີເມລ໌, ການຄຸ້ມຄອງຜູ້ຈອງອີເມລ໌, "
+"ການຄຸ້ມຄອງລາຍຊື່ອີເມວ, ການຕິດຕາມອັດຕາການເປີດອີເມວ, ອັດຕາການຄລິກຜ່ານອີເມວ, "
+"ແລະການວິເຄາະ ROI ການຕະຫຼາດອີເມວ."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "ພ້ອມ​ທີ່​ຈະ​ສະ​ຫຼັບ​?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"ເຂົ້າຮ່ວມທຸລະກິດຫຼາຍພັນຄົນທີ່ໄດ້ປ່ຽນຈາກການບໍລິການການຕະຫຼາດອີເມລ໌ລາຄາແພງມາເປັນແພລະຕະຟອມການຕະຫຼາດອີເມວຟຣີຂອງພວກເຮົາ.ເລີ່ມຕົ້ນດ້ວຍອັດຕະໂນມັດອີເມລ໌ໃນນາທີ"
+" - ບໍ່ຕ້ອງມີບັດເຄຣດິດ."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "ສ້າງບັນຊີຟຣີ"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "ມີບັນຊີຢູ່ແລ້ວບໍ?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "ການປະຕິບັດທີ່ດີທີ່ສຸດຂອງການອອກແບບອີເມວ"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"ຮຽນຮູ້ວິທີການປັບປຸງອັດຕາການເປີດອີເມວ, ເພີ່ມການພົວພັນທາງອີເມວ, ແລະເພີ່ມ ROI "
+"ການຕະຫຼາດອີເມວຂອງທ່ານໃຫ້ສູງສຸດດ້ວຍຍຸດທະສາດການຕະຫຼາດອີເມວທີ່ພິສູດແລະຄໍາແນະນໍາການຕະຫຼາດອີເມວ."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "ອັດຕາການເປີດເສລີ່ຍ"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"ໃຊ້ຫົວຂໍ້ອີເມວສ່ວນບຸກຄົນ, ສົ່ງອີເມວໃນເວລາທີ່ເຫມາະສົມ, "
+"ແລະແບ່ງສ່ວນລາຍຊື່ອີເມວຂອງທ່ານ.ຕິດຕາມອັດຕາການເປີດອີເມວດ້ວຍການວິເຄາະອີເມວຂອງພວກເຮົາເພື່ອເພີ່ມປະສິດທິພາບການໂຄສະນາການຕະຫຼາດອີເມວຂອງທ່ານ."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "ການປັບປຸງການຕິດຕາມ"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "ການ​ຄຸ້ມ​ຄອງ Bounce​"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"ສ້າງເນື້ອຫາອີເມວທີ່ມີສ່ວນຮ່ວມດ້ວຍການປັບແຕ່ງອີເມວ, "
+"ໃຊ້ອັດຕະໂນມັດອີເມວເພື່ອສົ່ງຂໍ້ຄວາມທີ່ທັນເວລາ, "
+"ແລະຕິດຕາມອັດຕາການຄລິກຜ່ານອີເມວ.ອັດຕະໂນມັດການຕະຫຼາດອີເມວຂອງພວກເຮົາຊ່ວຍໃຫ້ທ່ານສົ່ງຂໍ້ຄວາມທີ່ຖືກຕ້ອງໃນເວລາທີ່ເຫມາະສົມ."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "ການມີສ່ວນພົວພັນເພີ່ມເຕີມ"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "ອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"ໃຊ້ແຄມເປນອີເມລ໌ drip ສໍາລັບການບໍາລຸງລ້ຽງນໍາພາ, "
+"ປະຕິບັດການແບ່ງສ່ວນອີເມວສໍາລັບແຄມເປນເປົ້າຫມາຍ, ແລະຕິດຕາມ ROI "
+"ການຕະຫຼາດອີເມວດ້ວຍການວິເຄາະອີເມວທີ່ສົມບູນແບບ.ຊອບແວການຕະຫຼາດອີເມລ໌ຟຣີທີ່ໃຫ້ຜົນໄດ້ຮັບ."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "ເບິ່ງ ROI ຂອງເຈົ້າ"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "ພ້ອມທີ່ຈະປະຕິບັດການປະຕິບັດທີ່ດີທີ່ສຸດການຕະຫຼາດອີເມວເຫຼົ່ານີ້ບໍ?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "ເລີ່ມອັດຕະໂນມັດການຕະຫຼາດອີເມລ໌ຂອງທ່ານຟຣີ."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "ຄໍາຖາມທີ່ຖາມເລື້ອຍໆ"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "ທຸກຢ່າງທີ່ທ່ານຕ້ອງການເພື່ອອັດຕະໂນມັດການຕະຫຼາດອີເມວຂອງທ່ານ"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "ແຄມເປນ Drip ແມ່ນຫຍັງ?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"ແຄມເປນອີເມວ drip, ເຊິ່ງເອີ້ນກັນວ່າ ລຳ ດັບອີເມວອັດຕະໂນມັດ ຫຼື ແຄມເປນອີເມລ໌ "
+"drip, "
+"ແມ່ນຊຸດຂອງອີເມວອັດຕະໂນມັດທີ່ຖືກສົ່ງໄປຫາຜູ້ຈອງໃນໄລຍະເວລາ.ແຄມເປນກາລະຕະຫຼາດອີເມວເຫຼົ່ານີ້ຊ່ວຍບໍາລຸງລ້ຽງຜູ້ນໍາ,"
+" ຜູ້ໃຊ້ເທິງເຮືອ, "
+"ແລະຊຸກຍູ້ການແປງໂດຍຜ່ານລະບົບອັດຕະໂນມັດທາງຍຸດທະສາດ.ແພລະຕະຟອມການຕະຫຼາດອີເມວຂອງພວກເຮົາເຮັດໃຫ້ມັນງ່າຍຕໍ່ການສ້າງແຄມເປນອີເມລ໌ທີ່ມີພະລັງ."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "ຮຽນຮູ້ວິທີການສ້າງແລະສົ່ງອີເມວແຄມເປນທໍາອິດຂອງທ່ານ"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"ການສ້າງແຄມເປນອີເມວ drip "
+"ແມ່ນງ່າຍດາຍດ້ວຍຊອບແວອັດຕະໂນມັດການຕະຫຼາດອີເມວຂອງພວກເຮົາ.ລົງທະບຽນໂດຍບໍ່ເສຍຄ່າ,"
+" ສ້າງແຄມເປນອີເມລ໌ຂອງທ່ານ, ເພີ່ມລໍາດັບອີເມລ໌ດ້ວຍອີເມວທີ່ກໍານົດເວລາ, "
+"ແລະໃຫ້ອັດຕະໂນມັດອີເມວຂອງພວກເຮົາຈັດການກັບສ່ວນທີ່ເຫຼືອ.ທ່ານສາມາດນໍາໃຊ້ແມ່ແບບອີເມວຂອງພວກເຮົາຫຼືສ້າງແຄມເປນກາລະຕະຫຼາດອີເມວທີ່ກໍາຫນົດເອງ.ເລີ່ມຕົ້ນໃນນາທີ!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "ສ້າງແຄມເປນທໍາອິດຂອງທ່ານ"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "ຊອບແວການຕະຫຼາດອີເມລ໌ Drip ຟຣີ"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"ແມ່ນແລ້ວ!ເວທີການຕະຫຼາດອີເມວຂອງພວກເຮົາແມ່ນ 100%% "
+"ຟຣີຕະຫຼອດໄປ.ບໍ່ເຫມືອນກັບທາງເລືອກ Mailchimp, ການຕິດຕໍ່ຄົງທີ່, Sendinblue, ຫຼື"
+" GetResponse, ພວກເຮົາສະເຫນີແຄມເປນອີເມລ໌ທີ່ບໍ່ຈໍາກັດ, ຜູ້ຈອງບໍ່ຈໍາກັດ, ອີເມວ "
+"drip ບໍ່ຈໍາກັດ, "
+"ແລະຄຸນນະສົມບັດອັດຕະໂນມັດການຕະຫຼາດອີເມວຢ່າງເຕັມທີ່ໂດຍບໍ່ມີຄ່າໃຊ້ຈ່າຍ.ບໍ່ມີບັດເຄຣດິດທີ່ຕ້ອງການ,"
+" ບໍ່ມີຄ່າທໍານຽມທີ່ເຊື່ອງໄວ້."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "ມີຄຸນສົມບັດການຕະຫຼາດອີເມລ໌ໃດແດ່?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"ຊອບແວການຕະຫຼາດອີເມວຟຣີຂອງພວກເຮົາປະກອບມີ: ແຄມເປນອີເມລ໌ drip, "
+"ລໍາດັບອີເມລ໌ອັດຕະໂນມັດ, ການກໍານົດເວລາອີເມລ໌, "
+"ການວິເຄາະອີເມລ໌ແລະການຕິດຕາມອີເມລ໌ (ອັດຕາການເປີດອີເມວ, ອັດຕາການຄລິກອີເມວ), "
+"ການຈັດການຜູ້ຈອງອີເມລ໌, ການຈັດການລາຍຊື່ອີເມວ, ການແບ່ງສ່ວນອີເມວ, "
+"ການປັບແຕ່ງອີເມວ, ແມ່ແບບອີເມລ໌, ຈົດຫມາຍຂ່າວອີເມລ໌, "
+"ແລະການຕະຫຼາດອີເມລ໌ອັດຕະໂນມັດທີ່ສົມບູນແບບ.ທຸກສິ່ງທຸກຢ່າງທີ່ທ່ານຕ້ອງການສໍາລັບການຕະຫຼາດອີເມວສົບຜົນສໍາເລັດ!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "ອັດຕາການເປີດອີເມວສ່ວນບຸກຄົນ"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"ປັບປຸງອັດຕາການເປີດອີເມວໂດຍໃຊ້ຫົວຂໍ້ອີເມລ໌ສ່ວນບຸກຄົນ, "
+"ສົ່ງອີເມວໃນເວລາທີ່ເຫມາະສົມ, "
+"ແບ່ງສ່ວນລາຍຊື່ອີເມວຂອງທ່ານແລະສ້າງເນື້ອຫາອີເມວທີ່ມີສ່ວນຮ່ວມ.ເຄື່ອງມືການວິເຄາະອີເມວຂອງພວກເຮົາຊ່ວຍໃຫ້ທ່ານຕິດຕາມອັດຕາການເປີດອີເມວແລະເພີ່ມປະສິດທິພາບການໂຄສະນາການຕະຫຼາດອີເມວຂອງທ່ານໃຫ້ມີປະສິດຕິພາບດີຂຶ້ນ."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "ເລີ່ມການນໍາເຂົ້າ"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "ຍັງມີຄຳຖາມບໍ?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"ເລີ່ມຕົ້ນດ້ວຍຊອບແວການຕະຫຼາດອີເມລ໌ຟຣີຂອງພວກເຮົາ "
+"ແລະຄົ້ນພົບວິທີການອັດຕະໂນມັດອີເມລ໌ງ່າຍ!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "ພ້ອມທີ່ຈະຫັນປ່ຽນການຕະຫຼາດອີເມວຂອງທ່ານບໍ?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7344,15 +7931,15 @@ msgstr ""
 "ເຂົ້າຮ່ວມທຸລະກິດຫລາຍພັນຄົນໂດຍໃຊ້ແຄມເປນ drip ເພື່ອສ້າງລາຍໄດ້, "
 "ບໍາລຸງລ້ຽງຜູ້ນໍາ, ແລະສ້າງຄວາມສໍາພັນຂອງລູກຄ້າທີ່ຍືນຍົງ."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "ເລີ່ມບັນຊີຟຣີຂອງທ່ານ"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "ສຶກສາເພີ່ມເຕີມ"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "ບໍ່ຈຳເປັນຕ້ອງມີບັດເຄຣດິດ • ຕັ້ງຄ່າໃນ 5 ນາທີ • ຍົກເລີກໄດ້ທຸກເວລາ"
 
@@ -12785,10 +13372,6 @@ msgstr ""
 "ທ່ານສາມາດສ້າງຫຼາຍລາຍການເພື່ອແບ່ງກຸ່ມຜູ້ຊົມຂອງທ່ານ (ເຊັ່ນ: ລູກຄ້າ, "
 "ຄວາມສົດໃສດ້ານ, ຄູ່ຮ່ວມງານ)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "ເພີ່ມຜູ້ຕິດຕາມ"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -12829,10 +13412,6 @@ msgstr "ແຜນທີ່ຖັນແລະຄລິກ"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "ນໍາເຂົ້າ"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "ສ້າງແຄມເປນທໍາອິດຂອງທ່ານ"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13857,6 +14436,28 @@ msgstr ""
 "ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຍົກ​ເລີກ​ການ​ສະ​ຫມັກ​ໂດຍ​ຄວາມ​ຜິດ​ພາດ​ຫຼື​ຕ້ອງ​ການ​ທີ່​ຈະ​ໄດ້​ຮັບ​ອີ​ເມລ​໌​ອີກ​ເທື່ອ​ຫນຶ່ງ​,"
 " ກະ​ລຸ​ນາ​ຕິດ​ຕໍ່​ຫາ​ພວກ​ເຮົາ​ຫຼື​ລົງ​ທະ​ບຽນ​ອີກ​ເທື່ອ​ຫນຶ່ງ​."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "ເນື້ອຫາອີເມວ"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "ຮ້ອງຂໍຂໍ້ມູນ"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "ຮູບແບບການຕອບສະຫນອງ"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "ສ່ວນທ້າຍ"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "ກັບໄປຫາຜູ້ຈອງ"
@@ -14173,3 +14774,27 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "ນຳເຂົ້າລາຍຊື່ຜູ່ຕິດຕໍ່ "
 "ຫຼືເພີ່ມຜູ້ສະໝັກດ້ວຍຕົນເອງເພື່ອເບິ່ງພວກມັນຢູ່ໃນລາຍຊື່ນີ້."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "ລໍາດັບອີເມລ໌ອັດຕະໂນມັດທີ່ບໍາລຸງລ້ຽງຜູ້ນໍາ, ຜູ້ໃຊ້ເທິງເຮືອ, "
+#~ "ແລະຊຸກຍູ້ການແປງ.ຕັ້ງມັນຄັ້ງດຽວ, ແລະເບິ່ງລາຍໄດ້ຂອງທ່ານເພີ່ມຂຶ້ນ."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "ເປັນຫຍັງແຄມເປນ Drip ເຮັດວຽກ"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr "ບໍ່ຄືກັບການລະເບີດອີເມວດຽວ, ແຄມເປນ drip ສ້າງຄວາມສໍາພັນໃນໄລຍະເວລາ"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "ການເດີນທາງສ່ວນບຸກຄົນ"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "ສ້າງປະສົບການທີ່ເປັນເອກະລັກສໍາລັບຜູ້ສະຫມັກແຕ່ລະຄົນ.ແບ່ງກຸ່ມຜູ້ຊົມຂອງທ່ານແລະສົ່ງເນື້ອຫາທີ່"
+#~ " resonate."

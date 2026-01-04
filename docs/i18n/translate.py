@@ -325,9 +325,16 @@ class POTranslator:
         self.current_file = po_file_path.name
         self.current_file_path = po_file_path.absolute()
         
-        print(f"\n📄 Processing: {po_file_path.name}")
-        print(f"  Full path: {po_file_path.absolute()}")
-        print(f"  Language: {target_lang}")
+        # Get language name from settings if available
+        try:
+            from django.conf import settings
+            lang_name = dict(getattr(settings, 'LANGUAGES', [])).get(target_lang, target_lang)
+        except:
+            lang_name = target_lang
+        
+        print(f"\n📄 Processing file: {po_file_path.name}")
+        print(f"   Language: {target_lang.upper()} ({lang_name})")
+        print(f"   Full path: {po_file_path.absolute()}")
         
         try:
             po = polib.pofile(str(po_file_path))
@@ -352,7 +359,7 @@ class POTranslator:
         
         # Show sample of untranslated entries
         if empty_entries > 0 and not self.dry_run:
-            print(f"\n  Sample of entries to translate:")
+            print(f"\n  📝 Sample of entries to translate ({empty_entries} total):")
             sample_count = 0
             for entry in po:
                 if not entry.translated() and not entry.fuzzy and entry.msgid:
@@ -372,6 +379,8 @@ class POTranslator:
         
         # Get target language code for translation service
         target_lang_code = self.get_language_code(target_lang)
+        print(f"\n  🔄 Starting translation: {target_lang.upper()} -> {target_lang_code.upper()}")
+        print(f"  📊 Will translate {empty_entries} entries using {self.num_threads} thread(s)...")
         
         # Collect entries that need translation
         entries_to_translate = []
@@ -427,7 +436,7 @@ class POTranslator:
             for _ in range(self.num_threads):
                 entry_queue.put(None)
             
-            print(f"  🚀 Using {self.num_threads} threads with queue-based distribution")
+            print(f"  🚀 Using {self.num_threads} threads with queue-based distribution for {target_lang.upper()}")
             
             def translate_worker(worker_id):
                 """Worker thread that processes entries from the queue."""
@@ -456,7 +465,7 @@ class POTranslator:
                                 # Log first few translation attempts for debugging
                                 if worker_processed < 3:
                                     with self.lock:
-                                        print(f"  🔍 Thread {worker_id} translating: '{entry.msgid[:60]}...' -> {target_lang_code}")
+                                        print(f"  🔍 [{target_lang.upper()}] Thread {worker_id} translating: '{entry.msgid[:60]}...' -> {target_lang_code}")
                                 
                                 translated = self._translate_text_with_translator(
                                     thread_translator, entry.msgid, target_lang_code
@@ -470,24 +479,25 @@ class POTranslator:
                                             print(f"  ✓ Thread {worker_id} success: '{entry.msgid[:40]}...' -> '{translated[:40]}...'")
                                 else:
                                     worker_errors += 1
-                                    if worker_errors <= 5:
-                                        with self.lock:
-                                            if translated == entry.msgid:
-                                                print(f"  ⚠ Thread {worker_id} returned same text (no translation): '{entry.msgid[:60]}...'")
-                                            elif not translated:
-                                                print(f"  ⚠ Thread {worker_id} returned None/empty for: '{entry.msgid[:60]}...'")
-                                            else:
-                                                print(f"  ⚠ Thread {worker_id} translation failed (unknown reason) for: '{entry.msgid[:60]}...'")
+                                    with self.lock:
+                                        if translated == entry.msgid:
+                                            print(f"  ⚠ [{target_lang.upper()}] Thread {worker_id} returned same text (no translation): '{entry.msgid[:60]}...'")
+                                        elif not translated:
+                                            print(f"  ⚠ [{target_lang.upper()}] Thread {worker_id} returned None/empty for: '{entry.msgid[:60]}...'")
+                                        else:
+                                            print(f"  ⚠ [{target_lang.upper()}] Thread {worker_id} translation failed (unknown reason) for: '{entry.msgid[:60]}...'")
                             except Exception as e:
                                 # Continue on error, don't stop the thread
                                 worker_errors += 1
                                 with self.lock:
-                                    if worker_errors <= 10:  # Log first 10 errors
-                                        print(f"  ⚠ Thread {worker_id} translation exception: {type(e).__name__}: {e}")
-                                        if worker_errors == 1:
-                                            import traceback
-                                            print(f"  📋 First error traceback:")
-                                            traceback.print_exc()
+                                    # Always log errors with more detail
+                                    error_msg = f"  ⚠ [{target_lang.upper()}] Thread {worker_id} translation exception for '{entry.msgid[:50]}...': {type(e).__name__}: {str(e)}"
+                                    print(error_msg)
+                                    # Print full traceback for first 3 errors per thread
+                                    if worker_errors <= 3:
+                                        import traceback
+                                        print(f"  📋 [{target_lang.upper()}] Thread {worker_id} error #{worker_errors} traceback:")
+                                        traceback.print_exc()
                         
                         # Translate plural forms
                         if entry.msgid_plural:
@@ -502,15 +512,20 @@ class POTranslator:
                                             worker_translated += 1
                                         else:
                                             worker_errors += 1
-                                            if worker_errors <= 5:
-                                                with self.lock:
-                                                    print(f"  ⚠ Thread {worker_id} plural translation failed for: '{entry.msgid_plural[:60]}...'")
+                                            with self.lock:
+                                                print(f"  ⚠ [{target_lang.upper()}] Thread {worker_id} plural translation failed for: '{entry.msgid_plural[:60]}...'")
                                     except Exception as e:
                                         # Continue on error, don't stop the thread
                                         worker_errors += 1
                                         with self.lock:
-                                            if worker_errors <= 10:  # Log first 10 errors
-                                                print(f"  ⚠ Thread {worker_id} plural translation exception: {type(e).__name__}: {e}")
+                                            # Always log plural errors
+                                            error_msg = f"  ⚠ [{target_lang.upper()}] Thread {worker_id} plural translation exception for '{entry.msgid_plural[:50]}...': {type(e).__name__}: {str(e)}"
+                                            print(error_msg)
+                                            # Print full traceback for first 3 errors per thread
+                                            if worker_errors <= 3:
+                                                import traceback
+                                                print(f"  📋 [{target_lang.upper()}] Thread {worker_id} plural error #{worker_errors} traceback:")
+                                                traceback.print_exc()
                         
                         worker_processed += 1
                         entry_queue.task_done()
@@ -521,22 +536,28 @@ class POTranslator:
                                 global_processed = processed_count + worker_processed
                                 global_translated = translated_count + worker_translated
                                 global_errors = error_count + worker_errors
-                                file_display = f"[{self.current_file}]" if hasattr(self, 'current_file') and self.current_file else ""
-                                lang_display = f"({target_lang})" if target_lang else ""
-                                print(f"  {file_display} {lang_display} Thread {worker_id}: {global_processed}/{len(entries_to_translate)} entries ({global_translated} translated, {global_errors} errors)...")
+                                lang_display = f"[{target_lang.upper()}]" if target_lang else ""
+                                print(f"  {lang_display} Thread {worker_id}: {global_processed}/{len(entries_to_translate)} entries ({global_translated} translated, {global_errors} errors)...")
                                 
                                 # Save progress periodically
                                 if global_processed % 100 == 0:
                                     try:
                                         po.save()
                                     except Exception as e:
-                                        print(f"    ⚠ Error saving: {e}")
+                                        print(f"    ⚠ [{target_lang.upper()}] Error saving progress: {type(e).__name__}: {str(e)}")
+                                        import traceback
+                                        traceback.print_exc()
                     
                     except Exception as e:
                         worker_errors += 1
                         entry_queue.task_done()
                         with self.lock:
-                            print(f"  ⚠ Thread {worker_id} error on entry {entry_idx}: {e}")
+                            error_msg = f"  ⚠ [{target_lang.upper()}] Thread {worker_id} error on entry {entry_idx}: {type(e).__name__}: {str(e)}"
+                            print(error_msg)
+                            # Print traceback for entry processing errors
+                            import traceback
+                            print(f"  📋 [{target_lang.upper()}] Thread {worker_id} entry error traceback:")
+                            traceback.print_exc()
                 
                 return worker_id, worker_translated, worker_errors, worker_processed
             
@@ -552,11 +573,17 @@ class POTranslator:
                             translated_count += worker_translated
                             error_count += worker_errors
                             processed_count += worker_processed
-                            print(f"  ✓ Thread {worker_id} completed: {worker_processed} entries, {worker_translated} translated, {worker_errors} errors")
+                            if worker_errors > 0:
+                                print(f"  ⚠ [{target_lang.upper()}] Thread {worker_id} completed: {worker_processed} entries, {worker_translated} translated, {worker_errors} ERRORS")
+                            else:
+                                print(f"  ✓ [{target_lang.upper()}] Thread {worker_id} completed: {worker_processed} entries, {worker_translated} translated, {worker_errors} errors")
                     except Exception as e:
                         with self.lock:
                             error_count += 1
-                            print(f"  ⚠ Error in worker thread: {e}")
+                            print(f"  ⚠ [{target_lang.upper()}] Error in worker thread: {type(e).__name__}: {str(e)}")
+                            import traceback
+                            print(f"  📋 [{target_lang.upper()}] Worker thread error traceback:")
+                            traceback.print_exc()
             
             # Final save
             try:
@@ -577,9 +604,8 @@ class POTranslator:
                 
                 # Progress updates
                 if processed_count % 50 == 0:
-                    file_display = f"[{self.current_file}]" if hasattr(self, 'current_file') and self.current_file else ""
-                    lang_display = f"({target_lang})" if target_lang else ""
-                    print(f"  {file_display} {lang_display} Progress: {processed_count}/{len(entries_to_translate)} entries processed ({translated_count} translated, {error_count} errors)...")
+                    lang_display = f"[{target_lang.upper()}]" if target_lang else ""
+                    print(f"  {lang_display} Progress: {processed_count}/{len(entries_to_translate)} entries processed ({translated_count} translated, {error_count} errors)...")
                     if not self.dry_run:
                         try:
                             po.save()
@@ -588,16 +614,23 @@ class POTranslator:
                                 verified_count = sum(1 for e in verify_po if e.translated())
                                 print(f"    ✓ Saved! {verified_count} entries now translated")
                         except Exception as e:
-                            print(f"    ⚠ Error saving progress: {e}")
+                            print(f"    ⚠ [{target_lang.upper()}] Error saving progress: {type(e).__name__}: {str(e)}")
+                            import traceback
+                            traceback.print_exc()
         
         # Save the file
         if not self.dry_run:
             try:
-                print(f"\n  💾 Saving translations to: {po_file_path}")
+                print(f"\n  💾 [{target_lang.upper()}] Saving translations to: {po_file_path}")
                 print(f"     Absolute path: {po_file_path.absolute()}")
                 po.save()
-                print(f"  ✓ File saved successfully!")
-                print(f"  ✓ Summary: {translated_count} entries translated, {error_count} errors, {skipped_count} skipped")
+                print(f"  ✓ [{target_lang.upper()}] File saved successfully!")
+                print(f"  ✓ [{target_lang.upper()}] Summary: {translated_count} entries translated, {error_count} errors, {skipped_count} skipped")
+                
+                # Print error summary if there were errors
+                if error_count > 0:
+                    print(f"\n  ⚠ [{target_lang.upper()}] ERROR SUMMARY: {error_count} errors occurred during translation")
+                    print(f"     Check the error messages above for details.")
                 
                 # Verify the save by checking file size
                 if po_file_path.exists():
@@ -610,10 +643,13 @@ class POTranslator:
                         verified_translated = sum(1 for e in verify_po if e.translated())
                         print(f"  ✓ Verification: {verified_translated}/{len(verify_po)} entries are translated in saved file")
                     except Exception as e:
-                        print(f"  ⚠ Could not verify saved file: {e}")
+                        print(f"  ⚠ [{target_lang.upper()}] Could not verify saved file: {type(e).__name__}: {str(e)}")
+                        import traceback
+                        traceback.print_exc()
             except Exception as e:
-                print(f"  ✗ Error saving file: {e}")
+                print(f"  ✗ [{target_lang.upper()}] Error saving file: {type(e).__name__}: {str(e)}")
                 import traceback
+                print(f"  📋 [{target_lang.upper()}] Save error traceback:")
                 traceback.print_exc()
                 self.stats['errors'] += error_count
                 return False
@@ -657,11 +693,28 @@ class POTranslator:
         print(f"Skip already translated: {skip_translated}")
         print("=" * 70)
         
+        total_languages = len(languages)
+        current_lang_index = 0
+        
         for lang_code in sorted(languages):
+            current_lang_index += 1
             po_file = locale_path / lang_code / 'LC_MESSAGES' / 'django.po'
             
+            # Get language name from settings if available
+            try:
+                from django.conf import settings
+                lang_name = dict(getattr(settings, 'LANGUAGES', [])).get(lang_code, lang_code)
+            except:
+                lang_name = lang_code
+            
+            # Big banner for new language
+            print("\n" + "=" * 70)
+            print(f"🌍 LANGUAGE {current_lang_index}/{total_languages}: {lang_code.upper()} ({lang_name})")
+            print("=" * 70)
+            print(f"📁 Locale directory: locale/{lang_code}/LC_MESSAGES/")
+            
             if not po_file.exists():
-                print(f"\n⚠ Skipping {lang_code}: django.po not found")
+                print(f"⚠ Skipping {lang_code}: django.po not found at {po_file}")
                 continue
             
             # Create backup if not dry run
@@ -669,9 +722,13 @@ class POTranslator:
                 backup_file = po_file.with_suffix('.po.bak')
                 if not backup_file.exists():
                     shutil.copy2(po_file, backup_file)
-                    print(f"  💾 Created backup: {backup_file.name}")
+                    print(f"💾 Created backup: {backup_file.name}")
             
             self.translate_po_file(po_file, lang_code, skip_translated)
+            
+            # Separator after each language
+            print(f"\n✅ Completed: {lang_code.upper()} ({lang_name})")
+            print("=" * 70)
         
         # Print summary
         print("\n" + "=" * 70)

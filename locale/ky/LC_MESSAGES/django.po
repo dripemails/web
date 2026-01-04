@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Электрондук почталар үчүн ыңгайлаштыр�
 msgid "Time Zone"
 msgstr "Убакыт алкагы"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Дарек сап 1"
@@ -64,22 +64,22 @@ msgstr "Дарек сап 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Квартира, люкс ж.б. (милдеттүү эмес)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "City"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Штат/Провинция"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Почта индекси"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Өлкө"
@@ -166,36 +166,36 @@ msgstr "Email Footer"
 msgid "Email Footers"
 msgstr "Электрондук колонтитулдар"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API ачкычы ийгиликтүү калыбына келтирилди!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Колонтитул ийгиликтүү түзүлдү!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Атын да, мазмунун да бериңиз."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Колонтитулдун аты талап кылынат"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Колонтитул мазмуну талап кылынат"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Колонтитул ийгиликтүү жаңыртылды!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Колонтитул ийгиликтүү өчүрүлдү!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Демейки колонтитул ийгиликтүү жаңыртылды!"
 
@@ -242,8 +242,8 @@ msgstr "Абоненттердин тизмеси"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Активдүү"
 
@@ -263,7 +263,7 @@ msgstr "Саноону басыңыз"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Кампания"
 
@@ -328,7 +328,7 @@ msgstr "Колонтитул"
 msgid "Email"
 msgstr "Email"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Электрондук почталар"
 
@@ -376,7 +376,7 @@ msgstr "айлар"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Жөнөтүлдү"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Өзгөрмөлөр"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Статус"
 
@@ -1182,12 +1182,12 @@ msgid "Lists"
 msgstr "Тизмелер"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Ысым"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Акыркы аты"
 
@@ -1204,7 +1204,7 @@ msgid "Confirmed At"
 msgstr "Тастыкталган"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1574,6 +1574,7 @@ msgid "Remember Me"
 msgstr "Мени эстеп жүр"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Кирүү"
 
@@ -1814,8 +1815,8 @@ msgid "Preview:"
 msgstr "Алдын ала көрүү:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "түзүлгөн"
 
@@ -1897,6 +1898,7 @@ msgid "Logout"
 msgstr "Чыгуу"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Акысыз катталуу"
 
@@ -2007,7 +2009,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Дал келген шаблондор же кампаниялар табылган жок"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Жигерсиз"
 
@@ -2069,7 +2071,7 @@ msgid "Campaign Statistics"
 msgstr "Кампаниянын статистикасы"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Жүктөлүүдө..."
 
@@ -2207,7 +2209,7 @@ msgstr "Бул кампанияга азырынча эч кандай элек�
 msgid "Create Campaign"
 msgstr "Кампания түзүү"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Жаңы кампания түзүү"
@@ -2275,7 +2277,7 @@ msgstr "Кампанияны тандаңыз"
 msgid "(Active)"
 msgstr "(Активдүү)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Азырынча кампаниялар жок"
 
@@ -2303,7 +2305,7 @@ msgstr "Калыптар табылган жок"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Бул өнөктүктө азырынча электрондук почта үлгүлөрү жок."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Электрондук почта үлгүсүн түзүү"
 
@@ -2345,8 +2347,8 @@ msgstr "Колонтитул жок"
 msgid "Select a footer to append to your email"
 msgstr "Электрондук почтаңызга кошумча колонтитул тандаңыз"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2576,7 +2578,7 @@ msgid "Number of Emails"
 msgstr "Электрондук каттардын саны"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Электрондук почта шаблону"
 
@@ -2799,7 +2801,7 @@ msgid "Generate Email"
 msgstr "Электрондук почтаны түзүү"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Электрондук почтаны алдын ала көрүү"
 
@@ -2812,7 +2814,7 @@ msgid "Send Test Email"
 msgstr "Сыноо электрондук почтасын жөнөтүү"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Электрондук почта дареги"
@@ -3195,7 +3197,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Google жана Microsoft тарабынан Calenvy сатып алуу"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Айден Тургут"
 
 #: .\templates\core\about.html:69
@@ -3504,7 +3508,7 @@ msgstr "Тизмелерди көрүү"
 msgid "Emails Sent"
 msgstr "Электрондук почталар жөнөтүлдү"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Аналитиканы көрүү"
 
@@ -3512,112 +3516,124 @@ msgstr "Аналитиканы көрүү"
 msgid "Add a List"
 msgstr "Тизме кошуу"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "%(total)s жазылуучунун ичинен %(start)s-%(end)s көрсөтүлүүдө"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Электрондук почтаны жеткирүү мүмкүнчүлүгү үчүн SPF жазуусун орнотуу"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Бул TXT жазуусун домениңиздин DNSсына кошуңуз:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Түрү:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Аты/Хост:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Маани:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Эскертүү:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Бул жазууну кантип кошуу керек:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "DNS башкаруу же DNS жөндөөлөрүнө өтүңүз"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Жогоруда көрсөтүлгөн маанилер менен жаңы TXT жазуусун кошуңуз"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Электрондук кат жөнөтүү жана жазылуу"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Кампания тандаңыз..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Алгач кампания тандаңыз..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "График"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "X мүнөттө жөнөтүү"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "X сааттын ичинде жөнөтүү"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "X күн ичинде жөнөтүү"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "X жуманын ичинде жөнөтүү"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "X айдын ичинде жөнөтүү"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Акыркы жөнөтүү аракети"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Электрондук почтаңыздын жөнөтүүлөрүнө жана жеткирүүлөрүнө көз салыңыз"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Жаңылоо"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Көрсөтүлгөн убакыттар"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Аракет жүктөлүүдө..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Электрондук почтаңыздан жарнамаларды алып салыңыз"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3626,15 +3642,15 @@ msgstr ""
 " почталарыңыздан жарнамаларды алып салуу үчүн DripEmails.org жөнүндө X же "
 "блогуңузда бөлүшүңүз."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Сиздин кампанияларыңыз"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Аракеттер"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3642,136 +3658,159 @@ msgstr ""
 "Жазылуучуларыңызга автоматташтырылган электрондук каттарды жөнөтө баштоо "
 "үчүн биринчи кампанияңызды түзүңүз."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Сиздин жазылуучулар тизмелери"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Азырынча жазылуучулардын тизмеси жок"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "Байланыштарыңызды уюштуруу үчүн биринчи жазылуучу тизмеңизди түзүңүз."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Ыкчам аракеттер"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Жазылуучуларды кошуу"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Электрондук почта калыптары"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Каттоо эсебинин жөндөөлөрү"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Жарнама алып салуу"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Шилтемелерди жазылууну токтотуу"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Убакыт алкагы"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Каттоо эсебинин жөндөөлөрү"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Электрондук колонтитулдар"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Кеңештер жана ресурстар"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Баштоо үчүн колдонмо"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Бир нече мүнөттүн ичинде биринчи электрондук почта кампанияңызды кантип "
 "орнотууну үйрөнүңүз."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Электрондук почтанын мыкты тажрыйбалары"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Конвертациялоочу электрондук почталарды түзүү боюнча кеңештер."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Жазылуучулар тизмеңизди өстүрүңүз"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Сиздин жазылуучуларыңызды көбөйтүү стратегиялары."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Физикалык дарек талап кылынат"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Дарек сабы 2 (кошумча)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && статусу"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Азырынча жөнөтүү аракети жок"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Электрондук кат жөнөтүү жана аракетиңизди бул жерден көрүү үчүн жогорудагы "
 "форманы колдонуңуз."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "үчүн"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Пландаштырылган"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Ката"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Толук HTML алдын ала көрүү"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Текст версиясы"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Азыраак көрсөтүү"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Жазылууну токтотуу"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Аракет жүктөлгөн жок"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Сураныч, кайра аракет кылыңыз."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Кайталап көрүңүз"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Электрондук почта үлгүсүн тандаңыз..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Электрондук каттарды жүктөө катасы"
 
@@ -7250,7 +7289,9 @@ msgid "Manage Your Subscribers"
 msgstr "Жазылуучуларыңызды башкарыңыз"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
 
 #: .\templates\core\home.html:18
@@ -7280,12 +7321,26 @@ msgstr "Лоялдуу кардарлар"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Лидерлерди, борттогу колдонуучуларды жана конверсияларды өстүрүүчү "
-"автоматташтырылган электрондук почта тизмеги.Аны бир жолу коюп, кирешеңиздин"
-" өсүшүн байкаңыз."
+"Автоматташтырылган электрондук почта ырааттуулугу, электрондук кампаниялар "
+"жана электрондук маркетингди автоматташтыруу үчүн мыкты бекер тамчылатып "
+"электрондук маркетинг программасы.Күчтүү электрондук почта кампанияларын "
+"түзүңүз, электрондук почтанын автоматташтырылган ырааттуулугу менен "
+"лидерлерди өстүрүңүз жана электрондук маркетинг платформабыз менен "
+"конверсияларды жүргүзүңүз.SaaS электрондук почта маркетинги, электрондук "
+"коммерция электрондук маркетинг, B2B электрондук маркетинг жана чакан бизнес"
+" электрондук маркетинг үчүн идеалдуу.Электрондук почтаңызды "
+"автоматташтырууну бир нече мүнөттүн ичинде орнотуңуз - чексиз кампаниялар, "
+"чексиз жазылуучулар жана чексиз тамчылатуучу электрондук почталар менен "
+"толугу менен акысыз электрондук маркетинг программасы."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7295,74 +7350,188 @@ msgstr "Бүгүн бекер баштаңыз"
 msgid "Unlimited Campaigns"
 msgstr "Чексиз кампаниялар"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Чексиз кампаниялар"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Чексиз Абоненттер"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Кредиттик карта жок"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "5 мүнөттө орнотуу"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Жогорку ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Көбүрөөк катышуу"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Тезирээк өсүү"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Автоматташтыруу"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Эмне үчүн тамчылатып кампаниялар иштейт?"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Электрондук почта шаблондорун кантип түзүү керек"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Жалгыз электрондук почта жардыруусунан айырмаланып, тамчылатма кампаниялар "
-"убакыттын өтүшү менен мамилелерди курат"
+"Электрондук почтаны автоматташтыруу жана тамчылатма кампанияларды орнотуу эч"
+" качан оңой болгон эмес.Биздин электрондук маркетингди автоматташтыруу "
+"программабыз электрондук почтанын автоматташтырылган ырааттуулугун түзүүнү, "
+"электрондук каттарды пландаштырууну жана электрондук почтанын аналитикасына "
+"көз салууну жеңилдетет."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Биринчи кампанияңызды түзүңүз"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Биздин интуитивдик электрондук маркетинг куралыбыз менен электрондук "
+"почтаңыздын тамчылатма кампаниясын түзүңүз.Кереметтүү электрондук почта "
+"шаблондорун тандаңыз же жеке электрондук почта маркетинг кампанияларын "
+"түзүңүз."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Email Sequence"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Жекелештирилген электрондук почталар менен автоматташтырылган электрондук "
+"почта тизмегин иштеп чыгуу.Электрондук почтанын жазылуучулары үчүн "
+"электрондук почтанын планын, электрондук почтаны тарбиялоо ырааттуулугун "
+"жана саламдашуу серияларын орнотуңуз."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Абоненттерди башкаруу"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Электрондук почта тизмеңизди импорттоо, электрондук почта тизмесин башкаруу "
+"менен жазылуучуларды сегменттөө жана электрондук почтаңыздын аудиторияңызды "
+"уюштуруу.Электрондук почта абоненттерин башкаруу жана электрондук почта "
+"сегментациясы үчүн идеалдуу."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "AI эмнени оптималдаштыра алат"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Электрондук почтаны ачуу тарифтерин, электрондук почтаны чыкылдатуу "
+"ылдамдыгын жана реалдуу убакытта электрондук почта аналитикасы менен "
+"электрондук почтанын иштешин көзөмөлдөңүз.Маалыматтарга негизделген "
+"түшүнүктөр менен электрондук почта маркетингинин ROIин жакшыртыңыз."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Эмне үчүн Email Drip кампаниялары бир электрондук почта жардыруусуна "
+"караганда жакшыраак иштейт?"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Жалгыз электрондук почта жарылуусунан айырмаланып, автоматташтырылган "
+"тамчылатма электрондук почта кампаниялары убакыттын өтүшү менен мамилелерди "
+"курат.Электрондук почта маркетингин автоматташтыруу сизге керектүү учурда "
+"туура электрондук маркетинг билдирүүлөрүн жөнөтүүгө жардам берип, "
+"электрондук почтанын катышуусун жана электрондук маркетингдин ROIин "
+"жакшыртат."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Автоматташтырылган тарбиялоо"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Туура кабарды өз убагында жөнөтүңүз.Кол менен кийлигишүүсүз автоматтык түрдө"
 " жетектөө."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Жекелештирилген саякаттар"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Абоненттик сегментация"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Ар бир жазылуучу үчүн уникалдуу тажрыйбаларды түзүңүз.Аудиторияңызды бөлүңүз"
-" жана резонанс жараткан мазмунду жеткириңиз."
+"Жекелештирилген электрондук почталар менен ар бир жазылуучу үчүн уникалдуу "
+"электрондук почта тажрыйбаларын түзүңүз.Электрондук почтаңыздын аудиторияңыз"
+" менен резонанстуу багытталган электрондук маркетинг кампанияларын жеткирүү "
+"үчүн электрондук почта сегментациясын жана электрондук почта тизмесин "
+"башкарууну колдонуңуз."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Далилденген натыйжалар"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7370,19 +7539,21 @@ msgstr ""
 "Тамчы кампаниялары жалгыз электрондук почталарга караганда 3 эсе көп киреше "
 "алып келет.Биринчи күндөн тартып өлчөнгөн ROI караңыз."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Ийгиликке жетүү үчүн бардык нерсе"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Электрондук почта маркетингин оңой кылган күчтүү функциялар"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Smart Drip Sequences"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7390,11 +7561,11 @@ msgstr ""
 "Убакыт, жүрүм-турум же триггерлердин негизинде автоматтык түрдө жөнөтүлгөн "
 "көп кадамдуу электрондук почта тизмегин түзүңүз."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Реалдуу убакыттагы аналитика"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7402,11 +7573,11 @@ msgstr ""
 "Көз ачуулар, чыкылдатуулар, конверсиялар жана киреше.Кооз панелдер менен "
 "маалыматка негизделген чечимдерди кабыл алыңыз."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Керемет шаблондор"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7414,14 +7585,14 @@ msgstr ""
 "Профессионалдык шаблондордон тандаңыз же өзүңүздүнүңүздү түзүңүз.Сүйрөө жана"
 " таштоо редактору дизайнды жеңилдетет."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Абоненттик сегментация"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7429,11 +7600,11 @@ msgstr ""
 "Жазылуучуларды тизмелер боюнча уюштуруп, аларды белгилеңиз жана максаттуу "
 "кампанияларды керектүү аудиторияга жөнөтүңүз."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-кубаттуу Мазмун"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7441,11 +7612,11 @@ msgstr ""
 "AI менен кызыктуу электрондук почта мазмунун жаратыңыз.Кесипкөй, кызыктуу "
 "билдирүүлөрдү түзүп, убакытты үнөмдөңүз."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Enterprise Security"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7453,16 +7624,16 @@ msgstr ""
 "GDPR ылайыктуу, коопсуз инфраструктура жана ишенимдүү жеткирүү.Сиздин "
 "маалыматтарыңыз жана жазылуучуларыңыз корголот."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Өсүп келе жаткан ишканалардын ишенимине ээ"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Электрондук почта стратегиясын өзгөрткөн миңдеген маркетологдорго кошулуңуз"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7471,11 +7642,11 @@ msgstr ""
 "Тамчылатма кампанияларды ишке ашыргандан кийин биздин конверсия курсубуз "
 "340%% га өстү.Автоматташтыруу бизге жума сайын сааттарды үнөмдөйт."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Маркетинг боюнча директор"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7483,11 +7654,11 @@ msgstr ""
 "Эң жакшы бөлүгү?Бул толугу менен акысыз.Биз бир тыйын төлөбөстөн 50 000ден "
 "ашык кат жөнөттүк.Оюн алмаштыргыч."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Стартаптын негиздөөчүсү"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7495,15 +7666,488 @@ msgstr ""
 "Орнотуу 5 мүнөткө созулду.Интерфейс интуитивдик жана натыйжалар өзү үчүн "
 "сүйлөйт.Биздин электрондук почта байланышы эки эсеге көбөйдү."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Электрондук коммерция менеджери"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Баары үчүн акысыз электрондук маркетинг автоматташтыруу"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"SaaS электрондук почта маркетинги, электрондук коммерция электрондук "
+"маркетинг, B2B электрондук маркетинг же B2C электрондук маркетинг "
+"кампанияларын иштетип жатасызбы, биздин акысыз электрондук маркетинг "
+"автоматташтыруу программабыз сиздин муктаждыктарыңызга ылайыкташат."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Автоматташтырылган электрондук почта тизмеги, саламдашуу сериялары жана "
+"тарбиялоо кампаниялары бар колдонуучулар.Баштапкы электрондук маркетинг жана"
+" программалык камсыздоо компаниялары үчүн идеалдуу."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Бүгүн бекер баштаңыз"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Электрондук коммерция менеджери"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Ташталган арабанын электрондук почталары, продукт сунуштары жана "
+"транзакциялык электрондук почталар менен сатууну күчөтүңүз.Максаттуу "
+"кампаниялар менен электрондук почтаңыздын маркетингинин ROIин жогорулатыңыз."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Баштоо"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Электрондук почта маркетингин автоматташтыруу, электрондук почта "
+"сегментациясы жана жекелештирилген электрондук почта кампаниялары менен "
+"лидерлерди тарбиялаңыз.B2B электрондук почта маркетинг стратегиялары үчүн "
+"идеалдуу."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "AI функцияларын колдонуп көрүңүз"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Чакан бизнес электрондук маркетинг"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Чексиз кампаниялар, жазылуучулар жана автоматташтырылган электрондук почта "
+"тизмеги менен акысыз тамчылатып электрондук маркетинг программасы"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "Акы төлөнүүчү электрондук почта маркетингинин эң мыкты альтернативасы"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Эмне үчүн Mailchimp, Constant Contact, Sendinblue же GetResponse үчүн "
+"төлөйсүз, эгер сиз бир эле электрондук почта маркетингин автоматташтыруу "
+"функцияларын акысыз ала аласыз?Биздин электрондук маркетинг платформабыз "
+"чексиз электрондук кампанияларды, чексиз жазылуучуларды жана күчтүү "
+"электрондук почта автоматизациясын сунуштайт - мунун баары эч кандай "
+"чыгымсыз."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Акысыз Drip Email Маркетинг Программасы"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Free Forever планы"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Эч кандай жашыруун жыйымдар, эч кандай кредиттик карта талап "
+"кылынат.Mailchimp альтернативдүү же Constant Contact альтернативдик "
+"кызматтарынан айырмаланып, биз толугу менен акысыз электрондук маркетинг "
+"программабыз."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Чексиз кампаниялар"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Чексиз электрондук почта кампаниялары, чексиз тамчы каттары, чексиз "
+"жазылуучулар, чексиз электрондук почта автоматташтырылган.Электрондук "
+"почтаңыздын маркетингинин өсүшүнө эч кандай чектөөлөр жок."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Толук электрондук почтаны автоматташтыруу функциялары: электрондук почта "
+"тамчылатма кампаниялары, электрондук почтаны пландаштыруу, электрондук "
+"почтанын аналитикасы, электрондук почтага көз салуу, электрондук почтаны "
+"сегменттөө жана электрондук почтаны жекелештирүү."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Акысыз Drip Email Маркетинг Программасы"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Электрондук почта шаблондору, электрондук каттарды, электрондук почтанын "
+"жазылуучуларын башкаруу, электрондук почта тизмесин башкаруу, электрондук "
+"почтанын ачык тарифтерине көз салуу, электрондук почтаны чыкылдатуу "
+"ылдамдыгы жана электрондук почта маркетингинин ROI аналитикасы."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Которууга даярсызбы?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Кымбат электрондук маркетинг кызматтарынан биздин акысыз электрондук "
+"маркетинг платформабызга өткөн миңдеген ишканаларга кошулуңуз.Бир нече "
+"мүнөттүн ичинде электрондук почтаны автоматташтыруу менен баштаңыз - "
+"кредиттик карта талап кылынбайт."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Акысыз каттоо эсебин түзүү"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Каттоо эсебиңиз барбы?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Электрондук почта дизайнынын мыкты тажрыйбалары"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Электрондук почтанын ачык тарифтерин кантип жакшыртууну, электрондук "
+"почтанын катышуусун жогорулатууну жана электрондук маркетингдин далилденген "
+"стратегиялары жана электрондук маркетинг боюнча кеңештер менен электрондук "
+"почта маркетингиңиздин ROIңызды көбөйтүүнү үйрөнүңүз."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Орточо ачык курс"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Жекелештирилген электрондук почтанын тема саптарын колдонуңуз, электрондук "
+"каттарды оптималдуу убакта жөнөтүңүз жана электрондук почта тизмеңизди "
+"бөлүңүз.Электрондук почта маркетинг кампанияларыңызды оптималдаштыруу үчүн "
+"электрондук почтанын аналитикасы менен электрондук почтанын ачык тарифтерине"
+" көз салыңыз."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Жакшыртууларга көз салуу"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Bounce башкаруу"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Электрондук почтаны жекелештирүү менен кызыктуу электрондук почта мазмунун "
+"түзүңүз, өз убагында билдирүүлөрдү жөнөтүү үчүн электрондук почтаны "
+"автоматташтырууну колдонуңуз жана электрондук почтаны чыкылдатуу ылдамдыгын "
+"көзөмөлдөңүз.Биздин электрондук маркетинг автоматташтыруу сизге керектүү "
+"билдирүүнү керектүү убакта жөнөтүүгө жардам берет."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Көбүрөөк катышуу"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Акысыз электрондук почта маркетингин автоматташтыруу"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Жетекчиликти өстүрүү үчүн электрондук почта тамчылатма кампанияларын "
+"колдонуңуз, максаттуу кампаниялар үчүн электрондук почта сегментациясын ишке"
+" ашырыңыз жана электрондук почтанын ар тараптуу аналитикасы менен "
+"электрондук почта маркетингинин ROIине көз салыңыз.Натыйжаларды жеткирүүчү "
+"акысыз электрондук маркетинг программасы."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Сиздин ROI караңыз"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Бул электрондук маркетинг мыкты тажрыйбаларды ишке ашырууга даярсызбы?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Электрондук почтаңыздын маркетингин бекер автоматташтыра баштаңыз."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Көп берилүүчү суроолор"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Электрондук почта маркетингиңизди автоматташтыруу үчүн сизге керектүү "
+"нерселердин баары"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Тамчылатып кампаниялар деген эмне?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Тамчы электрондук почта кампаниясы, ошондой эле автоматташтырылган "
+"электрондук почта ырааттуулугу же электрондук тамчылатма кампаниясы катары "
+"белгилүү, убакыттын өтүшү менен жазылуучуларга жөнөтүлгөн автоматташтырылган"
+" электрондук каттардын сериясы.Бул электрондук маркетинг кампаниялары "
+"лидерлерди, борттогу колдонуучуларды өстүрүүгө жана электрондук почтаны "
+"стратегиялык автоматташтыруу аркылуу конверсияларды жүргүзүүгө жардам "
+"берет.Биздин электрондук маркетинг платформа күчтүү тамчылатып электрондук "
+"почта кампанияларын түзүүнү жеңилдетет."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr ""
+"Биринчи электрондук почта кампанияңызды кантип түзүүнү жана жөнөтүүнү "
+"үйрөнүңүз"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Электрондук почта маркетингин автоматташтыруу программабыз менен тамчылатып "
+"электрондук почта кампаниясын түзүү оңой.Акысыз катталыңыз, электрондук "
+"почта кампанияңызды түзүңүз, пландаштырылган электрондук каттар менен "
+"электрондук почта тизмегин кошуңуз жана калганын биздин электрондук почта "
+"автоматташтыруусуна уруксат бериңиз.Сиз биздин электрондук почта шаблондорун"
+" колдоно аласыз же жеке электрондук почта маркетинг кампанияларын түзө "
+"аласыз.Бир нече мүнөттөн кийин баштаңыз!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Биринчи кампанияңызды түзүңүз"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Акысыз Drip Email Маркетинг Программасы"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Ооба!Биздин электрондук маркетинг платформа түбөлүккө 100% акысыз.Mailchimp,"
+" Constant Contact, Sendinblue же GetResponse альтернативаларынан "
+"айырмаланып, биз чексиз электрондук почта кампанияларын, чексиз "
+"жазылуучуларды, чексиз тамчылатып каттарды жана электрондук маркетингди "
+"автоматташтыруу функцияларын акысыз сунуштайбыз.Кредиттик карта талап "
+"кылынбайт, жашыруун жыйымдар жок."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Кандай электрондук маркетинг өзгөчөлүктөрү камтылган?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Биздин акысыз электрондук маркетинг программабыз төмөнкүлөрдү камтыйт: "
+"электрондук почтанын тамчылатып жиберүүчү кампаниялары, электрондук почтанын"
+" автоматташтырылган ырааттуулугу, электрондук почтанын пландаштырылышы, "
+"электрондук почтанын аналитикасы жана электрондук почтага көз салуу "
+"(электрондук почтанын ачык тарифтери, электрондук почтаны чыкылдатуу "
+"ылдамдыгы), электрондук почтанын жазылуучуларын башкаруу, электрондук почта "
+"тизмесин башкаруу, электрондук почтаны сегментациялоо, электрондук почтаны "
+"жекелештирүү, электрондук почта шаблондору, электрондук каттарды жана "
+"электрондук маркетингди комплекстүү автоматташтыруу.Ийгиликтүү электрондук "
+"маркетинг үчүн сизге керектүү нерселердин баары!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Жеке электрондук почтаны ачуу тарифтери"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Жекелештирилген электрондук почтанын тема саптарын колдонуу, электрондук "
+"каттарды оптималдуу убакта жөнөтүү, электрондук почта тизмеңизди сегменттөө "
+"жана кызыктуу электрондук почта мазмунун түзүү аркылуу электрондук почтаны "
+"ачуу тарифтерин жакшыртыңыз.Биздин электрондук почтанын аналитика куралдары "
+"сизге электрондук почтанын ачык тарифтерине көз салууга жана жакшыраак "
+"иштеши үчүн электрондук маркетинг кампанияларыңызды оптималдаштырууга жардам"
+" берет."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Импортту баштоо"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Дагы эле суроолоруңуз барбы?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Биздин акысыз электрондук маркетинг программабыз менен баштаңыз жана "
+"электрондук почтаны автоматташтыруу канчалык оңой экенин билип алыңыз!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Электрондук почта маркетингиңизди өзгөртүүгө даярсызбы?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7512,15 +8156,15 @@ msgstr ""
 "мамилелерди түзүү үчүн тамчылатма кампанияларды колдонгон миңдеген "
 "ишканаларга кошулуңуз."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Акысыз каттоо эсебиңизди баштаңыз"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Көбүрөөк билүү"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Кредиттик карта талап кылынбайт • 5 мүнөттө орнотуу • Каалаган убакта жокко "
@@ -13105,10 +13749,6 @@ msgstr ""
 "Сиз аудиторияңызды сегментациялоо үчүн бир нече тизме түзө аласыз (мисалы, "
 "кардарлар, перспективалар, өнөктөштөр)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Жазылуучуларды кошуу"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Эми тизмеңизге бир нече жазылуучуларды кошолу.Сизде эки вариант бар:"
@@ -13149,10 +13789,6 @@ msgstr "Мамычаларды картага түшүрүп, чыкылдаты
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Импорттоо"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Биринчи кампанияңызды түзүңүз"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14211,6 +14847,28 @@ msgstr ""
 "Эгер сиз жаңылыштык менен жазылууну токтотсоңуз же электрондук каттарды "
 "кайра алгыңыз келсе, биз менен байланышыңыз же кайра катталыңыз."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Электрондук почта мазмуну"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "маалымат суроо"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Жооп форматы"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Колонтитул"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Жазылуучуларга кайтуу"
@@ -14531,3 +15189,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Бул жерде тизмеленгенин көрүү үчүн байланыштарды импорттоо же жазылуучуларды"
 " кол менен кошуңуз."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Лидерлерди, борттогу колдонуучуларды жана конверсияларды өстүрүүчү "
+#~ "автоматташтырылган электрондук почта тизмеги.Аны бир жолу коюп, кирешеңиздин"
+#~ " өсүшүн байкаңыз."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Эмне үчүн тамчылатып кампаниялар иштейт?"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Жалгыз электрондук почта жардыруусунан айырмаланып, тамчылатма кампаниялар "
+#~ "убакыттын өтүшү менен мамилелерди курат"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Жекелештирилген саякаттар"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Ар бир жазылуучу үчүн уникалдуу тажрыйбаларды түзүңүз.Аудиторияңызды бөлүңүз"
+#~ " жана резонанс жараткан мазмунду жеткириңиз."

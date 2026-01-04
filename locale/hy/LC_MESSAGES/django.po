@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Պատվերով ստորագիր HTML նամակների համար"
 msgid "Time Zone"
 msgstr "Ժամային Գոտի"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Հասցեի տող 1"
@@ -64,22 +64,22 @@ msgstr "Հասցեի տող 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Բնակարան, լյուքս և այլն (ըստ ցանկության)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Քաղաք"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Նահանգ/մարզ"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Փոստային ինդեքս"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Երկիր"
@@ -166,36 +166,36 @@ msgstr "Էլփոստի ստորագիր"
 msgid "Email Footers"
 msgstr "Էլփոստի ստորագիր"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API բանալին հաջողությամբ վերականգնվեց:"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Ստորատակը հաջողությամբ ստեղծվեց:"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Խնդրում ենք նշել և՛ անունը, և՛ բովանդակությունը:"
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Ստորագրի անունը պարտադիր է"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Ստորագրի բովանդակությունը պարտադիր է"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Ստորատակը հաջողությամբ թարմացվեց:"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Ստորատակը հաջողությամբ ջնջվեց:"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Կանխադրված էջատակը հաջողությամբ թարմացվեց:"
 
@@ -242,8 +242,8 @@ msgstr "Բաժանորդների ցուցակ"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Ակտիվ"
 
@@ -263,7 +263,7 @@ msgstr "Սեղմեք Հաշվել"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Քարոզարշավ"
 
@@ -328,7 +328,7 @@ msgstr "Ստորագիր"
 msgid "Email"
 msgstr "Էլ"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Նամակներ"
 
@@ -376,7 +376,7 @@ msgstr "ամիսներ"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Ուղարկվել է"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Փոփոխականներ"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Կարգավիճակ"
 
@@ -1177,12 +1177,12 @@ msgid "Lists"
 msgstr "Ցուցակներ"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Անուն"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Ազգանուն"
 
@@ -1199,7 +1199,7 @@ msgid "Confirmed At"
 msgstr "Հաստատված է ժամը"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1567,6 +1567,7 @@ msgid "Remember Me"
 msgstr "Հիշիր Ինձ"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Մուտք գործեք"
 
@@ -1806,8 +1807,8 @@ msgid "Preview:"
 msgstr "Նախադիտում:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Ստեղծվել է"
 
@@ -1886,6 +1887,7 @@ msgid "Logout"
 msgstr "Դուրս գալ"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Գրանցվել անվճար"
 
@@ -1995,7 +1997,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Համընկնող ձևանմուշներ կամ արշավներ չեն գտնվել"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Ոչ ակտիվ"
 
@@ -2057,7 +2059,7 @@ msgid "Campaign Statistics"
 msgstr "Քարոզարշավի վիճակագրություն"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Բեռնվում է..."
 
@@ -2195,7 +2197,7 @@ msgstr "Այս արշավին դեռևս ոչ մի նամակ չի ավելաց�
 msgid "Create Campaign"
 msgstr "Ստեղծել արշավ"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Ստեղծել նոր արշավ"
@@ -2262,7 +2264,7 @@ msgstr "Ընտրեք քարոզարշավ"
 msgid "(Active)"
 msgstr "(Ակտիվ)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Դեռևս քարոզարշավներ չկան"
 
@@ -2288,7 +2290,7 @@ msgstr "Կաղապարներ չեն գտնվել"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Այս արշավը դեռևս չունի էլփոստի ձևանմուշներ:"
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Ստեղծեք էլփոստի ձևանմուշ"
 
@@ -2330,8 +2332,8 @@ msgstr "Ոչ ստորագիր"
 msgid "Select a footer to append to your email"
 msgstr "Ընտրեք ստորագիր՝ ձեր էլ.փոստին ավելացնելու համար"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2557,7 +2559,7 @@ msgid "Number of Emails"
 msgstr "Նամակների քանակը"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Էլփոստի ձևանմուշ"
 
@@ -2779,7 +2781,7 @@ msgid "Generate Email"
 msgstr "Ստեղծեք էլ"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Էլփոստի նախադիտում"
 
@@ -2792,7 +2794,7 @@ msgid "Send Test Email"
 msgstr "Ուղարկեք փորձնական էլ"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Էլփոստի հասցե"
@@ -3168,7 +3170,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Calenvy-ի ձեռքբերում Google-ի և Microsoft-ի կողմից"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Էյդեն Թուրգուտ"
 
 #: .\templates\core\about.html:69
@@ -3476,7 +3480,7 @@ msgstr "Դիտել ցուցակները"
 msgid "Emails Sent"
 msgstr "Ուղարկված նամակներ"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Դիտել Analytics"
 
@@ -3484,112 +3488,124 @@ msgstr "Դիտել Analytics"
 msgid "Add a List"
 msgstr "Ավելացնել ցուցակ"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Ցուցադրվում է %(start)s-%(end)s բաժանորդներից %(total)s-ը"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "SPF գրառումների կարգավորում՝ էլփոստի առաքման համար"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Ավելացրեք այս TXT գրառումը ձեր տիրույթի DNS-ում."
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Տեսակը:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Անունը/Հյուրընկալողը՝"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Արժեքը:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Նշում."
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Ինչպես ավելացնել այս գրառումը."
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Նավարկեք դեպի DNS կառավարում կամ DNS կարգավորումներ"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Ավելացրեք նոր TXT գրառում՝ վերը նշված արժեքներով"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Ուղարկել էլփոստ և բաժանորդագրվել"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Ընտրեք քարոզարշավ..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Նախ ընտրեք քարոզարշավը..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Ժամանակացույց"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Ուղարկեք X րոպեում"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Ուղարկեք X ժամում"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Ուղարկեք X օրից"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Ուղարկեք X շաբաթից"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Ուղարկեք X ամսում"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Ուղարկելու վերջին գործունեությունը"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Հետևեք ձեր էլփոստի ուղարկումներին և առաքումներին"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Թարմացնել"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Ժամանակները ցուցադրված են"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Գործողությունը բեռնվում է..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Հեռացրեք գովազդները ձեր էլ.փոստից"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3598,15 +3614,15 @@ msgstr ""
 "մասին X-ում կամ ձեր բլոգում՝ ձեր բոլոր նամակներից գովազդները հեռացնելու "
 "համար:"
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Ձեր արշավները"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Գործողություններ"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3614,137 +3630,160 @@ msgstr ""
 "Ստեղծեք ձեր առաջին արշավը, որպեսզի սկսեք ավտոմատ նամակներ ուղարկել ձեր "
 "բաժանորդներին:"
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Ձեր բաժանորդների ցուցակները"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Բաժանորդների ցուցակներ դեռ չկան"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Ստեղծեք ձեր առաջին բաժանորդների ցուցակը՝ ձեր կոնտակտները կազմակերպելու "
 "համար:"
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Արագ գործողություններ"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Ավելացնել բաժանորդներ"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Էլփոստի կաղապարներ"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Հաշվի կարգավորումներ"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Գովազդի հեռացում"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Ապաբաժանորդագրվել Հղումներ"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Ժամային գոտի"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Հաշվի կարգավորումներ"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Էլփոստի ստորագիր"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Խորհուրդներ և ռեսուրսներ"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Սկսելու ուղեցույց"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Իմացեք, թե ինչպես ստեղծել ձեր առաջին էլփոստի արշավը րոպեների ընթացքում:"
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Էլփոստի լավագույն փորձը"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Փոխակերպող նամակներ ստեղծելու խորհուրդներ:"
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Աճեք ձեր բաժանորդների ցուցակը"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Ձեր բաժանորդները մեծացնելու ռազմավարություններ:"
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Պահանջվում է ֆիզիկական հասցե"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Հասցեի տող 2 (ըստ ցանկության)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && կարգավիճակ"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Ուղարկելու գործողություն դեռ չկա"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Օգտագործեք վերը նշված ձևը՝ նամակ ուղարկելու և ձեր գործունեությունը այստեղ "
 "տեսնելու համար:"
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Դեպի"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Պլանավորված"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Սխալ"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Ամբողջական HTML նախադիտում"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Տեքստային տարբերակ"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Ցույց տալ ավելի քիչ"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Չեղարկել բաժանորդագրությունը"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Չհաջողվեց բեռնել գործունեությունը"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Խնդրում ենք կրկին փորձել:"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Կրկին փորձեք"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Ընտրեք էլփոստի ձևանմուշ..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Նամակները բեռնելիս սխալ առաջացավ"
 
@@ -7198,7 +7237,9 @@ msgid "Manage Your Subscribers"
 msgstr "Կառավարեք ձեր բաժանորդներին"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
 
 #: .\templates\core\home.html:18
@@ -7228,12 +7269,25 @@ msgstr "Հավատարիմ հաճախորդներ"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Էլփոստի ավտոմատացված հաջորդականություններ, որոնք սնուցում են առաջատարներ, "
-"բեռնատար օգտագործողներ և խթանում փոխարկումներ:Սահմանեք այն մեկ անգամ և դիտեք"
-" ձեր եկամուտների աճը:"
+"Լավագույն անվճար կաթիլային էլ.փոստի մարքեթինգային ծրագրակազմը էլփոստի "
+"ավտոմատացված հաջորդականությունների, էլփոստի արշավների և էլփոստի "
+"շուկայավարման ավտոմատացման համար:Ստեղծեք հզոր էլփոստի կաթիլային արշավներ, "
+"զարգացրեք առաջատարներ էլփոստի ավտոմատացված հաջորդականությամբ և խթանեք "
+"փոխարկումները մեր էլփոստի շուկայավարման հարթակի միջոցով:Կատարյալ է SaaS "
+"էլփոստի մարքեթինգի, էլեկտրոնային առևտրի էլփոստի շուկայավարման, B2B էլփոստի "
+"շուկայավարման և փոքր բիզնեսի էլփոստի շուկայավարման համար:Կարգավորեք ձեր "
+"էլ.փոստի ավտոմատացումը րոպեների ընթացքում՝ ամբողջովին անվճար էլփոստի "
+"մարքեթինգային ծրագիր՝ անսահմանափակ արշավներով, անսահմանափակ բաժանորդներով և "
+"անսահմանափակ կաթիլային էլ."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7243,74 +7297,179 @@ msgstr "Սկսեք անվճար այսօր"
 msgid "Unlimited Campaigns"
 msgstr "Անսահմանափակ արշավներ"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Անսահմանափակ արշավներ"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Անսահմանափակ բաժանորդներ"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Վարկային քարտ չկա"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Կարգավորումը 5 րոպեում"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Ավելի բարձր ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Ավելի շատ ներգրավվածություն"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Ավելի արագ աճ"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Ավտոմատացում"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Ինչու՞ են աշխատում կաթիլային արշավները"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Ինչպես ստեղծել էլփոստի կաղապարներ"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Ի տարբերություն միայնակ էլփոստի պայթյունների, կաթիլային արշավները ժամանակի "
-"ընթացքում հարաբերություններ են ստեղծում"
+"Էլփոստի ավտոմատացման և էլփոստի կաթիլային արշավների կարգավորումը երբեք ավելի "
+"հեշտ չի եղել:Մեր էլփոստի մարքեթինգի ավտոմատացման ծրագիրը հեշտացնում է "
+"էլփոստի ավտոմատացված հաջորդականությունների ստեղծումը, էլփոստի ժամանակացույցը"
+" և էլփոստի վերլուծություններին հետևելը:"
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Ստեղծեք ձեր առաջին արշավը"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Կառուցեք ձեր էլփոստի կաթիլային արշավը մեր ինտուիտիվ էլփոստի շուկայավարման "
+"գործիքի միջոցով:Ընտրեք էլփոստի գեղեցիկ ձևանմուշներից կամ ստեղծեք հատուկ "
+"էլփոստի մարքեթինգային արշավներ:"
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Էլփոստի հաջորդականությունը"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Նախագծեք էլփոստի ավտոմատացված հաջորդականություններ անհատականացված էլ.Ձեր "
+"էլ.փոստի բաժանորդների համար կարգավորեք էլ."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Բաժանորդների կառավարում"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Ներմուծեք ձեր էլփոստի ցուցակը, բաժանորդներին բաժանորդագրեք էլ.Կատարյալ է "
+"էլփոստի բաժանորդների կառավարման և էլփոստի հատվածավորման համար:"
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Ինչ կարող է AI-ն օպտիմալացնել"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Դիտեք էլփոստի բացման տեմպերը, էլփոստի սեղմումների դրույքաչափերը և էլփոստի "
+"ներգրավվածությունը իրական ժամանակի էլփոստի վերլուծության միջոցով:Բարելավեք "
+"էլփոստի շուկայավարման ROI-ն տվյալների վրա հիմնված պատկերացումներով:"
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Ինչու էլփոստի կաթիլային արշավներն ավելի լավ են աշխատում, քան միայնակ էլփոստի"
+" պայթյունները"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Ի տարբերություն միայնակ էլփոստի պայթյունների, ավտոմատ կաթիլային էլփոստի "
+"արշավները ժամանակի ընթացքում հարաբերություններ են ստեղծում:Էլփոստի "
+"մարքեթինգի ավտոմատացումը օգնում է ձեզ ճիշտ ժամանակին ուղարկել ճիշտ էլփոստի "
+"մարքեթինգային հաղորդագրությունները՝ բարելավելով էլփոստի ներգրավվածությունը և"
+" էլփոստի մարքեթինգի ROI-ն:"
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Ավտոմատացված սնուցում"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Ուղարկեք ճիշտ հաղորդագրություն ճիշտ ժամանակին:Ավտոմատ կերպով ուղղորդեք "
 "կապարները ձեր ձագարով առանց ձեռքի միջամտության:"
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Անհատականացված ճամփորդություններ"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Բաժանորդների սեգմենտավորում"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Ստեղծեք յուրահատուկ փորձառություններ յուրաքանչյուր բաժանորդի "
-"համար:Սեգմենտացրեք ձեր լսարանը և մատուցեք ռեզոնանսային բովանդակություն:"
+"Ստեղծեք էլփոստի եզակի փորձառություններ յուրաքանչյուր բաժանորդի համար "
+"անհատականացված նամակներով:Օգտագործեք էլփոստի հատվածավորումը և էլփոստի "
+"ցուցակի կառավարումը` նպատակային էլփոստի մարքեթինգային արշավներ մատուցելու "
+"համար, որոնք ռեզոնանսվում են ձեր էլփոստի լսարանի հետ:"
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Ապացուցված արդյունքներ"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7318,19 +7477,21 @@ msgstr ""
 "Կաթիլային արշավները 3 անգամ ավելի շատ եկամուտ են բերում, քան առանձին "
 "էլ.Տեսեք չափելի ROI առաջին օրվանից:"
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Ամեն ինչ Ձեզ անհրաժեշտ է հաջողության հասնելու համար"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Հզոր հատկություններ, որոնք հեշտացնում են էլփոստի շուկայավարումը"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Smart Drip Sequences"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7338,11 +7499,11 @@ msgstr ""
 "Ստեղծեք բազմաքայլ էլփոստի հաջորդականություններ, որոնք ավտոմատ կերպով "
 "ուղարկում են՝ հիմնվելով ժամանակի, վարքագծի կամ գործարկիչների վրա:"
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Իրական ժամանակի վերլուծություն"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7350,11 +7511,11 @@ msgstr ""
 "Հետքերը բացվում են, կտտացնում, փոխարկումներ և եկամուտ:Տվյալների վրա հիմնված "
 "որոշումներ կայացրեք գեղեցիկ վահանակների միջոցով:"
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Գեղեցիկ կաղապարներ"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7362,14 +7523,14 @@ msgstr ""
 "Ընտրեք պրոֆեսիոնալ ձևանմուշներից կամ ստեղծեք ձերը:Քաշեք և թողեք խմբագրիչը "
 "դիզայնը հեշտացնում է:"
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Բաժանորդների սեգմենտավորում"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7377,11 +7538,11 @@ msgstr ""
 "Բաժանորդներին կազմակերպեք ցուցակների մեջ, նշեք նրանց և ուղարկեք նպատակային "
 "արշավներ ճիշտ լսարանին:"
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-ի վրա աշխատող բովանդակություն"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7389,11 +7550,11 @@ msgstr ""
 "Ստեղծեք ազդեցիկ էլփոստի բովանդակություն AI-ի միջոցով:Խնայեք ժամանակ "
 "պրոֆեսիոնալ, գրավիչ հաղորդագրություններ ստեղծելիս:"
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Ձեռնարկությունների անվտանգություն"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7401,17 +7562,17 @@ msgstr ""
 "GDPR-ին համապատասխան, անվտանգ ենթակառուցվածք և հուսալի առաքում:Ձեր տվյալները"
 " և բաժանորդները պաշտպանված են:"
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Վստահված է աճող բիզնեսների կողմից"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Միացե՛ք հազարավոր շուկայավարների, ովքեր փոխել են իրենց էլ.փոստի "
 "ռազմավարությունը"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7420,11 +7581,11 @@ msgstr ""
 "Մեր փոխակերպման տոկոսադրույքն աճել է 340%%-ով կաթիլային արշավներ "
 "իրականացնելուց հետո:Ավտոմատացումը մեզ ամեն շաբաթ ժամեր է խնայում:"
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Մարքեթինգի տնօրեն"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7432,11 +7593,11 @@ msgstr ""
 "Լավագույն մասը.Այն լիովին անվճար է:Մենք ուղարկել ենք ավելի քան 50,000 "
 "նամակներ՝ առանց մի դրամ վճարելու:Խաղի փոխարկիչ."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Ստարտափի հիմնադիր"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7444,15 +7605,460 @@ msgstr ""
 "Կարգավորումը տևեց 5 րոպե:Ինտերֆեյսը ինտուիտիվ է, և արդյունքները խոսում են "
 "իրենց մասին:Մեր էլփոստի ներգրավվածությունը կրկնապատկվեց:"
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Էլեկտրոնային առևտրի մենեջեր"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "փոստի մարքեթինգի անվճար ավտոմատացում բոլորի համար"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Անկախ նրանից՝ դուք վարում եք SaaS էլ.փոստի մարքեթինգ, էլեկտրոնային առևտրի "
+"էլփոստի մարքեթինգ, B2B էլփոստի մարքեթինգ կամ B2C էլ."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Ինքնաթիռի օգտատերեր՝ էլփոստի ավտոմատացված հաջորդականությամբ, ողջույնի "
+"սերիաներով և խթանող արշավներով:Կատարյալ է նորաստեղծ էլփոստի շուկայավարման և "
+"ծրագրային ապահովման ընկերությունների համար:"
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Սկսեք անվճար այսօր"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Էլեկտրոնային առևտրի մենեջեր"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Զարգացրեք վաճառքները լքված զամբյուղի էլ. նամակներով, ապրանքների առաջարկներով"
+" և գործարքային էլ.Բարձրացրեք ձեր էլփոստի մարքեթինգի ROI-ն՝ նպատակային "
+"արշավներով:"
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Սկսել"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Խնամեք առաջատարը էլփոստի մարքեթինգի ավտոմատացման, էլփոստի հատվածավորման և "
+"էլփոստի անհատականացված արշավների միջոցով:Կատարյալ է B2B էլփոստի "
+"շուկայավարման ռազմավարությունների համար:"
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Փորձեք AI-ի առանձնահատկությունները"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Փոքր բիզնեսի էլփոստի շուկայավարում"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Անվճար կաթիլային էլփոստի շուկայավարման ծրագիր՝ անսահմանափակ արշավներով, "
+"բաժանորդներով և էլփոստի ավտոմատացված հաջորդականությամբ"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "Վճարովի էլփոստի շուկայավարման գործիքների լավագույն անվճար այլընտրանքը"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Ինչո՞ւ վճարել Mailchimp-ի, Constant Contact-ի, Sendinblue-ի կամ "
+"GetResponse-ի համար, երբ կարող եք անվճար ստանալ էլփոստի շուկայավարման "
+"ավտոմատացման նույն հնարավորությունները:Մեր էլփոստի շուկայավարման հարթակն "
+"առաջարկում է անսահմանափակ էլփոստի արշավներ, անսահմանափակ բաժանորդներ և "
+"էլփոստի հզոր ավտոմատացում՝ բոլորն անվճար:"
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Անվճար կաթիլ էլփոստի շուկայավարման ծրագիր"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Անվճար ընդմիշտ պլան"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Ոչ թաքնված վճարներ, ոչ վարկային քարտ չի պահանջվում:Ի տարբերություն Mailchimp"
+" այլընտրանքային կամ Constant Contact այլընտրանքային ծառայությունների, մենք "
+"ամբողջովին անվճար էլփոստի շուկայավարման ծրագիր ենք:"
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Անսահմանափակ արշավներ"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Անսահմանափակ էլփոստի արշավներ, անսահմանափակ կաթիլային նամակներ, անսահմանափակ"
+" բաժանորդներ, էլփոստի անսահմանափակ ավտոմատացում:Ձեր էլփոստի շուկայավարման "
+"աճի սահմանափակումներ չկան:"
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Էլփոստի ավտոմատացման ամբողջական առանձնահատկությունները՝ էլփոստի կաթիլային "
+"արշավներ, էլփոստի պլանավորում, էլփոստի վերլուծություն, էլփոստի հետևում, "
+"էլփոստի հատվածավորում և էլփոստի անհատականացում:"
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Անվճար կաթիլ էլփոստի շուկայավարման ծրագիր"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Էլփոստի ձևանմուշներ, էլփոստի տեղեկագրեր, էլփոստի բաժանորդների կառավարում, "
+"էլփոստի ցուցակի կառավարում, էլփոստի բաց գների հետևում, էլփոստի սեղմումների "
+"դրույքաչափեր և էլփոստի մարքեթինգի ROI վերլուծություն:"
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Պատրա՞ստ եք անցնել:"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Միացե՛ք հազարավոր ձեռնարկությունների, ովքեր թանկարժեք էլ.փոստի մարքեթինգային"
+" ծառայություններից անցել են մեր անվճար էլփոստի մարքեթինգային հարթակին:Սկսեք "
+"էլփոստի ավտոմատացմանը մի քանի րոպեում. վարկային քարտ չի պահանջվում:"
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Ստեղծեք անվճար հաշիվ"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Արդեն ունե՞ք հաշիվ:"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Էլփոստի դիզայնի լավագույն փորձը"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Իմացեք, թե ինչպես բարելավել էլ.փոստի բաց դրույքաչափերը, ավելացնել էլփոստի "
+"ներգրավվածությունը և առավելագույնի հասցնել ձեր էլփոստի մարքեթինգի ROI-ն՝ "
+"էլփոստի մարքեթինգի ապացուցված ռազմավարությունների և էլ."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Միջին բաց դրույքաչափը"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Օգտագործեք էլփոստի անհատականացված թեմայի տողերը, ուղարկեք նամակներ օպտիմալ "
+"ժամանակներում և բաժանեք ձեր էլ.Հետևեք էլփոստի բաց սակագներին մեր էլփոստի "
+"վերլուծության միջոցով՝ ձեր էլփոստի մարքեթինգային արշավները օպտիմալացնելու "
+"համար:"
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Հետևելով բարելավումներին"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Վերադարձի կառավարում"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Ստեղծեք գրավիչ էլ.Մեր էլփոստի մարքեթինգի ավտոմատացումը օգնում է ձեզ ճիշտ "
+"ժամանակին ուղարկել ճիշտ հաղորդագրություն:"
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Ավելի շատ ներգրավվածություն"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Էլփոստի մարքեթինգի անվճար ավտոմատացում"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Օգտագործեք էլփոստի կաթիլային արշավներ առաջատարի սնուցման համար, իրականացրեք "
+"էլփոստի սեգմենտավորում նպատակային արշավների համար և հետևեք էլփոստի "
+"մարքեթինգի ROI-ին համապարփակ էլփոստի վերլուծության միջոցով:Անվճար էլփոստի "
+"մարքեթինգային ծրագիր, որն ապահովում է արդյունքներ:"
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Տեսեք ձեր ROI-ն"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr "Պատրա՞ստ եք իրականացնել այս էլփոստի շուկայավարման լավագույն փորձը:"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Սկսեք ավտոմատացնել ձեր էլփոստի մարքեթինգը անվճար:"
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Հաճախակի տրվող հարցեր"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Այն ամենը, ինչ անհրաժեշտ է ձեր էլ.փոստի մարքեթինգը ավտոմատացնելու համար"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Որո՞նք են կաթիլային արշավները:"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Էլփոստի կաթիլային արշավը, որը նաև հայտնի է որպես էլփոստի ավտոմատացված "
+"հաջորդականություն կամ էլփոստի կաթիլային արշավ, ժամանակի ընթացքում "
+"բաժանորդներին ուղարկվող ավտոմատացված նամակների շարք է:Այս էլփոստի "
+"մարքեթինգային արշավները օգնում են զարգացնել առաջատարներ, բեռնատար "
+"օգտագործողներ և առաջացնել փոխարկումներ էլփոստի ռազմավարական ավտոմատացման "
+"միջոցով:Մեր էլփոստի շուկայավարման հարթակը հեշտացնում է հզոր կաթիլային "
+"էլփոստի արշավներ ստեղծելը:"
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Իմացեք, թե ինչպես ստեղծել և ուղարկել ձեր առաջին էլփոստի արշավը"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Կաթիլային էլփոստի արշավ ստեղծելը պարզ է մեր էլփոստի շուկայավարման "
+"ավտոմատացման ծրագրաշարի միջոցով:Գրանցվեք անվճար, ստեղծեք ձեր էլփոստի արշավը,"
+" ավելացրեք էլփոստի հաջորդականություններ պլանավորված էլ. նամակներով և թողեք "
+"մեր էլփոստի ավտոմատացումը կարգավորի մնացածը:Դուք կարող եք օգտագործել մեր "
+"էլ.փոստի ձևանմուշները կամ ստեղծել հատուկ էլ.Սկսեք րոպեների ընթացքում:"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Ստեղծեք ձեր առաջին արշավը"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Անվճար կաթիլ էլփոստի շուկայավարման ծրագիր"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Այո՛Մեր էլփոստի շուկայավարման հարթակը 100%% անվճար է ընդմիշտ:Ի տարբերություն"
+" Mailchimp, Constant Contact, Sendinblue կամ GetResponse այլընտրանքների, "
+"մենք առաջարկում ենք անսահմանափակ էլփոստի արշավներ, անսահմանափակ բաժանորդներ,"
+" անսահմանափակ կաթիլային էլ.Ոչ վարկային քարտ չի պահանջվում, ոչ թաքնված "
+"վճարներ:"
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Էլփոստի շուկայավարման ի՞նչ հատկանիշներ են ներառված:"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Մեր անվճար էլփոստի մարքեթինգային ծրագիրը ներառում է՝ էլփոստի կաթիլային "
+"արշավներ, էլփոստի ավտոմատացված հաջորդականություններ, էլփոստի պլանավորում, "
+"էլփոստի վերլուծություն և էլփոստի հետագծում (էլփոստի բաց սակագներ, էլփոստի "
+"սեղմումների տոկոսադրույքներ), էլփոստի բաժանորդների կառավարում, էլփոստի "
+"ցուցակի կառավարում, էլփոստի հատվածավորում, էլփոստի անհատականացում, էլ.Այն "
+"ամենը, ինչ ձեզ անհրաժեշտ է հաջող էլփոստի շուկայավարման համար:"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Անհատական ​​էլփոստի բաց սակագներ"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Բարելավեք էլփոստի բացման տոկոսադրույքները՝ օգտագործելով էլփոստի "
+"անհատականացված թեմայի տողերը, օպտիմալ ժամանակներում էլփոստ ուղարկելը, ձեր "
+"էլ.Էլփոստի վերլուծության մեր գործիքներն օգնում են ձեզ հետևել էլփոստի բաց "
+"դրույքաչափերին և օպտիմալացնել ձեր էլփոստի մարքեթինգային արշավները՝ ավելի լավ"
+" կատարողականության համար:"
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Սկսեք ներմուծումը"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Դեռ Հարցեր ունե՞ք"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Սկսեք մեր անվճար էլ.փոստի շուկայավարման ծրագրաշարով և պարզեք, թե որքան հեշտ "
+"կարող է լինել էլփոստի ավտոմատացումը:"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Պատրա՞ստ եք վերափոխել ձեր էլփոստի շուկայավարումը:"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7461,15 +8067,15 @@ msgstr ""
 "արշավներ՝ եկամուտը մեծացնելու, առաջատարներ զարգացնելու և հաճախորդների հետ "
 "կայուն հարաբերություններ հաստատելու համար:"
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Սկսեք ձեր անվճար հաշիվը"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Իմացեք ավելին"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Վարկային քարտ չի պահանջվում • Կարգավորում 5 րոպեից • Չեղարկեք ցանկացած "
@@ -13034,10 +13640,6 @@ msgstr ""
 "Դուք կարող եք ստեղծել մի քանի ցուցակներ՝ ձեր լսարանը բաժանելու համար "
 "(օրինակ՝ հաճախորդներ, հեռանկարներ, գործընկերներ):"
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Ավելացնել բաժանորդներ"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13079,10 +13681,6 @@ msgstr "Քարտեզագրեք սյունակները և սեղմեք"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Ներմուծում"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Ստեղծեք ձեր առաջին արշավը"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14140,6 +14738,28 @@ msgstr ""
 "Եթե ​​սխալմամբ դուրս եք եկել բաժանորդագրությունից կամ ցանկանում եք նորից "
 "նամակներ ստանալ, դիմեք մեզ կամ նորից գրանցվեք:"
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Էլփոստի բովանդակություն"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "տեղեկատվություն խնդրել"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Արձագանքման ձևաչափ"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Ստորագիր"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Վերադարձ դեպի բաժանորդներ"
@@ -14460,3 +15080,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Ներմուծեք կոնտակտներ կամ ավելացրեք բաժանորդներ ձեռքով՝ դրանք այստեղ նշված "
 "տեսնելու համար:"
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Էլփոստի ավտոմատացված հաջորդականություններ, որոնք սնուցում են առաջատարներ, "
+#~ "բեռնատար օգտագործողներ և խթանում փոխարկումներ:Սահմանեք այն մեկ անգամ և դիտեք"
+#~ " ձեր եկամուտների աճը:"
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Ինչու՞ են աշխատում կաթիլային արշավները"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Ի տարբերություն միայնակ էլփոստի պայթյունների, կաթիլային արշավները ժամանակի "
+#~ "ընթացքում հարաբերություններ են ստեղծում"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Անհատականացված ճամփորդություններ"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Ստեղծեք յուրահատուկ փորձառություններ յուրաքանչյուր բաժանորդի "
+#~ "համար:Սեգմենտացրեք ձեր լսարանը և մատուցեք ռեզոնանսային բովանդակություն:"

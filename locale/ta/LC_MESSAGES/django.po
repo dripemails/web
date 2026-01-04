@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "மின்னஞ்சல்களுக்கான தனிப்�
 msgid "Time Zone"
 msgstr "நேர மண்டலம்"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "முகவரி வரி 1"
@@ -64,22 +64,22 @@ msgstr "முகவரி வரி 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "அபார்ட்மெண்ட், தொகுப்பு போன்றவை (விரும்பினால்)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "நகரம்"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "மாநிலம்/மாகாணம்"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "குறியீடு"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "நாடு"
@@ -166,36 +166,36 @@ msgstr "மின்னஞ்சல் அடிக்குறிப்பு"
 msgid "Email Footers"
 msgstr "மின்னஞ்சல் அடிக்குறிப்புகள்"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API விசை வெற்றிகரமாக மீண்டும் உருவாக்கப்பட்டது!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "அடிக்குறிப்பு வெற்றிகரமாக உருவாக்கப்பட்டது!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "பெயர் மற்றும் உள்ளடக்கம் இரண்டையும் வழங்கவும்."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "அடிக்குறிப்பு பெயர் தேவை"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "அடிக்குறிப்பு உள்ளடக்கம் தேவை"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "அடிக்குறிப்பு வெற்றிகரமாக புதுப்பிக்கப்பட்டது!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "அடிக்குறிப்பு வெற்றிகரமாக நீக்கப்பட்டது!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "இயல்பு அடிக்குறிப்பு வெற்றிகரமாக புதுப்பிக்கப்பட்டது!"
 
@@ -242,8 +242,8 @@ msgstr "சந்தாதாரர் பட்டியல்"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "செயலில்"
 
@@ -263,7 +263,7 @@ msgstr "எண்ணிக்கை என்பதைக் கிளிக் 
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "பிரச்சாரம்"
 
@@ -328,7 +328,7 @@ msgstr "அடிக்குறிப்பு"
 msgid "Email"
 msgstr "மின்னஞ்சல்"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "மின்னஞ்சல்கள்"
 
@@ -376,7 +376,7 @@ msgstr "மாதங்கள்"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "அனுப்பப்பட்டது"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "மாறிகள்"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "நிலை"
 
@@ -1181,12 +1181,12 @@ msgid "Lists"
 msgstr "பட்டியல்கள்"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "முதல் பெயர்"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "கடைசி பெயர்"
 
@@ -1203,7 +1203,7 @@ msgid "Confirmed At"
 msgstr "இல் உறுதிப்படுத்தப்பட்டது"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1574,6 +1574,7 @@ msgid "Remember Me"
 msgstr "என்னை நினைவு செய்யுங்கள்"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "உள்நுழையவும்"
 
@@ -1816,8 +1817,8 @@ msgid "Preview:"
 msgstr "முன்னோட்டம்:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "உருவாக்கப்பட்டது"
 
@@ -1899,6 +1900,7 @@ msgid "Logout"
 msgstr "வெளியேறு"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "இலவசமாக பதிவு செய்யுங்கள்"
 
@@ -2008,7 +2010,7 @@ msgid "No templates or campaigns found matching"
 msgstr "பொருந்தக்கூடிய டெம்ப்ளேட்கள் அல்லது பிரச்சாரங்கள் எதுவும் இல்லை"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "செயலற்றது"
 
@@ -2070,7 +2072,7 @@ msgid "Campaign Statistics"
 msgstr "பிரச்சார புள்ளிவிவரங்கள்"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "ஏற்றுகிறது..."
 
@@ -2208,7 +2210,7 @@ msgstr "இந்த பிரச்சாரத்தில் இதுவர�
 msgid "Create Campaign"
 msgstr "பிரச்சாரத்தை உருவாக்கவும்"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "புதிய பிரச்சாரத்தை உருவாக்கவும்"
@@ -2277,7 +2279,7 @@ msgstr "ஒரு பிரச்சாரத்தைத் தேர்ந்�
 msgid "(Active)"
 msgstr "(செயலில்)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "இன்னும் பிரச்சாரங்கள் இல்லை"
 
@@ -2305,7 +2307,7 @@ msgstr "டெம்ப்ளேட்கள் எதுவும் இல்�
 msgid "This campaign doesn't have any email templates yet."
 msgstr "இந்த பிரச்சாரத்தில் இதுவரை எந்த மின்னஞ்சல் டெம்ப்ளேட்களும் இல்லை."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "மின்னஞ்சல் டெம்ப்ளேட்டை உருவாக்கவும்"
 
@@ -2347,8 +2349,8 @@ msgstr "அடிக்குறிப்பு இல்லை"
 msgid "Select a footer to append to your email"
 msgstr "உங்கள் மின்னஞ்சலில் இணைக்க அடிக்குறிப்பைத் தேர்ந்தெடுக்கவும்"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2583,7 +2585,7 @@ msgid "Number of Emails"
 msgstr "மின்னஞ்சல்களின் எண்ணிக்கை"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "மின்னஞ்சல் டெம்ப்ளேட்"
 
@@ -2810,7 +2812,7 @@ msgid "Generate Email"
 msgstr "மின்னஞ்சலை உருவாக்கவும்"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "மின்னஞ்சல் முன்னோட்டம்"
 
@@ -2823,7 +2825,7 @@ msgid "Send Test Email"
 msgstr "சோதனை மின்னஞ்சலை அனுப்பவும்"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "மின்னஞ்சல் முகவரி"
@@ -3207,7 +3209,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "கூகுள் மற்றும் மைக்ரோசாப்ட் மூலம் கேலன்வி கையகப்படுத்தல்"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "ஐடன் துர்கட்"
 
 #: .\templates\core\about.html:69
@@ -3519,7 +3523,7 @@ msgstr "பட்டியல்களைக் காண்க"
 msgid "Emails Sent"
 msgstr "மின்னஞ்சல்கள் அனுப்பப்பட்டன"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "பகுப்பாய்வுகளைப் பார்க்கவும்"
 
@@ -3527,112 +3531,124 @@ msgstr "பகுப்பாய்வுகளைப் பார்க்க�
 msgid "Add a List"
 msgstr "பட்டியலைச் சேர்க்கவும்"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "%(total)s சந்தாதாரர்களில் %(start)s-%(end)s ஐக் காட்டுகிறது"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "மின்னஞ்சல் வழங்குவதற்கான SPF பதிவு அமைப்பு"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "இந்த TXT பதிவை உங்கள் டொமைனின் DNS இல் சேர்க்கவும்:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "வகை:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "பெயர்/புரவலன்:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "மதிப்பு:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "குறிப்பு:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "இந்த பதிவை எவ்வாறு சேர்ப்பது:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "DNS மேலாண்மை அல்லது DNS அமைப்புகளுக்கு செல்லவும்"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "மேலே காட்டப்பட்டுள்ள மதிப்புகளுடன் புதிய TXT பதிவைச் சேர்க்கவும்"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "மின்னஞ்சல் அனுப்பவும் & குழுசேரவும்"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "பிரச்சாரத்தைத் தேர்ந்தெடுக்கவும்..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "முதலில் ஒரு பிரச்சாரத்தைத் தேர்ந்தெடுக்கவும்..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "அட்டவணை"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "X நிமிடங்களில் அனுப்பவும்"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "X மணிநேரத்தில் அனுப்பவும்"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "X நாட்களில் அனுப்பவும்"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "X வாரங்களில் அனுப்பவும்"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "X மாதங்களில் அனுப்பவும்"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "சமீபத்திய அனுப்புதல் செயல்பாடு"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "உங்கள் மின்னஞ்சல் அனுப்புதல்கள் மற்றும் விநியோகங்களைக் கண்காணிக்கவும்"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "புதுப்பிக்கவும்"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "நேரங்கள் காட்டப்பட்டுள்ளன"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "செயல்பாட்டை ஏற்றுகிறது..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "உங்கள் மின்னஞ்சல்களில் இருந்து விளம்பரங்களை அகற்றவும்"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3641,15 +3657,15 @@ msgstr ""
 " அல்லது உங்கள் எல்லா மின்னஞ்சல்களிலிருந்தும் விளம்பரங்களை அகற்ற உங்கள் "
 "வலைப்பதிவைப் பற்றி பகிரவும்."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "உங்கள் பிரச்சாரங்கள்"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "செயல்கள்"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3657,137 +3673,160 @@ msgstr ""
 "உங்கள் சந்தாதாரர்களுக்கு தானியங்கு மின்னஞ்சல்களை அனுப்புவதற்கு உங்கள் முதல் "
 "பிரச்சாரத்தை உருவாக்கவும்."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "உங்கள் சந்தாதாரர் பட்டியல்கள்"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "இதுவரை சந்தாதாரர் பட்டியல் இல்லை"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "உங்கள் தொடர்புகளை ஒழுங்கமைக்க உங்கள் முதல் சந்தாதாரர் பட்டியலை உருவாக்கவும்."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "விரைவான செயல்கள்"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "சந்தாதாரர்களைச் சேர்க்கவும்"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "மின்னஞ்சல் டெம்ப்ளேட்கள்"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "கணக்கு அமைப்புகள்"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "விளம்பர நீக்கம்"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "இணைப்புகளை நீக்கவும்"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "நேர மண்டலம்"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "கணக்கு அமைப்புகள்"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "மின்னஞ்சல் அடிக்குறிப்புகள்"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "உதவிக்குறிப்புகள் & ஆதாரங்கள்"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "தொடங்குதல் வழிகாட்டி"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "நிமிடங்களில் உங்கள் முதல் மின்னஞ்சல் பிரச்சாரத்தை எவ்வாறு அமைப்பது என்பதை "
 "அறிக."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "சிறந்த நடைமுறைகளை மின்னஞ்சல் செய்யவும்"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "மாற்றும் மின்னஞ்சல்களை உருவாக்குவதற்கான உதவிக்குறிப்புகள்."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "உங்கள் சந்தாதாரர் பட்டியலை அதிகரிக்கவும்"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "உங்கள் சந்தாதாரர்களை அதிகரிப்பதற்கான உத்திகள்."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "உடல் முகவரி தேவை"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "முகவரி வரி 2 (விரும்பினால்)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && நிலை"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "இன்னும் அனுப்புதல் செயல்பாடு இல்லை"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "மேலே உள்ள படிவத்தைப் பயன்படுத்தி மின்னஞ்சலை அனுப்பவும், உங்கள் செயல்பாட்டை "
 "இங்கே பார்க்கவும்."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "செய்ய"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "திட்டமிடப்பட்டது"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "பிழை"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "முழு HTML முன்னோட்டம்"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "உரை பதிப்பு"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "குறைவாகக் காட்டு"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "குழுவிலகவும்"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "செயல்பாட்டை ஏற்ற முடியவில்லை"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "மீண்டும் முயற்சிக்கவும்."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "மீண்டும் முயற்சிக்கவும்"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "மின்னஞ்சல் டெம்ப்ளேட்டைத் தேர்ந்தெடுக்கவும்..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "மின்னஞ்சல்களை ஏற்றுவதில் பிழை"
 
@@ -7303,7 +7342,9 @@ msgid "Manage Your Subscribers"
 msgstr "உங்கள் சந்தாதாரர்களை நிர்வகிக்கவும்"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
 
 #: .\templates\core\home.html:18
@@ -7333,12 +7374,25 @@ msgstr "விசுவாசமான வாடிக்கையாளர்�
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"லீட்கள், உள் பயனர்கள் மற்றும் இயக்கி மாற்றங்களை வளர்க்கும் தானியங்கு "
-"மின்னஞ்சல் தொடர்கள்.ஒருமுறை செட் செய்து, உங்கள் வருவாய் பெருகுவதைப் "
-"பாருங்கள்."
+"தானியங்கி மின்னஞ்சல் தொடர்கள், மின்னஞ்சல் பிரச்சாரங்கள் மற்றும் மின்னஞ்சல் "
+"மார்க்கெட்டிங் ஆட்டோமேஷனுக்கான சிறந்த இலவச துளி மின்னஞ்சல் மார்க்கெட்டிங் "
+"மென்பொருள்.எங்கள் மின்னஞ்சல் மார்க்கெட்டிங் பிளாட்ஃபார்ம் மூலம் சக்திவாய்ந்த"
+" மின்னஞ்சல் துளி பிரச்சாரங்களை உருவாக்கவும், தானியங்கு மின்னஞ்சல் "
+"வரிசைகளுடன் முன்னணிகளை வளர்க்கவும் மற்றும் மாற்றங்களை இயக்கவும்.SaaS "
+"மின்னஞ்சல் மார்க்கெட்டிங், மின்வணிக மின்னஞ்சல் மார்க்கெட்டிங், B2B "
+"மின்னஞ்சல் மார்க்கெட்டிங் மற்றும் சிறு வணிக மின்னஞ்சல் மார்க்கெட்டிங் "
+"ஆகியவற்றுக்கு ஏற்றது.உங்கள் மின்னஞ்சல் ஆட்டோமேஷனை நிமிடங்களில் அமைக்கவும் - "
+"வரம்பற்ற பிரச்சாரங்கள், வரம்பற்ற சந்தாதாரர்கள் மற்றும் வரம்பற்ற சொட்டு "
+"மின்னஞ்சல்களுடன் முற்றிலும் இலவச மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7348,74 +7402,185 @@ msgstr "இன்றே இலவசமாகத் தொடங்குங்�
 msgid "Unlimited Campaigns"
 msgstr "வரம்பற்ற பிரச்சாரங்கள்"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "வரம்பற்ற பிரச்சாரங்கள்"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "வரம்பற்ற சந்தாதாரர்கள்"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "கிரெடிட் கார்டு இல்லை"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "5 நிமிடங்களில் அமைக்கவும்"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "அதிக ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "அதிக ஈடுபாடு"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "வேகமான வளர்ச்சி"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "ஆட்டோமேஷன்"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "சொட்டுநீர் பிரச்சாரங்கள் ஏன் வேலை செய்கின்றன"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "மின்னஞ்சல் டெம்ப்ளேட்களை எவ்வாறு உருவாக்குவது"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"ஒற்றை மின்னஞ்சல் வெடிப்புகள் போலல்லாமல், சொட்டு பிரச்சாரங்கள் காலப்போக்கில் "
-"உறவுகளை உருவாக்குகின்றன"
+"மின்னஞ்சல் ஆட்டோமேஷன் மற்றும் மின்னஞ்சல் சொட்டு பிரச்சாரங்களை அமைப்பது "
+"எப்போதும் எளிதாக இருந்ததில்லை.எங்கள் மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன் "
+"மென்பொருள் தானியங்கு மின்னஞ்சல் வரிசைகளை உருவாக்குவது, மின்னஞ்சல்களை "
+"திட்டமிடுவது மற்றும் மின்னஞ்சல் பகுப்பாய்வுகளை கண்காணிப்பது ஆகியவற்றை "
+"எளிதாக்குகிறது."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "உங்கள் முதல் பிரச்சாரத்தை உருவாக்கவும்"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"எங்கள் உள்ளுணர்வு மின்னஞ்சல் மார்க்கெட்டிங் கருவி மூலம் உங்கள் மின்னஞ்சல் "
+"சொட்டு பிரச்சாரத்தை உருவாக்குங்கள்.அழகான மின்னஞ்சல் டெம்ப்ளேட்களில் இருந்து "
+"தேர்வு செய்யவும் அல்லது தனிப்பயன் மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்களை "
+"உருவாக்கவும்."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "மின்னஞ்சல் வரிசை"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"தனிப்பயனாக்கப்பட்ட மின்னஞ்சல்களுடன் தானியங்கி மின்னஞ்சல் வரிசைகளை "
+"வடிவமைக்கவும்.உங்கள் மின்னஞ்சல் சந்தாதாரர்களுக்கு மின்னஞ்சல் திட்டமிடல், "
+"மின்னஞ்சல் வளர்ப்பு தொடர்கள் மற்றும் வரவேற்பு தொடர்களை அமைக்கவும்."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "சந்தாதாரர்களை நிர்வகித்தல்"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"உங்கள் மின்னஞ்சல் பட்டியல், மின்னஞ்சல் பட்டியல் நிர்வாகத்துடன் பிரிவு "
+"சந்தாதாரர்களை இறக்குமதி செய்து, உங்கள் மின்னஞ்சல் பார்வையாளர்களை "
+"ஒழுங்கமைக்கவும்.மின்னஞ்சல் சந்தாதாரர் மேலாண்மை மற்றும் மின்னஞ்சல் பிரிவுக்கு"
+" ஏற்றது."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "AI என்ன மேம்படுத்த முடியும்"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"மின்னஞ்சல் திறந்த கட்டணங்கள், மின்னஞ்சல் கிளிக் விகிதங்கள் மற்றும் "
+"மின்னஞ்சல் ஈடுபாட்டை நிகழ்நேர மின்னஞ்சல் பகுப்பாய்வு மூலம் "
+"கண்காணிக்கவும்.தரவு சார்ந்த நுண்ணறிவுகளுடன் மின்னஞ்சல் மார்க்கெட்டிங் ROI ஐ "
+"மேம்படுத்தவும்."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"ஒற்றை மின்னஞ்சல் வெடிப்புகளை விட மின்னஞ்சல் சொட்டுநீர் பிரச்சாரங்கள் ஏன் "
+"சிறப்பாக செயல்படுகின்றன"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"ஒற்றை மின்னஞ்சல் குண்டுவெடிப்புகளைப் போலன்றி, தானியங்கு சொட்டு மின்னஞ்சல் "
+"பிரச்சாரங்கள் காலப்போக்கில் உறவுகளை உருவாக்குகின்றன.மின்னஞ்சல் "
+"மார்க்கெட்டிங் ஆட்டோமேஷன் உங்களுக்கு சரியான நேரத்தில் சரியான மின்னஞ்சல் "
+"மார்க்கெட்டிங் செய்திகளை அனுப்ப உதவுகிறது, மின்னஞ்சல் ஈடுபாட்டை "
+"மேம்படுத்துகிறது மற்றும் மின்னஞ்சல் மார்க்கெட்டிங் ROI ஐ மேம்படுத்துகிறது."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "தானியங்கு வளர்ப்பு"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "சரியான நேரத்தில் சரியான செய்தியை அனுப்பவும்.கைமுறையான தலையீடு இல்லாமல் "
 "உங்கள் புனல் மூலம் தானாகவே வழிகாட்டுதல்களை வழிநடத்துங்கள்."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "தனிப்பயனாக்கப்பட்ட பயணங்கள்"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "சந்தாதாரர் பிரிவு"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"ஒவ்வொரு சந்தாதாரருக்கும் தனிப்பட்ட அனுபவங்களை உருவாக்கவும்.உங்கள் "
-"பார்வையாளர்களைப் பிரித்து, எதிரொலிக்கும் உள்ளடக்கத்தை வழங்கவும்."
+"தனிப்பயனாக்கப்பட்ட மின்னஞ்சல்கள் மூலம் ஒவ்வொரு சந்தாதாரருக்கும் தனிப்பட்ட "
+"மின்னஞ்சல் அனுபவங்களை உருவாக்கவும்.உங்கள் மின்னஞ்சல் பார்வையாளர்களுடன் "
+"எதிரொலிக்கும் இலக்கு மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்களை வழங்க "
+"மின்னஞ்சல் பிரிவு மற்றும் மின்னஞ்சல் பட்டியல் நிர்வாகத்தைப் பயன்படுத்தவும்."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "நிரூபிக்கப்பட்ட முடிவுகள்"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7423,19 +7588,21 @@ msgstr ""
 "ஒற்றை மின்னஞ்சல்களை விட சொட்டு பிரச்சாரங்கள் 3 மடங்கு அதிக வருவாயை "
 "உருவாக்குகின்றன.முதல் நாளிலிருந்து அளவிடக்கூடிய ROI ஐப் பார்க்கவும்."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "நீங்கள் வெற்றிபெற வேண்டிய அனைத்தும்"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "மின்னஞ்சல் மார்க்கெட்டிங் சிரமமின்றி செய்யும் சக்திவாய்ந்த அம்சங்கள்"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "ஸ்மார்ட் டிரிப் தொடர்கள்"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7443,11 +7610,11 @@ msgstr ""
 "நேரம், நடத்தை அல்லது தூண்டுதல்களின் அடிப்படையில் தானாக அனுப்பும் பல-படி "
 "மின்னஞ்சல் தொடர்களை உருவாக்கவும்."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "நிகழ்நேர பகுப்பாய்வு"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7455,11 +7622,11 @@ msgstr ""
 "ட்ராக் திறக்கிறது, கிளிக்குகள், மாற்றங்கள் மற்றும் வருவாய்.அழகான "
 "டாஷ்போர்டுகளுடன் தரவு சார்ந்த முடிவுகளை எடுக்கவும்."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "அழகான டெம்ப்ளேட்கள்"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7467,14 +7634,14 @@ msgstr ""
 "தொழில்முறை டெம்ப்ளேட்களில் இருந்து தேர்வு செய்யவும் அல்லது சொந்தமாக "
 "உருவாக்கவும்.இழுத்து விட எடிட்டர் வடிவமைப்பை எளிதாக்குகிறது."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "சந்தாதாரர் பிரிவு"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7482,11 +7649,11 @@ msgstr ""
 "சந்தாதாரர்களை பட்டியல்களாக ஒழுங்கமைக்கவும், அவர்களைக் குறியிடவும் மற்றும் "
 "இலக்கு பிரச்சாரங்களை சரியான பார்வையாளர்களுக்கு அனுப்பவும்."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-இயக்கப்படும் உள்ளடக்கம்"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7494,11 +7661,11 @@ msgstr ""
 "AI உடன் அழுத்தமான மின்னஞ்சல் உள்ளடக்கத்தை உருவாக்கவும்.தொழில்முறை, ஈர்க்கும்"
 " செய்திகளை உருவாக்கும் போது நேரத்தைச் சேமிக்கவும்."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "நிறுவன பாதுகாப்பு"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7506,17 +7673,17 @@ msgstr ""
 "GDPR இணக்கம், பாதுகாப்பான உள்கட்டமைப்பு மற்றும் நம்பகமான விநியோகம்.உங்கள் "
 "தரவு மற்றும் சந்தாதாரர்கள் பாதுகாக்கப்பட்டுள்ளனர்."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "வளர்ந்து வரும் வணிகங்களால் நம்பப்படுகிறது"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "தங்கள் மின்னஞ்சல் மூலோபாயத்தை மாற்றிய ஆயிரக்கணக்கான சந்தைப்படுத்துபவர்களுடன்"
 " சேரவும்"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7525,11 +7692,11 @@ msgstr ""
 "சொட்டுநீர் பிரச்சாரங்களைச் செயல்படுத்திய பிறகு எங்கள் மாற்று விகிதம் 340%% "
 "அதிகரித்துள்ளது.ஆட்டோமேஷன் ஒவ்வொரு வாரமும் மணிநேரங்களைச் சேமிக்கிறது."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "சந்தைப்படுத்தல் இயக்குனர்"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7537,11 +7704,11 @@ msgstr ""
 "சிறந்த பகுதி?இது முற்றிலும் இலவசம்.50,000க்கும் மேற்பட்ட மின்னஞ்சல்களை ஒரு "
 "காசு கூட செலுத்தாமல் அனுப்பியுள்ளோம்.விளையாட்டு மாற்றி."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "தொடக்க நிறுவனர்"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7549,15 +7716,479 @@ msgstr ""
 "அமைவு 5 நிமிடங்கள் எடுத்தது.இடைமுகம் உள்ளுணர்வு, மற்றும் முடிவுகள் தங்களைப் "
 "பற்றி பேசுகின்றன.எங்கள் மின்னஞ்சல் ஈடுபாடு இருமடங்கானது."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "இ-காமர்ஸ் மேலாளர்"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "அனைவருக்கும் இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"நீங்கள் SaaS மின்னஞ்சல் மார்க்கெட்டிங், மின்வணிக மின்னஞ்சல் மார்க்கெட்டிங், "
+"B2B மின்னஞ்சல் மார்க்கெட்டிங் அல்லது B2C மின்னஞ்சல் மார்க்கெட்டிங் "
+"பிரச்சாரங்களை இயக்கினாலும், எங்களின் இலவச மின்னஞ்சல் மார்க்கெட்டிங் "
+"ஆட்டோமேஷன் மென்பொருள் உங்கள் தேவைகளுக்கு ஏற்றது."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"தன்னியக்க மின்னஞ்சல் தொடர்கள், வரவேற்பு தொடர்கள் மற்றும் பிரச்சாரங்களை "
+"வளர்க்கும் உள் பயனர்கள்.தொடக்க மின்னஞ்சல் மார்க்கெட்டிங் மற்றும் மென்பொருள் "
+"நிறுவனங்களுக்கு ஏற்றது."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "இன்றே இலவசமாகத் தொடங்குங்கள்"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "இ-காமர்ஸ் மேலாளர்"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"கைவிடப்பட்ட கார்ட் மின்னஞ்சல்கள், தயாரிப்பு பரிந்துரைகள் மற்றும் பரிவர்த்தனை"
+" மின்னஞ்சல்கள் மூலம் விற்பனையை அதிகரிக்கவும்.இலக்கு பிரச்சாரங்களுடன் உங்கள் "
+"மின்னஞ்சல் மார்க்கெட்டிங் ROI ஐ அதிகரிக்கவும்."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "தொடங்குதல்"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன், மின்னஞ்சல் பிரிவு மற்றும் "
+"தனிப்பயனாக்கப்பட்ட மின்னஞ்சல் பிரச்சாரங்களை வளர்ப்பது.B2B மின்னஞ்சல் "
+"மார்க்கெட்டிங் உத்திகளுக்கு ஏற்றது."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "AI அம்சங்களை முயற்சிக்கவும்"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "சிறு வணிக மின்னஞ்சல் மார்க்கெட்டிங்"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"வரம்பற்ற பிரச்சாரங்கள், சந்தாதாரர்கள் மற்றும் தானியங்கு மின்னஞ்சல் "
+"தொடர்களுடன் இலவச சொட்டு மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr "கட்டண மின்னஞ்சல் மார்க்கெட்டிங் கருவிகளுக்கு சிறந்த இலவச மாற்று"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"அதே மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன் அம்சங்களை நீங்கள் இலவசமாகப் "
+"பெறும்போது, ​​Mailchimp, Constant Contact, Sendinblue அல்லது GetResponse "
+"ஆகியவற்றிற்கு ஏன் பணம் செலுத்த வேண்டும்?எங்கள் மின்னஞ்சல் மார்க்கெட்டிங் "
+"தளம் வரம்பற்ற மின்னஞ்சல் பிரச்சாரங்கள், வரம்பற்ற சந்தாதாரர்கள் மற்றும் "
+"சக்திவாய்ந்த மின்னஞ்சல் ஆட்டோமேஷன் ஆகியவற்றை வழங்குகிறது - இவை அனைத்தும் "
+"எந்த கட்டணமும் இல்லாமல்."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "இலவச டிரிப் மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "இலவச எப்போதும் திட்டம்"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"மறைக்கப்பட்ட கட்டணங்கள் இல்லை, கிரெடிட் கார்டு தேவையில்லை.Mailchimp மாற்று "
+"அல்லது நிலையான தொடர்பு மாற்று சேவைகளைப் போலல்லாமல், நாங்கள் முற்றிலும் இலவச "
+"மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "வரம்பற்ற பிரச்சாரங்கள்"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"வரம்பற்ற மின்னஞ்சல் பிரச்சாரங்கள், வரம்பற்ற சொட்டு மின்னஞ்சல்கள், வரம்பற்ற "
+"சந்தாதாரர்கள், வரம்பற்ற மின்னஞ்சல் ஆட்டோமேஷன்.உங்கள் மின்னஞ்சல் "
+"மார்க்கெட்டிங் வளர்ச்சிக்கு வரம்புகள் இல்லை."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"முழுமையான மின்னஞ்சல் ஆட்டோமேஷன் அம்சங்கள்: மின்னஞ்சல் சொட்டு பிரச்சாரங்கள், "
+"மின்னஞ்சல் திட்டமிடல், மின்னஞ்சல் பகுப்பாய்வு, மின்னஞ்சல் கண்காணிப்பு, "
+"மின்னஞ்சல் பிரிவு மற்றும் மின்னஞ்சல் தனிப்பயனாக்கம்."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "இலவச டிரிப் மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"மின்னஞ்சல் டெம்ப்ளேட்டுகள், மின்னஞ்சல் செய்திமடல்கள், மின்னஞ்சல் சந்தாதாரர் "
+"மேலாண்மை, மின்னஞ்சல் பட்டியல் மேலாண்மை, மின்னஞ்சல் திறந்த கட்டணங்கள் "
+"கண்காணிப்பு, மின்னஞ்சல் கிளிக் விகிதங்கள் மற்றும் மின்னஞ்சல் மார்க்கெட்டிங் "
+"ROI பகுப்பாய்வு."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "மாறத் தயாரா?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"விலையுயர்ந்த மின்னஞ்சல் மார்க்கெட்டிங் சேவைகளிலிருந்து எங்கள் இலவச "
+"மின்னஞ்சல் மார்க்கெட்டிங் தளத்திற்கு மாறிய ஆயிரக்கணக்கான வணிகங்களில் "
+"சேரவும்.சில நிமிடங்களில் மின்னஞ்சல் ஆட்டோமேஷனைத் தொடங்குங்கள் - கிரெடிட் "
+"கார்டு தேவையில்லை."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "இலவச கணக்கை உருவாக்கவும்"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "ஏற்கனவே கணக்கு உள்ளதா?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "மின்னஞ்சல் வடிவமைப்பு சிறந்த நடைமுறைகள்"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"நிரூபிக்கப்பட்ட மின்னஞ்சல் மார்க்கெட்டிங் உத்திகள் மற்றும் மின்னஞ்சல் "
+"மார்க்கெட்டிங் உதவிக்குறிப்புகள் மூலம் மின்னஞ்சல் திறந்த கட்டணங்களை "
+"மேம்படுத்துவது, மின்னஞ்சல் ஈடுபாட்டை அதிகரிப்பது மற்றும் உங்கள் மின்னஞ்சல் "
+"மார்க்கெட்டிங் ROI ஐ அதிகரிப்பது எப்படி என்பதை அறிக."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "சராசரி திறந்த விகிதம்"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"தனிப்பயனாக்கப்பட்ட மின்னஞ்சல் பொருள் வரிகளைப் பயன்படுத்தவும், உகந்த "
+"நேரங்களில் மின்னஞ்சல்களை அனுப்பவும் மற்றும் உங்கள் மின்னஞ்சல் பட்டியலைப் "
+"பிரிக்கவும்.உங்கள் மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்களை மேம்படுத்த எங்கள்"
+" மின்னஞ்சல் பகுப்பாய்வுகளுடன் மின்னஞ்சல் திறந்த கட்டணங்களைக் கண்காணிக்கவும்."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "கண்காணிப்பு மேம்பாடுகள்"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "துள்ளல் மேலாண்மை"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"மின்னஞ்சல் தனிப்பயனாக்கத்துடன் ஈர்க்கும் மின்னஞ்சல் உள்ளடக்கத்தை "
+"உருவாக்கவும், சரியான நேரத்தில் செய்திகளை அனுப்ப மின்னஞ்சல் ஆட்டோமேஷனைப் "
+"பயன்படுத்தவும் மற்றும் மின்னஞ்சல் கிளிக் விகிதங்களைக் கண்காணிக்கவும்.எங்கள் "
+"மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன் சரியான நேரத்தில் சரியான செய்தியை அனுப்ப"
+" உதவுகிறது."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "அதிக ஈடுபாடு"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "இலவச மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன்"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"முன்னணி வளர்ப்பதற்கு மின்னஞ்சல் துளி பிரச்சாரங்களைப் பயன்படுத்தவும், இலக்கு "
+"பிரச்சாரங்களுக்கு மின்னஞ்சல் பிரிவை செயல்படுத்தவும் மற்றும் விரிவான "
+"மின்னஞ்சல் பகுப்பாய்வுகளுடன் மின்னஞ்சல் மார்க்கெட்டிங் ROI ஐ "
+"கண்காணிக்கவும்.முடிவுகளை வழங்கும் இலவச மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "உங்கள் ROI ஐப் பார்க்கவும்"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"இந்த மின்னஞ்சல் மார்க்கெட்டிங் சிறந்த நடைமுறைகளைச் செயல்படுத்தத் தயாரா?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr ""
+"உங்கள் மின்னஞ்சல் மார்க்கெட்டிங்கை இலவசமாக தானியக்கமாக்கத் தொடங்குங்கள்."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "அடிக்கடி கேட்கப்படும் கேள்விகள்"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "உங்கள் மின்னஞ்சல் மார்க்கெட்டிங் தானியங்கு செய்ய வேண்டிய அனைத்தும்"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "சொட்டுநீர் பிரச்சாரங்கள் என்றால் என்ன?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"ஒரு சொட்டு மின்னஞ்சல் பிரச்சாரம், தானியங்கு மின்னஞ்சல் வரிசை அல்லது "
+"மின்னஞ்சல் சொட்டு பிரச்சாரம் என்றும் அழைக்கப்படுகிறது, இது காலப்போக்கில் "
+"சந்தாதாரர்களுக்கு அனுப்பப்படும் தானியங்கு மின்னஞ்சல்களின் தொடர் ஆகும்.இந்த "
+"மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்கள் மூலோபாய மின்னஞ்சல் ஆட்டோமேஷன் மூலம் "
+"முன்னணிகள், உள் பயனர்கள் மற்றும் டிரைவ் மாற்றங்களை வளர்க்க உதவுகின்றன.எங்கள்"
+" மின்னஞ்சல் மார்க்கெட்டிங் தளம் சக்திவாய்ந்த சொட்டு மின்னஞ்சல் பிரச்சாரங்களை"
+" உருவாக்குவதை எளிதாக்குகிறது."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr ""
+"உங்கள் முதல் மின்னஞ்சல் பிரச்சாரத்தை எவ்வாறு உருவாக்குவது மற்றும் அனுப்புவது"
+" என்பதை அறிக"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"எங்கள் மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன் மென்பொருளைக் கொண்டு சொட்டு "
+"மின்னஞ்சல் பிரச்சாரத்தை உருவாக்குவது எளிது.இலவசமாகப் பதிவு செய்யவும், உங்கள்"
+" மின்னஞ்சல் பிரச்சாரத்தை உருவாக்கவும், திட்டமிடப்பட்ட மின்னஞ்சல்களுடன் "
+"மின்னஞ்சல் வரிசைகளைச் சேர்க்கவும், மீதமுள்ளவற்றை எங்கள் மின்னஞ்சல் "
+"ஆட்டோமேஷனைக் கையாள அனுமதிக்கவும்.நீங்கள் எங்கள் மின்னஞ்சல் டெம்ப்ளேட்களைப் "
+"பயன்படுத்தலாம் அல்லது தனிப்பயன் மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்களை "
+"உருவாக்கலாம்.நிமிடங்களில் தொடங்குங்கள்!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "உங்கள் முதல் பிரச்சாரத்தை உருவாக்கவும்"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "இலவச டிரிப் மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருள்"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"ஆம்!எங்கள் மின்னஞ்சல் மார்க்கெட்டிங் தளம் எப்போதும் 100% இலவசம்.Mailchimp, "
+"Constant Contact, Sendinblue அல்லது GetResponse மாற்றுகளைப் போலன்றி, "
+"வரம்பற்ற மின்னஞ்சல் பிரச்சாரங்கள், வரம்பற்ற சந்தாதாரர்கள், வரம்பற்ற துளி "
+"மின்னஞ்சல்கள் மற்றும் முழு மின்னஞ்சல் மார்க்கெட்டிங் ஆட்டோமேஷன் அம்சங்களை "
+"கட்டணமின்றி வழங்குகிறோம்.கிரெடிட் கார்டு தேவையில்லை, மறைக்கப்பட்ட கட்டணங்கள்"
+" இல்லை."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "என்ன மின்னஞ்சல் மார்க்கெட்டிங் அம்சங்கள் சேர்க்கப்பட்டுள்ளன?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"எங்கள் இலவச மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருளில் அடங்கும்: மின்னஞ்சல் துளி"
+" பிரச்சாரங்கள், தானியங்கு மின்னஞ்சல் வரிசைகள், மின்னஞ்சல் திட்டமிடல், "
+"மின்னஞ்சல் பகுப்பாய்வு மற்றும் மின்னஞ்சல் கண்காணிப்பு (மின்னஞ்சல் திறந்த "
+"கட்டணங்கள், மின்னஞ்சல் கிளிக் விகிதங்கள்), மின்னஞ்சல் சந்தாதாரர் மேலாண்மை, "
+"மின்னஞ்சல் பட்டியல் மேலாண்மை, மின்னஞ்சல் பிரிவு, மின்னஞ்சல் தனிப்பயனாக்கம், "
+"மின்னஞ்சல் டெம்ப்ளேட்கள், மின்னஞ்சல் செய்திமடல்கள் மற்றும் விரிவான "
+"மின்னஞ்சல் சந்தைப்படுத்தல் ஆட்டோமேஷன்.வெற்றிகரமான மின்னஞ்சல் மார்க்கெட்டிங் "
+"செய்ய உங்களுக்கு தேவையான அனைத்தும்!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "தனிப்பட்ட மின்னஞ்சல் திறந்த கட்டணங்கள்"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"தனிப்பயனாக்கப்பட்ட மின்னஞ்சல் பொருள் வரிகளைப் பயன்படுத்தி, உகந்த நேரத்தில் "
+"மின்னஞ்சல்களை அனுப்புவதன் மூலம், உங்கள் மின்னஞ்சல் பட்டியலைப் பிரிப்பதன் "
+"மூலம் மற்றும் ஈர்க்கக்கூடிய மின்னஞ்சல் உள்ளடக்கத்தை உருவாக்குவதன் மூலம் "
+"மின்னஞ்சல் திறந்த கட்டணங்களை மேம்படுத்தவும்.எங்கள் மின்னஞ்சல் பகுப்பாய்வுக் "
+"கருவிகள் மின்னஞ்சல் திறந்த கட்டணங்களைக் கண்காணிக்கவும், சிறந்த "
+"செயல்திறனுக்காக உங்கள் மின்னஞ்சல் மார்க்கெட்டிங் பிரச்சாரங்களை "
+"மேம்படுத்தவும் உதவுகின்றன."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "இறக்குமதியைத் தொடங்கவும்"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "இன்னும் கேள்விகள் உள்ளதா?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"எங்கள் இலவச மின்னஞ்சல் மார்க்கெட்டிங் மென்பொருளுடன் தொடங்கவும் மற்றும் "
+"மின்னஞ்சல் ஆட்டோமேஷன் எவ்வளவு எளிதாக இருக்கும் என்பதைக் கண்டறியவும்!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "உங்கள் மின்னஞ்சல் மார்க்கெட்டிங் மாற்ற தயாரா?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7566,15 +8197,15 @@ msgstr ""
 "உருவாக்கவும் சொட்டுநீர் பிரச்சாரங்களைப் பயன்படுத்தி ஆயிரக்கணக்கான "
 "வணிகங்களில் சேரவும்."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "உங்கள் இலவச கணக்கைத் தொடங்கவும்"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "மேலும் அறிக"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "கிரெடிட் கார்டு தேவையில்லை • 5 நிமிடங்களில் அமைவு • எப்போது வேண்டுமானாலும் "
@@ -13206,10 +13837,6 @@ msgstr ""
 "உங்கள் பார்வையாளர்களை (எ.கா., வாடிக்கையாளர்கள், வாய்ப்புகள், கூட்டாளர்கள்) "
 "பிரிக்க பல பட்டியல்களை உருவாக்கலாம்."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "சந்தாதாரர்களைச் சேர்க்கவும்"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13253,10 +13880,6 @@ msgstr "நெடுவரிசைகளை வரைபடமாக்கி �
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "இறக்குமதி"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "உங்கள் முதல் பிரச்சாரத்தை உருவாக்கவும்"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14320,6 +14943,28 @@ msgstr ""
 "நீங்கள் தவறுதலாக குழுவிலகினால் அல்லது மீண்டும் மின்னஞ்சல்களைப் பெற "
 "விரும்பினால், எங்களைத் தொடர்பு கொள்ளவும் அல்லது மீண்டும் பதிவு செய்யவும்."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "மின்னஞ்சல் உள்ளடக்கம்"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "கோரிக்கை தகவல்"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "பதில் வடிவம்"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "அடிக்குறிப்பு"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "சந்தாதாரர்களுக்குத் திரும்பு"
@@ -14645,3 +15290,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "இங்கே பட்டியலிடப்பட்டுள்ளதைக் காண, தொடர்புகளை இறக்குமதி செய்யவும் அல்லது "
 "சந்தாதாரர்களை கைமுறையாகச் சேர்க்கவும்."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "லீட்கள், உள் பயனர்கள் மற்றும் இயக்கி மாற்றங்களை வளர்க்கும் தானியங்கு "
+#~ "மின்னஞ்சல் தொடர்கள்.ஒருமுறை செட் செய்து, உங்கள் வருவாய் பெருகுவதைப் "
+#~ "பாருங்கள்."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "சொட்டுநீர் பிரச்சாரங்கள் ஏன் வேலை செய்கின்றன"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "ஒற்றை மின்னஞ்சல் வெடிப்புகள் போலல்லாமல், சொட்டு பிரச்சாரங்கள் காலப்போக்கில் "
+#~ "உறவுகளை உருவாக்குகின்றன"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "தனிப்பயனாக்கப்பட்ட பயணங்கள்"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "ஒவ்வொரு சந்தாதாரருக்கும் தனிப்பட்ட அனுபவங்களை உருவாக்கவும்.உங்கள் "
+#~ "பார்வையாளர்களைப் பிரித்து, எதிரொலிக்கும் உள்ளடக்கத்தை வழங்கவும்."

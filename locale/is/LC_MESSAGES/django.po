@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Sérsniðinn HTML fótur fyrir tölvupóst"
 msgid "Time Zone"
 msgstr "Tímabelti"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Heimilisfangslína 1"
@@ -64,22 +64,22 @@ msgstr "Heimilisfangslína 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Íbúð, svíta osfrv. (valfrjálst)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Borg"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Ríki/hérað"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Póstnúmer"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Land"
@@ -166,36 +166,36 @@ msgstr "Tölvupóstfótur"
 msgid "Email Footers"
 msgstr "Tölvupóstfótur"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API lykill endurgerður!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Fótur búinn til!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Vinsamlegast gefðu upp bæði nafn og efni."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Nafn fótar er áskilið"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Efni í fæti er áskilið"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Fótur uppfærður!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Fóti eytt!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Sjálfgefinn fótur uppfærður!"
 
@@ -242,8 +242,8 @@ msgstr "Áskrifendalisti"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Virkur"
 
@@ -263,7 +263,7 @@ msgstr "Smelltu á Count"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Herferð"
 
@@ -328,7 +328,7 @@ msgstr "Fótur"
 msgid "Email"
 msgstr "Tölvupóstur"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Tölvupóstar"
 
@@ -376,7 +376,7 @@ msgstr "mánuði"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Sent"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Breytur"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Staða"
 
@@ -1175,12 +1175,12 @@ msgid "Lists"
 msgstr "Listar"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Fornafn"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Eftirnafn"
 
@@ -1197,7 +1197,7 @@ msgid "Confirmed At"
 msgstr "Staðfest kl"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1564,6 +1564,7 @@ msgid "Remember Me"
 msgstr "Mundu eftir mér"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Skráðu þig inn"
 
@@ -1803,8 +1804,8 @@ msgid "Preview:"
 msgstr "Forskoðun:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Búið til"
 
@@ -1885,6 +1886,7 @@ msgid "Logout"
 msgstr "Útskrá"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Skráðu þig ókeypis"
 
@@ -1994,7 +1996,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Engin sniðmát eða herferðir fundust sem passa"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Óvirkt"
 
@@ -2054,7 +2056,7 @@ msgid "Campaign Statistics"
 msgstr "Tölfræði herferðar"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Hleður..."
 
@@ -2192,7 +2194,7 @@ msgstr "Engum tölvupósti hefur verið bætt við þessa herferð ennþá."
 msgid "Create Campaign"
 msgstr "Búðu til herferð"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Búðu til nýja herferð"
@@ -2259,7 +2261,7 @@ msgstr "Veldu herferð"
 msgid "(Active)"
 msgstr "(Virkt)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Engar herferðir ennþá"
 
@@ -2287,7 +2289,7 @@ msgstr "Engin sniðmát fundust"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Þessi herferð er ekki með nein tölvupóstsniðmát ennþá."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Búðu til sniðmát fyrir tölvupóst"
 
@@ -2329,8 +2331,8 @@ msgstr "Enginn fótur"
 msgid "Select a footer to append to your email"
 msgstr "Veldu fót til að bæta við tölvupóstinn þinn"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2556,7 +2558,7 @@ msgid "Number of Emails"
 msgstr "Fjöldi tölvupósta"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Sniðmát fyrir tölvupóst"
 
@@ -2777,7 +2779,7 @@ msgid "Generate Email"
 msgstr "Búa til tölvupóst"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Forskoðun tölvupósts"
 
@@ -2790,7 +2792,7 @@ msgid "Send Test Email"
 msgstr "Sendu prófunarpóst"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Netfang"
@@ -3158,7 +3160,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Calenvy kaup frá Google og Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3465,7 +3469,7 @@ msgstr "Skoða lista"
 msgid "Emails Sent"
 msgstr "Tölvupóstar sendir"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Skoða greiningu"
 
@@ -3473,112 +3477,124 @@ msgstr "Skoða greiningu"
 msgid "Add a List"
 msgstr "Bæta við lista"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Sýnir %(start)s-%(end)s af %(total)s áskrifendum"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "SPF Record Uppsetning fyrir afhendingu tölvupósts"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Bættu þessari TXT færslu við DNS lénsins þíns:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Tegund:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Nafn/gestgjafi:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Gildi:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Athugið:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Hvernig á að bæta þessari skrá við:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Farðu í DNS stjórnun eða DNS stillingar"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Bættu við nýrri TXT færslu með gildunum sem sýnd eru hér að ofan"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Senda tölvupóst og gerast áskrifandi"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Veldu herferð..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Veldu herferð fyrst..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Dagskrá"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Sendu eftir X mínútur"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Sendu eftir X klukkustundir"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Sendu eftir X daga"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Sendu eftir X vikur"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Senda eftir X mánuði"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Nýleg sendingaraðgerð"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Fylgstu með tölvupóstinum þínum og sendingu"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Endurnýja"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Tímar sýndir í"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Hleður virkni..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Fjarlægðu auglýsingar úr tölvupóstinum þínum"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3587,15 +3603,15 @@ msgstr ""
 "DripEmails.org á X eða blogginu þínu til að fjarlægja auglýsingar úr öllum "
 "tölvupóstinum þínum."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Herferðirnar þínar"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Aðgerðir"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3603,137 +3619,160 @@ msgstr ""
 "Búðu til fyrstu herferðina þína til að byrja að senda sjálfvirkan tölvupóst "
 "til áskrifenda þinna."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Áskrifendalistarnir þínir"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Engir áskrifendalistar ennþá"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Búðu til fyrsta áskrifendalistann þinn til að byrja að skipuleggja "
 "tengiliðina þína."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Fljótar aðgerðir"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Bæta við áskrifendum"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Sniðmát fyrir tölvupóst"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Reikningsstillingar"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Fjarlæging auglýsinga"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Hætta áskrift Tenglar"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Tímabelti"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Reikningsstillingar"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Tölvupóstfótur"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Ábendingar og úrræði"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Leiðbeiningar um að byrja"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Lærðu hvernig á að setja upp fyrstu tölvupóstherferðina þína á nokkrum "
 "mínútum."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Bestu starfsvenjur í tölvupósti"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Ráð til að búa til tölvupóst sem umbreytir."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Stækkaðu áskrifendalistann þinn"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Aðferðir til að fjölga áskrifendum þínum."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Líkamlegt heimilisfang áskilið"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Heimilisfangslína 2 (valfrjálst)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && staða"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Engin sendingarvirkni ennþá"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Notaðu eyðublaðið hér að ofan til að senda tölvupóst og sjá virkni þína hér."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Til"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Dagskrá"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Villa"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Full HTML forskoðun"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Textaútgáfa"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Sýna minna"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Hætta áskrift"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Mistókst að hlaða virkni"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Vinsamlegast reyndu aftur."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Reyndu aftur"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Veldu tölvupóstsniðmát..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Villa við að hlaða tölvupósti"
 
@@ -7143,7 +7182,9 @@ msgid "Manage Your Subscribers"
 msgstr "Stjórna áskrifendum þínum"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
 
 #: .\templates\core\home.html:18
@@ -7173,11 +7214,25 @@ msgstr "Tryggir viðskiptavinir"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Sjálfvirkar tölvupóstraðir sem hlúa að leiðum, notendum um borð og knýja "
-"fram viðskipti.Stilltu það einu sinni og horfðu á tekjur þínar vaxa."
+"Besti ókeypis markaðssetningarhugbúnaðurinn fyrir dropapóst fyrir "
+"sjálfvirkar tölvupóstraðir, tölvupóstherferðir og sjálfvirkni í "
+"markaðssetningu tölvupósts.Búðu til öflugar herferðir með tölvupósti, hlúðu "
+"að leiðum með sjálfvirkum tölvupóströðum og ýttu til viðskipta með "
+"markaðsvettvangi tölvupósts okkar.Fullkomið fyrir markaðssetningu á SaaS "
+"tölvupósti, markaðssetningu á tölvupósti í rafrænum viðskiptum, "
+"markaðssetningu á B2B tölvupósti og markaðssetningu á tölvupósti fyrir lítil"
+" fyrirtæki.Settu upp sjálfvirkni tölvupóstsins á nokkrum mínútum - "
+"algjörlega ókeypis markaðssetningarhugbúnaður fyrir tölvupóst með "
+"ótakmörkuðum herferðum, ótakmörkuðum áskrifendum og ótakmörkuðum dropapósti."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7187,73 +7242,180 @@ msgstr "Byrjaðu ókeypis í dag"
 msgid "Unlimited Campaigns"
 msgstr "Ótakmarkaðar herferðir"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Ótakmarkaðar herferðir"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Ótakmarkaður áskrifandi"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Ekkert kreditkort"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Uppsetning á 5 mínútum"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Hærri arðsemi"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Meiri þátttöku"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Hraðari vöxtur"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Sjálfvirkni"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Af hverju Drip herferðir virka"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Hvernig á að búa til sniðmát fyrir tölvupóst"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Ólíkt stökum tölvupósti, byggja drip herferðir upp sambönd með tímanum"
+"Það hefur aldrei verið auðveldara að setja upp sjálfvirkni í tölvupósti og "
+"herferðir með tölvupósti.Sjálfvirkni hugbúnaður okkar fyrir markaðssetningu "
+"tölvupósts gerir það einfalt að búa til sjálfvirkar tölvupóstraðir, "
+"tímasetja tölvupósta og fylgjast með tölvupóstgreiningum."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Búðu til þína fyrstu herferð"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Byggðu upp dreypiherferðina þína fyrir tölvupóst með leiðandi markaðstóli "
+"okkar fyrir tölvupóst.Veldu úr fallegum tölvupóstsniðmátum eða búðu til "
+"sérsniðnar markaðsherferðir fyrir tölvupóst."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Röð tölvupósts"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Hannaðu sjálfvirkar tölvupóstraðir með sérsniðnum tölvupósti.Settu upp "
+"tímasetningu tölvupósts, uppeldisröð tölvupósts og móttökuröð fyrir "
+"tölvupóstáskrifendur þína."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Umsjón með áskrifendum"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Flyttu inn tölvupóstlistann þinn, skiptu áskrifendum með "
+"tölvupóstlistastjórnun og skipuleggðu tölvupósthópinn þinn.Fullkomið fyrir "
+"stjórnun tölvupóstsáskrifenda og skiptingu tölvupósts."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Hvað AI getur hagrætt"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Fylgstu með opnunartíðni tölvupósts, smellihlutfalli tölvupósts og þátttöku "
+"tölvupósts með rauntíma greiningu tölvupósts.Bættu arðsemi markaðssetningar "
+"í tölvupósti með gagnastýrðri innsýn."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Af hverju Drip herferðir með tölvupósti virka betur en stakar sendingar með "
+"tölvupósti"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Ólíkt stökum tölvupósti, byggja sjálfvirkar dropapóstherferðir upp sambönd "
+"með tímanum.Sjálfvirkni markaðssetningar í tölvupósti hjálpar þér að senda "
+"réttu markaðsskilaboðin í tölvupósti á réttum tíma, bæta þátttöku í "
+"tölvupósti og arðsemi markaðssetningar í tölvupósti."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Sjálfvirk ræktun"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Sendu rétt skilaboð á réttum tíma.Leiðbeiningar sjálfkrafa í gegnum trektina"
 " þína án handvirkrar íhlutunar."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Persónulegar ferðir"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Skipting áskrifenda"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Búðu til einstaka upplifun fyrir hvern áskrifanda.Skiptu áhorfendum þínum í "
-"sundur og skilaðu efni sem hljómar."
+"Búðu til einstaka tölvupóstupplifun fyrir hvern áskrifanda með sérsniðnum "
+"tölvupósti.Notaðu skiptingu tölvupósts og stjórnun tölvupóstlista til að "
+"skila markvissum markaðsherferðum í tölvupósti sem hljóma vel hjá "
+"netfangahópnum þínum."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Sannaður árangur"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7261,19 +7423,21 @@ msgstr ""
 "Drip herferðir skila 3x meiri tekjum en stakur tölvupóstur.Sjá mælanlega "
 "arðsemi frá fyrsta degi."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Allt sem þú þarft til að ná árangri"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Öflugir eiginleikar sem gera markaðssetningu tölvupósts áreynslulausa"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Smart Drip Sequences"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7281,11 +7445,11 @@ msgstr ""
 "Búðu til margra þrepa tölvupóstraðir sem senda sjálfkrafa út frá "
 "tímasetningu, hegðun eða kveikjum."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Rauntímagreining"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7293,11 +7457,11 @@ msgstr ""
 "Fylgstu með opnum, smellum, viðskiptum og tekjum.Taktu gagnadrifnar "
 "ákvarðanir með fallegum mælaborðum."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Falleg sniðmát"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7305,14 +7469,14 @@ msgstr ""
 "Veldu úr faglegum sniðmátum eða búðu til þitt eigið.Drag-and-drop ritstjóri "
 "auðveldar hönnun."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Skipting áskrifenda"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7320,11 +7484,11 @@ msgstr ""
 "Skiptu áskrifendum í lista, merktu þá og sendu markvissar herferðir til "
 "rétta markhópsins."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "AI-knúið efni"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7332,11 +7496,11 @@ msgstr ""
 "Búðu til sannfærandi tölvupóstsefni með gervigreind.Sparaðu tíma meðan þú "
 "býrð til fagleg, grípandi skilaboð."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Öryggi fyrirtækja"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7344,16 +7508,16 @@ msgstr ""
 "Samræmist GDPR, öruggum innviðum og áreiðanlegri afhendingu.Gögnin þín og "
 "áskrifendur eru vernduð."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Treyst af vaxandi fyrirtækjum"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Vertu með í þúsundum markaðsmanna sem hafa umbreytt tölvupóststefnu sinni"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7362,11 +7526,11 @@ msgstr ""
 "Viðskiptahlutfall okkar jókst um 340%% eftir innleiðingu á "
 "dropaherferðum.Sjálfvirknin sparar okkur tíma í hverri viku."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Markaðsstjóri"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7374,11 +7538,11 @@ msgstr ""
 "Besti hlutinn?Það er alveg ókeypis.Við höfum sent yfir 50.000 tölvupósta án "
 "þess að borga krónu.Leikjaskipti."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Startup stofnandi"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7386,15 +7550,472 @@ msgstr ""
 "Uppsetning tók 5 mínútur.Viðmótið er leiðandi og niðurstöðurnar tala sínu "
 "máli.Þátttaka okkar í tölvupósti tvöfaldaðist."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Stjórnandi rafrænna viðskipta"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Ókeypis sjálfvirkni markaðssetningar í tölvupósti fyrir alla"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Hvort sem þú ert að keyra SaaS tölvupóstmarkaðssetningu, netverslun með "
+"tölvupósti, B2B tölvupóstmarkaðssetningu eða B2C tölvupóstmarkaðsherferðir, "
+"þá lagar ókeypis sjálfvirkni hugbúnaður fyrir markaðssetningu tölvupósts að "
+"þínum þörfum."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Notendur um borð með sjálfvirkum tölvupóstaröðum, móttökuröðum og hlúðu að "
+"herferðum.Fullkomið fyrir upphaf markaðssetningar í tölvupósti og "
+"hugbúnaðarfyrirtæki."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Byrjaðu ókeypis í dag"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Stjórnandi rafrænna viðskipta"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Auktu sölu með yfirgefnum körfupóstum, vörutillögum og "
+"viðskiptatölvupósti.Auktu arðsemi þína fyrir markaðssetningu tölvupósts með "
+"markvissum herferðum."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Að byrja"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Hlúðu að leiðum með sjálfvirkni markaðssetningu tölvupósts, skiptingu "
+"tölvupósts og sérsniðnum tölvupóstsherferðum.Fullkomið fyrir B2B "
+"markaðssetningaraðferðir í tölvupósti."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Prófaðu AI eiginleika"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Tölvupóstmarkaðssetning fyrir smáfyrirtæki"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Ókeypis markaðssetningarhugbúnaður fyrir dropapóst með ótakmörkuðum "
+"herferðum, áskrifendum og sjálfvirkum tölvupóströðum"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Besti ókeypis valkosturinn við markaðssetningartæki fyrir greitt tölvupóst"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Af hverju að borga fyrir Mailchimp, Constant Contact, Sendinblue eða "
+"GetResponse þegar þú getur fengið sömu sjálfvirkni í tölvupósti "
+"markaðssetningu ókeypis?Tölvupóstmarkaðsvettvangurinn okkar býður upp á "
+"ótakmarkaðar tölvupóstsherferðir, ótakmarkaða áskrifendur og öfluga "
+"sjálfvirkni tölvupósts - allt án kostnaðar."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Ókeypis hugbúnaður fyrir Drip tölvupóstmarkaðssetningu"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Ókeypis að eilífu áætlun"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Engin falin gjöld, ekkert kreditkort krafist.Ólíkt Mailchimp val eða "
+"Constant Contact valþjónustu, erum við algjörlega ókeypis hugbúnaður fyrir "
+"markaðssetningu tölvupósts."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Ótakmarkaðar herferðir"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Ótakmarkaðar tölvupóstsherferðir, ótakmarkaður dropapóstur, ótakmarkaður "
+"áskrifandi, ótakmarkaður sjálfvirkni tölvupósts.Engin takmörk fyrir vöxt "
+"þinn markaðssetning tölvupósts."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Fullkomnir sjálfvirknieiginleikar tölvupósts: Drip herferðir í tölvupósti, "
+"tímasetningar tölvupósts, greiningar á tölvupósti, rakningu tölvupósts, "
+"skiptingu tölvupósts og sérsniðin tölvupóst."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Ókeypis hugbúnaður fyrir Drip tölvupóstmarkaðssetningu"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Tölvupóstsniðmát, fréttabréf tölvupósts, stjórnun tölvupóstsáskrifenda, "
+"stjórnun tölvupóstlista, mælingar á opnum vöxtum tölvupósts, smellihlutfall "
+"tölvupósts og arðsemi markaðssetningar í tölvupósti."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Tilbúinn til að skipta?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Gakktu til liðs við þúsundir fyrirtækja sem hafa skipt úr dýrri "
+"tölvupóstmarkaðsþjónustu yfir í ókeypis tölvupóstmarkaðsvettvanginn "
+"okkar.Byrjaðu með sjálfvirkni tölvupósts á nokkrum mínútum - ekki þarf "
+"kreditkort."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Búðu til ókeypis reikning"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Ertu nú þegar með reikning?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Bestu starfshættir við hönnun tölvupósts"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Lærðu hvernig á að bæta opnunarhlutfall tölvupósts, auka þátttöku í "
+"tölvupósti og hámarka arðsemi þína fyrir markaðssetningu tölvupósts með "
+"sannreyndum markaðsaðferðum í tölvupósti og ráðleggingum um markaðssetningu "
+"tölvupósts."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Meðalopnunargengi"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Notaðu sérsniðnar efnislínur í tölvupósti, sendu tölvupóst á ákjósanlegum "
+"tímum og deildu tölvupóstlistanum þínum.Fylgstu með opnunarhlutfalli "
+"tölvupósts með tölvupóstgreiningum okkar til að hámarka markaðsherferðir "
+"þínar í tölvupósti."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Rekja endurbætur"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Hoppstjórnun"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Búðu til grípandi tölvupóstsefni með sérsniðnum tölvupósti, notaðu "
+"sjálfvirkni tölvupósts til að senda tímanlega skilaboð og fylgstu með "
+"smellihlutfalli tölvupósts.Sjálfvirkni markaðssetningar í tölvupósti hjálpar"
+" þér að senda réttu skilaboðin á réttum tíma."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Meiri þátttöku"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Ókeypis sjálfvirkni í markaðssetningu tölvupósts"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Notaðu dropaherferðir í tölvupósti til að hlúa að leiðum, innleiða skiptingu"
+" tölvupósts fyrir markvissar herferðir og fylgjast með arðsemi "
+"tölvupóstsmarkaðs með yfirgripsmikilli greiningu tölvupósts.Ókeypis "
+"markaðssetningarhugbúnaður fyrir tölvupóst sem skilar árangri."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Sjáðu arðsemi þína"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Tilbúinn til að innleiða þessar bestu starfsvenjur fyrir markaðssetningu í "
+"tölvupósti?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Byrjaðu að gera sjálfvirkan markaðssetningu tölvupósts þíns ókeypis."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Algengar spurningar"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Allt sem þú þarft til að gera tölvupóstmarkaðssetningu þína sjálfvirkan"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Hvað eru Drip herferðir?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Drip tölvupóstsherferð, einnig þekkt sem sjálfvirk póströð eða dreypiherferð"
+" tölvupósts, er röð sjálfvirkra tölvupósta sem send eru til áskrifenda með "
+"tímanum.Þessar markaðsherferðir í tölvupósti hjálpa til við að hlúa að "
+"leiðum, notendum um borð og knýja fram viðskipti með stefnumótandi "
+"sjálfvirkni tölvupósts.Tölvupóstmarkaðsvettvangurinn okkar gerir það auðvelt"
+" að búa til öflugar dropapóstsherferðir."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Lærðu hvernig á að búa til og senda fyrstu tölvupóstherferðina þína"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Það er einfalt að búa til dropapóstherferð með sjálfvirknihugbúnaði okkar "
+"fyrir markaðssetningu tölvupósts.Skráðu þig ókeypis, búðu til "
+"tölvupóstherferð þína, bættu við tölvupóstsröðum með áætluðum tölvupóstum og"
+" láttu tölvupóstsjálfvirkni okkar sjá um afganginn.Þú getur notað "
+"tölvupóstsniðmát okkar eða búið til sérsniðnar markaðsherferðir í "
+"tölvupósti.Byrjaðu á nokkrum mínútum!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Búðu til þína fyrstu herferð"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Ókeypis hugbúnaður fyrir Drip tölvupóstmarkaðssetningu"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Já!Markaðsvettvangur okkar fyrir tölvupóst er 100%% ókeypis að eilífu.Ólíkt "
+"Mailchimp, Constant Contact, Sendinblue eða GetResponse valmöguleika, bjóðum"
+" við upp á ótakmarkaðar tölvupóstherferðir, ótakmarkaða áskrifendur, "
+"ótakmarkaðan dropapóst og fulla sjálfvirknieiginleika fyrir markaðssetningu "
+"tölvupósts án kostnaðar.Engin greiðslukort krafist, engin falin gjöld."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Hvaða eiginleikar fyrir markaðssetningu tölvupósts eru innifalin?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Ókeypis tölvupóstmarkaðshugbúnaðurinn okkar felur í sér: Drip-herferðir í "
+"tölvupósti, sjálfvirkar tölvupóstraðir, tímasetningar tölvupósts, greiningu "
+"tölvupósts og rakningu tölvupósts (opnunarhlutfall tölvupósts, "
+"smellihlutfall tölvupósts), stjórnun tölvupóstsáskrifenda, stjórnun "
+"tölvupóstlista, skiptingu tölvupósts, sérsniðin tölvupóst, sniðmát "
+"tölvupósts, fréttabréf í tölvupósti og alhliða sjálfvirkni markaðssetningar "
+"tölvupósts.Allt sem þú þarft fyrir árangursríka markaðssetningu í "
+"tölvupósti!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Opnunarverð einstakra tölvupósta"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Bættu opnunarhlutfall tölvupósts með því að nota sérsniðnar efnislínur "
+"tölvupósts, senda tölvupóst á ákjósanlegum tímum, skipta upp "
+"tölvupóstlistanum þínum og búa til grípandi "
+"tölvupóstsefni.Tölvugreiningartól okkar hjálpa þér að fylgjast með "
+"opnunarhlutfalli tölvupósts og fínstilla markaðsherferðir þínar fyrir "
+"tölvupóst til að ná betri árangri."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Byrjaðu innflutning"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Ertu enn með spurningar?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Byrjaðu með ókeypis tölvupóstmarkaðshugbúnaðinum okkar og uppgötvaðu hversu "
+"auðveld sjálfvirkni tölvupósts getur verið!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Tilbúinn til að umbreyta markaðssetningu tölvupósts þíns?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7402,15 +8023,15 @@ msgstr ""
 "Vertu með í þúsundum fyrirtækja sem nota dreypiherferðir til að auka tekjur,"
 " hlúa að leiðum og byggja upp varanleg viðskiptatengsl."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Byrjaðu ókeypis reikninginn þinn"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Lærðu meira"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Ekki þarf kreditkort • Uppsetning á 5 mínútum • Hætta við hvenær sem er"
@@ -12910,10 +13531,6 @@ msgstr ""
 "Þú getur búið til marga lista til að flokka markhópinn þinn (t.d. "
 "viðskiptavini, tilvonandi, samstarfsaðila)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Bæta við áskrifendum"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -12955,10 +13572,6 @@ msgstr "Kortaðu dálkana og smelltu"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Innflutningur"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Búðu til þína fyrstu herferð"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14000,6 +14613,28 @@ msgstr ""
 "Ef þú hættir áskrift fyrir mistök eða vilt fá tölvupóst aftur, vinsamlegast "
 "hafðu samband við okkur eða skráðu þig aftur."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Efni tölvupósts"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "óska eftir upplýsingum"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Svarsnið"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Fótur"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Aftur að áskrifendum"
@@ -14322,3 +14957,28 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Flyttu inn tengiliði eða bættu við áskrifendum handvirkt til að sjá þá "
 "skráða hér."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Sjálfvirkar tölvupóstraðir sem hlúa að leiðum, notendum um borð og knýja "
+#~ "fram viðskipti.Stilltu það einu sinni og horfðu á tekjur þínar vaxa."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Af hverju Drip herferðir virka"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Ólíkt stökum tölvupósti, byggja drip herferðir upp sambönd með tímanum"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Persónulegar ferðir"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Búðu til einstaka upplifun fyrir hvern áskrifanda.Skiptu áhorfendum þínum í "
+#~ "sundur og skilaðu efni sem hljómar."

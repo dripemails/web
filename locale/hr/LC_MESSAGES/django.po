@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Prilagođeni HTML podnožja za e-poštu"
 msgid "Time Zone"
 msgstr "Vremenska zona"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "1. redak adrese"
@@ -64,22 +64,22 @@ msgstr "2. redak adrese"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Apartman, apartman i sl. (po izboru)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Grad"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Država/pokrajina"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "poštanski broj"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Zemlja"
@@ -166,36 +166,36 @@ msgstr "Podnožje e-pošte"
 msgid "Email Footers"
 msgstr "Podnožja e-pošte"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API ključ uspješno regeneriran!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Podnožje je uspješno kreirano!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Navedite naziv i sadržaj."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Naziv podnožja je obavezan"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Sadržaj podnožja je obavezan"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Podnožje je uspješno ažurirano!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Podnožje je uspješno izbrisano!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Zadano podnožje uspješno je ažurirano!"
 
@@ -242,8 +242,8 @@ msgstr "Popis pretplatnika"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktivan"
 
@@ -263,7 +263,7 @@ msgstr "Pritisnite Brojaj"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kampanja"
 
@@ -328,7 +328,7 @@ msgstr "Podnožje"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "E-pošta"
 
@@ -376,7 +376,7 @@ msgstr "mjeseca"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Poslano"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Varijable"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Status"
 
@@ -1174,12 +1174,12 @@ msgid "Lists"
 msgstr "Popisi"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Ime"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Prezime"
 
@@ -1196,7 +1196,7 @@ msgid "Confirmed At"
 msgstr "Potvrđeno At"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1560,6 +1560,7 @@ msgid "Remember Me"
 msgstr "Zapamti Me"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Prijavite se"
 
@@ -1798,8 +1799,8 @@ msgid "Preview:"
 msgstr "Pregled:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Stvoreno"
 
@@ -1881,6 +1882,7 @@ msgid "Logout"
 msgstr "Odjava"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Prijavite se besplatno"
 
@@ -1990,7 +1992,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Nema odgovarajućih predložaka ili kampanja"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Neaktivan"
 
@@ -2050,7 +2052,7 @@ msgid "Campaign Statistics"
 msgstr "Statistika kampanje"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Učitavanje..."
 
@@ -2188,7 +2190,7 @@ msgstr "U ovu kampanju još nije dodana nijedna adresa e-pošte."
 msgid "Create Campaign"
 msgstr "Napravite kampanju"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Napravite novu kampanju"
@@ -2255,7 +2257,7 @@ msgstr "Odaberite kampanju"
 msgid "(Active)"
 msgstr "(Aktivan)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Još nema kampanja"
 
@@ -2283,7 +2285,7 @@ msgstr "Nema pronađenih predložaka"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Ova kampanja još nema nijedan predložak e-pošte."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Stvorite predložak e-pošte"
 
@@ -2325,8 +2327,8 @@ msgstr "Bez podnožja"
 msgid "Select a footer to append to your email"
 msgstr "Odaberite podnožje koje želite dodati svojoj e-pošti"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2552,7 +2554,7 @@ msgid "Number of Emails"
 msgstr "Broj e-poruka"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Predložak e-pošte"
 
@@ -2774,7 +2776,7 @@ msgid "Generate Email"
 msgstr "Generirajte e-poštu"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Pregled e-pošte"
 
@@ -2787,7 +2789,7 @@ msgid "Send Test Email"
 msgstr "Pošalji probnu e-poštu"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "E-mail adresa"
@@ -3161,7 +3163,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Kupnja Calenvyja od strane Googlea i Microsofta"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3467,7 +3471,7 @@ msgstr "Prikaz popisa"
 msgid "Emails Sent"
 msgstr "E-poruke poslane"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Pogledajte analitiku"
 
@@ -3475,112 +3479,124 @@ msgstr "Pogledajte analitiku"
 msgid "Add a List"
 msgstr "Dodajte popis"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Prikazuje se %(start)s-%(end)s od %(total)s pretplatnika"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Postavljanje SPF zapisa za isporučivost e-pošte"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Dodajte ovaj TXT zapis DNS-u svoje domene:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Tip:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Ime/Host:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Vrijednost:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Bilješka:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Kako dodati ovaj zapis:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Idite na upravljanje DNS-om ili DNS postavke"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Dodajte novi TXT zapis s gore prikazanim vrijednostima"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Pošaljite e-poštu i pretplatite se"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Odaberite kampanju..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Prvo odaberite kampanju..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Raspored"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Pošaljite za X minuta"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Pošaljite za X sati"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Pošaljite za X dana"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Pošaljite za X tjedana"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Pošaljite za X mjeseci"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Nedavna aktivnost slanja"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Pratite svoje slanje i isporuke e-pošte"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Osvježiti"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Prikazana vremena u"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Učitavanje aktivnosti..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Uklonite oglase iz svoje e-pošte"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3589,15 +3605,15 @@ msgstr ""
 "DripEmails.org na X ili svom blogu kako biste uklonili oglase iz svih svojih"
 " e-poruka."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Vaše kampanje"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Radnje"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3605,136 +3621,159 @@ msgstr ""
 "Napravite svoju prvu kampanju kako biste svojim pretplatnicima počeli slati "
 "automatiziranu e-poštu."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Vaši popisi pretplatnika"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Još nema popisa pretplatnika"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Napravite svoj prvi popis pretplatnika da biste počeli organizirati svoje "
 "kontakte."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Brze radnje"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Dodajte pretplatnike"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Predlošci e-pošte"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Postavke računa"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Uklanjanje oglasa"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Linkovi za otkazivanje pretplate"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Vremenska zona"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Postavke računa"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Podnožja e-pošte"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Savjeti i resursi"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Vodič za početak rada"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Naučite kako postaviti svoju prvu e-mail kampanju u nekoliko minuta."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Najbolje prakse e-pošte"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Savjeti za izradu e-poruka koje pretvaraju."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Povećajte svoj popis pretplatnika"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategije za povećanje broja pretplatnika."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Potrebna je fizička adresa"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Redak adrese 2 (neobavezno)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && status"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Još nema aktivnosti slanja"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Koristite gornji obrazac za slanje e-pošte i pogledajte svoju aktivnost "
 "ovdje."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Do"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Zakazano"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Greška"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Potpuni HTML pregled"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Tekstna verzija"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Prikaži manje"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Odjavi pretplatu"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Učitavanje aktivnosti nije uspjelo"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Molimo pokušajte ponovo."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Pokušaj ponovo"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Odaberite predložak e-pošte..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Pogreška pri učitavanju e-pošte"
 
@@ -7174,7 +7213,9 @@ msgid "Manage Your Subscribers"
 msgstr "Upravljajte svojim pretplatnicima"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Besplatna automatizacija marketinga putem e-pošte"
 
 #: .\templates\core\home.html:18
@@ -7204,12 +7245,25 @@ msgstr "Lojalni kupci"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Automatizirani nizovi e-pošte koji njeguju potencijalne klijente, uključene "
-"korisnike i potiču konverzije.Postavite ga jednom i gledajte kako vam prihod"
-" raste."
+"Najbolji besplatni softver za marketing putem e-pošte za automatizirane "
+"sekvence e-pošte, kampanje e-pošte i automatizaciju marketinga putem "
+"e-pošte.Stvorite moćne kampanje e-pošte, njegujte potencijalne klijente "
+"pomoću automatiziranih sekvenci e-pošte i potaknite konverzije s našom "
+"platformom za marketing e-poštom.Savršeno za SaaS marketing putem e-pošte, "
+"marketing putem e-pošte za e-trgovinu, B2B marketing putem e-pošte i "
+"marketing putem e-pošte za mala poduzeća.Postavite svoju automatizaciju "
+"e-pošte u nekoliko minuta - potpuno besplatan softver za marketing e-poštom "
+"s neograničenim brojem kampanja, neograničenim brojem pretplatnika i "
+"neograničenim brojem e-poruka."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7219,74 +7273,180 @@ msgstr "Počnite besplatno danas"
 msgid "Unlimited Campaigns"
 msgstr "Neograničene kampanje"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Neograničene kampanje"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Neograničeni pretplatnici"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Nema kreditne kartice"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Postavljanje za 5 minuta"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Veći ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Više angažmana"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Brži rast"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Automatizacija"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Zašto Drip kampanje funkcioniraju"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Kako izraditi predloške e-pošte"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Za razliku od pojedinačnih slanja e-pošte, kapajuće kampanje grade odnose "
-"tijekom vremena"
+"Postavljanje automatizacije e-pošte i kampanja slanja e-pošte nikada nije "
+"bilo lakše.Naš softver za automatizaciju marketinga e-pošte olakšava "
+"stvaranje automatiziranih nizova e-pošte, zakazivanje e-pošte i praćenje "
+"analitike e-pošte."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Napravite svoju prvu kampanju"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Izgradite svoju e-mail drip kampanju s našim intuitivnim alatom za e-mail "
+"marketing.Birajte između prekrasnih predložaka e-pošte ili kreirajte "
+"prilagođene marketinške kampanje e-pošte."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Sekvenca e-pošte"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Dizajnirajte automatizirane nizove e-pošte s personaliziranim "
+"e-porukama.Postavite zakazivanje e-pošte, slijed njegovanja e-pošte i serije"
+" dobrodošlice za svoje pretplatnike na e-poštu."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Upravljanje pretplatnicima"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Uvezite svoj popis e-pošte, segmentirajte pretplatnike pomoću upravljanja "
+"popisom e-pošte i organizirajte svoju publiku e-pošte.Savršeno za "
+"upravljanje pretplatnicima e-pošte i segmentaciju e-pošte."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Što AI može optimizirati"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Pratite stope otvaranja e-pošte, stope klikova na e-poštu i angažman e-pošte"
+" s analitikom e-pošte u stvarnom vremenu.Poboljšajte povrat ulaganja u "
+"marketing putem e-pošte pomoću uvida temeljenih na podacima."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Zašto kampanje padanja e-pošte funkcioniraju bolje od pojedinačnih e-poruka"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Za razliku od pojedinačnih slanja e-pošte, automatizirane kapajuće kampanje "
+"e-pošte grade odnose tijekom vremena.Automatizacija marketinga putem e-pošte"
+" pomaže vam da pošaljete prave marketinške poruke putem e-pošte u pravo "
+"vrijeme, poboljšavajući angažman putem e-pošte i povrat ulaganja u marketing"
+" putem e-pošte."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Automatizirani odgoj"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Pošaljite pravu poruku u pravo vrijeme.Automatski vodite potencijalne "
 "klijente kroz svoj tok bez ručne intervencije."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Personalizirana putovanja"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentacija pretplatnika"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Stvorite jedinstvena iskustva za svakog pretplatnika.Segmentirajte svoju "
-"publiku i isporučite sadržaj koji odjekuje."
+"Stvorite jedinstvena iskustva e-pošte za svakog pretplatnika pomoću "
+"personaliziranih e-poruka.Upotrijebite segmentaciju e-pošte i upravljanje "
+"popisima e-pošte za pružanje ciljanih marketinških kampanja e-pošte koje "
+"odjekuju kod vaše publike e-pošte."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Dokazani rezultati"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7294,19 +7454,21 @@ msgstr ""
 "Drip kampanje generiraju 3x više prihoda nego pojedinačne "
 "e-poruke.Pogledajte mjerljivi ROI od prvog dana."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Sve što vam je potrebno za uspjeh"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Snažne značajke koje olakšavaju marketing putem e-pošte"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Pametne sekvence kapanja"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7314,11 +7476,11 @@ msgstr ""
 "Stvorite nizove e-pošte u više koraka koji se automatski šalju na temelju "
 "vremena, ponašanja ili okidača."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Analitika u stvarnom vremenu"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7326,11 +7488,11 @@ msgstr ""
 "Pratite otvaranja, klikove, konverzije i prihod.Donosite odluke temeljene na"
 " podacima s prekrasnim nadzornim pločama."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Prekrasni predlošci"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7338,14 +7500,14 @@ msgstr ""
 "Odaberite između profesionalnih predložaka ili izradite vlastiti.Povuci i "
 "ispusti uređivač olakšava dizajn."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentacija pretplatnika"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7353,11 +7515,11 @@ msgstr ""
 "Organizirajte pretplatnike u popise, označite ih i pošaljite ciljane "
 "kampanje pravoj publici."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Sadržaj koji pokreće AI"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7365,11 +7527,11 @@ msgstr ""
 "Generirajte uvjerljiv sadržaj e-pošte pomoću umjetne inteligencije.Uštedite "
 "vrijeme dok stvarate profesionalne, privlačne poruke."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Sigurnost poduzeća"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7377,16 +7539,16 @@ msgstr ""
 "Usklađenost s GDPR-om, sigurna infrastruktura i pouzdana isporuka.Vaši "
 "podaci i pretplatnici su zaštićeni."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Povjerenje rastućih tvrtki"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Pridružite se tisućama trgovaca koji su promijenili svoju strategiju e-pošte"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7395,11 +7557,11 @@ msgstr ""
 "Naša stopa konverzije porasla je za 340%% nakon implementacije kapajućih "
 "kampanja.Automatizacija nam štedi sate svaki tjedan."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Direktor marketinga"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7407,11 +7569,11 @@ msgstr ""
 "Najbolji dio?Potpuno je besplatno.Poslali smo više od 50.000 e-poruka, a da "
 "nismo platili ni novčića.Promjena igre."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Osnivač startupa"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7419,15 +7581,469 @@ msgstr ""
 "Postavljanje je trajalo 5 minuta.Sučelje je intuitivno, a rezultati govore "
 "sami za sebe.Naš se angažman putem e-pošte udvostručio."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Voditelj e-trgovine"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Besplatna automatizacija marketinga putem e-pošte za sve"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Bez obzira provodite li SaaS marketing putem e-pošte, marketing putem "
+"e-pošte, B2B marketing putem e-pošte ili B2C marketinške kampanje putem "
+"e-pošte, naš besplatni softver za automatizaciju marketinga putem e-pošte "
+"prilagođava se vašim potrebama."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Besplatna automatizacija marketinga putem e-pošte"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Onboard korisnici s automatiziranim nizovima e-pošte, serijama dobrodošlice "
+"i kampanjama za njegu.Savršeno za startup e-mail marketing i softverske "
+"tvrtke."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Počnite besplatno danas"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Voditelj e-trgovine"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Potaknite prodaju e-poštom o napuštenoj košarici, preporukama proizvoda i "
+"transakcijskom e-poštom.Povećajte povrat ulaganja u marketing putem e-pošte "
+"pomoću ciljanih kampanja."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Početak rada"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Besplatna automatizacija marketinga putem e-pošte"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Njegujte potencijalne klijente pomoću automatizacije marketinga e-pošte, "
+"segmentacije e-pošte i personaliziranih kampanja e-pošte.Savršeno za B2B "
+"strategije e-mail marketinga."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Isprobajte AI značajke"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Marketing putem e-pošte za mala poduzeća"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Besplatni softver za marketing putem e-pošte s neograničenim brojem "
+"kampanja, pretplatnika i automatiziranih nizova e-pošte"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Besplatna automatizacija marketinga putem e-pošte"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Najbolja besplatna alternativa plaćenim marketinškim alatima putem e-pošte"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Zašto plaćati za Mailchimp, Constant Contact, Sendinblue ili GetResponse "
+"kada iste značajke automatizacije marketinga putem e-pošte možete dobiti "
+"besplatno?Naša platforma za marketing putem e-pošte nudi neograničene "
+"kampanje putem e-pošte, neograničen broj pretplatnika i moćnu automatizaciju"
+" e-pošte - sve to bez ikakvih troškova."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Besplatni Drip softver za marketing putem e-pošte"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Besplatan plan zauvijek"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Nema skrivenih naknada, nije potrebna kreditna kartica.Za razliku od "
+"alternativnih usluga Mailchimp ili Constant Contact, mi smo potpuno "
+"besplatni softver za marketing putem e-pošte."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Neograničene kampanje"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Neograničene kampanje e-poštom, neograničeni broj e-mailova s ​​kapanjem, "
+"neograničeni broj pretplatnika, neograničena automatizacija e-pošte.Nema "
+"ograničenja za rast vašeg marketinga putem e-pošte."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Besplatna automatizacija marketinga putem e-pošte"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Potpune značajke automatizacije e-pošte: kampanje za privlačenje e-pošte, "
+"zakazivanje e-pošte, analitika e-pošte, praćenje e-pošte, segmentacija "
+"e-pošte i personalizacija e-pošte."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Besplatni Drip softver za marketing putem e-pošte"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Predlošci e-pošte, bilteni e-pošte, upravljanje pretplatnicima e-pošte, "
+"upravljanje listama e-pošte, praćenje stope otvaranja e-pošte, stope klikova"
+" na e-poštu i analitika povrata ulaganja u marketing e-pošte."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Spremni za prebacivanje?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Pridružite se tisućama tvrtki koje su sa skupih usluga marketinga putem "
+"e-pošte prešle na našu besplatnu platformu za marketing putem "
+"e-pošte.Započnite s automatizacijom e-pošte u nekoliko minuta - kreditna "
+"kartica nije potrebna."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Stvorite besplatni račun"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Već imate račun?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Najbolje prakse dizajna e-pošte"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Naučite kako poboljšati stope otvaranja e-pošte, povećati angažman e-pošte i"
+" maksimizirati povrat ulaganja u marketing e-pošte pomoću provjerenih "
+"strategija marketinga e-pošte i savjeta za marketing e-pošte."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Prosječna stopa otvaranja"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Koristite personalizirane retke predmeta e-pošte, šaljite e-poruke u "
+"optimalno vrijeme i segmentirajte svoju listu e-pošte.Pratite stope "
+"otvaranja e-pošte s našom analitikom e-pošte kako biste optimizirali svoje "
+"marketinške kampanje e-pošte."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Praćenje poboljšanja"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Upravljanje odbijanjem"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Stvorite privlačan sadržaj e-pošte s personalizacijom e-pošte, koristite "
+"automatizaciju e-pošte za slanje pravovremenih poruka i pratite stope "
+"klikova na e-poštu.Naša automatizacija marketinga putem e-pošte pomaže vam "
+"poslati pravu poruku u pravo vrijeme."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Više angažmana"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Besplatna automatizacija marketinga putem e-pošte"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Upotrijebite kampanje e-pošte za prikupljanje potencijalnih klijenata, "
+"implementirajte segmentaciju e-pošte za ciljane kampanje i pratite ROI "
+"marketinga e-pošte uz sveobuhvatnu analizu e-pošte.Besplatni softver za "
+"marketing putem e-pošte koji daje rezultate."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Pogledajte svoj ROI"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Jeste li spremni primijeniti ove najbolje prakse za marketing putem e-pošte?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Počnite besplatno automatizirati svoj marketing putem e-pošte."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Često postavljana pitanja"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Sve što vam je potrebno za automatizaciju vašeg marketinga putem e-pošte"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Što su Drip kampanje?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Drip e-mail kampanja, također poznata kao automatizirani slijed e-pošte ili "
+"email drip kampanja, niz je automatiziranih e-poruka koje se šalju "
+"pretplatnicima tijekom vremena.Ove marketinške kampanje putem e-pošte pomažu"
+" u njegovanju potencijalnih klijenata, uključenih korisnika i potiču "
+"konverzije kroz stratešku automatizaciju e-pošte.Naša marketinška platforma "
+"putem e-pošte olakšava stvaranje snažnih kampanja putem e-pošte."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Naučite kako izraditi i poslati svoju prvu email kampanju"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Stvaranje kapajuće e-mail kampanje jednostavno je uz naš softver za "
+"automatizaciju e-mail marketinga.Prijavite se besplatno, izradite svoju "
+"kampanju e-pošte, dodajte nizove e-pošte s zakazanim e-porukama i prepustite"
+" našoj automatizaciji e-pošte ostalo.Možete koristiti naše predloške e-pošte"
+" ili kreirati prilagođene marketinške kampanje e-pošte.Započnite za nekoliko"
+" minuta!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Napravite svoju prvu kampanju"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Besplatni Drip softver za marketing putem e-pošte"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Da!Naša platforma za marketing putem e-pošte je 100%% besplatna zauvijek.Za "
+"razliku od alternativa Mailchimp, Constant Contact, Sendinblue ili "
+"GetResponse, nudimo neograničen broj kampanja e-poštom, neograničen broj "
+"pretplatnika, neograničen broj e-poruka i potpune značajke automatizacije "
+"marketinga e-pošte bez ikakvih troškova.Nije potrebna kreditna kartica, nema"
+" skrivenih naknada."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Koje su značajke marketinga putem e-pošte uključene?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Naš besplatni softver za marketing e-poštom uključuje: kampanje za e-poštu, "
+"automatizirane sekvence e-pošte, zakazivanje e-pošte, analitiku e-pošte i "
+"praćenje e-pošte (stope otvaranja e-pošte, stope klikova na e-poštu), "
+"upravljanje pretplatnicima e-pošte, upravljanje popisom e-pošte, "
+"segmentaciju e-pošte, personalizaciju e-pošte, predloške e-pošte, biltene "
+"e-pošte i sveobuhvatnu automatizaciju marketinga e-pošte.Sve što vam je "
+"potrebno za uspješan email marketing!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Individualne cijene otvaranja e-pošte"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Poboljšajte stope otvaranja e-pošte korištenjem personaliziranih redaka "
+"predmeta e-pošte, slanjem e-pošte u optimalno vrijeme, segmentiranjem popisa"
+" e-pošte i stvaranjem zanimljivog sadržaja e-pošte.Naši alati za analizu "
+"e-pošte pomažu vam u praćenju stope otvaranja e-pošte i optimiziraju vaše "
+"marketinške kampanje e-pošte za bolju izvedbu."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Pokrenite uvoz"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Još uvijek imate pitanja?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Započnite s našim besplatnim softverom za marketing e-poštom i otkrijte "
+"koliko automatizacija e-pošte može biti jednostavna!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Jeste li spremni transformirati svoj marketing putem e-pošte?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7436,15 +8052,15 @@ msgstr ""
 "prihoda, njegovanje potencijalnih klijenata i izgradnju trajnih odnosa s "
 "klijentima."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Pokrenite svoj besplatni račun"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Saznajte više"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Kreditna kartica nije potrebna • Postavljanje za 5 minuta • Otkažite bilo "
@@ -12971,10 +13587,6 @@ msgstr ""
 "Možete izraditi više popisa kako biste segmentirali svoju publiku (npr. "
 "kupci, potencijalni klijenti, partneri)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Dodajte pretplatnike"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Dodajmo sada neke pretplatnike na vaš popis.Imate dvije mogućnosti:"
@@ -13014,10 +13626,6 @@ msgstr "Mapirajte stupce i kliknite"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Uvoz"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Napravite svoju prvu kampanju"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14065,6 +14673,28 @@ msgstr ""
 "Ako ste greškom otkazali pretplatu ili želite ponovno primati e-poštu, "
 "kontaktirajte nas ili se ponovno prijavite."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Sadržaj e-pošte"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "zatražiti informacije"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Format odgovora"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Podnožje"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Povratak na pretplatnike"
@@ -14383,3 +15013,30 @@ msgstr "Pokušajte s drugim imenom ili e-adresom."
 msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Uvezite kontakte ili dodajte pretplatnike ručno da biste ih vidjeli ovdje."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Automatizirani nizovi e-pošte koji njeguju potencijalne klijente, uključene "
+#~ "korisnike i potiču konverzije.Postavite ga jednom i gledajte kako vam prihod"
+#~ " raste."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Zašto Drip kampanje funkcioniraju"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Za razliku od pojedinačnih slanja e-pošte, kapajuće kampanje grade odnose "
+#~ "tijekom vremena"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Personalizirana putovanja"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Stvorite jedinstvena iskustva za svakog pretplatnika.Segmentirajte svoju "
+#~ "publiku i isporučite sadržaj koji odjekuje."

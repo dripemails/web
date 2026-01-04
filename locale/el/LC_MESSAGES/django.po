@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Προσαρμοσμένο HTML υποσέλιδου για μηνύμα
 msgid "Time Zone"
 msgstr "Ζώνη ώρας"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Γραμμή διεύθυνσης 1"
@@ -64,22 +64,22 @@ msgstr "Γραμμή διεύθυνσης 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Διαμέρισμα, σουίτα κ.λπ. (προαιρετικό)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Πόλη"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Πολιτεία/Επαρχία"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "ΤΚ"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Χώρα"
@@ -166,36 +166,36 @@ msgstr "Υποσέλιδο ηλεκτρονικού ταχυδρομείου"
 msgid "Email Footers"
 msgstr "Υποσέλιδα ηλεκτρονικού ταχυδρομείου"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Το κλειδί API αναδημιουργήθηκε με επιτυχία!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Το υποσέλιδο δημιουργήθηκε με επιτυχία!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Δώστε όνομα και περιεχόμενο."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Απαιτείται όνομα υποσέλιδου"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Απαιτείται περιεχόμενο υποσέλιδου"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Το υποσέλιδο ενημερώθηκε με επιτυχία!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Το υποσέλιδο διαγράφηκε με επιτυχία!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Το προεπιλεγμένο υποσέλιδο ενημερώθηκε με επιτυχία!"
 
@@ -242,8 +242,8 @@ msgstr "Λίστα Συνδρομητών"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Ενεργός"
 
@@ -263,7 +263,7 @@ msgstr "Κάντε κλικ στο Count"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Εκστρατεία"
 
@@ -328,7 +328,7 @@ msgstr "Υποσέλιδο"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Email"
 
@@ -376,7 +376,7 @@ msgstr "μήνες"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Στάλθηκε"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Μεταβλητές"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Κατάσταση"
 
@@ -1190,12 +1190,12 @@ msgid "Lists"
 msgstr "Κονίστρα"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Ονομα"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Επώνυμο"
 
@@ -1212,7 +1212,7 @@ msgid "Confirmed At"
 msgstr "Επιβεβαιώθηκε στις"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1585,6 +1585,7 @@ msgid "Remember Me"
 msgstr "Να με θυμάσαι"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Είσοδος"
 
@@ -1826,8 +1827,8 @@ msgid "Preview:"
 msgstr "Πρεμιέρα:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Δημιουργήθηκε"
 
@@ -1909,6 +1910,7 @@ msgid "Logout"
 msgstr "Αποσύνδεση"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Εγγραφείτε Δωρεάν"
 
@@ -2019,7 +2021,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Δεν βρέθηκαν πρότυπα ή καμπάνιες που να ταιριάζουν"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Αδρανής"
 
@@ -2080,7 +2082,7 @@ msgid "Campaign Statistics"
 msgstr "Στατιστικά καμπάνιας"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
@@ -2221,7 +2223,7 @@ msgstr ""
 msgid "Create Campaign"
 msgstr "Δημιουργία καμπάνιας"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Δημιουργία νέας καμπάνιας"
@@ -2288,7 +2290,7 @@ msgstr "Επιλέξτε μια καμπάνια"
 msgid "(Active)"
 msgstr "(Ενεργός)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Δεν υπάρχουν ακόμα καμπάνιες"
 
@@ -2317,7 +2319,7 @@ msgstr "Δεν βρέθηκαν πρότυπα"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Αυτή η καμπάνια δεν έχει ακόμη πρότυπα ηλεκτρονικού ταχυδρομείου."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Δημιουργία προτύπου email"
 
@@ -2359,8 +2361,8 @@ msgstr "Χωρίς υποσέλιδο"
 msgid "Select a footer to append to your email"
 msgstr "Επιλέξτε ένα υποσέλιδο για προσθήκη στο email σας"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2599,7 +2601,7 @@ msgid "Number of Emails"
 msgstr "Αριθμός μηνυμάτων ηλεκτρονικού ταχυδρομείου"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Πρότυπο email"
 
@@ -2824,7 +2826,7 @@ msgid "Generate Email"
 msgstr "Δημιουργία email"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Προεπισκόπηση email"
 
@@ -2837,7 +2839,7 @@ msgid "Send Test Email"
 msgstr "Αποστολή δοκιμαστικού email"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Διεύθυνση Email"
@@ -3220,7 +3222,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Εξαγορά Calenvy από την Google και τη Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3533,7 +3537,7 @@ msgstr "Προβολή λιστών"
 msgid "Emails Sent"
 msgstr "Email που στάλθηκαν"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Προβολή Analytics"
 
@@ -3541,112 +3545,124 @@ msgstr "Προβολή Analytics"
 msgid "Add a List"
 msgstr "Προσθήκη λίστας"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Εμφάνιση %(start)s-%(end)s από %(total)s συνδρομητές"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Ρύθμιση εγγραφής SPF για δυνατότητα παράδοσης email"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Προσθέστε αυτήν την εγγραφή TXT στο DNS του τομέα σας:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Τύπος:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Όνομα/Κεντριστής:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Αξία:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Σημείωμα:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Πώς να προσθέσετε αυτήν την εγγραφή:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Μεταβείτε στη διαχείριση DNS ή στις ρυθμίσεις DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Προσθέστε μια νέα εγγραφή TXT με τις τιμές που φαίνονται παραπάνω"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Αποστολή email & εγγραφή"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Επιλέξτε καμπάνια..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Επιλέξτε πρώτα μια καμπάνια..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Πρόγραμμα"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Αποστολή σε Χ λεπτά"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Αποστολή σε X ώρες"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Αποστολή σε X Ημέρες"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Αποστολή σε Χ Εβδομάδες"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Αποστολή σε Χ Μήνες"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Πρόσφατη δραστηριότητα αποστολής"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Παρακολουθήστε τις αποστολές και τις παραδόσεις email σας"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Φρεσκάρω"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Ώρες που εμφανίζονται σε"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Φόρτωση δραστηριότητας..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Αφαιρέστε τις διαφημίσεις από τα email σας"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3655,15 +3671,15 @@ msgstr ""
 "DripEmails.org στο X ή το ιστολόγιό σας για να αφαιρέσετε διαφημίσεις από "
 "όλα τα email σας."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Οι καμπάνιες σας"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Δράσεις"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3671,137 +3687,160 @@ msgstr ""
 "Δημιουργήστε την πρώτη σας καμπάνια για να ξεκινήσετε την αποστολή "
 "αυτοματοποιημένων email στους συνδρομητές σας."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Οι λίστες συνδρομητών σας"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Δεν υπάρχουν ακόμη λίστες συνδρομητών"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Δημιουργήστε την πρώτη σας λίστα συνδρομητών για να ξεκινήσετε την οργάνωση "
 "των επαφών σας."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Γρήγορες Ενέργειες"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Προσθήκη συνδρομητών"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Πρότυπα email"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Ρυθμίσεις λογαριασμού"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Αφαίρεση διαφήμισης"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Κατάργηση εγγραφής συνδέσμων"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Ζώνη ώρας"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Ρυθμίσεις λογαριασμού"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Υποσέλιδα ηλεκτρονικού ταχυδρομείου"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Συμβουλές & Πόροι"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Οδηγός έναρξης"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Μάθετε πώς να ρυθμίζετε την πρώτη σας καμπάνια email μέσα σε λίγα λεπτά."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Βέλτιστες πρακτικές ηλεκτρονικού ταχυδρομείου"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Συμβουλές για τη δημιουργία email που μετατρέπουν."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Αναπτύξτε τη λίστα συνδρομητών σας"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Στρατηγικές για να αυξήσετε τους συνδρομητές σας."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Απαιτείται φυσική διεύθυνση"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Γραμμή 2 διεύθυνσης (Προαιρετικό)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && κατάσταση"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Δεν υπάρχει δραστηριότητα αποστολής ακόμα"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Χρησιμοποιήστε την παραπάνω φόρμα για να στείλετε ένα email και να δείτε τη "
 "δραστηριότητά σας εδώ."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Να"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Προγραμματισμένος"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Πλήρης προεπισκόπηση HTML"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Έκδοση κειμένου"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Δείξτε λιγότερα"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Απεγγραφή"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Η φόρτωση της δραστηριότητας απέτυχε"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Δοκιμάστε ξανά."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Δοκιμάζω πάλι"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Επιλέξτε ένα πρότυπο email..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Σφάλμα κατά τη φόρτωση των email"
 
@@ -7303,7 +7342,9 @@ msgid "Manage Your Subscribers"
 msgstr "Διαχειριστείτε τους συνδρομητές σας"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
 
 #: .\templates\core\home.html:18
@@ -7333,12 +7374,26 @@ msgstr "Πιστοί Πελάτες"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Αυτοματοποιημένες αλληλουχίες email που τροφοδοτούν δυνητικούς πελάτες, "
-"ενσωματωμένους χρήστες και αυξάνουν τις μετατροπές.Ρυθμίστε το μία φορά και "
-"παρακολουθήστε τα έσοδά σας να αυξάνονται."
+"Το καλύτερο δωρεάν λογισμικό μάρκετινγκ email drip για αυτοματοποιημένες "
+"αλληλουχίες email, καμπάνιες email και αυτοματισμό μάρκετινγκ μέσω "
+"email.Δημιουργήστε ισχυρές καμπάνιες στάγδην email, καλλιεργήστε δυνητικούς "
+"πελάτες με αυτοματοποιημένες αλληλουχίες email και αυξήστε τις μετατροπές με"
+" την πλατφόρμα μάρκετινγκ email μας.Ιδανικό για μάρκετινγκ ηλεκτρονικού "
+"ταχυδρομείου SaaS, μάρκετινγκ ηλεκτρονικού ταχυδρομείου ηλεκτρονικού "
+"εμπορίου, μάρκετινγκ ηλεκτρονικού ταχυδρομείου B2B και μάρκετινγκ "
+"ηλεκτρονικού ταχυδρομείου για μικρές επιχειρήσεις.Ρυθμίστε την "
+"αυτοματοποίηση email σας μέσα σε λίγα λεπτά - εντελώς δωρεάν λογισμικό "
+"μάρκετινγκ email με απεριόριστες καμπάνιες, απεριόριστους συνδρομητές και "
+"απεριόριστα μηνύματα ηλεκτρονικού ταχυδρομείου."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7348,74 +7403,183 @@ msgstr "Ξεκινήστε δωρεάν σήμερα"
 msgid "Unlimited Campaigns"
 msgstr "Απεριόριστες καμπάνιες"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Απεριόριστες καμπάνιες"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Απεριόριστοι Συνδρομητές"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Χωρίς πιστωτική κάρτα"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Ρύθμιση σε 5 λεπτά"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Υψηλότερη απόδοση επένδυσης (ROI)."
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Περισσότερος αρραβώνας"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Ταχύτερη Ανάπτυξη"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Αυτοματοποίηση"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Γιατί λειτουργούν οι καμπάνιες Drip"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Πώς να δημιουργήσετε πρότυπα ηλεκτρονικού ταχυδρομείου"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Σε αντίθεση με τις εκρήξεις μεμονωμένων email, οι καμπάνιες drip χτίζουν "
-"σχέσεις με την πάροδο του χρόνου"
+"Η δημιουργία καμπανιών αυτοματοποίησης email και στάγδην email δεν ήταν ποτέ"
+" πιο εύκολη.Το λογισμικό αυτοματοποίησης ηλεκτρονικού μάρκετινγκ που "
+"διαθέτουμε διευκολύνει τη δημιουργία αυτοματοποιημένων αλληλουχιών email, "
+"τον προγραμματισμό email και την παρακολούθηση αναλυτικών στοιχείων email."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Δημιουργήστε την πρώτη σας καμπάνια"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Δημιουργήστε την καμπάνια σας στα email με το διαισθητικό εργαλείο "
+"μάρκετινγκ μέσω email.Επιλέξτε από όμορφα πρότυπα email ή δημιουργήστε "
+"προσαρμοσμένες καμπάνιες μάρκετινγκ μέσω email."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Ακολουθία email"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Σχεδιάστε αυτοματοποιημένες αλληλουχίες email με εξατομικευμένα "
+"email.Ρυθμίστε τον προγραμματισμό email, τις αλληλουχίες ανάπτυξης email και"
+" τις σειρές καλωσορίσματος για τους συνδρομητές email σας."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Διαχείριση Συνδρομητών"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Εισαγάγετε τη λίστα email σας, τμηματοποιήστε τους συνδρομητές με τη "
+"διαχείριση λίστας email και οργανώστε το κοινό σας email.Ιδανικό για "
+"διαχείριση συνδρομητών email και τμηματοποίηση email."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Τι μπορεί να βελτιστοποιήσει το AI"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Παρακολουθήστε τα ποσοστά ανοίγματος email, τα ποσοστά κλικ email και την "
+"αφοσίωση μέσω email με αναλυτικά στοιχεία email σε πραγματικό "
+"χρόνο.Βελτιώστε την απόδοση επένδυσης (ROI) του μάρκετινγκ ηλεκτρονικού "
+"ταχυδρομείου με πληροφορίες που βασίζονται σε δεδομένα."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Γιατί οι καμπάνιες Drip Email λειτουργούν καλύτερα από τις μεμονωμένες "
+"εκρήξεις email"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Σε αντίθεση με τις εκρήξεις μεμονωμένων μηνυμάτων ηλεκτρονικού ταχυδρομείου,"
+" οι αυτοματοποιημένες καμπάνιες drip email δημιουργούν σχέσεις με την πάροδο"
+" του χρόνου.Η αυτοματοποίηση μάρκετινγκ ηλεκτρονικού ταχυδρομείου σάς βοηθά "
+"να στέλνετε τα σωστά μηνύματα μάρκετινγκ ηλεκτρονικού ταχυδρομείου τη σωστή "
+"στιγμή, βελτιώνοντας την αφοσίωση μέσω email και την απόδοση επένδυσης "
+"μάρκετινγκ μέσω email."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Αυτοματοποιημένη Διατροφή"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Στείλτε το σωστό μήνυμα την κατάλληλη στιγμή.Αυτόματη καθοδήγηση δυνητικών "
 "πελατών μέσω της διοχέτευσής σας χωρίς μη αυτόματη παρέμβαση."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Εξατομικευμένα ταξίδια"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Τμηματοποίηση συνδρομητών"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Δημιουργήστε μοναδικές εμπειρίες για κάθε συνδρομητή.Τμηματοποιήστε το κοινό"
-" σας και προσφέρετε περιεχόμενο που έχει απήχηση."
+"Δημιουργήστε μοναδικές εμπειρίες email για κάθε συνδρομητή με εξατομικευμένα"
+" email.Χρησιμοποιήστε την τμηματοποίηση email και τη διαχείριση λίστας email"
+" για να παραδώσετε στοχευμένες καμπάνιες μάρκετινγκ email που έχουν απήχηση "
+"στο κοινό σας email."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Αποδεδειγμένα Αποτελέσματα"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7424,19 +7588,21 @@ msgstr ""
 "μηνύματα ηλεκτρονικού ταχυδρομείου.Δείτε το μετρήσιμο ROI από την πρώτη "
 "μέρα."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Όλα όσα χρειάζεστε για να πετύχετε"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Ισχυρές δυνατότητες που κάνουν το email marketing αβίαστο"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Έξυπνες ακολουθίες σταγόνων"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7444,11 +7610,11 @@ msgstr ""
 "Δημιουργήστε αλληλουχίες email πολλαπλών βημάτων που αποστέλλονται αυτόματα "
 "με βάση το χρόνο, τη συμπεριφορά ή τα εναύσματα."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Αναλύσεις σε πραγματικό χρόνο"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7456,11 +7622,11 @@ msgstr ""
 "Άνοιγμα κομματιού, κλικ, μετατροπές και έσοδα.Λάβετε αποφάσεις βάσει "
 "δεδομένων με όμορφους πίνακες εργαλείων."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Όμορφα πρότυπα"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7468,14 +7634,14 @@ msgstr ""
 "Επιλέξτε από επαγγελματικά πρότυπα ή δημιουργήστε τα δικά σας.Το πρόγραμμα "
 "επεξεργασίας μεταφοράς και απόθεσης διευκολύνει τη σχεδίαση."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Τμηματοποίηση συνδρομητών"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7483,11 +7649,11 @@ msgstr ""
 "Οργανώστε τους συνδρομητές σε λίστες, προσθέστε ετικέτες σε αυτούς και "
 "στείλτε στοχευμένες καμπάνιες στο σωστό κοινό."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Περιεχόμενο που υποστηρίζεται από AI"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7495,11 +7661,11 @@ msgstr ""
 "Δημιουργήστε συναρπαστικό περιεχόμενο email με AI.Εξοικονομήστε χρόνο ενώ "
 "δημιουργείτε επαγγελματικά, ελκυστικά μηνύματα."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Enterprise Security"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7507,17 +7673,17 @@ msgstr ""
 "Συμβατό με το GDPR, ασφαλή υποδομή και αξιόπιστη παράδοση.Τα δεδομένα και οι"
 " συνδρομητές σας προστατεύονται."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Εμπιστεύονται οι αναπτυσσόμενες επιχειρήσεις"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Συμμετάσχετε σε χιλιάδες επαγγελματίες του μάρκετινγκ που έχουν αλλάξει τη "
 "στρατηγική ηλεκτρονικού ταχυδρομείου τους"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7526,11 +7692,11 @@ msgstr ""
 "Το ποσοστό μετατροπών μας αυξήθηκε κατά 340%% μετά την εφαρμογή καμπανιών "
 "στάγδην.Ο αυτοματισμός μας εξοικονομεί ώρες κάθε εβδομάδα."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Διευθυντής Μάρκετινγκ"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7538,11 +7704,11 @@ msgstr ""
 "Το καλύτερο μέρος;Είναι εντελώς δωρεάν.Έχουμε στείλει πάνω από 50.000 email "
 "χωρίς να πληρώσουμε δεκάρα.Αλλαγή παιχνιδιού."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Ιδρυτής Startup"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7550,16 +7716,482 @@ msgstr ""
 "Η εγκατάσταση κράτησε 5 λεπτά.Η διεπαφή είναι διαισθητική και τα "
 "αποτελέσματα μιλούν από μόνα τους.Η δέσμευσή μας μέσω email διπλασιάστηκε."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Υπεύθυνος ηλεκτρονικού εμπορίου"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Δωρεάν αυτοματοποίηση email marketing για όλους"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Είτε εκτελείτε SaaS email marketing, e-commerce email marketing, B2B email "
+"marketing ή B2C email marketing, το δωρεάν λογισμικό αυτοματοποίησης email "
+"marketing προσαρμόζεται στις ανάγκες σας."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Ενσωματωμένοι χρήστες με αυτοματοποιημένες αλληλουχίες ηλεκτρονικού "
+"ταχυδρομείου, σειρές καλωσορίσματος και εκστρατείες.Ιδανικό για startup "
+"μάρκετινγκ ηλεκτρονικού ταχυδρομείου και εταιρείες λογισμικού."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Ξεκινήστε δωρεάν σήμερα"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Υπεύθυνος ηλεκτρονικού εμπορίου"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Αυξήστε τις πωλήσεις με email εγκαταλελειμμένου καλαθιού, προτάσεις "
+"προϊόντων και μηνύματα ηλεκτρονικού ταχυδρομείου για συναλλαγές.Ενισχύστε "
+"την απόδοση επένδυσης στο email marketing με στοχευμένες καμπάνιες."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Ξεκινώντας"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Καλλιεργήστε δυνητικούς πελάτες με αυτοματισμό μάρκετινγκ ηλεκτρονικού "
+"ταχυδρομείου, τμηματοποίηση email και εξατομικευμένες καμπάνιες ηλεκτρονικού"
+" ταχυδρομείου.Ιδανικό για στρατηγικές μάρκετινγκ email B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Δοκιμάστε τις λειτουργίες AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Email Marketing για μικρές επιχειρήσεις"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Δωρεάν λογισμικό μάρκετινγκ ηλεκτρονικού ταχυδρομείου drip με απεριόριστες "
+"καμπάνιες, συνδρομητές και αυτοματοποιημένες αλληλουχίες email"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Τα καλύτερα δωρεάν εναλλακτικά εργαλεία μάρκετινγκ ηλεκτρονικού ταχυδρομείου"
+" επί πληρωμή"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Γιατί να πληρώσετε για Mailchimp, Constant Contact, Sendinblue ή GetResponse"
+" όταν μπορείτε να λάβετε τις ίδιες δυνατότητες αυτοματισμού μάρκετινγκ "
+"ηλεκτρονικού ταχυδρομείου δωρεάν;Η πλατφόρμα μάρκετινγκ ηλεκτρονικού "
+"ταχυδρομείου μας προσφέρει απεριόριστες καμπάνιες ηλεκτρονικού ταχυδρομείου,"
+" απεριόριστους συνδρομητές και ισχυρό αυτοματισμό ηλεκτρονικού ταχυδρομείου "
+"- όλα αυτά χωρίς κόστος."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Δωρεάν λογισμικό μάρκετινγκ ηλεκτρονικού ταχυδρομείου Drip"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Δωρεάν σχέδιο Forever"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Δεν απαιτούνται κρυφές χρεώσεις, δεν απαιτείται πιστωτική κάρτα.Σε αντίθεση "
+"με τις εναλλακτικές υπηρεσίες Mailchimp ή Constant Contact, είμαστε εντελώς "
+"δωρεάν λογισμικό μάρκετινγκ ηλεκτρονικού ταχυδρομείου."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Απεριόριστες καμπάνιες"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Απεριόριστες καμπάνιες email, απεριόριστα drip email, απεριόριστοι "
+"συνδρομητές, απεριόριστος αυτοματισμός email.Δεν υπάρχουν όρια στην ανάπτυξη"
+" του email marketing."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Ολοκληρωμένες λειτουργίες αυτοματισμού email: καμπάνιες στάγδην email, "
+"προγραμματισμός email, αναλυτικά στοιχεία email, παρακολούθηση email, "
+"τμηματοποίηση email και εξατομίκευση email."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Δωρεάν λογισμικό μάρκετινγκ ηλεκτρονικού ταχυδρομείου Drip"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Πρότυπα email, ενημερωτικά δελτία ηλεκτρονικού ταχυδρομείου, διαχείριση "
+"συνδρομητών email, διαχείριση λίστας email, παρακολούθηση ανοιγμένων τιμών "
+"email, ποσοστά κλικ email και αναλυτικά στοιχεία απόδοσης επένδυσης "
+"μάρκετινγκ μέσω email."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Είστε έτοιμοι για εναλλαγή;"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Γίνετε μέλος χιλιάδων επιχειρήσεων που έχουν αλλάξει από τις ακριβές "
+"υπηρεσίες μάρκετινγκ ηλεκτρονικού ταχυδρομείου στη δωρεάν πλατφόρμα "
+"μάρκετινγκ ηλεκτρονικού ταχυδρομείου μας.Ξεκινήστε με την αυτοματοποίηση "
+"email σε λίγα λεπτά - δεν απαιτείται πιστωτική κάρτα."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Δημιουργήστε δωρεάν λογαριασμό"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Έχετε ήδη λογαριασμό;"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Βέλτιστες πρακτικές σχεδίασης email"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Μάθετε πώς μπορείτε να βελτιώσετε τα ποσοστά ανοίγματος email, να αυξήσετε "
+"τη δέσμευση μέσω email και να μεγιστοποιήσετε την απόδοση επένδυσης "
+"μάρκετινγκ μέσω email με αποδεδειγμένες στρατηγικές μάρκετινγκ μέσω email "
+"και συμβουλές μάρκετινγκ μέσω email."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Μέσος όρος ανοίγματος"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Χρησιμοποιήστε εξατομικευμένες γραμμές θέματος email, στείλτε email σε "
+"βέλτιστους χρόνους και τμηματοποιήστε τη λίστα email σας.Παρακολουθήστε τα "
+"ποσοστά ανοίγματος email με τα αναλυτικά στοιχεία email μας για να "
+"βελτιστοποιήσετε τις καμπάνιες μάρκετινγκ μέσω email."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Βελτιώσεις παρακολούθησης"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Διαχείριση αναπήδησης"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Δημιουργήστε ελκυστικό περιεχόμενο email με εξατομίκευση email, "
+"χρησιμοποιήστε την αυτοματοποίηση email για να στείλετε έγκαιρα μηνύματα και"
+" παρακολουθήστε τα ποσοστά κλικ email.Η αυτοματοποίηση ηλεκτρονικού "
+"μάρκετινγκ που διαθέτουμε σάς βοηθά να στείλετε το σωστό μήνυμα την "
+"κατάλληλη στιγμή."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Περισσότερος αρραβώνας"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Δωρεάν αυτοματισμός μάρκετινγκ μέσω email"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Χρησιμοποιήστε καμπάνιες στάγδην email για την ανάπτυξη δυνητικών πελατών, "
+"εφαρμόστε τμηματοποίηση email για στοχευμένες καμπάνιες και παρακολουθήστε "
+"την απόδοση επένδυσης μάρκετινγκ μέσω email με ολοκληρωμένα αναλυτικά "
+"στοιχεία ηλεκτρονικού ταχυδρομείου.Δωρεάν λογισμικό μάρκετινγκ email που "
+"προσφέρει αποτελέσματα."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Δείτε την απόδοση επένδυσης (ROI)."
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Είστε έτοιμοι να εφαρμόσετε αυτές τις βέλτιστες πρακτικές μάρκετινγκ "
+"ηλεκτρονικού ταχυδρομείου;"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Ξεκινήστε να αυτοματοποιείτε δωρεάν το email marketing."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Συχνές Ερωτήσεις"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Όλα όσα χρειάζεστε για να αυτοματοποιήσετε το email marketing"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Τι είναι οι καμπάνιες σταγόνας;"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Μια καμπάνια ηλεκτρονικού ταχυδρομείου σταγόνας, γνωστή και ως "
+"αυτοματοποιημένη αλληλουχία email ή καμπάνια στάγδην email, είναι μια σειρά "
+"αυτοματοποιημένων μηνυμάτων ηλεκτρονικού ταχυδρομείου που αποστέλλονται σε "
+"συνδρομητές με την πάροδο του χρόνου.Αυτές οι καμπάνιες μάρκετινγκ "
+"ηλεκτρονικού ταχυδρομείου συμβάλλουν στην καλλιέργεια δυνητικών πελατών, "
+"στους χρήστες ενσωματωμένων και στην αύξηση των μετατροπών μέσω της "
+"στρατηγικής αυτοματοποίησης ηλεκτρονικού ταχυδρομείου.Η πλατφόρμα μάρκετινγκ"
+" ηλεκτρονικού ταχυδρομείου μας διευκολύνει τη δημιουργία ισχυρών καμπανιών "
+"drip email."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr ""
+"Μάθετε πώς να δημιουργείτε και να στέλνετε την πρώτη σας καμπάνια email"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Η δημιουργία μιας καμπάνιας ηλεκτρονικού ταχυδρομείου σταγόνας είναι απλή με"
+" το λογισμικό αυτοματοποίησης μάρκετινγκ μέσω email.Εγγραφείτε δωρεάν, "
+"δημιουργήστε την καμπάνια email σας, προσθέστε αλληλουχίες email με "
+"προγραμματισμένα email και αφήστε την αυτοματοποίηση email μας να χειριστεί "
+"τα υπόλοιπα.Μπορείτε να χρησιμοποιήσετε τα πρότυπα email μας ή να "
+"δημιουργήσετε προσαρμοσμένες καμπάνιες μάρκετινγκ μέσω email.Ξεκινήστε σε "
+"λίγα λεπτά!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Δημιουργήστε την πρώτη σας καμπάνια"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Δωρεάν λογισμικό μάρκετινγκ ηλεκτρονικού ταχυδρομείου Drip"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Ναί!Η πλατφόρμα μάρκετινγκ ηλεκτρονικού ταχυδρομείου μας είναι 100%% δωρεάν "
+"για πάντα.Σε αντίθεση με τις εναλλακτικές λύσεις Mailchimp, Constant "
+"Contact, Sendinblue ή GetResponse, προσφέρουμε απεριόριστες καμπάνιες "
+"ηλεκτρονικού ταχυδρομείου, απεριόριστους συνδρομητές, απεριόριστα μηνύματα "
+"ηλεκτρονικού ταχυδρομείου και πλήρεις λειτουργίες αυτοματισμού μάρκετινγκ "
+"ηλεκτρονικού ταχυδρομείου χωρίς κόστος.Δεν απαιτείται πιστωτική κάρτα, χωρίς"
+" κρυφές χρεώσεις."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Ποιες λειτουργίες email marketing περιλαμβάνονται;"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Το δωρεάν λογισμικό μάρκετινγκ email μας περιλαμβάνει: καμπάνιες στάγδην "
+"email, αυτοματοποιημένες αλληλουχίες email, προγραμματισμό email, αναλυτικά "
+"στοιχεία email και παρακολούθηση email (τιμές ανοίγματος email, ποσοστά κλικ"
+" email), διαχείριση συνδρομητών email, διαχείριση λίστας email, "
+"τμηματοποίηση email, εξατομίκευση email, πρότυπα email, ενημερωτικά δελτία "
+"email και ολοκληρωμένη αυτοματοποίηση email marketing.Όλα όσα χρειάζεστε για"
+" επιτυχημένο email marketing!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Μεμονωμένες τιμές ανοίγματος email"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Βελτιώστε τα ποσοστά ανοίγματος email χρησιμοποιώντας εξατομικευμένες "
+"γραμμές θέματος email, στέλνοντας email στη βέλτιστη ώρα, τμηματοποιώντας τη"
+" λίστα email σας και δημιουργώντας ελκυστικό περιεχόμενο email.Τα εργαλεία "
+"ανάλυσης email που διαθέτουμε σάς βοηθούν να παρακολουθείτε τα ποσοστά "
+"ανοίγματος email και να βελτιστοποιείτε τις καμπάνιες μάρκετινγκ μέσω email "
+"για καλύτερη απόδοση."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Ξεκινήστε την εισαγωγή"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Έχετε ακόμα ερωτήσεις;"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Ξεκινήστε με το δωρεάν λογισμικό μάρκετινγκ email μας και ανακαλύψτε πόσο "
+"εύκολη μπορεί να είναι η αυτοματοποίηση email!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr ""
 "Είστε έτοιμοι να μεταμορφώσετε το μάρκετινγκ ηλεκτρονικού ταχυδρομείου σας;"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7568,15 +8200,15 @@ msgstr ""
 "για να αυξήσετε τα έσοδα, να καλλιεργήσετε δυνητικούς πελάτες και να "
 "δημιουργήσετε μόνιμες σχέσεις με τους πελάτες."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Ξεκινήστε τον δωρεάν λογαριασμό σας"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Μάθετε περισσότερα"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Δεν απαιτείται πιστωτική κάρτα • Ρύθμιση σε 5 λεπτά • Ακύρωση ανά πάσα "
@@ -13209,10 +13841,6 @@ msgstr ""
 "Μπορείτε να δημιουργήσετε πολλές λίστες για να τμηματοποιήσετε το κοινό σας "
 "(π.χ. πελάτες, υποψήφιους πελάτες, συνεργάτες)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Προσθήκη συνδρομητών"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13253,10 +13881,6 @@ msgstr "Αντιστοιχίστε τις στήλες και κάντε κλι�
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Εισαγωγή"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Δημιουργήστε την πρώτη σας καμπάνια"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14318,6 +14942,28 @@ msgstr ""
 "Εάν καταργήσατε την εγγραφή σας κατά λάθος ή θέλετε να λαμβάνετε ξανά email,"
 " επικοινωνήστε μαζί μας ή εγγραφείτε ξανά."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Περιεχόμενο email"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "ζητήστε πληροφορίες"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Μορφή απόκρισης"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Υποσέλιδο"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Επιστροφή στους συνδρομητές"
@@ -14643,3 +15289,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Εισαγάγετε επαφές ή προσθέστε συνδρομητές μη αυτόματα για να τους δείτε στη "
 "λίστα εδώ."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Αυτοματοποιημένες αλληλουχίες email που τροφοδοτούν δυνητικούς πελάτες, "
+#~ "ενσωματωμένους χρήστες και αυξάνουν τις μετατροπές.Ρυθμίστε το μία φορά και "
+#~ "παρακολουθήστε τα έσοδά σας να αυξάνονται."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Γιατί λειτουργούν οι καμπάνιες Drip"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Σε αντίθεση με τις εκρήξεις μεμονωμένων email, οι καμπάνιες drip χτίζουν "
+#~ "σχέσεις με την πάροδο του χρόνου"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Εξατομικευμένα ταξίδια"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Δημιουργήστε μοναδικές εμπειρίες για κάθε συνδρομητή.Τμηματοποιήστε το κοινό"
+#~ " σας και προσφέρετε περιεχόμενο που έχει απήχηση."

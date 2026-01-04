@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Vlastní HTML zápatí pro e-maily"
 msgid "Time Zone"
 msgstr "Časové pásmo"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Řádek adresy 1"
@@ -64,22 +64,22 @@ msgstr "Řádek adresy 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Apartmán, apartmá atd. (volitelné)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Město"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Stát/provincie"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "PSČ"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Země"
@@ -166,36 +166,36 @@ msgstr "Zápatí e-mailu"
 msgid "Email Footers"
 msgstr "Zápatí e-mailu"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Klíč API byl úspěšně obnoven!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Zápatí bylo úspěšně vytvořeno!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Uveďte název i obsah."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Název zápatí je povinný"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Obsah zápatí je povinný"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Zápatí bylo úspěšně aktualizováno!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Zápatí bylo úspěšně smazáno!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Výchozí zápatí bylo úspěšně aktualizováno!"
 
@@ -242,8 +242,8 @@ msgstr "Seznam odběratelů"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktivní"
 
@@ -263,7 +263,7 @@ msgstr "Klepněte na tlačítko Počet"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kampaň"
 
@@ -328,7 +328,7 @@ msgstr "Zápatí"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "e-maily"
 
@@ -376,7 +376,7 @@ msgstr "měsíce"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Odesláno"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Proměnné"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Postavení"
 
@@ -1174,12 +1174,12 @@ msgid "Lists"
 msgstr "Seznamy"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Křestní jméno"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Příjmení"
 
@@ -1196,7 +1196,7 @@ msgid "Confirmed At"
 msgstr "Potvrzeno v"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1559,6 +1559,7 @@ msgid "Remember Me"
 msgstr "Pamatuj si mě"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Přihlaste se"
 
@@ -1797,8 +1798,8 @@ msgid "Preview:"
 msgstr "Náhled:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Vytvořeno"
 
@@ -1880,6 +1881,7 @@ msgid "Logout"
 msgstr "Odhlášení"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Zaregistrujte se zdarma"
 
@@ -1989,7 +1991,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Nebyly nalezeny žádné odpovídající šablony ani kampaně"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Neaktivní"
 
@@ -2049,7 +2051,7 @@ msgid "Campaign Statistics"
 msgstr "Statistiky kampaně"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Načítání..."
 
@@ -2187,7 +2189,7 @@ msgstr "Do této kampaně zatím nebyly přidány žádné e-maily."
 msgid "Create Campaign"
 msgstr "Vytvořit kampaň"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Vytvořit novou kampaň"
@@ -2254,7 +2256,7 @@ msgstr "Vyberte kampaň"
 msgid "(Active)"
 msgstr "(Aktivní)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Zatím žádné kampaně"
 
@@ -2281,7 +2283,7 @@ msgstr "Nebyly nalezeny žádné šablony"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Tato kampaň zatím nemá žádné e-mailové šablony."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Vytvořte šablonu e-mailu"
 
@@ -2323,8 +2325,8 @@ msgstr "Bez zápatí"
 msgid "Select a footer to append to your email"
 msgstr "Vyberte zápatí, které chcete připojit k e-mailu"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2550,7 +2552,7 @@ msgid "Number of Emails"
 msgstr "Počet e-mailů"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Šablona e-mailu"
 
@@ -2770,7 +2772,7 @@ msgid "Generate Email"
 msgstr "Generovat e-mail"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Náhled e-mailu"
 
@@ -2783,7 +2785,7 @@ msgid "Send Test Email"
 msgstr "Odeslat zkušební e-mail"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "E-mailová adresa"
@@ -3149,7 +3151,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Akvizice Calenvy společností Google a Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aiden Turgut"
 
 #: .\templates\core\about.html:69
@@ -3456,7 +3460,7 @@ msgstr "Zobrazit seznamy"
 msgid "Emails Sent"
 msgstr "E-maily odeslány"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Zobrazit službu Analytics"
 
@@ -3464,112 +3468,124 @@ msgstr "Zobrazit službu Analytics"
 msgid "Add a List"
 msgstr "Přidat seznam"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Zobrazuje se %(start)s-%(end)s z %(total)s odběratelů"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Nastavení záznamu SPF pro doručování e-mailů"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Přidejte tento záznam TXT do DNS vaší domény:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Typ:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Jméno/hostitel:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Hodnota:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Poznámka:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Jak přidat tento záznam:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Přejděte na správu DNS nebo nastavení DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Přidejte nový záznam TXT s hodnotami uvedenými výše"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Odeslat e-mail a přihlásit se k odběru"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Vyberte kampaň..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Nejprve vyberte kampaň..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Naplánovat"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Odeslat za X minut"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Odeslat do X hodin"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Odeslat za X dní"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Odeslat do X týdnů"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Odeslat do X měsíců"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Nedávná aktivita odesílání"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Sledujte odeslané a doručené e-maily"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Obnovit"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Časy uvedené v"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Načítání aktivity..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Odstraňte reklamy z vašich e-mailů"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3577,15 +3593,15 @@ msgstr ""
 "Vaše e-maily aktuálně obsahují naši značku.Sdílejte o DripEmails.org na X "
 "nebo na svém blogu, abyste odstranili reklamy ze všech svých e-mailů."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Vaše kampaně"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Akce"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3593,135 +3609,158 @@ msgstr ""
 "Vytvořte svou první kampaň a začněte odesílat automatické e-maily svým "
 "odběratelům."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Vaše seznamy odběratelů"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Zatím žádné seznamy odběratelů"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Vytvořte svůj první seznam odběratelů a začněte organizovat své kontakty."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Rychlé akce"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Přidat odběratele"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Šablony e-mailů"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Nastavení účtu"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Odstranění reklamy"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Zrušit odběr odkazů"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Časové pásmo"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Nastavení účtu"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Zápatí e-mailu"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Tipy a zdroje"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Průvodce Začínáme"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Naučte se, jak nastavit svou první e-mailovou kampaň během několika minut."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Doporučené postupy e-mailem"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Tipy pro vytváření e-mailů, které konvertují."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Rozšiřte svůj seznam odběratelů"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategie pro zvýšení počtu odběratelů."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Je vyžadována fyzická adresa"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "2. řádek adresy (volitelné)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && stav"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Zatím žádná aktivita odesílání"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Pomocí výše uvedeného formuláře odešlete e-mail a zde uvidíte svou aktivitu."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Na"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Naplánováno"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Chyba"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Úplný náhled HTML"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Textová verze"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Ukažte méně"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Odhlásit odběr"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Aktivitu se nepodařilo načíst"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Zkuste to prosím znovu."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Zkuste to znovu"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Vyberte šablonu e-mailu..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Chyba při načítání e-mailů"
 
@@ -7141,7 +7180,9 @@ msgid "Manage Your Subscribers"
 msgstr "Spravujte své odběratele"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Bezplatná automatizace e-mailového marketingu"
 
 #: .\templates\core\home.html:18
@@ -7171,12 +7212,24 @@ msgstr "Věrní zákazníci"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Automatizované sekvence e-mailů, které vyživují potenciální zákazníky, "
-"integrují uživatele a podporují konverze.Nastavte si to jednou a sledujte, "
-"jak vaše tržby rostou."
+"Nejlepší bezplatný e-mailový marketingový software pro automatické sekvence "
+"e-mailů, e-mailové kampaně a automatizaci e-mailového marketingu.Vytvářejte "
+"výkonné e-mailové kampaně, pečujte o potenciální zákazníky pomocí "
+"automatických e-mailových sekvencí a zvyšujte konverze pomocí naší platformy"
+" e-mailového marketingu.Ideální pro e-mailový marketing SaaS, e-mailový "
+"marketing elektronického obchodu, e-mailový marketing B2B a e-mailový "
+"marketing pro malé firmy.Nastavte si automatizaci e-mailu během několika "
+"minut – zcela bezplatný software pro e-mailový marketing s neomezeným počtem"
+" kampaní, neomezeným počtem odběratelů a neomezeným přečerpáváním e-mailů."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7186,74 +7239,181 @@ msgstr "Začněte zdarma ještě dnes"
 msgid "Unlimited Campaigns"
 msgstr "Neomezené kampaně"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Neomezené kampaně"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Neomezený počet předplatitelů"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Žádná kreditní karta"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Nastavení za 5 minut"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Vyšší ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Více zapojení"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Rychlejší růst"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Automatizace"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Proč kapkové kampaně fungují"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Jak vytvořit e-mailové šablony"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"Na rozdíl od jednotlivých e-mailových výbuchů, kapkové kampaně budují vztahy"
-" v průběhu času"
+"Nastavení automatizace e-mailů a odkapávacích kampaní nebylo nikdy "
+"jednodušší.Náš software pro automatizaci e-mailového marketingu usnadňuje "
+"vytváření automatických e-mailových sekvencí, plánování e-mailů a sledování "
+"analýzy e-mailů."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Vytvořte svou první kampaň"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Vytvořte si svou e-mailovou kampaň pomocí našeho intuitivního nástroje pro "
+"e-mailový marketing.Vyberte si z krásných e-mailových šablon nebo si "
+"vytvořte vlastní e-mailové marketingové kampaně."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "E-mailová sekvence"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Navrhněte automatizované e-mailové sekvence s personalizovanými "
+"e-maily.Nastavte plánování e-mailů, e-mailové vyživovací sekvence a uvítací "
+"série pro odběratele e-mailů."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Správa předplatitelů"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Importujte svůj e-mailový seznam, segmentujte odběratele pomocí správy "
+"e-mailových seznamů a organizujte své e-mailové publikum.Ideální pro správu "
+"odběratelů e-mailů a segmentaci e-mailů."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Co může AI optimalizovat"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Sledujte míru otevření e-mailu, míru kliknutí na e-mail a zapojení e-mailů "
+"pomocí analýzy e-mailů v reálném čase.Zlepšete návratnost investic do "
+"e-mailového marketingu pomocí statistik založených na datech."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Proč e-mailové odkapávací kampaně fungují lépe než jednorázové e-mailové "
+"výbuchy"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"Na rozdíl od jednorázových e-mailových výbuchů, automatické odkapávací "
+"e-mailové kampaně budují vztahy v průběhu času.Automatizace e-mailového "
+"marketingu vám pomáhá posílat správné e-mailové marketingové zprávy ve "
+"správný čas, zlepšuje zapojení e-mailů a návratnost investic do e-mailového "
+"marketingu."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Automatizované ošetřování"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Odešlete správnou zprávu ve správný čas.Automaticky provádějte potenciální "
 "zákazníky přes svůj trychtýř bez ručního zásahu."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Personalizované cesty"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentace předplatitelů"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Vytvořte jedinečné zážitky pro každého předplatitele.Segmentujte své "
-"publikum a dodávejte obsah, který rezonuje."
+"Vytvořte jedinečné e-mailové zážitky pro každého odběratele pomocí "
+"personalizovaných e-mailů.Pomocí segmentace e-mailů a správy seznamů e-mailů"
+" můžete doručovat cílené e-mailové marketingové kampaně, které osloví vaše "
+"e-mailové publikum."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Prokázané výsledky"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7261,19 +7421,21 @@ msgstr ""
 "Drop kampaně generují 3x vyšší příjmy než jednotlivé e-maily.Podívejte se na"
 " měřitelnou návratnost investic od prvního dne."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Vše, co potřebujete k úspěchu"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Výkonné funkce, které usnadňují e-mailový marketing"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Inteligentní odkapávací sekvence"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7281,11 +7443,11 @@ msgstr ""
 "Vytvářejte vícekrokové e-mailové sekvence, které se automaticky odesílají na"
 " základě načasování, chování nebo spouštěčů."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Analýza v reálném čase"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7293,11 +7455,11 @@ msgstr ""
 "Sledujte otevření, kliknutí, konverze a tržby.Rozhodujte se na základě dat "
 "pomocí krásných řídicích panelů."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Krásné šablony"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7305,14 +7467,14 @@ msgstr ""
 "Vyberte si z profesionálních šablon nebo si vytvořte vlastní.Drag-and-drop "
 "editor usnadňuje návrh."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentace předplatitelů"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7320,11 +7482,11 @@ msgstr ""
 "Uspořádejte odběratele do seznamů, označte je a posílejte cílené kampaně "
 "správnému publiku."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Obsah poháněný umělou inteligencí"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7332,11 +7494,11 @@ msgstr ""
 "Vytvářejte působivý e-mailový obsah pomocí AI.Ušetřete čas při vytváření "
 "profesionálních a poutavých zpráv."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Podniková bezpečnost"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7344,16 +7506,16 @@ msgstr ""
 "V souladu s GDPR, zabezpečená infrastruktura a spolehlivé doručení.Vaše data"
 " a předplatitelé jsou chráněni."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Důvěryhodné rostoucími podniky"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Připojte se k tisícům obchodníků, kteří změnili svou e-mailovou strategii"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7362,11 +7524,11 @@ msgstr ""
 "Náš konverzní poměr se po implementaci kapkacích kampaní zvýšil o 340 % "
 "%.Automatizace nám každý týden ušetří hodiny."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Marketingový ředitel"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7374,11 +7536,11 @@ msgstr ""
 "Nejlepší část?Je to zcela zdarma.Poslali jsme více než 50 000 e-mailů, aniž "
 "bychom zaplatili desetník.Měnič hry."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Zakladatel startupu"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7386,15 +7548,467 @@ msgstr ""
 "Nastavení trvalo 5 minut.Rozhraní je intuitivní a výsledky mluví samy za "
 "sebe.Naše e-mailové zapojení se zdvojnásobilo."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Manažer elektronického obchodu"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Zdarma automatizace e-mailového marketingu pro každého"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Ať už provozujete e-mailový marketing SaaS, e-mailový marketing "
+"elektronického obchodu, e-mailový marketing B2B nebo e-mailové marketingové "
+"kampaně B2C, náš bezplatný software pro automatizaci e-mailového marketingu "
+"se přizpůsobí vašim potřebám."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Bezplatná automatizace e-mailového marketingu"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Zapojte uživatele pomocí automatických e-mailových sekvencí, uvítacích sérií"
+" a živných kampaní.Ideální pro začínající e-mailové marketingové a "
+"softwarové společnosti."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Začněte zdarma ještě dnes"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Manažer elektronického obchodu"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Zvyšte prodej pomocí e-mailů s opuštěným košíkem, doporučení produktů a "
+"transakčních e-mailů.Zvyšte návratnost investic do e-mailového marketingu "
+"pomocí cílených kampaní."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Začínáme"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Bezplatná automatizace e-mailového marketingu"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Vychovávejte potenciální zákazníky pomocí automatizace e-mailového "
+"marketingu, segmentace e-mailů a personalizovaných e-mailových "
+"kampaní.Ideální pro B2B e-mailové marketingové strategie."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Vyzkoušejte funkce AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "E-mailový marketing pro malé firmy"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Bezplatný e-mailový marketingový software s neomezeným počtem kampaní, "
+"odběratelů a automatických e-mailových sekvencí"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Bezplatná automatizace e-mailového marketingu"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Nejlepší bezplatná alternativa k nástrojům placeného e-mailového marketingu"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Proč platit za Mailchimp, Constant Contact, Sendinblue nebo GetResponse, "
+"když stejné funkce pro automatizaci e-mailového marketingu můžete získat "
+"zdarma?Naše e-mailová marketingová platforma nabízí neomezené e-mailové "
+"kampaně, neomezený počet odběratelů a výkonnou automatizaci e-mailů – to vše"
+" zdarma."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Zdarma Drip Email Marketing Software"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Volný plán navždy"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Žádné skryté poplatky, není potřeba kreditní karta.Na rozdíl od "
+"alternativních služeb Mailchimp nebo Constant Contact jsme zcela bezplatný "
+"software pro e-mailový marketing."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Neomezené kampaně"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Neomezené e-mailové kampaně, neomezené odkapávací e-maily, neomezený počet "
+"odběratelů, neomezená automatizace e-mailů.Bez omezení růstu vašeho "
+"e-mailového marketingu."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Bezplatná automatizace e-mailového marketingu"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Kompletní funkce pro automatizaci e-mailů: kampaně s odkapáváním e-mailů, "
+"plánování e-mailů, analýza e-mailů, sledování e-mailů, segmentace e-mailů a "
+"personalizace e-mailů."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Zdarma Drip Email Marketing Software"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Šablony e-mailů, e-mailové zpravodaje, správa odběratelů e-mailů, správa "
+"seznamu e-mailů, sledování sazeb za otevření e-mailů, míry kliknutí na "
+"e-maily a analýza návratnosti investic do e-mailového marketingu."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Jste připraveni přejít?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Připojte se k tisícům firem, které přešly z drahých služeb e-mailového "
+"marketingu na naši bezplatnou platformu e-mailového marketingu.Začněte s "
+"automatizací e-mailů během několika minut – nepotřebujete kreditní kartu."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Vytvořte bezplatný účet"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Už máte účet?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Doporučené postupy návrhu e-mailu"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Naučte se, jak zlepšit míru otevření e-mailů, zvýšit zapojení e-mailů a "
+"maximalizovat návratnost investic do e-mailového marketingu pomocí "
+"osvědčených strategií e-mailového marketingu a tipů pro e-mailový marketing."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Průměrná míra otevření"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Používejte personalizované řádky předmětu e-mailů, posílejte e-maily v "
+"optimálních časech a segmentujte svůj seznam e-mailů.Sledujte míru otevření "
+"e-mailů pomocí naší e-mailové analýzy a optimalizujte své e-mailové "
+"marketingové kampaně."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Vylepšení sledování"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Správa opuštění"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Vytvářejte poutavý e-mailový obsah s personalizací e-mailů, používejte "
+"automatizaci e-mailů k odesílání včasných zpráv a sledujte míru kliknutí na "
+"e-maily.Naše automatizace e-mailového marketingu vám pomůže odeslat správnou"
+" zprávu ve správný čas."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Více zapojení"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Bezplatná automatizace e-mailového marketingu"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Používejte e-mailové odkapávací kampaně pro péči o potenciální zákazníky, "
+"implementujte segmentaci e-mailů pro cílené kampaně a sledujte návratnost "
+"investic do e-mailového marketingu pomocí komplexní e-mailové "
+"analýzy.Bezplatný software pro e-mailový marketing, který přináší výsledky."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Zobrazit návratnost investic"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Jste připraveni implementovat tyto doporučené postupy pro e-mailový "
+"marketing?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Začněte automatizovat svůj e-mailový marketing zdarma."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Často kladené otázky"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr "Vše, co potřebujete k automatizaci e-mailového marketingu"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Co jsou kapací kampaně?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Odkapávací e-mailová kampaň, známá také jako automatická sekvence e-mailů "
+"nebo kampaň s odkapáváním e-mailů, je série automatických e-mailů zasílaných"
+" odběratelům v průběhu času.Tyto e-mailové marketingové kampaně pomáhají "
+"vychovávat potenciální zákazníky, integrovat uživatele a řídit konverze "
+"prostřednictvím strategické automatizace e-mailů.Naše platforma pro "
+"e-mailový marketing usnadňuje vytváření výkonných e-mailových kampaní."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Přečtěte si, jak vytvořit a odeslat svou první e-mailovou kampaň"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Vytvoření e-mailové kampaně je s naším softwarem pro automatizaci "
+"e-mailového marketingu jednoduché.Zaregistrujte se zdarma, vytvořte svou "
+"e-mailovou kampaň, přidejte e-mailové sekvence s naplánovanými e-maily a "
+"nechte naši e-mailovou automatizaci, aby se postarala o zbytek.Můžete použít"
+" naše e-mailové šablony nebo vytvořit vlastní e-mailové marketingové "
+"kampaně.Začněte během několika minut!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Vytvořte svou první kampaň"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Zdarma Drip Email Marketing Software"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Ano!Naše e-mailová marketingová platforma je navždy 100% zdarma.Na rozdíl od"
+" alternativ Mailchimp, Constant Contact, Sendinblue nebo GetResponse "
+"nabízíme neomezené e-mailové kampaně, neomezené množství odběratelů, "
+"neomezené odkapávací e-maily a plné funkce automatizace e-mailového "
+"marketingu zdarma.Nevyžaduje se žádná kreditní karta, žádné skryté poplatky."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Jaké funkce e-mailového marketingu jsou zahrnuty?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Náš bezplatný software pro e-mailový marketing zahrnuje: e-mailové kampaně, "
+"automatické sekvence e-mailů, plánování e-mailů, analýzu e-mailů a sledování"
+" e-mailů (míra otevření e-mailů, míra kliknutí na e-maily), správa "
+"odběratelů e-mailů, správa seznamu e-mailů, segmentace e-mailů, "
+"personalizace e-mailů, e-mailové šablony, e-mailové zpravodaje a komplexní "
+"automatizace e-mailového marketingu.Vše, co potřebujete pro úspěšný "
+"e-mailový marketing!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Individuální sazby za otevření e-mailu"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Zlepšete míru otevření e-mailů pomocí přizpůsobených předmětů e-mailů, "
+"odesílání e-mailů v optimálních časech, segmentování seznamu e-mailů a "
+"vytváření poutavého obsahu e-mailů.Naše nástroje pro analýzu e-mailů vám "
+"pomohou sledovat míru otevření e-mailů a optimalizovat vaše e-mailové "
+"marketingové kampaně pro lepší výkon."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Spusťte import"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Stále máte otázky?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Začněte s naším bezplatným softwarem pro e-mailový marketing a zjistěte, jak"
+" snadná může být automatizace e-mailů!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Jste připraveni změnit svůj e-mailový marketing?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7403,15 +8017,15 @@ msgstr ""
 "příjmů, podpoře potenciálních zákazníků a budování trvalých vztahů se "
 "zákazníky."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Založte si svůj bezplatný účet"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Další informace"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Není vyžadována žádná kreditní karta • Nastavení za 5 minut • Kdykoli zrušit"
@@ -12902,10 +13516,6 @@ msgstr ""
 "Můžete vytvořit více seznamů a segmentovat své publikum (např. zákazníky, "
 "potenciální zákazníky, partnery)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Přidat odběratele"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Nyní do vašeho seznamu přidejte několik odběratelů.Máte dvě možnosti:"
@@ -12945,10 +13555,6 @@ msgstr "Mapujte sloupce a klikněte"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Importovat"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Vytvořte svou první kampaň"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -13993,6 +14599,28 @@ msgstr ""
 "Pokud jste se omylem odhlásili nebo chcete znovu dostávat e-maily, "
 "kontaktujte nás nebo se znovu zaregistrujte."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Obsah e-mailu"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "požádat o informace"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Formát odpovědi"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Zápatí"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Zpět k předplatitelům"
@@ -14308,3 +14936,30 @@ msgstr "Zkuste jiné jméno nebo e-mailovou adresu."
 msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Importujte kontakty nebo přidejte odběratele ručně, abyste je zde viděli."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Automatizované sekvence e-mailů, které vyživují potenciální zákazníky, "
+#~ "integrují uživatele a podporují konverze.Nastavte si to jednou a sledujte, "
+#~ "jak vaše tržby rostou."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Proč kapkové kampaně fungují"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "Na rozdíl od jednotlivých e-mailových výbuchů, kapkové kampaně budují vztahy"
+#~ " v průběhu času"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Personalizované cesty"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Vytvořte jedinečné zážitky pro každého předplatitele.Segmentujte své "
+#~ "publikum a dodávejte obsah, který rezonuje."

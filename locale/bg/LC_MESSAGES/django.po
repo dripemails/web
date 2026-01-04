@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Персонализиран HTML долен колонтитул за �
 msgid "Time Zone"
 msgstr "Часова зона"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Адрес, ред 1"
@@ -64,22 +64,22 @@ msgstr "Ред 2 на адреса"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Апартамент, апартамент и др. (по избор)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "град"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Щат/провинция"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Пощенски код"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "държава"
@@ -166,36 +166,36 @@ msgstr "Долен колонтитул на имейл"
 msgid "Email Footers"
 msgstr "Долен колонтитул на имейл"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "API ключът е регенериран успешно!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Долен колонтитул е създаден успешно!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Моля, посочете име и съдържание."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Името на долния колонтитул е задължително"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Изисква се съдържание на долния колонтитул"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Долен колонтитул е актуализиран успешно!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Долен колонтитул изтрит успешно!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Долен колонтитул по подразбиране е актуализиран успешно!"
 
@@ -242,8 +242,8 @@ msgstr "Списък с абонати"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Активен"
 
@@ -263,7 +263,7 @@ msgstr "Щракнете върху Брой"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Кампания"
 
@@ -328,7 +328,7 @@ msgstr "Долен колонтитул"
 msgid "Email"
 msgstr "Имейл"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "Имейли"
 
@@ -376,7 +376,7 @@ msgstr "месеца"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Изпратено"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Променливи"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Статус"
 
@@ -1179,12 +1179,12 @@ msgid "Lists"
 msgstr "Списъци"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Първо име"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Фамилия"
 
@@ -1201,7 +1201,7 @@ msgid "Confirmed At"
 msgstr "Потвърдено Ат"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1568,6 +1568,7 @@ msgid "Remember Me"
 msgstr "Запомни ме"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Вход"
 
@@ -1809,8 +1810,8 @@ msgid "Preview:"
 msgstr "Преглед:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Създаден"
 
@@ -1892,6 +1893,7 @@ msgid "Logout"
 msgstr "Изход"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Регистрирайте се безплатно"
 
@@ -2001,7 +2003,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Няма намерени съответстващи шаблони или кампании"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Неактивен"
 
@@ -2061,7 +2063,7 @@ msgid "Campaign Statistics"
 msgstr "Статистика на кампанията"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Зареждане..."
 
@@ -2199,7 +2201,7 @@ msgstr "Все още няма добавени имейли към тази к�
 msgid "Create Campaign"
 msgstr "Създаване на кампания"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Създаване на нова кампания"
@@ -2266,7 +2268,7 @@ msgstr "Изберете кампания"
 msgid "(Active)"
 msgstr "(Активен)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Все още няма кампании"
 
@@ -2294,7 +2296,7 @@ msgstr "Няма намерени шаблони"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Тази кампания все още няма имейл шаблони."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Създайте имейл шаблон"
 
@@ -2336,8 +2338,8 @@ msgstr "Без долен колонтитул"
 msgid "Select a footer to append to your email"
 msgstr "Изберете долен колонтитул, който да добавите към вашия имейл"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2565,7 +2567,7 @@ msgid "Number of Emails"
 msgstr "Брой имейли"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Шаблон за имейл"
 
@@ -2786,7 +2788,7 @@ msgid "Generate Email"
 msgstr "Генериране на имейл"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Предварителен преглед на имейл"
 
@@ -2799,7 +2801,7 @@ msgid "Send Test Email"
 msgstr "Изпратете тестов имейл"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Имейл адрес"
@@ -3173,7 +3175,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Придобиване на Calenvy от Google и Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Ейдън Тургут"
 
 #: .\templates\core\about.html:69
@@ -3480,7 +3484,7 @@ msgstr "Преглед на списъци"
 msgid "Emails Sent"
 msgstr "Изпратени имейли"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Вижте Analytics"
 
@@ -3488,112 +3492,124 @@ msgstr "Вижте Analytics"
 msgid "Add a List"
 msgstr "Добавяне на списък"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Показани са %(start)s-%(end)s от %(total)s абонати"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Настройка на SPF запис за доставка на имейл"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Добавете този TXT запис към DNS на вашия домейн:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Тип:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Име/Хост:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Стойност:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Забележка:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Как да добавите този запис:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Отидете до DNS управление или DNS настройки"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Добавете нов TXT запис със стойностите, показани по-горе"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Изпратете имейл и се абонирайте"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Изберете кампания..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Първо изберете кампания..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "График"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Изпратете след X минути"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Изпращане след X часа"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Изпратете след X дни"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Изпратете след X седмици"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Изпращане след X месеца"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Скорошна активност при изпращане"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Проследявайте изпращанията и доставките на вашите имейли"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Опресняване"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Показани времена в"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Зарежда се активност..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Премахнете рекламите от вашите имейли"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3601,15 +3617,15 @@ msgstr ""
 "Вашите имейли в момента включват нашата марка.Споделете за DripEmails.org в "
 "X или вашия блог, за да премахнете рекламите от всичките си имейли."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Вашите кампании"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Действия"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3617,136 +3633,159 @@ msgstr ""
 "Създайте първата си кампания, за да започнете да изпращате автоматизирани "
 "имейли до вашите абонати."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Вашите списъци с абонати"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Все още няма списъци с абонати"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Създайте първия си списък с абонати, за да започнете да организирате "
 "контактите си."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Бързи действия"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Добавяне на абонати"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Шаблони за имейли"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Настройки на акаунта"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Премахване на реклама"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Връзки за отписване"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Часова зона"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Настройки на акаунта"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Долен колонтитул на имейл"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Съвети и ресурси"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Начално ръководство"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Научете как да настроите първата си имейл кампания за минути."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Най-добри практики по имейл"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Съвети за създаване на имейли, които преобразуват."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Разширете своя списък с абонати"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Стратегии за увеличаване на вашите абонати."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Изисква се физически адрес"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Ред 2 на адреса (по избор)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && статус"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Все още няма активност за изпращане"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Използвайте формата по-горе, за да изпратите имейл и да видите активността "
 "си тук."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "до"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Планирано"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Грешка"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Пълен преглед на HTML"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Текстова версия"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Покажи по-малко"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Отписване"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Неуспешно зареждане на дейността"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Моля, опитайте отново."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Опитайте отново"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Изберете имейл шаблон..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Грешка при зареждането на имейлите"
 
@@ -7202,7 +7241,9 @@ msgid "Manage Your Subscribers"
 msgstr "Управлявайте своите абонати"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Безплатна автоматизация на имейл маркетинг"
 
 #: .\templates\core\home.html:18
@@ -7232,12 +7273,24 @@ msgstr "Лоялни клиенти"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Автоматизирани имейл последователности, които подхранват потенциални "
-"клиенти, бордови потребители и стимулират реализации.Задайте го веднъж и "
-"гледайте как приходите ви растат."
+"Най-добрият безплатен софтуер за имейл маркетинг за автоматизирани имейл "
+"последователности, имейл кампании и автоматизация на имейл "
+"маркетинг.Създавайте мощни имейл кампании, подхранвайте потенциални клиенти "
+"с автоматизирани имейл последователности и стимулирайте реализации с нашата "
+"платформа за имейл маркетинг.Перфектен за SaaS имейл маркетинг, имейл "
+"маркетинг за електронна търговия, B2B имейл маркетинг и имейл маркетинг за "
+"малък бизнес.Настройте своята автоматизация на електронната поща за минути -"
+" напълно безплатен софтуер за имейл маркетинг с неограничени кампании, "
+"неограничен брой абонати и неограничен брой имейли."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7247,74 +7300,180 @@ msgstr "Започнете безплатно днес"
 msgid "Unlimited Campaigns"
 msgstr "Неограничени кампании"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Неограничени кампании"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Неограничени абонати"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Няма кредитна карта"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Настройка за 5 минути"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "По-висока ROI"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Повече ангажираност"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "По-бърз растеж"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Автоматизация"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Защо Drip кампаниите работят"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Как да създадете имейл шаблони"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"За разлика от единичните имейли, кампаниите с капково изграждат "
-"взаимоотношения с течение на времето"
+"Настройването на автоматизирани имейли и имейл кампании за капка никога не е"
+" било по-лесно.Нашият софтуер за автоматизация на имейл маркетинг улеснява "
+"създаването на автоматизирани поредици от имейли, планиране на имейли и "
+"проследяване на имейл анализи."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Създайте първата си кампания"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Изградете своя имейл кампания за капково изпращане с нашия интуитивен "
+"инструмент за имейл маркетинг.Изберете от красиви имейл шаблони или създайте"
+" персонализирани имейл маркетингови кампании."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Последователност на имейл"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Проектирайте автоматизирани имейл последователности с персонализирани "
+"имейли.Настройте график за имейли, последователности за поддържане на имейли"
+" и серии за добре дошли за вашите абонати за имейли."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Управление на абонати"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Импортирайте имейл списъка си, сегментирайте абонатите с управление на имейл"
+" списъка и организирайте имейл аудиторията си.Перфектен за управление на "
+"имейл абонати и сегментиране на имейли."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Какво AI може да оптимизира"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Наблюдавайте процентите на отворени имейли, честотите на кликване по имейл и"
+" ангажираността с имейли с имейл анализи в реално време.Подобрете "
+"възвръщаемостта на инвестициите в имейл маркетинг с прозрения, управлявани "
+"от данни."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr "Защо имейл Drip кампаниите работят по-добре от единичните имейли"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"За разлика от единичните имейли, кампаниите с автоматизиран капков имейл "
+"изграждат взаимоотношения с течение на времето.Автоматизацията на имейл "
+"маркетинга ви помага да изпращате правилните имейл маркетингови съобщения в "
+"точното време, подобрявайки ангажираността с имейл и възвръщаемостта на "
+"инвестициите в имейл маркетинга."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Автоматизирано отглеждане"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Изпратете правилното съобщение в точното време.Автоматично насочвайте "
 "изводите през вашата фуния без ръчна намеса."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Персонализирани пътувания"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Сегментиране на абонати"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Създайте уникални преживявания за всеки абонат.Сегментирайте аудиторията си "
-"и предоставяйте съдържание, което резонира."
+"Създайте уникални имейл изживявания за всеки абонат с персонализирани "
+"имейли.Използвайте сегментиране на имейли и управление на списък с имейли, "
+"за да предоставите целеви имейл маркетингови кампании, които резонират с "
+"вашата имейл аудитория."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Доказани резултати"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7322,19 +7481,21 @@ msgstr ""
 "Капковите кампании генерират 3 пъти повече приходи от единичните "
 "имейли.Вижте измерима ROI от първия ден."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Всичко, от което се нуждаете, за да успеете"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr "Мощни функции, които правят имейл маркетинга лесен"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Интелигентни последователности на капене"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7342,11 +7503,11 @@ msgstr ""
 "Създавайте многоетапни имейл последователности, които автоматично се "
 "изпращат въз основа на време, поведение или задействания."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Анализ в реално време"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7354,11 +7515,11 @@ msgstr ""
 "Проследявайте отваряния, кликвания, реализации и приходи.Вземете решения, "
 "базирани на данни, с красиви табла за управление."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Красиви шаблони"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7366,14 +7527,14 @@ msgstr ""
 "Изберете от професионални шаблони или създайте свой собствен.Редакторът с "
 "плъзгане и пускане прави дизайна лесен."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Сегментиране на абонати"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7381,11 +7542,11 @@ msgstr ""
 "Организирайте абонатите в списъци, маркирайте ги и изпращайте насочени "
 "кампании към правилната аудитория."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Задвижвано от AI съдържание"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7393,11 +7554,11 @@ msgstr ""
 "Генерирайте завладяващо имейл съдържание с AI.Спестете време, докато "
 "създавате професионални, ангажиращи съобщения."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Корпоративна сигурност"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7405,17 +7566,17 @@ msgstr ""
 "Съвместимост с GDPR, сигурна инфраструктура и надеждна доставка.Вашите данни"
 " и абонати са защитени."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Доверени на разрастващи се бизнеси"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Присъединете се към хиляди търговци, които са променили своята имейл "
 "стратегия"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7424,11 +7585,11 @@ msgstr ""
 "Нашият процент на реализация се увеличи с 340%% след прилагане на капкови "
 "кампании.Автоматизацията ни спестява часове всяка седмица."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Маркетинг директор"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7436,11 +7597,11 @@ msgstr ""
 "Най-добрата част?Това е напълно безплатно.Изпратихме над 50 000 имейла, без "
 "да платим нито стотинка.Промяна на играта."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Основател на стартъп"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7448,15 +7609,471 @@ msgstr ""
 "Настройката отне 5 минути.Интерфейсът е интуитивен, а резултатите говорят "
 "сами за себе си.Нашият имейл ангажимент се удвои."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Мениджър за електронна търговия"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Безплатна автоматизация на имейл маркетинг за всички"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Независимо дали провеждате SaaS имейл маркетинг, електронна търговия имейл "
+"маркетинг, B2B имейл маркетинг или B2C имейл маркетингови кампании, нашият "
+"безплатен софтуер за автоматизация на имейл маркетинг се адаптира към вашите"
+" нужди."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Безплатна автоматизация на имейл маркетинг"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Вградени потребители с автоматизирани имейл последователности, поздравителни"
+" серии и подхранващи кампании.Перфектен за стартиращи компании за имейл "
+"маркетинг и софтуер."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Започнете безплатно днес"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Мениджър за електронна търговия"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Стимулирайте продажбите с имейли за изоставена количка, препоръки за "
+"продукти и транзакционни имейли.Увеличете възвръщаемостта на инвестициите си"
+" в имейл маркетинг с насочени кампании."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Първи стъпки"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Безплатна автоматизация на имейл маркетинг"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Подхранвайте потенциални клиенти с автоматизация на имейл маркетинга, "
+"сегментиране на имейли и персонализирани имейл кампании.Перфектен за B2B "
+"имейл маркетинг стратегии."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Опитайте AI функции"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Малък бизнес имейл маркетинг"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Безплатен софтуер за имейл маркетинг с неограничен брой кампании, абонати и "
+"автоматизирани имейл последователности"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Безплатна автоматизация на имейл маркетинг"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Най-добрата безплатна алтернатива на платените инструменти за имейл "
+"маркетинг"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Защо да плащате за Mailchimp, Constant Contact, Sendinblue или GetResponse, "
+"когато можете да получите същите функции за автоматизация на имейл маркетинг"
+" безплатно?Нашата платформа за имейл маркетинг предлага неограничени имейл "
+"кампании, неограничен брой абонати и мощна автоматизация на имейли - всичко "
+"това безплатно."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Безплатен Drip имейл маркетинг софтуер"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Безплатен план завинаги"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Без скрити такси, не се изисква кредитна карта.За разлика от алтернативните "
+"услуги на Mailchimp или Constant Contact, ние сме напълно безплатен софтуер "
+"за имейл маркетинг."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Неограничени кампании"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Неограничени имейл кампании, неограничени капкови имейли, неограничени "
+"абонати, неограничена автоматизация на имейли.Няма ограничения за растежа на"
+" вашия имейл маркетинг."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Безплатна автоматизация на имейл маркетинг"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Пълни функции за автоматизация на имейли: имейл кампании, планиране на "
+"имейли, имейл анализи, имейл проследяване, имейл сегментиране и имейл "
+"персонализиране."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Безплатен Drip имейл маркетинг софтуер"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Имейл шаблони, имейл бюлетини, управление на абонати по имейл, управление на"
+" списък с имейли, проследяване на проценти на отворени имейли, проценти на "
+"кликвания по имейл и анализ на ROI за имейл маркетинг."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Готови ли сте за превключване?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Присъединете се към хиляди фирми, които са преминали от скъпи услуги за "
+"имейл маркетинг към нашата безплатна платформа за имейл маркетинг.Започнете "
+"с автоматизацията на имейл за минути - не е необходима кредитна карта."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Създайте безплатен акаунт"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Вече имате акаунт?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Най-добри практики за дизайн на имейл"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Научете как да подобрите процентите на отворени имейли, да увеличите "
+"ангажираността с имейли и да увеличите максимално възвръщаемостта на "
+"инвестициите си в имейл маркетинг с доказани стратегии за имейл маркетинг и "
+"съвети за имейл маркетинг."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Средна отворена ставка"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Използвайте персонализирани редове за теми на имейли, изпращайте имейли в "
+"оптимално време и сегментирайте имейл списъка си.Проследявайте процентите на"
+" отворени имейли с нашия имейл анализ, за ​​да оптимизирате вашите имейл "
+"маркетинг кампании."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Подобрения в проследяването"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Управление на отскачане"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Създавайте ангажиращо имейл съдържание с персонализиране на имейли, "
+"използвайте автоматизация на имейли, за да изпращате навременни съобщения, и"
+" наблюдавайте честотата на кликване по имейл.Нашата автоматизация за имейл "
+"маркетинг ви помага да изпратите правилното съобщение в точното време."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Повече ангажираност"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Безплатна автоматизация на имейл маркетинг"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Използвайте имейл кампании за подаване на имейли за поддържане на "
+"потенциални клиенти, внедрете сегментиране на имейли за целеви кампании и "
+"проследете възвръщаемостта на инвестициите в имейл маркетинга с изчерпателни"
+" имейл анализи.Безплатен софтуер за имейл маркетинг, който дава резултати."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Вижте вашата ROI"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Готови ли сте да приложите тези най-добри практики за имейл маркетинг?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Започнете да автоматизирате своя имейл маркетинг безплатно."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Често задавани въпроси"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Всичко, от което се нуждаете, за да автоматизирате своя имейл маркетинг"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Какво представляват Drip кампаниите?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Капкова имейл кампания, известна още като автоматизирана имейл "
+"последователност или имейл кампания с капково изпращане, е поредица от "
+"автоматизирани имейли, изпращани до абонатите с течение на времето.Тези "
+"имейл маркетингови кампании помагат за поддържане на потенциални клиенти, "
+"бордови потребители и стимулират реализации чрез стратегическа автоматизация"
+" на имейли.Нашата платформа за имейл маркетинг улеснява създаването на мощни"
+" имейл кампании с капково приложение."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Научете как да създадете и изпратите първата си имейл кампания"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Създаването на капкова имейл кампания е лесно с нашия софтуер за "
+"автоматизация на имейл маркетинг.Регистрирайте се безплатно, създайте своя "
+"имейл кампания, добавете имейл последователности с планирани имейли и "
+"оставете нашата автоматизация на имейл да се справи с останалото.Можете да "
+"използвате нашите имейл шаблони или да създадете персонализирани имейл "
+"маркетингови кампании.Започнете след минути!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Създайте първата си кампания"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Безплатен Drip имейл маркетинг софтуер"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"даНашата платформа за имейл маркетинг е 100%% безплатна завинаги.За разлика "
+"от алтернативите Mailchimp, Constant Contact, Sendinblue или GetResponse, "
+"ние предлагаме неограничени имейл кампании, неограничен брой абонати, "
+"неограничен брой имейли и пълни функции за автоматизация на имейл маркетинга"
+" без заплащане.Не се изисква кредитна карта, няма скрити такси."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Какви функции за имейл маркетинг са включени?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Нашият безплатен софтуер за имейл маркетинг включва: кампании за имейл "
+"маркетинг, автоматизирани имейл последователности, имейл график, имейл "
+"анализи и имейл проследяване (проценти на отваряне на имейли, проценти на "
+"кликвания по имейл), управление на имейл абонати, управление на списък с "
+"имейли, сегментиране на имейли, персонализиране на имейли, имейл шаблони, "
+"имейл бюлетини и цялостна автоматизация на имейл маркетинга.Всичко "
+"необходимо за успешен имейл маркетинг!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Индивидуални тарифи за отваряне на имейли"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Подобрете процентите на отворени имейли, като използвате персонализирани "
+"редове за теми на имейли, изпращате имейли в оптимално време, сегментирате "
+"списъка си с имейли и създавате ангажиращо имейл съдържание.Нашите "
+"инструменти за анализ на имейл ви помагат да проследявате процентите на "
+"отворени имейли и да оптимизирате маркетинговите си кампании по имейл за по-"
+"добро представяне."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Стартирайте импортирането"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Все още имате въпроси?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Започнете с нашия безплатен софтуер за имейл маркетинг и открийте колко "
+"лесно може да бъде автоматизирането на имейл!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Готови ли сте да трансформирате своя имейл маркетинг?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7465,15 +8082,15 @@ msgstr ""
 "увеличите приходите, да подхранвате потенциални клиенти и да изграждате "
 "трайни взаимоотношения с клиенти."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Стартирайте своя безплатен акаунт"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Научете повече"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Не се изисква кредитна карта • Настройка за 5 минути • Отказ по всяко време"
@@ -13021,10 +13638,6 @@ msgstr ""
 "Можете да създадете множество списъци, за да сегментирате вашата аудитория "
 "(напр. клиенти, потенциални клиенти, партньори)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Добавяне на абонати"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr ""
@@ -13065,10 +13678,6 @@ msgstr "Картирайте колоните и щракнете"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Импортиране"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Създайте първата си кампания"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14123,6 +14732,28 @@ msgstr ""
 "Ако сте се отписали по погрешка или искате да получавате имейли отново, "
 "моля, свържете се с нас или се регистрирайте отново."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Съдържание на имейл"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "искане на информация"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Формат на отговора"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Долен колонтитул"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Назад към абонатите"
@@ -14443,3 +15074,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Импортирайте контакти или добавете абонати ръчно, за да ги видите изброени "
 "тук."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Автоматизирани имейл последователности, които подхранват потенциални "
+#~ "клиенти, бордови потребители и стимулират реализации.Задайте го веднъж и "
+#~ "гледайте как приходите ви растат."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Защо Drip кампаниите работят"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "За разлика от единичните имейли, кампаниите с капково изграждат "
+#~ "взаимоотношения с течение на времето"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Персонализирани пътувания"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Създайте уникални преживявания за всеки абонат.Сегментирайте аудиторията си "
+#~ "и предоставяйте съдържание, което резонира."

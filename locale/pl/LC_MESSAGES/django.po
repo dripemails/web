@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 10:17-0600\n"
+"POT-Creation-Date: 2026-01-04 14:16-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Niestandardowy kod HTML stopki dla wiadomości e-mail"
 msgid "Time Zone"
 msgstr "Strefa czasowa"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:633
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
 #: .\templates\core\settings.html:45
 msgid "Address Line 1"
 msgstr "Linia adresu 1"
@@ -64,22 +64,22 @@ msgstr "Linia adresu 2"
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Mieszkanie, apartament itp. (opcjonalnie)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:642
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
 #: .\templates\core\settings.html:54
 msgid "City"
 msgstr "Miasto"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:646
+#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
 #: .\templates\core\settings.html:58
 msgid "State/Province"
 msgstr "Stan/Prowincja"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:652
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
 #: .\templates\core\settings.html:64
 msgid "Postal Code"
 msgstr "Kod pocztowy"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:656
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
 #: .\templates\core\settings.html:68
 msgid "Country"
 msgstr "Kraj"
@@ -166,36 +166,36 @@ msgstr "Stopka e-maila"
 msgid "Email Footers"
 msgstr "Stopki e-maili"
 
-#: .\analytics\views.py:326 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
 msgid "API key regenerated successfully!"
 msgstr "Klucz API został pomyślnie zregenerowany!"
 
-#: .\analytics\views.py:355 .\analytics\views.py:392
+#: .\analytics\views.py:426 .\analytics\views.py:463
 #: .\templates\campaigns\template.html:1187
 msgid "Footer created successfully!"
 msgstr "Stopka została utworzona pomyślnie!"
 
-#: .\analytics\views.py:358 .\analytics\views.py:417
+#: .\analytics\views.py:429 .\analytics\views.py:488
 msgid "Please provide both name and content."
 msgstr "Podaj nazwę i treść."
 
-#: .\analytics\views.py:377
+#: .\analytics\views.py:448
 msgid "Footer name is required"
 msgstr "Nazwa stopki jest wymagana"
 
-#: .\analytics\views.py:380
+#: .\analytics\views.py:451
 msgid "Footer content is required"
 msgstr "Treść stopki jest wymagana"
 
-#: .\analytics\views.py:414
+#: .\analytics\views.py:485
 msgid "Footer updated successfully!"
 msgstr "Stopka została pomyślnie zaktualizowana!"
 
-#: .\analytics\views.py:432
+#: .\analytics\views.py:503
 msgid "Footer deleted successfully!"
 msgstr "Stopka została pomyślnie usunięta!"
 
-#: .\analytics\views.py:446
+#: .\analytics\views.py:517
 msgid "Default footer updated successfully!"
 msgstr "Domyślna stopka została pomyślnie zaktualizowana!"
 
@@ -242,8 +242,8 @@ msgstr "Lista subskrybentów"
 
 #: .\campaigns\models.py:24 .\subscribers\models.py:49
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:402
-#: .\templates\core\dashboard.html:460 .\templates\subscribers\list.html:142
+#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
+#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktywny"
 
@@ -263,7 +263,7 @@ msgstr "Kliknij opcję Licz"
 #: .\templates\campaigns\campaign_analysis.html:19
 #: .\templates\campaigns\template.html:293
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:252 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kampania"
 
@@ -328,7 +328,7 @@ msgstr "Stopka"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:383
+#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
 msgid "Emails"
 msgstr "E-maile"
 
@@ -376,7 +376,7 @@ msgstr "miesiące"
 #: .\templates\campaigns\campaign_analysis.html:39
 #: .\templates\campaigns\campaign_analysis.html:117
 #: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:384 .\templates\core\dashboard.html:1021
+#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
 msgid "Sent"
 msgstr "Wysłano"
 
@@ -454,7 +454,7 @@ msgid "Variables"
 msgstr "Zmienne"
 
 #: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:382 .\templates\subscribers\list.html:80
+#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Status"
 
@@ -1177,12 +1177,12 @@ msgid "Lists"
 msgstr "Listy"
 
 #: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:239
+#: .\templates\core\dashboard.html:241
 msgid "First Name"
 msgstr "Imię"
 
 #: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:243
+#: .\templates\core\dashboard.html:245
 msgid "Last Name"
 msgstr "Nazwisko"
 
@@ -1199,7 +1199,7 @@ msgid "Confirmed At"
 msgstr "Potwierdzone o godz"
 
 #: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:459
+#: .\templates\core\dashboard.html:461
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1565,6 +1565,7 @@ msgid "Remember Me"
 msgstr "Zapamiętaj mnie"
 
 #: .\templates\account\login.html:75 .\templates\core\home.html:73
+#: .\templates\core\home.html:749
 msgid "Sign In"
 msgstr "Zalogować się"
 
@@ -1804,8 +1805,8 @@ msgid "Preview:"
 msgstr "Zapowiedź:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:385
-#: .\templates\core\dashboard.html:461
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
+#: .\templates\core\dashboard.html:463
 msgid "Created"
 msgstr "Stworzony"
 
@@ -1888,6 +1889,7 @@ msgid "Logout"
 msgstr "Wyloguj się"
 
 #: .\templates\base.html:144 .\templates\base.html:181
+#: .\templates\core\home.html:509 .\templates\core\home.html:746
 msgid "Sign Up Free"
 msgstr "Zarejestruj się za darmo"
 
@@ -1998,7 +2000,7 @@ msgid "No templates or campaigns found matching"
 msgstr "Nie znaleziono pasujących szablonów ani kampanii"
 
 #: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:404 .\templates\subscribers\list.html:144
+#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Nieaktywny"
 
@@ -2059,7 +2061,7 @@ msgid "Campaign Statistics"
 msgstr "Statystyki kampanii"
 
 #: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1216
+#: .\templates\core\dashboard.html:1218
 msgid "Loading..."
 msgstr "Załadunek..."
 
@@ -2197,7 +2199,7 @@ msgstr "Do tej kampanii nie dodano jeszcze żadnych e-maili."
 msgid "Create Campaign"
 msgstr "Utwórz kampanię"
 
-#: .\templates\campaigns\create.html:9
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Utwórz nową kampanię"
@@ -2264,7 +2266,7 @@ msgstr "Wybierz kampanię"
 msgid "(Active)"
 msgstr "(Aktywny)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:430
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
 msgid "No campaigns yet"
 msgstr "Nie ma jeszcze żadnych kampanii"
 
@@ -2290,7 +2292,7 @@ msgstr "Nie znaleziono szablonów"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Ta kampania nie ma jeszcze żadnych szablonów e-maili."
 
-#: .\templates\campaigns\drafts.html:81
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
 msgid "Create Email Template"
 msgstr "Utwórz szablon e-maila"
 
@@ -2332,8 +2334,8 @@ msgstr "Brak stopki"
 msgid "Select a footer to append to your email"
 msgstr "Wybierz stopkę, którą chcesz dołączyć do wiadomości e-mail"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:267
-#: .\templates\core\dashboard.html:1083
+#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:1085
 #: .\templates\core\feature_email_scheduling.html:44
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Send Now"
@@ -2559,7 +2561,7 @@ msgid "Number of Emails"
 msgstr "Liczba e-maili"
 
 #: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:258
+#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
 msgid "Email Template"
 msgstr "Szablon e-maila"
 
@@ -2782,7 +2784,7 @@ msgid "Generate Email"
 msgstr "Wygeneruj e-mail"
 
 #: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1047
+#: .\templates\core\dashboard.html:1049
 msgid "Email Preview"
 msgstr "Podgląd e-maila"
 
@@ -2795,7 +2797,7 @@ msgid "Send Test Email"
 msgstr "Wyślij e-mail testowy"
 
 #: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:248 .\templates\core\settings.html:20
+#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
 #: .\templates\core\settings.html:26 .\templates\core\settings.html:191
 msgid "Email Address"
 msgstr "Adres e-mail"
@@ -3173,7 +3175,9 @@ msgid "Calenvy acquisition by Google and Microsoft"
 msgstr "Przejęcie Calenvy przez Google i Microsoft"
 
 #: .\templates\core\about.html:67
-msgid "Aiden Turgut"
+#, fuzzy
+#| msgid "Aiden Turgut"
+msgid "Aidan Turgut"
 msgstr "Aidena Turguta"
 
 #: .\templates\core\about.html:69
@@ -3484,7 +3488,7 @@ msgstr "Zobacz listy"
 msgid "Emails Sent"
 msgstr "E-maile wysłane"
 
-#: .\templates\core\dashboard.html:130
+#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
 msgid "View Analytics"
 msgstr "Zobacz Analitykę"
 
@@ -3492,112 +3496,124 @@ msgstr "Zobacz Analitykę"
 msgid "Add a List"
 msgstr "Dodaj listę"
 
-#: .\templates\core\dashboard.html:193
+#: .\templates\core\dashboard.html:178
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            Showing %(start)s-%(end)s of %(total)s subscribers\n"
+#| "                        "
+msgid ""
+"\n"
+"                            Thanks for including %(site_domain)s SPF records in your domain DNS settings!\n"
+"                        "
+msgstr "Wyświetlanie %(start)s-%(end)s z %(total)s subskrybentów"
+
+#: .\templates\core\dashboard.html:195
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Konfiguracja rekordu SPF pod kątem dostarczalności wiadomości e-mail"
 
-#: .\templates\core\dashboard.html:198
+#: .\templates\core\dashboard.html:200
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Dodaj ten rekord TXT do DNS swojej domeny:"
 
-#: .\templates\core\dashboard.html:201
+#: .\templates\core\dashboard.html:203
 msgid "Type:"
 msgstr "Typ:"
 
-#: .\templates\core\dashboard.html:204
+#: .\templates\core\dashboard.html:206
 msgid "Name/Host:"
 msgstr "Imię/Gospodarz:"
 
-#: .\templates\core\dashboard.html:207
+#: .\templates\core\dashboard.html:209
 msgid "Value:"
 msgstr "Wartość:"
 
-#: .\templates\core\dashboard.html:216 .\templates\core\docs\analytics.html:13
+#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
 #: .\templates\core\tutorials\quick_start.html:96
 msgid "Note:"
 msgstr "Notatka:"
 
-#: .\templates\core\dashboard.html:220
+#: .\templates\core\dashboard.html:222
 msgid "How to add this record:"
 msgstr "Jak dodać ten rekord:"
 
-#: .\templates\core\dashboard.html:223
+#: .\templates\core\dashboard.html:225
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Przejdź do zarządzania DNS lub ustawień DNS"
 
-#: .\templates\core\dashboard.html:224
+#: .\templates\core\dashboard.html:226
 msgid "Add a new TXT record with the values shown above"
 msgstr "Dodaj nowy rekord TXT z wartościami pokazanymi powyżej"
 
-#: .\templates\core\dashboard.html:235
+#: .\templates\core\dashboard.html:237
 msgid "Send Email & Subscribe"
 msgstr "Wyślij e-mail i subskrybuj"
 
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Wybierz kampanię..."
 
-#: .\templates\core\dashboard.html:260 .\templates\core\dashboard.html:1236
+#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Najpierw wybierz kampanię..."
 
-#: .\templates\core\dashboard.html:265
+#: .\templates\core\dashboard.html:267
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Harmonogram"
 
-#: .\templates\core\dashboard.html:268
+#: .\templates\core\dashboard.html:270
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Wyślij za X minut"
 
-#: .\templates\core\dashboard.html:269
+#: .\templates\core\dashboard.html:271
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Wyślij w ciągu X godzin"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:272
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Wyślij w ciągu X dni"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:273
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Wyślij za X tygodni"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:274
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Wyślij za X miesięcy"
 
-#: .\templates\core\dashboard.html:298
+#: .\templates\core\dashboard.html:300
 msgid "Recent Send Activity"
 msgstr "Ostatnia aktywność wysyłania"
 
-#: .\templates\core\dashboard.html:299
+#: .\templates\core\dashboard.html:301
 msgid "Track your email sends and deliveries"
 msgstr "Śledź wysyłane i dostarczane wiadomości e-mail"
 
-#: .\templates\core\dashboard.html:306
+#: .\templates\core\dashboard.html:308
 msgid "Refresh"
 msgstr "Odświeżać"
 
-#: .\templates\core\dashboard.html:317
+#: .\templates\core\dashboard.html:319
 msgid "Times shown in"
 msgstr "Czasy pokazane w"
 
-#: .\templates\core\dashboard.html:334 .\templates\core\dashboard.html:1116
+#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
 msgid "Loading activity..."
 msgstr "Ładowanie aktywności..."
 
-#: .\templates\core\dashboard.html:351 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
 msgid "Remove Advertisements from Your Emails"
 msgstr "Usuń reklamy ze swoich e-maili"
 
-#: .\templates\core\dashboard.html:352
+#: .\templates\core\dashboard.html:354
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3606,15 +3622,15 @@ msgstr ""
 "DripEmails.org na X lub swoim blogu, aby usunąć reklamy ze wszystkich swoich"
 " e-maili."
 
-#: .\templates\core\dashboard.html:367
+#: .\templates\core\dashboard.html:369
 msgid "Your Campaigns"
 msgstr "Twoje kampanie"
 
-#: .\templates\core\dashboard.html:387 .\templates\core\dashboard.html:463
+#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
 msgid "Actions"
 msgstr "Działania"
 
-#: .\templates\core\dashboard.html:431
+#: .\templates\core\dashboard.html:433
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3622,137 +3638,160 @@ msgstr ""
 "Utwórz swoją pierwszą kampanię, aby rozpocząć wysyłanie automatycznych "
 "e-maili do swoich subskrybentów."
 
-#: .\templates\core\dashboard.html:444
+#: .\templates\core\dashboard.html:446
 msgid "Your Subscriber Lists"
 msgstr "Twoje listy subskrybentów"
 
-#: .\templates\core\dashboard.html:499
+#: .\templates\core\dashboard.html:501
 msgid "No subscriber lists yet"
 msgstr "Nie ma jeszcze list subskrybentów"
 
-#: .\templates\core\dashboard.html:500
+#: .\templates\core\dashboard.html:502
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Utwórz swoją pierwszą listę subskrybentów i zacznij organizować swoje "
 "kontakty."
 
-#: .\templates\core\dashboard.html:516
+#: .\templates\core\dashboard.html:518
 msgid "Quick Actions"
 msgstr "Szybkie działania"
 
-#: .\templates\core\dashboard.html:553 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:530
+#: .\templates\core\tutorials\quick_start.html:105
+msgid "Add Subscribers"
+msgstr "Dodaj subskrybentów"
+
+#: .\templates\core\dashboard.html:548
+#, fuzzy
+#| msgid "Email Templates"
+msgid "View Email Templates"
+msgstr "Szablony e-maili"
+
+#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Ustawienia konta"
 
-#: .\templates\core\dashboard.html:556 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
 msgid "Ad Removal"
 msgstr "Usuwanie reklam"
 
-#: .\templates\core\dashboard.html:568 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
 msgid "Unsubscribe Links"
 msgstr "Anuluj subskrypcję linków"
 
-#: .\templates\core\dashboard.html:580 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
 msgid "Timezone"
 msgstr "Strefa czasowa"
 
-#: .\templates\core\dashboard.html:600
+#: .\templates\core\dashboard.html:590
+#, fuzzy
+#| msgid "Account Settings"
+msgid "Manage Account Settings"
+msgstr "Ustawienia konta"
+
+#: .\templates\core\dashboard.html:593
+#, fuzzy
+#| msgid "Email Footers"
+msgid "Manage Email Footers"
+msgstr "Stopki e-maili"
+
+#: .\templates\core\dashboard.html:602
 msgid "Tips & Resources"
 msgstr "Wskazówki i zasoby"
 
-#: .\templates\core\dashboard.html:603
+#: .\templates\core\dashboard.html:605
 msgid "Getting Started Guide"
 msgstr "Przewodnik dla początkujących"
 
-#: .\templates\core\dashboard.html:604
+#: .\templates\core\dashboard.html:606
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Dowiedz się, jak skonfigurować pierwszą kampanię e-mailową w kilka minut."
 
-#: .\templates\core\dashboard.html:607
+#: .\templates\core\dashboard.html:609
 msgid "Email Best Practices"
 msgstr "Najlepsze praktyki e-mailowe"
 
-#: .\templates\core\dashboard.html:608
+#: .\templates\core\dashboard.html:610
 msgid "Tips for creating emails that convert."
 msgstr "Wskazówki dotyczące tworzenia e-maili, które konwertują."
 
-#: .\templates\core\dashboard.html:611
+#: .\templates\core\dashboard.html:613
 msgid "Grow Your Subscriber List"
 msgstr "Powiększ swoją listę subskrybentów"
 
-#: .\templates\core\dashboard.html:612
+#: .\templates\core\dashboard.html:614
 msgid "Strategies to increase your subscribers."
 msgstr "Strategie zwiększające liczbę subskrybentów."
 
-#: .\templates\core\dashboard.html:626
+#: .\templates\core\dashboard.html:628
 msgid "Physical Address Required"
 msgstr "Wymagany adres fizyczny"
 
-#: .\templates\core\dashboard.html:637 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
 msgid "Address Line 2 (Optional)"
 msgstr "Linia adresu 2 (opcjonalnie)"
 
-#: .\templates\core\dashboard.html:859 .\templates\core\dashboard.html:1167
-#: .\templates\core\dashboard.html:1364
+#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
+#: .\templates\core\dashboard.html:1366
 msgid "= 200 && status"
 msgstr "= 200 && stanu"
 
-#: .\templates\core\dashboard.html:913
+#: .\templates\core\dashboard.html:915
 msgid "No send activity yet"
 msgstr "Brak aktywności związanej z wysyłaniem"
 
-#: .\templates\core\dashboard.html:914
+#: .\templates\core\dashboard.html:916
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Skorzystaj z powyższego formularza, aby wysłać e-mail i zobaczyć tutaj swoją"
 " aktywność."
 
-#: .\templates\core\dashboard.html:999
+#: .\templates\core\dashboard.html:1001
 msgid "To"
 msgstr "Do"
 
-#: .\templates\core\dashboard.html:1010
+#: .\templates\core\dashboard.html:1012
 msgid "Scheduled"
 msgstr "Zaplanowany"
 
-#: .\templates\core\dashboard.html:1033
+#: .\templates\core\dashboard.html:1035
 msgid "Error"
 msgstr "Błąd"
 
-#: .\templates\core\dashboard.html:1056
+#: .\templates\core\dashboard.html:1058
 msgid "Full HTML Preview"
 msgstr "Pełny podgląd HTML"
 
-#: .\templates\core\dashboard.html:1060
+#: .\templates\core\dashboard.html:1062
 msgid "Text Version"
 msgstr "Wersja tekstowa"
 
-#: .\templates\core\dashboard.html:1064
+#: .\templates\core\dashboard.html:1066
 msgid "Show less"
 msgstr "Pokaż mniej"
 
-#: .\templates\core\dashboard.html:1094
+#: .\templates\core\dashboard.html:1096
 msgid "Unsubscribe"
 msgstr "Zrezygnuj z subskrypcji"
 
-#: .\templates\core\dashboard.html:1142
+#: .\templates\core\dashboard.html:1144
 msgid "Failed to load activity"
 msgstr "Nie udało się wczytać aktywności"
 
-#: .\templates\core\dashboard.html:1143
+#: .\templates\core\dashboard.html:1145
 msgid "Please try again."
 msgstr "Spróbuj ponownie."
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1147
 msgid "Retry"
 msgstr "Spróbować ponownie"
 
-#: .\templates\core\dashboard.html:1222 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Wybierz szablon wiadomości e-mail..."
 
-#: .\templates\core\dashboard.html:1232
+#: .\templates\core\dashboard.html:1234
 msgid "Error loading emails"
 msgstr "Błąd podczas ładowania e-maili"
 
@@ -7206,7 +7245,9 @@ msgid "Manage Your Subscribers"
 msgstr "Zarządzaj swoimi subskrybentami"
 
 #: .\templates\core\home.html:4
-msgid "Free Email Marketing Automation"
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Free Drip Email Marketing Automation"
 msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
 
 #: .\templates\core\home.html:18
@@ -7236,12 +7277,25 @@ msgstr "Lojalni Klienci"
 
 #: .\templates\core\home.html:61
 msgid ""
-"Automated email sequences that nurture leads, onboard users, and drive "
-"conversions. Set it once, and watch your revenue grow."
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 msgstr ""
-"Zautomatyzowane sekwencje e-maili, które pielęgnują potencjalnych klientów, "
-"wdrażają użytkowników i zwiększają konwersje.Ustaw go raz i obserwuj, jak "
-"Twoje przychody rosną."
+"Najlepsze darmowe oprogramowanie do marketingu e-mailowego typu kroplowego "
+"do zautomatyzowanych sekwencji e-maili, kampanii e-mailowych i automatyzacji"
+" marketingu e-mailowego.Twórz skuteczne kampanie e-mailowe, pielęgnuj "
+"potencjalnych klientów dzięki automatycznym sekwencjom e-maili i generuj "
+"konwersje dzięki naszej platformie e-mail marketingu.Idealny do marketingu "
+"e-mailowego SaaS, e-commerce e-mail marketingu, marketingu e-mailowego B2B i"
+" marketingu e-mailowego małych firm.Skonfiguruj automatyzację poczty e-mail "
+"w ciągu kilku minut — całkowicie darmowe oprogramowanie do marketingu "
+"e-mailowego z nieograniczoną liczbą kampanii, nieograniczoną liczbą "
+"subskrybentów i nieograniczoną liczbą e-maili kroplowych."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7251,74 +7305,181 @@ msgstr "Zacznij bezpłatnie już dziś"
 msgid "Unlimited Campaigns"
 msgstr "Nieograniczone kampanie"
 
-#: .\templates\core\home.html:89 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:89
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Drip Emails"
+msgstr "Nieograniczone kampanie"
+
+#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Nieograniczona liczba abonentów"
 
-#: .\templates\core\home.html:95
+#: .\templates\core\home.html:101
 msgid "No Credit Card"
 msgstr "Brak karty kredytowej"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:107
 msgid "Setup in 5 Minutes"
 msgstr "Konfiguracja w 5 minut"
 
-#: .\templates\core\home.html:114
+#: .\templates\core\home.html:120
 msgid "Higher ROI"
 msgstr "Wyższy zwrot z inwestycji"
 
-#: .\templates\core\home.html:118
+#: .\templates\core\home.html:124
 msgid "More Engagement"
 msgstr "Więcej zaangażowania"
 
-#: .\templates\core\home.html:122
+#: .\templates\core\home.html:128
 msgid "Faster Growth"
 msgstr "Szybszy wzrost"
 
-#: .\templates\core\home.html:126
+#: .\templates\core\home.html:132
 msgid "Automation"
 msgstr "Automatyzacja"
 
-#: .\templates\core\home.html:137
-msgid "Why Drip Campaigns Work"
-msgstr "Dlaczego kampanie kroplowe działają"
+#: .\templates\core\home.html:143
+#, fuzzy
+#| msgid "How to Create Email Templates"
+msgid "How to Create Drip Email Campaigns in Minutes"
+msgstr "Jak tworzyć szablony e-maili"
 
-#: .\templates\core\home.html:140
+#: .\templates\core\home.html:146
 msgid ""
-"Unlike single email blasts, drip campaigns build relationships over time"
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 msgstr ""
-"W przeciwieństwie do pojedynczych e-maili, kampanie kroplowe budują relacje "
-"z czasem"
+"Konfigurowanie automatyzacji e-maili i kampanii kroplowych nigdy nie było "
+"łatwiejsze.Nasze oprogramowanie do automatyzacji marketingu e-mailowego "
+"ułatwia tworzenie zautomatyzowanych sekwencji e-maili, planowanie wiadomości"
+" e-mail i śledzenie analityki wiadomości e-mail."
 
-#: .\templates\core\home.html:152
-msgid "Automated Nurturing"
+#: .\templates\core\home.html:155
+#, fuzzy
+#| msgid "Create Your First Campaign"
+msgid "Create Your Campaign"
+msgstr "Utwórz swoją pierwszą kampanię"
+
+#: .\templates\core\home.html:156
+msgid ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
+msgstr ""
+"Zbuduj swoją kampanię kropelkową za pomocą naszego intuicyjnego narzędzia do"
+" marketingu e-mailowego.Wybieraj spośród pięknych szablonów wiadomości "
+"e-mail lub twórz niestandardowe kampanie e-mail marketingowe."
+
+#: .\templates\core\home.html:162
+#, fuzzy
+#| msgid "Email Sequence"
+msgid "Add Email Sequences"
+msgstr "Sekwencja e-maili"
+
+#: .\templates\core\home.html:163
+msgid ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
+msgstr ""
+"Projektuj zautomatyzowane sekwencje e-maili ze spersonalizowanymi "
+"e-mailami.Skonfiguruj harmonogram e-maili, sekwencje obsługi e-maili i serie"
+" powitalne dla subskrybentów poczty e-mail."
+
+#: .\templates\core\home.html:169
+#, fuzzy
+#| msgid "Managing Subscribers"
+msgid "Manage Subscribers"
+msgstr "Zarządzanie subskrybentami"
+
+#: .\templates\core\home.html:170
+msgid ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
+msgstr ""
+"Zaimportuj swoją listę e-mailową, segmentuj subskrybentów za pomocą "
+"zarządzania listą e-mailową i organizuj odbiorców poczty e-mail.Idealny do "
+"zarządzania subskrybentami poczty e-mail i segmentacji poczty e-mail."
+
+#: .\templates\core\home.html:176
+#, fuzzy
+#| msgid "What AI Can Optimize"
+msgid "Track & Optimize"
+msgstr "Co sztuczna inteligencja może zoptymalizować"
+
+#: .\templates\core\home.html:177
+msgid ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
+msgstr ""
+"Monitoruj współczynniki otwarć e-maili, współczynniki kliknięć w e-maile i "
+"zaangażowanie w e-maile dzięki analizom e-maili w czasie "
+"rzeczywistym.Zwiększ zwrot z inwestycji w marketing e-mailowy dzięki "
+"spostrzeżeniom opartym na danych."
+
+#: .\templates\core\home.html:188
+msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
+msgstr ""
+"Dlaczego kampanie kropelkowe e-mailowe działają lepiej niż pojedyncze "
+"wystrzały e-mailowe"
+
+#: .\templates\core\home.html:191
+msgid ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
+msgstr ""
+"W przeciwieństwie do pojedynczych e-maili, automatyczne kampanie e-mailowe "
+"typu kroplowego budują relacje z czasem.Automatyzacja marketingu e-mailowego"
+" pomaga wysyłać właściwe wiadomości e-mail marketingowe we właściwym czasie,"
+" poprawiając zaangażowanie w e-mail i zwrot z inwestycji w e-mail marketing."
+
+#: .\templates\core\home.html:203
+#, fuzzy
+#| msgid "Automated Nurturing"
+msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Zautomatyzowane pielęgnowanie"
 
-#: .\templates\core\home.html:154
+#: .\templates\core\home.html:205
+#, fuzzy
+#| msgid ""
+#| "Send the right message at the right time. Automatically guide leads through "
+#| "your funnel without manual intervention."
 msgid ""
-"Send the right message at the right time. Automatically guide leads through "
-"your funnel without manual intervention."
+"Send the right email marketing message at the right time with email "
+"automation. Automatically guide leads through your funnel with automated "
+"email sequences, email nurture campaigns, and personalized email marketing "
+"without manual intervention."
 msgstr ""
 "Wyślij właściwą wiadomość we właściwym czasie.Automatycznie prowadź leady "
 "przez lejek bez konieczności ręcznej interwencji."
 
-#: .\templates\core\home.html:165
-msgid "Personalized Journeys"
-msgstr "Spersonalizowane podróże"
+#: .\templates\core\home.html:216
+#, fuzzy
+#| msgid "Subscriber Segmentation"
+msgid "Email Personalization & Subscriber Segmentation"
+msgstr "Segmentacja abonentów"
 
-#: .\templates\core\home.html:167
+#: .\templates\core\home.html:218
 msgid ""
-"Create unique experiences for each subscriber. Segment your audience and "
-"deliver content that resonates."
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 msgstr ""
-"Twórz unikalne doświadczenia dla każdego subskrybenta.Segmentuj odbiorców i "
-"dostarczaj treści, które rezonują."
+"Twórz unikalne doświadczenia e-mailowe dla każdego subskrybenta dzięki "
+"spersonalizowanym e-mailom.Korzystaj z segmentacji wiadomości e-mail i "
+"zarządzania listami e-mailowymi, aby dostarczać ukierunkowane kampanie "
+"e-mail marketingu, które odpowiadają Twoim odbiorcom e-maili."
 
-#: .\templates\core\home.html:178
+#: .\templates\core\home.html:229
 msgid "Proven Results"
 msgstr "Sprawdzone wyniki"
 
-#: .\templates\core\home.html:180
+#: .\templates\core\home.html:231
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7326,20 +7487,22 @@ msgstr ""
 "Kampanie kroplowe generują 3 razy większe przychody niż pojedyncze "
 "e-maile.Zobacz mierzalny zwrot z inwestycji już od pierwszego dnia."
 
-#: .\templates\core\home.html:192
+#: .\templates\core\home.html:243
 msgid "Everything You Need to Succeed"
 msgstr "Wszystko, czego potrzebujesz, aby odnieść sukces"
 
-#: .\templates\core\home.html:195
+#: .\templates\core\home.html:246
 msgid "Powerful features that make email marketing effortless"
 msgstr ""
 "Zaawansowane funkcje, dzięki którym marketing e-mailowy staje się łatwy"
 
-#: .\templates\core\home.html:209
-msgid "Smart Drip Sequences"
+#: .\templates\core\home.html:260
+#, fuzzy
+#| msgid "Smart Drip Sequences"
+msgid "Smart Drip Email Sequences"
 msgstr "Inteligentne sekwencje kropli"
 
-#: .\templates\core\home.html:211
+#: .\templates\core\home.html:262
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7347,11 +7510,11 @@ msgstr ""
 "Twórz wieloetapowe sekwencje e-maili, które są wysyłane automatycznie na "
 "podstawie czasu, zachowania lub wyzwalaczy."
 
-#: .\templates\core\home.html:225
+#: .\templates\core\home.html:276
 msgid "Real-Time Analytics"
 msgstr "Analityka w czasie rzeczywistym"
 
-#: .\templates\core\home.html:227
+#: .\templates\core\home.html:278
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7359,11 +7522,11 @@ msgstr ""
 "Śledź otwarcia, kliknięcia, konwersje i przychody.Podejmuj decyzje w oparciu"
 " o dane, korzystając z pięknych pulpitów nawigacyjnych."
 
-#: .\templates\core\home.html:241
+#: .\templates\core\home.html:291
 msgid "Beautiful Templates"
 msgstr "Piękne szablony"
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:293
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7371,14 +7534,14 @@ msgstr ""
 "Wybieraj spośród profesjonalnych szablonów lub twórz własne.Edytor "
 "„przeciągnij i upuść” ułatwia projektowanie."
 
-#: .\templates\core\home.html:257 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentacja abonentów"
 
-#: .\templates\core\home.html:259
+#: .\templates\core\home.html:309
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7386,11 +7549,11 @@ msgstr ""
 "Organizuj subskrybentów w listy, oznaczaj ich i wysyłaj ukierunkowane "
 "kampanie do właściwych odbiorców."
 
-#: .\templates\core\home.html:273
+#: .\templates\core\home.html:323
 msgid "AI-Powered Content"
 msgstr "Treści oparte na sztucznej inteligencji"
 
-#: .\templates\core\home.html:275
+#: .\templates\core\home.html:325
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7398,11 +7561,11 @@ msgstr ""
 "Generuj atrakcyjne treści e-maili za pomocą sztucznej "
 "inteligencji.Oszczędzaj czas, tworząc profesjonalne, angażujące wiadomości."
 
-#: .\templates\core\home.html:289
+#: .\templates\core\home.html:338
 msgid "Enterprise Security"
 msgstr "Bezpieczeństwo przedsiębiorstwa"
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:340
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7410,16 +7573,16 @@ msgstr ""
 "Zgodna z RODO, bezpieczna infrastruktura i niezawodna dostawa.Twoje dane i "
 "subskrybenci są chronieni."
 
-#: .\templates\core\home.html:304
+#: .\templates\core\home.html:353
 msgid "Trusted by Growing Businesses"
 msgstr "Zaufały nam rozwijające się firmy"
 
-#: .\templates\core\home.html:307
+#: .\templates\core\home.html:356
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Dołącz do tysięcy marketerów, którzy zmienili swoją strategię e-mailową"
 
-#: .\templates\core\home.html:324
+#: .\templates\core\home.html:373
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7428,11 +7591,11 @@ msgstr ""
 "Nasz współczynnik konwersji wzrósł o 340%% po wdrożeniu kampanii "
 "kroplowych.Automatyzacja oszczędza nam godziny tygodniowo."
 
-#: .\templates\core\home.html:332
+#: .\templates\core\home.html:381
 msgid "Marketing Director"
 msgstr "Dyrektor Marketingu"
 
-#: .\templates\core\home.html:349
+#: .\templates\core\home.html:398
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7440,11 +7603,11 @@ msgstr ""
 "Najlepsza część?To całkowicie darmowe.Wysłaliśmy ponad 50 000 e-maili, nie "
 "płacąc ani grosza.Zmieniacz gier."
 
-#: .\templates\core\home.html:357
+#: .\templates\core\home.html:406
 msgid "Startup Founder"
 msgstr "Założyciel startupu"
 
-#: .\templates\core\home.html:374
+#: .\templates\core\home.html:423
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7452,15 +7615,477 @@ msgstr ""
 "Konfiguracja zajęła 5 minut.Interfejs jest intuicyjny, a wyniki mówią same "
 "za siebie.Nasze zaangażowanie e-mailowe podwoiło się."
 
-#: .\templates\core\home.html:382
+#: .\templates\core\home.html:431
 msgid "E-commerce Manager"
 msgstr "Menedżer handlu elektronicznego"
 
-#: .\templates\core\home.html:396
+#: .\templates\core\home.html:444
+#, fuzzy
+#| msgid "Free email marketing automation for everyone"
+msgid "Perfect Email Marketing Solution for Every Business"
+msgstr "Darmowa automatyzacja e-mail marketingu dla każdego"
+
+#: .\templates\core\home.html:447
+msgid ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
+msgstr ""
+"Niezależnie od tego, czy prowadzisz marketing e-mailowy SaaS, e-commerce "
+"marketing e-mailowy, marketing e-mailowy B2B czy kampanie e-mailowe B2C, "
+"nasze bezpłatne oprogramowanie do automatyzacji marketingu e-mailowego "
+"dostosuje się do Twoich potrzeb."
+
+#: .\templates\core\home.html:458
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "SaaS Email Marketing"
+msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
+
+#: .\templates\core\home.html:459
+msgid ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
+msgstr ""
+"Przyciągaj użytkowników za pomocą zautomatyzowanych sekwencji e-maili, serii"
+" powitalnych i kampanii pielęgnujących.Idealny dla początkujących firm "
+"zajmujących się marketingiem e-mailowym i oprogramowaniem."
+
+#: .\templates\core\home.html:461
+#, fuzzy
+#| msgid "Start Free Today"
+msgid "Start Free"
+msgstr "Zacznij bezpłatnie już dziś"
+
+#: .\templates\core\home.html:474
+#, fuzzy
+#| msgid "E-commerce Manager"
+msgid "Ecommerce Email Marketing"
+msgstr "Menedżer handlu elektronicznego"
+
+#: .\templates\core\home.html:475
+msgid ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
+msgstr ""
+"Zwiększaj sprzedaż dzięki e-mailom o porzuconych koszykach, rekomendacjom "
+"produktów i e-mailom transakcyjnym.Zwiększ zwrot z inwestycji w marketing "
+"e-mailowy dzięki ukierunkowanym kampaniom."
+
+#: .\templates\core\home.html:477
+#, fuzzy
+#| msgid "Getting Started"
+msgid "Get Started"
+msgstr "Pierwsze kroki"
+
+#: .\templates\core\home.html:490
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "B2B Email Marketing"
+msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
+
+#: .\templates\core\home.html:491
+msgid ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
+msgstr ""
+"Pozyskuj potencjalnych klientów dzięki automatyzacji marketingu e-mailowego,"
+" segmentacji wiadomości e-mail i spersonalizowanym kampaniom "
+"e-mailowym.Idealny do strategii e-mail marketingu B2B."
+
+#: .\templates\core\home.html:493
+#, fuzzy
+#| msgid "Try AI Features"
+msgid "Try Free"
+msgstr "Wypróbuj funkcje AI"
+
+#: .\templates\core\home.html:506
+msgid "Small Business Email Marketing"
+msgstr "Marketing e-mailowy w małych firmach"
+
+#: .\templates\core\home.html:507
+#, fuzzy
+#| msgid ""
+#| "Free drip email marketing software with unlimited campaigns, subscribers, "
+#| "and automated email sequences"
+msgid ""
+"Affordable email marketing for small businesses. Free email marketing "
+"software with unlimited campaigns, subscribers, and email automation "
+"features."
+msgstr ""
+"Bezpłatne oprogramowanie do marketingu e-mailowego kroplowego z "
+"nieograniczoną liczbą kampanii, subskrybentów i automatycznymi sekwencjami "
+"e-maili"
+
+#: .\templates\core\home.html:519
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Start Your Free Email Marketing Campaign Today"
+msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
+
+#: .\templates\core\home.html:533
+msgid "The Best Free Alternative to Paid Email Marketing Tools"
+msgstr ""
+"Najlepsza darmowa alternatywa dla płatnych narzędzi do marketingu "
+"e-mailowego"
+
+#: .\templates\core\home.html:536
+msgid ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
+msgstr ""
+"Po co płacić za Mailchimp, Constant Contact, Sendinblue czy GetResponse, "
+"skoro możesz uzyskać te same funkcje automatyzacji marketingu e-mailowego za"
+" darmo?Nasza platforma e-mail marketingu oferuje nieograniczone kampanie "
+"e-mailowe, nieograniczoną liczbę subskrybentów i zaawansowaną automatyzację "
+"poczty e-mail – a wszystko to bezpłatnie."
+
+#: .\templates\core\home.html:543
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Why Choose Our Free Email Marketing Software?"
+msgstr "Darmowe oprogramowanie do marketingu e-mailowego metodą kroplową"
+
+#: .\templates\core\home.html:550
+#, fuzzy, python-format
+#| msgid "Free Forever Plan"
+msgid "100%% Free Forever"
+msgstr "Bezpłatny plan na zawsze"
+
+#: .\templates\core\home.html:551
+msgid ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
+msgstr ""
+"Żadnych ukrytych opłat, nie jest wymagana karta kredytowa.W przeciwieństwie "
+"do alternatywnych usług Mailchimp lub Constant Contact, jesteśmy całkowicie "
+"darmowym oprogramowaniem do marketingu e-mailowego."
+
+#: .\templates\core\home.html:559
+#, fuzzy
+#| msgid "Unlimited Campaigns"
+msgid "Unlimited Everything"
+msgstr "Nieograniczone kampanie"
+
+#: .\templates\core\home.html:560
+msgid ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
+msgstr ""
+"Nieograniczone kampanie e-mailowe, nieograniczone e-maile kroplowe, "
+"nieograniczona liczba subskrybentów, nieograniczona automatyzacja poczty "
+"e-mail.Brak ograniczeń w rozwoju Twojego marketingu e-mailowego."
+
+#: .\templates\core\home.html:568
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Full Email Marketing Automation"
+msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
+
+#: .\templates\core\home.html:569
+msgid ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
+msgstr ""
+"Kompletne funkcje automatyzacji poczty e-mail: kampanie kroplowe e-maili, "
+"planowanie wiadomości e-mail, analityka wiadomości e-mail, śledzenie "
+"wiadomości e-mail, segmentacja wiadomości e-mail i personalizacja wiadomości"
+" e-mail."
+
+#: .\templates\core\home.html:577
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Best Email Marketing Software Features"
+msgstr "Darmowe oprogramowanie do marketingu e-mailowego metodą kroplową"
+
+#: .\templates\core\home.html:578
+msgid ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
+msgstr ""
+"Szablony e-maili, biuletyny e-mailowe, zarządzanie subskrybentami e-maili, "
+"zarządzanie listami e-mailowymi, śledzenie współczynników otwarć e-maili, "
+"współczynniki kliknięć w e-mailach i analityka ROI marketingu e-mailowego."
+
+#: .\templates\core\home.html:584
+msgid "Ready to Switch?"
+msgstr "Gotowy na zmianę?"
+
+#: .\templates\core\home.html:586
+msgid ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
+msgstr ""
+"Dołącz do tysięcy firm, które przeszły z drogich usług marketingu "
+"e-mailowego na naszą bezpłatną platformę marketingu e-mailowego.Rozpocznij "
+"pracę z automatyzacją poczty e-mail w ciągu kilku minut — nie jest wymagana "
+"karta kredytowa."
+
+#: .\templates\core\home.html:590
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Free Account Now"
+msgstr "Utwórz darmowe konto"
+
+#: .\templates\core\home.html:593
+#, fuzzy
+#| msgid "Already have an account?"
+msgid "Already Have an Account? Sign In"
+msgstr "Masz już konto?"
+
+#: .\templates\core\home.html:607
+#, fuzzy
+#| msgid "Email Design Best Practices"
+msgid "Email Marketing Best Practices & Tips"
+msgstr "Najlepsze praktyki w zakresie projektowania e-maili"
+
+#: .\templates\core\home.html:610
+msgid ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
+msgstr ""
+"Dowiedz się, jak poprawić współczynnik otwarć wiadomości e-mail, zwiększyć "
+"zaangażowanie w wiadomości e-mail i zmaksymalizować zwrot z inwestycji w "
+"marketing e-mailowy, korzystając ze sprawdzonych strategii marketingu "
+"e-mailowego i wskazówek dotyczących marketingu e-mailowego."
+
+#: .\templates\core\home.html:621
+#, fuzzy
+#| msgid "Average Open Rate"
+msgid "Improve Email Open Rates"
+msgstr "Średni współczynnik otwarć"
+
+#: .\templates\core\home.html:622
+msgid ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
+msgstr ""
+"Używaj spersonalizowanych tematów e-maili, wysyłaj e-maile w optymalnych "
+"porach i segmentuj swoją listę e-mailową.Śledź współczynniki otwarć e-maili "
+"za pomocą naszych analiz e-mailowych, aby zoptymalizować kampanie e-mail "
+"marketingowe."
+
+#: .\templates\core\home.html:624
+#, fuzzy
+#| msgid "Tracking Improvements"
+msgid "Start Tracking Opens"
+msgstr "Udoskonalenia śledzenia"
+
+#: .\templates\core\home.html:637
+#, fuzzy
+#| msgid "Bounce management"
+msgid "Increase Email Engagement"
+msgstr "Zarządzanie odbiciami"
+
+#: .\templates\core\home.html:638
+msgid ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
+msgstr ""
+"Twórz angażujące treści e-maili dzięki personalizacji wiadomości e-mail, "
+"korzystaj z automatyzacji poczty e-mail, aby wysyłać wiadomości na czas i "
+"monitoruj współczynniki kliknięć w wiadomości e-mail.Nasza automatyzacja "
+"marketingu e-mailowego pomaga wysłać właściwą wiadomość we właściwym czasie."
+
+#: .\templates\core\home.html:640
+#, fuzzy
+#| msgid "More Engagement"
+msgid "Boost Engagement"
+msgstr "Więcej zaangażowania"
+
+#: .\templates\core\home.html:653
+#, fuzzy
+#| msgid "Free Email Marketing Automation"
+msgid "Maximize Email Marketing ROI"
+msgstr "Bezpłatna automatyzacja marketingu e-mailowego"
+
+#: .\templates\core\home.html:654
+msgid ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
+msgstr ""
+"Korzystaj z kampanii kroplowych e-maili w celu pozyskiwania leadów, wdrażaj "
+"segmentację e-maili dla ukierunkowanych kampanii i śledź ROI z marketingu "
+"e-mailowego za pomocą kompleksowej analityki e-maili.Darmowe oprogramowanie "
+"do marketingu e-mailowego, które zapewnia rezultaty."
+
+#: .\templates\core\home.html:656
+msgid "See Your ROI"
+msgstr "Zobacz swój zwrot z inwestycji"
+
+#: .\templates\core\home.html:665
+msgid "Ready to implement these email marketing best practices?"
+msgstr ""
+"Gotowy do wdrożenia tych najlepszych praktyk w zakresie marketingu "
+"e-mailowego?"
+
+#: .\templates\core\home.html:667
+#, fuzzy
+#| msgid "Start automating your email marketing for free."
+msgid "Start Your Email Marketing Journey Free"
+msgstr "Zacznij bezpłatnie automatyzować swój e-mail marketing."
+
+#: .\templates\core\home.html:681
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Frequently Asked Questions About Email Marketing"
+msgstr "Często zadawane pytania"
+
+#: .\templates\core\home.html:684
+#, fuzzy
+#| msgid "Everything you need to automate your email marketing"
+msgid ""
+"Everything you need to know about drip email campaigns, email automation, "
+"and our free email marketing software."
+msgstr ""
+"Wszystko, czego potrzebujesz, aby zautomatyzować swój e-mail marketing"
+
+#: .\templates\core\home.html:690
+#, fuzzy
+#| msgid "What Are Drip Campaigns?"
+msgid "What is a drip email campaign?"
+msgstr "Czym są kampanie kroplowe?"
+
+#: .\templates\core\home.html:692
+msgid ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
+msgstr ""
+"Kampania kroplowa e-mailowa, znana również jako automatyczna sekwencja "
+"e-maili lub kampania kroplowa e-mailowa, to seria automatycznych e-maili "
+"wysyłanych do subskrybentów w miarę upływu czasu.Te kampanie marketingu "
+"e-mailowego pomagają pozyskiwać potencjalnych klientów, pozyskiwać "
+"użytkowników i zwiększać konwersje poprzez strategiczną automatyzację poczty"
+" e-mail.Nasza platforma do marketingu e-mailowego ułatwia tworzenie "
+"skutecznych kampanii e-mailowych typu kroplówka."
+
+#: .\templates\core\home.html:697
+#, fuzzy
+#| msgid "Learn how to create and send your first email campaign"
+msgid "How do I create a drip email campaign?"
+msgstr "Dowiedz się, jak utworzyć i wysłać pierwszą kampanię e-mailową"
+
+#: .\templates\core\home.html:699
+msgid ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
+msgstr ""
+"Tworzenie kampanii e-mailowej typu drip jest proste dzięki naszemu "
+"oprogramowaniu do automatyzacji marketingu e-mailowego.Zarejestruj się za "
+"darmo, stwórz kampanię e-mailową, dodaj sekwencje e-maili z zaplanowanymi "
+"e-mailami i pozwól, aby nasza automatyzacja poczty e-mail zajęła się "
+"resztą.Możesz skorzystać z naszych szablonów e-maili lub stworzyć "
+"niestandardowe kampanie e-mail marketingowe.Rozpocznij w ciągu kilku minut!"
+
+#: .\templates\core\home.html:703
+#: .\templates\core\tutorials\quick_start.html:134
+msgid "Create Your First Campaign"
+msgstr "Utwórz swoją pierwszą kampanię"
+
+#: .\templates\core\home.html:712
+#, fuzzy
+#| msgid "Free Drip Email Marketing Software"
+msgid "Is this really free email marketing software?"
+msgstr "Darmowe oprogramowanie do marketingu e-mailowego metodą kroplową"
+
+#: .\templates\core\home.html:714
+#, python-format
+msgid ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
+msgstr ""
+"Tak!Nasza platforma e-mail marketingu jest w 100% darmowa na zawsze.W "
+"przeciwieństwie do alternatyw Mailchimp, Constant Contact, Sendinblue czy "
+"GetResponse, oferujemy nieograniczoną liczbę kampanii e-mailowych, "
+"nieograniczoną liczbę subskrybentów, nieograniczoną liczbę e-maili "
+"kroplowych oraz pełne funkcje automatyzacji marketingu e-mailowego bez "
+"żadnych kosztów.Nie wymaga karty kredytowej, żadnych ukrytych opłat."
+
+#: .\templates\core\home.html:719
+msgid "What email marketing features are included?"
+msgstr "Jakie funkcje marketingu e-mailowego są dostępne?"
+
+#: .\templates\core\home.html:721
+msgid ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
+msgstr ""
+"Nasze bezpłatne oprogramowanie do marketingu e-mailowego obejmuje: kampanie "
+"kroplowe e-maili, automatyczne sekwencje wiadomości e-mail, planowanie "
+"wiadomości e-mail, analitykę wiadomości e-mail i śledzenie wiadomości e-mail"
+" (współczynnik otwarć wiadomości e-mail, współczynnik kliknięć w "
+"wiadomościach e-mail), zarządzanie subskrybentami poczty e-mail, zarządzanie"
+" listami e-mailowymi, segmentację wiadomości e-mail, personalizację "
+"wiadomości e-mail, szablony wiadomości e-mail, biuletyny e-mailowe i "
+"kompleksową automatyzację marketingu e-mailowego.Wszystko, czego "
+"potrzebujesz do skutecznego marketingu e-mailowego!"
+
+#: .\templates\core\home.html:726
+#, fuzzy
+#| msgid "Individual email open rates"
+msgid "How can I improve my email open rates?"
+msgstr "Indywidualne współczynniki otwarć e-maili"
+
+#: .\templates\core\home.html:728
+msgid ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
+msgstr ""
+"Popraw współczynnik otwarć e-maili, używając spersonalizowanych tematów "
+"e-maili, wysyłając e-maile w optymalnym czasie, segmentując listę e-mailową "
+"i tworząc angażującą treść e-maili.Nasze narzędzia do analizy poczty e-mail "
+"pomagają śledzić współczynniki otwarć wiadomości e-mail i optymalizować "
+"kampanie e-mail marketingowe w celu uzyskania lepszej wydajności."
+
+#: .\templates\core\home.html:732
+#, fuzzy
+#| msgid "Start Import"
+msgid "Start Improving Opens"
+msgstr "Rozpocznij import"
+
+#: .\templates\core\home.html:742
+msgid "Still Have Questions?"
+msgstr "Nadal masz pytania?"
+
+#: .\templates\core\home.html:743
+msgid ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
+msgstr ""
+"Zacznij korzystać z naszego bezpłatnego oprogramowania do marketingu "
+"e-mailowego i odkryj, jak łatwa może być automatyzacja poczty e-mail!"
+
+#: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Gotowy na transformację swojego marketingu e-mailowego?"
 
-#: .\templates\core\home.html:399
+#: .\templates\core\home.html:765
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7469,15 +8094,15 @@ msgstr ""
 "zwiększania przychodów, pozyskiwania potencjalnych klientów i budowania "
 "trwałych relacji z klientami."
 
-#: .\templates\core\home.html:403
+#: .\templates\core\home.html:769
 msgid "Start Your Free Account"
 msgstr "Uruchom swoje darmowe konto"
 
-#: .\templates\core\home.html:409
+#: .\templates\core\home.html:775
 msgid "Learn More"
 msgstr "Dowiedz się więcej"
 
-#: .\templates\core\home.html:413
+#: .\templates\core\home.html:779
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Nie wymaga karty kredytowej • Konfiguracja w 5 minut • Anuluj w dowolnym "
@@ -13040,10 +13665,6 @@ msgstr ""
 "Możesz utworzyć wiele list, aby posegmentować odbiorców (np. klientów, "
 "potencjalnych klientów, partnerów)."
 
-#: .\templates\core\tutorials\quick_start.html:105
-msgid "Add Subscribers"
-msgstr "Dodaj subskrybentów"
-
 #: .\templates\core\tutorials\quick_start.html:109
 msgid "Now let's add some subscribers to your list. You have two options:"
 msgstr "Teraz dodajmy kilku subskrybentów do Twojej listy.Masz dwie opcje:"
@@ -13083,10 +13704,6 @@ msgstr "Zamapuj kolumny i kliknij"
 #: .\templates\core\tutorials\quick_start.html:125
 msgid "Import"
 msgstr "Import"
-
-#: .\templates\core\tutorials\quick_start.html:134
-msgid "Create Your First Campaign"
-msgstr "Utwórz swoją pierwszą kampanię"
 
 #: .\templates\core\tutorials\quick_start.html:138
 msgid "Time to create and send your first email campaign:"
@@ -14147,6 +14764,28 @@ msgstr ""
 "Jeśli przez pomyłkę zrezygnowałeś z subskrypcji lub chcesz ponownie "
 "otrzymywać e-maile, skontaktuj się z nami lub zarejestruj się ponownie."
 
+#: .\templates\rest_framework\base.html:76
+#, fuzzy
+#| msgid "Email Content"
+msgid "main content"
+msgstr "Treść e-maila"
+
+#: .\templates\rest_framework\base.html:80
+msgid "request info"
+msgstr "poproś o informacje"
+
+#: .\templates\rest_framework\base.html:83
+#, fuzzy
+#| msgid "Response Format"
+msgid "response info"
+msgstr "Forma odpowiedzi"
+
+#: .\templates\rest_framework\base.html:92
+#, fuzzy
+#| msgid "Footer"
+msgid "footer"
+msgstr "Stopka"
+
 #: .\templates\subscribers\add.html:15
 msgid "Back to subscribers"
 msgstr "Wracając do abonentów"
@@ -14466,3 +15105,30 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Zaimportuj kontakty lub dodaj subskrybentów ręcznie, aby zobaczyć ich tutaj "
 "na liście."
+
+#~ msgid ""
+#~ "Automated email sequences that nurture leads, onboard users, and drive "
+#~ "conversions. Set it once, and watch your revenue grow."
+#~ msgstr ""
+#~ "Zautomatyzowane sekwencje e-maili, które pielęgnują potencjalnych klientów, "
+#~ "wdrażają użytkowników i zwiększają konwersje.Ustaw go raz i obserwuj, jak "
+#~ "Twoje przychody rosną."
+
+#~ msgid "Why Drip Campaigns Work"
+#~ msgstr "Dlaczego kampanie kroplowe działają"
+
+#~ msgid ""
+#~ "Unlike single email blasts, drip campaigns build relationships over time"
+#~ msgstr ""
+#~ "W przeciwieństwie do pojedynczych e-maili, kampanie kroplowe budują relacje "
+#~ "z czasem"
+
+#~ msgid "Personalized Journeys"
+#~ msgstr "Spersonalizowane podróże"
+
+#~ msgid ""
+#~ "Create unique experiences for each subscriber. Segment your audience and "
+#~ "deliver content that resonates."
+#~ msgstr ""
+#~ "Twórz unikalne doświadczenia dla każdego subskrybenta.Segmentuj odbiorców i "
+#~ "dostarczaj treści, które rezonują."

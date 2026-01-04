@@ -498,9 +498,13 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
 # Ollama Configuration for AI Email Generation (Production)
 # For local Ollama (same server as Django), use: http://localhost:11434
 # For remote Ollama server, set OLLAMA_BASE_URL in .env file
+# Model options:
+#   - llama3.2:1b (smallest, ~1.3GB RAM, fastest, good for limited memory)
+#   - llama3.2:3b (balanced, ~2.0GB RAM, better quality)
+#   - llama3.1:8b (largest, ~4.8GB RAM, best quality, requires more memory)
 # See docs/ai/ollama_remote_setup.md for setup instructions
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')  # Default to smaller model for limited memory
 OLLAMA_TIMEOUT = int(os.environ.get('OLLAMA_TIMEOUT', '300'))  # Timeout in seconds (default: 300 = 5 minutes)
 
 # Admin site customization

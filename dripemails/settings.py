@@ -352,6 +352,10 @@ SITE_URL = env('SITE_URL')
 # Ollama Configuration for AI Email Generation (Local Development)
 # For local development, Ollama should be running on localhost
 # To use a remote Ollama server, update OLLAMA_BASE_URL in .env file
+# Model options:
+#   - llama3.2:1b (smallest, ~1.3GB RAM, fastest, good for limited memory)
+#   - llama3.2:3b (balanced, ~2.0GB RAM, better quality)
+#   - llama3.1:8b (largest, ~4.8GB RAM, best quality, requires more memory)
 # See docs/ai/ollama_remote_setup.md for setup instructions
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL')
 OLLAMA_MODEL = env('OLLAMA_MODEL')

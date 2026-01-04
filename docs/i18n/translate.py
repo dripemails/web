@@ -379,8 +379,17 @@ class POTranslator:
         
         # Get target language code for translation service
         target_lang_code = self.get_language_code(target_lang)
+        is_fallback_to_english = target_lang_code == 'en' and target_lang.lower() != 'en'
+        
+        if is_fallback_to_english:
+            print(f"\n  ⚠ Language {target_lang.upper()} not well supported - using English fallback")
+            print(f"  ℹ️  Entries will be kept in English (better than no translation)")
+        
         print(f"\n  🔄 Starting translation: {target_lang.upper()} -> {target_lang_code.upper()}")
         print(f"  📊 Will translate {empty_entries} entries using {self.num_threads} thread(s)...")
+        
+        # Store fallback flag for use in worker threads
+        self._current_fallback_to_english = is_fallback_to_english
         
         # Collect entries that need translation
         entries_to_translate = []
@@ -471,12 +480,23 @@ class POTranslator:
                                     thread_translator, entry.msgid, target_lang_code
                                 )
                                 
+                                # Check if this is a fallback to English (use stored flag)
+                                is_fallback_to_english = getattr(self, '_current_fallback_to_english', False)
+                                
                                 if translated and translated != entry.msgid:
                                     entry.msgstr = translated
                                     worker_translated += 1
                                     if worker_translated <= 3:
                                         with self.lock:
                                             print(f"  ✓ Thread {worker_id} success: '{entry.msgid[:40]}...' -> '{translated[:40]}...'")
+                                elif is_fallback_to_english and translated == entry.msgid:
+                                    # For fallback languages, accept English as valid translation
+                                    entry.msgstr = translated
+                                    worker_translated += 1
+                                    # Only log first few to avoid spam
+                                    if worker_translated <= 5:
+                                        with self.lock:
+                                            print(f"  ℹ️  [{target_lang.upper()}] Thread {worker_id} using English (fallback): '{entry.msgid[:60]}...'")
                                 else:
                                     worker_errors += 1
                                     with self.lock:

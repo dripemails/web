@@ -7340,6 +7340,14 @@ msgid ""
 "completely free email marketing software with unlimited campaigns, unlimited"
 " subscribers, and unlimited drip emails."
 msgstr ""
+"The best free drip email marketing software for automated email sequences, "
+"email campaigns, and email marketing automation. Create powerful email drip "
+"campaigns, nurture leads with automated email sequences, and drive "
+"conversions with our email marketing platform. Perfect for SaaS email "
+"marketing, ecommerce email marketing, B2B email marketing, and small "
+"business email marketing. Set up your email automation in minutes - "
+"completely free email marketing software with unlimited campaigns, unlimited"
+" subscribers, and unlimited drip emails."
 
 #: .\templates\core\home.html:67
 msgid "Start Free Today"
@@ -7395,6 +7403,9 @@ msgid ""
 "Our email marketing automation software makes it simple to create automated "
 "email sequences, schedule emails, and track email analytics."
 msgstr ""
+"Setting up email automation and email drip campaigns has never been easier. "
+"Our email marketing automation software makes it simple to create automated "
+"email sequences, schedule emails, and track email analytics."
 
 #: .\templates\core\home.html:155
 #, fuzzy
@@ -7408,6 +7419,9 @@ msgid ""
 "Choose from beautiful email templates or create custom email marketing "
 "campaigns."
 msgstr ""
+"Build your email drip campaign with our intuitive email marketing tool. "
+"Choose from beautiful email templates or create custom email marketing "
+"campaigns."
 
 #: .\templates\core\home.html:162
 #, fuzzy
@@ -7421,6 +7435,9 @@ msgid ""
 "scheduling, email nurture sequences, and welcome series for your email "
 "subscribers."
 msgstr ""
+"Design automated email sequences with personalized emails. Set up email "
+"scheduling, email nurture sequences, and welcome series for your email "
+"subscribers."
 
 #: .\templates\core\home.html:169
 #, fuzzy
@@ -7434,6 +7451,9 @@ msgid ""
 "organize your email audience. Perfect for email subscriber management and "
 "email segmentation."
 msgstr ""
+"Import your email list, segment subscribers with email list management, and "
+"organize your email audience. Perfect for email subscriber management and "
+"email segmentation."
 
 #: .\templates\core\home.html:176
 #, fuzzy
@@ -7446,10 +7466,12 @@ msgid ""
 "Monitor email open rates, email click rates, and email engagement with real-"
 "time email analytics. Improve email marketing ROI with data-driven insights."
 msgstr ""
+"Monitor email open rates, email click rates, and email engagement with real-"
+"time email analytics. Improve email marketing ROI with data-driven insights."
 
 #: .\templates\core\home.html:188
 msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
-msgstr ""
+msgstr "Why Email Drip Campaigns Work Better Than Single Email Blasts"
 
 #: .\templates\core\home.html:191
 msgid ""
@@ -7458,6 +7480,10 @@ msgid ""
 " email marketing messages at the right time, improving email engagement and "
 "email marketing ROI."
 msgstr ""
+"Unlike single email blasts, automated drip email campaigns build "
+"relationships over time. Email marketing automation helps you send the right"
+" email marketing messages at the right time, improving email engagement and "
+"email marketing ROI."
 
 #: .\templates\core\home.html:203
 #, fuzzy
@@ -7491,6 +7517,9 @@ msgid ""
 "emails. Use email segmentation and email list management to deliver targeted"
 " email marketing campaigns that resonate with your email audience."
 msgstr ""
+"Create unique email experiences for each subscriber with personalized "
+"emails. Use email segmentation and email list management to deliver targeted"
+" email marketing campaigns that resonate with your email audience."
 
 #: .\templates\core\home.html:229
 msgid "Proven Results"
@@ -7652,6 +7681,9 @@ msgid ""
 "email marketing, or B2C email marketing campaigns, our free email marketing "
 "automation software adapts to your needs."
 msgstr ""
+"Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
+"email marketing, or B2C email marketing campaigns, our free email marketing "
+"automation software adapts to your needs."
 
 #: .\templates\core\home.html:458
 #, fuzzy
@@ -7664,6 +7696,8 @@ msgid ""
 "Onboard users with automated email sequences, welcome series, and nurture "
 "campaigns. Perfect for startup email marketing and software companies."
 msgstr ""
+"Onboard users with automated email sequences, welcome series, and nurture "
+"campaigns. Perfect for startup email marketing and software companies."
 
 #: .\templates\core\home.html:461
 #, fuzzy
@@ -7683,6 +7717,9 @@ msgid ""
 "transactional emails. Boost your email marketing ROI with targeted "
 "campaigns."
 msgstr ""
+"Drive sales with abandoned cart emails, product recommendations, and "
+"transactional emails. Boost your email marketing ROI with targeted "
+"campaigns."
 
 #: .\templates\core\home.html:477
 #, fuzzy
@@ -7701,6 +7738,8 @@ msgid ""
 "Nurture leads with email marketing automation, email segmentation, and "
 "personalized email campaigns. Perfect for B2B email marketing strategies."
 msgstr ""
+"Nurture leads with email marketing automation, email segmentation, and "
+"personalized email campaigns. Perfect for B2B email marketing strategies."
 
 #: .\templates\core\home.html:493
 #, fuzzy
@@ -7710,7 +7749,7 @@ msgstr "Leka likarolo tsa AI"
 
 #: .\templates\core\home.html:506
 msgid "Small Business Email Marketing"
-msgstr ""
+msgstr "Small Business Email Marketing"
 
 #: .\templates\core\home.html:507
 #, fuzzy
@@ -7733,7 +7772,7 @@ msgstr "Free Email Marketing Automation"
 
 #: .\templates\core\home.html:533
 msgid "The Best Free Alternative to Paid Email Marketing Tools"
-msgstr ""
+msgstr "The Best Free Alternative to Paid Email Marketing Tools"
 
 #: .\templates\core\home.html:536
 msgid ""
@@ -7742,6 +7781,10 @@ msgid ""
 "marketing platform offers unlimited email campaigns, unlimited subscribers, "
 "and powerful email automation - all at no cost."
 msgstr ""
+"Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
+" can get the same email marketing automation features for free? Our email "
+"marketing platform offers unlimited email campaigns, unlimited subscribers, "
+"and powerful email automation - all at no cost."
 
 #: .\templates\core\home.html:543
 #, fuzzy
@@ -7761,6 +7804,9 @@ msgid ""
 "Constant Contact alternative services, we're completely free email marketing"
 " software."
 msgstr ""
+"No hidden fees, no credit card required. Unlike Mailchimp alternative or "
+"Constant Contact alternative services, we're completely free email marketing"
+" software."
 
 #: .\templates\core\home.html:559
 #, fuzzy
@@ -7773,6 +7819,8 @@ msgid ""
 "Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
 "unlimited email automation. No limits on your email marketing growth."
 msgstr ""
+"Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
+"unlimited email automation. No limits on your email marketing growth."
 
 #: .\templates\core\home.html:568
 #, fuzzy
@@ -7786,6 +7834,9 @@ msgid ""
 "email analytics, email tracking, email segmentation, and email "
 "personalization."
 msgstr ""
+"Complete email automation features: email drip campaigns, email scheduling, "
+"email analytics, email tracking, email segmentation, and email "
+"personalization."
 
 #: .\templates\core\home.html:577
 #, fuzzy
@@ -7799,10 +7850,13 @@ msgid ""
 "management, email open rates tracking, email click rates, and email "
 "marketing ROI analytics."
 msgstr ""
+"Email templates, email newsletters, email subscriber management, email list "
+"management, email open rates tracking, email click rates, and email "
+"marketing ROI analytics."
 
 #: .\templates\core\home.html:584
 msgid "Ready to Switch?"
-msgstr ""
+msgstr "Ready to Switch?"
 
 #: .\templates\core\home.html:586
 msgid ""
@@ -7810,6 +7864,9 @@ msgid ""
 "services to our free email marketing platform. Get started with email "
 "automation in minutes - no credit card required."
 msgstr ""
+"Join thousands of businesses who've switched from expensive email marketing "
+"services to our free email marketing platform. Get started with email "
+"automation in minutes - no credit card required."
 
 #: .\templates\core\home.html:590
 #, fuzzy
@@ -7835,6 +7892,9 @@ msgid ""
 "maximize your email marketing ROI with proven email marketing strategies and"
 " email marketing tips."
 msgstr ""
+"Learn how to improve email open rates, increase email engagement, and "
+"maximize your email marketing ROI with proven email marketing strategies and"
+" email marketing tips."
 
 #: .\templates\core\home.html:621
 #, fuzzy
@@ -7848,6 +7908,9 @@ msgid ""
 "segment your email list. Track email open rates with our email analytics to "
 "optimize your email marketing campaigns."
 msgstr ""
+"Use personalized email subject lines, send emails at optimal times, and "
+"segment your email list. Track email open rates with our email analytics to "
+"optimize your email marketing campaigns."
 
 #: .\templates\core\home.html:624
 #, fuzzy
@@ -7867,6 +7930,9 @@ msgid ""
 "automation to send timely messages, and monitor email click rates. Our email"
 " marketing automation helps you send the right message at the right time."
 msgstr ""
+"Create engaging email content with email personalization, use email "
+"automation to send timely messages, and monitor email click rates. Our email"
+" marketing automation helps you send the right message at the right time."
 
 #: .\templates\core\home.html:640
 #, fuzzy
@@ -7886,14 +7952,17 @@ msgid ""
 "for targeted campaigns, and track email marketing ROI with comprehensive "
 "email analytics. Free email marketing software that delivers results."
 msgstr ""
+"Use email drip campaigns for lead nurturing, implement email segmentation "
+"for targeted campaigns, and track email marketing ROI with comprehensive "
+"email analytics. Free email marketing software that delivers results."
 
 #: .\templates\core\home.html:656
 msgid "See Your ROI"
-msgstr ""
+msgstr "See Your ROI"
 
 #: .\templates\core\home.html:665
 msgid "Ready to implement these email marketing best practices?"
-msgstr ""
+msgstr "Ready to implement these email marketing best practices?"
 
 #: .\templates\core\home.html:667
 #, fuzzy
@@ -7931,6 +8000,11 @@ msgid ""
 " drive conversions through strategic email automation. Our email marketing "
 "platform makes it easy to create powerful drip email campaigns."
 msgstr ""
+"A drip email campaign, also known as an automated email sequence or email "
+"drip campaign, is a series of automated emails sent to subscribers over "
+"time. These email marketing campaigns help nurture leads, onboard users, and"
+" drive conversions through strategic email automation. Our email marketing "
+"platform makes it easy to create powerful drip email campaigns."
 
 #: .\templates\core\home.html:697
 #, fuzzy
@@ -7947,6 +8021,11 @@ msgid ""
 "can use our email templates or create custom email marketing campaigns. Get "
 "started in minutes!"
 msgstr ""
+"Creating a drip email campaign is simple with our email marketing automation"
+" software. Sign up for free, create your email campaign, add email sequences"
+" with scheduled emails, and let our email automation handle the rest. You "
+"can use our email templates or create custom email marketing campaigns. Get "
+"started in minutes!"
 
 #: .\templates\core\home.html:703
 #: .\templates\core\tutorials\quick_start.html:134
@@ -7968,10 +8047,15 @@ msgid ""
 " full email marketing automation features at no cost. No credit card "
 "required, no hidden fees."
 msgstr ""
+"Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
+"Constant Contact, Sendinblue, or GetResponse alternatives, we offer "
+"unlimited email campaigns, unlimited subscribers, unlimited drip emails, and"
+" full email marketing automation features at no cost. No credit card "
+"required, no hidden fees."
 
 #: .\templates\core\home.html:719
 msgid "What email marketing features are included?"
-msgstr ""
+msgstr "What email marketing features are included?"
 
 #: .\templates\core\home.html:721
 msgid ""
@@ -7982,6 +8066,12 @@ msgid ""
 "email newsletters, and comprehensive email marketing automation. Everything "
 "you need for successful email marketing!"
 msgstr ""
+"Our free email marketing software includes: email drip campaigns, automated "
+"email sequences, email scheduling, email analytics and email tracking (email"
+" open rates, email click rates), email subscriber management, email list "
+"management, email segmentation, email personalization, email templates, "
+"email newsletters, and comprehensive email marketing automation. Everything "
+"you need for successful email marketing!"
 
 #: .\templates\core\home.html:726
 #, fuzzy
@@ -7996,6 +8086,10 @@ msgid ""
 "email content. Our email analytics tools help you track email open rates and"
 " optimize your email marketing campaigns for better performance."
 msgstr ""
+"Improve email open rates by using personalized email subject lines, sending "
+"emails at optimal times, segmenting your email list, and creating engaging "
+"email content. Our email analytics tools help you track email open rates and"
+" optimize your email marketing campaigns for better performance."
 
 #: .\templates\core\home.html:732
 #, fuzzy
@@ -8005,13 +8099,15 @@ msgstr "Qala ho Kenya"
 
 #: .\templates\core\home.html:742
 msgid "Still Have Questions?"
-msgstr ""
+msgstr "Still Have Questions?"
 
 #: .\templates\core\home.html:743
 msgid ""
 "Get started with our free email marketing software and discover how easy "
 "email automation can be!"
 msgstr ""
+"Get started with our free email marketing software and discover how easy "
+"email automation can be!"
 
 #: .\templates\core\home.html:762
 msgid "Ready to Transform Your Email Marketing?"
@@ -14746,7 +14842,7 @@ msgstr "Email Content"
 
 #: .\templates\rest_framework\base.html:80
 msgid "request info"
-msgstr ""
+msgstr "request info"
 
 #: .\templates\rest_framework\base.html:83
 #, fuzzy

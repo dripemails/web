@@ -966,13 +966,18 @@ def generate_email_with_ai(request, campaign_id):
             })
     
     except ValueError as e:
+        logger.error(f"AI email generation error (ValueError): {str(e)}")
         return Response({
             'error': str(e),
             'hint': 'Please ensure Ollama is running (ollama serve) and the llama3.1:8b model is available (ollama pull llama3.1:8b)'
         }, status=400)
     except Exception as e:
+        import traceback
+        logger.error(f"AI email generation error (Exception): {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
         return Response({
-            'error': _('Failed to generate email: {}').format(str(e))
+            'error': _('Failed to generate email: {}').format(str(e)),
+            'detail': str(e)
         }, status=500)
 
 

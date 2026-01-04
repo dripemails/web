@@ -845,18 +845,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 email_id: templateId || null
             };
             
+            // Create AbortController for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+            
             fetch(`/api/campaigns/${campaignId}/generate-email/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCookie('csrftoken')
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                signal: controller.signal
             })
             .then(response => {
+                clearTimeout(timeoutId);
                 if (!response.ok) {
-                    return response.json().then(errorData => {
-                        throw new Error(errorData.error || 'Failed to generate email');
+                    // Try to get error details from response
+                    return response.text().then(text => {
+                        let errorData = null;
+                        try {
+                            errorData = JSON.parse(text);
+                        } catch (e) {
+                            // Response is not JSON
+                            throw new Error(`Server error (${response.status}): ${text.substring(0, 200)}`);
+                        }
+                        const errorMsg = errorData.error || errorData.detail || errorData.message || 'Failed to generate email';
+                        throw new Error(errorMsg);
                     });
                 }
                 return response.json();
@@ -873,13 +888,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                clearTimeout(timeoutId);
+                console.error('AI Generation Error:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                
                 let errorMsg = '{% trans "Failed to generate email. " %}';
-                if (error.message.includes('API') || error.message.includes('token')) {
-                    errorMsg += '{% trans "Make sure Ollama is running (ollama serve) and the llama3.1:8b model is available (ollama pull llama3.1:8b)." %}';
-                } else {
+                
+                // Handle different error types
+                if (error.name === 'AbortError' || error.message.includes('aborted')) {
+                    errorMsg += '{% trans "Request timed out after 5 minutes. The AI generation is taking too long. Please try again or check server resources." %}';
+                } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMsg += '{% trans "Network error: Could not connect to server. Please check your connection and try again." %}';
+                } else if (error.message.includes('Ollama')) {
                     errorMsg += error.message;
+                } else if (error.message.includes('timeout') || error.message.includes('Timeout')) {
+                    errorMsg += '{% trans "Request timed out. The AI generation is taking too long. Please try again." %}';
+                } else if (error.message.includes('500') || error.message.includes('server error')) {
+                    errorMsg += error.message + ' {% trans "Please check the server logs for more details." %}';
+                } else if (error.message.includes('404') || error.message.includes('not found')) {
+                    errorMsg += error.message + ' {% trans "Please ensure Ollama is running on the server." %}';
+                } else {
+                    // Show the actual error message
+                    errorMsg += error.message || '{% trans "Unknown error occurred. Please check the browser console and server logs for details." %}';
                 }
+                
                 alert(errorMsg);
             })
             .finally(() => {

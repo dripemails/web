@@ -143,3 +143,4 @@ If you want to switch models:
 
 **Default recommendation:** `llama3.2:1b` unless you have specific quality requirements and enough memory.
 
+

@@ -107,7 +107,6 @@ class SubscriberAdmin(admin.ModelAdmin):
             return format_html('<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 3px;">ACTIVE</span>')
         return format_html('<span style="background: #dc3545; color: white; padding: 3px 8px; border-radius: 3px;">INACTIVE</span>')
     is_active_badge.short_description = 'Status'
-    is_active_badge.boolean = True
     
     def confirmed_badge(self, obj):
         """Display confirmation status with badge."""
@@ -115,7 +114,6 @@ class SubscriberAdmin(admin.ModelAdmin):
             return format_html('<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 3px;">✓ CONFIRMED</span>')
         return format_html('<span style="background: #ffc107; color: white; padding: 3px 8px; border-radius: 3px;">⚠ PENDING</span>')
     confirmed_badge.short_description = 'Confirmed'
-    confirmed_badge.boolean = True
     
     def lists_count(self, obj):
         """Display number of lists the subscriber belongs to."""

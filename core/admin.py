@@ -115,7 +115,6 @@ class EmailLogAdmin(admin.ModelAdmin):
             return format_html('<span style="background: #dc3545; color: white; padding: 3px 8px; border-radius: 3px;">SPAM</span>')
         return format_html('<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 3px;">OK</span>')
     is_spam_badge.short_description = 'Spam Status'
-    is_spam_badge.boolean = True
     
     def size_display(self, obj):
         """Display file size in human-readable format."""

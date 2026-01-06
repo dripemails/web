@@ -48,16 +48,18 @@ class CampaignAdmin(admin.ModelAdmin):
     
     def open_rate_display(self, obj):
         """Display open rate as a percentage with color coding."""
-        rate = obj.open_rate
+        rate = float(obj.open_rate) if obj.open_rate else 0.0
         color = '#28a745' if rate >= 20 else '#ffc107' if rate >= 10 else '#dc3545'
-        return format_html('<span style="color: {}; font-weight: bold;">{:.1f}%</span>', color, rate)
+        rate_str = f'{rate:.1f}%'
+        return format_html('<span style="color: {}; font-weight: bold;">{}</span>', color, rate_str)
     open_rate_display.short_description = 'Open Rate'
     
     def click_rate_display(self, obj):
         """Display click rate as a percentage with color coding."""
-        rate = obj.click_rate
+        rate = float(obj.click_rate) if obj.click_rate else 0.0
         color = '#28a745' if rate >= 5 else '#ffc107' if rate >= 2 else '#dc3545'
-        return format_html('<span style="color: {}; font-weight: bold;">{:.1f}%</span>', color, rate)
+        rate_str = f'{rate:.1f}%'
+        return format_html('<span style="color: {}; font-weight: bold;">{}</span>', color, rate_str)
     click_rate_display.short_description = 'Click Rate'
     
     actions = ['activate_campaigns', 'deactivate_campaigns']

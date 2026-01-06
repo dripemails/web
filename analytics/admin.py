@@ -40,7 +40,6 @@ class UserProfileAdmin(admin.ModelAdmin):
             return format_html('<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 3px;">✓ VERIFIED</span>')
         return format_html('<span style="background: #dc3545; color: white; padding: 3px 8px; border-radius: 3px;">✗ NOT VERIFIED</span>')
     spf_verified_badge.short_description = 'SPF Status'
-    spf_verified_badge.boolean = True
     
     def address_display(self, obj):
         """Display formatted address."""
@@ -108,7 +107,6 @@ class EmailFooterAdmin(admin.ModelAdmin):
             return format_html('<span style="background: #007bff; color: white; padding: 3px 8px; border-radius: 3px; font-weight: bold;">DEFAULT</span>')
         return format_html('<span style="background: #6c757d; color: white; padding: 3px 8px; border-radius: 3px;">-</span>')
     is_default_badge.short_description = 'Default'
-    is_default_badge.boolean = True
     
     def html_preview(self, obj):
         """Show a preview of the HTML footer."""

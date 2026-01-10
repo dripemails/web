@@ -3,15 +3,20 @@ from .models import Campaign, Email, EmailEvent
 from subscribers.models import List
 
 class EmailSerializer(serializers.ModelSerializer):
-    footer_id = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    footer_id = serializers.SerializerMethodField()
+    footer_id_input = serializers.CharField(write_only=True, required=False, allow_blank=True)
     
     class Meta:
         model = Email
-        fields = ['id', 'subject', 'body_html', 'body_text', 'wait_time', 'wait_unit', 'order', 'footer', 'footer_id']
+        fields = ['id', 'subject', 'body_html', 'body_text', 'wait_time', 'wait_unit', 'order', 'footer', 'footer_id', 'footer_id_input']
         read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def get_footer_id(self, obj):
+        """Return the footer ID if a footer is assigned, otherwise None."""
+        return str(obj.footer.id) if obj.footer else None
         
     def create(self, validated_data):
-        footer_id = validated_data.pop('footer_id', None)
+        footer_id = validated_data.pop('footer_id_input', None)
         if footer_id and footer_id.strip():
             from analytics.models import EmailFooter
             try:
@@ -22,7 +27,7 @@ class EmailSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
         
     def update(self, instance, validated_data):
-        footer_id = validated_data.pop('footer_id', None)
+        footer_id = validated_data.pop('footer_id_input', None)
         if footer_id and footer_id.strip():
             from analytics.models import EmailFooter
             try:

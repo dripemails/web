@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const templateForm = document.getElementById('templateForm');
     const testForm = document.getElementById('testForm');
     const campaignId = '{{ campaign.id }}';
-    const templateId = '{{ template.id }}';
+    const templateId = '{{ template.id|default:"" }}';
     
     // Footer modal elements
     const newFooterBtn = document.getElementById('newFooterBtn');
@@ -462,8 +462,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const newFooterForm = document.getElementById('newFooterForm');
     
     // Load template data if editing
-    if (templateId) {
-        fetch(`/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`)
+    if (templateId && templateId.trim()) {
+        fetch(`/api/campaigns/${campaignId}/emails/${templateId}/`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('subject').value = data.subject;
@@ -557,20 +557,20 @@ document.addEventListener('DOMContentLoaded', function() {
             body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
         };
         
-        // Only add footer_id if a footer is selected
+        // Only add footer_id_input if a footer is selected
         if (selectedFooterId && selectedFooterId.trim()) {
-            data.footer_id = selectedFooterId;
+            data.footer_id_input = selectedFooterId;
         }
         
-        const url = templateId 
-            ? `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/`
-            : `/campaigns/api/campaigns/${campaignId}/emails/`;
+        const url = (templateId && templateId.trim())
+            ? `/api/campaigns/${campaignId}/emails/${templateId}/`
+            : `/api/campaigns/${campaignId}/emails/`;
         
         console.log('Submitting data:', data);
         console.log('URL:', url);
         
         fetch(url, {
-            method: templateId ? 'PUT' : 'POST',
+            method: (templateId && templateId.trim()) ? 'PUT' : 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
@@ -626,12 +626,12 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         // The URL must include the email_id (templateId)
-        if (!templateId) {
-            alert('{% trans "Please save the email template first before sending a test email." %}');
+        if (!templateId || !templateId.trim()) {
+            alert('{% trans "Please save the template first before sending a test email." %}');
             return;
         }
         
-        const url = `/campaigns/api/campaigns/${campaignId}/emails/${templateId}/test/`;
+        const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
         
         fetch(url, {
             method: 'POST',

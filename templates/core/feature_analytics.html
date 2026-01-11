@@ -5,26 +5,170 @@
 
 {% block content %}
 <div class="max-w-4xl mx-auto py-12 px-4">
-    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Analytics" %}</h1>
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Analytics & Tracking" %}</h1>
     <p class="text-lg text-gray-700 mb-8">{% trans "Gain insights into your campaigns with real-time analytics. Track opens, clicks, and subscriber growth to optimize your email marketing." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
-        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "What You Can Track" %}</h2>
-            <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                <li>{% trans "Open rates and click rates for each campaign." %}</li>
-                <li>{% trans "Subscriber growth and engagement trends." %}</li>
-                <li>{% trans "Top performing emails and links." %}</li>
-                <li>{% trans "Export analytics data for further analysis." %}</li>
-            </ul>
-        </div>
-        <div class="flex-1 flex justify-center">
-            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
-                <rect x="20" y="60" width="10" height="20" rx="2" stroke-width="6" class="text-indigo-200" />
-                <rect x="40" y="40" width="10" height="40" rx="2" stroke-width="6" class="text-indigo-200" />
-                <rect x="60" y="30" width="10" height="50" rx="2" stroke-width="6" class="text-indigo-200" />
-                <rect x="80" y="20" width="10" height="60" rx="2" stroke-width="6" class="text-indigo-200" />
-            </svg>
+    
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "What You Can Track" %}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Campaign Performance" %}</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>{% trans "Open rates for each campaign" %}</li>
+                    <li>{% trans "Click-through rates (CTR)" %}</li>
+                    <li>{% trans "Total emails sent" %}</li>
+                    <li>{% trans "Delivery status" %}</li>
+                    <li>{% trans "Bounce rates" %}</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Subscriber Insights" %}</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>{% trans "Subscriber growth over time" %}</li>
+                    <li>{% trans "Engagement trends" %}</li>
+                    <li>{% trans "List performance metrics" %}</li>
+                    <li>{% trans "Unsubscribe rates" %}</li>
+                    <li>{% trans "Active vs. inactive subscribers" %}</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Email-Level Analytics" %}</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>{% trans "Individual email open rates" %}</li>
+                    <li>{% trans "Link click tracking" %}</li>
+                    <li>{% trans "Top performing emails" %}</li>
+                    <li>{% trans "Most clicked links" %}</li>
+                    <li>{% trans "Time-based engagement patterns" %}</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Export & Reporting" %}</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>{% trans "Export analytics data to CSV" %}</li>
+                    <li>{% trans "Generate custom reports" %}</li>
+                    <li>{% trans "Historical data tracking" %}</li>
+                    <li>{% trans "Performance comparisons" %}</li>
+                </ul>
+            </div>
         </div>
     </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "How to Access Analytics" %}</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Analytics Dashboard" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Analytics → Dashboard" %}</strong></li>
+                    <li>{% trans "View overview metrics including:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Total campaigns" %}</li>
+                            <li>{% trans "Total emails sent" %}</li>
+                            <li>{% trans "Overall open rates" %}</li>
+                            <li>{% trans "Click rates" %}</li>
+                            <li>{% trans "Subscriber statistics" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "See recent activity and trends" %}</li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/analytics/dashboard/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Campaign Analytics" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Go to" %} <strong>{% trans "Analytics → Campaign Analytics" %}</strong></li>
+                    <li>{% trans "Select a campaign to view detailed metrics" %}</li>
+                    <li>{% trans "See campaign-specific data:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Campaign open rate" %}</li>
+                            <li>{% trans "Click-through rate" %}</li>
+                            <li>{% trans "Emails sent vs. delivered" %}</li>
+                            <li>{% trans "Individual email performance within the campaign" %}</li>
+                            <li>{% trans "Subscriber engagement timeline" %}</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/analytics/campaigns/&lt;campaign_id&gt;/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Subscriber Analytics" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Analytics → Subscriber Analytics" %}</strong></li>
+                    <li>{% trans "Select a subscriber list to analyze" %}</li>
+                    <li>{% trans "View list-specific metrics:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "List growth over time" %}</li>
+                            <li>{% trans "Engagement rates by list" %}</li>
+                            <li>{% trans "Subscriber status breakdown" %}</li>
+                            <li>{% trans "Campaign performance for this list" %}</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/analytics/subscribers/&lt;list_id&gt;/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Campaign Analysis Page" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Go to" %} <strong>{% trans "Campaigns → Analysis" %}</strong></li>
+                    <li>{% trans "View comprehensive campaign analytics with:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Visual charts and graphs" %}</li>
+                            <li>{% trans "Performance comparisons" %}</li>
+                            <li>{% trans "Detailed email-level statistics" %}</li>
+                            <li>{% trans "Export options" %}</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/campaigns/analysis/</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "How Tracking Works" %}</h2>
+        <div class="space-y-4">
+            <div class="border-l-4 border-blue-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Open Tracking" %}</h3>
+                <p class="text-gray-700">{% trans "When an email is sent, a tiny invisible tracking pixel is embedded. When the recipient opens the email, the pixel loads and records the open event. Opens are tracked automatically for all emails." %}</p>
+                <p class="text-sm text-gray-600 mt-2">{% trans "Tracking URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/track/open/&lt;tracking_id&gt;/&lt;encoded_email&gt;/</code></p>
+            </div>
+            <div class="border-l-4 border-green-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Click Tracking" %}</h3>
+                <p class="text-gray-700">{% trans "All links in your emails are automatically wrapped with tracking URLs. When a subscriber clicks a link, the system records the click before redirecting to the destination. This allows you to see which links are most popular." %}</p>
+                <p class="text-sm text-gray-600 mt-2">{% trans "Tracking URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/track/click/&lt;tracking_id&gt;/</code></p>
+            </div>
+            <div class="border-l-4 border-purple-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "Real-Time Updates" %}</h3>
+                <p class="text-gray-700">{% trans "Analytics are updated in real-time as opens and clicks occur. Refresh your analytics dashboard to see the latest metrics. Data is stored permanently for historical analysis." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">{% trans "Key Metrics Explained" %}</h2>
+        <div class="space-y-4">
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Open Rate" %}</h3>
+                <p class="text-gray-700">{% trans "The percentage of delivered emails that were opened. Calculated as: (Opens / Delivered) × 100. Industry average is typically 20-25%." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Click-Through Rate (CTR)" %}</h3>
+                <p class="text-gray-700">{% trans "The percentage of delivered emails that resulted in at least one click. Calculated as: (Unique Clicks / Delivered) × 100. Good CTR is typically 2-5%." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Click-to-Open Rate (CTOR)" %}</h3>
+                <p class="text-gray-700">{% trans "The percentage of opened emails that resulted in clicks. Calculated as: (Clicks / Opens) × 100. This shows how engaging your content is to those who open." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="{% url 'analytics:dashboard' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+            {% trans "View Analytics Dashboard" %}
+        </a>
+    </div>
 </div>
-{% endblock %} 
+{% endblock %}

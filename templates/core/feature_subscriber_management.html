@@ -7,23 +7,188 @@
 <div class="max-w-4xl mx-auto py-12 px-4">
     <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Subscriber Management" %}</h1>
     <p class="text-lg text-gray-700 mb-8">{% trans "Easily manage your subscribers and lists. Import, segment, and engage your audience for better results." %}</p>
-    <div class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
-        <div class="flex-1 mb-6 md:mb-0 md:mr-8">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">{% trans "Key Features" %}</h2>
-            <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                <li>{% trans "Import subscribers from CSV or Excel files." %}</li>
-                <li>{% trans "Segment your audience for targeted campaigns." %}</li>
-                <li>{% trans "Manage subscriber status and activity." %}</li>
-                <li>{% trans "GDPR-compliant unsubscribe management." %}</li>
-            </ul>
-        </div>
-        <div class="flex-1 flex justify-center">
-            <svg class="w-40 h-40 text-indigo-300" fill="none" viewBox="0 0 100 100" stroke="currentColor">
-                <circle cx="50" cy="50" r="45" stroke-width="6" class="text-indigo-200" />
-                <circle cx="50" cy="50" r="20" stroke-width="6" />
-                <circle cx="50" cy="50" r="8" fill="currentColor" />
-            </svg>
+    
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Key Features" %}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Bulk Import" %}</h3>
+                <p class="text-gray-700">{% trans "Import hundreds or thousands of subscribers from CSV or Excel files. Map columns, handle duplicates, and validate email addresses automatically." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "List Organization" %}</h3>
+                <p class="text-gray-700">{% trans "Create multiple subscriber lists to organize your audience. Segment by source, interest, engagement level, or customer stage." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Search & Filter" %}</h3>
+                <p class="text-gray-700">{% trans "Quickly find subscribers by name or email. View all subscribers across lists or filter by specific lists and campaigns." %}</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "GDPR Compliance" %}</h3>
+                <p class="text-gray-700">{% trans "Manage subscriber status (subscribed, unsubscribed, pending). Honor unsubscribe requests automatically and maintain compliance." %}</p>
+            </div>
         </div>
     </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "How to Manage Subscribers" %}</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "View All Subscribers" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Subscribers" %}</strong> {% trans "in your dashboard" %}</li>
+                    <li>{% trans "See all subscribers across all your lists in one place" %}</li>
+                    <li>{% trans "Use the search bar to find specific subscribers by name or email" %}</li>
+                    <li>{% trans "View subscriber details:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Name and email address" %}</li>
+                            <li>{% trans "Lists they belong to" %}</li>
+                            <li>{% trans "Campaigns they're linked to" %}</li>
+                            <li>{% trans "Subscription status" %}</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/subscribers/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Add Subscribers Manually" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Go to" %} <strong>{% trans "Subscribers → Add Subscriber" %}</strong></li>
+                    <li>{% trans "Fill in the subscriber information:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Email address (required)" %}</li>
+                            <li>{% trans "First name (optional)" %}</li>
+                            <li>{% trans "Last name (optional)" %}</li>
+                            <li>{% trans "Select subscriber list(s)" %}</li>
+                            <li>{% trans "Set status (subscribed, unsubscribed, or pending)" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Add Subscriber" %}"</strong></li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/subscribers/add/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Import from CSV" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Subscribers → Import" %}</strong></li>
+                    <li>{% trans "Prepare your CSV file with columns:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">email</code> - {% trans "Required" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">first_name</code> - {% trans "Optional" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">last_name</code> - {% trans "Optional" %}</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">status</code> - {% trans "Optional (subscribed, unsubscribed, pending)" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Select the list you want to import to" %}</li>
+                    <li>{% trans "Upload your CSV file" %}</li>
+                    <li>{% trans "Map CSV columns to DripEmails fields" %}</li>
+                    <li>{% trans "Configure import options:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Skip duplicates" %}</li>
+                            <li>{% trans "Update existing subscribers" %}</li>
+                            <li>{% trans "Send welcome email" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Review and start the import" %}</li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/subscribers/import/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Export Subscribers" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Go to" %} <strong>{% trans "Subscribers" %}</strong></li>
+                    <li>{% trans "Click" %} <strong>"{% trans "Export to CSV" %}"</strong> {% trans "button" %}</li>
+                    <li>{% trans "Download includes all subscriber data:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "Email addresses" %}</li>
+                            <li>{% trans "Names" %}</li>
+                            <li>{% trans "Subscription status" %}</li>
+                            <li>{% trans "List memberships" %}</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/subscribers/export/</code></p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Manage Subscriber Lists" %}</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                    <li>{% trans "Navigate to" %} <strong>{% trans "Subscribers → Lists" %}</strong></li>
+                    <li>{% trans "Create new lists or manage existing ones" %}</li>
+                    <li>{% trans "View list details:" %}
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <li>{% trans "List name and description" %}</li>
+                            <li>{% trans "Subscriber count" %}</li>
+                            <li>{% trans "Associated campaigns" %}</li>
+                            <li>{% trans "List settings" %}</li>
+                        </ul>
+                    </li>
+                    <li>{% trans "Add or remove subscribers from lists" %}</li>
+                    <li>{% trans "Link lists to campaigns" %}</li>
+                </ol>
+                <p class="text-sm text-gray-600 italic">{% trans "URL:" %} <code class="bg-gray-100 px-2 py-1 rounded">/subscribers/lists/</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "List Organization Strategies" %}</h2>
+        <div class="space-y-4">
+            <div class="border-l-4 border-blue-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "By Source" %}</h3>
+                <p class="text-gray-700">{% trans "Create separate lists for different acquisition channels: Website, Events, Partnerships, Social Media, Referrals." %}</p>
+            </div>
+            <div class="border-l-4 border-green-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "By Product Interest" %}</h3>
+                <p class="text-gray-700">{% trans "Segment by what subscribers are interested in: Product A Leads, Product B Customers, Trial Users, Enterprise Prospects." %}</p>
+            </div>
+            <div class="border-l-4 border-purple-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "By Engagement Level" %}</h3>
+                <p class="text-gray-700">{% trans "Organize by how active subscribers are: Highly Engaged, Moderately Active, Inactive, Re-engagement Candidates." %}</p>
+            </div>
+            <div class="border-l-4 border-orange-500 pl-4">
+                <h3 class="font-semibold text-gray-900">{% trans "By Customer Stage" %}</h3>
+                <p class="text-gray-700">{% trans "Track where subscribers are in the customer journey: Prospects, New Customers, Loyal Customers, Churned." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Subscriber Status Management" %}</h2>
+        <div class="space-y-3">
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Subscribed" %}</h3>
+                <p class="text-gray-700">{% trans "Active subscribers who will receive emails from campaigns they're linked to. This is the default status for new subscribers." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Unsubscribed" %}</h3>
+                <p class="text-gray-700">{% trans "Subscribers who have opted out. They will not receive any emails, and the system automatically excludes them from campaigns. GDPR-compliant unsubscribe handling." %}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-gray-900">{% trans "Pending" %}</h3>
+                <p class="text-gray-700">{% trans "Subscribers awaiting confirmation (for double opt-in scenarios). They won't receive emails until confirmed." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r mb-8">
+        <h3 class="text-lg font-semibold text-yellow-900 mb-2">{% trans "💡 Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-yellow-900">
+            <li>{% trans "Always clean your CSV files before importing - remove duplicates and invalid emails" %}</li>
+            <li>{% trans "Test imports with a small batch (10-20 rows) first" %}</li>
+            <li>{% trans "Use UTF-8 encoding to preserve special characters in names" %}</li>
+            <li>{% trans "Keep lists organized by purpose - smaller, targeted lists perform better than one giant list" %}</li>
+            <li>{% trans "Regularly clean your lists - remove hard bounces and honor unsubscribes promptly" %}</li>
+        </ul>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="{% url 'subscribers:list' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+            {% trans "Manage Your Subscribers" %}
+        </a>
+    </div>
 </div>
-{% endblock %} 
+{% endblock %}

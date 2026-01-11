@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Using the Email Editor" %} - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">✏️ {% trans "Using the Email Editor" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Create beautiful emails with our powerful editor" %}</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ {% trans "14 min read" %}</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Email Editor Overview" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "DripEmails.org features a rich text editor powered by Quill that makes creating professional emails easy, even if you don't know HTML." %}</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 {% trans "Pro Tip:" %}</strong> {% trans "Use the editor's formatting toolbar to maintain consistent styling across your emails." %}</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Editor Features" %}</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>{% trans "Rich text formatting:" %}</strong> {% trans "Bold, italic, underline, strikethrough" %}</li>
+            <li><strong>{% trans "Headings:" %}</strong> {% trans "H1, H2, H3 for structure" %}</li>
+            <li><strong>{% trans "Lists:" %}</strong> {% trans "Bullet points and numbered lists" %}</li>
+            <li><strong>{% trans "Links:" %}</strong> {% trans "Add clickable links to any text" %}</li>
+            <li><strong>{% trans "Images:" %}</strong> {% trans "Insert and resize images" %}</li>
+            <li><strong>{% trans "Colors:" %}</strong> {% trans "Text and background colors" %}</li>
+            <li><strong>{% trans "Alignment:" %}</strong> {% trans "Left, center, right, justify" %}</li>
+            <li><strong>{% trans "Merge tags:" %}</strong> {% trans "Personalization variables" %}</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Formatting Text" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Type or paste your content into the editor" %}</li>
+          <li>{% trans "Select the text you want to format" %}</li>
+          <li>{% trans "Use the toolbar buttons to apply formatting" %}</li>
+          <li>{% trans "Click elsewhere to deselect and see the result" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Adding Links" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Make your emails clickable:" %}</p>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Select the text you want to make a link" %}</li>
+          <li>{% trans "Click the" %} <strong>Link</strong> button (🔗) in the toolbar</li>
+          <li>Enter the URL (include https://)</li>
+          <li>{% trans "Choose whether to open in a new tab" %}</li>
+          <li>{% trans "Click" %} <strong>"Insert"</strong></li>
+        </ol>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> Always test your links before sending. Broken links hurt your credibility and conversion rates.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Inserting Images" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Add visual appeal:" %}</p>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Click where you want the image" %}</li>
+          <li>{% trans "Click the" %} <strong>Image</strong> button (🖼️) in the toolbar</li>
+          <li>{% trans "Choose to upload a file or enter an image URL" %}</li>
+          <li>{% trans "Resize by dragging the corners" %}</li>
+          <li>{% trans "Add alt text for accessibility" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Using Merge Tags" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Personalize emails with subscriber data:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>{first_name}</strong> {% trans "- Subscriber's first name" %}</li>
+            <li><strong>{last_name}</strong> {% trans "- Subscriber's last name" %}</li>
+            <li><strong>{email}</strong> {% trans "- Subscriber's email address" %}</li>
+            <li><strong>{company}</strong> - Company name (if collected)</li>
+          </ul>
+          <p class="text-gray-700 mt-4"><strong>{% trans "Example:" %}</strong> "Hi {first_name}, thanks for joining!"</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Creating Call-to-Action Buttons" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "While the editor doesn't have a dedicated button tool, create button-like links:" %}</p>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Type your button text (e.g., "Get Started")</li>
+          <li>{% trans "Select the text and make it bold" %}</li>
+          <li>{% trans "Add a link to the text" %}</li>
+          <li>{% trans "Change text color to white or bright color" %}</li>
+          <li>{% trans "Add background color for button effect" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">HTML Mode (Advanced)</h3>
+        <p class="text-gray-700 mb-4">{% trans "For advanced users:" %}</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Click the" %} <strong>&lt;/&gt;</strong> button to switch to HTML view</li>
+          <li>{% trans "Edit the raw HTML directly" %}</li>
+          <li>{% trans "Click the button again to return to visual mode" %}</li>
+          <li>{% trans "Perfect for adding custom styles or complex layouts" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Keep formatting simple and consistent" %}</li>
+          <li>{% trans "Use headings to structure your content" %}</li>
+          <li>Break up text with paragraphs and bullet points</li>
+          <li>Optimize images before uploading (< 1MB each)</li>
+          <li>{% trans "Test how your email looks in preview mode" %}</li>
+          <li>{% trans "Use merge tags to personalize at scale" %}</li>
+          <li>{% trans "Include alt text for all images" %}</li>
+          <li>{% trans "Make links descriptive, not 'click here'" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Keyboard Shortcuts" %}</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>{% trans "Ctrl/Cmd + B:" %}</strong> Bold</li>
+            <li><strong>{% trans "Ctrl/Cmd + I:" %}</strong> Italic</li>
+            <li><strong>{% trans "Ctrl/Cmd + U:" %}</strong> Underline</li>
+            <li><strong>{% trans "Ctrl/Cmd + K:" %}</strong> Add link</li>
+            <li><strong>{% trans "Ctrl/Cmd + Z:" %}</strong> Undo</li>
+            <li><strong>{% trans "Ctrl/Cmd + Y:" %}</strong> Redo</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_reusable_templates' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
+            <h4 class="font-semibold text-purple-900">{% trans "Creating Reusable Templates" %}</h4>
+            <p class="text-sm text-purple-700">{% trans "Save time with templates" %}</p>
+          </a>
+          <a href="{% url 'core:tutorial_design_best_practices' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+            <h4 class="font-semibold text-indigo-900">{% trans "Email Design Best Practices" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Create effective emails" %}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

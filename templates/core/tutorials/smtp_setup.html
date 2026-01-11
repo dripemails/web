@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}SMTP Server Setup - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-gray-700 to-gray-900 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">{% trans "📬 SMTP Server Setup" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Configure email sending infrastructure" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 18 min read" %}</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "SMTP Configuration" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Setting up a reliable SMTP server is crucial for successful email delivery. This guide covers both local development and production configurations." %}</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> For production, use a dedicated email service provider (ESP) like SendGrid, AWS SES, or Mailgun for better deliverability.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "SMTP Options" %}</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-blue-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Development (Built-in)</h4>
+            <p class="text-gray-700">{% trans "Use DripEmails.org's built-in SMTP server for testing locally" %}</p>
+          </div>
+          <div class="border-l-4 border-green-500 pl-4">
+            <h4 class="font-semibold text-gray-900">Production (ESP)</h4>
+            <p class="text-gray-700">{% trans "Use SendGrid, AWS SES, Mailgun, or similar for sending at scale" %}</p>
+          </div>
+          <div class="border-l-4 border-purple-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Self-Hosted" %}</h4>
+            <p class="text-gray-700">Configure Postfix or similar on your own server (advanced)</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Using Built-in SMTP (Development)</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "The built-in SMTP server is already included" %}</li>
+          <li>{% trans "No configuration needed for local testing" %}</li>
+          <li>{% trans "Emails are logged but not actually sent" %}</li>
+          <li>{% trans "Perfect for development and testing" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Configuring External SMTP" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Add to your .env file or environment variables:" %}</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+# Email Settings<br/>
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend<br/>
+EMAIL_HOST=smtp.sendgrid.net<br/>
+EMAIL_PORT=587<br/>
+EMAIL_USE_TLS=True<br/>
+EMAIL_HOST_USER=apikey<br/>
+EMAIL_HOST_PASSWORD=your-sendgrid-api-key<br/>
+DEFAULT_FROM_EMAIL=noreply@yourdomain.com
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "SendGrid Setup" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Create account at <a href="https://{% trans "sendgrid.com" %}" class="text-blue-600 hover:underline">sendgrid.com</a></li>
+          <li>{% trans "Verify your domain or sender email" %}</li>
+          <li>{% trans "Generate an API key in settings" %}</li>
+          <li>{% trans "Add credentials to your .env file" %}</li>
+          <li>{% trans "Test with a sample email" %}</li>
+        </ol>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> Never commit API keys to version control. Always use environment variables.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "AWS SES Setup" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Amazon Simple Email Service configuration:" %}</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend<br/>
+EMAIL_HOST=email-smtp.us-east-1.amazonaws.com<br/>
+EMAIL_PORT=587<br/>
+EMAIL_USE_TLS=True<br/>
+EMAIL_HOST_USER=your-ses-smtp-username<br/>
+EMAIL_HOST_PASSWORD=your-ses-smtp-password<br/>
+AWS_SES_REGION_NAME=us-east-1<br/>
+AWS_SES_REGION_ENDPOINT=email.us-east-1.amazonaws.com
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Mailgun Setup" %}</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend<br/>
+EMAIL_HOST=smtp.mailgun.org<br/>
+EMAIL_PORT=587<br/>
+EMAIL_USE_TLS=True<br/>
+EMAIL_HOST_USER=postmaster@yourdomain.mailgun.org<br/>
+EMAIL_HOST_PASSWORD=your-mailgun-smtp-password
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Testing SMTP Configuration" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Run this Django management command:" %}</p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+python manage.py shell<br/><br/>
+from django.core.mail import send_mail<br/>
+send_mail(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'Test Subject',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'Test message',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'from@example.com',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;['to@example.com'],<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fail_silently=False,<br/>
+)
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Domain Authentication" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Required for good deliverability:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>{% trans "SPF Record:" %}</strong> Authorizes servers to send on your behalf</li>
+            <li><strong>DKIM:</strong> {% trans "Cryptographic signature proving email authenticity" %}</li>
+            <li><strong>DMARC:</strong> {% trans "Policy for handling failed authentication" %}</li>
+            <li><strong>{% trans "Custom Domain:" %}</strong> Send from @yourdomain.com, not @gmail.com</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Email Sending Limits" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Know your provider's limits:" %}</p>
+        <div class="space-y-3 mb-6">
+          <div class="bg-blue-50 p-3 rounded">
+            <strong>{% trans "SendGrid Free:" %}</strong> 100 emails/day
+          </div>
+          <div class="bg-green-50 p-3 rounded">
+            <strong>AWS SES:</strong> 62,000 emails/month free (first year)
+          </div>
+          <div class="bg-purple-50 p-3 rounded">
+            <strong>{% trans "Mailgun:" %}</strong> 5,000 emails/month free
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Troubleshooting" %}</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-red-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Connection Refused" %}</h4>
+            <p class="text-gray-700">{% trans "Check firewall settings, verify SMTP host and port are correct" %}</p>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Authentication Failed" %}</h4>
+            <p class="text-gray-700">{% trans "Double-check credentials, regenerate API key if needed" %}</p>
+          </div>
+          <div class="border-l-4 border-yellow-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Emails to Spam" %}</h4>
+            <p class="text-gray-700">{% trans "Configure SPF, DKIM, DMARC properly. Warm up your domain gradually" %}</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Monitoring Email Delivery" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Track delivery rates in ESP dashboard" %}</li>
+          <li>Monitor bounce rates (keep under 2%)</li>
+          <li>Watch spam complaint rates (keep under 0.1%)</li>
+          <li>{% trans "Set up webhook notifications for failures" %}</li>
+          <li>{% trans "Review sending reputation scores regularly" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>Use TLS/SSL encryption (port 587 or 465)</li>
+          <li>{% trans "Never send from @gmail.com or @yahoo.com in production" %}</li>
+          <li>{% trans "Authenticate your domain properly" %}</li>
+          <li>{% trans "Start with low sending volumes and gradually increase" %}</li>
+          <li>{% trans "Monitor deliverability metrics closely" %}</li>
+          <li>{% trans "Keep your bounce list clean" %}</li>
+          <li>{% trans "Use different SMTP configs for dev/staging/production" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_deployment' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+            <h4 class="font-semibold">{% trans "Deploying to Production" %}</h4>
+            <p class="text-sm text-gray-300">{% trans "Full deployment guide" %}</p>
+          </a>
+          <a href="{% url 'core:docs_getting_started' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+            <h4 class="font-semibold">{% trans "Documentation" %}</h4>
+            <p class="text-sm text-gray-300">{% trans "More technical details" %}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

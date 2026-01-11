@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 class UserProfile(models.Model):
     """Extended user profile with additional settings."""
@@ -9,6 +10,19 @@ class UserProfile(models.Model):
     promo_url = models.URLField(_('Promo URL'), blank=True)
     send_without_unsubscribe = models.BooleanField(_('Send Without Unsubscribe'), default=False)
     custom_footer_html = models.TextField(_('Custom Footer HTML'), blank=True, help_text=_('Custom footer HTML for emails'))
+    timezone = models.CharField(_('Time Zone'), max_length=64, default='UTC')
+    # Address fields for email footer (required by CAN-SPAM, GDPR, etc.)
+    address_line1 = models.CharField(_('Address Line 1'), max_length=255, blank=True, help_text=_('Street address'))
+    address_line2 = models.CharField(_('Address Line 2'), max_length=255, blank=True, help_text=_('Apartment, suite, etc. (optional)'))
+    city = models.CharField(_('City'), max_length=100, blank=True)
+    state = models.CharField(_('State/Province'), max_length=100, blank=True)
+    postal_code = models.CharField(_('Postal Code'), max_length=20, blank=True)
+    country = models.CharField(_('Country'), max_length=100, blank=True)
+    # SPF verification fields
+    spf_verified = models.BooleanField(_('SPF Verified'), default=False, help_text=_('Whether the user has a valid SPF record'))
+    spf_last_checked = models.DateTimeField(_('SPF Last Checked'), null=True, blank=True, help_text=_('Last time SPF record was checked'))
+    spf_record = models.TextField(_('SPF Record'), blank=True, help_text=_('The SPF record found for the user\'s domain'))
+    spf_missing_includes = models.JSONField(_('SPF Missing Includes'), default=list, blank=True, help_text=_('List of missing required SPF includes'))
     
     class Meta:
         verbose_name = _('User Profile')

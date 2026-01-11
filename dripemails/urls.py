@@ -1,14 +1,38 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import get_language
 from campaigns import views as campaign_views
+from analytics import views as analytics_views
+from subscribers import views as subscriber_views
+from core import views as core_views
+
+def api_docs_redirect(request):
+    """Redirect /api/docs/ to /resources/api-reference/."""
+    # Use reverse to get the proper URL with language prefix if needed
+    from django.urls import reverse
+    try:
+        url = reverse('core:resource_api_reference')
+        return HttpResponseRedirect(url)
+    except:
+        # Fallback if reverse fails
+        lang = get_language() or ''
+        prefix = f'/{lang}' if lang else ''
+        return HttpResponseRedirect(f'{prefix}/resources/api-reference/')
 
 # URL patterns that should NOT be prefixed with a language code
 non_prefixed_urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')), # Provides 'set_language'
+    # Redirect /api/docs/ to /resources/api-reference/
+    path('api/docs/', api_docs_redirect, name='api-docs-redirect'),
+    path('api/docs', api_docs_redirect, name='api-docs-redirect-no-slash'),
+    # Unsubscribe endpoint (no language prefix needed) - must be early to avoid conflicts
+    path('unsubscribe/<uuid:subscriber_uuid>/', core_views.unsubscribe, name='unsubscribe'),
+    path('unsubscribe/<uuid:subscriber_uuid>', core_views.unsubscribe, name='unsubscribe-no-slash'),
     # API endpoints (no language prefix needed)
     path('api/campaigns/', campaign_views.campaign_list_create, name='api-campaign-list-create'),
     path('api/campaigns/<uuid:campaign_id>/', campaign_views.campaign_detail, name='api-campaign-detail'),
@@ -19,11 +43,37 @@ non_prefixed_urlpatterns = [
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/', campaign_views.email_detail, name='api-email-detail'),
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/test/', campaign_views.test_email, name='api-test-email'),
     path('api/campaigns/<uuid:campaign_id>/emails/<uuid:email_id>/send/', campaign_views.send_email, name='api-send-email'),
+    path('api/campaigns/<uuid:campaign_id>/generate-email/', campaign_views.generate_email_with_ai, name='api-generate-email'),
+    path('api/campaigns/revise-email/', campaign_views.revise_email_with_ai, name='api-revise-email'),
+    path('api/campaigns/<uuid:campaign_id>/stats/', campaign_views.campaign_stats_api, name='api-campaign-stats'),
+    path('api/campaigns/search-templates/', campaign_views.search_templates, name='api-search-templates'),
     path('api/upload-contacts/', campaign_views.upload_contacts, name='api-upload-contacts'),
+    # Analytics API endpoints (no language prefix needed)
+    path('api/footers/create/', analytics_views.footer_create_api, name='api-footer-create'),
+    path('api/regenerate-key/', analytics_views.regenerate_api_key, name='api-regenerate-key'),
+    # Subscribers API endpoints (no language prefix needed)
+    path('api/subscribers/lists/', subscriber_views.list_list_create, name='api-subscriber-list-create'),
+    path('api/subscribers/lists/<uuid:pk>/', subscriber_views.list_detail, name='api-subscriber-list-detail'),
+    path('api/subscribers/', subscriber_views.subscriber_list_create, name='api-subscriber-create'),
+    path('api/subscribers/<uuid:pk>/', subscriber_views.subscriber_detail, name='api-subscriber-detail'),
+    path('api/subscribers/import/', subscriber_views.process_import, name='api-subscriber-import'),
+    path('api/subscribers/validate-file/', subscriber_views.validate_file, name='api-subscriber-validate-file'),
+    # Core API endpoints (no language prefix needed)
+    path('api/send-email/', core_views.send_email_api, name='api-send-email'),
+    path('api/send-email/requests/', core_views.send_email_requests_list, name='api-send-email-requests'),
+    path('api/send-email/requests/<uuid:request_id>/send-now/', core_views.send_email_request_send_now, name='api-send-email-request-send-now'),
+    path('api/send-email/requests/<uuid:request_id>/unsubscribe/', core_views.send_email_request_unsubscribe, name='api-send-email-request-unsubscribe'),
+    path('api/profile/settings/', core_views.profile_settings, name='api-profile-settings'),
+    # Email tracking endpoints (no language prefix needed)
+    path('analytics/message_split.gif', analytics_views.message_split_gif, name='message-split'),
+    path('analytics/track/open/<uuid:tracking_id>/<str:encoded_email>/', analytics_views.track_open, name='track-open'),
+    path('analytics/track/click/<uuid:tracking_id>/', analytics_views.track_click, name='track-click'),
 ]
 
 # URL patterns that SHOULD be prefixed with a language code
 language_prefixed_urlpatterns = i18n_patterns(
+    # Profile page - must come before allauth.urls to override default profile redirect
+    path('accounts/profile/', core_views.profile, name='account_profile'),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls')),
     # Web views only (no API endpoints)
@@ -39,4 +89,6 @@ urlpatterns = non_prefixed_urlpatterns + language_prefixed_urlpatterns
 # Add static and media files for development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Use django.contrib.staticfiles to serve from STATICFILES_DIRS in development
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

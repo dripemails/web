@@ -1,6 +1,7 @@
 # Core models
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
@@ -20,6 +21,39 @@ class BlogPost(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class ForumPost(models.Model):
+    """User forum post model."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='forum_posts')
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.title} by {self.user.username}"
+
+
+class SuccessStory(models.Model):
+    """Success story model with logo upload."""
+    company_name = models.CharField(max_length=200)
+    contact_name = models.CharField(max_length=200)
+    contact_email = models.EmailField()
+    logo = models.ImageField(upload_to='success_stories/logos/', blank=True, null=True)
+    story = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-submitted_at']
+        verbose_name_plural = 'Success Stories'
+    
+    def __str__(self):
+        return f"{self.company_name} - {self.contact_name}"
 
 
 class EmailLog(models.Model):

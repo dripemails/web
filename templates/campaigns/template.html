@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Email Template" %} - DripEmails.org{% endblock %}
 
 {% block extra_head %}
 <!-- Quill.js - Free WYSIWYG Editor -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
+<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
+<script src="{% static 'js/quill.min.js' %}"></script>
 <style>
     .ql-editor {
         min-height: 300px;
@@ -70,13 +72,40 @@
 <div class="min-h-screen bg-gray-100 py-12">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
+            {% if not campaign %}
+            <!-- Campaign Selection Alert -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm text-yellow-700">
+                            <strong>{% trans "No campaign selected." %}</strong> {% trans "You'll be prompted to select a campaign when you save this template." %}
+                        </p>
+                        <div class="mt-2">
+                            <label for="campaign_selector" class="block text-sm font-medium text-yellow-900 mb-1">{% trans "Or select a campaign now:" %}</label>
+                            <select id="campaign_selector" class="block w-full md:w-1/2 rounded-md border-yellow-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500">
+                                <option value="">-- {% trans "Select a campaign (optional)" %} --</option>
+                                {% for c in all_campaigns %}
+                                    <option value="{{ c.id }}">{{ c.name }}{% if c.is_active %} ({% trans "Active" %}){% endif %}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <div class="bg-indigo-600 py-6 px-8 text-white">
                     <h1 class="text-2xl font-bold">{% trans "Email Template" %}</h1>
-                    <p class="text-indigo-100">{% trans "Design your email template" %}</p>
+                    <p class="text-indigo-100">{% if campaign %}{{ campaign.name }}{% else %}{% trans "Design your email template" %}{% endif %}</p>
                 </div>
                 
-                <form id="templateForm" class="p-8" method="POST" action="{% if template %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/campaigns/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
+                <form id="templateForm" class="p-8" method="POST" action="{% if template %}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/{% else %}/api/campaigns/{{ campaign.id }}/emails/{% endif %}">
                     {% csrf_token %}
                     <div class="space-y-6">
                         <div>
@@ -93,7 +122,7 @@
                                 <select id="wait_unit" name="wait_unit" required
                                         class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     {% for value, label in wait_units %}
-                                        <option value="{{ value }}">{{ label }}</option>
+                                        <option value="{{ value }}" {% if template and template.wait_unit == value %}selected{% elif not template and value == 'days' %}selected{% endif %}>{{ label }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -106,6 +135,9 @@
                             <div class="flex items-center justify-between mb-4">
                                 <h2 class="text-lg font-medium text-gray-900">{% trans "Email Content" %}</h2>
                                 <div class="flex space-x-2">
+                                    <button type="button" id="aiGenerateBtn" class="inline-flex items-center px-3 py-2 border border-green-300 shadow-sm text-sm leading-4 font-medium rounded-md text-green-700 bg-green-50 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        ✨ {% trans "AI Generate" %}
+                                    </button>
                                     <button type="button" id="previewBtn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         {% trans "Preview" %}
                                     </button>
@@ -175,6 +207,10 @@
                                                 class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             {% trans "Copy" %}
                                         </button>
+                                        <button type="button" onclick="regenerateApiKey()" 
+                                                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            {% trans "Regenerate" %}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +225,7 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-        url = "{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
+        url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
 headers = {
     "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
     "Content-Type": "application/json"
@@ -207,7 +243,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                 
                                 <div class="space-y-2">
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "JavaScript" %}</h3>
-                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>fetch("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/", {
     method: "POST",
     headers: {
         "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
@@ -228,7 +264,7 @@ response = requests.post(url, json=data, headers=headers)</code></pre>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>require 'net/http'
 require 'json'
 
-uri = URI("{{ request.scheme }}://{{ request.get_host }}/campaigns/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
+uri = URI("{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/")
 headers = {
     'Authorization' => 'Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}',
     'Content-Type' => 'application/json'
@@ -261,7 +297,7 @@ response = http.request(request)</code></pre>
                                 {% trans "Cancel" %}
                             </button>
                             <div class="flex space-x-3">
-                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button type="{% if show_campaign_modal %}button{% else %}submit{% endif %}" {% if show_campaign_modal %}onclick="showCampaignModal()"{% endif %} class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     {% trans "Save Template" %}
                                 </button>
                             </div>
@@ -269,6 +305,116 @@ response = http.request(request)</code></pre>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+    
+    <!-- Campaign Selection Modal -->
+    {% if show_campaign_modal %}
+    <div id="campaignModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900">{% trans "Select Campaign" %}</h3>
+                <p class="text-sm text-gray-500 mt-1">{% trans "Choose which campaign to save this template to" %}</p>
+            </div>
+            <div class="p-6">
+                <label for="modal_campaign_select" class="block text-sm font-medium text-gray-700 mb-2">{% trans "Campaign" %}</label>
+                <select id="modal_campaign_select" required
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">-- {% trans "Select a campaign" %} --</option>
+                    {% for c in all_campaigns %}
+                        <option value="{{ c.id }}">{{ c.name }}{% if c.is_active %} ({% trans "Active" %}){% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex justify-end space-x-3 px-6 py-4 border-t border-gray-200">
+                <button type="button" onclick="hideCampaignModal()" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                    {% trans "Cancel" %}
+                </button>
+                <button type="button" onclick="submitWithCampaign()" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {% trans "Save Template" %}
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- AI Generate Modal -->
+    <div id="aiModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900">✨ {% trans "Generate Email with AI" %}</h3>
+                <p class="text-sm text-gray-500 mt-1">{% trans "Describe what you want in your email and let AI create the content" %}</p>
+            </div>
+            <form id="aiGenerateForm" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="ai_subject_topic" class="block text-sm font-medium text-gray-700">{% trans "What is the email about?" %}</label>
+                        <input type="text" id="ai_subject_topic" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                               placeholder="{% trans 'e.g., New product launch, special discount offer, welcome to our service...' %}">
+                        <p class="mt-1 text-xs text-gray-500">{% trans "Describe the main topic or purpose of the email" %}</p>
+                    </div>
+                    
+                    <div>
+                        <label for="ai_context" class="block text-sm font-medium text-gray-700">{% trans "Email Details" %}</label>
+                        <textarea id="ai_context" rows="4"
+                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                  placeholder="Provide specific details:
+- What action do you want readers to take?
+- Any special offers or key information?
+- Brand voice or personality to use?
+- Call to action?"></textarea>
+                        <p class="mt-1 text-xs text-gray-500">{% trans "Include any specific details, offers, key points, or instructions you want included" %}</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="ai_recipient" class="block text-sm font-medium text-gray-700">{% trans "Who is this for?" %}</label>
+                            <input type="text" id="ai_recipient"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                   placeholder="{% trans 'e.g., customers, subscribers, users...' %}" value="subscriber">
+                        </div>
+                        <div>
+                            <label for="ai_tone" class="block text-sm font-medium text-gray-700">{% trans "Tone" %}</label>
+                            <select id="ai_tone"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                                <option value="professional">{% trans "Professional" %}</option>
+                                <option value="friendly">{% trans "Friendly" %}</option>
+                                <option value="persuasive">{% trans "Persuasive" %}</option>
+                                <option value="casual">{% trans "Casual" %}</option>
+                                <option value="formal">{% trans "Formal" %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="ai_length" class="block text-sm font-medium text-gray-700">{% trans "Email Length" %}</label>
+                        <select id="ai_length"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <option value="short">{% trans "Short (concise, 2-3 paragraphs)" %}</option>
+                            <option value="medium" selected>{% trans "Medium (balanced, 4-5 paragraphs)" %}</option>
+                            <option value="long">{% trans "Long (detailed, 6+ paragraphs)" %}</option>
+                        </select>
+                    </div>
+                    
+                    {% comment %}
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-md">
+                        <p class="text-sm text-blue-800">
+                            ℹ️ {% trans "AI generation uses Hugging Face API to create email content. The generated subject and body will replace your current email." %}
+                        </p>
+                    </div>
+                    {% endcomment %}
+                    
+                    <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                        <button type="button" id="cancelAiGenerate" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                            {% trans "Cancel" %}
+                        </button>
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            ✨ {% trans "Generate Email" %}
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -375,9 +521,29 @@ response = http.request(request)</code></pre>
 </div>
 
 <script>
+// @ts-nocheck - Django template variables used throughout
 // Global variables for Quill editors
 let quill;
 let footerQuill;
+
+// Function to clean HTML content by removing empty paragraph tags with breaks
+// This removes leading/trailing empty paragraphs and collapses consecutive ones,
+// but preserves single empty paragraphs between content (intentional spacing)
+function cleanQuillContent(html) {
+    if (!html) return html;
+    
+    // Remove leading empty paragraphs
+    html = html.replace(/^(<p><br\s*\/?><\/p>\s*)+/gi, '');
+    
+    // Remove trailing empty paragraphs
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*)+$/gi, '');
+    
+    // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
+    // This replaces 2+ consecutive empty paragraphs with just one
+    html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
+    
+    return html;
+}
 
 // Function to copy variable to clipboard and insert into editor
 function copyVariable(variable, element) {
@@ -429,6 +595,136 @@ document.addEventListener('DOMContentLoaded', function() {
         placeholder: '{% trans "Enter your email content here..." %}'
     });
     
+    // Campaign modal functions
+    const showCampaignModal = "{{ show_campaign_modal|default:False|lower }}" === "true";
+    
+    // Handle campaign selector at top of page
+    const campaignSelector = document.getElementById('campaign_selector');
+    if (campaignSelector && showCampaignModal) {
+        campaignSelector.addEventListener('change', function() {
+            if (this.value) {
+                // Redirect to template page with selected campaign
+                window.location.href = `/campaigns/template/${this.value}/`;
+            }
+        });
+    }
+    
+    if (showCampaignModal) {
+        window.showCampaignModal = function() {
+        // Check if user selected a campaign from the top selector
+        const topCampaignSelector = document.getElementById('campaign_selector');
+        if (topCampaignSelector && topCampaignSelector.value) {
+            // Use the selected campaign from top selector
+            submitWithSpecificCampaign(topCampaignSelector.value);
+            return;
+        }
+        
+        // Otherwise show modal for selection
+        // Validate form first
+        const subject = document.getElementById('subject').value.trim();
+        const bodyContent = cleanQuillContent(quill.root.innerHTML.trim());
+        
+        if (!subject) {
+            alert('{% trans "Please enter an email subject." %}');
+            return;
+        }
+        
+        if (!bodyContent || bodyContent === '<p><br></p>') {
+            alert('{% trans "Please enter email content." %}');
+            return;
+        }
+        
+        document.getElementById('campaignModal').classList.remove('hidden');
+    };
+    
+    window.hideCampaignModal = function() {
+        document.getElementById('campaignModal').classList.add('hidden');
+    };
+    
+    window.submitWithCampaign = function() {
+        const selectedCampaignId = document.getElementById('modal_campaign_select').value;
+        
+        if (!selectedCampaignId) {
+            alert('{% trans "Please select a campaign." %}');
+            return;
+        }
+        
+        submitWithSpecificCampaign(selectedCampaignId);
+    };
+    
+    window.submitWithSpecificCampaign = function(selectedCampaignId) {
+        // Close modal if open
+        const modal = document.getElementById('campaignModal');
+        if (modal && !modal.classList.contains('hidden')) {
+            hideCampaignModal();
+        }
+        hideCampaignModal();
+        
+        // Get form data
+        const htmlContent = cleanQuillContent(quill.root.innerHTML);
+        const footerSelect = document.getElementById('footer_select');
+        const selectedFooterId = footerSelect.value;
+        
+        // Get wait_time value and ensure it's a valid integer
+        const waitTimeInput = document.getElementById('wait_time');
+        const waitTimeValue = waitTimeInput.value.trim();
+        const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+        
+        // Validate wait_time
+        if (isNaN(waitTime) || waitTime < 1) {
+            alert('{% trans "Wait time must be a number greater than 0." %}');
+            return;
+        }
+        
+        const data = {
+            subject: document.getElementById('subject').value,
+            wait_time: waitTime,
+            wait_unit: document.getElementById('wait_unit').value,
+            body_html: htmlContent,
+            body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
+        };
+        
+        // Only add footer_id if a footer is selected
+        if (selectedFooterId && selectedFooterId.trim()) {
+            data.footer_id = selectedFooterId;
+        }
+        
+        // Submit via API
+        fetch(`/api/campaigns/${selectedCampaignId}/emails/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.error || 'Validation failed');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('{% trans "Template saved successfully!" %}');
+            // Redirect to the campaign template page
+            window.location.href = `/campaigns/template/${selectedCampaignId}/`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('{% trans "An error occurred while saving the template: " %}' + error.message);
+        });
+    };
+    
+        // Close modal when clicking outside
+        document.getElementById('campaignModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCampaignModal();
+            }
+        });
+    }
+    
     // Initialize footer editor
     footerQuill = new Quill('#footerEditor', {
         theme: 'snow',
@@ -446,6 +742,11 @@ document.addEventListener('DOMContentLoaded', function() {
         placeholder: '{% trans "Enter footer content here..." %}'
     });
     
+    const aiGenerateBtn = document.getElementById('aiGenerateBtn');
+    const aiModal = document.getElementById('aiModal');
+    const aiGenerateForm = document.getElementById('aiGenerateForm');
+    const cancelAiGenerate = document.getElementById('cancelAiGenerate');
+    
     const previewBtn = document.getElementById('previewBtn');
     const testBtn = document.getElementById('testBtn');
     const previewModal = document.getElementById('previewModal');
@@ -455,6 +756,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const campaignId = '{{ campaign.id }}';
     const templateId = '{{ template.id|default:"" }}';
     
+    // Debug: Log campaignId and templateId
+    console.log('campaignId:', campaignId);
+    console.log('templateId:', templateId);
     // Footer modal elements
     const newFooterBtn = document.getElementById('newFooterBtn');
     const newFooterModal = document.getElementById('newFooterModal');
@@ -462,7 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newFooterForm = document.getElementById('newFooterForm');
     
     // Load template data if editing
-    if (templateId && templateId.trim()) {
+    if (templateId) {
         fetch(`/api/campaigns/${campaignId}/emails/${templateId}/`)
             .then(response => response.json())
             .then(data => {
@@ -471,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('wait_unit').value = data.wait_unit;
                 
                 // Set content in Quill editor
-                quill.root.innerHTML = data.body_html;
+                quill.root.innerHTML = cleanQuillContent(data.body_html);
                 
                 // Set footer if available
                 if (data.footer_id) {
@@ -484,175 +788,345 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Preview functionality
-    previewBtn.addEventListener('click', function() {
-        const content = quill.root.innerHTML;
-        
-        // Get selected footer content
-        const footerSelect = document.getElementById('footer_select');
-        const selectedFooterId = footerSelect.value;
-        let footerContent = '';
-        
-        if (selectedFooterId) {
-            // Find the footer content from the options
-            const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
-            if (footerOption) {
-                // This is a simplified approach - in a real implementation, you'd fetch the footer content
-                footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">[Footer content would appear here]</div>';
+    // AI Generate functionality - Show modal for user input
+    if (aiGenerateBtn) {
+        aiGenerateBtn.addEventListener('click', function() {
+            // Check if campaignId is empty
+            if (!campaignId || campaignId.trim() === '') {
+                alert('{% trans "Error: Campaign ID is missing. Please select a campaign first." %}');
+                return;
             }
-        }
-        
-        document.getElementById('previewContent').innerHTML = content + footerContent;
-        previewModal.classList.remove('hidden');
-    });
+            
+            // Show the modal instead of auto-generating
+            aiModal.classList.remove('hidden');
+            document.getElementById('ai_subject_topic').focus();
+        });
+    }
+    
+    // Keep cancel functionality for modal in case it's still needed elsewhere
+    if (cancelAiGenerate) {
+        cancelAiGenerate.addEventListener('click', function() {
+            aiModal.classList.add('hidden');
+            aiGenerateForm.reset();
+        });
+    }
+    
+    if (aiModal) {
+        aiModal.addEventListener('click', function(e) {
+            if (e.target === aiModal) {
+                aiModal.classList.add('hidden');
+                aiGenerateForm.reset();
+            }
+        });
+    }
+    
+    // Form submission for modal (in case user opens it manually)
+    if (aiGenerateForm) {
+        aiGenerateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const topic = document.getElementById('ai_subject_topic').value;
+            const recipient = document.getElementById('ai_recipient').value;
+            const tone = document.getElementById('ai_tone').value;
+            const length = document.getElementById('ai_length').value;
+            const context = document.getElementById('ai_context').value;
+            
+            const submitBtn = aiGenerateForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '✨ {% trans "Generating..." %}';
+            submitBtn.disabled = true;
+            
+            const data = {
+                subject_topic: topic,
+                recipient: recipient,
+                tone: tone,
+                length: length,
+                context: context,
+                email_id: templateId || null
+            };
+            
+            // Create AbortController for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+            
+            fetch(`/api/campaigns/${campaignId}/generate-email/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data),
+                signal: controller.signal
+            })
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    // Try to get error details from response
+                    return response.text().then(text => {
+                        let errorData = null;
+                        try {
+                            errorData = JSON.parse(text);
+                        } catch (e) {
+                            // Response is not JSON
+                            throw new Error(`Server error (${response.status}): ${text.substring(0, 200)}`);
+                        }
+                        const errorMsg = errorData.error || errorData.detail || errorData.message || 'Failed to generate email';
+                        throw new Error(errorMsg);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.subject) {
+                    document.getElementById('subject').value = data.subject;
+                    quill.root.innerHTML = cleanQuillContent(data.body_html);
+                    aiModal.classList.add('hidden');
+                    aiGenerateForm.reset();
+                    alert('{% trans "Email generated successfully! Review and save when ready." %}');
+                } else {
+                    alert('{% trans "Error: Invalid response from AI service." %}');
+                }
+            })
+            .catch(error => {
+                clearTimeout(timeoutId);
+                console.error('AI Generation Error:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                
+                let errorMsg = '{% trans "Failed to generate email. " %}';
+                
+                // Handle different error types
+                if (error.name === 'AbortError' || error.message.includes('aborted')) {
+                    errorMsg += '{% trans "Request timed out after 5 minutes. The AI generation is taking too long. Please try again or check server resources." %}';
+                } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMsg += '{% trans "Network error: Could not connect to server. Please check your connection and try again." %}';
+                } else if (error.message.includes('Ollama')) {
+                    errorMsg += error.message;
+                } else if (error.message.includes('timeout') || error.message.includes('Timeout')) {
+                    errorMsg += '{% trans "Request timed out. The AI generation is taking too long. Please try again." %}';
+                } else if (error.message.includes('500') || error.message.includes('server error')) {
+                    errorMsg += error.message + ' {% trans "Please check the server logs for more details." %}';
+                } else if (error.message.includes('404') || error.message.includes('not found')) {
+                    errorMsg += error.message + ' {% trans "Please ensure Ollama is running on the server." %}';
+                } else {
+                    // Show the actual error message
+                    errorMsg += error.message || '{% trans "Unknown error occurred. Please check the browser console and server logs for details." %}';
+                }
+                
+                alert(errorMsg);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Preview functionality
+    if (previewBtn) {
+        previewBtn.addEventListener('click', function() {
+            const content = cleanQuillContent(quill.root.innerHTML);
+            
+            // Get selected footer content
+            const footerSelect = document.getElementById('footer_select');
+            const selectedFooterId = footerSelect.value;
+            let footerContent = '';
+            
+            if (selectedFooterId) {
+                // Find the footer content from the options
+                const footerOption = footerSelect.querySelector(`option[value="${selectedFooterId}"]`);
+                if (footerOption) {
+                    // This is a simplified approach - in a real implementation, you'd fetch the footer content
+                    footerContent = '<hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;"><div style="font-size: 12px; color: #6b7280;">{% trans "[Footer content would appear here]" %}</div>';
+                }
+            }
+            
+            document.getElementById('previewContent').innerHTML = content + footerContent;
+            previewModal.classList.remove('hidden');
+        });
+    }
     
     // Test email functionality
-    testBtn.addEventListener('click', function() {
-        testModal.classList.remove('hidden');
-    });
+    if (testBtn) {
+        testBtn.addEventListener('click', function() {
+            testModal.classList.remove('hidden');
+        });
+    }
     
     // Footer modal functionality
-    newFooterBtn.addEventListener('click', function() {
-        newFooterModal.classList.remove('hidden');
-        document.getElementById('footerName').focus();
-    });
+    if (newFooterBtn) {
+        newFooterBtn.addEventListener('click', function() {
+            newFooterModal.classList.remove('hidden');
+            document.getElementById('footerName').focus();
+        });
+    }
     
-    cancelNewFooter.addEventListener('click', function() {
-        newFooterModal.classList.add('hidden');
-        newFooterForm.reset();
-        footerQuill.setContents([]);
-    });
-    
-    // Close footer modal when clicking outside
-    newFooterModal.addEventListener('click', function(e) {
-        if (e.target === newFooterModal) {
+    if (cancelNewFooter) {
+        cancelNewFooter.addEventListener('click', function() {
             newFooterModal.classList.add('hidden');
             newFooterForm.reset();
             footerQuill.setContents([]);
-        }
-    });
+        });
+    }
+    
+    // Close footer modal when clicking outside
+    if (newFooterModal) {
+        newFooterModal.addEventListener('click', function(e) {
+            if (e.target === newFooterModal) {
+                newFooterModal.classList.add('hidden');
+                newFooterForm.reset();
+                footerQuill.setContents([]);
+            }
+        });
+    }
     
     // Form submission
-    templateForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show loading state
-        const submitBtn = templateForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = '{% trans "Saving..." %}';
-        submitBtn.disabled = true;
-        
-        // Get content from Quill editor
-        const htmlContent = quill.root.innerHTML;
-        
-        // Get selected footer
-        const footerSelect = document.getElementById('footer_select');
-        const selectedFooterId = footerSelect.value;
-        
-        const data = {
-            subject: document.getElementById('subject').value,
-            wait_time: parseInt(document.getElementById('wait_time').value),
-            wait_unit: document.getElementById('wait_unit').value,
-            body_html: htmlContent,
-            body_text: htmlContent.replace(/<[^>]*>/g, '') // Convert HTML to plain text
-        };
-        
-        // Only add footer_id_input if a footer is selected
-        if (selectedFooterId && selectedFooterId.trim()) {
-            data.footer_id_input = selectedFooterId;
-        }
-        
-        const url = (templateId && templateId.trim())
-            ? `/api/campaigns/${campaignId}/emails/${templateId}/`
-            : `/api/campaigns/${campaignId}/emails/`;
-        
-        console.log('Submitting data:', data);
-        console.log('URL:', url);
-        
-        fetch(url, {
-            method: (templateId && templateId.trim()) ? 'PUT' : 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.error || 'Network response was not ok');
-                });
+    if (templateForm) {
+        templateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (showCampaignModal) {
+                // If campaign modal should be shown, don't submit - the button click handler will show modal
+                return;
             }
-            return response.json();
-        })
-        .then(data => {
-            // Show success message
-            alert('{% trans "Template saved successfully!" %}');
-            // Redirect to campaign edit page
-            window.location.href = `/campaigns/${campaignId}/edit/`;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            let errorMessage = '{% trans "An error occurred while saving the template. Please try again." %}';
-            if (error.message) {
-                errorMessage += '\n\nError: ' + error.message;
+            
+            // Show loading state
+            const submitBtn = templateForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '{% trans "Saving..." %}';
+            submitBtn.disabled = true;
+            
+            // Get content from Quill editor
+            const htmlContent = cleanQuillContent(quill.root.innerHTML);
+            
+            // Get selected footer
+            const footerSelect = document.getElementById('footer_select');
+            const selectedFooterId = footerSelect.value;
+            
+            // Get wait_time value and ensure it's a valid integer
+            const waitTimeInput = document.getElementById('wait_time');
+            const waitTimeValue = waitTimeInput.value.trim();
+            const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+            
+            // Validate wait_time
+            if (isNaN(waitTime) || waitTime < 1) {
+                alert('{% trans "Wait time must be a number greater than 0." %}');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
             }
-            alert(errorMessage);
-        })
-        .finally(() => {
-            // Reset button state
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            
+            const data = {
+                subject: document.getElementById('subject').value,
+                wait_time: waitTime,
+                wait_unit: document.getElementById('wait_unit').value,
+                body_html: htmlContent,
+                body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
+            };
+            
+            // Only add footer_id if a footer is selected
+            if (selectedFooterId && selectedFooterId.trim()) {
+                data.footer_id = selectedFooterId;
+            }
+            
+            const url = templateId 
+                ? `/api/campaigns/${campaignId}/emails/${templateId}/`
+                : `/api/campaigns/${campaignId}/emails/`;
+            
+            console.log('Submitting data:', data);
+            console.log('URL:', url);
+            
+            fetch(url, {
+                method: templateId ? 'PUT' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.error || 'Network response was not ok');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Show success message
+                alert('{% trans "Template saved successfully!" %}');
+                // Redirect to campaign edit page
+                window.location.href = `/campaigns/${campaignId}/edit/`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                let errorMessage = '{% trans "An error occurred while saving the template. Please try again." %}';
+                if (error.message) {
+                    errorMessage += '\n\nError: ' + error.message;
+                }
+                alert(errorMessage);
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
-    });
+    }
     
     // Test email form submission
-    testForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('test_email').value;
-        const firstName = document.getElementById('test_first_name').value;
-        const lastName = document.getElementById('test_last_name').value;
-        const fullName = `${firstName} ${lastName}`.trim();
-        
-        const data = {
-            email: email,
-            variables: {
-                first_name: firstName,
-                last_name: lastName,
-                full_name: fullName,
-                email: email
+    if (testForm) {
+        testForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('test_email').value;
+            const firstName = document.getElementById('test_first_name').value;
+            const lastName = document.getElementById('test_last_name').value;
+            const fullName = `${firstName} ${lastName}`.trim();
+            
+            const data = {
+                email: email,
+                variables: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    full_name: fullName,
+                    email: email
+                }
+            };
+            
+            // The URL must include the email_id (templateId)
+            if (!templateId) {
+                alert('{% trans "Please save the email template first before sending a test email." %}');
+                return;
             }
-        };
-        
-        // The URL must include the email_id (templateId)
-        if (!templateId || !templateId.trim()) {
-            alert('{% trans "Please save the template first before sending a test email." %}');
-            return;
-        }
-        
-        const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
-        
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            closeTestModal();
-            alert('{% trans "Test email sent successfully!" %}');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('{% trans "An error occurred while sending the test email. Please try again." %}');
+            
+            const url = `/api/campaigns/${campaignId}/emails/${templateId}/test/`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json().then(data => ({status: response.status, body: data})))
+            .then(({status, body}) => {
+                if (status !== 200) {
+                    // Show the actual error message from the server
+                    const errorMsg = body.error || '{% trans "An error occurred while sending the test email. Please try again." %}';
+                    alert(errorMsg);
+                } else {
+                    closeTestModal();
+                    alert('{% trans "Test email sent successfully!" %}');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('{% trans "An error occurred while sending the test email. Please try again." %}');
+            });
         });
-    });
+    }
 });
 
 function closePreviewModal() {
@@ -677,6 +1151,58 @@ function copyApiKey() {
     }, 2000);
 }
 
+function regenerateApiKey() {
+    if (!confirm('{% trans "Are you sure you want to regenerate your API key? This will invalidate your current key and you will need to update any applications using it." %}')) {
+        return;
+    }
+    
+    const regenerateButton = document.querySelector('button[onclick="regenerateApiKey()"]');
+    const originalText = regenerateButton.textContent;
+    regenerateButton.textContent = '{% trans "Regenerating..." %}';
+    regenerateButton.disabled = true;
+    
+    fetch('/api/regenerate-key/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the API key input
+            document.getElementById('apiKey').value = data.api_key;
+            
+            // Update all API examples with the new key
+            updateApiExamples(data.api_key);
+            
+            alert('{% trans "API key regenerated successfully!" %}');
+        } else {
+            alert('{% trans "Error regenerating API key. Please try again." %}');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('{% trans "Error regenerating API key. Please try again." %}');
+    })
+    .finally(() => {
+        regenerateButton.textContent = originalText;
+        regenerateButton.disabled = false;
+    });
+}
+
+function updateApiExamples(newApiKey) {
+    // Update all API examples with the new key
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach(block => {
+        let content = block.textContent;
+        // Replace the API key in all code examples
+        content = content.replace(/Bearer [A-Za-z0-9]+/g, `Bearer ${newApiKey}`);
+        block.textContent = content;
+    });
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -697,7 +1223,7 @@ document.getElementById('newFooterForm').addEventListener('submit', function(e) 
     e.preventDefault();
     
     const name = document.getElementById('footerName').value;
-    const htmlContent = footerQuill.root.innerHTML;
+    const htmlContent = cleanQuillContent(footerQuill.root.innerHTML);
     const isDefault = document.getElementById('isDefault').checked;
     
     if (!name.trim()) {

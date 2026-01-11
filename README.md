@@ -1060,6 +1060,357 @@ If Celery is available, scheduled emails can also be processed by Celery workers
 - Use `send_scheduled_emails` cron as a backup/fallback
 - Run cron every 5 minutes to catch any emails missed by Celery
 
+## 📧 Gmail/IMAP Email Processing (Cron Script)
+
+DripEmails includes a cron script to automatically fetch and process emails from Gmail (and future support for Outlook and IMAP) to send automated replies.
+
+### Overview
+
+The `cron.py` script with the `process_gmail_emails` command:
+- Fetches the latest emails from connected Gmail accounts via Gmail API
+- Automatically sends replies using the Gmail campaign template
+- Creates subscribers from email addresses found in From, To, and Sender fields
+- Processes emails and sends auto-replies to all recipients
+
+### Prerequisites
+
+1. **Google OAuth Credentials:**
+   - 📖 **See detailed setup guide:** [Gmail OAuth Setup Guide](docs/gmail_oauth/gmail_oauth_setup.md)
+   - Quick steps:
+     - Create a project in [Google Cloud Console](https://console.cloud.google.com/)
+     - Enable Gmail API for your project
+     - Create OAuth 2.0 credentials (Web application)
+     - Set authorized redirect URI: `https://dripemails.org/api/gmail/callback/`
+     - Copy your Client ID and Client Secret (you'll only see the secret once!)
+
+2. **Install Python dependencies:**
+   ```bash
+   pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+   ```
+
+3. **Configure environment variables:**
+   Add to your `.env` file:
+   ```bash
+   # Gmail OAuth Configuration
+   GOOGLE_CLIENT_ID=your_client_id.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=your_client_secret
+   GOOGLE_REDIRECT_URI=https://dripemails.org/api/gmail/callback/
+   ```
+   
+   **Redirect URL:** `https://dripemails.org/api/gmail/callback/` ✅ (This is correct!)
+
+4. **Run migrations:**
+   ```bash
+   python manage.py makemigrations gmail
+   python manage.py migrate
+   ```
+
+### Usage
+
+#### Process Gmail Emails
+
+Process emails for all active Gmail credentials:
+
+```bash
+python cron.py process_gmail_emails
+```
+
+This will:
+- Fetch latest emails from all connected Gmail accounts
+- Extract recipient emails from From, To, and Sender fields
+- Create/update subscribers in the Gmail subscriber list
+- Send auto-reply emails using the Gmail campaign template
+- Mark emails as processed
+
+#### Process with Limit
+
+Process a limited number of emails per credential (useful for rate limiting):
+
+```bash
+python cron.py process_gmail_emails --limit 50
+```
+
+#### Production Usage
+
+For production, use the `--settings` flag:
+
+```bash
+python cron.py process_gmail_emails --settings=dripemails.live
+```
+
+#### Combined Usage
+
+```bash
+# Process up to 50 emails per credential in production
+python cron.py process_gmail_emails --settings=dripemails.live --limit 50
+```
+
+### Output Example
+
+```
+Processing Gmail emails for 2 credentials
+Fetching emails for user1@gmail.com
+Fetching emails for user2@gmail.com
+Sent auto-reply to sender@example.com for Gmail message abc123...
+Gmail Processing Summary:
+  Credentials processed: 2
+  Emails processed: 15
+  Auto-replies sent: 28
+  Errors: 0
+```
+
+### Setting Up Automated Processing
+
+#### Using Cron (Linux/macOS)
+
+Add to your crontab to run every 5 minutes:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add this line (adjust paths as needed)
+*/5 * * * * cd /path/to/dripemails.org && /path/to/python cron.py process_gmail_emails --settings=dripemails.live --limit 50 >> /var/log/dripemails-gmail-processor.log 2>&1
+```
+
+For more frequent processing (every minute):
+
+```bash
+* * * * * cd /path/to/dripemails.org && /path/to/python cron.py process_gmail_emails --settings=dripemails.live --limit 50 >> /var/log/dripemails-gmail-processor.log 2>&1
+```
+
+#### Using Systemd Timer (Linux)
+
+Create `/etc/systemd/system/dripemails-gmail-processor.service`:
+
+```ini
+[Unit]
+Description=DripEmails Gmail Email Processor
+After=network.target
+
+[Service]
+Type=oneshot
+User=dripemails
+WorkingDirectory=/home/dripemails/web
+Environment="DJANGO_SETTINGS_MODULE=dripemails.live"
+ExecStart=/home/dripemails/venv/bin/python cron.py process_gmail_emails --limit 50
+```
+
+Create `/etc/systemd/system/dripemails-gmail-processor.timer`:
+
+```ini
+[Unit]
+Description=Run DripEmails Gmail Processor Every 5 Minutes
+Requires=dripemails-gmail-processor.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable dripemails-gmail-processor.timer
+sudo systemctl start dripemails-gmail-processor.timer
+sudo systemctl status dripemails-gmail-processor.timer
+```
+
+#### Using Supervisord (Recommended)
+
+Supervisord is ideal for continuous email processing. A configuration template is available at `docs/gmail_oauth/gmail_supervisord.conf`.
+
+**1. Create Supervisord Configuration**
+
+Copy the template and update paths:
+
+```bash
+# Copy the template
+sudo cp docs/gmail_oauth/gmail_supervisord.conf /etc/supervisor/conf.d/gmail_email_processor.conf
+
+# Edit and update paths
+sudo nano /etc/supervisor/conf.d/gmail_email_processor.conf
+```
+
+Or create manually at `/etc/supervisor/conf.d/gmail_email_processor.conf`:
+
+```ini
+[program:gmail_email_processor]
+command=python /path/to/dripemails.org/cron.py process_gmail_emails --settings=dripemails.live --limit 50
+directory=/path/to/dripemails.org
+user=root
+autostart=true
+autorestart=true
+startretries=3
+startsecs=10
+stopwaitsecs=600
+stdout_logfile=/var/log/gmail_processor.log
+stderr_logfile=/var/log/gmail_processor_error.log
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=5
+stderr_logfile_maxbytes=10MB
+stderr_logfile_backups=5
+environment=PYTHONUNBUFFERED="1"
+```
+
+**Note:** For periodic execution (e.g., every 5 minutes), use a wrapper script or cron instead of continuous execution. For continuous execution with built-in delays, modify the command:
+
+```ini
+command=/bin/bash -c "while true; do python /path/to/dripemails.org/cron.py process_gmail_emails --settings=dripemails.live --limit 50 || true; sleep 300; done"
+```
+
+**2. Load and Start Service**
+
+```bash
+# Reload supervisor configuration
+sudo supervisorctl reread
+
+# Update supervisor with new programs
+sudo supervisorctl update
+
+# Start the Gmail processor service
+sudo supervisorctl start gmail_email_processor
+
+# Check status
+sudo supervisorctl status gmail_email_processor
+
+# View logs
+sudo supervisorctl tail -f gmail_email_processor
+```
+
+**3. Management Commands**
+
+```bash
+# Start the service
+sudo supervisorctl start gmail_email_processor
+
+# Stop the service
+sudo supervisorctl stop gmail_email_processor
+
+# Restart the service
+sudo supervisorctl restart gmail_email_processor
+
+# Check status
+sudo supervisorctl status gmail_email_processor
+
+# View real-time logs
+sudo supervisorctl tail -f gmail_email_processor
+```
+
+**Benefits of Using Supervisord:**
+- ✅ Automatic restart if the script crashes
+- ✅ Centralized process management
+- ✅ Easy log management and rotation
+- ✅ Can run continuously or on a schedule
+- ✅ Integrates with other services (SMTP, scheduled emails, etc.)
+
+#### Using Windows Task Scheduler
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger: Every 5 minutes
+4. Set action: Start a program
+   - Program: `C:\path\to\python.exe`
+   - Arguments: `cron.py process_gmail_emails --limit 50`
+   - Start in: `C:\path\to\dripemails.org`
+
+### How It Works
+
+1. **Fetch Emails**: Uses Gmail API to fetch the latest unprocessed emails from each connected Gmail account
+2. **Extract Recipients**: Gets email addresses from:
+   - `From` header
+   - `To` header (comma-separated)
+   - `Sender` header (if present)
+3. **Create Subscribers**: Automatically creates/updates subscribers in the Gmail subscriber list
+4. **Send Auto-Replies**: Sends email using the Gmail campaign template with variable replacement:
+   - `{{first_name}}` - Extracted from email address or subscriber record
+   - `{{subject}}` - Original email subject
+5. **Mark as Processed**: Updates email status to prevent duplicate processing
+
+### Gmail Campaign Setup
+
+When a user connects their Gmail account via OAuth, the system automatically:
+- Creates a "Gmail Auto-Reply" subscriber list
+- Creates a "Gmail Auto-Reply" campaign
+- Creates a default email template with the message: "Hi {{first_name}}, thanks for emailing me. Did you have any questions?"
+
+You can customize the campaign and email template in the Django admin or via the web interface.
+
+### Configuration
+
+#### Gmail OAuth Setup
+
+📖 **For detailed step-by-step instructions, see:** [Gmail OAuth Setup Guide](docs/gmail_oauth/gmail_oauth_setup.md)
+
+📖 **Having issues?** Check the [Gmail OAuth Troubleshooting Guide](docs/gmail_oauth/gmail_troubleshooting.md)
+
+**Quick Setup:**
+
+1. **Google Cloud Console:**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create or select a project
+   - Enable Gmail API
+   - Go to "Credentials" → "Create Credentials" → "OAuth client ID"
+   - Choose "Web application"
+   - Add authorized redirect URI: `https://dripemails.org/api/gmail/callback/`
+   - **⚠️ Copy Client ID and Client Secret immediately - you won't see the secret again!**
+
+2. **Environment Variables:**
+   ```bash
+   # .env file
+   GOOGLE_CLIENT_ID=123456789-abcdefgh.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=GOCSPX-abcdefghijklmnop
+   GOOGLE_REDIRECT_URI=https://dripemails.org/api/gmail/callback/
+   ```
+   
+   **✅ Redirect URL:** `https://dripemails.org/api/gmail/callback/` (matches your domain)
+
+3. **User Authentication:**
+   - Users connect Gmail via the dashboard
+   - OAuth flow stores credentials securely
+   - Credentials are automatically refreshed when expired
+
+### Troubleshooting
+
+**No emails being fetched:**
+- Verify Gmail account is connected in the dashboard
+- Check that `sync_enabled=True` for the credential
+- Verify Google OAuth credentials are correct in `.env`
+- Check Gmail API quotas and limits
+
+**Auto-replies not being sent:**
+- Verify Gmail campaign exists and is active
+- Check that email template exists in the campaign
+- Ensure subscriber list is assigned to the campaign
+- Review error logs in `/var/log/gmail_processor_error.log`
+
+**OAuth errors:**
+- Verify redirect URI matches exactly in Google Cloud Console
+- Check that Client ID and Secret are correct
+- Ensure Gmail API is enabled for your project
+- Check that user has granted necessary permissions
+
+**Rate limiting:**
+- Gmail API has daily quotas (default: 1 billion quota units per day)
+- Use `--limit` flag to process fewer emails per run
+- Increase cron frequency instead of processing more emails per run
+- Monitor API usage in Google Cloud Console
+
+### Future: Outlook and IMAP Support
+
+The email provider system is designed to support multiple providers:
+
+- **Gmail** - OAuth-based (implemented)
+- **Outlook** - OAuth-based (planned)
+- **IMAP** - Username/password-based (planned)
+
+All providers use the same models (`EmailCredential` and `EmailMessage`) with a `provider` field to distinguish between them. The cron script will automatically process all active credentials regardless of provider type.
+
 ## 🔧 Configuration
 
 ### Django Settings

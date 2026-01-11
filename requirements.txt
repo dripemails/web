@@ -34,6 +34,11 @@ dnspython==2.6.1
 markdown==3.7
 googletrans==4.0.0rc1 
 polib
+# Gmail/Google OAuth integration
+google-auth==2.23.4
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.108.0
 
 # NOTE: GNU gettext tools (msgfmt, xgettext) are required for Django's i18n commands
 # These are SYSTEM dependencies, not Python packages. Install on your server:

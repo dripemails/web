@@ -29,6 +29,10 @@ env = environ.Env(
     OLLAMA_BASE_URL=(str, 'http://localhost:11434'),
     OLLAMA_MODEL=(str, 'llama3.1:8b'),
     OLLAMA_TIMEOUT=(int, 300),  # 5 minutes timeout for AI generation
+    # Gmail/Google OAuth Configuration
+    GOOGLE_CLIENT_ID=(str, ''),
+    GOOGLE_CLIENT_SECRET=(str, ''),
+    GOOGLE_REDIRECT_URI=(str, 'https://dripemails.org/api/gmail/callback/'),
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -68,6 +72,7 @@ INSTALLED_APPS = [
     'campaigns',
     'subscribers',
     'analytics',
+    'gmail',
 ]
 
 MIDDLEWARE = [

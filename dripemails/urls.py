@@ -64,6 +64,8 @@ non_prefixed_urlpatterns = [
     path('api/send-email/requests/<uuid:request_id>/send-now/', core_views.send_email_request_send_now, name='api-send-email-request-send-now'),
     path('api/send-email/requests/<uuid:request_id>/unsubscribe/', core_views.send_email_request_unsubscribe, name='api-send-email-request-unsubscribe'),
     path('api/profile/settings/', core_views.profile_settings, name='api-profile-settings'),
+    # Gmail API endpoints (no language prefix needed)
+    path('api/gmail/', include('gmail.urls')),
     # Email tracking endpoints (no language prefix needed)
     path('analytics/message_split.gif', analytics_views.message_split_gif, name='message-split'),
     path('analytics/track/open/<uuid:tracking_id>/<str:encoded_email>/', analytics_views.track_open, name='track-open'),

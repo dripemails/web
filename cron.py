@@ -16,6 +16,11 @@ Usage:
     python cron.py send_scheduled_emails
     python cron.py send_scheduled_emails --settings=dripemails.live
     python cron.py send_scheduled_emails --limit 100
+    
+    # Process Gmail Emails
+    python cron.py process_gmail_emails
+    python cron.py process_gmail_emails --settings=dripemails.live
+    python cron.py process_gmail_emails --limit 50
 """
 
 import os
@@ -432,6 +437,147 @@ def check_user_by_id(user_id: int):
         sys.exit(1)
 
 
+def process_gmail_emails(limit=None):
+    """
+    Fetch and process Gmail emails for all active Gmail credentials.
+    Sends auto-reply emails to From, To, and Sender email addresses.
+    """
+    from gmail.models import EmailCredential, EmailMessage, EmailProvider
+    from gmail.services import GmailService
+    from campaigns.models import Campaign, Email
+    from subscribers.models import List, Subscriber
+    from campaigns.tasks import send_campaign_email
+    import re
+    
+    # Get all active Gmail credentials
+    credentials = EmailCredential.objects.filter(
+        provider=EmailProvider.GMAIL,
+        is_active=True,
+        sync_enabled=True
+    ).select_related('user')
+    
+    total_credentials = credentials.count()
+    logger.info(f"Processing Gmail emails for {total_credentials} credentials")
+    
+    if total_credentials == 0:
+        logger.info("No active Gmail credentials found")
+        return
+    
+    total_processed = 0
+    total_sent = 0
+    error_count = 0
+    
+    service = GmailService()
+    
+    for credential in credentials:
+        try:
+            # Fetch latest emails
+            logger.info(f"Fetching emails for {credential.email_address}")
+            email_messages = service.fetch_emails(credential, max_results=limit or 50)
+            
+            # Update last sync time
+            credential.last_sync_at = timezone.now()
+            credential.save(update_fields=['last_sync_at'])
+            
+            # Process each email
+            for email_msg in email_messages:
+                if email_msg.processed:
+                    continue
+                
+                try:
+                    # Get recipient emails (From, To, Sender)
+                    recipients = set()
+                    recipients.add(email_msg.from_email)
+                    recipients.update(email_msg.to_emails_list)
+                    if email_msg.sender_email:
+                        recipients.add(email_msg.sender_email)
+                    
+                    # Find or get Gmail campaign for this credential
+                    gmail_campaign = Campaign.objects.filter(
+                        user=credential.user,
+                        name__icontains='Gmail Auto-Reply',
+                        subscriber_list__name__icontains='Gmail'
+                    ).first()
+                    
+                    if not gmail_campaign:
+                        logger.warning(f"No Gmail campaign found for user {credential.user.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Get the first email template from the campaign
+                    campaign_email = gmail_campaign.emails.first()
+                    if not campaign_email:
+                        logger.warning(f"No email template found in Gmail campaign {gmail_campaign.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Get or create Gmail subscriber list
+                    gmail_list = gmail_campaign.subscriber_list
+                    if not gmail_list:
+                        logger.warning(f"No subscriber list found for Gmail campaign {gmail_campaign.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Send auto-reply to each recipient
+                    for recipient_email in recipients:
+                        if not recipient_email or recipient_email == credential.email_address:
+                            continue  # Don't send to self
+                        
+                        # Extract first name from email or use email prefix
+                        first_name = recipient_email.split('@')[0].split('.')[0].title()
+                        
+                        # Get or create subscriber
+                        subscriber, created = Subscriber.objects.get_or_create(
+                            email=recipient_email,
+                            defaults={
+                                'first_name': first_name,
+                                'is_active': True,
+                                'confirmed': True
+                            }
+                        )
+                        
+                        # Add to Gmail list if not already
+                        if gmail_list not in subscriber.lists.all():
+                            subscriber.lists.add(gmail_list)
+                        
+                        # Send the email
+                        try:
+                            send_campaign_email(
+                                str(campaign_email.id),
+                                str(subscriber.id),
+                                variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject}
+                            )
+                            total_sent += 1
+                            logger.info(f"Sent auto-reply to {recipient_email} for Gmail message {email_msg.id}")
+                        except Exception as e:
+                            logger.error(f"Error sending auto-reply to {recipient_email}: {str(e)}")
+                    
+                    # Mark email as processed
+                    email_msg.processed = True
+                    email_msg.campaign_email = campaign_email
+                    email_msg.save(update_fields=['processed', 'campaign_email'])
+                    total_processed += 1
+                    
+                except Exception as e:
+                    logger.error(f"Error processing Gmail email {email_msg.id}: {str(e)}")
+                    error_count += 1
+                    continue
+            
+        except Exception as e:
+            logger.error(f"Error processing Gmail for credential {credential.id}: {str(e)}")
+            error_count += 1
+            continue
+    
+    logger.info(f"Gmail Processing Summary:")
+    logger.info(f"  Credentials processed: {total_credentials}")
+    logger.info(f"  Emails processed: {total_processed}")
+    logger.info(f"  Auto-replies sent: {total_sent}")
+    logger.info(f"  Errors: {error_count}")
+
+
 def send_scheduled_emails(limit=None):
     """
     Process and send scheduled emails that are due to be sent.
@@ -500,7 +646,7 @@ def main():
     parser = argparse.ArgumentParser(description='DripEmails Cron Script')
     parser.add_argument('--settings', type=str, default='dripemails.settings',
                         help='Django settings module (default: dripemails.settings)')
-    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails)')
+    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails, process_gmail_emails)')
     parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID')
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users')
     parser.add_argument('--limit', type=int, help='Limit number of scheduled emails to process')
@@ -523,6 +669,8 @@ def main():
             sys.exit(1)
     elif args.command == 'send_scheduled_emails':
         send_scheduled_emails(limit=args.limit)
+    elif args.command == 'process_gmail_emails':
+        process_gmail_emails(limit=args.limit)
     else:
         logger.error(f"Unknown command: {args.command}")
         print(__doc__)

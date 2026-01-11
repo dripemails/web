@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Setting Up AI Features - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-teal-500 to-cyan-600 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">{% trans "🤖 Setting Up AI Features" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Configure AI-powered email generation with Ollama" %}</p>
+      <p class="text-white text-opacity-80 mt-2">{% trans "⏱️ 15 min read" %}</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "AI-Powered Email Creation" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "DripEmails.org integrates with Ollama to provide AI-powered email content generation, helping you create engaging campaigns faster." %}</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>{% trans "💡 Pro Tip:" %}</strong> AI works best when you provide clear, specific prompts. The more context you give, the better the results.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Prerequisites" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Before using AI features, you need:" %}</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>Ollama installed:</strong> Download from <a href="https://{% trans "ollama.ai" %}" class="text-blue-600 hover:underline">ollama.ai</a></li>
+          <li><strong>{% trans "AI model downloaded:" %}</strong> We recommend llama2 or mistral</li>
+          <li><strong>{% trans "Ollama running:" %}</strong> The Ollama service must be active</li>
+          <li><strong>{% trans "Network access:" %}</strong> DripEmails.org connects to localhost:11434</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 1: Install Ollama" %}</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+# On macOS/Linux:<br/>
+curl https://ollama.ai/install.sh | sh<br/><br/>
+# On Windows:<br/>
+# Download installer from ollama.ai
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 2: Download an AI Model" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Choose a model based on your needs:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <div class="space-y-3">
+            <div>
+              <strong class="text-gray-900">llama2 (Recommended)</strong>
+              <p class="text-gray-700 text-sm">{% trans "Balanced performance and quality" %}</p>
+              <code class="bg-gray-900 text-gray-100 px-3 py-1 rounded text-sm">{% trans "ollama pull llama2" %}</code>
+            </div>
+            <div>
+              <strong class="text-gray-900">{% trans "mistral" %}</strong>
+              <p class="text-gray-700 text-sm">{% trans "Fast and efficient" %}</p>
+              <code class="bg-gray-900 text-gray-100 px-3 py-1 rounded text-sm">{% trans "ollama pull mistral" %}</code>
+            </div>
+            <div>
+              <strong class="text-gray-900">{% trans "llama2:13b" %}</strong>
+              <p class="text-gray-700 text-sm">Higher quality (requires more resources)</p>
+              <code class="bg-gray-900 text-gray-100 px-3 py-1 rounded text-sm">{% trans "ollama pull llama2:13b" %}</code>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 3: Start Ollama Service" %}</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+ollama serve
+        </div>
+        <p class="text-gray-700 mb-6">{% trans "Leave this running in a terminal window while using DripEmails.org." %}</p>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 4: Configure in DripEmails.org" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>Go to <strong>{% trans "Settings → AI Configuration" %}</strong></li>
+          <li>Verify Ollama connection status (should show "Connected")</li>
+          <li>{% trans "Select your preferred model from the dropdown" %}</li>
+          <li>{% trans "Test the connection with the 'Test AI' button" %}</li>
+          <li>{% trans "Adjust generation settings if needed" %}</li>
+        </ol>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>{% trans "⚠️ Important:" %}</strong> If connection fails, ensure Ollama is running on localhost:11434 and your firewall isn't blocking it.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "AI Generation Settings" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Customize how AI generates content:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>{% trans "Model:" %}</strong> Which AI model to use</li>
+            <li><strong>{% trans "Temperature:" %}</strong> Creativity level (0.1 = conservative, 0.9 = creative)</li>
+            <li><strong>{% trans "Max tokens:" %}</strong> Maximum length of generated text</li>
+            <li><strong>{% trans "Tone:" %}</strong> Professional, casual, friendly, urgent</li>
+            <li><strong>{% trans "Language:" %}</strong> Output language preference</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Testing Your Setup" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Verify everything works:" %}</p>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Create a new campaign" %}</li>
+          <li>{% trans "Click the" %} <strong>"Generate with AI"</strong> button</li>
+          <li>{% trans "Enter a simple prompt: 'Write a welcome email for new subscribers'" %}</li>
+          <li>{% trans "Click" %} <strong>"Generate"</strong></li>
+          <li>{% trans "AI should produce content within 5-10 seconds" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Troubleshooting" %}</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-red-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Connection Failed" %}</h4>
+            <p class="text-gray-700">{% trans "Check that Ollama is running:" %} <code>ollama list</code> should show your models</p>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Slow Generation" %}</h4>
+            <p class="text-gray-700">Try a smaller model (mistral) or reduce max_tokens setting</p>
+          </div>
+          <div class="border-l-4 border-yellow-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Poor Quality Output" %}</h4>
+            <p class="text-gray-700">{% trans "Use more specific prompts and try increasing temperature slightly" %}</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "System Requirements" %}</h3>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <p class="text-gray-700 mb-3"><strong>{% trans "Minimum:" %}</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700 mb-4">
+            <li>8GB RAM</li>
+            <li>{% trans "4 CPU cores" %}</li>
+            <li>{% trans "10GB free disk space" %}</li>
+          </ul>
+          <p class="text-gray-700 mb-3"><strong>{% trans "Recommended:" %}</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-gray-700">
+            <li>16GB+ RAM</li>
+            <li>{% trans "8+ CPU cores or GPU" %}</li>
+            <li>{% trans "20GB free disk space" %}</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Keep Ollama running when actively using AI features" %}</li>
+          <li>{% trans "Start with llama2 for best balance of speed and quality" %}</li>
+          <li>{% trans "Use specific prompts for better results" %}</li>
+          <li>{% trans "Always review and edit AI-generated content" %}</li>
+          <li>{% trans "Save successful prompts for reuse" %}</li>
+          <li>{% trans "Update Ollama regularly for improvements" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_ai_generation' %}" class="block p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition">
+            <h4 class="font-semibold text-teal-900">{% trans "Generating Email Content with AI" %}</h4>
+            <p class="text-sm text-teal-700">{% trans "Create AI-powered campaigns" %}</p>
+          </a>
+          <a href="{% url 'core:tutorial_ai_optimization' %}" class="block p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition">
+            <h4 class="font-semibold text-cyan-900">{% trans "AI Email Revision & Optimization" %}</h4>
+            <p class="text-sm text-cyan-700">{% trans "Improve existing content" %}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

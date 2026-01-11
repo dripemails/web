@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-from subscribers.models import List
+from subscribers.models import List, Subscriber
 import uuid
 
 class Campaign(models.Model):
@@ -21,7 +21,7 @@ class Campaign(models.Model):
     description = models.TextField(_('Description'), blank=True)
     slug = models.SlugField(max_length=150, unique=True)
     subscriber_list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='campaigns', verbose_name=_('Subscriber List'), null=True, blank=True)
-    is_active = models.BooleanField(_('Active'), default=False)
+    is_active = models.BooleanField(_('Active'), default=True)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
     sent_count = models.IntegerField(_('Sent Count'), default=0)
@@ -84,9 +84,19 @@ class Email(models.Model):
     
     @property
     def wait_time_display(self):
-        unit = _("hour") if self.wait_unit == "hours" else _("day")
-        if self.wait_time != 1:
-            unit = _("hours") if self.wait_unit == "hours" else _("days")
+        """Display wait time with proper unit (minutes, hours, days, weeks, months)."""
+        unit_map = {
+            'minutes': (_("minute"), _("minutes")),
+            'hours': (_("hour"), _("hours")),
+            'days': (_("day"), _("days")),
+            'weeks': (_("week"), _("weeks")),
+            'months': (_("month"), _("months")),
+        }
+        
+        # Get singular or plural form based on wait_time
+        unit_singular, unit_plural = unit_map.get(self.wait_unit, (_("day"), _("days")))
+        unit = unit_singular if self.wait_time == 1 else unit_plural
+        
         return f"{self.wait_time} {unit}"
 
 
@@ -117,3 +127,65 @@ class EmailEvent(models.Model):
     
     def __str__(self):
         return f"{self.event_type} - {self.email} - {self.subscriber_email}"
+
+
+class EmailSendRequest(models.Model):
+    """Store information about individual email send requests."""
+
+    STATUS_CHOICES = [
+        ('pending', _('Pending')),
+        ('queued', _('Queued')),
+        ('sent', _('Sent')),
+        ('failed', _('Failed')),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_send_requests', verbose_name=_('User'))
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='email_send_requests', verbose_name=_('Campaign'))
+    email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='send_requests', verbose_name=_('Email'))
+    subscriber = models.ForeignKey(Subscriber, on_delete=models.SET_NULL, null=True, blank=True, related_name='send_requests', verbose_name=_('Subscriber'))
+    subscriber_email = models.EmailField(_('Subscriber Email'))
+    variables = models.JSONField(_('Variables'), default=dict, blank=True)
+    status = models.CharField(_('Status'), max_length=10, choices=STATUS_CHOICES, default='pending')
+    scheduled_for = models.DateTimeField(_('Scheduled For'))
+    sent_at = models.DateTimeField(_('Sent At'), null=True, blank=True)
+    error_message = models.TextField(_('Error Message'), blank=True)
+    created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = _('Email Send Request')
+        verbose_name_plural = _('Email Send Requests')
+
+    def __str__(self):
+        return f"{self.email.subject} -> {self.subscriber_email} ({self.status})"
+
+
+class EmailAIAnalysis(models.Model):
+    """Store AI-generated content and topic analysis results for emails."""
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.OneToOneField(Email, on_delete=models.CASCADE, related_name='ai_analysis', verbose_name=_('Email'))
+    
+    # AI-generated content
+    generated_subject = models.CharField(_('Generated Subject'), max_length=200, blank=True)
+    generated_body_html = models.TextField(_('Generated Body HTML'), blank=True)
+    generation_prompt = models.TextField(_('Generation Prompt'), blank=True, help_text=_("The prompt used to generate content"))
+    generation_model = models.CharField(_('Generation Model'), max_length=50, default='gpt-3.5-turbo', blank=True)
+    
+    # Topic analysis results
+    topics_json = models.JSONField(_('Topics'), default=list, blank=True, help_text=_("Extracted topics and keywords"))
+    dominant_topics = models.JSONField(_('Dominant Topics'), default=list, blank=True, help_text=_("Dominant topic for this email"))
+    topic_analysis_count = models.IntegerField(_('Emails Analyzed'), default=0, help_text=_("Number of emails used in topic analysis"))
+    
+    # Metadata
+    created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('Email AI Analysis')
+        verbose_name_plural = _('Email AI Analyses')
+
+    def __str__(self):
+        return f"AI Analysis for {self.email.subject}"

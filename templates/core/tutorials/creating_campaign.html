@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Creating Your First Campaign" %} - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">📧 {% trans "Creating Your First Campaign" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Learn how to create and send your first email campaign" %}</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ {% trans "15 min read" %}</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Getting Started" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "Email campaigns are the core of DripEmails.org. This guide will walk you through creating your first campaign from start to finish." %}</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 {% trans "Pro Tip:" %}</strong> {% trans "Before creating a campaign, make sure you have at least one subscriber list set up." %}</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 1: Navigate to Campaigns" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% blocktrans %}From your dashboard, click on <strong>Campaigns</strong> in the navigation menu{% endblocktrans %}</li>
+          <li>{% trans "Click the" %} <strong>"{% trans "Create New Campaign" %}"</strong> {% trans "button" %}</li>
+          <li>{% trans "You'll be taken to the campaign creation wizard" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 2: Basic Campaign Settings" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Fill in the following information:" %}</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>{% trans "Campaign Name:" %}</strong> {% blocktrans %}A descriptive name for internal use (e.g., "Welcome Series Week 1"){% endblocktrans %}</li>
+          <li><strong>{% trans "Subject Line:" %}</strong> {% trans "The subject your recipients will see (keep it under 50 characters)" %}</li>
+          <li><strong>{% trans "From Name:" %}</strong> {% trans "The sender name (your company or personal name)" %}</li>
+          <li><strong>{% trans "From Email:" %}</strong> {% trans "The email address to send from (must be verified)" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 3: Design Your Email" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "You have three options:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ol class="list-decimal list-inside space-y-3 text-gray-700">
+            <li><strong>{% trans "Visual Editor:" %}</strong> {% trans "Use our drag-and-drop editor to design beautiful emails" %}</li>
+            <li><strong>{% trans "HTML Editor:" %}</strong> {% trans "Write custom HTML for complete control" %}</li>
+            <li><strong>{% trans "Template Library:" %}</strong> {% trans "Start from a pre-designed template" %}</li>
+          </ol>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 4: Select Recipients" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Choose one or more subscriber lists" %}</li>
+          <li>{% trans "Apply filters if you want to target specific segments" %}</li>
+          <li>{% trans "Preview the number of recipients" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 5: Send or Schedule" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Choose when to send your campaign:" %}</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>{% trans "Send Now:" %}</strong> {% trans "Campaign goes out immediately" %}</li>
+          <li><strong>{% trans "Schedule:" %}</strong> {% trans "Pick a specific date and time" %}</li>
+          <li><strong>{% trans "Draft:" %}</strong> {% trans "Save for later editing" %}</li>
+        </ul>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>⚠️ {% trans "Important:" %}</strong> {% trans "Always send a test email to yourself before sending to your entire list." %}</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Keep subject lines clear and compelling" %}</li>
+          <li>{% blocktrans %}Personalize with merge tags (e.g., {first_name}){% endblocktrans %}</li>
+          <li>{% trans "Include a clear call-to-action" %}</li>
+          <li>{% trans "Test on multiple devices before sending" %}</li>
+          <li>{% trans "Always include an unsubscribe link (automatically added)" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_drip_campaigns' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+            <h4 class="font-semibold text-indigo-900">{% trans "Building Drip Campaigns" %}</h4>
+            <p class="text-sm text-indigo-700">{% trans "Create automated email sequences" %}</p>
+          </a>
+          <a href="{% url 'core:tutorial_email_editor' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
+            <h4 class="font-semibold text-purple-900">{% trans "Using the Email Editor" %}</h4>
+            <p class="text-sm text-purple-700">{% trans "Master the visual email designer" %}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

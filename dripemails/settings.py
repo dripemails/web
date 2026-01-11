@@ -10,17 +10,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from .env file
 env = environ.Env(
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
     SECRET_KEY=(str, 'django-insecure-default-key-for-dev'),
     DATABASE_URL=(str, f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"),
     EMAIL_BACKEND=(str, 'django.core.mail.backends.smtp.EmailBackend'),
     EMAIL_HOST=(str, 'localhost'),
-    EMAIL_PORT=(int, 1025),
+    EMAIL_PORT=(int, 1025),  # Default to 1025 to match run_smtp_server default (avoids Postfix conflict)
     EMAIL_HOST_USER=(str, ''),
     EMAIL_HOST_PASSWORD=(str, ''),
     EMAIL_USE_TLS=(bool, False),
     DEFAULT_FROM_EMAIL=(str, 'DripEmails <noreply@dripemails.org>'),
+    FOUNDERS_EMAIL=(str, 'founders@dripemails.org'),
     SITE_URL=(str, 'http://localhost:8000'),
+    DEFAULT_URL=(str, 'http://localhost:8000/'),
+    CELERY_ENABLED=(str, ''),  # Empty string means auto-detect, 'True'/'False' to override
+    CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
+    CELERY_RESULT_BACKEND=(str, 'django-db'),
+    OLLAMA_BASE_URL=(str, 'http://localhost:11434'),
+    OLLAMA_MODEL=(str, 'llama3.2:1b'),
+    OLLAMA_TIMEOUT=(int, 300),  # 5 minutes timeout for AI generation
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -52,7 +60,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'django_celery_beat',
+    # 'django_celery_beat',  # Not using django-celery-beat - would downgrade Django to 4.2.25
     'django_celery_results',
     
     # Local apps
@@ -89,6 +97,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.current_year',
+                'core.context_processors.site_detection',
             ],
         },
     },
@@ -134,6 +143,87 @@ LANGUAGES = [
     ('es', _('Spanish')),
     ('fr', _('French')),
     ('de', _('German')),
+    ('it', _('Italian')),
+    ('pt', _('Portuguese')),
+    ('pt-br', _('Portuguese (Brazil)')),
+    ('ru', _('Russian')),
+    ('zh-hans', _('Chinese (Simplified)')),
+    ('zh-hant', _('Chinese (Traditional)')),
+    ('ja', _('Japanese')),
+    ('ko', _('Korean')),
+    ('ar', _('Arabic')),
+    ('hi', _('Hindi')),
+    ('tr', _('Turkish')),
+    ('pl', _('Polish')),
+    ('nl', _('Dutch')),
+    ('sv', _('Swedish')),
+    ('da', _('Danish')),
+    ('no', _('Norwegian')),
+    ('fi', _('Finnish')),
+    ('cs', _('Czech')),
+    ('ro', _('Romanian')),
+    ('hu', _('Hungarian')),
+    ('el', _('Greek')),
+    ('he', _('Hebrew')),
+    ('th', _('Thai')),
+    ('vi', _('Vietnamese')),
+    ('id', _('Indonesian')),
+    ('ms', _('Malay')),
+    ('uk', _('Ukrainian')),
+    ('bg', _('Bulgarian')),
+    ('hr', _('Croatian')),
+    ('sr', _('Serbian')),
+    ('sk', _('Slovak')),
+    ('sl', _('Slovenian')),
+    ('lt', _('Lithuanian')),
+    ('lv', _('Latvian')),
+    ('et', _('Estonian')),
+    ('is', _('Icelandic')),
+    ('ga', _('Irish')),
+    ('mt', _('Maltese')),
+    ('ca', _('Catalan')),
+    ('eu', _('Basque')),
+    ('gl', _('Galician')),
+    ('cy', _('Welsh')),
+    ('fa', _('Persian')),
+    ('ur', _('Urdu')),
+    ('bn', _('Bengali')),
+    ('ta', _('Tamil')),
+    ('te', _('Telugu')),
+    ('mr', _('Marathi')),
+    ('gu', _('Gujarati')),
+    ('kn', _('Kannada')),
+    ('ml', _('Malayalam')),
+    ('pa', _('Punjabi')),
+    ('ne', _('Nepali')),
+    ('si', _('Sinhala')),
+    ('my', _('Burmese')),
+    ('km', _('Khmer')),
+    ('lo', _('Lao')),
+    ('ka', _('Georgian')),
+    ('hy', _('Armenian')),
+    ('az', _('Azerbaijani')),
+    ('kk', _('Kazakh')),
+    ('ky', _('Kyrgyz')),
+    ('uz', _('Uzbek')),
+    ('mn', _('Mongolian')),
+    ('sw', _('Swahili')),
+    ('af', _('Afrikaans')),
+    ('zu', _('Zulu')),
+    ('xh', _('Xhosa')),
+    ('am', _('Amharic')),
+    ('ha', _('Hausa')),
+    ('yo', _('Yoruba')),
+    ('ig', _('Igbo')),
+    ('sn', _('Shona')),
+    ('st', _('Sotho')),
+    ('tn', _('Tswana')),
+    ('ve', _('Venda')),
+    ('ts', _('Tsonga')),
+    ('ss', _('Swati')),
+    ('nr', _('Ndebele')),
+    ('nso', _('Northern Sotho')),
+    ('eo', _('Esperanto')),
 ]
 
 # Location of translation files
@@ -168,27 +258,71 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# For development, make email verification optional; for production use 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none' #was mandatory now none
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Email settings
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+# For development, use console backend to avoid SMTP connection errors
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = env('EMAIL_BACKEND')
+
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+FOUNDERS_EMAIL = env('FOUNDERS_EMAIL', default='founders@dripemails.org')
 
-# Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'django-db'
+# For local development on Windows, make authentication optional
+# If EMAIL_HOST_USER is empty, Django won't use authentication
+# This is useful when running a local SMTP server without auth
+import sys
+if sys.platform == 'win32' and DEBUG:
+    # On Windows development, ensure empty credentials don't cause issues
+    if not EMAIL_HOST_USER:
+        EMAIL_HOST_USER = ''
+    if not EMAIL_HOST_PASSWORD:
+        EMAIL_HOST_PASSWORD = ''
+    # Ensure we're using port 1025 for local SMTP server (matches run_smtp_server default)
+    # This avoids conflicts with Postfix which typically runs on port 25
+    if EMAIL_HOST == 'localhost':
+        # If port is 587 or 25, switch to 1025 for local dev (avoids Postfix conflicts)
+        if EMAIL_PORT in (587, 25):
+            EMAIL_PORT = 1025
+            EMAIL_USE_TLS = False
+        # Otherwise keep the configured port
+
+# Celery settings (optional - Redis not required)
+# Celery is used for asynchronous email sending, but the app will fall back to
+# synchronous sending if Redis/Celery is not available
+import sys
+_celery_enabled_env = env('CELERY_ENABLED', default='')
+if not _celery_enabled_env or _celery_enabled_env.lower() in ('', 'auto', 'none'):
+    # Auto-detect: Disable Celery on Windows when DEBUG=True (for easier development)
+    # Enable Celery by default on Linux/macOS or when DEBUG=False
+    CELERY_ENABLED = (sys.platform != 'win32' or not DEBUG)
+else:
+    # Convert string to boolean
+    CELERY_ENABLED = _celery_enabled_env.lower() in ('true', '1', 'yes', 'on')
+
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='django-db')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Not using django-celery-beat
+# To use beat without django-celery-beat, you can set:
+# CELERY_BEAT_SCHEDULER = 'celery.beat:PersistentScheduler'
+
+# Note: On Windows development with DEBUG=True, Celery is disabled by default
+# Email sending will be synchronous. For production or to enable Celery, set
+# CELERY_ENABLED=True in your .env file and ensure Redis is running.
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = DEBUG
@@ -201,6 +335,7 @@ CORS_ALLOWED_ORIGINS = [
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'core.authentication.BearerTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
@@ -213,3 +348,15 @@ REST_FRAMEWORK = {
 
 # Site URL for absolute URLs
 SITE_URL = env('SITE_URL')
+
+# Ollama Configuration for AI Email Generation (Local Development)
+# For local development, Ollama should be running on localhost
+# To use a remote Ollama server, update OLLAMA_BASE_URL in .env file
+# Model options:
+#   - llama3.2:1b (smallest, ~1.3GB RAM, fastest, good for limited memory)
+#   - llama3.2:3b (balanced, ~2.0GB RAM, better quality)
+#   - llama3.1:8b (largest, ~4.8GB RAM, best quality, requires more memory)
+# See docs/ai/ollama_remote_setup.md for setup instructions
+OLLAMA_BASE_URL = env('OLLAMA_BASE_URL')
+OLLAMA_MODEL = env('OLLAMA_MODEL')
+OLLAMA_TIMEOUT = env('OLLAMA_TIMEOUT')  # Timeout in seconds (default: 300 = 5 minutes)

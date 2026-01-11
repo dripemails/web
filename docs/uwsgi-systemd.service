@@ -1,0 +1,21 @@
+[Unit]
+Description=uWSGI instance to serve DripEmails.org
+After=network.target postgresql.service redis.service
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/dripemails.org
+Environment="PATH=/path/to/dripemails.org/venv/bin"
+ExecStart=/path/to/dripemails.org/venv/bin/uwsgi --ini /path/to/dripemails.org/docs/uwsgi.ini
+Restart=always
+RestartSec=10
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+
+
+

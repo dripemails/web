@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load campaigns_tags %}
 
 {% block title %}{% trans "Edit Campaign" %} - {{ campaign.name }}{% endblock %}
 
@@ -130,6 +131,420 @@
             </div>
         </div>
     </div>
+
+    <!-- Sent Emails Section (Full Width) -->
+    <div class="mt-8">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold text-gray-900">{% trans "Sent Emails" %}</h2>
+            <span class="text-sm text-gray-500">{% trans "Total:" %} {{ sent_emails.paginator.count }}</span>
+        </div>
+        
+        {% if sent_emails %}
+        <div class="bg-white shadow rounded-lg overflow-visible">
+            <div class="overflow-x-visible">
+                <table class="w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="width: 40px;"></th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Subject" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Recipient" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Sent At" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Status" %}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for send_request in sent_emails %}
+                        <tr class="hover:bg-gray-50 cursor-pointer email-row" data-row-id="sent-{{ send_request.id }}">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="expand-btn text-gray-400 hover:text-gray-600 focus:outline-none" onclick="toggleEmailDetails(event, 'sent-{{ send_request.id }}')">
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'sent-{{ send_request.id }}')">
+                                <div class="text-sm font-medium text-gray-900">{{ send_request.email.subject }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'sent-{{ send_request.id }}')">
+                                <div class="text-sm text-gray-900">{{ send_request.subscriber_email }}</div>
+                                {% if send_request.subscriber %}
+                                <div class="text-sm text-gray-500">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</div>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'sent-{{ send_request.id }}')">
+                                <div class="text-sm text-gray-900">{{ send_request.sent_at|date:"M d, Y g:i A" }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'sent-{{ send_request.id }}')">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    {% trans "Sent" %}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr id="details-sent-{{ send_request.id }}" class="hidden email-details">
+                            <td colspan="5" class="px-6 py-4 bg-gray-50">
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="text-sm font-semibold text-gray-700 mb-2">{% trans "Email Details" %}</h4>
+                                            <dl class="space-y-1">
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Request ID:" %}</dt>
+                                                    <dd class="text-gray-900 font-mono text-xs ml-2">{{ send_request.id }}</dd>
+                                                </div>
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Created:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                                {% if send_request.variables %}
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Variables:" %}</dt>
+                                                    <dd class="text-gray-900 font-mono text-xs ml-2">{{ send_request.variables|safe }}</dd>
+                                                </div>
+                                                {% endif %}
+                                            </dl>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-semibold text-gray-700 mb-2">{% trans "Recipient Details" %}</h4>
+                                            <dl class="space-y-1">
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Email:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.subscriber_email }}</dd>
+                                                </div>
+                                                {% if send_request.subscriber %}
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Name:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</dd>
+                                                </div>
+                                                {% endif %}
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-sm font-semibold text-gray-700">{% trans "Email Content" %}</h4>
+                                            <div class="space-x-2">
+                                                <button onclick="showEmailTab('sent-{{ send_request.id }}', 'html')" class="email-tab-btn active px-3 py-1 text-xs font-medium rounded bg-indigo-100 text-indigo-700" data-tab="html">
+                                                    {% trans "HTML" %}
+                                                </button>
+                                                <button onclick="showEmailTab('sent-{{ send_request.id }}', 'text')" class="email-tab-btn px-3 py-1 text-xs font-medium rounded bg-gray-200 text-gray-700" data-tab="text">
+                                                    {% trans "Plain Text" %}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div id="html-sent-{{ send_request.id }}" class="email-content-tab border border-gray-200 rounded-lg p-4 bg-white max-h-96 overflow-y-auto">
+                                            {{ send_request.email.body_html|render_email_variables:send_request|safe }}
+                                        </div>
+                                        <div id="text-sent-{{ send_request.id }}" class="email-content-tab hidden border border-gray-200 rounded-lg p-4 bg-white max-h-96 overflow-y-auto">
+                                            <pre class="whitespace-pre-wrap text-sm text-gray-800">{{ send_request.email.body_text|render_email_variables:send_request }}</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <!-- Pagination for Sent Emails -->
+                {% if sent_emails.has_other_pages %}
+                <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <div class="flex-1 flex justify-between sm:hidden">
+                        {% if sent_emails.has_previous %}
+                        <a href="?sent_page={{ sent_emails.previous_page_number }}{% if pending_emails.number != 1 %}&pending_page={{ pending_emails.number }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            {% trans "Previous" %}
+                        </a>
+                        {% endif %}
+                        {% if sent_emails.has_next %}
+                        <a href="?sent_page={{ sent_emails.next_page_number }}{% if pending_emails.number != 1 %}&pending_page={{ pending_emails.number }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            {% trans "Next" %}
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                {% trans "Showing" %}
+                                <span class="font-medium">{{ sent_emails.start_index }}</span>
+                                {% trans "to" %}
+                                <span class="font-medium">{{ sent_emails.end_index }}</span>
+                                {% trans "of" %}
+                                <span class="font-medium">{{ sent_emails.paginator.count }}</span>
+                                {% trans "results" %}
+                            </p>
+                        </div>
+                        <div>
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                {% if sent_emails.has_previous %}
+                                <a href="?sent_page={{ sent_emails.previous_page_number }}{% if pending_emails.number != 1 %}&pending_page={{ pending_emails.number }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">{% trans "Previous" %}</span>
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                                
+                                {% for num in sent_emails.paginator.page_range %}
+                                    {% if sent_emails.number == num %}
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-indigo-50 text-sm font-medium text-indigo-600">
+                                        {{ num }}
+                                    </span>
+                                    {% elif num > sent_emails.number|add:'-3' and num < sent_emails.number|add:'3' %}
+                                    <a href="?sent_page={{ num }}{% if pending_emails.number != 1 %}&pending_page={{ pending_emails.number }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        {{ num }}
+                                    </a>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if sent_emails.has_next %}
+                                <a href="?sent_page={{ sent_emails.next_page_number }}{% if pending_emails.number != 1 %}&pending_page={{ pending_emails.number }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">{% trans "Next" %}</span>
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center py-12 bg-white shadow rounded-lg">
+                <p class="text-gray-500">{% trans "No emails have been sent from this campaign yet." %}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Pending Emails Section (Full Width) -->
+        <div class="mt-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-900">{% trans "Pending Emails" %}</h2>
+                <span class="text-sm text-gray-500">{% trans "Total:" %} {{ pending_emails.paginator.count }}</span>
+            </div>
+            
+            {% if pending_emails %}
+            <div class="bg-white shadow rounded-lg overflow-visible">
+                <div class="overflow-x-visible">
+                    <table class="w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="width: 40px;"></th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Subject" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Recipient" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Scheduled For" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Status" %}
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                {% trans "Action" %}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for send_request in pending_emails %}
+                        <tr class="hover:bg-gray-50 cursor-pointer email-row" data-row-id="pending-{{ send_request.id }}">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="expand-btn text-gray-400 hover:text-gray-600 focus:outline-none" onclick="toggleEmailDetails(event, 'pending-{{ send_request.id }}')">
+                                    <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'pending-{{ send_request.id }}')">
+                                <div class="text-sm font-medium text-gray-900">{{ send_request.email.subject }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'pending-{{ send_request.id }}')">
+                                <div class="text-sm text-gray-900">{{ send_request.subscriber_email }}</div>
+                                {% if send_request.subscriber %}
+                                <div class="text-sm text-gray-500">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</div>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'pending-{{ send_request.id }}')">
+                                <div class="text-sm text-gray-900">{{ send_request.scheduled_for|date:"M d, Y g:i A" }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap" onclick="toggleEmailDetails(event, 'pending-{{ send_request.id }}')">
+                                {% if send_request.status == 'queued' %}
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                    {% trans "Queued" %}
+                                </span>
+                                {% else %}
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    {% trans "Pending" %}
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button onclick="sendEmailNow(event, '{{ send_request.id }}')" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    {% trans "Send Now" %}
+                                </button>
+                            </td>
+                        </tr>
+                        <tr id="details-pending-{{ send_request.id }}" class="hidden email-details">
+                            <td colspan="6" class="px-6 py-4 bg-gray-50">
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="text-sm font-semibold text-gray-700 mb-2">{% trans "Email Details" %}</h4>
+                                            <dl class="space-y-1">
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Request ID:" %}</dt>
+                                                    <dd class="text-gray-900 font-mono text-xs ml-2">{{ send_request.id }}</dd>
+                                                </div>
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Created:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Scheduled For:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.scheduled_for|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                                {% if send_request.variables %}
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Variables:" %}</dt>
+                                                    <dd class="text-gray-900 font-mono text-xs ml-2">{{ send_request.variables|safe }}</dd>
+                                                </div>
+                                                {% endif %}
+                                                {% if send_request.error_message %}
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Error:" %}</dt>
+                                                    <dd class="text-red-600 text-xs ml-2">{{ send_request.error_message }}</dd>
+                                                </div>
+                                                {% endif %}
+                                            </dl>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-semibold text-gray-700 mb-2">{% trans "Recipient Details" %}</h4>
+                                            <dl class="space-y-1">
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Email:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.subscriber_email }}</dd>
+                                                </div>
+                                                {% if send_request.subscriber %}
+                                                <div class="flex text-sm">
+                                                    <dt class="text-gray-600">{% trans "Name:" %}</dt>
+                                                    <dd class="text-gray-900 ml-2">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</dd>
+                                                </div>
+                                                {% endif %}
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-sm font-semibold text-gray-700">{% trans "Email Content" %}</h4>
+                                            <div class="space-x-2">
+                                                <button onclick="showEmailTab('pending-{{ send_request.id }}', 'html')" class="email-tab-btn active px-3 py-1 text-xs font-medium rounded bg-indigo-100 text-indigo-700" data-tab="html">
+                                                    {% trans "HTML" %}
+                                                </button>
+                                                <button onclick="showEmailTab('pending-{{ send_request.id }}', 'text')" class="email-tab-btn px-3 py-1 text-xs font-medium rounded bg-gray-200 text-gray-700" data-tab="text">
+                                                    {% trans "Plain Text" %}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div id="html-pending-{{ send_request.id }}" class="email-content-tab border border-gray-200 rounded-lg p-4 bg-white max-h-96 overflow-y-auto">
+                                            {{ send_request.email.body_html|render_email_variables:send_request|safe }}
+                                        </div>
+                                        <div id="text-pending-{{ send_request.id }}" class="email-content-tab hidden border border-gray-200 rounded-lg p-4 bg-white max-h-96 overflow-y-auto">
+                                            <pre class="whitespace-pre-wrap text-sm text-gray-800">{{ send_request.email.body_text|render_email_variables:send_request }}</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <!-- Pagination for Pending Emails -->
+                {% if pending_emails.has_other_pages %}
+                <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <div class="flex-1 flex justify-between sm:hidden">
+                        {% if pending_emails.has_previous %}
+                        <a href="?pending_page={{ pending_emails.previous_page_number }}{% if sent_emails.number != 1 %}&sent_page={{ sent_emails.number }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            {% trans "Previous" %}
+                        </a>
+                        {% endif %}
+                        {% if pending_emails.has_next %}
+                        <a href="?pending_page={{ pending_emails.next_page_number }}{% if sent_emails.number != 1 %}&sent_page={{ sent_emails.number }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            {% trans "Next" %}
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                {% trans "Showing" %}
+                                <span class="font-medium">{{ pending_emails.start_index }}</span>
+                                {% trans "to" %}
+                                <span class="font-medium">{{ pending_emails.end_index }}</span>
+                                {% trans "of" %}
+                                <span class="font-medium">{{ pending_emails.paginator.count }}</span>
+                                {% trans "results" %}
+                            </p>
+                        </div>
+                        <div>
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                {% if pending_emails.has_previous %}
+                                <a href="?pending_page={{ pending_emails.previous_page_number }}{% if sent_emails.number != 1 %}&sent_page={{ sent_emails.number }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">{% trans "Previous" %}</span>
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                                
+                                {% for num in pending_emails.paginator.page_range %}
+                                    {% if pending_emails.number == num %}
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-indigo-50 text-sm font-medium text-indigo-600">
+                                        {{ num }}
+                                    </span>
+                                    {% elif num > pending_emails.number|add:'-3' and num < pending_emails.number|add:'3' %}
+                                    <a href="?pending_page={{ num }}{% if sent_emails.number != 1 %}&sent_page={{ sent_emails.number }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        {{ num }}
+                                    </a>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if pending_emails.has_next %}
+                                <a href="?pending_page={{ pending_emails.next_page_number }}{% if sent_emails.number != 1 %}&sent_page={{ sent_emails.number }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">{% trans "Next" %}</span>
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center py-12 bg-white shadow rounded-lg">
+                <p class="text-gray-500">{% trans "No pending emails for this campaign." %}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- File Upload Modal -->
@@ -349,6 +764,104 @@ $(document).ready(function() {
         return cookieValue;
     }
 });
+
+// Toggle email details expansion
+function toggleEmailDetails(event, rowId) {
+    event.stopPropagation();
+    
+    const detailsRow = document.getElementById('details-' + rowId);
+    const expandBtn = document.querySelector(`[data-row-id="${rowId}"] .expand-btn svg`);
+    
+    if (detailsRow.classList.contains('hidden')) {
+        // Expand
+        detailsRow.classList.remove('hidden');
+        expandBtn.style.transform = 'rotate(90deg)';
+    } else {
+        // Collapse
+        detailsRow.classList.add('hidden');
+        expandBtn.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Switch between HTML and Plain Text tabs
+function showEmailTab(rowId, tabType) {
+    const htmlTab = document.getElementById('html-' + rowId);
+    const textTab = document.getElementById('text-' + rowId);
+    const detailsRow = document.getElementById('details-' + rowId);
+    const buttons = detailsRow.querySelectorAll('.email-tab-btn');
+    
+    if (tabType === 'html') {
+        htmlTab.classList.remove('hidden');
+        textTab.classList.add('hidden');
+        buttons[0].classList.remove('bg-gray-200', 'text-gray-700');
+        buttons[0].classList.add('bg-indigo-100', 'text-indigo-700');
+        buttons[1].classList.remove('bg-indigo-100', 'text-indigo-700');
+        buttons[1].classList.add('bg-gray-200', 'text-gray-700');
+    } else {
+        htmlTab.classList.add('hidden');
+        textTab.classList.remove('hidden');
+        buttons[1].classList.remove('bg-gray-200', 'text-gray-700');
+        buttons[1].classList.add('bg-indigo-100', 'text-indigo-700');
+        buttons[0].classList.remove('bg-indigo-100', 'text-indigo-700');
+        buttons[0].classList.add('bg-gray-200', 'text-gray-700');
+    }
+}
+
+// Send pending email immediately
+function sendEmailNow(event, requestId) {
+    event.stopPropagation();
+    
+    if (!confirm('{% trans "Are you sure you want to send this email now?" %}')) {
+        return;
+    }
+    
+    const button = event.target;
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = '{% trans "Sending..." %}';
+    
+    fetch('/api/send-email/requests/' + requestId + '/send-now/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => {
+                throw new Error(data.error || '{% trans "Failed to send email" %}');
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message || '{% trans "Email sent successfully!" %}');
+        // Reload page to update the lists
+        window.location.reload();
+    })
+    .catch(error => {
+        alert(error.message || '{% trans "An error occurred while sending the email" %}');
+        button.disabled = false;
+        button.textContent = originalText;
+    });
+}
+
+// Helper function to get CSRF token (if not already defined)
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 </script>
 {% endblock %}
 {% endblock %} 

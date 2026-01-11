@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}{% trans "Importing Subscribers from CSV" %} - DripEmails.org{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-pink-500 to-red-500 h-48 flex items-center justify-center text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="mb-4">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">📁 {% trans "Importing Subscribers from CSV" %}</h1>
+      <p class="text-xl text-white text-opacity-90">{% trans "Bulk upload your subscriber data" %}</p>
+      <p class="text-white text-opacity-80 mt-2">⏱️ {% trans "10 min read" %}</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <div class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Getting Started with CSV Imports" %}</h2>
+        <p class="text-gray-700 mb-6">{% trans "CSV imports allow you to quickly add hundreds or thousands of subscribers to your lists. This guide covers the entire import process." %}</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p class="text-blue-900"><strong>💡 {% trans "Pro Tip:" %}</strong> {% trans "Always clean your CSV file before importing. Remove duplicates, invalid emails, and test with a small batch first." %}</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 1: Prepare Your CSV File" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Your CSV must include these required columns:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li><strong>email</strong> - {% trans "The subscriber's email address (required)" %}</li>
+            <li><strong>first_name</strong> - {% trans "First name (optional but recommended)" %}</li>
+            <li><strong>last_name</strong> - {% trans "Last name (optional)" %}</li>
+            <li><strong>status</strong> - {% trans "subscribed, unsubscribed, or pending (optional)" %}</li>
+          </ul>
+        </div>
+
+        <p class="text-gray-700 mb-4"><strong>{% trans "Example CSV format:" %}</strong></p>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 font-mono text-sm">
+email,first_name,last_name,status<br/>
+john@example.com,John,Doe,subscribed<br/>
+jane@example.com,Jane,Smith,subscribed<br/>
+bob@example.com,Bob,Johnson,subscribed
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 2: Start the Import" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Go to" %} <strong>{% trans "Subscribers → Import" %}</strong></li>
+          <li>{% trans "Select the list you want to import to" %}</li>
+          <li>{% trans "Click" %} <strong>"{% trans "Choose File" %}"</strong> {% trans "and select your CSV" %}</li>
+          <li>{% trans "Map your CSV columns to DripEmails fields" %}</li>
+        </ol>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 3: Map Columns" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Match your CSV headers to our fields:" %}</p>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li>{% blocktrans %}CSV "email" → DripEmails "Email"{% endblocktrans %}</li>
+            <li>{% blocktrans %}CSV "first_name" → DripEmails "First Name"{% endblocktrans %}</li>
+            <li>{% blocktrans %}CSV "last_name" → DripEmails "Last Name"{% endblocktrans %}</li>
+            <li>{% trans "You can skip columns you don't need" %}</li>
+          </ul>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 4: Import Options" %}</h3>
+        <p class="text-gray-700 mb-4">{% trans "Configure these settings:" %}</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>{% trans "Skip duplicates:" %}</strong> {% trans "Don't re-import existing subscribers" %}</li>
+          <li><strong>{% trans "Update existing:" %}</strong> {% trans "Update info for existing subscribers" %}</li>
+          <li><strong>{% trans "Send welcome email:" %}</strong> {% trans "Automatically welcome new subscribers" %}</li>
+          <li><strong>{% trans "Tag imports:" %}</strong> {% trans "Add a tag to identify this import batch" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Step 5: Review and Import" %}</h3>
+        <ol class="list-decimal list-inside space-y-3 text-gray-700 mb-6">
+          <li>{% trans "Review the import summary" %}</li>
+          <li>{% trans "Check for any errors or warnings" %}</li>
+          <li>{% trans "Click" %} <strong>"{% trans "Start Import" %}"</strong></li>
+          <li>{% trans "Wait for the import to complete (you'll get an email)" %}</li>
+        </ol>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+          <p class="text-yellow-900"><strong>⚠️ {% trans "Important:" %}</strong> {% trans "Large imports (10,000+) may take several minutes. Don't close the browser window during import." %}</p>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Common Issues and Solutions" %}</h3>
+        <div class="space-y-4 mb-6">
+          <div class="border-l-4 border-red-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Invalid Email Addresses" %}</h4>
+            <p class="text-gray-700">{% trans "These will be skipped. Check the error report after import." %}</p>
+          </div>
+          <div class="border-l-4 border-orange-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "Duplicate Emails" %}</h4>
+            <p class="text-gray-700">{% trans "Use \"Skip duplicates\" or \"Update existing\" to handle these." %}</p>
+          </div>
+          <div class="border-l-4 border-yellow-500 pl-4">
+            <h4 class="font-semibold text-gray-900">{% trans "File Too Large" %}</h4>
+            <p class="text-gray-700">{% trans "Split your CSV into smaller files (5,000 rows each)." %}</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Best Practices" %}</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li>{% trans "Always test with a small CSV first (10-20 rows)" %}</li>
+          <li>{% trans "Use UTF-8 encoding to preserve special characters" %}</li>
+          <li>{% trans "Remove empty rows and columns" %}</li>
+          <li>{% trans "Validate email addresses before importing" %}</li>
+          <li>{% trans "Add a source tag to track where subscribers came from" %}</li>
+          <li>{% trans "Keep your original CSV file as a backup" %}</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <a href="{% url 'core:tutorial_managing_lists' %}" class="block p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition">
+            <h4 class="font-semibold text-pink-900">{% trans "Managing Subscriber Lists" %}</h4>
+            <p class="text-sm text-pink-700">{% trans "Organize your subscribers" %}</p>
+          </a>
+          <a href="{% url 'core:tutorial_subscriber_segmentation' %}" class="block p-4 bg-red-50 rounded-lg hover:bg-red-100 transition">
+            <h4 class="font-semibold text-red-900">{% trans "Subscriber Segmentation" %}</h4>
+            <p class="text-sm text-red-700">{% trans "Create targeted segments" %}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

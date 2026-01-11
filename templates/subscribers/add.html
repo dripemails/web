@@ -1,0 +1,362 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load i18n static %}
+
+{% block title %}{% trans "Add Subscriber" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+        <div class="mb-6">
+            <a href="{% url 'subscribers:list' %}" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                {% trans "Back to subscribers" %}
+            </a>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="px-6 py-5 border-b border-gray-200">
+                    <h1 class="text-2xl font-bold text-gray-900">{% trans "Add a Subscriber" %}</h1>
+                    <p class="text-sm text-gray-600 mt-1">
+                        {% trans "Create a new subscriber, attach them to a list, and optionally send the first campaign email." %}
+                    </p>
+                </div>
+
+                <div class="px-6 py-6 space-y-8">
+                    <div id="statusMessage" class="hidden rounded-md border px-4 py-3"></div>
+
+                    {% if not lists %}
+                        <div class="rounded-md border border-blue-200 bg-blue-50 px-4 py-4 text-sm text-blue-800">
+                            {% trans "You don't have any subscriber lists yet. That's okay—add one later if you want to organize subscribers into segments." %}
+                        </div>
+                    {% endif %}
+
+                    <form id="addSubscriberForm" class="space-y-6">
+                        <fieldset class="space-y-4">
+                            <legend class="text-lg font-semibold text-gray-800">{% trans "Subscriber details" %}</legend>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="first_name" class="block text-sm font-medium text-gray-700">{% trans "First name" %}</label>
+                                    <input type="text" id="first_name" name="first_name" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="last_name" class="block text-sm font-medium text-gray-700">{% trans "Last name" %}</label>
+                                    <input type="text" id="last_name" name="last_name" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">{% trans "Email address" %}</label>
+                                <input type="email" required id="email" name="email" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="subscriber@example.com">
+                            </div>
+                            <div>
+                                <label for="list" class="block text-sm font-medium text-gray-700">{% trans "Subscriber list" %}</label>
+                                <select id="list" name="list" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="">{% trans "No list (optional)" %}</option>
+                                    {% for list in lists %}
+                                        <option value="{{ list.id }}">{{ list.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <p class="mt-1 text-xs text-gray-500">{% trans "Leave blank to create the subscriber without adding them to a list." %}</p>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="space-y-4">
+                            <legend class="text-lg font-semibold text-gray-800">{% trans "Initial campaign email (optional)" %}</legend>
+                            <p class="text-sm text-gray-600">{% trans "Optionally send the first email from a campaign to this subscriber." %}</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="campaign" class="block text-sm font-medium text-gray-700">{% trans "Campaign" %}</label>
+                                    <select id="campaign" name="campaign" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="">{% trans "No campaign (optional)" %}</option>
+                                        {% for campaign in campaigns %}
+                                            <option value="{{ campaign.id }}">{{ campaign.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="email_template" class="block text-sm font-medium text-gray-700">{% trans "Email template" %}</label>
+                                    <select id="email_template" name="email_template" disabled class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="">{% trans "Select a campaign first..." %}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="schedule" class="block text-sm font-medium text-gray-700">{% trans "Send timer" %}</label>
+                                    <select id="schedule" name="schedule" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        <option value="now">{% trans "Send immediately" %}</option>
+                                        <option value="seconds">{% trans "In seconds" %}</option>
+                                        <option value="minutes">{% trans "In minutes" %}</option>
+                                        <option value="hours">{% trans "In hours" %}</option>
+                                        <option value="days">{% trans "In days" %}</option>
+                                        <option value="weeks">{% trans "In weeks" %}</option>
+                                        <option value="months">{% trans "In months" %}</option>
+                                    </select>
+                                </div>
+                                <div id="scheduleValueWrapper" class="hidden">
+                                    <label for="schedule_value" id="schedule_value_label" class="block text-sm font-medium text-gray-700">{% trans "Delay value" %}</label>
+                                    <input type="number" min="1" id="schedule_value" name="schedule_value" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <p class="mt-1 text-xs text-gray-500">{% trans "Use whole numbers to define when the first email should send." %}</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
+                            <button type="button" id="resetFormBtn" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+                                {% trans "Reset" %}
+                            </button>
+                            <button type="submit" id="submitBtn" class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                <svg id="submitSpinner" class="mr-2 hidden h-4 w-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                </svg>
+                                <span id="submitButtonText">{% trans "Create subscriber" %}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="campaign-data" type="application/json">
+    {{ campaign_data_json|safe }}
+</script>
+
+<script>
+    (function () {
+        const campaignDataElement = document.getElementById('campaign-data');
+        const campaignData = campaignDataElement ? JSON.parse(campaignDataElement.textContent || '[]') : [];
+        const form = document.getElementById('addSubscriberForm');
+        const campaignSelect = document.getElementById('campaign');
+        const emailTemplateSelect = document.getElementById('email_template');
+        const scheduleSelect = document.getElementById('schedule');
+        const scheduleValueWrapper = document.getElementById('scheduleValueWrapper');
+        const scheduleValueInput = document.getElementById('schedule_value');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitSpinner = document.getElementById('submitSpinner');
+        const submitButtonText = document.getElementById('submitButtonText');
+        const statusMessage = document.getElementById('statusMessage');
+        const resetFormBtn = document.getElementById('resetFormBtn');
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i += 1) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function toggleScheduleValue() {
+            if (scheduleSelect.value === 'now') {
+                scheduleValueWrapper.classList.add('hidden');
+                scheduleValueInput.value = '';
+            } else {
+                scheduleValueWrapper.classList.remove('hidden');
+                scheduleValueInput.focus();
+            }
+        }
+
+        function populateEmailTemplates() {
+            const selectedCampaignId = campaignSelect.value;
+            emailTemplateSelect.innerHTML = '';
+
+            if (!selectedCampaignId) {
+                emailTemplateSelect.disabled = true;
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = '{{ _("Select a campaign first...") }}';
+                emailTemplateSelect.appendChild(option);
+                return;
+            }
+
+            const campaign = campaignData.find((item) => item.id === selectedCampaignId);
+            emailTemplateSelect.disabled = false;
+
+            if (!campaign || !campaign.emails.length) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = '{{ _("No email templates available for this campaign") }}';
+                emailTemplateSelect.appendChild(option);
+                emailTemplateSelect.disabled = true;
+                return;
+            }
+
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '{{ _("Select an email template...") }}';
+            emailTemplateSelect.appendChild(placeholder);
+
+            campaign.emails.forEach((email) => {
+                const option = document.createElement('option');
+                option.value = email.id;
+                option.textContent = email.subject;
+                emailTemplateSelect.appendChild(option);
+            });
+        }
+
+        function setSubmittingState(isSubmitting) {
+            if (isSubmitting) {
+                submitBtn.setAttribute('disabled', 'disabled');
+                submitSpinner.classList.remove('hidden');
+                submitButtonText.textContent = '{{ _("Saving...") }}';
+            } else {
+                submitBtn.removeAttribute('disabled');
+                submitSpinner.classList.add('hidden');
+                submitButtonText.textContent = '{{ _("Create subscriber") }}';
+            }
+        }
+
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('hidden', 'border-green-200', 'bg-green-50', 'text-green-800', 'border-red-200', 'bg-red-50', 'text-red-800');
+            if (type === 'success') {
+                statusMessage.classList.add('border-green-200', 'bg-green-50', 'text-green-800');
+            } else {
+                statusMessage.classList.add('border-red-200', 'bg-red-50', 'text-red-800');
+            }
+        }
+
+        function resetForm() {
+            form.reset();
+            emailTemplateSelect.innerHTML = '<option value=\"\">{{ _("Select a campaign first...") }}</option>';
+            emailTemplateSelect.disabled = true;
+            scheduleValueWrapper.classList.add('hidden');
+            scheduleValueInput.value = '';
+            statusMessage.classList.add('hidden');
+        }
+
+        campaignSelect.addEventListener('change', populateEmailTemplates);
+        scheduleSelect.addEventListener('change', toggleScheduleValue);
+        resetFormBtn.addEventListener('click', resetForm);
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusMessage.classList.add('hidden');
+
+            const email = form.email.value.trim();
+            const listId = form.list.value;
+            const campaignId = form.campaign.value;
+            const emailId = form.email_template.value;
+            const schedule = form.schedule.value;
+            const scheduleValue = form.schedule_value.value;
+
+            if (!email) {
+                showStatus('{{ _("Please provide an email address.") }}', 'error');
+                return;
+            }
+            
+            // Validate campaign fields if campaign is selected
+            if (campaignId) {
+                if (!emailId) {
+                    showStatus('{{ _("Choose an email template to send.") }}', 'error');
+                    return;
+                }
+                if (schedule !== 'now' && !scheduleValue) {
+                    showStatus('{{ _("Provide a delay value for the send timer.") }}', 'error');
+                    return;
+                }
+            }
+
+            setSubmittingState(true);
+
+            const csrftoken = getCookie('csrftoken');
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            };
+
+            try {
+                const subscriberResponse = await fetch('{{ api_subscriber_create_url }}', {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({
+                        email,
+                        first_name: form.first_name.value.trim(),
+                        last_name: form.last_name.value.trim(),
+                        list_id: listId || null,
+                        is_active: true,
+                    }),
+                });
+
+                let subscriberData = null;
+                try {
+                    subscriberData = await subscriberResponse.json();
+                } catch (jsonError) {
+                    console.warn('Could not parse subscriber response as JSON:', jsonError);
+                    const textResponse = await subscriberResponse.text();
+                    console.warn('Response text:', textResponse);
+                }
+
+                if (!subscriberResponse.ok) {
+                    const errorMessage = subscriberData?.error || subscriberData?.detail || JSON.stringify(subscriberData) || 'Unable to create subscriber.';
+                    throw new Error(errorMessage);
+                }
+
+                // If campaign is selected, send the email
+                if (campaignId && emailId) {
+                    const sendResponse = await fetch('{{ api_send_email_url }}', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            email,
+                            first_name: form.first_name.value.trim(),
+                            last_name: form.last_name.value.trim(),
+                            campaign_id: campaignId,
+                            email_id: emailId,
+                            schedule,
+                            schedule_value: schedule === 'now' ? '0' : scheduleValue,
+                        }),
+                    });
+
+                    let sendData = null;
+                    try {
+                        sendData = await sendResponse.json();
+                    } catch (jsonError) {
+                        console.warn('Could not parse send email response as JSON:', jsonError);
+                        const textResponse = await sendResponse.text();
+                        console.warn('Response text:', textResponse);
+                    }
+
+                    if (!sendResponse.ok) {
+                        const errorMessage = sendData?.error || sendData?.detail || JSON.stringify(sendData) || 'Unable to schedule the email.';
+                        throw new Error(errorMessage);
+                    }
+
+                    resetForm();
+                    showStatus('{{ _("Subscriber created and first email scheduled successfully!") }}', 'success');
+                } else {
+                    resetForm();
+                    showStatus('{{ _("Subscriber created successfully!") }}', 'success');
+                }
+            } catch (error) {
+                console.error('Error details:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                if (error.stack) {
+                    console.error('Error stack:', error.stack);
+                }
+                let errorMessage = error.message || '{{ _("Something went wrong. Please try again.") }}';
+                if (error.name === 'TypeError' && (error.message.includes('fetch') || error.message.includes('network'))) {
+                    errorMessage = '{{ _("Network error: Could not connect to server. Please check if the server is running.") }}';
+                }
+                showStatus(errorMessage, 'error');
+            } finally {
+                setSubmittingState(false);
+            }
+        });
+    })();
+</script>
+{% endblock %}
+

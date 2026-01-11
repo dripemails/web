@@ -1,0 +1,220 @@
+{% extends "core/docs/base_docs.html" %}
+{% load i18n %}
+
+{% block doc_title %}Deployment Troubleshooting{% endblock %}
+
+{% block doc_content %}
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Deployment Troubleshooting" %}</h1>
+
+<div class="prose max-w-none">
+  <p class="text-lg text-gray-600 mb-6">
+    Common deployment issues and their solutions.
+  </p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Common Issues" %}</h2>
+
+  <div class="space-y-6">
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ 502 Bad Gateway" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Gunicorn is not running or socket file doesn't exist</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check Gunicorn status
+sudo systemctl status dripemails
+
+# Restart Gunicorn
+sudo systemctl restart dripemails
+
+# Check socket file
+ls -la /home/dripemails/web/dripemails.sock
+
+# Check logs
+sudo journalctl -u dripemails -n 50</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Static Files Not Loading" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Static files not collected or Nginx misconfigured</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Collect static files
+python manage.py collectstatic --noinput
+
+# Check permissions
+sudo chown -R dripemails:www-data /home/dripemails/web/staticfiles
+sudo chmod -R 755 /home/dripemails/web/staticfiles
+
+# Restart Nginx
+sudo systemctl restart nginx</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Database Connection Error" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Database credentials or host incorrect</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Test PostgreSQL connection
+sudo -u postgres psql -c "SELECT version();"
+
+# Check database exists
+sudo -u postgres psql -l | grep dripemails
+
+# Verify .env settings
+cat .env | grep DB_
+
+# Test connection from Django
+python manage.py shell
+>>> from django.db import connection
+>>> connection.ensure_connection()</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ SMTP Server Not Starting" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Port conflict or permission issues</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check if port is in use
+sudo netstat -tulpn | grep 1025
+
+# Check supervisor logs
+sudo supervisorctl tail dripemails-smtp
+
+# Use different port if 1025 is taken
+python manage.py run_smtp_server --port 2525
+
+# Update supervisor config
+sudo nano /etc/supervisor/conf.d/dripemails-smtp.conf
+sudo supervisorctl reread
+sudo supervisorctl update</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Celery Not Processing Tasks" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Redis not running or Celery worker down</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check Redis status
+sudo systemctl status redis-server
+
+# Start Redis if stopped
+sudo systemctl start redis-server
+
+# Check Celery workers
+sudo supervisorctl status dripemails-celery-worker
+
+# Restart Celery
+sudo supervisorctl restart dripemails-celery-worker
+sudo supervisorctl restart dripemails-celery-beat
+
+# Check Celery logs
+sudo supervisorctl tail dripemails-celery-worker</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Permission Denied Errors" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Incorrect file permissions or ownership</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Fix ownership
+sudo chown -R dripemails:www-data /home/dripemails/web
+
+# Fix permissions
+sudo chmod -R 755 /home/dripemails/web
+sudo chmod -R 775 /home/dripemails/web/media
+sudo chmod -R 775 /home/dripemails/web/staticfiles
+
+# Fix socket permissions
+sudo chmod 660 /home/dripemails/web/dripemails.sock</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ SSL Certificate Issues" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> Let's Encrypt failed or certificate expired</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Check certificate status
+sudo certbot certificates
+
+# Renew certificate
+sudo certbot renew
+
+# Force renewal
+sudo certbot renew --force-renewal
+
+# Test renewal process
+sudo certbot renew --dry-run</code></pre>
+    </div>
+
+    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "❌ Emails Not Sending" %}</h3>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Cause:" %}</strong> SMTP server not configured or firewall blocking</p>
+      <p class="text-gray-700 mb-3"><strong>{% trans "Solution:" %}</strong></p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Test SMTP connection
+telnet localhost 1025
+
+# Check SMTP server status
+sudo supervisorctl status dripemails-smtp
+
+# Check firewall rules
+sudo ufw status
+sudo ufw allow 1025/tcp
+
+# Test email sending
+python manage.py shell
+>>> from django.core.mail import send_mail
+>>> send_mail('Test', 'Test', 'from@test.com', ['to@test.com'])</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Debugging Tips" %}</h2>
+
+  <div class="space-y-4">
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "📋 Check All Logs" %}</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Gunicorn logs
+sudo journalctl -u dripemails -f
+
+# Nginx access logs
+tail -f /var/log/nginx/access.log
+
+# Nginx error logs
+tail -f /var/log/nginx/error.log
+
+# Supervisor logs
+sudo supervisorctl tail -f dripemails-smtp
+
+# Celery logs
+sudo supervisorctl tail -f dripemails-celery-worker</code></pre>
+    </div>
+
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "🔍 Enable Debug Mode Temporarily" %}</h3>
+      <p class="text-blue-800 mb-2">{% trans "Edit .env file:" %}</p>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>{% trans "DEBUG=True" %}</code></pre>
+      <p class="text-blue-800 mt-2"><strong>{% trans "⚠️ Remember to disable debug mode after troubleshooting!" %}</strong></p>
+    </div>
+
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">{% trans "🔄 Restart All Services" %}</h3>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code># Restart everything
+sudo systemctl restart dripemails
+sudo systemctl restart nginx
+sudo supervisorctl restart all
+sudo systemctl restart redis-server</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Getting Help" %}</h2>
+
+  <div class="bg-green-50 border-l-4 border-green-500 p-6">
+    <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "💬 Need More Help?" %}</h3>
+    <ul class="list-disc pl-6 text-green-800 space-y-2">
+      <li>Check the <a href="{% url 'core:resource_community' %}" class="underline font-semibold">community forums</a></li>
+      <li>Report issues on <a href="https://github.com/dripemails/web/issues" target="_blank" class="underline font-semibold">{% trans "GitHub" %}</a></li>
+      <li>Email us at <a href="mailto:{% trans "founders@dripemails.org" %}" class="underline font-semibold">founders@dripemails.org</a></li>
+    </ul>
+  </div>
+
+  <div class="flex gap-4 mt-8">
+    <a href="{% url 'core:docs_deployment_production' %}" class="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
+      ← Production Setup
+    </a>
+    <a href="{% url 'core:docs_deployment' %}" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
+      Back to Deployment Guide
+    </a>
+  </div>
+</div>
+{% endblock %}

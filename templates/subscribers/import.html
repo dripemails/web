@@ -21,6 +21,9 @@
                             </label>
                             <select id="campaign" name="campaign" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="">{% trans "Select a campaign..." %}</option>
+                                {% for campaign in campaigns %}
+                                    {% comment %} <option value="{{campaign.id}}">{{campaign.name}}</option> {% endcomment %}
+                                {% endfor %}
                             </select>
                         </div>
 
@@ -122,7 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('campaign');
-            data.results.forEach(campaign => {
+            // API returns array directly, not wrapped in results
+            (data.results || data).forEach(campaign => {
                 const option = document.createElement('option');
                 option.value = campaign.id;
                 option.textContent = campaign.name;
@@ -130,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-    fetch('/subscribers/api/lists/')
+    fetch('/api/subscribers/lists/')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('list');
@@ -240,17 +244,25 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error || 'Request failed');
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.error) {
                 alert(data.error);
             } else {
+                alert(data.message || '{% trans "Subscribers imported successfully!" %}');
                 window.location.href = '/dashboard/';
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('{% trans "An error occurred while importing subscribers. Please try again." %}');
+            alert(error.message || '{% trans "An error occurred while importing subscribers. Please try again." %}');
         });
     });
 
@@ -306,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             description: formData.get('description')
         };
 
-        fetch('/subscribers/api/lists/', {
+        fetch('/api/subscribers/lists/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

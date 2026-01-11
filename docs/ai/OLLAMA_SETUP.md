@@ -1,10 +1,10 @@
 # Ollama Setup for AI Email Generation
 
-This guide will help you set up Ollama with the llama3.1:8b model for AI-powered email generation and revision features in your DripEmails application.
+This guide will help you set up Ollama with the llama3.2:1b model for AI-powered email generation and revision features in your DripEmails application.
 
 ## Overview
 
-The application uses **Ollama** with the **llama3.1:8b** model (8 billion parameter model), which provides:
+The application uses **Ollama** with the **llama3.2:1b** model (8 billion parameter model), which provides:
 
 - High-quality professional email content generation
 - Email revision for grammar, clarity, and tone improvements
@@ -63,14 +63,14 @@ The application uses **Ollama** with the **llama3.1:8b** model (8 billion parame
    ollama --version
    ```
 
-## Step 2: Download the llama3.1:8b Model
+## Step 2: Download the llama3.2:1b Model
 
 1. **Pull the Model**
 
    Open your terminal/PowerShell and run:
 
    ```bash
-   ollama pull llama3.1:8b
+   ollama pull llama3.2:1b
    ```
 
 2. **Wait for Download**
@@ -83,7 +83,7 @@ The application uses **Ollama** with the **llama3.1:8b** model (8 billion parame
    ```bash
    ollama list
    ```
-   You should see `llama3.1:8b` in the list
+   You should see `llama3.2:1b` in the list
 
 ## Step 3: Start Ollama with CPU-Only Mode
 
@@ -167,7 +167,7 @@ ollama serve
 
    ```bash
    curl http://localhost:11434/api/generate -d '{
-     "model": "llama3.1:8b",
+     "model": "llama3.2:1b",
      "prompt": "Write a professional welcome email",
      "stream": false
    }'
@@ -185,7 +185,7 @@ If you're running Ollama on a different host or port, create a `.env` file in yo
 ```env
 # Ollama Configuration (defaults shown)
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Note:** These are the default values. You only need to set them if you're using different settings.
@@ -195,7 +195,7 @@ OLLAMA_MODEL=llama3.1:8b
 ### CPU-Only Mode
 
 - **Generation Time:** 10-30 seconds per email (normal for CPU)
-- **Quality:** Excellent - llama3.1:8b provides high-quality output
+- **Quality:** Excellent - llama3.2:1b provides high-quality output
 - **Memory Usage:** ~5GB RAM during inference
 - **CPU Usage:** High during generation, minimal when idle
 
@@ -220,11 +220,11 @@ OLLAMA_MODEL=llama3.1:8b
 
 ### Model Not Found
 
-**Issue:** Error: "model 'llama3.1:8b' not found"
+**Issue:** Error: "model 'llama3.2:1b' not found"
 
 **Solutions:**
 
-- Run: `ollama pull llama3.1:8b`
+- Run: `ollama pull llama3.2:1b`
 - Verify with: `ollama list`
 - Ensure you have enough disk space (8GB required)
 
@@ -303,7 +303,7 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 ## Alternative Models
 
-While DripEmails is configured for `llama3.1:8b`, you can experiment with other models:
+While DripEmails is configured for `llama3.2:1b`, you can experiment with other models:
 
 ### Smaller (faster, less RAM)
 
@@ -334,7 +334,7 @@ OLLAMA_MODEL=llama3.1:13b
 ## Summary Checklist
 
 - [ ] Ollama installed and `ollama --version` works
-- [ ] Model downloaded with `ollama pull llama3.1:8b`
+- [ ] Model downloaded with `ollama pull llama3.2:1b`
 - [ ] OLLAMA_NUM_GPU=0 environment variable set
 - [ ] `ollama serve` running successfully
 - [ ] Tested with curl command (Step 4)

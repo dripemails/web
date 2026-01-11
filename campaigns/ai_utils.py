@@ -1,6 +1,6 @@
 """
 AI utilities for email generation and topic analysis.
-Provides functions for generating email content using Ollama with local llama3.1:8b model.
+Provides functions for generating email content using Ollama with local llama3.2:1b model.
 """
 
 import os

@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const templateForm = document.getElementById('templateForm');
     const testForm = document.getElementById('testForm');
     const campaignId = '{{ campaign.id }}';
-    const templateId = '{{ template.id }}';
+    const templateId = '{{ template.id|default:"" }}';
     
     // Debug: Log campaignId and templateId
     console.log('campaignId:', campaignId);

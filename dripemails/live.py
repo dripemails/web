@@ -508,6 +508,11 @@ OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
 OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')  # Default to smaller model for limited memory
 OLLAMA_TIMEOUT = int(os.environ.get('OLLAMA_TIMEOUT', '300'))  # Timeout in seconds (default: 300 = 5 minutes)
 
+# Gmail/Google OAuth Configuration
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', '')
+GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', 'https://dripemails.org/api/gmail/callback/')
+
 # Admin site customization
 ADMIN_SITE_HEADER = "DripEmails Administration"
 ADMIN_SITE_TITLE = "DripEmails Admin Portal"

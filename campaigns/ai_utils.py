@@ -24,12 +24,12 @@ logger = logging.getLogger(__name__)
 try:
     from django.conf import settings
     OLLAMA_BASE_URL = getattr(settings, 'OLLAMA_BASE_URL', os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"))
-    OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', os.environ.get("OLLAMA_MODEL", "llama3.1:8b"))
+    OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', os.environ.get("OLLAMA_MODEL", "llama3.2:1b"))
     OLLAMA_TIMEOUT = getattr(settings, 'OLLAMA_TIMEOUT', 300)  # 5 minutes default timeout
 except ImportError:
     # Django not available (e.g., during testing)
     OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
-    OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:8b")
+    OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.2:1b")
     OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "300"))
 
 

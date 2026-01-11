@@ -3,7 +3,7 @@ import requests
 import json
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "llama3.1:8b"
+OLLAMA_MODEL = "llama3.2:1b"
 
 def call_ollama(prompt):
     """

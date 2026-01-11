@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'campaigns.apps.CampaignsConfig',
     'subscribers.apps.SubscribersConfig',
     'analytics.apps.AnalyticsConfig',
+    'gmail.apps.GmailConfig',
 ]
 
 MIDDLEWARE = [

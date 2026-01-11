@@ -21,6 +21,8 @@ Usage:
     python cron.py process_gmail_emails
     python cron.py process_gmail_emails --settings=dripemails.live
     python cron.py process_gmail_emails --limit 50
+    python cron.py process_gmail_emails --periodic
+    python cron.py process_gmail_emails --periodic --interval 120
 """
 
 import os
@@ -33,6 +35,7 @@ import logging
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 import argparse
+import time
 
 # Setup Django - Parse settings argument first
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -650,6 +653,8 @@ def main():
     parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID')
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users')
     parser.add_argument('--limit', type=int, help='Limit number of scheduled emails to process')
+    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (for process_gmail_emails)')
+    parser.add_argument('--interval', type=int, default=120, help='Interval in seconds between executions when using --periodic (default: 120 = 2 minutes)')
     
     args = parser.parse_args()
     
@@ -670,7 +675,27 @@ def main():
     elif args.command == 'send_scheduled_emails':
         send_scheduled_emails(limit=args.limit)
     elif args.command == 'process_gmail_emails':
-        process_gmail_emails(limit=args.limit)
+        if args.periodic:
+            logger.info(f"Starting periodic Gmail email processing (interval: {args.interval} seconds)")
+            try:
+                while True:
+                    try:
+                        logger.info(f"Running Gmail email processing cycle at {timezone.now()}")
+                        process_gmail_emails(limit=args.limit)
+                        logger.info(f"Completed Gmail email processing cycle. Sleeping for {args.interval} seconds...")
+                    except KeyboardInterrupt:
+                        logger.info("Received interrupt signal. Stopping periodic execution.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error in periodic Gmail email processing cycle: {str(e)}", exc_info=True)
+                        logger.info(f"Continuing despite error. Will retry in {args.interval} seconds...")
+                    
+                    time.sleep(args.interval)
+            except KeyboardInterrupt:
+                logger.info("Periodic Gmail email processing stopped by user")
+                sys.exit(0)
+        else:
+            process_gmail_emails(limit=args.limit)
     else:
         logger.error(f"Unknown command: {args.command}")
         print(__doc__)

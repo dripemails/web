@@ -6,8 +6,9 @@ Usage:
 
 This command starts a modern async SMTP server that can receive emails from your Django application
 and handle them appropriately. Perfect for development, testing, and production email handling.
-Compatible with Python 3.11+ and 3.12+. Runs on standard SMTP port 25 by default (no SSL required).
+Compatible with Python 3.11+ and 3.12+. Runs on port 1025 by default (to avoid conflicts with Postfix on port 25).
 Supports authentication with Django users including the 'founders' account.
+Press Ctrl+C to gracefully stop the server.
 """
 
 import asyncio
@@ -15,6 +16,8 @@ import argparse
 import logging
 import json
 import os
+import signal
+import sys
 from pathlib import Path
 from django.core.management.base import BaseCommand
 from django.conf import settings
@@ -30,8 +33,8 @@ class Command(BaseCommand):
         parser.add_argument(
             '--port',
             type=int,
-            default=25,
-            help='Port to run the SMTP server on (default: 25)'
+            default=1025,
+            help='Port to run the SMTP server on (default: 1025)'
         )
         parser.add_argument(
             '--host',
@@ -155,47 +158,93 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS('🛑 SMTP server stopped by user.')
             )
+            sys.exit(0)
         except Exception as e:
-            self.stdout.write(
-                self.style.ERROR(f'❌ Error running SMTP server: {e}')
-            )
+            import traceback
+            error_msg = f'❌ Error running SMTP server: {e}'
+            self.stdout.write(self.style.ERROR(error_msg))
+            # Also print to stderr for supervisor to capture
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc())
+            logger.error(f"SMTP server error: {e}", exc_info=True)
+            sys.exit(1)
     
     def _run_smtp_server(self, host: str, port: int, config: dict):
         """Run the SMTP server with proper event loop handling for Python 3.11+."""
-        server = create_smtp_server(config)
+        try:
+            server = create_smtp_server(config)
+        except Exception as e:
+            import traceback
+            error_msg = f"Failed to create SMTP server: {e}"
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
         
-        if server.start(host, port):
+        try:
+            if not server.start(host, port):
+                error_msg = f"Failed to start SMTP server on {host}:{port}. Check if port is available and you have permissions."
+                self.stderr.write(error_msg + '\n')
+                logger.error(error_msg)
+                raise RuntimeError(error_msg)
+        except OSError as e:
+            import traceback
+            if e.errno == 13:  # Permission denied
+                error_msg = f"Permission denied binding to {host}:{port}. Port {port} may require root privileges. Try using port 1025 or run with sudo."
+            elif e.errno == 98:  # Address already in use
+                error_msg = f"Port {port} is already in use. Try a different port or stop the service using it."
+            else:
+                error_msg = f"OS error starting SMTP server: {e}"
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
+        
+        try:
+            # The aiosmtpd Controller manages its own event loop
+            # Just keep the process alive until interrupted
+            import time
+            while True:
+                # Check if controller is still running
+                if server.controller is None:
+                    break
+                if not hasattr(server.controller, 'smtpd') or server.controller.smtpd is None:
+                    break
+                time.sleep(0.5)  # Sleep to avoid CPU spinning
+        except KeyboardInterrupt:
+            self.stdout.write(
+                self.style.WARNING('\n🛑 Keyboard interrupt received. Stopping server...')
+            )
+        except Exception as e:
+            import traceback
+            error_msg = f'❌ Error running server: {e}'
+            self.stderr.write(error_msg + '\n')
+            self.stderr.write(traceback.format_exc() + '\n')
+            logger.error(error_msg, exc_info=True)
+            raise
+        finally:
+            # Stop the server gracefully
             try:
-                # Python 3.11+ compatible event loop handling
-                try:
-                    # Try to get existing event loop
-                    loop = asyncio.get_event_loop()
-                    if loop.is_running():
-                        # If loop is already running, just keep it running
-                        pass
-                    else:
-                        # Run the event loop
-                        loop.run_forever()
-                except RuntimeError:
-                    # No event loop available, create a new one
-                    loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(loop)
-                    loop.run_forever()
-            except KeyboardInterrupt:
-                pass
-            finally:
                 server.stop()
-        else:
-            raise RuntimeError("Failed to start SMTP server")
+                self.stdout.write(
+                    self.style.SUCCESS('✅ Server stopped successfully.')
+                )
+            except Exception as e:
+                logger.warning(f"Error stopping server: {e}")
     
     def _load_config(self, options):
         """Load configuration from file or command line options."""
+        import sys
+        # Automatically disable auth for Windows development when DEBUG is True
+        # unless explicitly enabled via --no-auth flag
+        auto_no_auth = (sys.platform == 'win32' and settings.DEBUG and not options['no_auth'])
+        
         config = {
             'debug': options['debug'],
             'save_to_database': options['save_to_db'],
             'log_to_file': options['log_to_file'],
             'allowed_domains': ['dripemails.org', 'localhost', '127.0.0.1'],
-            'auth_enabled': not options['no_auth'],
+            'auth_enabled': not (options['no_auth'] or auto_no_auth),
             'allowed_users': options['allowed_users'],
         }
         

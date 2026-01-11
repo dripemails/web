@@ -1,0 +1,427 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Template Revision" %} - {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+<!-- Quill.js - Free WYSIWYG Editor -->
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
+<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
+<script src="{% static 'js/quill.min.js' %}"></script>
+
+<style>
+  /* Quill editor custom styling */
+  .ql-container {
+    font-family: inherit;
+  }
+  .ql-editor {
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">{% trans "Template Revision" %}</h1>
+    <div>
+      <a href="{% url 'campaigns:analysis' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Analysis" %}</a>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6">
+    <form method="get" class="mb-4 flex items-center space-x-4">
+      <label class="flex items-center space-x-2">
+        <span class="text-sm text-gray-600">{% trans "Campaign" %}</span>
+        <select name="campaign_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
+          <option value="">-- {% trans "Select" %} --</option>
+          {% for c in campaigns %}
+            <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% if campaign %}
+        <label class="flex items-center space-x-2">
+          <span class="text-sm text-gray-600">{% trans "Email" %}</span>
+          <input type="hidden" name="campaign_id" value="{{ campaign.id }}">
+          <select name="email_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
+            <option value="">-- {% trans "Select" %} --</option>
+            {% for e in emails %}
+              <option value="{{ e.id }}" {% if email and email.id == e.id %}selected{% endif %}>{{ e.order }} - {{ e.subject }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      {% endif %}
+    </form>
+
+    {% if not campaigns %}
+      <p class="text-gray-600">{% trans "No campaigns available." %}</p>
+    {% else %}
+      {% if not email %}
+        <p class="text-gray-600">{% trans "Select an email to preview and edit a draft." %}</p>
+      {% else %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Original -->
+          <div class="border rounded p-4 bg-gray-50">
+            <h3 class="font-medium mb-2 flex items-center justify-between">
+              <span>{% trans "Original" %}</span>
+              <button type="button" id="ai-revise-button" class="bg-indigo-600 text-white px-3 py-1.5 rounded text-sm hover:bg-indigo-700 flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span>{% trans "AI Revise" %}</span>
+              </button>
+            </h3>
+            <div id="original-content" class="prose max-h-80 overflow-auto p-2 bg-white rounded">
+              {% if email.body_html %}
+                <div>{{ email.body_html|safe }}</div>
+              {% else %}
+                <pre class="whitespace-pre-wrap">{{ email.body_text }}</pre>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Editable -->
+          <div class="border rounded p-4 bg-gray-50">
+            <h3 class="font-medium mb-2">{% trans "Edit Draft" %}</h3>
+            <form id="saveTemplateForm" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="email_id" value="{{ email.id }}">
+              <input type="hidden" name="body_html" id="body_html_hidden">
+
+              <div class="mb-3 flex items-center space-x-3">
+                <label class="flex items-center space-x-2 text-sm text-gray-600"><input type="checkbox" id="live-preview" checked class="form-checkbox"> <span>{% trans "Live preview" %}</span></label>
+                <button type="button" id="preview-button" class="ml-auto bg-gray-100 px-3 py-1 rounded text-sm">{% trans "Refresh preview" %}</button>
+              </div>
+
+              <div class="mb-3">
+                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Subject" %}</label>
+                <input type="text" id="subject" name="subject" value="{{ email.subject }}" required
+                       class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+              </div>
+
+              <div class="mb-3">
+                <label for="save_to_campaign" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Save to Campaign" %}</label>
+                <select id="save_to_campaign" name="save_to_campaign" required
+                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                  {% for c in campaigns %}
+                    <option value="{{ c.id }}" {% if campaign and campaign.id == c.id %}selected{% endif %}>{{ c.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Body" %}</label>
+                <!-- Rich text editor using Quill -->
+                <div id="editor-container">
+                  <div id="draft-editor"></div>
+                </div>
+                <!-- Hidden textarea for form submission -->
+                <textarea name="draft" id="draft-textarea" class="hidden"></textarea>
+              </div>
+
+              <div class="mb-4 flex items-center space-x-3">
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center space-x-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                  </svg>
+                  <span>{% trans "Save Template" %}</span>
+                </button>
+                <button type="button" id="send-email-button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex items-center space-x-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <span>{% trans "Send Email" %}</span>
+                </button>
+              </div>
+
+              <div>
+                <h4 class="font-medium mb-2">{% trans "Preview" %}</h4>
+                <div id="draft-preview" class="prose max-h-48 overflow-auto p-3 bg-white rounded border"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  (function(){
+    // Initialize Quill editor
+    let quill;
+    const toolbarOptions = [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      ['link', 'image', 'video'],                       // link, image, video
+      ['clean']                                         // remove formatting button
+    ];
+
+    quill = new Quill('#draft-editor', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow',
+      placeholder: '{% trans "Write your email content here..." %}'
+    });
+
+    // Load initial content if available
+    {% if email.body_html %}
+    const initialContent = `{{ email.body_html|escapejs }}`;
+    {% elif email.body_text %}
+    const initialContent = `{{ email.body_text|escapejs }}`;
+    {% else %}
+    const initialContent = '';
+    {% endif %}
+    if(initialContent){
+      quill.root.innerHTML = initialContent;
+    }
+
+    const textarea = document.getElementById('draft-textarea');
+    const preview = document.getElementById('draft-preview');
+    const live = document.getElementById('live-preview');
+    const previewBtn = document.getElementById('preview-button');
+    const orig = document.getElementById('original-content');
+    const aiReviseBtn = document.getElementById('ai-revise-button');
+    const sendEmailBtn = document.getElementById('send-email-button');
+    const saveTemplateForm = document.getElementById('saveTemplateForm');
+    const bodyHtmlHidden = document.getElementById('body_html_hidden');
+    const subjectInput = document.getElementById('subject');
+    const campaignSelect = document.getElementById('save_to_campaign');
+
+    function updatePreview(){
+      if(!preview || !quill) {
+        console.log('Preview or quill not found');
+        return;
+      }
+      const htmlContent = quill.root.innerHTML;
+      console.log('Updating preview with content length:', htmlContent.length);
+      preview.innerHTML = htmlContent;
+    }
+
+    if(quill && preview){
+      // Initial preview update
+      updatePreview();
+      
+      // Live preview on content change
+      quill.on('text-change', function(delta, oldDelta, source) {
+        if(live && live.checked) {
+          console.log('Live preview enabled, updating...');
+          updatePreview(); 
+        }
+      });
+    }
+    
+    // Refresh preview button
+    if(previewBtn && quill && preview){ 
+      previewBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        console.log('Refresh preview clicked');
+        updatePreview(); 
+      });
+    }
+
+    // Scroll sync between original and preview for easier comparison
+    if(orig && preview){
+      orig.addEventListener('scroll', function(){ preview.scrollTop = orig.scrollTop; });
+      preview.addEventListener('scroll', function(){ orig.scrollTop = preview.scrollTop; });
+    }
+
+    // AI Revise functionality
+    if(aiReviseBtn && quill){
+      aiReviseBtn.addEventListener('click', async function(){
+        const currentText = quill.root.innerHTML.trim();
+        if(!currentText || currentText === '<p><br></p>'){
+          alert('{% trans "Please enter some email content first." %}');
+          return;
+        }
+
+        // Disable button and show loading state
+        aiReviseBtn.disabled = true;
+        const originalHTML = aiReviseBtn.innerHTML;
+        aiReviseBtn.innerHTML = '<svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span class="ml-1">{% trans "Revising..." %}</span>';
+
+        try {
+          const response = await fetch('/api/campaigns/revise-email/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+              email_text: currentText
+            })
+          });
+
+          const data = await response.json();
+
+          if(data.success && data.revised_text){
+            quill.root.innerHTML = data.revised_text;
+            updatePreview();
+            alert('{% trans "Email revised successfully! Review the changes in the editor." %}');
+          } else {
+            alert('{% trans "Revision failed: " %}' + (data.error || '{% trans "Unknown error" %}'));
+          }
+        } catch(error){
+          console.error('Error revising email:', error);
+          alert('{% trans "Failed to revise email. Please check your connection and try again." %}');
+        } finally {
+          // Restore button state
+          aiReviseBtn.disabled = false;
+          aiReviseBtn.innerHTML = originalHTML;
+        }
+      });
+    }
+
+    // Save Template functionality
+    if(saveTemplateForm){
+      saveTemplateForm.addEventListener('submit', async function(e){
+        e.preventDefault();
+        
+        const selectedCampaignId = campaignSelect.value;
+        const subject = subjectInput.value.trim();
+        const bodyContent = quill.root.innerHTML;
+        
+        // Update hidden textarea for compatibility
+        textarea.value = bodyContent;
+        
+        if(!subject){
+          alert('{% trans "Please enter an email subject." %}');
+          return;
+        }
+        
+        if(!bodyContent.trim() || bodyContent === '<p><br></p>'){
+          alert('{% trans "Please enter email content." %}');
+          return;
+        }
+        
+        // Determine if we're updating or creating
+        const emailId = document.querySelector('input[name="email_id"]').value;
+        const url = emailId 
+          ? `/api/campaigns/${selectedCampaignId}/emails/${emailId}/`
+          : `/api/campaigns/${selectedCampaignId}/emails/`;
+        const method = emailId ? 'PUT' : 'POST';
+        
+        // Prepare the request body
+        const requestBody = {
+          subject: subject,
+          body_html: bodyContent,
+          body_text: quill.getText().trim(), // Get plain text from Quill
+          wait_time: 1,
+          wait_unit: 'days'
+        };
+        
+        // For updates, include the order field
+        if(emailId && '{{ email.order }}'){
+          requestBody.order = parseInt('{{ email.order }}');
+        }
+        
+        try {
+          const response = await fetch(url, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify(requestBody)
+          });
+          
+          const data = await response.json();
+          
+          if(response.ok){
+            alert('{% trans "Template saved successfully!" %}');
+            // Redirect to the campaign template page
+            window.location.href = `/campaigns/template/${selectedCampaignId}/`;
+          } else {
+            let errorMsg = '{% trans "Failed to save template:" %} ';
+            if(data.details){
+              errorMsg += JSON.stringify(data.details, null, 2);
+            } else if(data.error){
+              errorMsg += data.error;
+            } else {
+              errorMsg += JSON.stringify(data);
+            }
+            alert(errorMsg);
+            console.error('Validation errors:', data);
+          }
+        } catch(error){
+          console.error('Error saving template:', error);
+          alert('{% trans "Failed to save template. Please try again." %}');
+        }
+      });
+    }
+
+    // Send Email functionality
+    if(sendEmailBtn && quill){
+      sendEmailBtn.addEventListener('click', async function(){
+        const recipientEmail = prompt('{% trans "Enter the recipient email address:" %}');
+        if(!recipientEmail){
+          return;
+        }
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(recipientEmail)){
+          alert('{% trans "Please enter a valid email address." %}');
+          return;
+        }
+
+        // Confirm sending
+        if(!confirm('{% trans "Send this email to " %}' + recipientEmail + '?')){
+          return;
+        }
+
+        // Disable button and show loading state
+        sendEmailBtn.disabled = true;
+        const originalHTML = sendEmailBtn.innerHTML;
+        sendEmailBtn.innerHTML = '<svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span class="ml-2">{% trans "Sending..." %}</span>';
+
+        try {
+          const response = await fetch('/api/campaigns/{{ campaign.id }}/emails/{{ email.id }}/send/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+              email: recipientEmail,
+              variables: {}
+            })
+          });
+
+          const data = await response.json();
+
+          if(response.ok && data.message){
+            alert('{% trans "Email sent successfully to " %}' + recipientEmail + '!');
+          } else {
+            alert('{% trans "Failed to send email: " %}' + (data.error || '{% trans "Unknown error" %}'));
+          }
+        } catch(error){
+          console.error('Error sending email:', error);
+          alert('{% trans "Failed to send email. Please check your connection and try again." %}');
+        } finally {
+          // Restore button state
+          sendEmailBtn.disabled = false;
+          sendEmailBtn.innerHTML = originalHTML;
+        }
+      });
+    }
+  })();
+</script>
+{% endblock %}

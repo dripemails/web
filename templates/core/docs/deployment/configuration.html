@@ -1,0 +1,202 @@
+{% extends "core/docs/base_docs.html" %}
+{% load i18n %}
+
+{% block doc_title %}Configuration Guide{% endblock %}
+
+{% block doc_content %}
+<h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Configuration Guide" %}</h1>
+
+<div class="prose max-w-none">
+  <p class="text-lg text-gray-600 mb-6">
+    Configure environment variables, database settings, and email configuration for DripEmails.org.
+  </p>
+
+  <!-- Video 2: Database & Configuration -->
+  <div class="bg-indigo-50 border-2 border-indigo-200 rounded-lg p-6 mb-8">
+    <h3 class="text-xl font-semibold text-indigo-900 mb-2">{% trans "📹 Video 2: Database & Configuration" %}</h3>
+    <p class="text-indigo-800 mb-4">{% trans "Watch this video to learn how to configure your database and environment variables:" %}</p>
+    <div class="aspect-video max-w-3xl">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/PMHiIKwFuTY?si=R7SnNidaIzKQR5tj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg w-full h-full"></iframe>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Environment Variables" %}</h2>
+
+  <p class="text-gray-700 mb-4">{% trans "Create a" %} <code>.env</code> file in your project root with these settings:</p>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3 mt-6">{% trans "Django Settings" %}</h3>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Django Configuration
+SECRET_KEY=your-secret-key-here-change-in-production
+DEBUG=True  # Set to False in production
+ALLOWED_HOSTS=localhost,127.0.0.1,yourdomain.com
+DJANGO_SETTINGS_MODULE=dripemails.settings</code></pre>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Database Configuration" %}</h3>
+  
+  <div class="space-y-6 mb-6">
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-2">PostgreSQL (Recommended)</h4>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>DB_ENGINE=django.db.backends.postgresql
+DB_NAME=dripemails
+DB_USER=dripemails
+DB_PASSWORD=your_password_here
+DB_HOST=localhost
+DB_PORT=5432</code></pre>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-2">{% trans "MySQL" %}</h4>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>DB_ENGINE=django.db.backends.mysql
+DB_NAME=dripemails
+DB_USER=dripemails
+DB_PASSWORD=your_password_here
+DB_HOST=localhost
+DB_PORT=3306</code></pre>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-2">SQLite (Development Only)</h4>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>DB_ENGINE=django.db.backends.sqlite3
+DB_NAME=db.sqlite3</code></pre>
+    </div>
+  </div>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Email Configuration" %}</h3>
+
+  <div class="space-y-6 mb-6">
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-2">Development (No Authentication)</h4>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=localhost
+EMAIL_PORT=1025
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_USE_TLS=False
+DEFAULT_FROM_EMAIL=noreply@dripemails.org</code></pre>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-2">Production (With Authentication)</h4>
+      <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto"><code>EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=localhost
+EMAIL_PORT=1025
+EMAIL_HOST_USER=your_username
+EMAIL_HOST_PASSWORD=your_password
+EMAIL_USE_TLS=False
+DEFAULT_FROM_EMAIL=noreply@yourdomain.com</code></pre>
+    </div>
+  </div>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">Celery Configuration (Optional)</h3>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>CELERY_ENABLED=  # Empty = auto-detect, True/False to override
+CELERY_BROKER_URL=redis://localhost:6379/0
+CELERY_RESULT_BACKEND=django-db
+REDIS_URL=redis://localhost:6379/0</code></pre>
+
+  <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+    <h4 class="text-lg font-semibold text-blue-900 mb-2">{% trans "💡 Celery Auto-Detection" %}</h4>
+    <p class="text-blue-800">
+      Leave <code>CELERY_ENABLED</code> empty for automatic detection:
+    </p>
+    <ul class="list-disc pl-6 text-blue-800 mt-2 space-y-1">
+      <li>Windows + DEBUG=True: Celery disabled (no Redis needed)</li>
+      <li>Linux/macOS or DEBUG=False: Celery enabled (Redis required)</li>
+      <li>{% trans "Override by setting CELERY_ENABLED=True or False" %}</li>
+    </ul>
+  </div>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">AI Features (Optional)</h3>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "HUGGINGFACE_API_KEY=hf_your_api_key_here" %}</code></pre>
+
+  <p class="text-gray-700 mb-4">
+    Get your free API key from <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">{% trans "Hugging Face" %}</a>
+  </p>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "SMTP Server Configuration" %}</h2>
+
+  <p class="text-gray-700 mb-4">{% trans "Configure the built-in SMTP server:" %}</p>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Django Settings" %}</h3>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>SMTP_SERVER_CONFIG = {
+    'host': 'localhost',
+    'port': 1025,
+    'auth_enabled': True,
+    'allowed_domains': ['yourdomain.com'],
+    'max_message_size': 10485760,  # 10MB
+    'rate_limit': 100,  # emails per minute
+}</code></pre>
+
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">{% trans "Command Line Options" %}</h3>
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Development (no authentication)
+python manage.py run_smtp_server --no-auth
+
+# Custom port
+python manage.py run_smtp_server --port 2525
+
+# Production (with authentication)
+python manage.py run_smtp_server --host 0.0.0.0 --port 25
+
+# With logging
+python manage.py run_smtp_server --log-to-file --save-to-db</code></pre>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "Security Settings" %}</h2>
+
+  <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+    <h3 class="text-lg font-semibold text-red-900 mb-2">{% trans "⚠️ Production Security" %}</h3>
+    <p class="text-red-800 mb-3">{% trans "Always configure these settings for production:" %}</p>
+    <pre class="bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto text-sm"><code>DEBUG=False
+SECRET_KEY=generate-a-new-secret-key
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+SECURE_SSL_REDIRECT=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True</code></pre>
+  </div>
+
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Complete .env Example" %}</h2>
+
+  <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code># Django
+SECRET_KEY=your-secret-key-here
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com
+
+# Database
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=dripemails
+DB_USER=dripemails
+DB_PASSWORD=secure_password
+DB_HOST=localhost
+DB_PORT=5432
+
+# Email
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=localhost
+EMAIL_PORT=1025
+EMAIL_HOST_USER=founders
+EMAIL_HOST_PASSWORD=secure_password
+EMAIL_USE_TLS=False
+DEFAULT_FROM_EMAIL=noreply@yourdomain.com
+
+# Celery (Optional)
+CELERY_ENABLED=True
+CELERY_BROKER_URL=redis://localhost:6379/0
+CELERY_RESULT_BACKEND=django-db
+REDIS_URL=redis://localhost:6379/0
+
+# AI Features (Optional)
+HUGGINGFACE_API_KEY=hf_your_api_key_here
+
+# Security
+SECURE_SSL_REDIRECT=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True</code></pre>
+
+  <div class="flex gap-4 mt-8">
+    <a href="{% url 'core:docs_deployment_installation' %}" class="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
+      ← Installation
+    </a>
+    <a href="{% url 'core:docs_deployment_production' %}" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
+      Next: Production Setup →
+    </a>
+  </div>
+</div>
+{% endblock %}

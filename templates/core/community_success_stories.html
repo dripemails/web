@@ -1,1 +1,101 @@
- 
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Success Stories" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{% trans "Success Stories" %}</h1>
+    <p class="text-lg text-gray-700 mb-8">{% trans "See how others are using DripEmails.org to grow their business. Share your own success story!" %}</p>
+    
+    <!-- Submission Form -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Share Your Success Story" %}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="{{ form.company_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                        {% trans "Company Name" %} *
+                    </label>
+                    {{ form.company_name }}
+                    {% if form.company_name.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.company_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="{{ form.contact_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                        {% trans "Your Name" %} *
+                    </label>
+                    {{ form.contact_name }}
+                    {% if form.contact_name.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.contact_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.contact_email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    {% trans "Email" %} *
+                </label>
+                {{ form.contact_email }}
+                {% if form.contact_email.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.contact_email.errors.0 }}</p>
+                {% endif %}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.logo.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    {% trans "Company Logo" %} ({% trans "optional" %})
+                </label>
+                {{ form.logo }}
+                {% if form.logo.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.logo.errors.0 }}</p>
+                {% endif %}
+                <p class="mt-1 text-sm text-gray-500">{% trans "Recommended: PNG or JPG, max 2MB" %}</p>
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.story.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    {% trans "Your Success Story" %} *
+                </label>
+                {{ form.story }}
+                {% if form.story.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ form.story.errors.0 }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                {% trans "Submit Success Story" %}
+            </button>
+        </form>
+    </div>
+    
+    <!-- Featured Success Stories -->
+    <div class="space-y-8">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Featured Success Stories" %}</h2>
+        
+        {% for story in stories %}
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-start space-x-6">
+                {% if story.logo %}
+                <div class="flex-shrink-0">
+                    <img src="{{ story.logo.url }}" alt="{{ story.company_name }}" class="w-24 h-24 object-contain">
+                </div>
+                {% endif %}
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ story.company_name }}</h3>
+                    <p class="text-sm text-gray-500 mb-4">
+                        {% trans "Submitted by" %} {{ story.contact_name }} • {{ story.submitted_at|date:"F Y" }}
+                    </p>
+                    <div class="prose max-w-none">
+                        <p class="text-gray-700 whitespace-pre-wrap">{{ story.story }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+            <p class="text-gray-500 text-lg">{% trans "No success stories yet. Be the first to share yours!" %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Unsubscribed Successfully" %} - DripEmails.org{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-16">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+            <div class="mb-6">
+                <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">
+                {% if already_unsubscribed %}
+                    {% trans "Already Unsubscribed" %}
+                {% else %}
+                    {% trans "Successfully Unsubscribed" %}
+                {% endif %}
+            </h1>
+            
+            <p class="text-lg text-gray-600 mb-6">
+                {% if already_unsubscribed %}
+                    {% trans "You have already been unsubscribed from our mailing list." %}
+                {% else %}
+                    {% blocktrans with email=subscriber.email %}
+                        You have been successfully unsubscribed from our mailing list.
+                        <br><br>
+                        <strong>{{ email }}</strong> will no longer receive emails from us.
+                    {% endblocktrans %}
+                {% endif %}
+            </p>
+            
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <p class="text-sm text-gray-600">
+                    {% trans "If you unsubscribed by mistake or would like to receive emails again, please contact us or sign up again." %}
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'core:home' %}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors">
+                    {% trans "Return to Home" %}
+                </a>
+                <a href="{% url 'core:contact' %}" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                    {% trans "Contact Us" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

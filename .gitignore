@@ -1,4 +1,9 @@
 # Python
+*.bat
+*.exe
+*.ps1
+activate
+*.cfg
 __pycache__/
 *.py[cod]
 *$py.class
@@ -20,14 +25,13 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-
+logs/
 # Django
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
-static/
 staticfiles/
 
 # Environment variables

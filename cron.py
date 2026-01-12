@@ -23,6 +23,13 @@ Usage:
     python cron.py process_gmail_emails --limit 50
     python cron.py process_gmail_emails --periodic
     python cron.py process_gmail_emails --periodic --interval 120
+    
+    # Crawl IMAP Emails
+    python cron.py crawl_imap
+    python cron.py crawl_imap --settings=dripemails.live
+    python cron.py crawl_imap --limit 50
+    python cron.py crawl_imap --periodic
+    python cron.py crawl_imap --periodic --interval 120
 """
 
 import os
@@ -581,6 +588,147 @@ def process_gmail_emails(limit=None):
     logger.info(f"  Errors: {error_count}")
 
 
+def crawl_imap(limit=None):
+    """
+    Fetch and process IMAP emails for all active IMAP credentials.
+    Sends auto-reply emails to From, To, and Sender email addresses.
+    """
+    from gmail.models import EmailCredential, EmailMessage, EmailProvider
+    from gmail.imap_service import IMAPService
+    from campaigns.models import Campaign, Email
+    from subscribers.models import List, Subscriber
+    from campaigns.tasks import send_campaign_email
+    import re
+    
+    # Get all active IMAP credentials
+    credentials = EmailCredential.objects.filter(
+        provider=EmailProvider.IMAP,
+        is_active=True,
+        sync_enabled=True
+    ).select_related('user')
+    
+    total_credentials = credentials.count()
+    logger.info(f"Processing IMAP emails for {total_credentials} credentials")
+    
+    if total_credentials == 0:
+        logger.info("No active IMAP credentials found")
+        return
+    
+    total_processed = 0
+    total_sent = 0
+    error_count = 0
+    
+    service = IMAPService()
+    
+    for credential in credentials:
+        try:
+            # Fetch latest emails
+            logger.info(f"Fetching emails for {credential.email_address}")
+            email_messages = service.fetch_emails(credential, max_results=limit or 50)
+            
+            # Update last sync time
+            credential.last_sync_at = timezone.now()
+            credential.save(update_fields=['last_sync_at'])
+            
+            # Process each email
+            for email_msg in email_messages:
+                if email_msg.processed:
+                    continue
+                
+                try:
+                    # Get recipient emails (From, To, Sender)
+                    recipients = set()
+                    recipients.add(email_msg.from_email)
+                    recipients.update(email_msg.to_emails_list)
+                    if email_msg.sender_email:
+                        recipients.add(email_msg.sender_email)
+                    
+                    # Find or get IMAP campaign for this credential
+                    imap_campaign = Campaign.objects.filter(
+                        user=credential.user,
+                        name__icontains='IMAP Auto-Reply',
+                        subscriber_list__name__icontains='IMAP'
+                    ).first()
+                    
+                    if not imap_campaign:
+                        logger.warning(f"No IMAP campaign found for user {credential.user.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Get the first email template from the campaign
+                    campaign_email = imap_campaign.emails.first()
+                    if not campaign_email:
+                        logger.warning(f"No email template found in IMAP campaign {imap_campaign.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Get or create IMAP subscriber list
+                    imap_list = imap_campaign.subscriber_list
+                    if not imap_list:
+                        logger.warning(f"No subscriber list found for IMAP campaign {imap_campaign.id}")
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
+                    
+                    # Send auto-reply to each recipient
+                    for recipient_email in recipients:
+                        if not recipient_email or recipient_email == credential.email_address:
+                            continue  # Don't send to self
+                        
+                        # Extract first name from email or use email prefix
+                        first_name = recipient_email.split('@')[0].split('.')[0].title()
+                        
+                        # Get or create subscriber
+                        subscriber, created = Subscriber.objects.get_or_create(
+                            email=recipient_email,
+                            defaults={
+                                'first_name': first_name,
+                                'is_active': True,
+                                'confirmed': True
+                            }
+                        )
+                        
+                        # Add to IMAP list if not already
+                        if imap_list not in subscriber.lists.all():
+                            subscriber.lists.add(imap_list)
+                        
+                        # Send the email
+                        try:
+                            send_campaign_email(
+                                str(campaign_email.id),
+                                str(subscriber.id),
+                                variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject}
+                            )
+                            total_sent += 1
+                            logger.info(f"Sent auto-reply to {recipient_email} for IMAP message {email_msg.id}")
+                        except Exception as e:
+                            logger.error(f"Error sending auto-reply to {recipient_email}: {str(e)}")
+                    
+                    # Mark email as processed
+                    email_msg.processed = True
+                    email_msg.campaign_email = campaign_email
+                    email_msg.save(update_fields=['processed', 'campaign_email'])
+                    total_processed += 1
+                    
+                except Exception as e:
+                    logger.error(f"Error processing IMAP email {email_msg.id}: {str(e)}")
+                    error_count += 1
+                    continue
+            
+        except Exception as e:
+            logger.error(f"Error processing IMAP for credential {credential.id}: {str(e)}")
+            error_count += 1
+            continue
+    
+    logger.info(f"IMAP Processing Summary:")
+    logger.info(f"  Credentials processed: {total_credentials}")
+    logger.info(f"  Emails processed: {total_processed}")
+    logger.info(f"  Auto-replies sent: {total_sent}")
+    logger.info(f"  Errors: {error_count}")
+
+
 def send_scheduled_emails(limit=None):
     """
     Process and send scheduled emails that are due to be sent.
@@ -649,11 +797,11 @@ def main():
     parser = argparse.ArgumentParser(description='DripEmails Cron Script')
     parser.add_argument('--settings', type=str, default='dripemails.settings',
                         help='Django settings module (default: dripemails.settings)')
-    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails, process_gmail_emails)')
+    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails, process_gmail_emails, crawl_imap)')
     parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID')
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users')
     parser.add_argument('--limit', type=int, help='Limit number of scheduled emails to process')
-    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (for process_gmail_emails)')
+    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (for process_gmail_emails or crawl_imap)')
     parser.add_argument('--interval', type=int, default=120, help='Interval in seconds between executions when using --periodic (default: 120 = 2 minutes)')
     
     args = parser.parse_args()
@@ -696,6 +844,28 @@ def main():
                 sys.exit(0)
         else:
             process_gmail_emails(limit=args.limit)
+    elif args.command == 'crawl_imap':
+        if args.periodic:
+            logger.info(f"Starting periodic IMAP email crawling (interval: {args.interval} seconds)")
+            try:
+                while True:
+                    try:
+                        logger.info(f"Running IMAP email crawling cycle at {timezone.now()}")
+                        crawl_imap(limit=args.limit)
+                        logger.info(f"Completed IMAP email crawling cycle. Sleeping for {args.interval} seconds...")
+                    except KeyboardInterrupt:
+                        logger.info("Received interrupt signal. Stopping periodic execution.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error in periodic IMAP email crawling cycle: {str(e)}", exc_info=True)
+                        logger.info(f"Continuing despite error. Will retry in {args.interval} seconds...")
+                    
+                    time.sleep(args.interval)
+            except KeyboardInterrupt:
+                logger.info("Periodic IMAP email crawling stopped by user")
+                sys.exit(0)
+        else:
+            crawl_imap(limit=args.limit)
     else:
         logger.error(f"Unknown command: {args.command}")
         print(__doc__)

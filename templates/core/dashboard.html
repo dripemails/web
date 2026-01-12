@@ -64,31 +64,114 @@
     </div>
     
     <div class="container mx-auto px-4 py-8">
-        <!-- Gmail Integration Section -->
-        <div id="gmail-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-blue-500 rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">{% trans "Gmail Integration" %}</h2>
-                        <p class="text-sm text-gray-600">{% trans "Connect your Gmail account to auto-reply to emails" %}</p>
-                    </div>
-                </div>
-                <div id="gmail-auth-status"></div>
+        <!-- Integrations Section -->
+        <div id="integrations-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">{% trans "Integrations" %}</h2>
+                <p class="text-sm text-gray-600">{% trans "Connect your email accounts to auto-reply to emails" %}</p>
             </div>
             
-            <!-- Gmail Email List -->
-            <div id="gmail-emails-container" class="mt-6 hidden">
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                        <h3 class="text-sm font-semibold text-gray-700">{% trans "Recent Gmail Emails" %}</h3>
+            <!-- Gmail Integration -->
+            <div id="gmail-section" class="mb-8 pb-8 border-b border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">{% trans "Gmail" %}</h3>
+                            <p class="text-sm text-gray-600">{% trans "Connect your Gmail account to auto-reply to emails" %}</p>
+                        </div>
                     </div>
-                    <div id="gmail-emails-list" class="divide-y divide-gray-200">
-                        <!-- Gmail emails will be loaded here -->
+                    <div id="gmail-auth-status"></div>
+                </div>
+                
+                <!-- Gmail Email List -->
+                <div id="gmail-emails-container" class="mt-6 hidden">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="text-sm font-semibold text-gray-700">{% trans "Recent Gmail Emails" %}</h4>
+                        </div>
+                        <div id="gmail-emails-list" class="divide-y divide-gray-200">
+                            <!-- Gmail emails will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IMAP Integration -->
+            <div id="imap-section">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">{% trans "IMAP" %}</h3>
+                            <p class="text-sm text-gray-600">{% trans "Connect your IMAP email account to auto-reply to emails" %}</p>
+                        </div>
+                    </div>
+                    <div id="imap-status"></div>
+                </div>
+                
+                <!-- IMAP Settings Form -->
+                <div id="imap-settings-form" class="mt-6 hidden">
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">{% trans "IMAP Settings" %}</h4>
+                        <form id="imap-connect-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Address" %}</label>
+                                    <input type="email" id="imap-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "IMAP Host" %}</label>
+                                    <input type="text" id="imap-host" name="host" placeholder="imap.example.com" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "IMAP Port" %}</label>
+                                    <input type="number" id="imap-port" name="port" placeholder="993" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Username" %}</label>
+                                    <input type="text" id="imap-username" name="username" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Password" %}</label>
+                                <input type="password" id="imap-password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="imap-use-ssl" name="use_ssl" checked class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <label for="imap-use-ssl" class="ml-2 block text-sm text-gray-700">{% trans "Use SSL/TLS" %}</label>
+                            </div>
+                            <div class="flex gap-3">
+                                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">
+                                    {% trans "Save & Connect" %}
+                                </button>
+                                <button type="button" id="imap-cancel-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium">
+                                    {% trans "Cancel" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- IMAP Email List -->
+                <div id="imap-emails-container" class="mt-6 hidden">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="text-sm font-semibold text-gray-700">{% trans "Recent IMAP Emails" %}</h4>
+                        </div>
+                        <div id="imap-emails-list" class="divide-y divide-gray-200">
+                            <!-- IMAP emails will be loaded here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1328,7 +1411,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkGmailStatus() {
         fetch('/api/gmail/emails/')
             .then(response => {
-                if (response.status === 404) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !data.connected) {
                     // No Gmail account connected
                     const connectGmailText = '{% trans "Connect Gmail" %}';
                     gmailAuthStatus.innerHTML = `
@@ -1345,12 +1434,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('gmail-connect-btn')?.addEventListener('click', function() {
                         connectGmail();
                     });
-                } else {
-                    return response.json();
-                }
-            })
-            .then(data => {
-                if (data && data.emails) {
+                } else if (data && data.emails) {
                     // Gmail connected
                     const connectedText = '{% trans "Connected" %}';
                     const disconnectText = '{% trans "Disconnect" %}';
@@ -1523,6 +1607,269 @@ document.addEventListener('DOMContentLoaded', function() {
     // Refresh Gmail emails every 30 seconds
     setInterval(function() {
         checkGmailStatus();
+    }, 30000);
+
+    // IMAP Integration
+    const imapStatus = document.getElementById('imap-status');
+    const imapSettingsForm = document.getElementById('imap-settings-form');
+    const imapEmailsContainer = document.getElementById('imap-emails-container');
+    const imapEmailsList = document.getElementById('imap-emails-list');
+    const imapConnectForm = document.getElementById('imap-connect-form');
+    const imapCancelBtn = document.getElementById('imap-cancel-btn');
+    
+    // Check IMAP connection status
+    function checkIMAPStatus(isInitialLoad = false) {
+        fetch('/api/gmail/imap/emails/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !data.connected) {
+                    // No IMAP account connected
+                    const connectIMAPText = '{% trans "Connect IMAP" %}';
+                    imapStatus.innerHTML = `
+                        <button id="imap-connect-btn" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            ${connectIMAPText}
+                        </button>
+                    `;
+                    // Only hide form on initial load, not during periodic refreshes
+                    if (isInitialLoad && imapSettingsForm) {
+                        imapSettingsForm.classList.add('hidden');
+                    }
+                    imapEmailsContainer.classList.add('hidden');
+                    
+                    // Handle connect button click
+                    const connectBtn = document.getElementById('imap-connect-btn');
+                    if (connectBtn) {
+                        // Remove existing listener to avoid duplicates
+                        const newBtn = connectBtn.cloneNode(true);
+                        connectBtn.parentNode.replaceChild(newBtn, connectBtn);
+                        newBtn.addEventListener('click', function() {
+                            imapSettingsForm.classList.remove('hidden');
+                        });
+                    }
+                } else if (data && data.emails) {
+                    // IMAP connected
+                    const connectedText = '{% trans "Connected" %}';
+                    const disconnectText = '{% trans "Disconnect" %}';
+                    imapStatus.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-800 rounded-lg text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                ${connectedText}
+                            </span>
+                            <button id="imap-disconnect-btn" class="text-sm text-red-600 hover:text-red-800 font-medium">
+                                ${disconnectText}
+                            </button>
+                        </div>
+                    `;
+                    if (imapSettingsForm) {
+                        imapSettingsForm.classList.add('hidden');
+                    }
+                    imapEmailsContainer.classList.remove('hidden');
+                    renderIMAPEmails(data.emails);
+                    
+                    // Handle disconnect button
+                    const disconnectBtn = document.getElementById('imap-disconnect-btn');
+                    if (disconnectBtn) {
+                        // Remove existing listener to avoid duplicates
+                        const newDisconnectBtn = disconnectBtn.cloneNode(true);
+                        disconnectBtn.parentNode.replaceChild(newDisconnectBtn, disconnectBtn);
+                        newDisconnectBtn.addEventListener('click', function() {
+                            disconnectIMAP();
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error checking IMAP status:', error);
+            });
+    }
+    
+    // Handle IMAP form submission
+    if (imapConnectForm) {
+        imapConnectForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('imap-email').value,
+                host: document.getElementById('imap-host').value,
+                port: parseInt(document.getElementById('imap-port').value),
+                username: document.getElementById('imap-username').value,
+                password: document.getElementById('imap-password').value,
+                use_ssl: document.getElementById('imap-use-ssl').checked
+            };
+            
+            fetch('/api/gmail/imap/connect/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert(data.error || 'Error connecting IMAP account');
+                }
+            })
+            .catch(error => {
+                console.error('Error connecting IMAP:', error);
+                alert('Error connecting IMAP account. Please try again.');
+            });
+        });
+    }
+    
+    // Handle cancel button
+    if (imapCancelBtn) {
+        imapCancelBtn.addEventListener('click', function() {
+            imapSettingsForm.classList.add('hidden');
+            imapConnectForm.reset();
+        });
+    }
+    
+    function disconnectIMAP() {
+        if (!confirm('Are you sure you want to disconnect IMAP? Auto-replies will stop being sent.')) {
+            return;
+        }
+        
+        fetch('/api/gmail/imap/disconnect/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.error || 'Error disconnecting IMAP');
+            }
+        })
+        .catch(error => {
+            console.error('Error disconnecting IMAP:', error);
+            alert('Error disconnecting IMAP. Please try again.');
+        });
+    }
+    
+    function renderIMAPEmails(emails) {
+        const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
+        const repliedText = '{% trans "Replied" %}';
+        const toText = '{% trans "To:" %}';
+        const senderText = '{% trans "Sender:" %}';
+        const autoReplyText = '{% trans "Auto-Reply Sent:" %}';
+        const emailContentText = '{% trans "Email Content:" %}';
+        const noContentText = '{% trans "(No content)" %}';
+        
+        if (!emails || emails.length === 0) {
+            imapEmailsList.innerHTML = `
+                <div class="px-4 py-8 text-center text-gray-500">
+                    <p>${noEmailsMsg}</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let html = '';
+        emails.forEach((email, index) => {
+            const previewId = `imap-preview-${email.id}`;
+            const date = new Date(email.received_at);
+            const dateStr = date.toLocaleString();
+            const isExpanded = index === 0; // Expand first email by default
+            
+            html += `
+                <div class="px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer" onclick="toggleIMAPEmail('${previewId}')">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="font-semibold text-gray-900 truncate">${email.from_email || ''}</span>
+                                ${email.campaign_email_id ? `
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-medium">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        ${repliedText}
+                                    </span>
+                                ` : ''}
+                            </div>
+                            <div class="text-sm text-gray-700 font-medium mb-1 truncate">${email.subject || '(No Subject)'}</div>
+                            <div class="text-xs text-gray-500">${dateStr}</div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 flex-shrink-0 transform transition-transform" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transform: rotate(${isExpanded ? '180deg' : '0deg'});">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div id="${previewId}" class="mt-3 pt-3 border-t border-gray-200 ${isExpanded ? '' : 'hidden'}">
+                        <div class="space-y-2 text-sm">
+                            <div>
+                                <span class="font-semibold text-gray-700">${toText}</span>
+                                <span class="text-gray-600">${email.to_emails ? email.to_emails.join(', ') : ''}</span>
+                            </div>
+                            ${email.sender_email && email.sender_email !== email.from_email ? `
+                                <div>
+                                    <span class="font-semibold text-gray-700">${senderText}</span>
+                                    <span class="text-gray-600">${email.sender_email}</span>
+                                </div>
+                            ` : ''}
+                            ${email.campaign_email_subject ? `
+                                <div class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                    <div class="text-xs font-semibold text-blue-800 mb-1">${autoReplyText}</div>
+                                    <div class="text-sm text-blue-900">${email.campaign_email_subject}</div>
+                                </div>
+                            ` : ''}
+                            <div class="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-64 overflow-y-auto">
+                                <div class="text-xs font-semibold text-gray-700 mb-2">${emailContentText}</div>
+                                <div class="text-sm text-gray-600 whitespace-pre-wrap">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        imapEmailsList.innerHTML = html;
+    }
+    
+    // Make toggleIMAPEmail globally accessible
+    window.toggleIMAPEmail = function(previewId) {
+        const preview = document.getElementById(previewId);
+        const icon = document.getElementById(previewId + '-icon');
+        if (preview && icon) {
+            if (preview.classList.contains('hidden')) {
+                preview.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                preview.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    };
+    
+    // Load IMAP status on page load
+    checkIMAPStatus(true); // isInitialLoad = true
+    
+    // Refresh IMAP emails every 30 seconds (only if form is hidden/account is connected)
+    setInterval(function() {
+        // Only refresh if form is hidden (user is not actively filling it out)
+        // This prevents hiding the form while user is typing
+        if (imapSettingsForm && imapSettingsForm.classList.contains('hidden')) {
+            checkIMAPStatus(false); // isInitialLoad = false
+        }
     }, 30000);
 
 // Toggle campaign status (activate/deactivate) - must be global for onclick handler

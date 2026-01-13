@@ -636,12 +636,34 @@ def crawl_imap(limit=None):
                     continue
                 
                 try:
-                    # Get recipient emails (From, To, Sender)
-                    recipients = set()
-                    recipients.add(email_msg.from_email)
-                    recipients.update(email_msg.to_emails_list)
-                    if email_msg.sender_email:
-                        recipients.add(email_msg.sender_email)
+                    # Get folder and names from provider_data
+                    provider_data = email_msg.provider_data or {}
+                    folder = provider_data.get('folder', 'INBOX')
+                    from_name = provider_data.get('from_name', '')
+                    sender_name = provider_data.get('sender_name', '')
+                    to_names = provider_data.get('to_names', {})
+                    
+                    # Determine recipients and their names based on folder
+                    recipients_with_names = {}
+                    
+                    if folder.upper() == 'INBOX':
+                        # For incoming emails, reply to From/Sender
+                        if email_msg.from_email and email_msg.from_email != credential.email_address:
+                            recipients_with_names[email_msg.from_email] = from_name or sender_name
+                        if email_msg.sender_email and email_msg.sender_email != credential.email_address:
+                            recipients_with_names[email_msg.sender_email] = sender_name or from_name
+                    else:
+                        # For Sent folder (or other folders), reply to To recipients
+                        for to_email in email_msg.to_emails_list:
+                            if to_email and to_email != credential.email_address:
+                                to_name = to_names.get(to_email, '')
+                                recipients_with_names[to_email] = to_name
+                    
+                    if not recipients_with_names:
+                        # No valid recipients, mark as processed
+                        email_msg.processed = True
+                        email_msg.save(update_fields=['processed'])
+                        continue
                     
                     # Find or get IMAP campaign for this credential
                     imap_campaign = Campaign.objects.filter(
@@ -673,36 +695,59 @@ def crawl_imap(limit=None):
                         continue
                     
                     # Send auto-reply to each recipient
-                    for recipient_email in recipients:
-                        if not recipient_email or recipient_email == credential.email_address:
-                            continue  # Don't send to self
+                    for recipient_email, recipient_name in recipients_with_names.items():
+                        if not recipient_email:
+                            continue
                         
-                        # Extract first name from email or use email prefix
-                        first_name = recipient_email.split('@')[0].split('.')[0].title()
+                        # Parse name into first_name and last_name
+                        name_parts = recipient_name.strip().split() if recipient_name else []
+                        first_name = name_parts[0] if name_parts else ''
+                        last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+                        
+                        # Fallback to email prefix if no name found
+                        if not first_name:
+                            first_name = recipient_email.split('@')[0].split('.')[0].title()
                         
                         # Get or create subscriber
                         subscriber, created = Subscriber.objects.get_or_create(
                             email=recipient_email,
                             defaults={
                                 'first_name': first_name,
+                                'last_name': last_name,
                                 'is_active': True,
                                 'confirmed': True
                             }
                         )
                         
+                        # Update subscriber name if we have better information
+                        if not created and recipient_name:
+                            updated = False
+                            if first_name and subscriber.first_name != first_name:
+                                subscriber.first_name = first_name
+                                updated = True
+                            if last_name and subscriber.last_name != last_name:
+                                subscriber.last_name = last_name
+                                updated = True
+                            if updated:
+                                subscriber.save()
+                        
                         # Add to IMAP list if not already
                         if imap_list not in subscriber.lists.all():
                             subscriber.lists.add(imap_list)
                         
-                        # Send the email
+                        # Send the email with proper name variables
                         try:
                             send_campaign_email(
                                 str(campaign_email.id),
                                 str(subscriber.id),
-                                variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject}
+                                variables={
+                                    'first_name': subscriber.first_name or first_name,
+                                    'last_name': subscriber.last_name or last_name,
+                                    'subject': email_msg.subject
+                                }
                             )
                             total_sent += 1
-                            logger.info(f"Sent auto-reply to {recipient_email} for IMAP message {email_msg.id}")
+                            logger.info(f"Sent auto-reply to {recipient_email} ({first_name}) for IMAP message {email_msg.id} from folder {folder}")
                         except Exception as e:
                             logger.error(f"Error sending auto-reply to {recipient_email}: {str(e)}")
                     

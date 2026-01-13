@@ -27,6 +27,17 @@
                                 <input type="email" id="email" name="email" value="{{ user.email }}" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3">
                                 <p class="mt-2 text-sm text-gray-500">{% trans "Your current email address. Change it to update your account email." %}</p>
                             </div>
+                            <div class="mb-4">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="auto_bcc_enabled" name="auto_bcc_enabled" type="checkbox" {% if auto_bcc_enabled %}checked{% endif %} class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="auto_bcc_enabled" class="font-medium text-gray-700">{% trans "Auto BCC this email address whenever a new email is sent." %}</label>
+                                        <p class="text-gray-500 mt-1">{% trans "When enabled, you will receive a copy of every email sent from your account." %}</p>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition-colors">
                                 Update Email Address
                             </button>

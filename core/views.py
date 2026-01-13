@@ -207,10 +207,15 @@ def account_settings(request):
 
         if form_type == 'email':
             new_email = request.POST.get('email', '').strip()
+            auto_bcc_enabled = request.POST.get('auto_bcc_enabled') == 'on'
+            
             if not new_email:
                 messages.error(request, _("Please provide an email address."))
             elif new_email == request.user.email:
-                messages.info(request, _("This is already your current email address."))
+                # Email hasn't changed, but auto_bcc setting might have
+                profile.auto_bcc_enabled = auto_bcc_enabled
+                profile.save(update_fields=['auto_bcc_enabled'])
+                messages.success(request, _("Auto BCC setting updated successfully."))
             else:
                 # Validate email format
                 from django.core.validators import validate_email
@@ -225,7 +230,10 @@ def account_settings(request):
                         # Update user email
                         request.user.email = new_email
                         request.user.save(update_fields=['email'])
-                        messages.success(request, _("Email address updated successfully to %(email)s") % {'email': new_email})
+                        # Update auto_bcc setting
+                        profile.auto_bcc_enabled = auto_bcc_enabled
+                        profile.save(update_fields=['auto_bcc_enabled'])
+                        messages.success(request, _("Email address and settings updated successfully to %(email)s") % {'email': new_email})
                 except ValidationError:
                     messages.error(request, _("Please provide a valid email address."))
             return redirect('core:settings')
@@ -281,6 +289,7 @@ def account_settings(request):
         'timezones': common_timezones,
         'current_timezone': profile.timezone or 'UTC',
         'send_without_unsubscribe': profile.send_without_unsubscribe,
+        'auto_bcc_enabled': profile.auto_bcc_enabled,
         'full_name': profile.full_name or '',
         'address_line1': profile.address_line1 or '',
         'address_line2': profile.address_line2 or '',
@@ -348,6 +357,10 @@ def profile_settings(request):
             if 'send_without_unsubscribe' in request.data:
                 profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
             
+            # Update auto_bcc_enabled if provided
+            if 'auto_bcc_enabled' in request.data:
+                profile.auto_bcc_enabled = request.data.get('auto_bcc_enabled', True)
+            
             # Update timezone if provided
             if 'timezone' in request.data:
                 new_timezone = request.data.get('timezone', 'UTC')
@@ -389,6 +402,7 @@ def profile_settings(request):
                 'message': _('Settings updated successfully'),
                 'has_verified_promo': profile.has_verified_promo,
                 'send_without_unsubscribe': profile.send_without_unsubscribe,
+                'auto_bcc_enabled': profile.auto_bcc_enabled,
                 'timezone': profile.timezone or 'UTC',
                 'full_name': profile.full_name or '',
                 'address_line1': profile.address_line1 or '',
@@ -402,6 +416,7 @@ def profile_settings(request):
         return Response({
             'has_verified_promo': profile.has_verified_promo,
             'send_without_unsubscribe': profile.send_without_unsubscribe,
+            'auto_bcc_enabled': profile.auto_bcc_enabled,
             'timezone': profile.timezone or 'UTC',
             'full_name': profile.full_name or '',
             'address_line1': profile.address_line1 or '',

@@ -383,12 +383,17 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         text_content += f"\n\n{ads_text}"
     
     # Create and send email
+    # Check if user has auto BCC enabled
+    bcc_list = []
+    if user_profile.auto_bcc_enabled:
+        bcc_list = [user_email]  # BCC the user so they can see emails being sent
+    
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
         from_email=from_email_header,
         to=[subscriber_email],
-        bcc=[user_email]  # BCC the user so they can see emails being sent
+        bcc=bcc_list if bcc_list else None
     )
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:
@@ -724,12 +729,17 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         from_email_header = user_email
     
     # Create and send email
+    # Check if user has auto BCC enabled
+    bcc_list = []
+    if user_profile.auto_bcc_enabled:
+        bcc_list = [user_email]  # BCC the user so they can see emails being sent
+    
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
         from_email=from_email_header,
         to=[subscriber.email],
-        bcc=[user_email]  # BCC the user so they can see emails being sent
+        bcc=bcc_list if bcc_list else None
     )
     # Only set Sender header if user doesn't have valid SPF record
     if not has_valid_spf:

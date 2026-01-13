@@ -25,6 +25,8 @@ class UserProfile(models.Model):
     spf_last_checked = models.DateTimeField(_('SPF Last Checked'), null=True, blank=True, help_text=_('Last time SPF record was checked'))
     spf_record = models.TextField(_('SPF Record'), blank=True, help_text=_('The SPF record found for the user\'s domain'))
     spf_missing_includes = models.JSONField(_('SPF Missing Includes'), default=list, blank=True, help_text=_('List of missing required SPF includes'))
+    # Auto BCC setting
+    auto_bcc_enabled = models.BooleanField(_('Auto BCC Enabled'), default=True, help_text=_('Automatically BCC this email address whenever a new email is sent'))
     
     class Meta:
         verbose_name = _('User Profile')

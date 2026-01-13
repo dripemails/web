@@ -8,6 +8,7 @@ import uuid
 class Campaign(models.Model):
     """Campaign model representing an email sequence."""
     FREQUENCY_CHOICES = [
+        ('seconds', _('Seconds')),
         ('minutes', _('Minutes')),
         ('hours', _('Hours')),
         ('days', _('Days')),
@@ -84,8 +85,9 @@ class Email(models.Model):
     
     @property
     def wait_time_display(self):
-        """Display wait time with proper unit (minutes, hours, days, weeks, months)."""
+        """Display wait time with proper unit (seconds, minutes, hours, days, weeks, months)."""
         unit_map = {
+            'seconds': (_("second"), _("seconds")),
             'minutes': (_("minute"), _("minutes")),
             'hours': (_("hour"), _("hours")),
             'days': (_("day"), _("days")),

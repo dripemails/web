@@ -290,7 +290,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         if footer_text:
             text_content += f"\n\n{footer_text}"
     
-    # Get user email for From address
+    # Get user email and name for From address
     # Prefer user from request_obj if available, otherwise use campaign user
     if request_obj and request_obj.user:
         user_email = request_obj.user.email
@@ -299,9 +299,16 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         user_email = email.campaign.user.email
         user = email.campaign.user
     
-    # Check if user has valid SPF record
+    # Get user profile for full_name and SPF
     user_profile, _ = UserProfile.objects.get_or_create(user=user)
     has_valid_spf = user_profile.spf_verified
+    full_name = user_profile.full_name or ''
+    
+    # Format From header: "Full Name <email@example.com>" or just email if no name
+    if full_name:
+        from_email_header = f"{full_name} <{user_email}>"
+    else:
+        from_email_header = user_email
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
     
@@ -376,7 +383,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=user_email,
+        from_email=from_email_header,
         to=[subscriber_email],
         bcc=[user_email]  # BCC the user so they can see emails being sent
     )
@@ -471,7 +478,9 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
     wait_unit = next_email.wait_unit or 'days'
     
     send_delay = timedelta(0)
-    if wait_unit == 'minutes':
+    if wait_unit == 'seconds':
+        send_delay = timedelta(seconds=wait_time)
+    elif wait_unit == 'minutes':
         send_delay = timedelta(minutes=wait_time)
     elif wait_unit == 'hours':
         send_delay = timedelta(hours=wait_time)
@@ -685,18 +694,27 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         html_content += unsubscribe_html
         text_content += unsubscribe_text
     
-    # Get user email for From address
+    # Get user email and name for From address
     user_email = email.campaign.user.email
     
     # Check if user has valid SPF record
     user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
     has_valid_spf = user_profile.spf_verified
     
+    # Get full_name for From header
+    full_name = user_profile.full_name or ''
+    
+    # Format From header: "Full Name <email@example.com>" or just email if no name
+    if full_name:
+        from_email_header = f"{full_name} <{user_email}>"
+    else:
+        from_email_header = user_email
+    
     # Create and send email
     msg = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=user_email,
+        from_email=from_email_header,
         to=[subscriber.email],
         bcc=[user_email]  # BCC the user so they can see emails being sent
     )
@@ -725,8 +743,24 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()
         if next_email:
             # Calculate when to send the next email
-            wait_time = timedelta(**{next_email.wait_unit: next_email.wait_time})
-            scheduled_for = timezone.now() + wait_time
+            wait_time_val = next_email.wait_time or 0
+            wait_unit_val = next_email.wait_unit or 'days'
+            
+            send_delay = timedelta(0)
+            if wait_unit_val == 'seconds':
+                send_delay = timedelta(seconds=wait_time_val)
+            elif wait_unit_val == 'minutes':
+                send_delay = timedelta(minutes=wait_time_val)
+            elif wait_unit_val == 'hours':
+                send_delay = timedelta(hours=wait_time_val)
+            elif wait_unit_val == 'days':
+                send_delay = timedelta(days=wait_time_val)
+            elif wait_unit_val == 'weeks':
+                send_delay = timedelta(weeks=wait_time_val)
+            elif wait_unit_val == 'months':
+                send_delay = timedelta(days=wait_time_val * 30)
+            
+            scheduled_for = timezone.now() + send_delay
             
             # Use EmailSendRequest to schedule the next email
             from .models import EmailSendRequest

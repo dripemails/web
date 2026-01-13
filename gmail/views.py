@@ -319,7 +319,7 @@ def imap_disconnect(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def imap_emails(request):
-    """Get IMAP emails for the authenticated user."""
+    """Get IMAP emails for the authenticated user with pagination."""
     try:
         credential = EmailCredential.objects.filter(
             user=request.user,
@@ -330,13 +330,51 @@ def imap_emails(request):
         if not credential:
             return Response({'emails': [], 'connected': False, 'error': 'No IMAP account connected'}, status=200)
         
+        # Get pagination parameters
+        page = int(request.GET.get('page', 1))
+        per_page = int(request.GET.get('per_page', 20))
+        
+        # Calculate offset
+        offset = (page - 1) * per_page
+        
+        # Get total count
+        total_count = EmailMessage.objects.filter(
+            credential=credential,
+            provider=EmailProvider.IMAP
+        ).count()
+        
+        # Get paginated emails
         emails = EmailMessage.objects.filter(
             credential=credential,
             provider=EmailProvider.IMAP
-        ).order_by('-received_at')[:50]
+        ).order_by('-received_at')[offset:offset + per_page]
         
         email_data = []
         for email in emails:
+            # Extract variables from provider_data for template replacement
+            provider_data = email.provider_data or {}
+            folder = provider_data.get('folder', 'INBOX')
+            
+            # Determine recipient info based on folder
+            if folder == 'Sent':
+                # For sent emails, recipient is in To header
+                to_names = provider_data.get('to_names', {})
+                recipient_email = email.to_emails_list[0] if email.to_emails_list else email.from_email
+                recipient_name = to_names.get(recipient_email, '') if recipient_email in to_names else ''
+            else:
+                # For inbox emails, recipient is in From/Sender header
+                recipient_email = email.from_email
+                recipient_name = provider_data.get('from_name', '') or provider_data.get('sender_name', '')
+            
+            # Parse name into first_name and last_name
+            name_parts = recipient_name.strip().split() if recipient_name else []
+            first_name = name_parts[0] if name_parts else ''
+            last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+            
+            # Fallback to email prefix if no name found
+            if not first_name:
+                first_name = recipient_email.split('@')[0].split('.')[0].title()
+            
             email_data.append({
                 'id': str(email.id),
                 'subject': email.subject,
@@ -348,9 +386,32 @@ def imap_emails(request):
                 'received_at': email.received_at.isoformat(),
                 'campaign_email_id': str(email.campaign_email.id) if email.campaign_email else None,
                 'campaign_email_subject': email.campaign_email.subject if email.campaign_email else None,
+                'campaign_email_body_html': email.campaign_email.body_html if email.campaign_email else None,
+                'campaign_email_body_text': email.campaign_email.body_text if email.campaign_email else None,
+                # Template variables for replacement
+                'template_variables': {
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'email': recipient_email,
+                    'subject': email.subject,
+                }
             })
         
-        return Response({'emails': email_data, 'connected': True})
+        # Calculate pagination info
+        total_pages = (total_count + per_page - 1) // per_page if total_count > 0 else 1
+        
+        return Response({
+            'emails': email_data,
+            'connected': True,
+            'pagination': {
+                'page': page,
+                'per_page': per_page,
+                'total_count': total_count,
+                'total_pages': total_pages,
+                'has_next': page < total_pages,
+                'has_previous': page > 1
+            }
+        })
     except Exception as e:
         logger.error(f"Error fetching IMAP emails: {str(e)}")
         return Response({'error': str(e)}, status=500)

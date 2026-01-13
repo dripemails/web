@@ -231,6 +231,7 @@ def account_settings(request):
             return redirect('core:settings')
 
         elif form_type == 'address':
+            full_name = request.POST.get('full_name', '').strip()
             address_line1 = request.POST.get('address_line1', '').strip()
             city = request.POST.get('city', '').strip()
             state = request.POST.get('state', '').strip()
@@ -238,17 +239,18 @@ def account_settings(request):
             country = request.POST.get('country', '').strip()
             
             # Validate required fields
-            if not address_line1 or not city or not state or not postal_code or not country:
-                messages.error(request, _("Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country."))
+            if not full_name or not address_line1 or not city or not state or not postal_code or not country:
+                messages.error(request, _("Please fill in all required fields: Full Name, Address Line 1, City, State, Postal Code, and Country."))
                 return redirect('core:settings')
             
+            profile.full_name = full_name
             profile.address_line1 = address_line1
             profile.address_line2 = request.POST.get('address_line2', '').strip()
             profile.city = city
             profile.state = state
             profile.postal_code = postal_code
             profile.country = country
-            profile.save(update_fields=['address_line1', 'address_line2', 'city', 'state', 'postal_code', 'country'])
+            profile.save(update_fields=['full_name', 'address_line1', 'address_line2', 'city', 'state', 'postal_code', 'country'])
             messages.success(request, _("Address updated successfully."))
             return redirect('core:settings')
 
@@ -279,6 +281,7 @@ def account_settings(request):
         'timezones': common_timezones,
         'current_timezone': profile.timezone or 'UTC',
         'send_without_unsubscribe': profile.send_without_unsubscribe,
+        'full_name': profile.full_name or '',
         'address_line1': profile.address_line1 or '',
         'address_line2': profile.address_line2 or '',
         'city': profile.city or '',
@@ -355,6 +358,10 @@ def profile_settings(request):
                 except pytz.UnknownTimeZoneError:
                     return Response({'error': _('Invalid timezone')}, status=400)
             
+            # Update full_name if provided
+            if 'full_name' in request.data:
+                profile.full_name = request.data.get('full_name', '').strip()
+            
             # Update address fields if provided
             if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data:
                 # Validate required fields when updating address
@@ -380,6 +387,7 @@ def profile_settings(request):
                 'has_verified_promo': profile.has_verified_promo,
                 'send_without_unsubscribe': profile.send_without_unsubscribe,
                 'timezone': profile.timezone or 'UTC',
+                'full_name': profile.full_name or '',
                 'address_line1': profile.address_line1 or '',
                 'address_line2': profile.address_line2 or '',
                 'city': profile.city or '',
@@ -392,6 +400,7 @@ def profile_settings(request):
             'has_verified_promo': profile.has_verified_promo,
             'send_without_unsubscribe': profile.send_without_unsubscribe,
             'timezone': profile.timezone or 'UTC',
+            'full_name': profile.full_name or '',
             'address_line1': profile.address_line1 or '',
             'address_line2': profile.address_line2 or '',
             'city': profile.city or '',

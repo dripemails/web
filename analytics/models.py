@@ -11,6 +11,8 @@ class UserProfile(models.Model):
     send_without_unsubscribe = models.BooleanField(_('Send Without Unsubscribe'), default=False)
     custom_footer_html = models.TextField(_('Custom Footer HTML'), blank=True, help_text=_('Custom footer HTML for emails'))
     timezone = models.CharField(_('Time Zone'), max_length=64, default='UTC')
+    # Full name for email From header
+    full_name = models.CharField(_('Full Name'), max_length=255, blank=True, help_text=_('Full name to use in email From header'))
     # Address fields for email footer (required by CAN-SPAM, GDPR, etc.)
     address_line1 = models.CharField(_('Address Line 1'), max_length=255, blank=True, help_text=_('Street address'))
     address_line2 = models.CharField(_('Address Line 2'), max_length=255, blank=True, help_text=_('Apartment, suite, etc. (optional)'))

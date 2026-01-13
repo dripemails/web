@@ -108,7 +108,9 @@ def email_list_create(request, campaign_id):
                     wait_unit = email.wait_unit or 'days'
                     
                     send_delay = timedelta(0)
-                    if wait_unit == 'minutes':
+                    if wait_unit == 'seconds':
+                        send_delay = timedelta(seconds=wait_time)
+                    elif wait_unit == 'minutes':
                         send_delay = timedelta(minutes=wait_time)
                     elif wait_unit == 'hours':
                         send_delay = timedelta(hours=wait_time)
@@ -452,6 +454,7 @@ def campaign_template(request, campaign_id=None):
         'all_campaigns': all_campaigns,
         'show_campaign_modal': show_campaign_modal,
         'wait_units': [
+            ('seconds', _('Seconds')),
             ('minutes', _('Minutes')),
             ('hours', _('Hours')),
             ('days', _('Days')),

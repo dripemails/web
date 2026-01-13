@@ -117,7 +117,7 @@
                         <div>
                             <label for="wait_time" class="block text-sm font-medium text-gray-700">{% trans "Wait Time" %}</label>
                             <div class="mt-1 flex space-x-3">
-                                <input type="number" id="wait_time" name="wait_time" min="1" required
+                                <input type="number" id="wait_time" name="wait_time" min="0" required
                                        class="block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <select id="wait_unit" name="wait_unit" required
                                         class="block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -127,7 +127,7 @@
                                 </select>
                             </div>
                             <p class="mt-1 text-sm text-gray-500">
-                                {% trans "Time to wait before sending this email after the previous one" %}
+                                {% trans "Time to wait before sending this email after the previous one (0 = send immediately)" %}
                             </p>
                         </div>
                         

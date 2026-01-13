@@ -564,9 +564,14 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
     
     try:
         email = Email.objects.select_related('campaign').get(id=email_id)
+    except Email.DoesNotExist:
+        logger.error(f"Email {email_id} not found")
+        return
+    
+    try:
         subscriber = Subscriber.objects.get(id=subscriber_id, is_active=True)
-    except (Email.DoesNotExist, Subscriber.DoesNotExist):
-        logger.error(f"Email {email_id} or Subscriber {subscriber_id} not found")
+    except Subscriber.DoesNotExist:
+        logger.error(f"Subscriber {subscriber_id} not found or not active")
         return
     
     # Make sure the campaign is still active

@@ -622,17 +622,35 @@ def crawl_imap(limit=None):
     
     for credential in credentials:
         try:
+            logger.info(f"=" * 80)
+            logger.info(f"Processing IMAP credential: {credential.id} for {credential.email_address} (User: {credential.user.id})")
+            logger.info(f"IMAP Host: {credential.imap_host}:{credential.imap_port}, SSL: {credential.imap_use_ssl}")
+            logger.info(f"Last sync: {credential.last_sync_at}")
+            
             # Fetch latest emails
-            logger.info(f"Fetching emails for {credential.email_address}")
+            logger.info(f"Fetching emails for {credential.email_address} (max_results: {limit or 50})")
             email_messages = service.fetch_emails(credential, max_results=limit or 50)
+            logger.info(f"Fetched {len(email_messages)} email messages from IMAP")
             
             # Update last sync time
             credential.last_sync_at = timezone.now()
             credential.save(update_fields=['last_sync_at'])
+            logger.info(f"Updated last_sync_at to {credential.last_sync_at}")
             
             # Process each email
-            for email_msg in email_messages:
-                if email_msg.processed:
+            for idx, email_msg in enumerate(email_messages, 1):
+                logger.info(f"--- Processing email {idx}/{len(email_messages)}: {email_msg.id} ---")
+                logger.info(f"  Subject: {email_msg.subject}")
+                logger.info(f"  From: {email_msg.from_email}")
+                logger.info(f"  To: {email_msg.to_emails}")
+                logger.info(f"  Received at: {email_msg.received_at}")
+                logger.info(f"  Provider message ID: {email_msg.provider_message_id}")
+                logger.info(f"  Already processed: {email_msg.processed}")
+                logger.info(f"  Has campaign_email: {email_msg.campaign_email is not None}")
+                
+                # Skip if already processed (prevents duplicates when same email appears in multiple folders)
+                if email_msg.processed and email_msg.campaign_email:
+                    logger.info(f"  SKIPPING: Email message {email_msg.id} already processed with campaign_email {email_msg.campaign_email.id}")
                     continue
                 
                 try:
@@ -643,29 +661,64 @@ def crawl_imap(limit=None):
                     sender_name = provider_data.get('sender_name', '')
                     to_names = provider_data.get('to_names', {})
                     
+                    logger.info(f"  Folder: {folder}")
+                    logger.info(f"  From name: {from_name}")
+                    logger.info(f"  Sender name: {sender_name}")
+                    logger.info(f"  To names: {to_names}")
+                    
                     # Determine recipients and their names based on folder
                     recipients_with_names = {}
+                    logger.info(f"  Determining recipients based on folder '{folder}'...")
                     
                     if folder.upper() == 'INBOX':
+                        logger.info(f"  INBOX folder: Processing as incoming email")
                         # For incoming emails, reply to From/Sender
                         if email_msg.from_email and email_msg.from_email != credential.email_address:
                             recipients_with_names[email_msg.from_email] = from_name or sender_name
+                            logger.info(f"    Added recipient (From): {email_msg.from_email} ({from_name or sender_name})")
+                        else:
+                            logger.info(f"    Skipped From email (self or empty): {email_msg.from_email}")
                         if email_msg.sender_email and email_msg.sender_email != credential.email_address:
                             recipients_with_names[email_msg.sender_email] = sender_name or from_name
+                            logger.info(f"    Added recipient (Sender): {email_msg.sender_email} ({sender_name or from_name})")
+                        else:
+                            logger.info(f"    Skipped Sender email (self or empty): {email_msg.sender_email}")
                     else:
-                        # For Sent folder (or other folders), reply to To recipients
-                        for to_email in email_msg.to_emails_list:
-                            if to_email and to_email != credential.email_address:
-                                to_name = to_names.get(to_email, '')
-                                recipients_with_names[to_email] = to_name
+                        # For Sent folder or All Mail folder, reply to To recipients
+                        # But only if this is a sent email (not an incoming email that also appears in All Mail)
+                        # We can distinguish by checking if the from_email matches the credential email
+                        is_sent_email = email_msg.from_email == credential.email_address or email_msg.sender_email == credential.email_address
+                        logger.info(f"  {folder} folder: is_sent_email={is_sent_email} (from_email={email_msg.from_email}, credential={credential.email_address})")
+                        if is_sent_email:
+                            logger.info(f"    Processing as sent email: replying to To recipients")
+                            # For Sent folder (or other folders), reply to To recipients
+                            for to_email in email_msg.to_emails_list:
+                                if to_email and to_email != credential.email_address:
+                                    to_name = to_names.get(to_email, '')
+                                    recipients_with_names[to_email] = to_name
+                                    logger.info(f"    Added recipient (To): {to_email} ({to_name})")
+                                else:
+                                    logger.info(f"    Skipped To email (self or empty): {to_email}")
+                        else:
+                            logger.info(f"    Processing as incoming email in {folder}: replying to From/Sender")
+                            # This is an incoming email that also appears in All Mail, treat it like INBOX
+                            if email_msg.from_email and email_msg.from_email != credential.email_address:
+                                recipients_with_names[email_msg.from_email] = from_name or sender_name
+                                logger.info(f"    Added recipient (From): {email_msg.from_email} ({from_name or sender_name})")
+                            if email_msg.sender_email and email_msg.sender_email != credential.email_address:
+                                recipients_with_names[email_msg.sender_email] = sender_name or from_name
+                                logger.info(f"    Added recipient (Sender): {email_msg.sender_email} ({sender_name or from_name})")
                     
+                    logger.info(f"  Total recipients determined: {len(recipients_with_names)}")
                     if not recipients_with_names:
+                        logger.warning(f"  No valid recipients found, marking email as processed and skipping")
                         # No valid recipients, mark as processed
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
                         continue
                     
                     # Find or get IMAP campaign for this credential
+                    logger.info(f"  Looking for IMAP campaign for user {credential.user.id}...")
                     imap_campaign = Campaign.objects.filter(
                         user=credential.user,
                         name__icontains='IMAP Auto-Reply',
@@ -673,30 +726,39 @@ def crawl_imap(limit=None):
                     ).first()
                     
                     if not imap_campaign:
-                        logger.warning(f"No IMAP campaign found for user {credential.user.id}")
+                        logger.warning(f"  No IMAP campaign found for user {credential.user.id}, marking as processed and skipping")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
                         continue
+                    
+                    logger.info(f"  Found IMAP campaign: {imap_campaign.id} - {imap_campaign.name}")
                     
                     # Get the first email template from the campaign
                     campaign_email = imap_campaign.emails.first()
                     if not campaign_email:
-                        logger.warning(f"No email template found in IMAP campaign {imap_campaign.id}")
+                        logger.warning(f"  No email template found in IMAP campaign {imap_campaign.id}, marking as processed and skipping")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
                         continue
+                    
+                    logger.info(f"  Found campaign email template: {campaign_email.id} - {campaign_email.subject}")
                     
                     # Get or create IMAP subscriber list
                     imap_list = imap_campaign.subscriber_list
                     if not imap_list:
-                        logger.warning(f"No subscriber list found for IMAP campaign {imap_campaign.id}")
+                        logger.warning(f"  No subscriber list found for IMAP campaign {imap_campaign.id}, marking as processed and skipping")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
                         continue
                     
+                    logger.info(f"  Using subscriber list: {imap_list.id} - {imap_list.name}")
+                    
                     # Send auto-reply to each recipient
-                    for recipient_email, recipient_name in recipients_with_names.items():
+                    logger.info(f"  Processing {len(recipients_with_names)} recipient(s)...")
+                    for recipient_idx, (recipient_email, recipient_name) in enumerate(recipients_with_names.items(), 1):
+                        logger.info(f"    Recipient {recipient_idx}/{len(recipients_with_names)}: {recipient_email}")
                         if not recipient_email:
+                            logger.warning(f"      Skipping empty recipient email")
                             continue
                         
                         # Parse name into first_name and last_name
@@ -707,6 +769,8 @@ def crawl_imap(limit=None):
                         # Fallback to email prefix if no name found
                         if not first_name:
                             first_name = recipient_email.split('@')[0].split('.')[0].title()
+                        
+                        logger.info(f"      Parsed name: first_name='{first_name}', last_name='{last_name}'")
                         
                         # Get or create subscriber
                         subscriber, created = Subscriber.objects.get_or_create(
@@ -719,6 +783,11 @@ def crawl_imap(limit=None):
                             }
                         )
                         
+                        if created:
+                            logger.info(f"      Created new subscriber: {subscriber.id}")
+                        else:
+                            logger.info(f"      Found existing subscriber: {subscriber.id}")
+                        
                         # Update subscriber name if we have better information
                         if not created and recipient_name:
                             updated = False
@@ -730,13 +799,44 @@ def crawl_imap(limit=None):
                                 updated = True
                             if updated:
                                 subscriber.save()
+                                logger.info(f"      Updated subscriber name")
                         
                         # Add to IMAP list if not already
                         if imap_list not in subscriber.lists.all():
                             subscriber.lists.add(imap_list)
+                            logger.info(f"      Added subscriber to IMAP list")
+                        else:
+                            logger.info(f"      Subscriber already in IMAP list")
+                        
+                        # Check if we've already sent an auto-reply to this recipient for this email message
+                        # This prevents duplicates when the same email appears in multiple folders (INBOX, Sent, All Mail)
+                        from campaigns.models import EmailEvent
+                        already_sent = EmailEvent.objects.filter(
+                            email=campaign_email,
+                            subscriber_email=recipient_email,
+                            event_type='sent'
+                        ).exists()
+                        
+                        if already_sent:
+                            logger.info(f"      Already sent auto-reply to {recipient_email} for campaign email {campaign_email.id}, skipping duplicate")
+                            continue
                         
                         # Send the email with proper name variables
                         try:
+                            logger.info(f"      Verifying email and subscriber exist before sending...")
+                            # Verify email and subscriber still exist before sending
+                            from campaigns.models import Email
+                            from subscribers.models import Subscriber
+                            
+                            try:
+                                Email.objects.get(id=campaign_email.id)
+                                Subscriber.objects.get(id=subscriber.id, is_active=True)
+                                logger.info(f"      Email and subscriber verified")
+                            except (Email.DoesNotExist, Subscriber.DoesNotExist) as e:
+                                logger.warning(f"      Email {campaign_email.id} or Subscriber {subscriber.id} not found, skipping auto-reply to {recipient_email}")
+                                continue
+                            
+                            logger.info(f"      Sending auto-reply email...")
                             send_campaign_email(
                                 str(campaign_email.id),
                                 str(subscriber.id),
@@ -747,31 +847,39 @@ def crawl_imap(limit=None):
                                 }
                             )
                             total_sent += 1
-                            logger.info(f"Sent auto-reply to {recipient_email} ({first_name}) for IMAP message {email_msg.id} from folder {folder}")
+                            logger.info(f"      ✓ Successfully sent auto-reply to {recipient_email} ({first_name}) for IMAP message {email_msg.id} from folder {folder}")
                         except Exception as e:
-                            logger.error(f"Error sending auto-reply to {recipient_email}: {str(e)}")
+                            logger.error(f"      ✗ Error sending auto-reply to {recipient_email}: {str(e)}", exc_info=True)
+                            # Continue processing other recipients
+                            continue
                     
                     # Mark email as processed
+                    logger.info(f"  Marking email {email_msg.id} as processed")
                     email_msg.processed = True
                     email_msg.campaign_email = campaign_email
                     email_msg.save(update_fields=['processed', 'campaign_email'])
                     total_processed += 1
+                    logger.info(f"  ✓ Completed processing email {email_msg.id}")
                     
                 except Exception as e:
-                    logger.error(f"Error processing IMAP email {email_msg.id}: {str(e)}")
+                    logger.error(f"  ✗ Error processing IMAP email {email_msg.id}: {str(e)}", exc_info=True)
                     error_count += 1
                     continue
             
+            logger.info(f"Completed processing credential {credential.id}: {len(email_messages)} emails fetched, {total_processed} processed, {total_sent} auto-replies sent")
+            
         except Exception as e:
-            logger.error(f"Error processing IMAP for credential {credential.id}: {str(e)}")
+            logger.error(f"✗ Error processing IMAP for credential {credential.id} ({credential.email_address}): {str(e)}", exc_info=True)
             error_count += 1
             continue
     
+    logger.info(f"=" * 80)
     logger.info(f"IMAP Processing Summary:")
     logger.info(f"  Credentials processed: {total_credentials}")
     logger.info(f"  Emails processed: {total_processed}")
     logger.info(f"  Auto-replies sent: {total_sent}")
     logger.info(f"  Errors: {error_count}")
+    logger.info(f"=" * 80)
 
 
 def send_scheduled_emails(limit=None):

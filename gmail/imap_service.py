@@ -19,15 +19,25 @@ class IMAPService:
     def __init__(self):
         pass
     
-    def test_connection(self, credential: EmailCredential) -> bool:
-        """Test IMAP connection with provided credentials."""
+    def test_connection(self, credential: EmailCredential):
+        """Test IMAP connection with provided credentials.
+        
+        Returns:
+            tuple: (success: bool, error_message: Optional[str])
+        """
         try:
             mail = self._connect(credential)
             mail.logout()
-            return True
+            return True, None
         except Exception as e:
-            logger.error(f"IMAP connection test failed for {credential.email_address}: {str(e)}")
-            return False
+            error_msg = str(e)
+            logger.error(f"IMAP connection test failed for {credential.email_address}: {error_msg}")
+            
+            # Check for application-specific password error
+            if 'Application-specific password required' in error_msg or 'ALERT' in error_msg and 'apppasswords' in error_msg.lower():
+                return False, 'app_password_required'
+            
+            return False, error_msg
     
     def _connect(self, credential: EmailCredential) -> imaplib.IMAP4:
         """Connect to IMAP server."""
@@ -39,29 +49,141 @@ class IMAPService:
         mail.login(credential.imap_username, credential.imap_password)
         return mail
     
+    def _find_sent_folder(self, mail) -> Optional[str]:
+        """Find the sent folder by trying common names."""
+        common_sent_folders = [
+            'Sent',
+            '[Gmail]/Sent Mail',
+            'Sent Messages',
+            'Sent Items',
+            'INBOX.Sent',
+            'INBOX/Sent',
+        ]
+        
+        for folder_name in common_sent_folders:
+            try:
+                status, _ = mail.select(folder_name)
+                if status == 'OK':
+                    logger.info(f"Found sent folder: {folder_name}")
+                    return folder_name
+            except Exception:
+                continue
+        
+        # Try to list all folders and find one that looks like a sent folder
+        try:
+            status, folders = mail.list()
+            if status == 'OK':
+                for folder_info in folders:
+                    folder_str = folder_info.decode() if isinstance(folder_info, bytes) else str(folder_info)
+                    # Look for folders containing "sent" (case-insensitive)
+                    if 'sent' in folder_str.lower():
+                        # Extract folder name (format varies: '() "/" "folder_name"' or similar)
+                        parts = folder_str.split('"')
+                        if len(parts) >= 3:
+                            folder_name = parts[-1]
+                            try:
+                                status, _ = mail.select(folder_name)
+                                if status == 'OK':
+                                    logger.info(f"Found sent folder: {folder_name}")
+                                    return folder_name
+                            except Exception:
+                                continue
+        except Exception as e:
+            logger.debug(f"Error listing folders to find sent folder: {str(e)}")
+        
+        return None
+    
+    def _find_all_mail_folder(self, mail) -> Optional[str]:
+        """Find the All Mail folder by trying common names."""
+        common_all_mail_folders = [
+            '[Gmail]/All Mail',
+            'All Mail',
+            'AllMessages',
+            'INBOX.All',
+        ]
+        
+        for folder_name in common_all_mail_folders:
+            try:
+                status, _ = mail.select(folder_name)
+                if status == 'OK':
+                    logger.info(f"Found All Mail folder: {folder_name}")
+                    return folder_name
+            except Exception:
+                continue
+        
+        # Try to list all folders and find one that looks like All Mail
+        try:
+            status, folders = mail.list()
+            if status == 'OK':
+                for folder_info in folders:
+                    folder_str = folder_info.decode() if isinstance(folder_info, bytes) else str(folder_info)
+                    # Look for folders containing "all" and "mail" (case-insensitive)
+                    folder_lower = folder_str.lower()
+                    if ('all' in folder_lower and 'mail' in folder_lower) or 'allmail' in folder_lower:
+                        # Extract folder name (format varies: '() "/" "folder_name"' or similar)
+                        parts = folder_str.split('"')
+                        if len(parts) >= 3:
+                            folder_name = parts[-1]
+                            try:
+                                status, _ = mail.select(folder_name)
+                                if status == 'OK':
+                                    logger.info(f"Found All Mail folder: {folder_name}")
+                                    return folder_name
+                            except Exception:
+                                continue
+        except Exception as e:
+            logger.debug(f"Error listing folders to find All Mail folder: {str(e)}")
+        
+        return None
+    
     def fetch_emails(self, credential: EmailCredential, max_results: int = 50, folders: List[str] = None) -> List[EmailMessage]:
         """Fetch latest emails from IMAP folders (default: INBOX and Sent)."""
         from email.parser import BytesParser
         from email.policy import default
+        from django.db import IntegrityError
         
         if folders is None:
-            folders = ['INBOX', 'Sent']
+            folders = ['INBOX']
+            # We'll find the sent folder dynamically
         
         try:
             mail = self._connect(credential)
             email_messages: List[EmailMessage] = []
 
+            # Find sent folder automatically
+            sent_folder = self._find_sent_folder(mail)
+            if sent_folder:
+                # Add sent folder to the list if not already there
+                if sent_folder not in folders:
+                    folders.append(sent_folder)
+                # Replace any 'Sent' placeholder with the actual folder name
+                folders = [f if f.lower() != 'sent' else sent_folder for f in folders]
+            else:
+                # Remove 'Sent' if we couldn't find it
+                folders = [f for f in folders if f.lower() != 'sent']
+                # Try to use All Mail as fallback since it includes sent items
+                all_mail_folder = self._find_all_mail_folder(mail)
+                if all_mail_folder:
+                    if all_mail_folder not in folders:
+                        folders.append(all_mail_folder)
+                    logger.info(f"Could not find sent folder for {credential.email_address}, using All Mail folder instead")
+                else:
+                    logger.warning(f"Could not find sent folder or All Mail folder for {credential.email_address}, only processing INBOX")
+
             # Process each folder
             for folder in folders:
                 try:
-                    # Select folder
+                    # Select folder (we use BODY.PEEK[] when fetching to avoid marking as read)
+                    # Some IMAP servers don't support examine(), so we use select() and rely on BODY.PEEK[]
                     status, _ = mail.select(folder)
                     if status != 'OK':
                         logger.warning(f"Could not select folder {folder}, skipping")
                         continue
 
-                    # Search for unread messages (UIDs)
-                    status, messages = mail.search(None, 'UNSEEN')
+                    # Search for all messages (both read and unread) - we don't want to mark them as read
+                    # Using 'ALL' instead of 'UNSEEN' to process both read and unread messages
+                    # We use 'UID' to fetch by UID without changing message flags
+                    status, messages = mail.uid('search', None, 'ALL')
                     if status != 'OK':
                         continue
 
@@ -76,8 +198,9 @@ class IMAPService:
 
                     for msg_id in message_ids:
                         try:
-                            # Fetch message
-                            status, msg_data = mail.fetch(msg_id, '(RFC822)')
+                            # Fetch message using UID FETCH with BODY.PEEK[] to avoid marking as read
+                            # BODY.PEEK[] retrieves the message without setting the \Seen flag
+                            status, msg_data = mail.uid('fetch', msg_id, '(BODY.PEEK[])')
                             if status != 'OK':
                                 continue
 
@@ -86,10 +209,14 @@ class IMAPService:
                             msg = BytesParser(policy=default).parsebytes(msg_bytes)
 
                             # Check if already exists
+                            # Use a unique identifier that includes folder to avoid conflicts
+                            # Different folders might have the same UID
                             uid = msg_id.decode() if isinstance(msg_id, bytes) else str(msg_id)
+                            unique_id = f"{folder}:{uid}"
+                            
                             if EmailMessage.objects.filter(
                                 credential=credential,
-                                provider_message_id=uid
+                                provider_message_id=unique_id
                             ).exists():
                                 continue
 
@@ -161,26 +288,30 @@ class IMAPService:
                                     except Exception:
                                         pass
 
-                            # Create EmailMessage
-                            email_msg = EmailMessage.objects.create(
-                                user=credential.user,
-                                credential=credential,
-                                provider=EmailProvider.IMAP,
-                                provider_message_id=uid,
-                                thread_id='',  # IMAP doesn't have thread IDs like Gmail
-                                subject=subject,
-                                from_email=from_email,
-                                to_emails=','.join(to_emails) if to_emails else '',
-                                cc_emails=','.join(cc_emails) if cc_emails else '',
-                                sender_email=sender_email,
-                                reply_to=reply_to,
-                                body_text=body_text,
-                                body_html=body_html,
-                                received_at=received_at,
-                                provider_data={'uid': uid, **names_data},
-                            )
-
-                            email_messages.append(email_msg)
+                            # Create EmailMessage with unique ID that includes folder
+                            try:
+                                email_msg = EmailMessage.objects.create(
+                                    user=credential.user,
+                                    credential=credential,
+                                    provider=EmailProvider.IMAP,
+                                    provider_message_id=unique_id,  # Use folder:uid format
+                                    thread_id='',  # IMAP doesn't have thread IDs like Gmail
+                                    subject=subject,
+                                    from_email=from_email,
+                                    to_emails=','.join(to_emails) if to_emails else '',
+                                    cc_emails=','.join(cc_emails) if cc_emails else '',
+                                    sender_email=sender_email,
+                                    reply_to=reply_to,
+                                    body_text=body_text,
+                                    body_html=body_html,
+                                    received_at=received_at,
+                                    provider_data={'uid': uid, 'original_folder': folder, **names_data},
+                                )
+                                email_messages.append(email_msg)
+                            except IntegrityError:
+                                # Email already exists, skip it
+                                logger.debug(f"Email {unique_id} already exists, skipping")
+                                continue
                         except Exception as e:
                             logger.error(f"Error processing IMAP message {msg_id} in folder {folder}: {str(e)}")
                             continue

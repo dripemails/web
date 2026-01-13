@@ -761,16 +761,19 @@
     </div>
 </div>
 
-<!-- Address Collection Modal -->
-<div id="addressModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <div class="mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">{% trans "Physical Address Required" %}</h3>
+<!-- Address Collection Modal (Required) -->
+<div id="addressModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full z-50 flex items-center justify-center" onclick="event.stopPropagation()">
+    <div class="relative mx-auto p-6 border-2 border-indigo-500 w-full max-w-2xl shadow-2xl rounded-lg bg-white" onclick="event.stopPropagation()">
+        <div class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gray-900">{% trans "Physical Address Required" %}</h3>
+                <!-- No close button - modal is required -->
             </div>
-            <p class="text-sm text-gray-600 mb-4">
-                Your physical address is required by email regulations (CAN-SPAM, GDPR, etc.) and will be included in the footer of emails near the unsubscribe link.
-            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+                <p class="text-sm text-blue-800">
+                    <strong>{% trans "Required by Law:" %}</strong> {% trans "Your physical address is required by email regulations (CAN-SPAM, GDPR, etc.) and will be included in the footer of emails near the unsubscribe link." %}
+                </p>
+            </div>
             <form id="addressForm" class="space-y-4">
                 <div>
                     <label for="modal_full_name" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
@@ -806,8 +809,8 @@
                     </div>
                 </div>
                 <div class="flex justify-end gap-3 pt-4">
-                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
-                        Save Address
+                    <button type="submit" class="px-6 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+                        {% trans "Update Address" %}
                     </button>
                 </div>
             </form>
@@ -840,9 +843,23 @@ function showAddressModal() {
 }
 
 function closeAddressModal() {
+    // Only allow closing if address is complete
     const modal = document.getElementById('addressModal');
     if (modal) {
-        modal.classList.add('hidden');
+        // Check if all required fields are filled
+        const fullName = document.getElementById('modal_full_name').value.trim();
+        const addressLine1 = document.getElementById('modal_address_line1').value.trim();
+        const city = document.getElementById('modal_city').value.trim();
+        const state = document.getElementById('modal_state').value.trim();
+        const postalCode = document.getElementById('modal_postal_code').value.trim();
+        const country = document.getElementById('modal_country').value.trim();
+        
+        if (fullName && addressLine1 && city && state && postalCode && country) {
+            modal.classList.add('hidden');
+        } else {
+            // Show error message
+            alert('{% trans "Please fill in all required fields before continuing." %}');
+        }
     }
 }
 
@@ -885,6 +902,9 @@ function checkAddressRequired() {
 
 // Handle address form submission
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if address is required on page load
+    checkAddressRequired();
+    
     const addressForm = document.getElementById('addressForm');
     if (addressForm) {
         addressForm.addEventListener('submit', function(e) {
@@ -910,13 +930,23 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.message) {
-                    alert(data.message || 'Address saved successfully!');
-                    closeAddressModal();
-                    // Reload page to reflect changes
-                    location.reload();
+                if (data.message || !data.error) {
+                    // Success - close modal and reload
+                    const modal = document.getElementById('addressModal');
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                    // Show success message briefly before reload
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                    successMsg.textContent = data.message || '{% trans "Address saved successfully!" %}';
+                    document.body.appendChild(successMsg);
+                    setTimeout(() => {
+                        successMsg.remove();
+                        location.reload();
+                    }, 1500);
                 } else {
-                    alert(data.error || 'Error saving address. Please try again.');
+                    alert(data.error || '{% trans "Error saving address. Please try again." %}');
                 }
             })
             .catch(error => {

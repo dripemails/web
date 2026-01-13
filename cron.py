@@ -808,18 +808,11 @@ def crawl_imap(limit=None):
                         else:
                             logger.info(f"      Subscriber already in IMAP list")
                         
-                        # Check if we've already sent an auto-reply to this recipient for this email message
-                        # This prevents duplicates when the same email appears in multiple folders (INBOX, Sent, All Mail)
-                        from campaigns.models import EmailEvent
-                        already_sent = EmailEvent.objects.filter(
-                            email=campaign_email,
-                            subscriber_email=recipient_email,
-                            event_type='sent'
-                        ).exists()
-                        
-                        if already_sent:
-                            logger.info(f"      Already sent auto-reply to {recipient_email} for campaign email {campaign_email.id}, skipping duplicate")
-                            continue
+                        # Note: We don't check for duplicate sends based on EmailEvent because:
+                        # 1. Each email message is only processed once (checked at the top of the loop)
+                        # 2. We want to reply to each new email, even if we've replied to that sender before
+                        # 3. The duplicate prevention is handled by the email_msg.processed flag
+                        # This allows legitimate replies to multiple emails from the same sender
                         
                         # Send the email with proper name variables
                         try:

@@ -363,16 +363,19 @@ def profile_settings(request):
                 profile.full_name = request.data.get('full_name', '').strip()
             
             # Update address fields if provided
-            if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data:
+            if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data or 'full_name' in request.data:
                 # Validate required fields when updating address
+                full_name = request.data.get('full_name', '').strip() if 'full_name' in request.data else profile.full_name
                 address_line1 = request.data.get('address_line1', '').strip() if 'address_line1' in request.data else profile.address_line1
                 city = request.data.get('city', '').strip() if 'city' in request.data else profile.city
                 state = request.data.get('state', '').strip() if 'state' in request.data else profile.state
                 postal_code = request.data.get('postal_code', '').strip() if 'postal_code' in request.data else profile.postal_code
                 country = request.data.get('country', '').strip() if 'country' in request.data else profile.country
                 
-                if not address_line1 or not city or not state or not postal_code or not country:
-                    return Response({'error': _('Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country.')}, status=400)
+                if not full_name or not address_line1 or not city or not state or not postal_code or not country:
+                    return Response({'error': _('Please fill in all required fields: Full Name, Address Line 1, City, State, Postal Code, and Country.')}, status=400)
+                
+                profile.full_name = full_name
                 
                 profile.address_line1 = address_line1
                 profile.address_line2 = request.data.get('address_line2', '').strip() if 'address_line2' in request.data else profile.address_line2
@@ -951,6 +954,9 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     if show_unsubscribe:
         # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
         address_lines = []
+        # Add full name first if available
+        if user_profile.full_name:
+            address_lines.append(user_profile.full_name)
         if user_profile.address_line1:
             address_lines.append(user_profile.address_line1)
         if user_profile.address_line2:

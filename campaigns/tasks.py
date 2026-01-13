@@ -336,6 +336,9 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         
         # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
         address_lines = []
+        # Add full name first if available
+        if user_profile.full_name:
+            address_lines.append(user_profile.full_name)
         if user_profile.address_line1:
             address_lines.append(user_profile.address_line1)
         if user_profile.address_line2:
@@ -671,6 +674,9 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
     if show_unsubscribe:
         # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
         address_lines = []
+        # Add full name first if available
+        if user_profile.full_name:
+            address_lines.append(user_profile.full_name)
         if user_profile.address_line1:
             address_lines.append(user_profile.address_line1)
         if user_profile.address_line2:

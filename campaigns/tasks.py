@@ -474,22 +474,24 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
         return
     
     # Calculate scheduled time based on next email's wait_time and wait_unit
-    wait_time = next_email.wait_time or 1
+    # Use 0 as default if wait_time is None, but allow 0 to mean immediate sending
+    wait_time = next_email.wait_time if next_email.wait_time is not None else 0
     wait_unit = next_email.wait_unit or 'days'
     
     send_delay = timedelta(0)
-    if wait_unit == 'seconds':
-        send_delay = timedelta(seconds=wait_time)
-    elif wait_unit == 'minutes':
-        send_delay = timedelta(minutes=wait_time)
-    elif wait_unit == 'hours':
-        send_delay = timedelta(hours=wait_time)
-    elif wait_unit == 'days':
-        send_delay = timedelta(days=wait_time)
-    elif wait_unit == 'weeks':
-        send_delay = timedelta(weeks=wait_time)
-    elif wait_unit == 'months':
-        send_delay = timedelta(days=wait_time * 30)
+    if wait_time > 0:
+        if wait_unit == 'seconds':
+            send_delay = timedelta(seconds=wait_time)
+        elif wait_unit == 'minutes':
+            send_delay = timedelta(minutes=wait_time)
+        elif wait_unit == 'hours':
+            send_delay = timedelta(hours=wait_time)
+        elif wait_unit == 'days':
+            send_delay = timedelta(days=wait_time)
+        elif wait_unit == 'weeks':
+            send_delay = timedelta(weeks=wait_time)
+        elif wait_unit == 'months':
+            send_delay = timedelta(days=wait_time * 30)
     
     scheduled_for = timezone.now() + send_delay
     

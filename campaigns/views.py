@@ -104,22 +104,24 @@ def email_list_create(request, campaign_id):
                 
                 if active_subscribers.exists():
                     # Calculate scheduled_for time based on email's wait_time and wait_unit
-                    wait_time = email.wait_time or 1
+                    # Use 0 as default if wait_time is None, but allow 0 to mean immediate sending
+                    wait_time = email.wait_time if email.wait_time is not None else 0
                     wait_unit = email.wait_unit or 'days'
                     
                     send_delay = timedelta(0)
-                    if wait_unit == 'seconds':
-                        send_delay = timedelta(seconds=wait_time)
-                    elif wait_unit == 'minutes':
-                        send_delay = timedelta(minutes=wait_time)
-                    elif wait_unit == 'hours':
-                        send_delay = timedelta(hours=wait_time)
-                    elif wait_unit == 'days':
-                        send_delay = timedelta(days=wait_time)
-                    elif wait_unit == 'weeks':
-                        send_delay = timedelta(weeks=wait_time)
-                    elif wait_unit == 'months':
-                        send_delay = timedelta(days=wait_time * 30)
+                    if wait_time > 0:
+                        if wait_unit == 'seconds':
+                            send_delay = timedelta(seconds=wait_time)
+                        elif wait_unit == 'minutes':
+                            send_delay = timedelta(minutes=wait_time)
+                        elif wait_unit == 'hours':
+                            send_delay = timedelta(hours=wait_time)
+                        elif wait_unit == 'days':
+                            send_delay = timedelta(days=wait_time)
+                        elif wait_unit == 'weeks':
+                            send_delay = timedelta(weeks=wait_time)
+                        elif wait_unit == 'months':
+                            send_delay = timedelta(days=wait_time * 30)
                     
                     scheduled_for = timezone.now() + send_delay
                     
@@ -202,20 +204,24 @@ def email_detail(request, campaign_id, email_id):
                     
                     if subscribers_to_schedule.exists():
                         # Calculate scheduled_for time based on email's wait_time and wait_unit
-                        wait_time = email.wait_time or 1
+                        # Use 0 as default if wait_time is None, but allow 0 to mean immediate sending
+                        wait_time = email.wait_time if email.wait_time is not None else 0
                         wait_unit = email.wait_unit or 'days'
                         
                         send_delay = timedelta(0)
-                        if wait_unit == 'minutes':
-                            send_delay = timedelta(minutes=wait_time)
-                        elif wait_unit == 'hours':
-                            send_delay = timedelta(hours=wait_time)
-                        elif wait_unit == 'days':
-                            send_delay = timedelta(days=wait_time)
-                        elif wait_unit == 'weeks':
-                            send_delay = timedelta(weeks=wait_time)
-                        elif wait_unit == 'months':
-                            send_delay = timedelta(days=wait_time * 30)
+                        if wait_time > 0:
+                            if wait_unit == 'seconds':
+                                send_delay = timedelta(seconds=wait_time)
+                            elif wait_unit == 'minutes':
+                                send_delay = timedelta(minutes=wait_time)
+                            elif wait_unit == 'hours':
+                                send_delay = timedelta(hours=wait_time)
+                            elif wait_unit == 'days':
+                                send_delay = timedelta(days=wait_time)
+                            elif wait_unit == 'weeks':
+                                send_delay = timedelta(weeks=wait_time)
+                            elif wait_unit == 'months':
+                                send_delay = timedelta(days=wait_time * 30)
                         
                         scheduled_for = timezone.now() + send_delay
                         
@@ -349,20 +355,24 @@ def send_email(request, campaign_id, email_id):
     from .tasks import _send_single_email_sync
     
     # Calculate scheduled_for time based on email's wait_time and wait_unit
-    wait_time = email.wait_time or 1
+    # Use 0 as default if wait_time is None, but allow 0 to mean immediate sending
+    wait_time = email.wait_time if email.wait_time is not None else 0
     wait_unit = email.wait_unit or 'days'
     
     send_delay = timedelta(0)
-    if wait_unit == 'minutes':
-        send_delay = timedelta(minutes=wait_time)
-    elif wait_unit == 'hours':
-        send_delay = timedelta(hours=wait_time)
-    elif wait_unit == 'days':
-        send_delay = timedelta(days=wait_time)
-    elif wait_unit == 'weeks':
-        send_delay = timedelta(weeks=wait_time)
-    elif wait_unit == 'months':
-        send_delay = timedelta(days=wait_time * 30)
+    if wait_time > 0:
+        if wait_unit == 'seconds':
+            send_delay = timedelta(seconds=wait_time)
+        elif wait_unit == 'minutes':
+            send_delay = timedelta(minutes=wait_time)
+        elif wait_unit == 'hours':
+            send_delay = timedelta(hours=wait_time)
+        elif wait_unit == 'days':
+            send_delay = timedelta(days=wait_time)
+        elif wait_unit == 'weeks':
+            send_delay = timedelta(weeks=wait_time)
+        elif wait_unit == 'months':
+            send_delay = timedelta(days=wait_time * 30)
     
     scheduled_for = timezone.now() + send_delay
     

@@ -774,23 +774,12 @@ def send_email_api(request):
             )
         
         def queue_with_celery(countdown_seconds):
-            """Queue the email with Celery if available."""
-            try:
-                send_single_email.apply_async(
-                    args=[str(email_obj.id), email, variables, str(send_request.id)],
-                    countdown=max(0, int(countdown_seconds))
-                )
-                send_request.status = 'queued'
-                send_request.error_message = ''
-                send_request.save(update_fields=['status', 'error_message', 'updated_at'])
-                return True, None
-            except (ConnectionError, OSError, Exception) as exc:
-                error_msg = str(exc)
-                logger.warning("Celery unavailable for scheduled email. Falling back to synchronous send. Error: %s", error_msg)
-                send_request.status = 'pending'
-                send_request.error_message = error_msg
-                send_request.save(update_fields=['status', 'error_message', 'updated_at'])
-                return False, error_msg
+            """Schedule the email using EmailSendRequest (no Celery)."""
+            # Update status to pending - the cron job will process it
+            send_request.status = 'pending'
+            send_request.error_message = ''
+            send_request.save(update_fields=['status', 'error_message', 'updated_at'])
+            return True, None
 
         # Immediate send logic
         if schedule == 'now' or scheduled_for <= timezone.now():
@@ -820,7 +809,7 @@ def send_email_api(request):
                     send_immediately()
                     send_request.refresh_from_db()
                     return Response({
-                        'message': _('Email sent successfully (Celery unavailable, sent immediately)'),
+                        'message': _('Email sent successfully'),
                         'request_id': str(send_request.id),
                         'timezone': profile.timezone or 'UTC'
                     })
@@ -853,10 +842,10 @@ def send_email_api(request):
             queued, error_msg = queue_with_celery(countdown_seconds)
             if queued:
                 return Response({
-                    'message': _('Email scheduled for {time}').format(time=scheduled_display),
+                    'message': _('Email scheduled for {time}. It will be sent automatically at the scheduled time.').format(time=scheduled_display),
                     'request_id': str(send_request.id),
                     'scheduled_for': scheduled_for_local.isoformat(),
-                    'status': 'queued',
+                    'status': 'pending',
                     'timezone': profile.timezone or 'UTC'
                 })
             return Response({

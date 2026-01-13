@@ -281,24 +281,14 @@ def test_email(request, campaign_id, email_id):
                 'error': _('Failed to send test email: {}').format(str(sync_error))
             }, status=500)
     else:
-        # Try to use Celery, fall back to sync if it fails
+        # Send test email directly (no Celery)
         try:
-            send_test_email.delay(str(email.id), test_email, variables)
+            send_test_email(str(email.id), test_email, variables)
             return Response({'message': _('Test email sent successfully')})
-        except (ConnectionError, OSError, Exception) as e:
-            # If Celery is not available (e.g., Redis not running), send synchronously
-            error_msg = str(e)
-            if '6379' in error_msg or 'redis' in error_msg.lower() or 'Connection refused' in error_msg:
-                logger.warning(f"Redis/Celery unavailable (likely on Windows dev), sending test email synchronously: {error_msg}")
-            else:
-                logger.warning(f"Celery unavailable, sending test email synchronously: {error_msg}")
-            try:
-                _send_test_email_sync(str(email.id), test_email, variables)
-                return Response({'message': _('Test email sent successfully')})
-            except Exception as sync_error:
-                return Response({
-                    'error': _('Failed to send test email: {}').format(str(sync_error))
-                }, status=500)
+        except Exception as e:
+            return Response({
+                'error': _('Failed to send test email: {}').format(str(e))
+            }, status=500)
 
 @api_view(['POST'])
 @authentication_classes([BearerTokenAuthentication, TokenAuthentication, SessionAuthentication])

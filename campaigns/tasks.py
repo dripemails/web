@@ -1,4 +1,3 @@
-from celery import shared_task
 from django.core.mail import EmailMultiAlternatives
 from django.utils import timezone
 from django.conf import settings
@@ -504,7 +503,6 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
                 f"for {subscriber_email} to be sent at {scheduled_for}")
 
 
-@shared_task
 def send_campaign_emails(campaign_id):
     """
     Process the campaign and schedule emails to subscribers.
@@ -539,8 +537,8 @@ def send_campaign_emails(campaign_id):
             subscriber_email=subscriber.email,
             event_type='sent'
         ).exists():
-            # Schedule the first email
-            send_campaign_email.delay(
+            # Send the first email immediately
+            send_campaign_email(
                 email_id=str(first_email.id),
                 subscriber_id=str(subscriber.id)
             )
@@ -548,8 +546,7 @@ def send_campaign_emails(campaign_id):
     logger.info(f"Scheduled first email of campaign {campaign.name} for {subscribers.count()} subscribers")
 
 
-@shared_task
-def send_campaign_email(email_id, subscriber_id):
+def send_campaign_email(email_id, subscriber_id, variables=None):
     """Send a specific campaign email to a specific subscriber."""
     from .models import Email, EmailEvent
     from subscribers.models import Subscriber
@@ -570,6 +567,18 @@ def send_campaign_email(email_id, subscriber_id):
     if not subscriber.is_active or subscriber not in email.campaign.subscriber_list.subscribers.all():
         logger.info(f"Subscriber {subscriber.email} is no longer active or in the list. Skipping email.")
         return
+    
+    # Build variables from subscriber if not provided
+    if variables is None:
+        variables = {}
+    
+    # Always include subscriber data in variables (subscriber data takes precedence)
+    if not variables.get('first_name') and subscriber.first_name:
+        variables['first_name'] = subscriber.first_name
+    if not variables.get('last_name') and subscriber.last_name:
+        variables['last_name'] = subscriber.last_name
+    if not variables.get('email'):
+        variables['email'] = subscriber.email
     
     # Get user profile for ad settings
     user_profile, created = UserProfile.objects.get_or_create(user=email.campaign.user)
@@ -600,9 +609,18 @@ def send_campaign_email(email_id, subscriber_id):
     encoded_email = quote(subscriber.email, safe='')
     unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
-    # Prepare email with tracking
+    # Prepare email with tracking and replace variables
     html_content = email.body_html
     text_content = email.body_text
+    subject = email.subject
+    
+    # Replace variables in content
+    if variables:
+        for key, value in variables.items():
+            placeholder = f"{{{{{key}}}}}"
+            html_content = html_content.replace(placeholder, str(value)) if html_content else html_content
+            text_content = text_content.replace(placeholder, str(value)) if text_content else text_content
+            subject = subject.replace(placeholder, str(value)) if subject else subject
     
     # Replace HR tags with separator image and wrap all links with tracking
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)
@@ -611,6 +629,11 @@ def send_campaign_email(email_id, subscriber_id):
     # Add email footer if one is assigned
     if email.footer:
         footer_html = email.footer.html_content
+        # Replace variables in footer if needed
+        if variables:
+            for key, value in variables.items():
+                placeholder = f"{{{{{key}}}}}"
+                footer_html = footer_html.replace(placeholder, str(value))
         html_content += footer_html
         # Convert footer HTML to text for plain text version using proper HTML to text conversion
         footer_text = _html_to_plain_text(footer_html)
@@ -671,7 +694,7 @@ def send_campaign_email(email_id, subscriber_id):
     
     # Create and send email
     msg = EmailMultiAlternatives(
-        subject=email.subject,
+        subject=subject,
         body=text_content,
         from_email=user_email,
         to=[subscriber.email],
@@ -696,16 +719,26 @@ def send_campaign_email(email_id, subscriber_id):
         campaign.sent_count += 1
         campaign.save(update_fields=['sent_count'])
         
-        logger.info(f"Sent email '{email.subject}' to {subscriber.email}")
+        logger.info(f"Sent email '{subject}' to {subscriber.email}")
         
         # Schedule the next email in sequence if one exists
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()
         if next_email:
             # Calculate when to send the next email
             wait_time = timedelta(**{next_email.wait_unit: next_email.wait_time})
-            send_campaign_email.apply_async(
-                args=[str(next_email.id), str(subscriber.id)],
-                countdown=wait_time.total_seconds()
+            scheduled_for = timezone.now() + wait_time
+            
+            # Use EmailSendRequest to schedule the next email
+            from .models import EmailSendRequest
+            EmailSendRequest.objects.create(
+                user=email.campaign.user,
+                campaign=email.campaign,
+                email=next_email,
+                subscriber=subscriber,
+                subscriber_email=subscriber.email,
+                variables=variables or {},
+                scheduled_for=scheduled_for,
+                status='pending'
             )
             logger.info(f"Scheduled next email '{next_email.subject}' for {subscriber.email} in {next_email.wait_time} {next_email.wait_unit}")
     
@@ -713,7 +746,6 @@ def send_campaign_email(email_id, subscriber_id):
         logger.error(f"Error sending email to {subscriber.email}: {str(e)}")
 
 
-@shared_task
 def process_email_open(tracking_id, subscriber_email):
     """Process email open event."""
     from .models import EmailEvent, Campaign
@@ -756,7 +788,6 @@ def process_email_open(tracking_id, subscriber_email):
         logger.error(f"Failed to process email open: {str(e)}")
 
 
-@shared_task
 def process_email_click(tracking_id, subscriber_email, link_url):
     """Process email click event."""
     from .models import EmailEvent, Campaign
@@ -790,13 +821,11 @@ def process_email_click(tracking_id, subscriber_email, link_url):
         logger.error(f"Failed to process email click: {str(e)}")
 
 
-@shared_task
 def send_test_email(email_id, test_email, variables=None):
     """Send a test email to a specific address."""
     return _send_test_email_sync(email_id, test_email, variables)
 
 
-@shared_task
 def send_single_email(email_id, subscriber_email, variables=None, request_id=None):
     """Send a single email to a specific address."""
     return _send_single_email_sync(email_id, subscriber_email, variables, request_id=request_id)

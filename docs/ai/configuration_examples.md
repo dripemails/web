@@ -25,7 +25,7 @@ sudo systemctl start ollama
 
 ```bash
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Test:**
@@ -72,7 +72,7 @@ sudo netstat -tlnp | grep 11434
 
 ```bash
 OLLAMA_BASE_URL=http://192.168.1.20:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Django Server (192.168.1.10) - dripemails/live.py:**
@@ -80,7 +80,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```python
 # Ollama Configuration
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://192.168.1.20:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 **Test from Django Server:**
@@ -130,14 +130,14 @@ curl http://localhost:11434/api/tags
 
 ```bash
 OLLAMA_BASE_URL=http://10.0.1.20:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Django Server - dripemails/live.py:**
 
 ```python
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://10.0.1.20:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 ---
@@ -204,7 +204,7 @@ sudo systemctl reload nginx
 
 ```bash
 OLLAMA_BASE_URL=https://ollama.yourdomain.com
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ---
@@ -233,7 +233,7 @@ sudo ufw allow from 10.0.1.0/24 to any port 11434
 
 ```bash
 OLLAMA_BASE_URL=http://10.0.1.50:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Considerations:**
@@ -254,7 +254,7 @@ OLLAMA_MODEL=llama3.1:8b
 CPU: 4 cores
 RAM: 8GB
 Storage: 20GB SSD
-Model: llama3.1:8b-q4_0 (quantized)
+Model: llama3.2:1b-q4_0 (quantized)
 ```
 
 **Medium Usage (100-1000 emails/day):**
@@ -263,7 +263,7 @@ Model: llama3.1:8b-q4_0 (quantized)
 CPU: 8 cores
 RAM: 16GB
 Storage: 50GB SSD
-Model: llama3.1:8b
+Model: llama3.2:1b
 ```
 
 **Heavy Usage (1000+ emails/day):**
@@ -272,7 +272,7 @@ Model: llama3.1:8b
 CPU: 16 cores
 RAM: 32GB
 Storage: 100GB SSD
-Model: llama3.1:8b
+Model: llama3.2:1b
 Consider: Multiple Ollama instances
 ```
 
@@ -294,11 +294,11 @@ Optional: GPU acceleration
 
 ```bash
 # Standard (Recommended)
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 # Size: 4.7GB, RAM: 8GB, Quality: ⭐⭐⭐⭐
 
 # Quantized (Faster)
-ollama pull llama3.1:8b-instruct-q4_0
+ollama pull llama3.2:1b-instruct-q4_0
 # Size: 2.5GB, RAM: 4GB, Quality: ⭐⭐⭐
 
 # Large (Best Quality)
@@ -312,11 +312,11 @@ ollama pull codellama:13b
 
 ### Configuration by Model
 
-**For llama3.1:8b-q4_0 (Fast/Low Memory):**
+**For llama3.2:1b-q4_0 (Fast/Low Memory):**
 
 ```bash
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
+OLLAMA_MODEL=llama3.2:1b-instruct-q4_0
 ```
 
 **For llama3.1:70b (Premium Quality):**
@@ -490,7 +490,7 @@ python test_ollama_config.py
 Before deploying:
 
 - [ ] Ollama installed and running
-- [ ] Model pulled: `ollama pull llama3.1:8b`
+- [ ] Model pulled: `ollama pull llama3.2:1b`
 - [ ] Remote access configured (if needed)
 - [ ] Firewall rules set
 - [ ] Django settings updated

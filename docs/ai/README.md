@@ -43,11 +43,11 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
 
 # 3. Install model
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 
 # 4. Add to .env
 echo "OLLAMA_BASE_URL=http://localhost:11434" >> .env
-echo "OLLAMA_MODEL=llama3.1:8b" >> .env
+echo "OLLAMA_MODEL=llama3.2:1b" >> .env
 ```
 
 ### Remote Server Setup
@@ -79,14 +79,14 @@ The AI generation system uses Django settings for configuration:
 
 ```python
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
 ```
 
 ### Production (`dripemails/live.py`)
 
 ```python
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 ### AI Utilities (`campaigns/ai_utils.py`)
@@ -102,7 +102,7 @@ Automatically uses Django settings or falls back to environment variables.
 ```bash
 # .env
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### Local Network Server
@@ -110,7 +110,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```bash
 # .env
 OLLAMA_BASE_URL=http://192.168.1.100:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### Remote Cloud Server
@@ -118,7 +118,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```bash
 # .env
 OLLAMA_BASE_URL=http://10.0.1.50:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### With Domain Name & SSL
@@ -126,7 +126,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```bash
 # .env
 OLLAMA_BASE_URL=https://ollama.yourdomain.com
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ---
@@ -158,8 +158,8 @@ print(result)
 
 | Model            | Size  | RAM Needed | Speed  | Quality   | Best For        |
 | ---------------- | ----- | ---------- | ------ | --------- | --------------- |
-| llama3.1:8b      | 4.7GB | 8GB        | Medium | High      | **Recommended** |
-| llama3.1:8b-q4_0 | 2.5GB | 4GB        | Fast   | Good      | High volume     |
+| llama3.2:1b      | 4.7GB | 8GB        | Medium | High      | **Recommended** |
+| llama3.2:1b-q4_0 | 2.5GB | 4GB        | Fast   | Good      | High volume     |
 | llama3.1:70b     | 40GB  | 64GB       | Slow   | Excellent | Premium         |
 
 ---
@@ -197,8 +197,8 @@ Use Celery tasks for non-blocking email generation.
 
 ### 3. Model Selection
 
-- Development: `llama3.1:8b-q4_0` (faster)
-- Production: `llama3.1:8b` (better quality)
+- Development: `llama3.2:1b-q4_0` (faster)
+- Production: `llama3.2:1b` (better quality)
 
 ### 4. Resource Allocation
 
@@ -213,7 +213,7 @@ Use Celery tasks for non-blocking email generation.
 | Variable          | Default                  | Description       |
 | ----------------- | ------------------------ | ----------------- |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama server URL |
-| `OLLAMA_MODEL`    | `llama3.1:8b`            | Model to use      |
+| `OLLAMA_MODEL`    | `llama3.2:1b`            | Model to use      |
 
 **Set in:**
 
@@ -244,7 +244,7 @@ sudo journalctl -u ollama -n 50
 ### Common Issues
 
 **Connection refused:** Ollama not running or firewall blocking
-**Model not found:** Run `ollama pull llama3.1:8b`
+**Model not found:** Run `ollama pull llama3.2:1b`
 **Slow responses:** Use smaller model or add more RAM
 **Timeout errors:** Increase timeout in `ai_utils.py`
 
@@ -305,4 +305,4 @@ For issues or questions:
 
 **Last Updated:** January 4, 2026  
 **Version:** 1.0  
-**Tested with:** Ollama 0.1.x, llama3.1:8b, Django 4.x
+**Tested with:** Ollama 0.1.x, llama3.2:1b, Django 4.x

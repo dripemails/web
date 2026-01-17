@@ -44,12 +44,12 @@ sudo journalctl -u ollama -f
 ### Step 3: Pull the Model
 
 ```bash
-# Pull the llama3.1:8b model (this will download ~5GB)
-ollama pull llama3.1:8b
+# Pull the llama3.2:1b model (this will download ~5GB)
+ollama pull llama3.2:1b
 
 # Verify model is available
 ollama list
-# Should show: llama3.1:8b
+# Should show: llama3.2:1b
 ```
 
 ### Step 4: Test Ollama
@@ -67,7 +67,7 @@ curl http://localhost:11434/api/tags
 
 ```bash
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 OLLAMA_TIMEOUT=300
 ```
 
@@ -130,7 +130,7 @@ sudo supervisorctl status ollama-server
 
 - [ ] Ollama is installed: `ollama --version`
 - [ ] Ollama service is running: `sudo systemctl status ollama`
-- [ ] Model is downloaded: `ollama list` shows `llama3.1:8b`
+- [ ] Model is downloaded: `ollama list` shows `llama3.2:1b`
 - [ ] Ollama responds: `curl http://localhost:11434/api/tags`
 - [ ] `.env` file has: `OLLAMA_BASE_URL=http://localhost:11434`
 - [ ] Django can connect: Test from Django shell
@@ -156,7 +156,7 @@ sudo systemctl restart ollama
 
 ```bash
 # Pull the model again
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 
 # Verify
 ollama list

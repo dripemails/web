@@ -8,7 +8,7 @@ Choose the right model based on your server's memory availability.
 |-------|--------------|------|-------|---------|----------|
 | `llama3.2:1b` | ~1.3 GB | 1.3 GB | Fastest | Good | **Low memory servers (recommended)** |
 | `llama3.2:3b` | ~2.0 GB | 2.0 GB | Fast | Better | Medium memory servers |
-| `llama3.1:8b` | ~4.8 GB | 4.7 GB | Slower | Best | High memory servers (4GB+ free RAM) |
+| `llama3.2:1b` | ~4.8 GB | 4.7 GB | Slower | Best | High memory servers (4GB+ free RAM) |
 
 ## 🎯 Quick Selection Guide
 
@@ -35,14 +35,14 @@ OLLAMA_MODEL=llama3.2:3b
 ```
 
 ### If you have 4GB+ free RAM:
-**Use: `llama3.1:8b`** ✅
+**Use: `llama3.2:1b`** ✅
 ```bash
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 ```
 
 Then set in `.env`:
 ```bash
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ## 🔍 Check Your Available Memory
@@ -74,7 +74,7 @@ ollama pull llama3.2:1b
 ollama pull llama3.2:3b
 
 # For high memory
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 ```
 
 ### Step 2: Update your `.env` file
@@ -84,7 +84,7 @@ ollama pull llama3.1:8b
 nano /path/to/your/.env
 
 # Update OLLAMA_MODEL
-OLLAMA_MODEL=llama3.2:1b  # or llama3.2:3b or llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b  # or llama3.2:3b or llama3.2:1b
 ```
 
 ### Step 3: Restart Django
@@ -122,7 +122,7 @@ If you want to switch models:
 
 3. **Optional: Remove old model to save space:**
    ```bash
-   ollama rm llama3.1:8b  # Only if you're not using it anymore
+   ollama rm llama3.2:1b  # Only if you're not using it anymore
    ```
 
 4. **Restart Django**
@@ -139,7 +139,7 @@ If you want to switch models:
 **For email generation specifically:**
 - `llama3.2:1b` is usually sufficient for email content - it's designed for text generation tasks
 - `llama3.2:3b` provides better quality if you have the memory
-- `llama3.1:8b` is best for complex tasks, but overkill for most email generation needs
+- `llama3.2:1b` is best for complex tasks, but overkill for most email generation needs
 
 **Default recommendation:** `llama3.2:1b` unless you have specific quality requirements and enough memory.
 

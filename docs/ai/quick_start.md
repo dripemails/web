@@ -28,14 +28,14 @@ Quick reference for setting up and using Ollama with Django DripEmails.
 3. **Install Model:**
 
    ```bash
-   ollama pull llama3.1:8b
+   ollama pull llama3.2:1b
    ```
 
 4. **Configure Django (.env):**
 
    ```bash
    OLLAMA_BASE_URL=http://localhost:11434
-   OLLAMA_MODEL=llama3.1:8b
+   OLLAMA_MODEL=llama3.2:1b
    ```
 
 5. **Test:**
@@ -68,7 +68,7 @@ sudo systemctl restart ollama
 sudo ufw allow 11434/tcp
 
 # 5. Install model
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 
 # 6. Get server IP
 curl ifconfig.me
@@ -91,7 +91,7 @@ curl ifconfig.me
    ```python
    # Ollama Configuration
    OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://192.168.1.100:11434')
-   OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+   OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
    ```
 
 3. **Update local settings:**
@@ -101,7 +101,7 @@ curl ifconfig.me
    ```python
    # Ollama Configuration
    OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-   OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+   OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
    ```
 
 4. **Test connection:**
@@ -118,7 +118,7 @@ curl ifconfig.me
 ```python
 # .env
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### Scenario 2: Separate Server on Same Network
@@ -126,7 +126,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```python
 # Production .env
 OLLAMA_BASE_URL=http://192.168.1.100:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### Scenario 3: Cloud Server
@@ -134,7 +134,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```python
 # Production .env
 OLLAMA_BASE_URL=http://10.0.1.50:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### Scenario 4: With Domain Name
@@ -142,7 +142,7 @@ OLLAMA_MODEL=llama3.1:8b
 ```python
 # Production .env
 OLLAMA_BASE_URL=https://ollama.yourdomain.com
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ---
@@ -180,17 +180,17 @@ sudo netstat -tlnp | grep 11434
 ollama list
 
 # Pull the model
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 ```
 
 ### Slow responses
 
 ```bash
 # Use smaller/faster model
-ollama pull llama3.1:8b-instruct-q4_0
+ollama pull llama3.2:1b-instruct-q4_0
 
 # Update .env
-OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
+OLLAMA_MODEL=llama3.2:1b-instruct-q4_0
 ```
 
 ---
@@ -199,11 +199,11 @@ OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
 
 | Model            | Size  | RAM  | Speed  | Quality    |
 | ---------------- | ----- | ---- | ------ | ---------- |
-| llama3.1:8b      | 4.7GB | 8GB  | ⚡⚡   | ⭐⭐⭐⭐   |
-| llama3.1:8b-q4_0 | 2.5GB | 4GB  | ⚡⚡⚡ | ⭐⭐⭐     |
+| llama3.2:1b      | 4.7GB | 8GB  | ⚡⚡   | ⭐⭐⭐⭐   |
+| llama3.2:1b-q4_0 | 2.5GB | 4GB  | ⚡⚡⚡ | ⭐⭐⭐     |
 | llama3.1:70b     | 40GB  | 64GB | ⚡     | ⭐⭐⭐⭐⭐ |
 
-**Recommendation:** Start with `llama3.1:8b` for best balance.
+**Recommendation:** Start with `llama3.2:1b` for best balance.
 
 ---
 

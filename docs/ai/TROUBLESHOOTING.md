@@ -82,7 +82,7 @@ python3 -c "import requests; print(requests.get('http://10.124.0.3:11434/api/tag
 
 **Expected Response:**
 ```json
-{"models":[{"name":"llama3.1:8b","modified_at":"...","size":...}]}
+{"models":[{"name":"llama3.2:1b","modified_at":"...","size":...}]}
 ```
 
 **If curl fails:**
@@ -123,7 +123,7 @@ grep OLLAMA /path/to/your/.env
 
 # Should show:
 # OLLAMA_BASE_URL=http://10.124.0.3:11434
-# OLLAMA_MODEL=llama3.1:8b
+# OLLAMA_MODEL=llama3.2:1b
 # OLLAMA_TIMEOUT=300
 ```
 
@@ -182,12 +182,12 @@ Read timed out. (read timeout=120)
 3. **Verify model is downloaded:**
    ```bash
    ollama list
-   # Should show llama3.1:8b
+   # Should show llama3.2:1b
    ```
 
 4. **Test model generation manually:**
    ```bash
-   ollama run llama3.1:8b "Test prompt"
+   ollama run llama3.2:1b "Test prompt"
    ```
 
 ---
@@ -196,20 +196,20 @@ Read timed out. (read timeout=120)
 
 **Error Message:**
 ```
-model 'llama3.1:8b' not found
+model 'llama3.2:1b' not found
 ```
 
 ### Solution:
 
 ```bash
 # Pull the model
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 
 # Verify it's available
 ollama list
 
 # Should show:
-# llama3.1:8b  <size>  <date>
+# llama3.2:1b  <size>  <date>
 ```
 
 ---
@@ -241,7 +241,7 @@ directory=/usr/local/bin
 user=root
 autostart=true
 autorestart=true
-environment=OLLAMA_HOST="0.0.0.0:11434",OLLAMA_MODEL="llama3.1:8b"
+environment=OLLAMA_HOST="0.0.0.0:11434",OLLAMA_MODEL="llama3.2:1b"
 redirect_stderr=true
 stdout_logfile=/var/log/supervisor/ollama-server.log
 stderr_logfile=/var/log/supervisor/ollama-server-error.log

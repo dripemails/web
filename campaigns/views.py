@@ -1099,30 +1099,6 @@ def search_templates(request):
 
 
 @login_required
-def campaign_detail_view(request, campaign_id):
-    """Display campaign detail page with sent and pending emails."""
-    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
-    
-    # Get sent emails (status='sent')
-    sent_emails = EmailSendRequest.objects.filter(
-        campaign=campaign,
-        status='sent'
-    ).select_related('email', 'subscriber').order_by('-sent_at')
-    
-    # Get pending emails (status='pending' or 'queued')
-    pending_emails = EmailSendRequest.objects.filter(
-        campaign=campaign,
-        status__in=['pending', 'queued']
-    ).select_related('email', 'subscriber').order_by('scheduled_for')
-    
-    return render(request, 'campaigns/campaign_detail.html', {
-        'campaign': campaign,
-        'sent_emails': sent_emails,
-        'pending_emails': pending_emails,
-    })
-
-
-@login_required
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def send_pending_email(request, request_id):

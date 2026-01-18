@@ -3,6 +3,30 @@
 
 {% block title %}{% trans "Edit Campaign" %} - {{ campaign.name }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .email-details-expanded {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .email-details-expanded:not(.hidden) {
+        max-height: 1000px;
+        transition: max-height 0.5s ease-in;
+    }
+    .rotate-icon {
+        transition: transform 0.3s ease;
+    }
+    .rotate-icon.rotated {
+        transform: rotate(180deg);
+    }
+    .send-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto">
@@ -127,6 +151,209 @@
                     </a>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+
+        <!-- Sent and Pending Emails Section -->
+        <div class="mt-8">
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="-mb-px flex space-x-8">
+                    <button onclick="switchEmailTab('sent')" id="sent-email-tab" 
+                            class="email-tab-button border-b-2 border-indigo-500 py-4 px-1 text-center text-sm font-medium text-indigo-600">
+                        {% trans "Sent Emails" %} ({{ sent_emails.count }})
+                    </button>
+                    <button onclick="switchEmailTab('pending')" id="pending-email-tab"
+                            class="email-tab-button border-b-2 border-transparent py-4 px-1 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        {% trans "Pending Emails" %} ({{ pending_emails.count }})
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Sent Emails Tab -->
+            <div id="sent-email-content" class="email-tab-content">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">{% trans "Sent Emails" %}</h3>
+                    
+                    {% if sent_emails %}
+                        <div class="space-y-4">
+                            {% for send_request in sent_emails %}
+                                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 hover:shadow-md transition-shadow">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-semibold text-gray-900">{{ send_request.email.subject }}</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "To:" %}</span> {{ send_request.subscriber_email }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Sent:" %}</span> {{ send_request.sent_at|date:"M d, Y g:i A" }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Status:" %}</span> 
+                                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">{% trans "Sent" %}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button onclick="toggleEmailDetails('sent-{{ send_request.id }}')" 
+                                                class="ml-4 text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
+                                            <span>{% trans "View Details" %}</span>
+                                            <svg class="w-5 h-5 ml-1 rotate-icon" id="icon-sent-{{ send_request.id }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Expanded Content -->
+                                    <div id="sent-{{ send_request.id }}" class="email-details-expanded mt-4 hidden">
+                                        <div class="border-t border-gray-300 pt-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Attributes" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Email ID:" %}</dt>
+                                                            <dd class="text-gray-800 text-xs">{{ send_request.email.id }}</dd>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Order:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.email.order }}</dd>
+                                                        </div>
+                                                        {% if send_request.subscriber %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Subscriber:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                    </dl>
+                                                </div>
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Sending Details" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Scheduled:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.scheduled_for|date:"M d, Y g:i A" }}</dd>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Created:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Content" %}</h5>
+                                                <div class="bg-white border border-gray-300 rounded p-4 max-h-96 overflow-y-auto">
+                                                    {{ send_request.email.body_html|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-600">{% trans "No emails have been sent from this campaign yet." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Pending Emails Tab -->
+            <div id="pending-email-content" class="email-tab-content hidden">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">{% trans "Pending Emails" %}</h3>
+                    
+                    {% if pending_emails %}
+                        <div class="space-y-4">
+                            {% for send_request in pending_emails %}
+                                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 hover:shadow-md transition-shadow" id="pending-item-{{ send_request.id }}">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-semibold text-gray-900">{{ send_request.email.subject }}</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "To:" %}</span> {{ send_request.subscriber_email }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Scheduled for:" %}</span> {{ send_request.scheduled_for|date:"M d, Y g:i A" }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Status:" %}</span> 
+                                                    <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">{{ send_request.get_status_display }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 flex flex-col gap-2">
+                                            <button onclick="toggleEmailDetails('pending-{{ send_request.id }}')" 
+                                                    class="text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
+                                                <span>{% trans "View Details" %}</span>
+                                                <svg class="w-5 h-5 ml-1 rotate-icon" id="icon-pending-{{ send_request.id }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="sendPendingEmail('{{ send_request.id }}')" 
+                                                    id="send-btn-{{ send_request.id }}"
+                                                    class="send-btn bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg text-sm hover:shadow-md transition-all">
+                                                {% trans "Send Now" %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Expanded Content -->
+                                    <div id="pending-{{ send_request.id }}" class="email-details-expanded mt-4 hidden">
+                                        <div class="border-t border-gray-300 pt-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Attributes" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Email ID:" %}</dt>
+                                                            <dd class="text-gray-800 text-xs">{{ send_request.email.id }}</dd>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Order:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.email.order }}</dd>
+                                                        </div>
+                                                        {% if send_request.subscriber %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Subscriber:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.subscriber.first_name }} {{ send_request.subscriber.last_name }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                    </dl>
+                                                </div>
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Sending Details" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Created:" %}</dt>
+                                                            <dd class="text-gray-800">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                        </div>
+                                                        {% if send_request.variables %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Variables:" %}</dt>
+                                                            <dd class="text-gray-800 text-xs">{{ send_request.variables }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Content" %}</h5>
+                                                <div class="bg-white border border-gray-300 rounded p-4 max-h-96 overflow-y-auto">
+                                                    {{ send_request.email.body_html|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-600">{% trans "No pending emails for this campaign." %}</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -332,23 +559,111 @@ $(document).ready(function() {
             }
         });
     }
-    
-    // Helper function to get CSRF token
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
+});
+
+// Helper function to get CSRF token (global scope)
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
             }
         }
-        return cookieValue;
     }
-});
+    return cookieValue;
+}
+
+// Tab switching for sent/pending emails
+function switchEmailTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.email-tab-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+    
+    // Remove active styling from all tabs
+    document.querySelectorAll('.email-tab-button').forEach(button => {
+        button.classList.remove('border-indigo-500', 'text-indigo-600');
+        button.classList.add('border-transparent', 'text-gray-500');
+    });
+    
+    // Show selected tab content
+    document.getElementById(tabName + '-email-content').classList.remove('hidden');
+    
+    // Add active styling to selected tab
+    const selectedTab = document.getElementById(tabName + '-email-tab');
+    selectedTab.classList.add('border-indigo-500', 'text-indigo-600');
+    selectedTab.classList.remove('border-transparent', 'text-gray-500');
+}
+
+// Toggle email details expansion
+function toggleEmailDetails(elementId) {
+    const content = document.getElementById(elementId);
+    const icon = document.getElementById('icon-' + elementId);
+    
+    content.classList.toggle('hidden');
+    icon.classList.toggle('rotated');
+}
+
+// Send pending email
+async function sendPendingEmail(requestId) {
+    const button = document.getElementById('send-btn-' + requestId);
+    const originalText = button.textContent;
+    
+    // Disable button and show loading
+    button.disabled = true;
+    button.textContent = '{% trans "Sending..." %}';
+    
+    try {
+        const response = await fetch(`/api/email-send-requests/${requestId}/send/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Show success message
+            showNotification('{% trans "Email sent successfully!" %}', 'success');
+            
+            // Reload the page to refresh the lists
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            // Show error message
+            showNotification(data.error || '{% trans "Failed to send email" %}', 'error');
+            button.disabled = false;
+            button.textContent = originalText;
+        }
+    } catch (error) {
+        console.error('Error sending email:', error);
+        showNotification('{% trans "An error occurred while sending the email" %}', 'error');
+        button.disabled = false;
+        button.textContent = originalText;
+    }
+}
+
+// Show notification
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    } text-white`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
 </script>
 {% endblock %}
 {% endblock %} 

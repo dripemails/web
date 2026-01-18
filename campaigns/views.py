@@ -419,13 +419,29 @@ def send_email(request, campaign_id, email_id):
 @login_required
 def campaign_edit(request, campaign_id):
     """Edit campaign and its templates."""
+    from .models import EmailSendRequest
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     emails = campaign.emails.all().order_by('order')
     lists = List.objects.filter(user=request.user)
+    
+    # Get sent emails (status='sent')
+    sent_emails = EmailSendRequest.objects.filter(
+        campaign=campaign,
+        status='sent'
+    ).select_related('email', 'subscriber').order_by('-sent_at')
+    
+    # Get pending emails (status='pending' or 'queued')
+    pending_emails = EmailSendRequest.objects.filter(
+        campaign=campaign,
+        status__in=['pending', 'queued']
+    ).select_related('email', 'subscriber').order_by('scheduled_for')
+    
     return render(request, 'campaigns/edit.html', {
         'campaign': campaign,
         'emails': emails,
-        'lists': lists
+        'lists': lists,
+        'sent_emails': sent_emails,
+        'pending_emails': pending_emails,
     })
 
 @login_required
@@ -1081,3 +1097,87 @@ def search_templates(request):
     
     return JsonResponse({'results': results})
 
+
+@login_required
+def campaign_detail_view(request, campaign_id):
+    """Display campaign detail page with sent and pending emails."""
+    campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+    
+    # Get sent emails (status='sent')
+    sent_emails = EmailSendRequest.objects.filter(
+        campaign=campaign,
+        status='sent'
+    ).select_related('email', 'subscriber').order_by('-sent_at')
+    
+    # Get pending emails (status='pending' or 'queued')
+    pending_emails = EmailSendRequest.objects.filter(
+        campaign=campaign,
+        status__in=['pending', 'queued']
+    ).select_related('email', 'subscriber').order_by('scheduled_for')
+    
+    return render(request, 'campaigns/campaign_detail.html', {
+        'campaign': campaign,
+        'sent_emails': sent_emails,
+        'pending_emails': pending_emails,
+    })
+
+
+@login_required
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def send_pending_email(request, request_id):
+    """Send a specific pending email immediately."""
+    from .models import EmailSendRequest
+    from .tasks import _send_single_email_sync
+    from django.utils import timezone
+    
+    # Get the email send request
+    send_request = get_object_or_404(EmailSendRequest, id=request_id, user=request.user)
+    
+    # Check if already sent
+    if send_request.status == 'sent':
+        return Response({'error': 'Email already sent'}, status=400)
+    
+    # Check if failed
+    if send_request.status == 'failed':
+        return Response({'error': 'Email previously failed. Cannot resend.'}, status=400)
+    
+    try:
+        # Update status to queued
+        send_request.status = 'queued'
+        send_request.save(update_fields=['status', 'updated_at'])
+        
+        # Send the email synchronously
+        _send_single_email_sync(
+            email_id=send_request.email.id,
+            subscriber_email=send_request.subscriber_email,
+            variables=send_request.variables,
+            request_id=send_request.id
+        )
+        
+        # Refresh from DB to get updated status
+        send_request.refresh_from_db()
+        
+        # If status is still not sent, there might be an error
+        if send_request.status != 'sent':
+            return Response({
+                'error': f'Email sending failed: {send_request.error_message}'
+            }, status=500)
+        
+        # Update campaign statistics
+        campaign = send_request.campaign
+        campaign.sent_count += 1
+        campaign.save(update_fields=['sent_count', 'updated_at'])
+        
+        return Response({
+            'success': True,
+            'message': 'Email sent successfully',
+            'sent_at': send_request.sent_at.isoformat() if send_request.sent_at else None
+        })
+    
+    except Exception as e:
+        logger.error(f"Error sending pending email {request_id}: {str(e)}")
+        send_request.status = 'failed'
+        send_request.error_message = str(e)
+        send_request.save(update_fields=['status', 'error_message', 'updated_at'])
+        return Response({'error': str(e)}, status=500)

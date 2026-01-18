@@ -2061,10 +2061,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
         const repliedText = '{% trans "Replied" %}';
         const toText = '{% trans "To:" %}';
+        const fromText = '{% trans "From:" %}';
+        const ccText = '{% trans "Cc:" %}';
         const senderText = '{% trans "Sender:" %}';
         const autoReplyText = '{% trans "Auto-Reply Sent:" %}';
         const emailContentText = '{% trans "Email Content:" %}';
         const noContentText = '{% trans "(No content)" %}';
+        const sentEmailText = '{% trans "Sent Email" %}';
         
         // Store pagination info
         imapPagination = pagination;
@@ -2102,22 +2105,42 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             const isExpanded = index === 0; // Expand first email by default
             const hasReply = email.campaign_email_id ? true : false;
+            const isSentEmail = email.is_sent_email || false;
             const displaySubject = hasReply ? `Re: ${email.subject || '(No Subject)'}` : (email.subject || '(No Subject)');
             
+            // For sent emails, display recipient in header; for received, display sender
+            const displayEmail = isSentEmail 
+                ? (email.to_emails && email.to_emails.length > 0 ? email.to_emails[0] : email.from_email)
+                : email.from_email;
+            
             html += `
-                <div class="border-b border-gray-100 last:border-b-0 transition-all duration-200 ${isExpanded ? 'bg-indigo-50/30' : 'hover:bg-gray-50/50'}" onclick="toggleIMAPEmail('${previewId}')">
-                    <div class="px-6 py-4 cursor-pointer">
+                <div class="border-b ${isSentEmail ? 'border-green-100' : 'border-gray-100'} last:border-b-0 transition-all duration-200 ${isExpanded ? (isSentEmail ? 'bg-green-50/40' : 'bg-indigo-50/30') : (isSentEmail ? 'hover:bg-green-50/30' : 'hover:bg-gray-50/50')}" onclick="toggleIMAPEmail('${previewId}')">
+                    <div class="px-6 py-5 cursor-pointer">
                         <div class="flex items-start justify-between gap-4">
                             <div class="flex-1 min-w-0">
-                                <div class="flex items-center gap-3 mb-2">
-                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
-                                        ${(email.from_email || '').charAt(0).toUpperCase()}
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-xl ${isSentEmail ? 'bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg shadow-green-200/50' : 'bg-gradient-to-br from-indigo-400 to-blue-500 shadow-lg shadow-indigo-200/50'} flex items-center justify-center text-white font-bold text-base ring-2 ring-white">
+                                        ${isSentEmail ? `
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                            </svg>
+                                        ` : displayEmail.charAt(0).toUpperCase()}
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <div class="flex items-center gap-2 flex-wrap">
-                                            <span class="font-semibold text-gray-900 text-sm truncate">${email.from_email || ''}</span>
+                                        <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                                            <span class="font-bold ${isSentEmail ? 'text-green-900' : 'text-gray-900'} text-sm truncate">${displayEmail || ''}</span>
+                                            ${isSentEmail ? `
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-xs font-bold shadow-md shadow-green-200/50 ring-1 ring-green-300/50">
+                                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                                    </svg>
+                                                    ${sentEmailText}
+                                                </span>
+                                            ` : ''}
                                             ${hasReply ? `
-                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold shadow-sm">
+                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-full text-xs font-bold shadow-sm ring-1 ring-emerald-300/50">
                                                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                                     </svg>
@@ -2125,49 +2148,152 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 </span>
                                             ` : ''}
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="ml-13">
-                                    <div class="text-sm font-semibold text-gray-900 mb-1.5 line-clamp-1">${displaySubject}</div>
-                                    <div class="flex items-center gap-2 text-xs text-gray-500">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
-                                        <span>${dateStr}</span>
+                                        <div class="text-sm font-bold ${isSentEmail ? 'text-green-900' : 'text-gray-900'} mb-2 line-clamp-1">${displaySubject}</div>
+                                        <div class="flex items-center gap-2 text-xs ${isSentEmail ? 'text-green-600' : 'text-gray-500'} font-medium">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <span>${dateStr}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex-shrink-0">
-                                <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 ${isSentEmail ? 'text-green-400' : 'text-gray-400'} transform transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </div>
                         </div>
                     </div>
                     <div id="${previewId}" class="px-6 pb-4 ${isExpanded ? '' : 'hidden'}">
-                        <div class="ml-13 space-y-3">
-                            <div class="flex items-start gap-2 text-sm">
-                                <span class="font-semibold text-gray-700 min-w-[60px]">${toText}</span>
-                                <span class="text-gray-600 break-all">${email.to_emails ? email.to_emails.join(', ') : ''}</span>
-                            </div>
-                            ${email.sender_email && email.sender_email !== email.from_email ? `
-                                <div class="flex items-start gap-2 text-sm">
-                                    <span class="font-semibold text-gray-700 min-w-[60px]">${senderText}</span>
-                                    <span class="text-gray-600 break-all">${email.sender_email}</span>
+                        <div class="ml-13 space-y-4">
+                            ${isSentEmail ? `
+                                <!-- Sent Email - Enhanced styling with icons and better layout -->
+                                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200 shadow-sm">
+                                    <div class="space-y-3">
+                                        <div class="flex items-start gap-3">
+                                            <div class="flex-shrink-0 mt-0.5">
+                                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 min-w-0 space-y-3">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="flex items-center gap-1.5 font-semibold text-green-800 text-sm min-w-[70px]">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                        </svg>
+                                                        ${fromText}
+                                                    </span>
+                                                    <span class="text-gray-800 font-medium break-all">${email.from_email || ''}</span>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="flex items-center gap-1.5 font-semibold text-green-800 text-sm min-w-[70px]">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                        </svg>
+                                                        ${toText}
+                                                    </span>
+                                                    <div class="flex-1">
+                                                        <div class="flex flex-wrap gap-2">
+                                                            ${email.to_emails && email.to_emails.length > 0 ? email.to_emails.map(to => `
+                                                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-green-200 rounded-lg text-gray-700 text-sm font-medium shadow-sm">
+                                                                    <svg class="w-3.5 h-3.5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                                                    </svg>
+                                                                    ${to}
+                                                                </span>
+                                                            `).join('') : '<span class="text-gray-500 text-sm italic">No recipients</span>'}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                ${email.sender_email && email.sender_email !== email.from_email ? `
+                                                    <!-- If both From and Sender exist and are different, show Sender in Cc -->
+                                                    <div class="flex items-start gap-3 pt-2 border-t border-green-200">
+                                                        <span class="flex items-center gap-1.5 font-semibold text-green-800 text-sm min-w-[70px]">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                            </svg>
+                                                            ${ccText}
+                                                        </span>
+                                                        <div class="flex-1">
+                                                            <div class="flex flex-wrap gap-2">
+                                                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-green-200 rounded-lg text-gray-700 text-sm font-medium shadow-sm">
+                                                                    ${email.sender_email}
+                                                                </span>
+                                                                ${email.cc_emails && email.cc_emails.length > 0 ? email.cc_emails.map(cc => `
+                                                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-green-200 rounded-lg text-gray-700 text-sm font-medium shadow-sm">
+                                                                        ${cc}
+                                                                    </span>
+                                                                `).join('') : ''}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ` : email.cc_emails && email.cc_emails.length > 0 ? `
+                                                    <div class="flex items-start gap-3 pt-2 border-t border-green-200">
+                                                        <span class="flex items-center gap-1.5 font-semibold text-green-800 text-sm min-w-[70px]">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                            </svg>
+                                                            ${ccText}
+                                                        </span>
+                                                        <div class="flex-1">
+                                                            <div class="flex flex-wrap gap-2">
+                                                                ${email.cc_emails.map(cc => `
+                                                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-green-200 rounded-lg text-gray-700 text-sm font-medium shadow-sm">
+                                                                        ${cc}
+                                                                    </span>
+                                                                `).join('')}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            ` : ''}
-                            <div class="mt-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                                <div class="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
-                                    <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">${emailContentText}</span>
+                            ` : `
+                                <!-- Received Email - Keep original styling -->
+                                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-4 border border-indigo-200 shadow-sm">
+                                    <div class="space-y-3">
+                                        <div class="flex items-start gap-2 text-sm">
+                                            <span class="font-semibold text-gray-700 min-w-[60px]">${toText}</span>
+                                            <span class="text-gray-600 break-all">${email.to_emails ? email.to_emails.join(', ') : ''}</span>
+                                        </div>
+                                        ${email.sender_email && email.sender_email !== email.from_email ? `
+                                            <div class="flex items-start gap-2 text-sm">
+                                                <span class="font-semibold text-gray-700 min-w-[60px]">${senderText}</span>
+                                                <span class="text-gray-600 break-all">${email.sender_email}</span>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `}
+                            <div class="mt-4 p-5 bg-gradient-to-br ${isSentEmail ? 'from-green-50 to-white' : 'from-white to-gray-50'} rounded-xl border ${isSentEmail ? 'border-green-200' : 'border-gray-200'} shadow-lg">
+                                <div class="flex items-center gap-2.5 mb-4 pb-3 border-b ${isSentEmail ? 'border-green-200' : 'border-gray-200'}">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-lg ${isSentEmail ? 'bg-green-100' : 'bg-indigo-100'} flex items-center justify-center">
+                                        <svg class="w-5 h-5 ${isSentEmail ? 'text-green-600' : 'text-indigo-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-bold ${isSentEmail ? 'text-green-800' : 'text-gray-800'} uppercase tracking-wide">
+                                        ${isSentEmail ? '{% trans "Sent Email Content:" %}' : emailContentText}
+                                    </span>
                                 </div>
                                 ${email.campaign_email_id && (email.campaign_email_body_html || email.campaign_email_body_text) ? `
-                                    <div class="space-y-3">
-                                        <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
-                                            <div class="text-xs font-semibold text-indigo-800 mb-2 uppercase tracking-wide">Auto-Reply Message</div>
-                                            <div class="prose prose-sm max-w-none text-gray-800">
+                                    <div class="space-y-4">
+                                        <div class="p-4 ${isSentEmail ? 'bg-gradient-to-br from-green-50 to-emerald-50' : 'bg-indigo-50'} border ${isSentEmail ? 'border-green-200' : 'border-indigo-200'} rounded-xl shadow-sm">
+                                            <div class="flex items-center gap-2 mb-3 pb-2 border-b ${isSentEmail ? 'border-green-200' : 'border-indigo-200'}">
+                                                <svg class="w-4 h-4 ${isSentEmail ? 'text-green-600' : 'text-indigo-600'}" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <div class="text-xs font-bold ${isSentEmail ? 'text-green-800' : 'text-indigo-800'} uppercase tracking-wide">Auto-Reply Message</div>
+                                            </div>
+                                            <div class="prose prose-sm max-w-none ${isSentEmail ? 'text-gray-800' : 'text-gray-800'}">
                                                 ${(() => {
                                                     // Replace template variables with actual values
                                                     let content = email.campaign_email_body_html || email.campaign_email_body_text || '';
@@ -2217,7 +2343,20 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </div>
                                     </div>
                                 ` : `
-                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                    <div class="p-4 ${isSentEmail ? 'bg-white border border-green-100' : 'bg-gray-50 border border-gray-100'} rounded-lg shadow-sm">
+                                        <div class="text-sm ${isSentEmail ? 'text-gray-800' : 'text-gray-700'} whitespace-pre-wrap leading-relaxed font-normal">
+                                            ${(() => {
+                                                let content = email.body_text || '';
+                                                if (!content && email.body_html) {
+                                                    // Convert HTML to plain text for better display
+                                                    const tmp = document.createElement('div');
+                                                    tmp.innerHTML = email.body_html;
+                                                    content = tmp.textContent || tmp.innerText || '';
+                                                }
+                                                return content || `<span class="text-gray-400 italic">${noContentText}</span>`;
+                                            })()}
+                                        </div>
+                                    </div>
                                 `}
                             </div>
                         </div>

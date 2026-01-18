@@ -634,9 +634,16 @@ def crawl_imap(limit=None):
             logger.info(f"IMAP Host: {credential.imap_host}:{credential.imap_port}, SSL: {credential.imap_use_ssl}")
             logger.info(f"Last sync: {credential.last_sync_at}")
             
-            # Fetch latest emails
+            # List all available folders
+            all_folders = service.list_all_folders(credential)
+            logger.info(f"Available IMAP folders for {credential.email_address} ({len(all_folders)} total):")
+            for idx, folder_name in enumerate(all_folders, 1):
+                logger.info(f"  {idx}. {folder_name}")
+            logger.info(f"--- End of folder list ---")
+            
+            # Fetch latest emails - pass the folder list so fetch_emails can find the sent folder
             logger.info(f"Fetching emails for {credential.email_address} (max_results: {limit or 50})")
-            email_messages = service.fetch_emails(credential, max_results=limit or 50)
+            email_messages = service.fetch_emails(credential, max_results=limit or 50, all_folders=all_folders)
             logger.info(f"Fetched {len(email_messages)} email messages from IMAP")
             
             # Update last sync time

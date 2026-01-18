@@ -592,17 +592,20 @@ def imap_emails(request):
         # Calculate offset
         offset = (page - 1) * per_page
         
-        # Get total count
+        # Get total count - include both received and sent emails
         total_count = EmailMessage.objects.filter(
             credential=credential,
             provider=EmailProvider.IMAP
         ).count()
         
-        # Get paginated emails
+        # Get paginated emails - include both received and sent
         emails = EmailMessage.objects.filter(
             credential=credential,
             provider=EmailProvider.IMAP
         ).order_by('-received_at')[offset:offset + per_page]
+        
+        # Get the user's email address for sent email detection
+        user_email = credential.email_address.lower() if credential.email_address else ''
         
         email_data = []
         for email in emails:
@@ -610,35 +613,57 @@ def imap_emails(request):
             provider_data = email.provider_data or {}
             folder = provider_data.get('folder', 'INBOX')
             
-            # Determine recipient info based on folder
-            if folder == 'Sent':
+            # Determine if this is a sent email
+            # Check if user is the sender (from_email or sender_email matches user's email)
+            # Or if folder indicates it's a sent folder
+            # Or if provider_data has 'sent': True flag (for emails created by send_campaign_email)
+            is_sent_email = (
+                provider_data.get('sent', False) or  # Check provider_data flag first
+                email.from_email.lower() == user_email or 
+                (email.sender_email and email.sender_email.lower() == user_email) or
+                'sent' in folder.lower() or
+                '[gmail]/sent' in folder.lower()
+            )
+            
+            if is_sent_email:
                 # For sent emails, recipient is in To header
                 to_names = provider_data.get('to_names', {})
-                recipient_email = email.to_emails_list[0] if email.to_emails_list else email.from_email
-                recipient_name = to_names.get(recipient_email, '') if recipient_email in to_names else ''
+                recipient_email = email.to_emails_list[0] if email.to_emails_list else ''
+                recipient_name = to_names.get(recipient_email, '') if recipient_email and recipient_email in to_names else ''
+                
+                # Parse name into first_name and last_name
+                name_parts = recipient_name.strip().split() if recipient_name else []
+                first_name = name_parts[0] if name_parts else ''
+                last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+                
+                # Fallback to email prefix if no name found
+                if not first_name and recipient_email:
+                    first_name = recipient_email.split('@')[0].split('.')[0].title()
             else:
                 # For inbox emails, recipient is in From/Sender header
                 recipient_email = email.from_email
                 recipient_name = provider_data.get('from_name', '') or provider_data.get('sender_name', '')
-            
-            # Parse name into first_name and last_name
-            name_parts = recipient_name.strip().split() if recipient_name else []
-            first_name = name_parts[0] if name_parts else ''
-            last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
-            
-            # Fallback to email prefix if no name found
-            if not first_name:
-                first_name = recipient_email.split('@')[0].split('.')[0].title()
+                
+                # Parse name into first_name and last_name
+                name_parts = recipient_name.strip().split() if recipient_name else []
+                first_name = name_parts[0] if name_parts else ''
+                last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+                
+                # Fallback to email prefix if no name found
+                if not first_name:
+                    first_name = recipient_email.split('@')[0].split('.')[0].title()
             
             email_data.append({
                 'id': str(email.id),
                 'subject': email.subject,
                 'from_email': email.from_email,
                 'to_emails': email.to_emails_list,
+                'cc_emails': email.cc_emails_list,
                 'sender_email': email.sender_email,
                 'body_text': email.body_text[:500] if email.body_text else '',
                 'body_html': email.body_html[:1000] if email.body_html else '',
                 'received_at': email.received_at.isoformat(),
+                'is_sent_email': is_sent_email,  # Flag to indicate this is a sent email
                 'campaign_email_id': str(email.campaign_email.id) if email.campaign_email else None,
                 'campaign_email_subject': email.campaign_email.subject if email.campaign_email else None,
                 'campaign_email_body_html': email.campaign_email.body_html if email.campaign_email else None,

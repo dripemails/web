@@ -426,8 +426,11 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         
         # If this is a Gmail or IMAP campaign, create an EmailMessage record for the sent email
         # so it shows up in Recent Gmail/IMAP Emails
-        is_gmail_campaign = 'Gmail Auto-Reply' in campaign.name
-        is_imap_campaign = 'IMAP Auto-Reply' in campaign.name
+        campaign_name_lower = campaign.name.lower()
+        is_gmail_campaign = 'gmail' in campaign_name_lower and ('auto' in campaign_name_lower or 'reply' in campaign_name_lower)
+        is_imap_campaign = 'imap' in campaign_name_lower and ('auto' in campaign_name_lower or 'reply' in campaign_name_lower)
+        
+        logger.info(f"Checking if campaign '{campaign.name}' is Gmail/IMAP auto-reply: Gmail={is_gmail_campaign}, IMAP={is_imap_campaign}")
         
         if is_gmail_campaign or is_imap_campaign:
             from gmail.models import EmailCredential, EmailMessage, EmailProvider
@@ -440,48 +443,60 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
                 is_active=True
             ).first()
             
+            logger.info(f"Looking for {provider} credential for user {user.id}: found={credential is not None}")
+            
             if credential:
-                # Create EmailMessage to represent the sent email
-                # Use a unique provider_message_id based on timestamp and subscriber email
-                provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber_email}"
-                
-                # Get the actual sent email content (with variables replaced)
-                sent_subject = subject
-                sent_body_html = html_content
-                sent_body_text = text_content
-                
-                # Extract recipient name from variables if available
-                recipient_name = ''
-                if variables:
-                    first_name = variables.get('first_name', '')
-                    last_name = variables.get('last_name', '')
-                    if first_name or last_name:
-                        recipient_name = f"{first_name} {last_name}".strip()
-                
-                # Create EmailMessage for the sent email
-                sent_email_msg = EmailMessage.objects.create(
-                    user=user,
-                    credential=credential,
-                    provider=provider,
-                    provider_message_id=provider_message_id,
-                    subject=sent_subject,
-                    from_email=user_email,  # The user's email (sender)
-                    to_emails=subscriber_email,  # The recipient
-                    sender_email=user_email,
-                    body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
-                    body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
-                    received_at=timezone.now(),  # When it was sent
-                    processed=True,  # Mark as processed since we just sent it
-                    campaign_email=email,  # Link to the campaign email template
-                    provider_data={
-                        'sent': True,
-                        'recipient_email': subscriber_email,
-                        'recipient_name': recipient_name or subscriber_email,
-                        'from_name': full_name or '',
-                        'to_names': {subscriber_email: recipient_name or subscriber_email},
-                    }
-                )
-                logger.info(f"Created EmailMessage {sent_email_msg.id} for sent email to {subscriber_email} in {provider} campaign")
+                try:
+                    # Create EmailMessage to represent the sent email
+                    # Use a unique provider_message_id based on timestamp and subscriber email
+                    provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber_email}"
+                    
+                    # Get the actual sent email content (with variables replaced)
+                    sent_subject = subject
+                    sent_body_html = html_content
+                    sent_body_text = text_content
+                    
+                    # Extract recipient name from variables if available
+                    recipient_name = ''
+                    if variables:
+                        first_name = variables.get('first_name', '')
+                        last_name = variables.get('last_name', '')
+                        if first_name or last_name:
+                            recipient_name = f"{first_name} {last_name}".strip()
+                    
+                    # Use credential's email address for from_email to ensure proper matching
+                    from_email_for_message = credential.email_address if credential.email_address else user_email
+                    
+                    # Create EmailMessage for the sent email
+                    sent_email_msg = EmailMessage.objects.create(
+                        user=user,
+                        credential=credential,
+                        provider=provider,
+                        provider_message_id=provider_message_id,
+                        subject=sent_subject,
+                        from_email=from_email_for_message,  # Use credential's email address
+                        to_emails=subscriber_email,  # The recipient
+                        sender_email=from_email_for_message,
+                        body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
+                        body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
+                        received_at=timezone.now(),  # When it was sent
+                        processed=True,  # Mark as processed since we just sent it
+                        campaign_email=email,  # Link to the campaign email template
+                        provider_data={
+                            'sent': True,
+                            'folder': 'Sent',  # Mark as sent folder
+                            'recipient_email': subscriber_email,
+                            'recipient_name': recipient_name or subscriber_email,
+                            'from_name': full_name or '',
+                            'to_names': {subscriber_email: recipient_name or subscriber_email},
+                        }
+                    )
+                    logger.info(f"✓ Created EmailMessage {sent_email_msg.id} for sent email to {subscriber_email} in {provider} campaign '{campaign.name}'")
+                    logger.info(f"  EmailMessage details: from={from_email_for_message}, to={subscriber_email}, subject={sent_subject}, provider={provider}, credential={credential.id}")
+                except Exception as e:
+                    logger.error(f"Error creating EmailMessage for sent email: {str(e)}", exc_info=True)
+            else:
+                logger.warning(f"Could not find {provider} credential for user {user.id} to create EmailMessage for sent email")
         
         # Schedule the next email in the campaign sequence
         try:
@@ -823,8 +838,11 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         
         # If this is a Gmail or IMAP campaign, create an EmailMessage record for the sent email
         # so it shows up in Recent Gmail/IMAP Emails
-        is_gmail_campaign = 'Gmail Auto-Reply' in campaign.name
-        is_imap_campaign = 'IMAP Auto-Reply' in campaign.name
+        campaign_name_lower = campaign.name.lower()
+        is_gmail_campaign = 'gmail' in campaign_name_lower and ('auto' in campaign_name_lower or 'reply' in campaign_name_lower)
+        is_imap_campaign = 'imap' in campaign_name_lower and ('auto' in campaign_name_lower or 'reply' in campaign_name_lower)
+        
+        logger.info(f"Checking if campaign '{campaign.name}' is Gmail/IMAP auto-reply: Gmail={is_gmail_campaign}, IMAP={is_imap_campaign}")
         
         if is_gmail_campaign or is_imap_campaign:
             from gmail.models import EmailCredential, EmailMessage, EmailProvider
@@ -839,39 +857,52 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
                 is_active=True
             ).first()
             
+            logger.info(f"Looking for {provider} credential for user {campaign.user.id}: found={credential is not None}")
+            
             if credential:
-                # Create EmailMessage to represent the sent email
-                # Use a unique provider_message_id based on timestamp and subscriber
-                provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber.id}"
-                
-                # Get the actual sent email content (with variables replaced)
-                sent_subject = subject
-                sent_body_html = html_content
-                sent_body_text = text_content
-                
-                # Create EmailMessage for the sent email
-                sent_email_msg = EmailMessage.objects.create(
-                    user=campaign.user,
-                    credential=credential,
-                    provider=provider,
-                    provider_message_id=provider_message_id,
-                    subject=sent_subject,
-                    from_email=user_email,  # The user's email (sender)
-                    to_emails=subscriber.email,  # The recipient
-                    sender_email=user_email,
-                    body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
-                    body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
-                    received_at=timezone.now(),  # When it was sent
-                    processed=True,  # Mark as processed since we just sent it
-                    campaign_email=email,  # Link to the campaign email template
-                    provider_data={
-                        'sent': True,
-                        'recipient_email': subscriber.email,
-                        'recipient_name': f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email,
-                        'from_name': user_profile.full_name or '',
-                    }
-                )
-                logger.info(f"Created EmailMessage {sent_email_msg.id} for sent email to {subscriber.email} in {provider} campaign")
+                try:
+                    # Create EmailMessage to represent the sent email
+                    # Use a unique provider_message_id based on timestamp and subscriber
+                    provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber.id}"
+                    
+                    # Get the actual sent email content (with variables replaced)
+                    sent_subject = subject
+                    sent_body_html = html_content
+                    sent_body_text = text_content
+                    
+                    # Use credential's email address for from_email to ensure proper matching
+                    from_email_for_message = credential.email_address if credential.email_address else user_email
+                    
+                    # Create EmailMessage for the sent email
+                    sent_email_msg = EmailMessage.objects.create(
+                        user=campaign.user,
+                        credential=credential,
+                        provider=provider,
+                        provider_message_id=provider_message_id,
+                        subject=sent_subject,
+                        from_email=from_email_for_message,  # Use credential's email address
+                        to_emails=subscriber.email,  # The recipient
+                        sender_email=from_email_for_message,
+                        body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
+                        body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
+                        received_at=timezone.now(),  # When it was sent
+                        processed=True,  # Mark as processed since we just sent it
+                        campaign_email=email,  # Link to the campaign email template
+                        provider_data={
+                            'sent': True,
+                            'folder': 'Sent',  # Mark as sent folder
+                            'recipient_email': subscriber.email,
+                            'recipient_name': f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email,
+                            'from_name': user_profile.full_name or '',
+                            'to_names': {subscriber.email: f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email},
+                        }
+                    )
+                    logger.info(f"✓ Created EmailMessage {sent_email_msg.id} for sent email to {subscriber.email} in {provider} campaign '{campaign.name}'")
+                    logger.info(f"  EmailMessage details: from={from_email_for_message}, to={subscriber.email}, subject={sent_subject}, provider={provider}, credential={credential.id}")
+                except Exception as e:
+                    logger.error(f"Error creating EmailMessage for sent email: {str(e)}", exc_info=True)
+            else:
+                logger.warning(f"Could not find {provider} credential for user {campaign.user.id} to create EmailMessage for sent email")
         
         # Schedule the next email in sequence if one exists
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()

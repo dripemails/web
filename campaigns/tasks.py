@@ -181,12 +181,21 @@ def _send_test_email_sync(email_id, test_email, variables=None):
     text_content = email.body_text or ""
     subject = email.subject or "Test Email"
     
+    # Get user email for sender_email variable
+    user_email = email.campaign.user.email if email.campaign and email.campaign.user else settings.DEFAULT_FROM_EMAIL
+    
     if variables:
         for key, value in variables.items():
             placeholder = f"{{{{{key}}}}}"
             html_content = html_content.replace(placeholder, str(value))
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
+    
+    # Always replace sender_email variable
+    sender_email_placeholder = "{{sender_email}}"
+    html_content = html_content.replace(sender_email_placeholder, user_email)
+    text_content = text_content.replace(sender_email_placeholder, user_email)
+    subject = subject.replace(sender_email_placeholder, user_email)
     
     # Ensure we have at least some content
     if not html_content and not text_content:
@@ -243,12 +252,21 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     text_content = email.body_text
     subject = email.subject
     
+    # Get user email for sender_email variable
+    user_email_for_var = email.campaign.user.email if email.campaign and email.campaign.user else settings.DEFAULT_FROM_EMAIL
+    
     if variables:
         for key, value in variables.items():
             placeholder = f"{{{{{key}}}}}"
             html_content = html_content.replace(placeholder, str(value))
             text_content = text_content.replace(placeholder, str(value))
             subject = subject.replace(placeholder, str(value))
+    
+    # Always replace sender_email variable
+    sender_email_placeholder = "{{sender_email}}"
+    html_content = html_content.replace(sender_email_placeholder, user_email_for_var)
+    text_content = text_content.replace(sender_email_placeholder, user_email_for_var)
+    subject = subject.replace(sender_email_placeholder, user_email_for_var)
     
     # Create the sent event first to get tracking ID
     sent_event = EmailEvent.objects.create(
@@ -284,6 +302,8 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             for key, value in variables.items():
                 placeholder = f"{{{{{key}}}}}"
                 footer_html = footer_html.replace(placeholder, str(value))
+        # Replace sender_email in footer
+        footer_html = footer_html.replace("{{sender_email}}", user_email_for_var)
         html_content += footer_html
         # Convert footer HTML to text for plain text version using proper HTML to text conversion
         footer_text = _html_to_plain_text(footer_html)

@@ -162,6 +162,9 @@
                                     <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{email}}', this)">
                                         <code class="variable-code">{{email}}</code>
                                     </div>
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{% templatetag openvariable %}sender_email{% templatetag closevariable %}', this)">
+                                        <code class="variable-code">{% templatetag openvariable %}sender_email{% templatetag closevariable %}</code>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -297,6 +300,9 @@ response = http.request(request)</code></pre>
                                 {% trans "Cancel" %}
                             </button>
                             <div class="flex space-x-3">
+                                <button type="button" id="sendEmailBtn" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                    {% trans "Send Email" %}
+                                </button>
                                 <button type="{% if show_campaign_modal %}button{% else %}submit{% endif %}" {% if show_campaign_modal %}onclick="showCampaignModal()"{% endif %} class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     {% trans "Save Template" %}
                                 </button>
@@ -465,6 +471,51 @@ response = http.request(request)</code></pre>
                         </button>
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             {% trans "Send" %}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Send Email Modal -->
+    <div id="sendEmailModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900">{% trans "Send Email" %}</h3>
+                <p class="text-sm text-gray-500 mt-1">{% trans "Send this email template to a recipient" %}</p>
+            </div>
+            <form id="sendEmailForm" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="send_email" class="block text-sm font-medium text-gray-700">{% trans "Recipient Email" %}</label>
+                        <input type="email" id="send_email" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                               placeholder="{% trans 'recipient@example.com' %}">
+                    </div>
+                    <div>
+                        <label for="send_first_name" class="block text-sm font-medium text-gray-700">{% trans "First Name" %}</label>
+                        <input type="text" id="send_first_name" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                               placeholder="{% trans 'Enter first name...' %}">
+                    </div>
+                    <div>
+                        <label for="send_last_name" class="block text-sm font-medium text-gray-700">{% trans "Last Name" %}</label>
+                        <input type="text" id="send_last_name" required
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                               placeholder="{% trans 'Enter last name...' %}">
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-md p-3">
+                        <p class="text-xs text-blue-800">
+                            <strong>{% trans "Note:" %}</strong> {% trans "The email will be sent immediately. The recipient will be automatically added to this campaign's subscriber list." %}
+                        </p>
+                    </div>
+                    <div class="flex justify-end space-x-3 pt-2">
+                        <button type="button" id="cancelSendEmail" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                            {% trans "Cancel" %}
+                        </button>
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            {% trans "Send Email" %}
                         </button>
                     </div>
                 </div>
@@ -925,7 +976,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preview functionality
     if (previewBtn) {
         previewBtn.addEventListener('click', function() {
-            const content = cleanQuillContent(quill.root.innerHTML);
+            let content = cleanQuillContent(quill.root.innerHTML);
+            
+            // Replace sender_email variable with user's email for preview
+            const userEmail = '{{ request.user.email }}';
+            // Handle both literal and HTML-encoded versions
+            content = content.replaceAll('{{sender_email}}', userEmail);
+            content = content.replaceAll('{{ sender_email }}', userEmail);
+            content = content.replaceAll('&#123;&#123;sender_email&#125;&#125;', userEmail);
+            content = content.replaceAll('{<!-- -->{sender_email}<!-- -->}', userEmail);
             
             // Get selected footer content
             const footerSelect = document.getElementById('footer_select');
@@ -976,6 +1035,168 @@ document.addEventListener('DOMContentLoaded', function() {
                 newFooterModal.classList.add('hidden');
                 newFooterForm.reset();
                 footerQuill.setContents([]);
+            }
+        });
+    }
+    
+    // Send Email modal functionality
+    const sendEmailBtn = document.getElementById('sendEmailBtn');
+    const sendEmailModal = document.getElementById('sendEmailModal');
+    const sendEmailForm = document.getElementById('sendEmailForm');
+    const cancelSendEmail = document.getElementById('cancelSendEmail');
+    
+    if (sendEmailBtn) {
+        sendEmailBtn.addEventListener('click', function() {
+            sendEmailModal.classList.remove('hidden');
+            document.getElementById('send_email').focus();
+        });
+    }
+    
+    if (cancelSendEmail) {
+        cancelSendEmail.addEventListener('click', function() {
+            sendEmailModal.classList.add('hidden');
+            sendEmailForm.reset();
+        });
+    }
+    
+    // Close send email modal when clicking outside
+    if (sendEmailModal) {
+        sendEmailModal.addEventListener('click', function(e) {
+            if (e.target === sendEmailModal) {
+                sendEmailModal.classList.add('hidden');
+                sendEmailForm.reset();
+            }
+        });
+    }
+    
+    // Send Email form submission
+    if (sendEmailForm) {
+        sendEmailForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('send_email').value;
+            const firstName = document.getElementById('send_first_name').value;
+            const lastName = document.getElementById('send_last_name').value;
+            const fullName = `${firstName} ${lastName}`.trim();
+            
+            const submitBtn = sendEmailForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '{% trans "Sending..." %}';
+            submitBtn.disabled = true;
+            
+            // Function to send the email
+            const sendEmail = function(emailId) {
+                const data = {
+                    email: email,
+                    send_immediately: true,  // Send immediately, don't use wait time
+                    variables: {
+                        first_name: firstName,
+                        last_name: lastName,
+                        full_name: fullName,
+                        email: email
+                    }
+                };
+                
+                const url = `/api/campaigns/${campaignId}/emails/${emailId}/send/`;
+                
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json().then(data => ({status: response.status, body: data})))
+                .then(({status, body}) => {
+                    if (status !== 200) {
+                        const errorMsg = body.error || '{% trans "An error occurred while sending the email. Please try again." %}';
+                        alert(errorMsg);
+                    } else {
+                        sendEmailModal.classList.add('hidden');
+                        sendEmailForm.reset();
+                        alert(body.message || '{% trans "Email sent successfully!" %}');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('{% trans "An error occurred while sending the email. Please try again." %}');
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+            };
+            
+            // If template is not saved, save it first
+            if (!templateId) {
+                // Get form data
+                const htmlContent = cleanQuillContent(quill.root.innerHTML);
+                const footerSelect = document.getElementById('footer_select');
+                const selectedFooterId = footerSelect.value;
+                
+                const waitTimeInput = document.getElementById('wait_time');
+                const waitTimeValue = waitTimeInput.value.trim();
+                const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+                
+                if (isNaN(waitTime) || waitTime < 1) {
+                    alert('{% trans "Wait time must be a number greater than 0." %}');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                
+                const templateData = {
+                    subject: document.getElementById('subject').value,
+                    wait_time: waitTime,
+                    wait_unit: document.getElementById('wait_unit').value,
+                    body_html: htmlContent,
+                    body_text: quill.getText().trim()
+                };
+                
+                if (selectedFooterId && selectedFooterId.trim()) {
+                    templateData.footer_id = selectedFooterId;
+                }
+                
+                // Save template first
+                fetch(`/api/campaigns/${campaignId}/emails/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(templateData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // Try to get error message, but handle HTML responses
+                        return response.text().then(text => {
+                            let errorMsg = 'Failed to save template';
+                            try {
+                                const errorData = JSON.parse(text);
+                                errorMsg = errorData.error || errorMsg;
+                            } catch (e) {
+                                // Response is HTML, not JSON
+                                errorMsg = `Server error (${response.status}): ${text.substring(0, 100)}`;
+                            }
+                            throw new Error(errorMsg);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Template saved, now send email
+                    sendEmail(data.id);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('{% trans "Failed to save template: " %}' + error.message);
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+            } else {
+                // Template already exists, just send
+                sendEmail(templateId);
             }
         });
     }

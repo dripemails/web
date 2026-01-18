@@ -313,6 +313,9 @@ def send_email(request, campaign_id, email_id):
     
     variables = request.data.get('variables', {})
     
+    # Check if we should send immediately (bypass wait time)
+    send_immediately = request.data.get('send_immediately', False)
+    
     # Get or create subscriber and subscribe to campaign's list
     from subscribers.models import Subscriber
     try:
@@ -355,15 +358,15 @@ def send_email(request, campaign_id, email_id):
     from .tasks import _send_single_email_sync
     
     # Calculate scheduled_for time based on email's wait_time and wait_unit
-    # Use 0 as default if wait_time is None, but allow 0 to mean immediate sending
-    wait_time = email.wait_time if email.wait_time is not None else 0
-    wait_unit = email.wait_unit or 'days'
-    
-    send_delay = timedelta(0)
-    if wait_time > 0:
-        if wait_unit == 'seconds':
-            send_delay = timedelta(seconds=wait_time)
-        elif wait_unit == 'minutes':
+    # If send_immediately is True, schedule for now
+    if send_immediately:
+        scheduled_for = timezone.now()
+    else:
+        wait_time = email.wait_time or 1
+        wait_unit = email.wait_unit or 'days'
+        
+        send_delay = timedelta(0)
+        if wait_unit == 'minutes':
             send_delay = timedelta(minutes=wait_time)
         elif wait_unit == 'hours':
             send_delay = timedelta(hours=wait_time)
@@ -373,8 +376,8 @@ def send_email(request, campaign_id, email_id):
             send_delay = timedelta(weeks=wait_time)
         elif wait_unit == 'months':
             send_delay = timedelta(days=wait_time * 30)
-    
-    scheduled_for = timezone.now() + send_delay
+        
+        scheduled_for = timezone.now() + send_delay
     
     send_request = EmailSendRequest.objects.create(
         user=request.user,

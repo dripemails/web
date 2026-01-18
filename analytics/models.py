@@ -11,6 +11,8 @@ class UserProfile(models.Model):
     send_without_unsubscribe = models.BooleanField(_('Send Without Unsubscribe'), default=False)
     custom_footer_html = models.TextField(_('Custom Footer HTML'), blank=True, help_text=_('Custom footer HTML for emails'))
     timezone = models.CharField(_('Time Zone'), max_length=64, default='UTC')
+    # Full name for email From header
+    full_name = models.CharField(_('Full Name'), max_length=255, blank=True, help_text=_('Full name to use in email From header'))
     # Address fields for email footer (required by CAN-SPAM, GDPR, etc.)
     address_line1 = models.CharField(_('Address Line 1'), max_length=255, blank=True, help_text=_('Street address'))
     address_line2 = models.CharField(_('Address Line 2'), max_length=255, blank=True, help_text=_('Apartment, suite, etc. (optional)'))
@@ -23,6 +25,8 @@ class UserProfile(models.Model):
     spf_last_checked = models.DateTimeField(_('SPF Last Checked'), null=True, blank=True, help_text=_('Last time SPF record was checked'))
     spf_record = models.TextField(_('SPF Record'), blank=True, help_text=_('The SPF record found for the user\'s domain'))
     spf_missing_includes = models.JSONField(_('SPF Missing Includes'), default=list, blank=True, help_text=_('List of missing required SPF includes'))
+    # Auto BCC setting
+    auto_bcc_enabled = models.BooleanField(_('Auto BCC Enabled'), default=True, help_text=_('Automatically BCC this email address whenever a new email is sent'))
     
     class Meta:
         verbose_name = _('User Profile')

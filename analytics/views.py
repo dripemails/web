@@ -428,8 +428,8 @@ def track_click(request, tracking_id):
             except Exception:
                 pass
         else:
-            # Process the click event asynchronously on production
-            process_email_click.delay(str(tracking_id), subscriber_email, destination_url)
+            # Process the click event directly (no Celery)
+            process_email_click(str(tracking_id), subscriber_email, destination_url)
     
     # Redirect to the destination URL
     if destination_url:

@@ -207,10 +207,15 @@ def account_settings(request):
 
         if form_type == 'email':
             new_email = request.POST.get('email', '').strip()
+            auto_bcc_enabled = request.POST.get('auto_bcc_enabled') == 'on'
+            
             if not new_email:
                 messages.error(request, _("Please provide an email address."))
             elif new_email == request.user.email:
-                messages.info(request, _("This is already your current email address."))
+                # Email hasn't changed, but auto_bcc setting might have
+                profile.auto_bcc_enabled = auto_bcc_enabled
+                profile.save(update_fields=['auto_bcc_enabled'])
+                messages.success(request, _("Auto BCC setting updated successfully."))
             else:
                 # Validate email format
                 from django.core.validators import validate_email
@@ -225,12 +230,16 @@ def account_settings(request):
                         # Update user email
                         request.user.email = new_email
                         request.user.save(update_fields=['email'])
-                        messages.success(request, _("Email address updated successfully to %(email)s") % {'email': new_email})
+                        # Update auto_bcc setting
+                        profile.auto_bcc_enabled = auto_bcc_enabled
+                        profile.save(update_fields=['auto_bcc_enabled'])
+                        messages.success(request, _("Email address and settings updated successfully to %(email)s") % {'email': new_email})
                 except ValidationError:
                     messages.error(request, _("Please provide a valid email address."))
             return redirect('core:settings')
 
         elif form_type == 'address':
+            full_name = request.POST.get('full_name', '').strip()
             address_line1 = request.POST.get('address_line1', '').strip()
             city = request.POST.get('city', '').strip()
             state = request.POST.get('state', '').strip()
@@ -238,17 +247,18 @@ def account_settings(request):
             country = request.POST.get('country', '').strip()
             
             # Validate required fields
-            if not address_line1 or not city or not state or not postal_code or not country:
-                messages.error(request, _("Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country."))
+            if not full_name or not address_line1 or not city or not state or not postal_code or not country:
+                messages.error(request, _("Please fill in all required fields: Full Name, Address Line 1, City, State, Postal Code, and Country."))
                 return redirect('core:settings')
             
+            profile.full_name = full_name
             profile.address_line1 = address_line1
             profile.address_line2 = request.POST.get('address_line2', '').strip()
             profile.city = city
             profile.state = state
             profile.postal_code = postal_code
             profile.country = country
-            profile.save(update_fields=['address_line1', 'address_line2', 'city', 'state', 'postal_code', 'country'])
+            profile.save(update_fields=['full_name', 'address_line1', 'address_line2', 'city', 'state', 'postal_code', 'country'])
             messages.success(request, _("Address updated successfully."))
             return redirect('core:settings')
 
@@ -279,6 +289,8 @@ def account_settings(request):
         'timezones': common_timezones,
         'current_timezone': profile.timezone or 'UTC',
         'send_without_unsubscribe': profile.send_without_unsubscribe,
+        'auto_bcc_enabled': profile.auto_bcc_enabled,
+        'full_name': profile.full_name or '',
         'address_line1': profile.address_line1 or '',
         'address_line2': profile.address_line2 or '',
         'city': profile.city or '',
@@ -345,6 +357,10 @@ def profile_settings(request):
             if 'send_without_unsubscribe' in request.data:
                 profile.send_without_unsubscribe = request.data.get('send_without_unsubscribe', False)
             
+            # Update auto_bcc_enabled if provided
+            if 'auto_bcc_enabled' in request.data:
+                profile.auto_bcc_enabled = request.data.get('auto_bcc_enabled', True)
+            
             # Update timezone if provided
             if 'timezone' in request.data:
                 new_timezone = request.data.get('timezone', 'UTC')
@@ -355,17 +371,24 @@ def profile_settings(request):
                 except pytz.UnknownTimeZoneError:
                     return Response({'error': _('Invalid timezone')}, status=400)
             
+            # Update full_name if provided
+            if 'full_name' in request.data:
+                profile.full_name = request.data.get('full_name', '').strip()
+            
             # Update address fields if provided
-            if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data:
+            if 'address_line1' in request.data or 'city' in request.data or 'state' in request.data or 'postal_code' in request.data or 'country' in request.data or 'full_name' in request.data:
                 # Validate required fields when updating address
+                full_name = request.data.get('full_name', '').strip() if 'full_name' in request.data else profile.full_name
                 address_line1 = request.data.get('address_line1', '').strip() if 'address_line1' in request.data else profile.address_line1
                 city = request.data.get('city', '').strip() if 'city' in request.data else profile.city
                 state = request.data.get('state', '').strip() if 'state' in request.data else profile.state
                 postal_code = request.data.get('postal_code', '').strip() if 'postal_code' in request.data else profile.postal_code
                 country = request.data.get('country', '').strip() if 'country' in request.data else profile.country
                 
-                if not address_line1 or not city or not state or not postal_code or not country:
-                    return Response({'error': _('Please fill in all required fields: Address Line 1, City, State, Postal Code, and Country.')}, status=400)
+                if not full_name or not address_line1 or not city or not state or not postal_code or not country:
+                    return Response({'error': _('Please fill in all required fields: Full Name, Address Line 1, City, State, Postal Code, and Country.')}, status=400)
+                
+                profile.full_name = full_name
                 
                 profile.address_line1 = address_line1
                 profile.address_line2 = request.data.get('address_line2', '').strip() if 'address_line2' in request.data else profile.address_line2
@@ -379,7 +402,9 @@ def profile_settings(request):
                 'message': _('Settings updated successfully'),
                 'has_verified_promo': profile.has_verified_promo,
                 'send_without_unsubscribe': profile.send_without_unsubscribe,
+                'auto_bcc_enabled': profile.auto_bcc_enabled,
                 'timezone': profile.timezone or 'UTC',
+                'full_name': profile.full_name or '',
                 'address_line1': profile.address_line1 or '',
                 'address_line2': profile.address_line2 or '',
                 'city': profile.city or '',
@@ -391,7 +416,9 @@ def profile_settings(request):
         return Response({
             'has_verified_promo': profile.has_verified_promo,
             'send_without_unsubscribe': profile.send_without_unsubscribe,
+            'auto_bcc_enabled': profile.auto_bcc_enabled,
             'timezone': profile.timezone or 'UTC',
+            'full_name': profile.full_name or '',
             'address_line1': profile.address_line1 or '',
             'address_line2': profile.address_line2 or '',
             'city': profile.city or '',
@@ -774,23 +801,12 @@ def send_email_api(request):
             )
         
         def queue_with_celery(countdown_seconds):
-            """Queue the email with Celery if available."""
-            try:
-                send_single_email.apply_async(
-                    args=[str(email_obj.id), email, variables, str(send_request.id)],
-                    countdown=max(0, int(countdown_seconds))
-                )
-                send_request.status = 'queued'
-                send_request.error_message = ''
-                send_request.save(update_fields=['status', 'error_message', 'updated_at'])
-                return True, None
-            except (ConnectionError, OSError, Exception) as exc:
-                error_msg = str(exc)
-                logger.warning("Celery unavailable for scheduled email. Falling back to synchronous send. Error: %s", error_msg)
-                send_request.status = 'pending'
-                send_request.error_message = error_msg
-                send_request.save(update_fields=['status', 'error_message', 'updated_at'])
-                return False, error_msg
+            """Schedule the email using EmailSendRequest (no Celery)."""
+            # Update status to pending - the cron job will process it
+            send_request.status = 'pending'
+            send_request.error_message = ''
+            send_request.save(update_fields=['status', 'error_message', 'updated_at'])
+            return True, None
 
         # Immediate send logic
         if schedule == 'now' or scheduled_for <= timezone.now():
@@ -820,7 +836,7 @@ def send_email_api(request):
                     send_immediately()
                     send_request.refresh_from_db()
                     return Response({
-                        'message': _('Email sent successfully (Celery unavailable, sent immediately)'),
+                        'message': _('Email sent successfully'),
                         'request_id': str(send_request.id),
                         'timezone': profile.timezone or 'UTC'
                     })
@@ -853,10 +869,10 @@ def send_email_api(request):
             queued, error_msg = queue_with_celery(countdown_seconds)
             if queued:
                 return Response({
-                    'message': _('Email scheduled for {time}').format(time=scheduled_display),
+                    'message': _('Email scheduled for {time}. It will be sent automatically at the scheduled time.').format(time=scheduled_display),
                     'request_id': str(send_request.id),
                     'scheduled_for': scheduled_for_local.isoformat(),
-                    'status': 'queued',
+                    'status': 'pending',
                     'timezone': profile.timezone or 'UTC'
                 })
             return Response({
@@ -953,6 +969,9 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     if show_unsubscribe:
         # Format user address for footer (required by CAN-SPAM, GDPR, etc.)
         address_lines = []
+        # Add full name first if available
+        if user_profile.full_name:
+            address_lines.append(user_profile.full_name)
         if user_profile.address_line1:
             address_lines.append(user_profile.address_line1)
         if user_profile.address_line2:

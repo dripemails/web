@@ -279,8 +279,6 @@ class OutlookService:
     pass
 
 
-class IMAPService:
-    """Service for IMAP email integration."""
-    # Placeholder for future implementation
-    pass
+# IMAPService is now in imap_service.py to avoid circular imports
+# Import it when needed: from gmail.imap_service import IMAPService
 

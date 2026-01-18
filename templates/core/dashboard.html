@@ -64,31 +64,142 @@
     </div>
     
     <div class="container mx-auto px-4 py-8">
-        <!-- Gmail Integration Section -->
-        <div id="gmail-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-blue-500 rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">{% trans "Gmail Integration" %}</h2>
-                        <p class="text-sm text-gray-600">{% trans "Connect your Gmail account to auto-reply to emails" %}</p>
-                    </div>
-                </div>
-                <div id="gmail-auth-status"></div>
+        <!-- Integrations Section -->
+        <div id="integrations-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">{% trans "Integrations" %}</h2>
+                <p class="text-sm text-gray-600">{% trans "Connect your email accounts to auto-reply to emails" %}</p>
             </div>
             
-            <!-- Gmail Email List -->
-            <div id="gmail-emails-container" class="mt-6 hidden">
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                        <h3 class="text-sm font-semibold text-gray-700">{% trans "Recent Gmail Emails" %}</h3>
+            <!-- Gmail Integration -->
+            <div id="gmail-section" class="mb-8 pb-8 border-b border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-blue-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">{% trans "Gmail" %}</h3>
+                            <p class="text-sm text-gray-600">{% trans "Connect your Gmail account to auto-reply to emails" %}</p>
+                        </div>
                     </div>
-                    <div id="gmail-emails-list" class="divide-y divide-gray-200">
-                        <!-- Gmail emails will be loaded here -->
+                    <div id="gmail-auth-status"></div>
+                </div>
+                
+                <!-- Gmail Email List -->
+                <div id="gmail-emails-container" class="mt-6 hidden">
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-blue-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-red-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-bold text-gray-900">{% trans "Recent Gmail Emails" %}</h4>
+                                    <p class="text-xs text-gray-600 mt-0.5">{% trans "View and manage your email conversations" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="gmail-emails-list" class="bg-white">
+                            <!-- Gmail emails will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IMAP Integration -->
+            <div id="imap-section">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">{% trans "IMAP" %}</h3>
+                            <p class="text-sm text-gray-600">{% trans "Connect your IMAP email account to auto-reply to emails" %}</p>
+                        </div>
+                    </div>
+                    <div id="imap-status"></div>
+                </div>
+                
+                <!-- IMAP Settings Form -->
+                <div id="imap-settings-form" class="mt-6 hidden">
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">{% trans "IMAP Settings" %}</h4>
+                        <form id="imap-connect-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email Address" %}</label>
+                                    <input type="email" id="imap-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "IMAP Host" %}</label>
+                                    <input type="text" id="imap-host" name="host" placeholder="imap.example.com" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "IMAP Port" %}</label>
+                                    <input type="number" id="imap-port" name="port" placeholder="993" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Username" %}</label>
+                                    <input type="text" id="imap-username" name="username" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Password" %}</label>
+                                <input type="password" id="imap-password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="imap-use-ssl" name="use_ssl" checked class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <label for="imap-use-ssl" class="ml-2 block text-sm text-gray-700">{% trans "Use SSL/TLS" %}</label>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <div class="flex-1">
+                                    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">
+                                        {% trans "Save & Connect" %}
+                                    </button>
+                                </div>
+                                <div class="flex flex-col gap-2 items-end">
+                                    <button type="button" id="imap-cancel-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium">
+                                        {% trans "Cancel" %}
+                                    </button>
+                                    <div id="imap-error-message" class="hidden text-right max-w-md"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- IMAP Email List -->
+                <div id="imap-emails-container" class="mt-6 hidden">
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-indigo-50 to-blue-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-indigo-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base font-bold text-gray-900">{% trans "Recent IMAP Emails" %}</h4>
+                                    <p class="text-xs text-gray-600 mt-0.5">{% trans "View and manage your email conversations" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="imap-emails-list" class="bg-white">
+                            <!-- IMAP emails will be loaded here -->
+                        </div>
+                        <div id="imap-emails-pagination">
+                            <!-- Pagination will be loaded here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -650,17 +761,25 @@
     </div>
 </div>
 
-<!-- Address Collection Modal -->
-<div id="addressModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <div class="mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">{% trans "Physical Address Required" %}</h3>
+<!-- Address Collection Modal (Required) -->
+<div id="addressModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full z-50 flex items-center justify-center" onclick="event.stopPropagation()">
+    <div class="relative mx-auto p-6 border-2 border-indigo-500 w-full max-w-2xl shadow-2xl rounded-lg bg-white" onclick="event.stopPropagation()">
+        <div class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gray-900">{% trans "Physical Address Required" %}</h3>
+                <!-- No close button - modal is required -->
             </div>
-            <p class="text-sm text-gray-600 mb-4">
-                Your physical address is required by email regulations (CAN-SPAM, GDPR, etc.) and will be included in the footer of emails near the unsubscribe link.
-            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+                <p class="text-sm text-blue-800">
+                    <strong>{% trans "Required by Law:" %}</strong> {% trans "Your physical address is required by email regulations (CAN-SPAM, GDPR, etc.) and will be included in the footer of emails near the unsubscribe link." %}
+                </p>
+            </div>
             <form id="addressForm" class="space-y-4">
+                <div>
+                    <label for="modal_full_name" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Full Name" %} <span class="text-red-500">*</span></label>
+                    <input type="text" id="modal_full_name" name="full_name" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm" placeholder="{% trans 'John Doe' %}">
+                    <p class="mt-1 text-xs text-gray-500">{% trans "This name will appear in the From header of emails you send" %}</p>
+                </div>
                 <div>
                     <label for="modal_address_line1" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Address Line 1" %} <span class="text-red-500">*</span></label>
                     <input type="text" id="modal_address_line1" name="address_line1" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm">
@@ -690,8 +809,8 @@
                     </div>
                 </div>
                 <div class="flex justify-end gap-3 pt-4">
-                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
-                        Save Address
+                    <button type="submit" class="px-6 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+                        {% trans "Update Address" %}
                     </button>
                 </div>
             </form>
@@ -724,9 +843,23 @@ function showAddressModal() {
 }
 
 function closeAddressModal() {
+    // Only allow closing if address is complete
     const modal = document.getElementById('addressModal');
     if (modal) {
-        modal.classList.add('hidden');
+        // Check if all required fields are filled
+        const fullName = document.getElementById('modal_full_name').value.trim();
+        const addressLine1 = document.getElementById('modal_address_line1').value.trim();
+        const city = document.getElementById('modal_city').value.trim();
+        const state = document.getElementById('modal_state').value.trim();
+        const postalCode = document.getElementById('modal_postal_code').value.trim();
+        const country = document.getElementById('modal_country').value.trim();
+        
+        if (fullName && addressLine1 && city && state && postalCode && country) {
+            modal.classList.add('hidden');
+        } else {
+            // Show error message
+            alert('{% trans "Please fill in all required fields before continuing." %}');
+        }
     }
 }
 
@@ -735,15 +868,94 @@ function checkAddressRequired() {
     fetch('/api/profile/settings/')
         .then(response => response.json())
         .then(data => {
-            // Check if all required address fields are missing
-            if (!data.address_line1 || !data.city || !data.state || !data.postal_code || !data.country) {
+            // Check if all required fields are missing (full_name and address)
+            if (!data.full_name || !data.address_line1 || !data.city || !data.state || !data.postal_code || !data.country) {
                 showAddressModal();
+                // Pre-fill form if we have partial data
+                if (data.full_name) {
+                    document.getElementById('modal_full_name').value = data.full_name;
+                }
+                if (data.address_line1) {
+                    document.getElementById('modal_address_line1').value = data.address_line1;
+                }
+                if (data.address_line2) {
+                    document.getElementById('modal_address_line2').value = data.address_line2;
+                }
+                if (data.city) {
+                    document.getElementById('modal_city').value = data.city;
+                }
+                if (data.state) {
+                    document.getElementById('modal_state').value = data.state;
+                }
+                if (data.postal_code) {
+                    document.getElementById('modal_postal_code').value = data.postal_code;
+                }
+                if (data.country) {
+                    document.getElementById('modal_country').value = data.country;
+                }
             }
         })
         .catch(error => {
             console.error('Error checking address:', error);
         });
 }
+
+// Handle address form submission
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if address is required on page load
+    checkAddressRequired();
+    
+    const addressForm = document.getElementById('addressForm');
+    if (addressForm) {
+        addressForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                full_name: document.getElementById('modal_full_name').value.trim(),
+                address_line1: document.getElementById('modal_address_line1').value.trim(),
+                address_line2: document.getElementById('modal_address_line2').value.trim(),
+                city: document.getElementById('modal_city').value.trim(),
+                state: document.getElementById('modal_state').value.trim(),
+                postal_code: document.getElementById('modal_postal_code').value.trim(),
+                country: document.getElementById('modal_country').value.trim()
+            };
+            
+            fetch('/api/profile/settings/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message || !data.error) {
+                    // Success - close modal and reload
+                    const modal = document.getElementById('addressModal');
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                    // Show success message briefly before reload
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                    successMsg.textContent = data.message || '{% trans "Address saved successfully!" %}';
+                    document.body.appendChild(successMsg);
+                    setTimeout(() => {
+                        successMsg.remove();
+                        location.reload();
+                    }, 1500);
+                } else {
+                    alert(data.error || '{% trans "Error saving address. Please try again." %}');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving address:', error);
+                alert('Error saving address. Please try again.');
+            });
+        });
+    }
+});
 
 // Helper function to get CSRF token
 function getCookie(name) {
@@ -1328,7 +1540,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkGmailStatus() {
         fetch('/api/gmail/emails/')
             .then(response => {
-                if (response.status === 404) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !data.connected) {
                     // No Gmail account connected
                     const connectGmailText = '{% trans "Connect Gmail" %}';
                     gmailAuthStatus.innerHTML = `
@@ -1345,12 +1563,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('gmail-connect-btn')?.addEventListener('click', function() {
                         connectGmail();
                     });
-                } else {
-                    return response.json();
-                }
-            })
-            .then(data => {
-                if (data && data.emails) {
+                } else if (data && data.emails) {
                     // Gmail connected
                     const connectedText = '{% trans "Connected" %}';
                     const disconnectText = '{% trans "Disconnect" %}';
@@ -1429,14 +1642,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const repliedText = '{% trans "Replied" %}';
         const toText = '{% trans "To:" %}';
         const senderText = '{% trans "Sender:" %}';
-        const autoReplyText = '{% trans "Auto-Reply Sent:" %}';
+        const autoReplyText = '{% trans "Auto-Reply Message" %}';
+        const originalEmailText = '{% trans "Original Email" %}';
         const emailContentText = '{% trans "Email Content:" %}';
         const noContentText = '{% trans "(No content)" %}';
         
         if (!emails || emails.length === 0) {
             gmailEmailsList.innerHTML = `
-                <div class="px-4 py-8 text-center text-gray-500">
-                    <p>${noEmailsMsg}</p>
+                <div class="px-6 py-12 text-center">
+                    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="text-gray-500 font-medium">${noEmailsMsg}</p>
                 </div>
             `;
             return;
@@ -1446,53 +1663,125 @@ document.addEventListener('DOMContentLoaded', function() {
         emails.forEach((email, index) => {
             const previewId = `gmail-preview-${email.id}`;
             const date = new Date(email.received_at);
-            const dateStr = date.toLocaleString();
+            const dateStr = date.toLocaleString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+            });
             const isExpanded = index === 0; // Expand first email by default
+            const hasReply = email.campaign_email_id ? true : false;
+            const displaySubject = hasReply ? `Re: ${email.subject || '(No Subject)'}` : (email.subject || '(No Subject)');
             
             html += `
-                <div class="px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer" onclick="toggleGmailEmail('${previewId}')">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="font-semibold text-gray-900 truncate">${email.from_email || ''}</span>
-                                ${email.campaign_email_id ? `
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-medium">
-                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                <div class="border-b border-gray-100 last:border-b-0 transition-all duration-200 ${isExpanded ? 'bg-red-50/30' : 'hover:bg-gray-50/50'}" onclick="toggleGmailEmail('${previewId}')">
+                    <div class="px-6 py-4 cursor-pointer">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-red-400 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
+                                        ${(email.from_email || '').charAt(0).toUpperCase()}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 flex-wrap">
+                                            <span class="font-semibold text-gray-900 text-sm truncate">${email.from_email || ''}</span>
+                                            ${hasReply ? `
+                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold shadow-sm">
+                                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    ${repliedText}
+                                                </span>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-13">
+                                    <div class="text-sm font-semibold text-gray-900 mb-1.5 line-clamp-1">${displaySubject}</div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
-                                        ${repliedText}
-                                    </span>
-                                ` : ''}
+                                        <span>${dateStr}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="text-sm text-gray-700 font-medium mb-1 truncate">${email.subject || '(No Subject)'}</div>
-                            <div class="text-xs text-gray-500">${dateStr}</div>
+                            <div class="flex-shrink-0">
+                                <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transform: rotate(${isExpanded ? '180deg' : '0deg'});">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <svg class="w-5 h-5 text-gray-400 flex-shrink-0 transform transition-transform" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transform: rotate(${isExpanded ? '180deg' : '0deg'});">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </div>
-                    <div id="${previewId}" class="mt-3 pt-3 border-t border-gray-200 ${isExpanded ? '' : 'hidden'}">
-                        <div class="space-y-2 text-sm">
-                            <div>
+                    <div id="${previewId}" class="px-6 pb-4 ${isExpanded ? '' : 'hidden'}">
+                        <div class="ml-13 space-y-3 pt-2 border-t border-gray-200">
+                            <div class="text-xs text-gray-600">
                                 <span class="font-semibold text-gray-700">${toText}</span>
-                                <span class="text-gray-600">${email.to_emails ? email.to_emails.join(', ') : ''}</span>
+                                <span>${email.to_emails ? (Array.isArray(email.to_emails) ? email.to_emails.join(', ') : email.to_emails) : ''}</span>
                             </div>
                             ${email.sender_email && email.sender_email !== email.from_email ? `
-                                <div>
+                                <div class="text-xs text-gray-600">
                                     <span class="font-semibold text-gray-700">${senderText}</span>
-                                    <span class="text-gray-600">${email.sender_email}</span>
+                                    <span>${email.sender_email}</span>
                                 </div>
                             ` : ''}
-                            ${email.campaign_email_subject ? `
-                                <div class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                                    <div class="text-xs font-semibold text-blue-800 mb-1">${autoReplyText}</div>
-                                    <div class="text-sm text-blue-900">${email.campaign_email_subject}</div>
+                            ${email.campaign_email_id && (email.campaign_email_body_html || email.campaign_email_body_text) ? `
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                        <div class="text-xs font-semibold text-indigo-800 mb-2 uppercase tracking-wide">Auto-Reply Message</div>
+                                        <div class="prose prose-sm max-w-none text-gray-800">
+                                            ${(() => {
+                                                // Replace template variables with actual values
+                                                let content = email.campaign_email_body_html || email.campaign_email_body_text || '';
+                                                const vars = email.template_variables || {};
+                                                
+                                                // Replace variables in content
+                                                content = content.replace(/\{\{first_name\}\}/g, vars.first_name || '');
+                                                content = content.replace(/\{\{last_name\}\}/g, vars.last_name || '');
+                                                content = content.replace(/\{\{email\}\}/g, vars.email || '');
+                                                content = content.replace(/\{\{subject\}\}/g, vars.subject || '');
+                                                
+                                                // Also handle case variations
+                                                content = content.replace(/\{\{First_Name\}\}/gi, vars.first_name || '');
+                                                content = content.replace(/\{\{Last_Name\}\}/gi, vars.last_name || '');
+                                                content = content.replace(/\{\{Email\}\}/gi, vars.email || '');
+                                                content = content.replace(/\{\{Subject\}\}/gi, vars.subject || '');
+                                                
+                                                return email.campaign_email_body_html ? 
+                                                    `<div class="leading-relaxed">${content}</div>` : 
+                                                    `<div class="whitespace-pre-wrap leading-relaxed">${content}</div>`;
+                                            })()}
+                                        </div>
+                                    </div>
+                                    <div class="pt-3 border-t border-gray-200">
+                                        <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
+                                            ${(() => {
+                                                // Format date for separator
+                                                const date = new Date(email.received_at);
+                                                const dateStr = date.toLocaleString('en-US', { 
+                                                    weekday: 'short',
+                                                    month: 'short', 
+                                                    day: 'numeric', 
+                                                    year: 'numeric',
+                                                    hour: 'numeric',
+                                                    minute: '2-digit'
+                                                });
+                                                // Use display name if available, otherwise use email
+                                                const fromName = email.from_display_name || email.from_email || 'Unknown';
+                                                const fromEmail = email.from_email || '';
+                                                const separator = `On ${dateStr} ${fromName} <${fromEmail}> wrote:`;
+                                                
+                                                return `
+                                                    <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
+                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                                `;
+                                            })()}
+                                    </div>
                                 </div>
-                            ` : ''}
-                            <div class="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-64 overflow-y-auto">
-                                <div class="text-xs font-semibold text-gray-700 mb-2">${emailContentText}</div>
-                                <div class="text-sm text-gray-600 whitespace-pre-wrap">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
-                            </div>
+                            ` : `
+                                <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -1523,6 +1812,520 @@ document.addEventListener('DOMContentLoaded', function() {
     // Refresh Gmail emails every 30 seconds
     setInterval(function() {
         checkGmailStatus();
+    }, 30000);
+
+    // IMAP Integration
+    const imapStatus = document.getElementById('imap-status');
+    const imapSettingsForm = document.getElementById('imap-settings-form');
+    const imapEmailsContainer = document.getElementById('imap-emails-container');
+    const imapEmailsList = document.getElementById('imap-emails-list');
+    const imapConnectForm = document.getElementById('imap-connect-form');
+    const imapCancelBtn = document.getElementById('imap-cancel-btn');
+    
+    // Check IMAP connection status
+    function checkIMAPStatus(isInitialLoad = false) {
+        fetch('/api/gmail/imap/emails/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !data.connected) {
+                    // No IMAP account connected
+                    const connectIMAPText = '{% trans "Connect IMAP" %}';
+                    imapStatus.innerHTML = `
+                        <button id="imap-connect-btn" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            ${connectIMAPText}
+                        </button>
+                    `;
+                    // Only hide form on initial load, not during periodic refreshes
+                    if (isInitialLoad && imapSettingsForm) {
+                        imapSettingsForm.classList.add('hidden');
+                    }
+                    imapEmailsContainer.classList.add('hidden');
+                    
+                    // Handle connect button click
+                    const connectBtn = document.getElementById('imap-connect-btn');
+                    if (connectBtn) {
+                        // Remove existing listener to avoid duplicates
+                        const newBtn = connectBtn.cloneNode(true);
+                        connectBtn.parentNode.replaceChild(newBtn, connectBtn);
+                        newBtn.addEventListener('click', function() {
+                            imapSettingsForm.classList.remove('hidden');
+                        });
+                    }
+                } else if (data && data.emails) {
+                    // IMAP connected
+                    const connectedText = '{% trans "Connected" %}';
+                    const disconnectText = '{% trans "Disconnect" %}';
+                    imapStatus.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-800 rounded-lg text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                ${connectedText}
+                            </span>
+                            <button id="imap-disconnect-btn" class="text-sm text-red-600 hover:text-red-800 font-medium">
+                                ${disconnectText}
+                            </button>
+                        </div>
+                    `;
+                    if (imapSettingsForm) {
+                        imapSettingsForm.classList.add('hidden');
+                    }
+                    imapEmailsContainer.classList.remove('hidden');
+                    renderIMAPEmails(data.emails || [], data.pagination || null);
+                    
+                    // Handle disconnect button
+                    const disconnectBtn = document.getElementById('imap-disconnect-btn');
+                    if (disconnectBtn) {
+                        // Remove existing listener to avoid duplicates
+                        const newDisconnectBtn = disconnectBtn.cloneNode(true);
+                        disconnectBtn.parentNode.replaceChild(newDisconnectBtn, disconnectBtn);
+                        newDisconnectBtn.addEventListener('click', function() {
+                            disconnectIMAP();
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error checking IMAP status:', error);
+            });
+    }
+    
+    // Handle IMAP form submission
+    if (imapConnectForm) {
+        imapConnectForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('imap-email').value,
+                host: document.getElementById('imap-host').value,
+                port: parseInt(document.getElementById('imap-port').value),
+                username: document.getElementById('imap-username').value,
+                password: document.getElementById('imap-password').value,
+                use_ssl: document.getElementById('imap-use-ssl').checked
+            };
+            
+            fetch('/api/gmail/imap/connect/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    // Display error message in the form
+                    const errorDiv = document.getElementById('imap-error-message');
+                    if (errorDiv) {
+                        if (data.error_type === 'app_password_required' && data.help_links) {
+                            // Special handling for app password error
+                            errorDiv.innerHTML = `
+                                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <p class="text-sm font-medium text-amber-800 mb-2">
+                                                ${data.error || 'Application-specific password required'}
+                                            </p>
+                                            <div class="text-xs text-amber-700 space-y-1">
+                                                <p class="font-semibold mb-1">{% trans "To fix this:" %}</p>
+                                                <ol class="list-decimal list-inside space-y-1 ml-2">
+                                                    <li>{% trans "Enable 2-Step Verification on your Google Account" %}</li>
+                                                    <li>{% trans "Generate an App Password for IMAP access" %}</li>
+                                                    <li>{% trans "Use the App Password instead of your regular password" %}</li>
+                                                </ol>
+                                                <div class="mt-2 flex flex-wrap gap-2">
+                                                    <a href="${data.help_links.support}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-amber-800 hover:text-amber-900 underline">
+                                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                        {% trans "Learn More" %}
+                                                    </a>
+                                                    <a href="${data.help_links.app_passwords}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-amber-800 hover:text-amber-900 underline">
+                                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                                        </svg>
+                                                        {% trans "Create App Password" %}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            // Generic error
+                            errorDiv.innerHTML = `
+                                <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded-r-lg shadow-sm">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-red-800">${data.error || 'Error connecting IMAP account'}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        errorDiv.classList.remove('hidden');
+                        // Scroll to error message
+                        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        // Fallback to alert if error div not found
+                        alert(data.error || 'Error connecting IMAP account');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error connecting IMAP:', error);
+                const errorDiv = document.getElementById('imap-error-message');
+                if (errorDiv) {
+                    errorDiv.innerHTML = `
+                        <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded-r-lg shadow-sm">
+                            <p class="text-sm font-medium text-red-800">{% trans "Error connecting IMAP account. Please try again." %}</p>
+                        </div>
+                    `;
+                    errorDiv.classList.remove('hidden');
+                } else {
+                    alert('Error connecting IMAP account. Please try again.');
+                }
+            });
+        });
+    }
+    
+    // Handle cancel button
+    if (imapCancelBtn) {
+        imapCancelBtn.addEventListener('click', function() {
+            imapSettingsForm.classList.add('hidden');
+            imapConnectForm.reset();
+            // Clear error message
+            const errorDiv = document.getElementById('imap-error-message');
+            if (errorDiv) {
+                errorDiv.classList.add('hidden');
+                errorDiv.innerHTML = '';
+            }
+        });
+    }
+    
+    function disconnectIMAP() {
+        if (!confirm('Are you sure you want to disconnect IMAP? Auto-replies will stop being sent.')) {
+            return;
+        }
+        
+        fetch('/api/gmail/imap/disconnect/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.error || 'Error disconnecting IMAP');
+            }
+        })
+        .catch(error => {
+            console.error('Error disconnecting IMAP:', error);
+            alert('Error disconnecting IMAP. Please try again.');
+        });
+    }
+    
+    let currentIMAPPage = 1;
+    let imapPagination = null;
+    
+    function renderIMAPEmails(emails, pagination) {
+        const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
+        const repliedText = '{% trans "Replied" %}';
+        const toText = '{% trans "To:" %}';
+        const senderText = '{% trans "Sender:" %}';
+        const autoReplyText = '{% trans "Auto-Reply Sent:" %}';
+        const emailContentText = '{% trans "Email Content:" %}';
+        const noContentText = '{% trans "(No content)" %}';
+        
+        // Store pagination info
+        imapPagination = pagination;
+        if (pagination) {
+            currentIMAPPage = pagination.page;
+        }
+        
+        if (!emails || emails.length === 0) {
+            imapEmailsList.innerHTML = `
+                <div class="px-6 py-12 text-center">
+                    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="text-gray-500 font-medium">${noEmailsMsg}</p>
+                </div>
+            `;
+            // Clear pagination if no emails
+            const paginationDiv = document.getElementById('imap-emails-pagination');
+            if (paginationDiv) {
+                paginationDiv.innerHTML = '';
+            }
+            return;
+        }
+        
+        let html = '';
+        emails.forEach((email, index) => {
+            const previewId = `imap-preview-${email.id}`;
+            const date = new Date(email.received_at);
+            const dateStr = date.toLocaleString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+            });
+            const isExpanded = index === 0; // Expand first email by default
+            const hasReply = email.campaign_email_id ? true : false;
+            const displaySubject = hasReply ? `Re: ${email.subject || '(No Subject)'}` : (email.subject || '(No Subject)');
+            
+            html += `
+                <div class="border-b border-gray-100 last:border-b-0 transition-all duration-200 ${isExpanded ? 'bg-indigo-50/30' : 'hover:bg-gray-50/50'}" onclick="toggleIMAPEmail('${previewId}')">
+                    <div class="px-6 py-4 cursor-pointer">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
+                                        ${(email.from_email || '').charAt(0).toUpperCase()}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2 flex-wrap">
+                                            <span class="font-semibold text-gray-900 text-sm truncate">${email.from_email || ''}</span>
+                                            ${hasReply ? `
+                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold shadow-sm">
+                                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    ${repliedText}
+                                                </span>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ml-13">
+                                    <div class="text-sm font-semibold text-gray-900 mb-1.5 line-clamp-1">${displaySubject}</div>
+                                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span>${dateStr}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}" id="${previewId}-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="${previewId}" class="px-6 pb-4 ${isExpanded ? '' : 'hidden'}">
+                        <div class="ml-13 space-y-3">
+                            <div class="flex items-start gap-2 text-sm">
+                                <span class="font-semibold text-gray-700 min-w-[60px]">${toText}</span>
+                                <span class="text-gray-600 break-all">${email.to_emails ? email.to_emails.join(', ') : ''}</span>
+                            </div>
+                            ${email.sender_email && email.sender_email !== email.from_email ? `
+                                <div class="flex items-start gap-2 text-sm">
+                                    <span class="font-semibold text-gray-700 min-w-[60px]">${senderText}</span>
+                                    <span class="text-gray-600 break-all">${email.sender_email}</span>
+                                </div>
+                            ` : ''}
+                            <div class="mt-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                                <div class="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
+                                    <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">${emailContentText}</span>
+                                </div>
+                                ${email.campaign_email_id && (email.campaign_email_body_html || email.campaign_email_body_text) ? `
+                                    <div class="space-y-3">
+                                        <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                            <div class="text-xs font-semibold text-indigo-800 mb-2 uppercase tracking-wide">Auto-Reply Message</div>
+                                            <div class="prose prose-sm max-w-none text-gray-800">
+                                                ${(() => {
+                                                    // Replace template variables with actual values
+                                                    let content = email.campaign_email_body_html || email.campaign_email_body_text || '';
+                                                    const vars = email.template_variables || {};
+                                                    
+                                                    // Replace variables in content
+                                                    content = content.replace(/\{\{first_name\}\}/g, vars.first_name || '');
+                                                    content = content.replace(/\{\{last_name\}\}/g, vars.last_name || '');
+                                                    content = content.replace(/\{\{email\}\}/g, vars.email || '');
+                                                    content = content.replace(/\{\{subject\}\}/g, vars.subject || '');
+                                                    
+                                                    // Also handle case variations
+                                                    content = content.replace(/\{\{First_Name\}\}/gi, vars.first_name || '');
+                                                    content = content.replace(/\{\{Last_Name\}\}/gi, vars.last_name || '');
+                                                    content = content.replace(/\{\{Email\}\}/gi, vars.email || '');
+                                                    content = content.replace(/\{\{Subject\}\}/gi, vars.subject || '');
+                                                    
+                                                    return email.campaign_email_body_html ? 
+                                                        `<div class="leading-relaxed">${content}</div>` : 
+                                                        `<div class="whitespace-pre-wrap leading-relaxed">${content}</div>`;
+                                                })()}
+                                            </div>
+                                        </div>
+                                        <div class="pt-3 border-t border-gray-200">
+                                            <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
+                                            ${(() => {
+                                                // Format date for separator
+                                                const date = new Date(email.received_at);
+                                                const dateStr = date.toLocaleString('en-US', { 
+                                                    weekday: 'short',
+                                                    month: 'short', 
+                                                    day: 'numeric', 
+                                                    year: 'numeric',
+                                                    hour: 'numeric',
+                                                    minute: '2-digit'
+                                                });
+                                                // Use display name if available, otherwise use email
+                                                const fromName = email.from_display_name || email.from_email || 'Unknown';
+                                                const fromEmail = email.from_email || '';
+                                                const separator = `On ${dateStr} ${fromName} <${fromEmail}> wrote:`;
+                                                
+                                                return `
+                                                    <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
+                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                                `;
+                                            })()}
+                                        </div>
+                                    </div>
+                                ` : `
+                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        imapEmailsList.innerHTML = html;
+        
+        // Render pagination if available
+        if (pagination && pagination.total_pages > 1) {
+            renderIMAPPagination(pagination);
+        } else {
+            const paginationDiv = document.getElementById('imap-emails-pagination');
+            if (paginationDiv) {
+                paginationDiv.innerHTML = '';
+            }
+        }
+    }
+    
+    function renderIMAPPagination(pagination) {
+        let paginationDiv = document.getElementById('imap-emails-pagination');
+        if (!paginationDiv) {
+            paginationDiv = document.createElement('div');
+            paginationDiv.id = 'imap-emails-pagination';
+            paginationDiv.className = 'px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between';
+            imapEmailsContainer.querySelector('.bg-white').appendChild(paginationDiv);
+        }
+        
+        const prevDisabled = !pagination.has_previous ? 'opacity-50 cursor-not-allowed bg-gray-100' : 'hover:bg-indigo-600 hover:text-white hover:border-indigo-600';
+        const nextDisabled = !pagination.has_next ? 'opacity-50 cursor-not-allowed bg-gray-100' : 'hover:bg-indigo-600 hover:text-white hover:border-indigo-600';
+        
+        paginationDiv.innerHTML = `
+            <div class="text-sm text-gray-600 font-medium">
+                <span class="text-gray-900">${pagination.page}</span> ${'{% trans "of" %}'} <span class="text-gray-900">${pagination.total_pages}</span>
+                <span class="text-gray-400 mx-2">•</span>
+                <span class="text-gray-600">${pagination.total_count} ${'{% trans "total" %}'}</span>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="loadIMAPPage(${pagination.page - 1})" 
+                        ${!pagination.has_previous ? 'disabled' : ''}
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg transition-all duration-200 ${prevDisabled} flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    ${'{% trans "Previous" %}'}
+                </button>
+                <button onclick="loadIMAPPage(${pagination.page + 1})" 
+                        ${!pagination.has_next ? 'disabled' : ''}
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg transition-all duration-200 ${nextDisabled} flex items-center gap-1.5">
+                    ${'{% trans "Next" %}'}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        `;
+    }
+    
+    function loadIMAPPage(page) {
+        fetch(`/api/gmail/imap/emails/?page=${page}&per_page=20`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.connected) {
+                    renderIMAPEmails(data.emails, data.pagination);
+                    // Scroll to top of email list
+                    imapEmailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading IMAP emails page:', error);
+            });
+    }
+    
+    // Make loadIMAPPage globally accessible
+    window.loadIMAPPage = loadIMAPPage;
+    
+    // Make toggleIMAPEmail globally accessible
+    window.toggleIMAPEmail = function(previewId) {
+        const preview = document.getElementById(previewId);
+        const icon = document.getElementById(previewId + '-icon');
+        if (preview && icon) {
+            if (preview.classList.contains('hidden')) {
+                preview.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                preview.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    };
+    
+    // Load IMAP status on page load
+    checkIMAPStatus(true); // isInitialLoad = true
+    
+    // Refresh IMAP emails every 30 seconds (only if form is hidden/account is connected)
+    setInterval(function() {
+        // Only refresh if form is hidden (user is not actively filling it out) and on first page
+        // This prevents hiding the form while user is typing and avoids losing pagination position
+        if (imapSettingsForm && imapSettingsForm.classList.contains('hidden') && currentIMAPPage === 1) {
+            checkIMAPStatus(false); // isInitialLoad = false
+        }
     }, 30000);
 
 // Toggle campaign status (activate/deactivate) - must be global for onclick handler

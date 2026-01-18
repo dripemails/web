@@ -513,6 +513,9 @@ GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
 GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', '')
 GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', 'https://dripemails.org/api/gmail/callback/')
 
+# Data Retention Policy (in days)
+DATA_RETENTION_DAYS = int(os.environ.get('DATA_RETENTION_DAYS', '30'))
+
 # Admin site customization
 ADMIN_SITE_HEADER = "DripEmails Administration"
 ADMIN_SITE_TITLE = "DripEmails Admin Portal"

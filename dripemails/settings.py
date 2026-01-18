@@ -33,6 +33,7 @@ env = environ.Env(
     GOOGLE_CLIENT_ID=(str, ''),
     GOOGLE_CLIENT_SECRET=(str, ''),
     GOOGLE_REDIRECT_URI=(str, 'https://dripemails.org/api/gmail/callback/'),
+    DATA_RETENTION_DAYS=(int, 30),  # Number of days to retain email messages and send activity
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))

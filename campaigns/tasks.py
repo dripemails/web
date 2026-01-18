@@ -424,6 +424,65 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         
         logger.info(f"Sent single email '{subject}' to {subscriber_email}")
         
+        # If this is a Gmail or IMAP campaign, create an EmailMessage record for the sent email
+        # so it shows up in Recent Gmail/IMAP Emails
+        is_gmail_campaign = 'Gmail Auto-Reply' in campaign.name
+        is_imap_campaign = 'IMAP Auto-Reply' in campaign.name
+        
+        if is_gmail_campaign or is_imap_campaign:
+            from gmail.models import EmailCredential, EmailMessage, EmailProvider
+            
+            # Find the credential for this user and provider
+            provider = EmailProvider.GMAIL if is_gmail_campaign else EmailProvider.IMAP
+            credential = EmailCredential.objects.filter(
+                user=user,
+                provider=provider,
+                is_active=True
+            ).first()
+            
+            if credential:
+                # Create EmailMessage to represent the sent email
+                # Use a unique provider_message_id based on timestamp and subscriber email
+                provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber_email}"
+                
+                # Get the actual sent email content (with variables replaced)
+                sent_subject = subject
+                sent_body_html = html_content
+                sent_body_text = text_content
+                
+                # Extract recipient name from variables if available
+                recipient_name = ''
+                if variables:
+                    first_name = variables.get('first_name', '')
+                    last_name = variables.get('last_name', '')
+                    if first_name or last_name:
+                        recipient_name = f"{first_name} {last_name}".strip()
+                
+                # Create EmailMessage for the sent email
+                sent_email_msg = EmailMessage.objects.create(
+                    user=user,
+                    credential=credential,
+                    provider=provider,
+                    provider_message_id=provider_message_id,
+                    subject=sent_subject,
+                    from_email=user_email,  # The user's email (sender)
+                    to_emails=subscriber_email,  # The recipient
+                    sender_email=user_email,
+                    body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
+                    body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
+                    received_at=timezone.now(),  # When it was sent
+                    processed=True,  # Mark as processed since we just sent it
+                    campaign_email=email,  # Link to the campaign email template
+                    provider_data={
+                        'sent': True,
+                        'recipient_email': subscriber_email,
+                        'recipient_name': recipient_name or subscriber_email,
+                        'from_name': full_name or '',
+                        'to_names': {subscriber_email: recipient_name or subscriber_email},
+                    }
+                )
+                logger.info(f"Created EmailMessage {sent_email_msg.id} for sent email to {subscriber_email} in {provider} campaign")
+        
         # Schedule the next email in the campaign sequence
         try:
             schedule_next_email_in_sequence(email, request_obj, subscriber_email, variables)
@@ -761,6 +820,58 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         campaign.save(update_fields=['sent_count'])
         
         logger.info(f"Sent email '{subject}' to {subscriber.email}")
+        
+        # If this is a Gmail or IMAP campaign, create an EmailMessage record for the sent email
+        # so it shows up in Recent Gmail/IMAP Emails
+        is_gmail_campaign = 'Gmail Auto-Reply' in campaign.name
+        is_imap_campaign = 'IMAP Auto-Reply' in campaign.name
+        
+        if is_gmail_campaign or is_imap_campaign:
+            from gmail.models import EmailCredential, EmailMessage, EmailProvider
+            from django.utils import timezone
+            import uuid
+            
+            # Find the credential for this user and provider
+            provider = EmailProvider.GMAIL if is_gmail_campaign else EmailProvider.IMAP
+            credential = EmailCredential.objects.filter(
+                user=campaign.user,
+                provider=provider,
+                is_active=True
+            ).first()
+            
+            if credential:
+                # Create EmailMessage to represent the sent email
+                # Use a unique provider_message_id based on timestamp and subscriber
+                provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber.id}"
+                
+                # Get the actual sent email content (with variables replaced)
+                sent_subject = subject
+                sent_body_html = html_content
+                sent_body_text = text_content
+                
+                # Create EmailMessage for the sent email
+                sent_email_msg = EmailMessage.objects.create(
+                    user=campaign.user,
+                    credential=credential,
+                    provider=provider,
+                    provider_message_id=provider_message_id,
+                    subject=sent_subject,
+                    from_email=user_email,  # The user's email (sender)
+                    to_emails=subscriber.email,  # The recipient
+                    sender_email=user_email,
+                    body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
+                    body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
+                    received_at=timezone.now(),  # When it was sent
+                    processed=True,  # Mark as processed since we just sent it
+                    campaign_email=email,  # Link to the campaign email template
+                    provider_data={
+                        'sent': True,
+                        'recipient_email': subscriber.email,
+                        'recipient_name': f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email,
+                        'from_name': user_profile.full_name or '',
+                    }
+                )
+                logger.info(f"Created EmailMessage {sent_email_msg.id} for sent email to {subscriber.email} in {provider} campaign")
         
         # Schedule the next email in sequence if one exists
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()

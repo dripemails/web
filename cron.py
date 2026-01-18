@@ -30,6 +30,13 @@ Usage:
     python cron.py crawl_imap --limit 50
     python cron.py crawl_imap --periodic
     python cron.py crawl_imap --periodic --interval 120
+    
+    # Garbage Collection
+    python cron.py garbage_collect
+    python cron.py garbage_collect --settings=dripemails.live
+    python cron.py garbage_collect --limit 1000
+    python cron.py garbage_collect --periodic
+    python cron.py garbage_collect --periodic --interval 86400
 """
 
 import os
@@ -936,6 +943,53 @@ def send_scheduled_emails(limit=None):
     logger.info(f"  Failed: {failed_count}")
 
 
+def garbage_collect(limit=None):
+    """
+    Garbage collection: Delete old email messages and send activity records.
+    
+    Deletes:
+    - EmailMessage objects older than DATA_RETENTION_DAYS days
+    - EmailSendRequest objects older than DATA_RETENTION_DAYS days
+    
+    Args:
+        limit: Optional limit on number of records to delete per type
+    """
+    from gmail.models import EmailMessage
+    from campaigns.models import EmailSendRequest
+    from django.conf import settings
+    from datetime import timedelta
+    
+    # Get retention period from settings
+    retention_days = getattr(settings, 'DATA_RETENTION_DAYS', 30)
+    cutoff_date = timezone.now() - timedelta(days=retention_days)
+    
+    logger.info(f"Starting garbage collection for records older than {retention_days} days (before {cutoff_date})")
+    
+    # Delete old EmailMessage records
+    old_email_messages = EmailMessage.objects.filter(received_at__lt=cutoff_date)
+    email_message_count = old_email_messages.count()
+    
+    if limit:
+        old_email_messages = old_email_messages[:limit]
+    
+    deleted_email_messages = old_email_messages.delete()[0]
+    logger.info(f"Deleted {deleted_email_messages} EmailMessage records (out of {email_message_count} total matching)")
+    
+    # Delete old EmailSendRequest records
+    old_send_requests = EmailSendRequest.objects.filter(created_at__lt=cutoff_date)
+    send_request_count = old_send_requests.count()
+    
+    if limit:
+        old_send_requests = old_send_requests[:limit]
+    
+    deleted_send_requests = old_send_requests.delete()[0]
+    logger.info(f"Deleted {deleted_send_requests} EmailSendRequest records (out of {send_request_count} total matching)")
+    
+    logger.info(f"Garbage collection complete:")
+    logger.info(f"  EmailMessage records deleted: {deleted_email_messages} (of {email_message_count} matching)")
+    logger.info(f"  EmailSendRequest records deleted: {deleted_send_requests} (of {send_request_count} matching)")
+
+
 def main():
     """Main entry point for the cron script."""
     # Re-parse arguments now that we have the full command line
@@ -1012,6 +1066,28 @@ def main():
                 sys.exit(0)
         else:
             crawl_imap(limit=args.limit)
+    elif args.command == 'garbage_collect':
+        if args.periodic:
+            logger.info(f"Starting periodic garbage collection (interval: {args.interval} seconds)")
+            try:
+                while True:
+                    try:
+                        logger.info(f"Running garbage collection cycle at {timezone.now()}")
+                        garbage_collect(limit=args.limit)
+                        logger.info(f"Completed garbage collection cycle. Sleeping for {args.interval} seconds...")
+                    except KeyboardInterrupt:
+                        logger.info("Received interrupt signal. Stopping periodic execution.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error in periodic garbage collection cycle: {str(e)}", exc_info=True)
+                        logger.info(f"Continuing despite error. Will retry in {args.interval} seconds...")
+                    
+                    time.sleep(args.interval)
+            except KeyboardInterrupt:
+                logger.info("Periodic garbage collection stopped by user")
+                sys.exit(0)
+        else:
+            garbage_collect(limit=args.limit)
     else:
         logger.error(f"Unknown command: {args.command}")
         print(__doc__)

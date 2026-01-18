@@ -1,0 +1,538 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block title %}{% trans "Emails" %} - {{ campaign.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">{{ campaign.name }}</h1>
+                <p class="text-gray-600 mt-1">{% trans "Email Queue and History" %}</p>
+            </div>
+            <a href="{% url 'campaigns:edit' campaign.id %}" 
+               class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                {% trans "Back to Campaign" %}
+            </a>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-white shadow rounded-lg mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8 px-6" aria-label="Tabs">
+                    <button onclick="switchTab('pending')" 
+                            class="tab-button border-b-2 border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 font-medium text-sm">
+                        {% trans "Pending Emails" %} ({{ pending_requests.count }})
+                    </button>
+                    <button onclick="switchTab('sent')" 
+                            class="tab-button border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 font-medium text-sm">
+                        {% trans "Sent Emails" %} ({{ sent_requests.count }})
+                    </button>
+                    <button onclick="switchTab('failed')" 
+                            class="tab-button border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 font-medium text-sm">
+                        {% trans "Failed Emails" %} ({{ failed_requests.count }})
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Pending Emails Tab -->
+        <div id="pending-tab" class="tab-content">
+            <div class="bg-white shadow rounded-lg overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-900">{% trans "Pending Emails" %}</h2>
+                    <p class="text-sm text-gray-600 mt-1">{% trans "Emails scheduled to be sent" %}</p>
+                </div>
+                
+                {% if pending_requests %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="w-8"></th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Subject" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Recipient" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Scheduled For" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Status" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Actions" %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for request in pending_requests %}
+                            <tr class="hover:bg-gray-50 cursor-pointer" onclick="toggleRow('pending-{{ forloop.counter }}')">
+                                <td class="px-6 py-4">
+                                    <button class="expand-btn text-gray-400 hover:text-gray-600">
+                                        <svg class="h-5 w-5 transform transition-transform" id="icon-pending-{{ forloop.counter }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ request.email.subject }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ request.subscriber_email }}</div>
+                                    {% if request.subscriber %}
+                                    <div class="text-xs text-gray-500">
+                                        {{ request.subscriber.first_name }} {{ request.subscriber.last_name }}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ request.scheduled_for|date:"M d, Y g:i A" }}
+                                    </div>
+                                    {% if request.scheduled_for > now %}
+                                    <div class="text-xs text-gray-500">
+                                        {% trans "In" %} {{ request.scheduled_for|timeuntil }}
+                                    </div>
+                                    {% else %}
+                                    <div class="text-xs text-orange-600">
+                                        {% trans "Overdue" %}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        {% trans "Pending" %}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button onclick="sendEmailNow('{{ request.id }}'); event.stopPropagation();" 
+                                            class="send-now-btn text-indigo-600 hover:text-indigo-900 font-medium">
+                                        {% trans "Send Now" %}
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr id="pending-{{ forloop.counter }}" class="hidden details-row bg-gray-50">
+                                <td colspan="6" class="px-6 py-4">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <!-- Email Details -->
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Email Details" %}</h4>
+                                            <dl class="space-y-2">
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Campaign" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.campaign.name }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Email Template" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.email.subject }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Wait Time" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.email.wait_time_display }}</dd>
+                                                </div>
+                                                {% if request.variables %}
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Variables" %}</dt>
+                                                    <dd class="text-sm text-gray-900">
+                                                        <pre class="text-xs bg-gray-100 p-2 rounded mt-1">{{ request.variables|safe }}</pre>
+                                                    </dd>
+                                                </div>
+                                                {% endif %}
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Created" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                        
+                                        <!-- Email Preview -->
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Email Preview" %}</h4>
+                                            <div class="border border-gray-200 rounded p-3 max-h-96 overflow-y-auto text-sm">
+                                                <div class="prose prose-sm max-w-none">
+                                                    {{ request.email.body_html|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="px-6 py-12 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">{% trans "No pending emails" %}</h3>
+                    <p class="mt-1 text-sm text-gray-500">{% trans "All emails have been sent or there are no scheduled emails." %}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sent Emails Tab -->
+        <div id="sent-tab" class="tab-content hidden">
+            <div class="bg-white shadow rounded-lg overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-900">{% trans "Sent Emails" %}</h2>
+                    <p class="text-sm text-gray-600 mt-1">{% trans "Successfully sent emails" %}</p>
+                </div>
+                
+                {% if sent_requests %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="w-8"></th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Subject" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Recipient" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Sent At" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Status" %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for request in sent_requests %}
+                            <tr class="hover:bg-gray-50 cursor-pointer" onclick="toggleRow('sent-{{ forloop.counter }}')">
+                                <td class="px-6 py-4">
+                                    <button class="expand-btn text-gray-400 hover:text-gray-600">
+                                        <svg class="h-5 w-5 transform transition-transform" id="icon-sent-{{ forloop.counter }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ request.email.subject }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ request.subscriber_email }}</div>
+                                    {% if request.subscriber %}
+                                    <div class="text-xs text-gray-500">
+                                        {{ request.subscriber.first_name }} {{ request.subscriber.last_name }}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        {{ request.sent_at|date:"M d, Y g:i A" }}
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                        {{ request.sent_at|timesince }} {% trans "ago" %}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        {% trans "Sent" %}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr id="sent-{{ forloop.counter }}" class="hidden details-row bg-gray-50">
+                                <td colspan="5" class="px-6 py-4">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <!-- Email Details -->
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Email Details" %}</h4>
+                                            <dl class="space-y-2">
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Campaign" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.campaign.name }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Email Template" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.email.subject }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Scheduled For" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.scheduled_for|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Actually Sent At" %}</dt>
+                                                    <ddw-8"></th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Subject" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Recipient" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Error" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Status" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Actions" %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for request in failed_requests %}
+                            <tr class="hover:bg-gray-50 cursor-pointer" onclick="toggleRow('failed-{{ forloop.counter }}')">
+                                <td class="px-6 py-4">
+                                    <button class="expand-btn text-gray-400 hover:text-gray-600">
+                                        <svg class="h-5 w-5 transform transition-transform" id="icon-failed-{{ forloop.counter }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ request.email.subject }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ request.subscriber_email }}</div>
+                                    {% if request.subscriber %}
+                                    <div class="text-xs text-gray-500">
+                                        {{ request.subscriber.first_name }} {{ request.subscriber.last_name }}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-red-600 max-w-md truncate" title="{{ request.error_message }}">
+                                        {{ request.error_message|default:"Unknown error" }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        {% trans "Failed" %}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button onclick="sendEmailNow('{{ request.id }}'); event.stopPropagation();" 
+                                            class="send-now-btn text-indigo-600 hover:text-indigo-900 font-medium">
+                                        {% trans "Retry" %}
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr id="failed-{{ forloop.counter }}" class="hidden details-row bg-gray-50">
+                                <td colspan="6" class="px-6 py-4">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <!-- Email Details -->
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Email Details" %}</h4>
+                                            <dl class="space-y-2">
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Campaign" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.campaign.name }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Email Template" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.email.subject }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Error Message" %}</dt>
+                                                    <dd class="text-sm text-red-600 break-words">{{ request.error_message|default:"Unknown error" }}</dd>
+                                                </div>
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Last Attempt" %}</dt>
+                                                    <dd class="text-sm text-gray-900">{{ request.updated_at|date:"M d, Y g:i A" }}</dd>
+                                                </div>
+                                                {% if request.variables %}
+                                                <div>
+                                                    <dt class="text-xs font-medium text-gray-500">{% trans "Variables" %}</dt>
+                                                    <dd class="text-sm text-gray-900">
+                                                        <pre class="text-xs bg-gray-100 p-2 rounded mt-1">{{ request.variables|safe }}</pre>
+                                                    </dd>
+                                                </div>
+         toggleRow(rowId) {
+    const detailsRow = document.getElementById(rowId);
+    const icon = document.getElementById('icon-' + rowId);
+    
+    if (detailsRow.classList.contains('hidden')) {
+        // Close all other open rows first
+        document.querySelectorAll('.details-row').forEach(row => {
+            if (!row.classList.contains('hidden')) {
+                row.classList.add('hidden');
+                // Reset all icons
+                document.querySelectorAll('[id^="icon-"]').forEach(ic => {
+                    ic.classList.remove('rotate-90');
+                });
+            }
+        });
+        
+        // Open this row
+        detailsRow.classList.remove('hidden');
+        icon.classList.add('rotate-90');
+    } else {
+        // Close this row
+        detailsRow.classList.add('hidden');
+        icon.classList.remove('rotate-90');
+    }
+}
+
+function                                        {% endif %}
+                                            </dl>
+                                        </div>
+                                        
+                                        <!-- Email Preview -->
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h4 class="text-sm font-semibold text-gray-900 mb-3">{% trans "Email Content" %}</h4>
+                                            <div class="border border-gray-200 rounded p-3 max-h-96 overflow-y-auto text-sm">
+                                                <div class="prose prose-sm max-w-none">
+                                                    {{ request.email.body_html|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </divsemibold text-gray-900">{% trans "Failed Emails" %}</h2>
+                    <p class="text-sm text-gray-600 mt-1">{% trans "Emails that failed to send" %}</p>
+                </div>
+                
+                {% if failed_requests %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Subject" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Recipient" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Error" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Status" %}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    {% trans "Actions" %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for request in failed_requests %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ request.email.subject }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ request.subscriber_email }}</div>
+                                    {% if request.subscriber %}
+                                    <div class="text-xs text-gray-500">
+                                        {{ request.subscriber.first_name }} {{ request.subscriber.last_name }}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-red-600 max-w-md truncate" title="{{ request.error_message }}">
+                                        {{ request.error_message|default:"Unknown error" }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        {% trans "Failed" %}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button onclick="sendEmailNow('{{ request.id }}')" 
+                                            class="send-now-btn text-indigo-600 hover:text-indigo-900 font-medium">
+                                        {% trans "Retry" %}
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="px-6 py-12 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">{% trans "No failed emails" %}</h3>
+                    <p class="mt-1 text-sm text-gray-500">{% trans "All emails were sent successfully." %}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function switchTab(tab) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    
+    // Remove active state from all buttons
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('border-indigo-500', 'text-indigo-600');
+        btn.classList.add('border-transparent', 'text-gray-500');
+    });
+    
+    // Show selected tab
+    document.getElementById(tab + '-tab').classList.remove('hidden');
+    
+    // Activate button
+    event.target.classList.remove('border-transparent', 'text-gray-500');
+    event.target.classList.add('border-indigo-500', 'text-indigo-600');
+}
+
+function sendEmailNow(requestId) {
+    if (!confirm('{% trans "Are you sure you want to send this email now?" %}')) {
+        return;
+    }
+    
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = '{% trans "Sending..." %}';
+    button.disabled = true;
+    
+    $.ajax({
+        url: '/api/campaigns/send-requests/' + requestId + '/send-now/',
+        type: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json'
+        },
+        success: function(response) {
+            // Show success message based on response
+            const successMsg = response.message || '{% trans "Email sent successfully!" %}';
+            alert(successMsg);
+            
+            // Reload page to update pending/sent lists and analytics
+            window.location.reload();
+        },
+        error: function(xhr) {
+            let errorMessage = '{% trans "Failed to send email" %}';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMessage = xhr.responseJSON.error;
+            }
+            alert(errorMessage);
+            button.textContent = originalText;
+            button.disabled = false;
+        }
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock %}

@@ -27,7 +27,7 @@ env = environ.Env(
     CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'),
     CELERY_RESULT_BACKEND=(str, 'django-db'),
     OLLAMA_BASE_URL=(str, 'http://localhost:11434'),
-    OLLAMA_MODEL=(str, 'llama3.1:8b'),
+    OLLAMA_MODEL=(str, 'llama3.2:1b'),
     OLLAMA_TIMEOUT=(int, 300),  # 5 minutes timeout for AI generation
     # Gmail/Google OAuth Configuration
     GOOGLE_CLIENT_ID=(str, ''),
@@ -361,7 +361,7 @@ SITE_URL = env('SITE_URL')
 # Model options:
 #   - llama3.2:1b (smallest, ~1.3GB RAM, fastest, good for limited memory)
 #   - llama3.2:3b (balanced, ~2.0GB RAM, better quality)
-#   - llama3.1:8b (largest, ~4.8GB RAM, best quality, requires more memory)
+#   - llama3.2:1b (small, ~1GB RAM, fast and efficient)
 # See docs/ai/ollama_remote_setup.md for setup instructions
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL')
 OLLAMA_MODEL = env('OLLAMA_MODEL')

@@ -5,7 +5,7 @@ This guide explains how to set up Ollama on a separate server and configure Djan
 ## Table of Contents
 
 1. [Installing Ollama on Remote Server](#installing-ollama-on-remote-server)
-2. [Installing the llama3.1:8b Model](#installing-the-llama318b-model)
+2. [Installing the llama3.2:1b Model](#installing-the-llama318b-model)
 3. [Configuring Ollama for Remote Access](#configuring-ollama-for-remote-access)
 4. [Getting the Server IP Address](#getting-the-server-ip-address)
 5. [Django Configuration](#django-configuration)
@@ -71,12 +71,12 @@ sudo systemctl start ollama
 
 ---
 
-## Installing the llama3.1:8b Model
+## Installing the llama3.2:1b Model
 
 1. **Pull the model:**
 
    ```bash
-   ollama pull llama3.1:8b
+   ollama pull llama3.2:1b
    ```
 
 2. **Verify the model is installed:**
@@ -85,11 +85,11 @@ sudo systemctl start ollama
    ollama list
    ```
 
-   You should see `llama3.1:8b` in the list.
+   You should see `llama3.2:1b` in the list.
 
 3. **Test the model:**
    ```bash
-   ollama run llama3.1:8b "Write a short email subject line about a product launch"
+   ollama run llama3.2:1b "Write a short email subject line about a product launch"
    ```
 
 ---
@@ -221,7 +221,7 @@ Add to `dripemails/settings.py`:
 ```python
 # Ollama Configuration for Local Development
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
 ```
 
 ### 2. Update `live.py` (Production Server)
@@ -231,7 +231,7 @@ Add to `dripemails/live.py`:
 ```python
 # Ollama Configuration for Production
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://YOUR_OLLAMA_SERVER_IP:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 Replace `YOUR_OLLAMA_SERVER_IP` with your actual Ollama server IP address.
@@ -245,7 +245,7 @@ from django.conf import settings
 
 # Ollama configuration from Django settings
 OLLAMA_BASE_URL = getattr(settings, 'OLLAMA_BASE_URL', 'http://localhost:11434')
-OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 ### 4. Environment Variables
@@ -254,14 +254,14 @@ OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', 'llama3.1:8b')
 
 ```bash
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 **Production Server (.env file):**
 
 ```bash
 OLLAMA_BASE_URL=http://192.168.1.100:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### 5. Example Configuration by Environment
@@ -291,7 +291,7 @@ print("Available models:", response.json())
 
 # Test generation
 payload = {
-    "model": "llama3.1:8b",
+    "model": "llama3.2:1b",
     "prompt": "Write a short email subject about a sale",
     "stream": False
 }
@@ -372,11 +372,11 @@ python test_ollama.py
 
 ### Model Not Found
 
-**Problem:** `model 'llama3.1:8b' not found`
+**Problem:** `model 'llama3.2:1b' not found`
 
 **Solutions:**
 
-1. Pull the model: `ollama pull llama3.1:8b`
+1. Pull the model: `ollama pull llama3.2:1b`
 2. Verify installation: `ollama list`
 3. Check exact model name in Django settings
 
@@ -411,7 +411,7 @@ sudo journalctl -u ollama -n 50 --no-pager
 
 **Solutions:**
 
-1. Use a smaller model: `ollama pull llama3.1:8b-instruct-q4_0`
+1. Use a smaller model: `ollama pull llama3.2:1b-instruct-q4_0`
 2. Increase server resources (RAM/CPU)
 3. Enable GPU acceleration if available
 4. Use caching for repeated requests
@@ -486,8 +486,8 @@ logger.info(f"Ollama request: model={OLLAMA_MODEL}, prompt_length={len(prompt)}"
 
 | Model                     | Size  | Speed  | Quality   | Use Case                 |
 | ------------------------- | ----- | ------ | --------- | ------------------------ |
-| llama3.1:8b               | 4.7GB | Medium | High      | Production (recommended) |
-| llama3.1:8b-instruct-q4_0 | 2.5GB | Fast   | Good      | High volume              |
+| llama3.2:1b               | 4.7GB | Medium | High      | Production (recommended) |
+| llama3.2:1b-instruct-q4_0 | 2.5GB | Fast   | Good      | High volume              |
 | llama3.1:70b              | 40GB  | Slow   | Excellent | Premium quality          |
 
 ### 2. Caching
@@ -538,7 +538,7 @@ def generate_email_async(campaign_id, subject, **kwargs):
 ```bash
 # Server Setup
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 OLLAMA_HOST=0.0.0.0:11434 ollama serve
 
 # Get IP Address

@@ -34,7 +34,7 @@ sudo systemctl restart ollama
 sudo ufw allow 11434/tcp
 
 # Install model
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 
 # Get server IP
 curl ifconfig.me
@@ -47,7 +47,7 @@ curl ifconfig.me
 ```python
 # Ollama Configuration
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://YOUR_SERVER_IP:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 **Local (`dripemails/settings.py`):**
@@ -55,7 +55,7 @@ OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
 ```python
 # Ollama Configuration
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
 ```
 
 **Environment Variables (`.env`):**
@@ -63,11 +63,11 @@ OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
 ```bash
 # Production
 OLLAMA_BASE_URL=http://192.168.1.100:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 
 # Local
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ### 3. Test Connection
@@ -91,7 +91,7 @@ Added Ollama configuration for local development:
 
 ```python
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
 ```
 
 ### 2. `dripemails/live.py`
@@ -100,7 +100,7 @@ Added Ollama configuration for production:
 
 ```python
 OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
-OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 ### 3. `campaigns/ai_utils.py`
@@ -111,7 +111,7 @@ Updated to use Django settings:
 from django.conf import settings
 
 OLLAMA_BASE_URL = getattr(settings, 'OLLAMA_BASE_URL', 'http://localhost:11434')
-OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', 'llama3.1:8b')
+OLLAMA_MODEL = getattr(settings, 'OLLAMA_MODEL', 'llama3.2:1b')
 ```
 
 ## 🌐 Deployment Scenarios

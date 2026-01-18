@@ -119,14 +119,14 @@ High-level overview of the complete setup. Covers:
 
    ```python
    OLLAMA_BASE_URL = env('OLLAMA_BASE_URL', default='http://localhost:11434')
-   OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.1:8b')
+   OLLAMA_MODEL = env('OLLAMA_MODEL', default='llama3.2:1b')
    ```
 
 2. **`dripemails/live.py`** (Production)
 
    ```python
    OLLAMA_BASE_URL = os.environ.get('OLLAMA_BASE_URL', 'http://localhost:11434')
-   OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.1:8b')
+   OLLAMA_MODEL = os.environ.get('OLLAMA_MODEL', 'llama3.2:1b')
    ```
 
 3. **`campaigns/ai_utils.py`** (AI Module)
@@ -140,7 +140,7 @@ Add to your `.env` file:
 
 ```bash
 OLLAMA_BASE_URL=http://localhost:11434  # or your server IP
-OLLAMA_MODEL=llama3.1:8b
+OLLAMA_MODEL=llama3.2:1b
 ```
 
 ---
@@ -158,7 +158,7 @@ Setup steps:
 
 - [ ] Install Ollama on target server
 - [ ] Configure for remote access (if needed)
-- [ ] Pull llama3.1:8b model
+- [ ] Pull llama3.2:1b model
 - [ ] Update Django settings
 - [ ] Add environment variables
 - [ ] Test connection
@@ -174,7 +174,7 @@ Setup steps:
 
 ### "Model not found"
 
-→ Run: `ollama pull llama3.1:8b`
+→ Run: `ollama pull llama3.2:1b`
 
 ### Slow responses
 

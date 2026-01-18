@@ -47,6 +47,7 @@ non_prefixed_urlpatterns = [
     path('api/campaigns/revise-email/', campaign_views.revise_email_with_ai, name='api-revise-email'),
     path('api/campaigns/<uuid:campaign_id>/stats/', campaign_views.campaign_stats_api, name='api-campaign-stats'),
     path('api/campaigns/search-templates/', campaign_views.search_templates, name='api-search-templates'),
+    path('api/email-send-requests/<uuid:request_id>/send/', campaign_views.send_pending_email, name='api-send-pending-email'),
     path('api/upload-contacts/', campaign_views.upload_contacts, name='api-upload-contacts'),
     # Analytics API endpoints (no language prefix needed)
     path('api/footers/create/', analytics_views.footer_create_api, name='api-footer-create'),

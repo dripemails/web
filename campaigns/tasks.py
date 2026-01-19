@@ -226,8 +226,18 @@ def _send_test_email_sync(email_id, test_email, variables=None):
         raise Exception(error_msg)
 
 
-def _send_single_email_sync(email_id, subscriber_email, variables=None, request_id=None):
-    """Send a single email synchronously (non-Celery version)."""
+def _send_single_email_sync(email_id, subscriber_email, variables=None, request_id=None, original_email_message=None):
+    """Send a single email synchronously (non-Celery version).
+    
+    Args:
+        email_id: ID of the campaign email template to send
+        subscriber_email: Email address of the subscriber to send to
+        variables: Dictionary of template variables to replace
+        request_id: Optional ID of EmailSendRequest
+        original_email_message: Optional EmailMessage object representing the original incoming email
+                               that triggered this auto-reply. If provided, its content will be
+                               appended to the sent email with a separator.
+    """
     from .models import Email, EmailEvent, EmailSendRequest
     request_obj = None
     if request_id:
@@ -293,6 +303,45 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # If we have HTML content but no text content, convert HTML to plain text
     if html_content and not text_content:
         text_content = _html_to_plain_text(html_content)
+    
+    # For auto-reply campaigns, append original incoming email content with separator
+    campaign_name_lower = email.campaign.name.lower() if email.campaign else ''
+    is_auto_reply = 'auto' in campaign_name_lower or 'reply' in campaign_name_lower
+    if is_auto_reply and original_email_message:
+        from django.utils import dateformat
+        import html
+        
+        # Format date for separator: "On Sun, Jan 18, 2026, 2:08 PM"
+        original_date = original_email_message.received_at
+        date_str = dateformat.format(original_date, 'D, M j, Y, g:i A')
+        
+        # Get original email sender
+        original_provider_data = original_email_message.provider_data or {}
+        original_from_email = original_email_message.from_email or ''
+        
+        # Format separator: "On [date] [email] wrote:"
+        separator_text = f"On {date_str} {original_from_email} wrote:"
+        separator_html = f'<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;"><p style="font-size: 12px; color: #666; margin-bottom: 10px;">{separator_text}</p>'
+        
+        # Get original email content - ALWAYS use text content, convert HTML to plain text if needed
+        original_body_text = original_email_message.body_text or ''
+        if not original_body_text and original_email_message.body_html:
+            # Convert HTML to plain text
+            original_body_text = _html_to_plain_text(original_email_message.body_html)
+        
+        # Convert plain text to HTML by escaping and preserving line breaks
+        escaped_text = html.escape(original_body_text)
+        # Convert line breaks to <br>
+        escaped_text = escaped_text.replace('\n', '<br>').replace('\r', '')
+        original_content_html = f'<div style="font-size: 13px; color: #333; line-height: 1.6;">{escaped_text}</div>'
+        
+        separator_html += original_content_html + '</div>'
+        
+        # Add separator and original content to HTML
+        html_content += separator_html
+        
+        # Add separator and original content to text
+        text_content += f"\n\n{separator_text}\n{original_body_text}"
     
     # Add email footer if one is assigned
     if email.footer:
@@ -509,6 +558,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
                             'recipient_name': recipient_name or subscriber_email,
                             'from_name': full_name or '',
                             'to_names': {subscriber_email: recipient_name or subscriber_email},
+                            'original_email_id': str(original_email_message.id) if original_email_message else None,  # Store original email ID for lookup
                         }
                     )
                     logger.info(f"✓ Created EmailMessage {sent_email_msg.id} for sent email to {subscriber_email} in {provider} campaign '{campaign.name}'")
@@ -659,8 +709,17 @@ def send_campaign_emails(campaign_id):
     logger.info(f"Scheduled first email of campaign {campaign.name} for {subscribers.count()} subscribers")
 
 
-def send_campaign_email(email_id, subscriber_id, variables=None):
-    """Send a specific campaign email to a specific subscriber."""
+def send_campaign_email(email_id, subscriber_id, variables=None, original_email_message=None):
+    """Send a specific campaign email to a specific subscriber.
+    
+    Args:
+        email_id: ID of the campaign email template to send
+        subscriber_id: ID of the subscriber to send to
+        variables: Dictionary of template variables to replace
+        original_email_message: Optional EmailMessage object representing the original incoming email
+                               that triggered this auto-reply. If provided, its content will be
+                               appended to the sent email with a separator.
+    """
     from .models import Email, EmailEvent
     from subscribers.models import Subscriber
     
@@ -757,6 +816,46 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
         footer_text = _html_to_plain_text(footer_html)
         if footer_text:
             text_content += f"\n\n{footer_text}"
+    
+    # For auto-reply campaigns, append original incoming email content with separator
+    campaign_name_lower = email.campaign.name.lower()
+    is_auto_reply = 'auto' in campaign_name_lower or 'reply' in campaign_name_lower
+    if is_auto_reply and original_email_message:
+        from django.utils import dateformat
+        
+        # Format date for separator: "On Sun, Jan 18, 2026, 2:08 PM"
+        original_date = original_email_message.received_at
+        date_str = dateformat.format(original_date, 'D, M j, Y, g:i A')
+        
+        # Get original email sender
+        original_provider_data = original_email_message.provider_data or {}
+        original_from_email = original_email_message.from_email or ''
+        original_from_name = original_provider_data.get('from_name', '') or original_provider_data.get('sender_name', '')
+        
+        # Format separator: "On [date] [email] wrote:"
+        separator_text = f"On {date_str} {original_from_email} wrote:"
+        separator_html = f'<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;"><p style="font-size: 12px; color: #666; margin-bottom: 10px;">{separator_text}</p>'
+        
+        # Get original email content - ALWAYS use text content, convert HTML to plain text if needed
+        original_body_text = original_email_message.body_text or ''
+        if not original_body_text and original_email_message.body_html:
+            # Convert HTML to plain text
+            original_body_text = _html_to_plain_text(original_email_message.body_html)
+        
+        # Convert plain text to HTML by escaping and preserving line breaks
+        import html
+        escaped_text = html.escape(original_body_text)
+        # Convert line breaks to <br>
+        escaped_text = escaped_text.replace('\n', '<br>').replace('\r', '')
+        original_content_html = f'<div style="font-size: 13px; color: #333; line-height: 1.6;">{escaped_text}</div>'
+        
+        separator_html += original_content_html + '</div>'
+        
+        # Add separator and original content to HTML
+        html_content += separator_html
+        
+        # Add separator and original content to text
+        text_content += f"\n\n{separator_text}\n{original_body_text}"
     
     # Add ads if required
     if show_ads:
@@ -915,6 +1014,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None):
                             'recipient_name': f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email,
                             'from_name': user_profile.full_name or '',
                             'to_names': {subscriber.email: f"{subscriber.first_name} {subscriber.last_name}".strip() or subscriber.email},
+                            'original_email_id': str(original_email_message.id) if original_email_message else None,  # Store original email ID for lookup
                         }
                     )
                     logger.info(f"✓ Created EmailMessage {sent_email_msg.id} for sent email to {subscriber.email} in {provider} campaign '{campaign.name}'")

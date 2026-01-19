@@ -625,10 +625,17 @@ def imap_emails(request):
                 '[gmail]/sent' in folder.lower()
             )
             
+            # Initialize original_email variable
+            original_email = None
+            
             if is_sent_email:
                 # For sent emails, recipient is in To header
+                # But for emails created by send_campaign_email, use recipient_email from provider_data
+                recipient_email = provider_data.get('recipient_email', '')
+                if not recipient_email and email.to_emails_list:
+                    recipient_email = email.to_emails_list[0]
+                
                 to_names = provider_data.get('to_names', {})
-                recipient_email = email.to_emails_list[0] if email.to_emails_list else ''
                 recipient_name = to_names.get(recipient_email, '') if recipient_email and recipient_email in to_names else ''
                 
                 # Parse name into first_name and last_name
@@ -639,6 +646,56 @@ def imap_emails(request):
                 # Fallback to email prefix if no name found
                 if not first_name and recipient_email:
                     first_name = recipient_email.split('@')[0].split('.')[0].title()
+                
+                # For sent emails created by send_campaign_email, use recipient_email as the to_emails
+                # Filter out the user's own email from to_emails if it's there
+                display_to_emails = email.to_emails_list.copy() if email.to_emails_list else []
+                if recipient_email and recipient_email not in display_to_emails:
+                    # If recipient_email is not in to_emails_list, use it as the primary recipient
+                    display_to_emails = [recipient_email]
+                else:
+                    # Filter out user's own email from the list
+                    display_to_emails = [e for e in display_to_emails if e.lower() != user_email]
+                    # If we filtered everything out but have recipient_email, use that
+                    if not display_to_emails and recipient_email:
+                        display_to_emails = [recipient_email]
+                
+                # Look up the original incoming email that triggered this auto-reply
+                # First try to use stored original_email_id from provider_data (most reliable)
+                original_email = None
+                original_email_id = provider_data.get('original_email_id')
+                if original_email_id:
+                    try:
+                        original_email = EmailMessage.objects.filter(
+                            id=original_email_id,
+                            credential=credential
+                        ).first()
+                    except Exception:
+                        pass
+                
+                # Fallback: Match by recipient_email = from_email of incoming email, same credential, received before sent email
+                if not original_email and recipient_email and email.campaign_email:
+                    original_email = EmailMessage.objects.filter(
+                        credential=credential,
+                        provider=EmailProvider.IMAP,
+                        from_email__iexact=recipient_email,
+                        received_at__lt=email.received_at,
+                        processed=True
+                    ).order_by('-received_at').first()
+                    
+                    # If not found, try matching by subject (removing "Re: " prefix)
+                    if not original_email:
+                        subject_match = email.subject
+                        if subject_match.startswith('Re: '):
+                            subject_match = subject_match[4:]
+                        original_email = EmailMessage.objects.filter(
+                            credential=credential,
+                            provider=EmailProvider.IMAP,
+                            from_email__iexact=recipient_email,
+                            subject__icontains=subject_match,
+                            received_at__lt=email.received_at,
+                            processed=True
+                        ).order_by('-received_at').first()
             else:
                 # For inbox emails, recipient is in From/Sender header
                 recipient_email = email.from_email
@@ -652,12 +709,28 @@ def imap_emails(request):
                 # Fallback to email prefix if no name found
                 if not first_name:
                     first_name = recipient_email.split('@')[0].split('.')[0].title()
+                
+                display_to_emails = email.to_emails_list
+            
+            # Prepare original email data if available
+            original_email_data = None
+            if is_sent_email and original_email:
+                original_provider_data = original_email.provider_data or {}
+                original_email_data = {
+                    'id': str(original_email.id),
+                    'subject': original_email.subject,
+                    'from_email': original_email.from_email,
+                    'from_name': original_provider_data.get('from_name', '') or original_provider_data.get('sender_name', ''),
+                    'body_text': original_email.body_text or '',
+                    'body_html': original_email.body_html or '',
+                    'received_at': original_email.received_at.isoformat(),
+                }
             
             email_data.append({
                 'id': str(email.id),
                 'subject': email.subject,
                 'from_email': email.from_email,
-                'to_emails': email.to_emails_list,
+                'to_emails': display_to_emails,
                 'cc_emails': email.cc_emails_list,
                 'sender_email': email.sender_email,
                 'body_text': email.body_text[:500] if email.body_text else '',
@@ -668,6 +741,7 @@ def imap_emails(request):
                 'campaign_email_subject': email.campaign_email.subject if email.campaign_email else None,
                 'campaign_email_body_html': email.campaign_email.body_html if email.campaign_email else None,
                 'campaign_email_body_text': email.campaign_email.body_text if email.campaign_email else None,
+                'original_email': original_email_data,  # Original incoming email that triggered the reply
                 # Template variables for replacement
                 'template_variables': {
                     'first_name': first_name,

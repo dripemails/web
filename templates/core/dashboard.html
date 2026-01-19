@@ -2061,6 +2061,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
         const repliedText = '{% trans "Replied" %}';
         const toText = '{% trans "To:" %}';
+        const autoReplyToText = '{% trans "Auto Reply To:" %}';
         const fromText = '{% trans "From:" %}';
         const ccText = '{% trans "Cc:" %}';
         const senderText = '{% trans "Sender:" %}';
@@ -2073,6 +2074,17 @@ document.addEventListener('DOMContentLoaded', function() {
         imapPagination = pagination;
         if (pagination) {
             currentIMAPPage = pagination.page;
+        }
+        
+        // Capture currently expanded email IDs before re-rendering
+        const expandedEmailIds = new Set();
+        if (imapEmailsList) {
+            const previewDivs = imapEmailsList.querySelectorAll('[id^="imap-preview-"]');
+            previewDivs.forEach(div => {
+                if (!div.classList.contains('hidden')) {
+                    expandedEmailIds.add(div.id);
+                }
+            });
         }
         
         if (!emails || emails.length === 0) {
@@ -2195,7 +2207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                                         </svg>
-                                                        ${toText}
+                                                        ${autoReplyToText}
                                                     </span>
                                                     <div class="flex-1">
                                                         <div class="flex flex-wrap gap-2">
@@ -2320,8 +2332,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="pt-3 border-t border-gray-200">
                                             <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
                                             ${(() => {
+                                                // Use original_email data if available (for sent auto-replies), otherwise use current email
+                                                const origEmail = email.original_email || email;
+                                                const origReceivedAt = origEmail.received_at || email.received_at;
+                                                
                                                 // Format date for separator
-                                                const date = new Date(email.received_at);
+                                                const date = new Date(origReceivedAt);
                                                 const dateStr = date.toLocaleString('en-US', { 
                                                     weekday: 'short',
                                                     month: 'short', 
@@ -2330,14 +2346,31 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     hour: 'numeric',
                                                     minute: '2-digit'
                                                 });
-                                                // Use display name if available, otherwise use email
-                                                const fromName = email.from_display_name || email.from_email || 'Unknown';
-                                                const fromEmail = email.from_email || '';
-                                                const separator = `On ${dateStr} ${fromName} <${fromEmail}> wrote:`;
+                                                // Use original email's from_email for sent emails, otherwise use display name
+                                                const fromEmail = origEmail.from_email || email.from_email || '';
+                                                const fromName = origEmail.from_name || origEmail.from_email || fromEmail || 'Unknown';
+                                                
+                                                // For sent emails, show recipient email (who originally emailed us)
+                                                // Format: "On [date] [email] wrote:"
+                                                const separatorEmail = isSentEmail && email.to_emails && email.to_emails.length > 0 
+                                                    ? email.to_emails[0] 
+                                                    : fromEmail;
+                                                
+                                                const separator = `On ${dateStr} ${separatorEmail} wrote:`;
+                                                
+                                                // Get original email content - ALWAYS use text content, convert HTML to plain text if needed
+                                                let originalContent = origEmail.body_text || '';
+                                                if (!originalContent && origEmail.body_html) {
+                                                    // Convert HTML to plain text for better display
+                                                    const tmp = document.createElement('div');
+                                                    tmp.innerHTML = origEmail.body_html;
+                                                    originalContent = tmp.textContent || tmp.innerText || '';
+                                                }
+                                                originalContent = originalContent || noContentText;
                                                 
                                                 return `
                                                     <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
-                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${originalContent}</div>
                                                 `;
                                             })()}
                                         </div>
@@ -2366,6 +2399,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         imapEmailsList.innerHTML = html;
+        
+        // Restore expanded state for emails that were expanded before refresh
+        expandedEmailIds.forEach(previewId => {
+            const previewDiv = document.getElementById(previewId);
+            const icon = document.getElementById(previewId + '-icon');
+            if (previewDiv && icon) {
+                previewDiv.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                // Also update the parent container background to match expanded state
+                const parent = previewDiv.closest('.border-b');
+                if (parent) {
+                    const isSentEmail = parent.classList.contains('border-green-100');
+                    if (isSentEmail) {
+                        parent.classList.add('bg-green-50/40');
+                        parent.classList.remove('hover:bg-green-50/30');
+                    } else {
+                        parent.classList.add('bg-indigo-50/30');
+                        parent.classList.remove('hover:bg-gray-50/50');
+                    }
+                }
+            }
+        });
         
         // Render pagination if available
         if (pagination && pagination.total_pages > 1) {

@@ -565,7 +565,8 @@ def process_gmail_emails(limit=None):
                             send_campaign_email(
                                 str(campaign_email.id),
                                 str(subscriber.id),
-                                variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject}
+                                variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject},
+                                original_email_message=email_msg  # Pass the original incoming email message
                             )
                             total_sent += 1
                             logger.info(f"Sent auto-reply to {recipient_email} for Gmail message {email_msg.id}")
@@ -851,7 +852,8 @@ def crawl_imap(limit=None):
                                     'first_name': subscriber.first_name or first_name,
                                     'last_name': subscriber.last_name or last_name,
                                     'subject': email_msg.subject
-                                }
+                                },
+                                original_email_message=email_msg  # Pass the original incoming email message
                             )
                             total_sent += 1
                             logger.info(f"      ✓ Successfully sent auto-reply to {recipient_email} ({first_name}) for IMAP message {email_msg.id} from folder {folder}")

@@ -1759,15 +1759,37 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 const fromEmail = email.from_email || '';
                                                 const separator = `On ${dateStr} ${fromName} <${fromEmail}> wrote:`;
                                                 
+                                                // Strip ALL HTML tags including style/link/script to prevent page styling issues
+                                                let gmailContent = email.body_text || '';
+                                                if (!gmailContent && email.body_html) {
+                                                    gmailContent = stripAllHTML(email.body_html);
+                                                }
+                                                // Double-check: if content still has HTML tags, strip them again
+                                                if (gmailContent && /<[^>]+>/.test(gmailContent)) {
+                                                    gmailContent = stripAllHTML(gmailContent);
+                                                }
+                                                gmailContent = gmailContent || noContentText;
+                                                
                                                 return `
                                                     <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
-                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${gmailContent}</div>
                                                 `;
                                             })()}
                                     </div>
                                 </div>
                             ` : `
-                                <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${email.body_text || (email.body_html ? email.body_html.replace(/<[^>]*>/g, '') : '') || noContentText}</div>
+                                ${(() => {
+                                    // Strip ALL HTML tags including style/link/script to prevent page styling issues
+                                    let gmailContent = email.body_text || '';
+                                    if (!gmailContent && email.body_html) {
+                                        gmailContent = stripAllHTML(email.body_html);
+                                    }
+                                    // Double-check: if content still has HTML tags, strip them again
+                                    if (gmailContent && /<[^>]+>/.test(gmailContent)) {
+                                        gmailContent = stripAllHTML(gmailContent);
+                                    }
+                                    return `<div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${gmailContent || noContentText}</div>`;
+                                })()}
                             `}
                         </div>
                     </div>
@@ -2077,6 +2099,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Helper function to strip ALL HTML tags and content, including style/link/script tags
+    // This prevents HTML styling from affecting the page layout
+    function stripAllHTML(htmlContent) {
+        if (!htmlContent) return '';
+        
+        // First, remove script and style tags with their content
+        let cleaned = htmlContent
+            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+            .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+            .replace(/<link\b[^>]*>/gi, '')
+            .replace(/<\/?link\b[^>]*>/gi, '');
+        
+        // Create a temporary element in a sandbox (won't affect page)
+        // Use DOMParser which doesn't execute scripts/styles
+        try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(cleaned, 'text/html');
+            // Get text content only - this strips all HTML tags
+            let text = doc.body.textContent || doc.body.innerText || '';
+            // Clean up whitespace
+            text = text.replace(/\s+/g, ' ').trim();
+            return text;
+        } catch (e) {
+            // Fallback: use regex to remove all HTML tags
+            return cleaned
+                .replace(/<[^>]+>/g, '') // Remove all HTML tags
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+    }
+    
     function renderIMAPEmails(emails, pagination) {
         const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
         const repliedText = '{% trans "Replied" %}';
@@ -2363,13 +2422,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 
                                                 const separator = `On ${dateStr} ${separatorEmail} wrote:`;
                                                 
-                                                // Get original email content - ALWAYS use text content, convert HTML to plain text if needed
+                                                // Get original email content - ALWAYS use text content, strip ALL HTML tags
                                                 let originalContent = origEmail.body_text || '';
                                                 if (!originalContent && origEmail.body_html) {
-                                                    // Convert HTML to plain text for better display
-                                                    const tmp = document.createElement('div');
-                                                    tmp.innerHTML = origEmail.body_html;
-                                                    originalContent = tmp.textContent || tmp.innerText || '';
+                                                    // Strip ALL HTML tags including style/link/script to prevent page styling issues
+                                                    originalContent = stripAllHTML(origEmail.body_html);
+                                                }
+                                                // Double-check: if originalContent still has HTML tags, strip them again
+                                                if (originalContent && /<[^>]+>/.test(originalContent)) {
+                                                    originalContent = stripAllHTML(originalContent);
                                                 }
                                                 originalContent = originalContent || noContentText;
                                                 
@@ -2386,10 +2447,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                             ${(() => {
                                                 let content = email.body_text || '';
                                                 if (!content && email.body_html) {
-                                                    // Convert HTML to plain text for better display
-                                                    const tmp = document.createElement('div');
-                                                    tmp.innerHTML = email.body_html;
-                                                    content = tmp.textContent || tmp.innerText || '';
+                                                    // Strip ALL HTML tags including style/link/script to prevent page styling issues
+                                                    content = stripAllHTML(email.body_html);
+                                                }
+                                                // Double-check: if content still has HTML tags, strip them again
+                                                if (content && /<[^>]+>/.test(content)) {
+                                                    content = stripAllHTML(content);
                                                 }
                                                 return content || `<span class="text-gray-400 italic">${noContentText}</span>`;
                                             })()}

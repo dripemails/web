@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.http import HttpResponseRedirect
 from django.conf import settings
@@ -9,6 +10,7 @@ from campaigns import views as campaign_views
 from analytics import views as analytics_views
 from subscribers import views as subscriber_views
 from core import views as core_views
+from core.sitemaps import StaticViewSitemap, BlogPostSitemap
 
 def api_docs_redirect(request):
     """Redirect /api/docs/ to /resources/api-reference/."""
@@ -23,10 +25,20 @@ def api_docs_redirect(request):
         prefix = f'/{lang}' if lang else ''
         return HttpResponseRedirect(f'{prefix}/resources/api-reference/')
 
+# Sitemaps configuration (for Google Search Console)
+sitemaps = {
+    "static": StaticViewSitemap,
+    "blog": BlogPostSitemap,
+}
+
+
 # URL patterns that should NOT be prefixed with a language code
 non_prefixed_urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')), # Provides 'set_language'
+    # XML sitemap for SEO (used by Google Search Console and others)
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+
     # Redirect /api/docs/ to /resources/api-reference/
     path('api/docs/', api_docs_redirect, name='api-docs-redirect'),
     path('api/docs', api_docs_redirect, name='api-docs-redirect-no-slash'),

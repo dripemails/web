@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-04 14:16-0600\n"
+"POT-Creation-Date: 2026-01-21 02:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\analytics\models.py:8 .\analytics\models.py:36 .\campaigns\models.py:143
-#: .\subscribers\models.py:10 .\subscribers\models.py:76
+#: .\analytics\models.py:8 .\analytics\models.py:40 .\campaigns\models.py:145
+#: .\gmail\models.py:18 .\gmail\models.py:70 .\subscribers\models.py:10
+#: .\subscribers\models.py:76
 msgid "User"
 msgstr "Felhasználó"
 
@@ -47,228 +48,260 @@ msgstr "Egyéni lábléc HTML e-mailekhez"
 msgid "Time Zone"
 msgstr "Időzóna"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
-#: .\templates\core\settings.html:45
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:779
+#: .\templates\core\settings.html:56
+#, fuzzy
+#| msgid "Full name"
+msgid "Full Name"
+msgstr "Teljes név"
+
+#: .\analytics\models.py:15
+msgid "Full name to use in email From header"
+msgstr "Az e-mail Feladó fejlécében használandó teljes név"
+
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:784
+#: .\templates\core\settings.html:61
 msgid "Address Line 1"
 msgstr "Cím 1. sora"
 
-#: .\analytics\models.py:15
+#: .\analytics\models.py:17
 msgid "Street address"
 msgstr "Cím"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Address Line 2"
 msgstr "2. címsor"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Apartman, lakosztály stb. (opcionális)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
-#: .\templates\core\settings.html:54
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:793
+#: .\templates\core\settings.html:70
 msgid "City"
 msgstr "Város"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
-#: .\templates\core\settings.html:58
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:797
+#: .\templates\core\settings.html:74
 msgid "State/Province"
 msgstr "állam/tartomány"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
-#: .\templates\core\settings.html:64
+#: .\analytics\models.py:21 .\templates\core\dashboard.html:803
+#: .\templates\core\settings.html:80
 msgid "Postal Code"
 msgstr "Irányítószám"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
-#: .\templates\core\settings.html:68
+#: .\analytics\models.py:22 .\templates\core\dashboard.html:807
+#: .\templates\core\settings.html:84
 msgid "Country"
 msgstr "Ország"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "SPF Verified"
 msgstr "SPF ellenőrzött"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "Whether the user has a valid SPF record"
 msgstr "A felhasználónak van-e érvényes SPF rekordja"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "SPF Last Checked"
 msgstr "SPF utolsó ellenőrzése"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "Last time SPF record was checked"
 msgstr "Az SPF rekord legutóbbi ellenőrzése"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "SPF Record"
 msgstr "SPF rekord"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "The SPF record found for the user's domain"
 msgstr "A felhasználó tartományához talált SPF rekord"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "SPF Missing Includes"
 msgstr "SPF hiányzik, tartalmazza"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "List of missing required SPF includes"
 msgstr "A hiányzó szükséges SPF listája tartalmazza"
 
-#: .\analytics\models.py:28
+#: .\analytics\models.py:29
+msgid "Auto BCC Enabled"
+msgstr "Automatikus BCC engedélyezve"
+
+#: .\analytics\models.py:29
+#, fuzzy
+#| msgid "Automatically scheduled 2 days after Email 1 is sent"
+msgid "Automatically BCC this email address whenever a new email is sent"
+msgstr "Automatikusan ütemezve 2 nappal az 1. e-mail elküldése után"
+
+#: .\analytics\models.py:32
 msgid "User Profile"
 msgstr "Felhasználói profil"
 
-#: .\analytics\models.py:29
+#: .\analytics\models.py:33
 msgid "User Profiles"
 msgstr "Felhasználói profilok"
 
-#: .\analytics\models.py:32
+#: .\analytics\models.py:36
 #, python-format
 msgid "Profile for %(username)s"
 msgstr "%(username)s profilja"
 
-#: .\analytics\models.py:37 .\campaigns\models.py:20
+#: .\analytics\models.py:41 .\campaigns\models.py:21
 #: .\subscribers\models.py:11 .\subscribers\models.py:77
 #: .\templates\subscribers\list.html:76
 msgid "Name"
 msgstr "Név"
 
-#: .\analytics\models.py:38
+#: .\analytics\models.py:42
 msgid "HTML Content"
 msgstr "HTML tartalom"
 
-#: .\analytics\models.py:39
+#: .\analytics\models.py:43
 msgid "Is Default"
 msgstr "Alapértelmezett"
 
-#: .\analytics\models.py:40 .\campaigns\models.py:25 .\campaigns\models.py:74
-#: .\campaigns\models.py:121 .\campaigns\models.py:153
-#: .\campaigns\models.py:183 .\subscribers\models.py:14
+#: .\analytics\models.py:44 .\campaigns\models.py:26 .\campaigns\models.py:75
+#: .\campaigns\models.py:123 .\campaigns\models.py:155
+#: .\campaigns\models.py:185 .\gmail\models.py:42 .\subscribers\models.py:14
 #: .\subscribers\models.py:53
 msgid "Created At"
 msgstr "Létrehozva:"
 
-#: .\analytics\models.py:41 .\campaigns\models.py:26 .\campaigns\models.py:75
-#: .\campaigns\models.py:154 .\campaigns\models.py:184
+#: .\analytics\models.py:45 .\campaigns\models.py:27 .\campaigns\models.py:76
+#: .\campaigns\models.py:156 .\campaigns\models.py:186 .\gmail\models.py:43
 #: .\subscribers\models.py:15 .\subscribers\models.py:54
 msgid "Updated At"
 msgstr "Frissítve:"
 
-#: .\analytics\models.py:44 .\templates\campaigns\drafts.html:216
-#: .\templates\campaigns\template.html:148
+#: .\analytics\models.py:48 .\templates\campaigns\drafts.html:216
+#: .\templates\campaigns\template.html:178
 msgid "Email Footer"
 msgstr "E-mail lábléc"
 
-#: .\analytics\models.py:45 .\templates\analytics\footer_list.html:4
+#: .\analytics\models.py:49 .\templates\analytics\footer_list.html:4
 #: .\templates\analytics\footer_list.html:12
 msgid "Email Footers"
 msgstr "E-mail láblécek"
 
-#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:485 .\templates\campaigns\template.html:1402
 msgid "API key regenerated successfully!"
 msgstr "Az API-kulcs sikeresen újragenerálva!"
 
-#: .\analytics\views.py:426 .\analytics\views.py:463
-#: .\templates\campaigns\template.html:1187
+#: .\analytics\views.py:514 .\analytics\views.py:551
+#: .\templates\campaigns\template.html:1499
 msgid "Footer created successfully!"
 msgstr "A lábléc sikeresen létrehozva!"
 
-#: .\analytics\views.py:429 .\analytics\views.py:488
+#: .\analytics\views.py:517 .\analytics\views.py:576
 msgid "Please provide both name and content."
 msgstr "Kérjük, adja meg a nevet és a tartalmat is."
 
-#: .\analytics\views.py:448
+#: .\analytics\views.py:536
 msgid "Footer name is required"
 msgstr "A lábléc neve kötelező"
 
-#: .\analytics\views.py:451
+#: .\analytics\views.py:539
 msgid "Footer content is required"
 msgstr "A lábléc tartalma kötelező"
 
-#: .\analytics\views.py:485
+#: .\analytics\views.py:573
 msgid "Footer updated successfully!"
 msgstr "A lábléc sikeresen frissítve!"
 
-#: .\analytics\views.py:503
+#: .\analytics\views.py:591
 msgid "Footer deleted successfully!"
 msgstr "A lábléc sikeresen törölve!"
 
-#: .\analytics\views.py:517
+#: .\analytics\views.py:605
 msgid "Default footer updated successfully!"
 msgstr "Az alapértelmezett lábléc sikeresen frissítve!"
 
-#: .\campaigns\models.py:11 .\campaigns\views.py:462
+#: .\campaigns\models.py:11 .\campaigns\views.py:526
+#, fuzzy
+#| msgid "In seconds"
+msgid "Seconds"
+msgstr "Másodpercek alatt"
+
+#: .\campaigns\models.py:12 .\campaigns\views.py:527
 #: .\templates\campaigns\drafts.html:203
 #: .\templates\core\feature_email_scheduling.html:66
 msgid "Minutes"
 msgstr "Jegyzőkönyv"
 
-#: .\campaigns\models.py:12 .\campaigns\views.py:463
+#: .\campaigns\models.py:13 .\campaigns\views.py:528
 #: .\templates\campaigns\drafts.html:204
 #: .\templates\core\feature_email_scheduling.html:67
 msgid "Hours"
 msgstr "Órák"
 
-#: .\campaigns\models.py:13 .\campaigns\views.py:464
+#: .\campaigns\models.py:14 .\campaigns\views.py:529
 #: .\templates\campaigns\drafts.html:205
 #: .\templates\core\feature_email_scheduling.html:68
 msgid "Days"
 msgstr "Napok"
 
-#: .\campaigns\models.py:14 .\campaigns\views.py:465
+#: .\campaigns\models.py:15 .\campaigns\views.py:530
 #: .\templates\campaigns\drafts.html:206
 #: .\templates\core\feature_email_scheduling.html:69
 msgid "Weeks"
 msgstr "Hetek"
 
-#: .\campaigns\models.py:15 .\campaigns\views.py:466
+#: .\campaigns\models.py:16 .\campaigns\views.py:531
 #: .\templates\campaigns\drafts.html:207
 #: .\templates\core\feature_email_scheduling.html:70
 msgid "Months"
 msgstr "Hónapok"
 
-#: .\campaigns\models.py:21 .\subscribers\models.py:12
+#: .\campaigns\models.py:22 .\subscribers\models.py:12
 #: .\templates\campaigns\campaign_edit_page.html:12
-#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:35
+#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:60
 msgid "Description"
 msgstr "Leírás"
 
-#: .\campaigns\models.py:23 .\templates\campaigns\campaign_edit_page.html:13
-#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:41
+#: .\campaigns\models.py:24 .\templates\campaigns\campaign_edit_page.html:13
+#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:66
 msgid "Subscriber List"
 msgstr "Előfizetői lista"
 
-#: .\campaigns\models.py:24 .\subscribers\models.py:49
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
-#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
+#: .\campaigns\models.py:25 .\gmail\models.py:35 .\subscribers\models.py:49
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:16
+#: .\templates\campaigns\template.html:93
+#: .\templates\campaigns\template.html:331 .\templates\core\dashboard.html:545
+#: .\templates\core\dashboard.html:603 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktív"
 
-#: .\campaigns\models.py:27
+#: .\campaigns\models.py:28
 msgid "Sent Count"
 msgstr "Elküldött gróf"
 
-#: .\campaigns\models.py:28
+#: .\campaigns\models.py:29
 msgid "Open Count"
 msgstr "Nyitott szám"
 
-#: .\campaigns\models.py:29
+#: .\campaigns\models.py:30
 msgid "Click Count"
 msgstr "Kattintson a Számlálás gombra"
 
-#: .\campaigns\models.py:32 .\campaigns\models.py:66 .\campaigns\models.py:144
-#: .\templates\campaigns\campaign_analysis.html:19
-#: .\templates\campaigns\template.html:293
+#: .\campaigns\models.py:33 .\campaigns\models.py:67 .\campaigns\models.py:146
+#: .\templates\analytics\dashboard.html:116
+#: .\templates\campaigns\campaign_analysis.html:23
+#: .\templates\campaigns\campaign_emails.html:128
+#: .\templates\campaigns\campaign_emails.html:253
+#: .\templates\campaigns\campaign_emails.html:330
+#: .\templates\campaigns\template.html:326
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:395 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kampány"
 
-#: .\campaigns\models.py:33 .\templates\base.html:369
-#: .\templates\core\dashboard.html:77
+#: .\campaigns\models.py:34 .\templates\analytics\dashboard.html:94
+#: .\templates\base.html:370 .\templates\core\dashboard.html:218
 #: .\templates\core\feature_drip_campaigns.html:35
 #: .\templates\core\resource_api_reference.html:93
 #: .\templates\core\resource_api_reference.html:140
@@ -278,48 +311,54 @@ msgstr "Kampány"
 msgid "Campaigns"
 msgstr "Kampányok"
 
-#: .\campaigns\models.py:67 .\templates\campaigns\campaign_analysis.html:147
+#: .\campaigns\models.py:68 .\gmail\models.py:79
+#: .\templates\campaigns\campaign_analysis.html:151
+#: .\templates\campaigns\campaign_emails.html:57
+#: .\templates\campaigns\campaign_emails.html:197
+#: .\templates\campaigns\campaign_emails.html:268
+#: .\templates\campaigns\campaign_emails.html:401
 #: .\templates\core\contact.html:35
 msgid "Subject"
 msgstr "Téma"
 
-#: .\campaigns\models.py:68
+#: .\campaigns\models.py:69
 msgid "HTML Body"
 msgstr "HTML törzs"
 
-#: .\campaigns\models.py:69
+#: .\campaigns\models.py:70
 msgid "Text Body"
 msgstr "Szövegtörzs"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:197
-#: .\templates\campaigns\template.html:91
+#: .\campaigns\models.py:71 .\templates\campaigns\campaign_emails.html:136
+#: .\templates\campaigns\drafts.html:197
+#: .\templates\campaigns\template.html:118
 #: .\templates\core\feature_email_scheduling.html:63
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Time"
 msgstr "Várj Idő"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:211
+#: .\campaigns\models.py:71 .\templates\campaigns\drafts.html:211
 msgid "Time to wait before sending this email"
 msgstr "Ideje várni, mielőtt elküldi ezt az e-mailt"
 
-#: .\campaigns\models.py:71 .\templates\core\feature_email_scheduling.html:64
+#: .\campaigns\models.py:72 .\templates\core\feature_email_scheduling.html:64
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Unit"
 msgstr "Várj egység"
 
-#: .\campaigns\models.py:72 .\templates\campaigns\campaign_edit_page.html:39
+#: .\campaigns\models.py:73 .\templates\campaigns\campaign_edit_page.html:39
 #: .\templates\core\feature_email_scheduling.html:73
 #: .\templates\core\feature_email_templates.html:65
 msgid "Order"
 msgstr "Rendelés"
 
-#: .\campaigns\models.py:73
+#: .\campaigns\models.py:74
 msgid "Footer"
 msgstr "Lábléc"
 
-#: .\campaigns\models.py:79 .\campaigns\models.py:115
-#: .\campaigns\models.py:145 .\campaigns\models.py:169
-#: .\subscribers\models.py:45 .\templates\base.html:414
+#: .\campaigns\models.py:80 .\campaigns\models.py:117
+#: .\campaigns\models.py:147 .\campaigns\models.py:171
+#: .\subscribers\models.py:45 .\templates\base.html:415
 #: .\templates\campaigns\email_analysis.html:215
 #: .\templates\campaigns\email_analysis.html:399
 #: .\templates\campaigns\template_revision.html:48
@@ -328,231 +367,259 @@ msgstr "Lábléc"
 msgid "Email"
 msgstr "Email"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
+#: .\campaigns\models.py:81 .\templates\campaigns\campaign_emails.html:5
+#: .\templates\core\dashboard.html:526
 msgid "Emails"
 msgstr "E-mailek"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "second"
+msgstr "Másodpercek alatt"
+
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "seconds"
+msgstr "Másodpercek alatt"
+
+#: .\campaigns\models.py:91
 msgid "minute"
 msgstr "perc"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:91
 msgid "minutes"
 msgstr "jegyzőkönyv"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hour"
 msgstr "óra"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hours"
 msgstr "óra"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "day"
 msgstr "nap"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "days"
 msgstr "napokon"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "week"
 msgstr "hét"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "weeks"
 msgstr "hét"
 
-#: .\campaigns\models.py:93 .\templates\core\pricing.html:20
+#: .\campaigns\models.py:95 .\templates\core\pricing.html:20
 msgid "month"
 msgstr "hónap"
 
-#: .\campaigns\models.py:93
+#: .\campaigns\models.py:95
 msgid "months"
 msgstr "hónapokban"
 
-#: .\campaigns\models.py:106 .\campaigns\models.py:138
-#: .\templates\campaigns\campaign_analysis.html:39
-#: .\templates\campaigns\campaign_analysis.html:117
-#: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
+#: .\campaigns\models.py:108 .\campaigns\models.py:140
+#: .\templates\analytics\dashboard.html:119
+#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:121
+#: .\templates\campaigns\campaign_analysis.html:152
+#: .\templates\campaigns\campaign_emails.html:241
+#: .\templates\campaigns\edit.html:198 .\templates\campaigns\edit.html:499
+#: .\templates\core\dashboard.html:527 .\templates\core\dashboard.html:1219
 msgid "Sent"
 msgstr "Küldött"
 
-#: .\campaigns\models.py:107 .\templates\campaigns\campaign_analysis.html:118
-#: .\templates\campaigns\campaign_analysis.html:149
+#: .\campaigns\models.py:109 .\templates\analytics\dashboard.html:46
+#: .\templates\analytics\dashboard.html:122
+#: .\templates\campaigns\campaign_analysis.html:122
+#: .\templates\campaigns\campaign_analysis.html:153
 msgid "Opened"
 msgstr "Megnyílt"
 
-#: .\campaigns\models.py:108 .\templates\campaigns\campaign_analysis.html:119
-#: .\templates\campaigns\campaign_analysis.html:150
+#: .\campaigns\models.py:110 .\templates\analytics\dashboard.html:61
+#: .\templates\analytics\dashboard.html:125
+#: .\templates\campaigns\campaign_analysis.html:123
+#: .\templates\campaigns\campaign_analysis.html:154
 msgid "Clicked"
 msgstr "Kattintva"
 
-#: .\campaigns\models.py:109
+#: .\campaigns\models.py:111
 msgid "Bounced"
 msgstr "Pattant"
 
-#: .\campaigns\models.py:110
+#: .\campaigns\models.py:112
 msgid "Complained"
 msgstr "panaszkodott"
 
-#: .\campaigns\models.py:111
+#: .\campaigns\models.py:113
 #: .\templates\core\feature_subscriber_management.html:167
 msgid "Unsubscribed"
 msgstr "Leiratkozott"
 
-#: .\campaigns\models.py:116 .\campaigns\models.py:147
+#: .\campaigns\models.py:118 .\campaigns\models.py:149
 msgid "Subscriber Email"
 msgstr "Előfizetői e-mail"
 
-#: .\campaigns\models.py:117
+#: .\campaigns\models.py:119
 msgid "Event Type"
 msgstr "Esemény típusa"
 
-#: .\campaigns\models.py:118
+#: .\campaigns\models.py:120
 msgid "Link Clicked"
 msgstr "Link Kattintva"
 
-#: .\campaigns\models.py:119
+#: .\campaigns\models.py:121
 msgid "User Agent"
 msgstr "Felhasználói ügynök"
 
-#: .\campaigns\models.py:120
+#: .\campaigns\models.py:122
 msgid "IP Address"
 msgstr "IP-cím"
 
-#: .\campaigns\models.py:125
+#: .\campaigns\models.py:127
 msgid "Email Event"
 msgstr "Esemény e-mailben"
 
-#: .\campaigns\models.py:126
+#: .\campaigns\models.py:128
 msgid "Email Events"
 msgstr "E-mail események"
 
-#: .\campaigns\models.py:136
+#: .\campaigns\models.py:138 .\templates\campaigns\campaign_emails.html:110
 #: .\templates\core\feature_subscriber_management.html:171
 msgid "Pending"
 msgstr "Függőben levő"
 
-#: .\campaigns\models.py:137
+#: .\campaigns\models.py:139
 msgid "Queued"
 msgstr "Sorban"
 
-#: .\campaigns\models.py:139
+#: .\campaigns\models.py:141 .\templates\campaigns\campaign_emails.html:312
+#: .\templates\campaigns\campaign_emails.html:438
 msgid "Failed"
 msgstr "Sikertelen"
 
-#: .\campaigns\models.py:146 .\subscribers\models.py:58
+#: .\campaigns\models.py:148 .\subscribers\models.py:58
 #: .\subscribers\models.py:97
 msgid "Subscriber"
 msgstr "Előfizető"
 
-#: .\campaigns\models.py:148
+#: .\campaigns\models.py:150 .\templates\campaigns\campaign_emails.html:141
+#: .\templates\campaigns\campaign_emails.html:347
 msgid "Variables"
 msgstr "Változók"
 
-#: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
+#: .\campaigns\models.py:151 .\templates\campaigns\campaign_edit_page.html:14
+#: .\templates\campaigns\campaign_emails.html:66
+#: .\templates\campaigns\campaign_emails.html:206
+#: .\templates\campaigns\campaign_emails.html:277
+#: .\templates\campaigns\campaign_emails.html:410
+#: .\templates\core\dashboard.html:525 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Állapot"
 
-#: .\campaigns\models.py:150
+#: .\campaigns\models.py:152 .\templates\campaigns\campaign_emails.html:63
+#: .\templates\campaigns\campaign_emails.html:261
 msgid "Scheduled For"
 msgstr "Ütemezett erre"
 
-#: .\campaigns\models.py:151
+#: .\campaigns\models.py:153 .\templates\campaigns\campaign_emails.html:203
 msgid "Sent At"
 msgstr "Elküldve:"
 
-#: .\campaigns\models.py:152
+#: .\campaigns\models.py:154 .\templates\campaigns\campaign_emails.html:338
 msgid "Error Message"
 msgstr "Hibaüzenet"
 
-#: .\campaigns\models.py:158
+#: .\campaigns\models.py:160
 msgid "Email Send Request"
 msgstr "Kérelem küldése e-mailben"
 
-#: .\campaigns\models.py:159
+#: .\campaigns\models.py:161
 msgid "Email Send Requests"
 msgstr "E-mail küldési kérések"
 
-#: .\campaigns\models.py:172
+#: .\campaigns\models.py:174
 msgid "Generated Subject"
 msgstr "Generált téma"
 
-#: .\campaigns\models.py:173
+#: .\campaigns\models.py:175
 msgid "Generated Body HTML"
 msgstr "Generált törzs HTML"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "Generation Prompt"
 msgstr "Generation Prompt"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "The prompt used to generate content"
 msgstr "A tartalom generálására használt prompt"
 
-#: .\campaigns\models.py:175
+#: .\campaigns\models.py:177
 msgid "Generation Model"
 msgstr "Generációs modell"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Topics"
 msgstr "Témák"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Extracted topics and keywords"
 msgstr "Témák és kulcsszavak kinyerése"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant Topics"
 msgstr "Domináns témák"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant topic for this email"
 msgstr "Domináns téma ennél az e-mailnél"
 
-#: .\campaigns\models.py:180 .\templates\campaigns\email_analysis.html:182
+#: .\campaigns\models.py:182 .\templates\campaigns\email_analysis.html:182
 msgid "Emails Analyzed"
 msgstr "E-mailek elemzett"
 
-#: .\campaigns\models.py:180
+#: .\campaigns\models.py:182
 msgid "Number of emails used in topic analysis"
 msgstr "A témaelemzésben használt e-mailek száma"
 
-#: .\campaigns\models.py:187
+#: .\campaigns\models.py:189
 msgid "Email AI Analysis"
 msgstr "E-mail AI-elemzés"
 
-#: .\campaigns\models.py:188
+#: .\campaigns\models.py:190
 msgid "Email AI Analyses"
 msgstr "AI elemzések e-mailben"
 
-#: .\campaigns\views.py:258 .\campaigns\views.py:311
+#: .\campaigns\views.py:270 .\campaigns\views.py:313
 msgid "Email address is required"
 msgstr "E-mail cím megadása kötelező"
 
-#: .\campaigns\views.py:275 .\campaigns\views.py:284 .\campaigns\views.py:294
+#: .\campaigns\views.py:287 .\campaigns\views.py:296
 msgid "Test email sent successfully"
 msgstr "A teszt e-mail sikeresen elküldve"
 
-#: .\campaigns\views.py:278 .\campaigns\views.py:297
+#: .\campaigns\views.py:290 .\campaigns\views.py:299
 #, python-brace-format
 msgid "Failed to send test email: {}"
 msgstr "Nem sikerült elküldeni a teszt e-mailt: {}"
 
-#: .\campaigns\views.py:394 .\core\views.py:802
+#: .\campaigns\views.py:403 .\core\views.py:818 .\core\views.py:839
 msgid "Email sent successfully"
 msgstr "E-mail sikeresen elküldve"
 
-#: .\campaigns\views.py:403 .\core\views.py:808 .\core\views.py:829
+#: .\campaigns\views.py:412 .\core\views.py:824 .\core\views.py:845
 #, python-brace-format
 msgid "Failed to send email: {}"
 msgstr "Nem sikerült elküldeni az e-mailt: {}"
 
-#: .\campaigns\views.py:410 .\core\views.py:846 .\core\views.py:863
+#: .\campaigns\views.py:419 .\core\views.py:862 .\core\views.py:872
+#: .\core\views.py:879
 #, python-brace-format
 msgid ""
 "Email scheduled for {time}. It will be sent automatically at the scheduled "
@@ -561,103 +628,103 @@ msgstr ""
 "E-mail ütemezve erre: {time}.A rendszer automatikusan elküldi az ütemezett "
 "időpontban."
 
-#: .\campaigns\views.py:447
+#: .\campaigns\views.py:511
 msgid "Please create a campaign first before creating email templates."
 msgstr "E-mail sablonok létrehozása előtt először hozzon létre egy kampányt."
 
-#: .\campaigns\views.py:484
+#: .\campaigns\views.py:549
 msgid "Cannot activate a campaign with no emails"
 msgstr "E-mailek nélkül nem lehet kampányt aktiválni"
 
-#: .\campaigns\views.py:491
+#: .\campaigns\views.py:556
 msgid "Campaign activated successfully"
 msgstr "A kampány sikeresen aktiválva"
 
-#: .\campaigns\views.py:504
+#: .\campaigns\views.py:569
 msgid "Campaign deactivated successfully"
 msgstr "A kampány sikeresen deaktiválva"
 
-#: .\campaigns\views.py:518
+#: .\campaigns\views.py:583
 msgid "Email ID and direction are required"
 msgstr "E-mail azonosító és útbaigazítás szükséges"
 
-#: .\campaigns\views.py:523 .\campaigns\views.py:919
+#: .\campaigns\views.py:588 .\campaigns\views.py:1020
 msgid "Email not found"
 msgstr "Az e-mail nem található"
 
-#: .\campaigns\views.py:535
+#: .\campaigns\views.py:600
 msgid "Email not found in campaign"
 msgstr "Az e-mail cím nem található a kampányban"
 
-#: .\campaigns\views.py:543
+#: .\campaigns\views.py:608
 msgid "Cannot move email in that direction"
 msgstr "Az e-mail nem mozgatható ebbe az irányba"
 
-#: .\campaigns\views.py:553
+#: .\campaigns\views.py:618
 msgid "Email order updated successfully"
 msgstr "Az e-mailes megrendelés sikeresen frissítve"
 
-#: .\campaigns\views.py:561
+#: .\campaigns\views.py:626
 msgid "No file uploaded"
 msgstr "Nincs fájl feltöltve"
 
-#: .\campaigns\views.py:565
+#: .\campaigns\views.py:630
 msgid "Invalid file format. Please upload a CSV or Excel file."
 msgstr ""
 "Érvénytelen fájlformátum.Kérjük, töltsön fel egy CSV- vagy Excel-fájlt."
 
-#: .\campaigns\views.py:597
+#: .\campaigns\views.py:662
 #, python-brace-format
 msgid "Missing required columns: {}"
 msgstr "Hiányzó kötelező oszlopok: {}"
 
-#: .\campaigns\views.py:612
+#: .\campaigns\views.py:677
 msgid "File processed successfully"
 msgstr "A fájl feldolgozása sikeres volt"
 
-#: .\campaigns\views.py:618
+#: .\campaigns\views.py:683
 #, python-brace-format
 msgid "Error processing file: {}"
 msgstr "Hiba a fájl feldolgozása közben: {}"
 
-#: .\campaigns\views.py:641
+#: .\campaigns\views.py:706
 msgid "Campaign created successfully!"
 msgstr "A kampány sikeresen létrehozva!"
 
-#: .\campaigns\views.py:644
+#: .\campaigns\views.py:709
 msgid "Please provide a campaign name."
 msgstr "Kérjük, adja meg a kampány nevét."
 
-#: .\campaigns\views.py:885
+#: .\campaigns\views.py:986
 msgid "Subject topic is required"
 msgstr "A tárgy témája kötelező"
 
-#: .\campaigns\views.py:913
+#: .\campaigns\views.py:1014
 msgid "Email generated and saved successfully"
 msgstr "Az e-mail létrehozása és mentése sikeresen megtörtént"
 
-#: .\campaigns\views.py:923
+#: .\campaigns\views.py:1024
 msgid "Email generated successfully"
 msgstr "Az e-mail sikeresen generálva"
 
-#: .\campaigns\views.py:936
+#: .\campaigns\views.py:1041
 #, python-brace-format
 msgid "Failed to generate email: {}"
 msgstr "Nem sikerült létrehozni az e-mailt: {}"
 
-#: .\campaigns\views.py:950
+#: .\campaigns\views.py:1056
 msgid "Email text is required"
 msgstr "Az e-mail szövege kötelező"
 
-#: .\campaigns\views.py:957
+#: .\campaigns\views.py:1063
 msgid "Email revised successfully"
 msgstr "Az e-mail sikeresen felülvizsgálva"
 
-#: .\campaigns\views.py:963
+#: .\campaigns\views.py:1069
 msgid "Revision failed"
 msgstr "A felülvizsgálat sikertelen"
 
-#: .\campaigns\views.py:969
+#: .\campaigns\views.py:1075
 #, python-brace-format
 msgid "Failed to revise email: {}"
 msgstr "Nem sikerült az e-mail átdolgozása: {}"
@@ -671,73 +738,80 @@ msgid "Invalid token header. Token string should not contain spaces."
 msgstr ""
 "Érvénytelen token fejléc.A token karakterlánc nem tartalmazhat szóközt."
 
-#: .\core\views.py:211 .\templates\subscribers\add.html:256
+#: .\core\views.py:213 .\templates\subscribers\add.html:256
 msgid "Please provide an email address."
 msgstr "Kérjük, adjon meg egy e-mail címet."
 
-#: .\core\views.py:213
-msgid "This is already your current email address."
-msgstr "Ez már az Ön jelenlegi e-mail címe."
+#: .\core\views.py:218
+#, fuzzy
+#| msgid "Settings updated successfully"
+msgid "Auto BCC setting updated successfully."
+msgstr "A beállítások frissítése sikeresen megtörtént"
 
-#: .\core\views.py:223
+#: .\core\views.py:228
 msgid "This email address is already in use by another account."
 msgstr "Ezt az e-mail címet egy másik fiók már használja."
 
-#: .\core\views.py:228
-#, python-format
-msgid "Email address updated successfully to %(email)s"
+#: .\core\views.py:236
+#, fuzzy, python-format
+#| msgid "Email address updated successfully to %(email)s"
+msgid "Email address and settings updated successfully to %(email)s"
 msgstr "Az e-mail cím sikeresen frissítve erre: %(email)s"
 
-#: .\core\views.py:230
+#: .\core\views.py:238
 msgid "Please provide a valid email address."
 msgstr "Kérjük, adjon meg egy érvényes e-mail címet."
 
-#: .\core\views.py:242 .\core\views.py:368
+#: .\core\views.py:251 .\core\views.py:389
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
 msgid ""
-"Please fill in all required fields: Address Line 1, City, State, Postal "
-"Code, and Country."
+"Please fill in all required fields: Full Name, Address Line 1, City, State, "
+"Postal Code, and Country."
 msgstr ""
 "Kérjük, töltse ki az összes kötelező mezőt: Cím 1. sora, Város, Állam, "
 "Irányítószám és Ország."
 
-#: .\core\views.py:252
+#: .\core\views.py:262
 msgid "Address updated successfully."
 msgstr "A cím sikeresen frissítve."
 
-#: .\core\views.py:258
+#: .\core\views.py:268
 msgid "Please select a valid time zone."
 msgstr "Kérjük, válasszon érvényes időzónát."
 
-#: .\core\views.py:262
+#: .\core\views.py:272
 #, python-format
 msgid "Time zone updated to %(tz)s"
 msgstr "Az időzóna frissítve erre: %(tz)s"
 
-#: .\core\views.py:269
+#: .\core\views.py:279
 msgid ""
 "Unsubscribe links are now disabled. This may violate email regulations."
 msgstr ""
 "A leiratkozási linkek le vannak tiltva.Ez sértheti az e-mail szabályozást."
 
-#: .\core\views.py:271
+#: .\core\views.py:281
 msgid "Unsubscribe links are now enabled."
 msgstr "A leiratkozási linkek mostantól engedélyezve vannak."
 
-#: .\core\views.py:302
+#: .\core\views.py:314
 msgid "Please provide a URL to your post"
 msgstr "Kérjük, adjon meg egy URL-t a bejegyzéséhez"
 
-#: .\core\views.py:307
+#: .\core\views.py:319
 msgid "Please provide a valid URL starting with http:// or https://"
 msgstr ""
 "Adjon meg egy érvényes URL-t, amely http:// vagy https:// karakterekkel "
 "kezdődik"
 
-#: .\core\views.py:322
+#: .\core\views.py:334
 msgid "Please provide a valid URL for the selected platform"
 msgstr "Adjon meg egy érvényes URL-t a kiválasztott platformhoz"
 
-#: .\core\views.py:330
+#: .\core\views.py:342
 msgid ""
 "Thank you for promoting DripEmails.org! Ads have been disabled for your "
 "account."
@@ -745,27 +819,27 @@ msgstr ""
 "Köszönjük a DripEmails.org népszerűsítését!A hirdetéseket letiltottuk az Ön "
 "fiókjában."
 
-#: .\core\views.py:356
+#: .\core\views.py:372
 msgid "Invalid timezone"
 msgstr "Érvénytelen időzóna"
 
-#: .\core\views.py:379
+#: .\core\views.py:402
 msgid "Settings updated successfully"
 msgstr "A beállítások frissítése sikeresen megtörtént"
 
-#: .\core\views.py:404
+#: .\core\views.py:431
 msgid "An error occurred while saving settings"
 msgstr "Hiba történt a beállítások mentése közben"
 
-#: .\core\views.py:552
+#: .\core\views.py:579
 msgid "You must be logged in to post."
 msgstr "A hozzászóláshoz be kell jelentkezned."
 
-#: .\core\views.py:577
+#: .\core\views.py:604
 msgid "Your post has been submitted successfully!"
 msgstr "A bejegyzésed sikeresen elküldve!"
 
-#: .\core\views.py:619
+#: .\core\views.py:646
 msgid ""
 "Thank you for sharing your success story! We'll review it and may feature it"
 " on our site."
@@ -773,50 +847,40 @@ msgstr ""
 "Köszönjük, hogy megosztotta sikertörténetét!Ellenőrizzük, és "
 "megjeleníthetjük webhelyünkön."
 
-#: .\core\views.py:648
+#: .\core\views.py:675
 msgid "Please provide email address, campaign, and email template"
 msgstr "Kérjük, adjon meg e-mail címet, kampányt és e-mail sablont"
 
-#: .\core\views.py:716
+#: .\core\views.py:743
 #, python-brace-format
 msgid "Failed to create or update subscriber: {}"
 msgstr "Nem sikerült létrehozni vagy frissíteni az előfizetőt: {}"
 
-#: .\core\views.py:814
+#: .\core\views.py:830
 msgid "Email scheduled successfully"
 msgstr "Az e-mail ütemezése sikeres volt"
 
-#: .\core\views.py:823
-msgid "Email sent successfully (Celery unavailable, sent immediately)"
-msgstr ""
-"Az e-mail sikeres elküldése (a zeller nem elérhető, azonnal elküldjük)"
-
-#: .\core\views.py:856
-#, python-brace-format
-msgid "Email scheduled for {time}"
-msgstr "E-mail ütemezve ide: {time}"
-
-#: .\core\views.py:871
+#: .\core\views.py:887
 msgid "Campaign not found"
 msgstr "A kampány nem található"
 
-#: .\core\views.py:873
+#: .\core\views.py:889
 msgid "Email template not found"
 msgstr "Az e-mail sablon nem található"
 
-#: .\core\views.py:1057
+#: .\core\views.py:1076
 msgid "Email already sent."
 msgstr "E-mail már elküldve."
 
-#: .\core\views.py:1069
+#: .\core\views.py:1088
 msgid "Email sent successfully."
 msgstr "E-mail sikeresen elküldve."
 
-#: .\core\views.py:1102
+#: .\core\views.py:1121
 msgid "Subscriber has been unsubscribed."
 msgstr "Az előfizető leiratkozott."
 
-#: .\core\views.py:1115
+#: .\core\views.py:1134
 msgid ""
 "Invalid unsubscribe link. The subscriber may have already been unsubscribed "
 "or the link is invalid."
@@ -824,368 +888,568 @@ msgstr ""
 "Érvénytelen leiratkozási link.Előfordulhat, hogy az előfizető már "
 "leiratkozott, vagy a link érvénytelen."
 
-#: .\docs\live.py:146 .\dripemails\live.py:159 .\dripemails\settings.py:139
+#: .\docs\live.py:146 .\dripemails\live.py:160 .\dripemails\settings.py:148
 #: .\smtp_server\docs\live.py:146
 msgid "English"
 msgstr "angol"
 
-#: .\docs\live.py:147 .\dripemails\live.py:160 .\dripemails\settings.py:140
+#: .\docs\live.py:147 .\dripemails\live.py:161 .\dripemails\settings.py:149
 #: .\smtp_server\docs\live.py:147
 msgid "Spanish"
 msgstr "spanyol"
 
-#: .\docs\live.py:148 .\dripemails\live.py:161 .\dripemails\settings.py:141
+#: .\docs\live.py:148 .\dripemails\live.py:162 .\dripemails\settings.py:150
 #: .\smtp_server\docs\live.py:148
 msgid "French"
 msgstr "francia"
 
-#: .\docs\live.py:149 .\dripemails\live.py:162 .\dripemails\settings.py:142
+#: .\docs\live.py:149 .\dripemails\live.py:163 .\dripemails\settings.py:151
 #: .\smtp_server\docs\live.py:149
 msgid "German"
 msgstr "német"
 
-#: .\dripemails\live.py:163 .\dripemails\settings.py:143
+#: .\dripemails\live.py:164 .\dripemails\settings.py:152
 msgid "Italian"
 msgstr "olasz"
 
-#: .\dripemails\live.py:164 .\dripemails\settings.py:144
+#: .\dripemails\live.py:165 .\dripemails\settings.py:153
 msgid "Portuguese"
 msgstr "portugál"
 
-#: .\dripemails\live.py:165 .\dripemails\settings.py:145
+#: .\dripemails\live.py:166 .\dripemails\settings.py:154
 msgid "Portuguese (Brazil)"
 msgstr "portugál (Brazília)"
 
-#: .\dripemails\live.py:166 .\dripemails\settings.py:146
+#: .\dripemails\live.py:167 .\dripemails\settings.py:155
 msgid "Russian"
 msgstr "orosz"
 
-#: .\dripemails\live.py:167 .\dripemails\settings.py:147
+#: .\dripemails\live.py:168 .\dripemails\settings.py:156
 msgid "Chinese (Simplified)"
 msgstr "kínai (egyszerűsített)"
 
-#: .\dripemails\live.py:168 .\dripemails\settings.py:148
+#: .\dripemails\live.py:169 .\dripemails\settings.py:157
 msgid "Chinese (Traditional)"
 msgstr "kínai (hagyományos)"
 
-#: .\dripemails\live.py:169 .\dripemails\settings.py:149
+#: .\dripemails\live.py:170 .\dripemails\settings.py:158
 msgid "Japanese"
 msgstr "japán"
 
-#: .\dripemails\live.py:170 .\dripemails\settings.py:150
+#: .\dripemails\live.py:171 .\dripemails\settings.py:159
 msgid "Korean"
 msgstr "koreai"
 
-#: .\dripemails\live.py:171 .\dripemails\settings.py:151
+#: .\dripemails\live.py:172 .\dripemails\settings.py:160
 msgid "Arabic"
 msgstr "arab"
 
-#: .\dripemails\live.py:172 .\dripemails\settings.py:152
+#: .\dripemails\live.py:173 .\dripemails\settings.py:161
 msgid "Hindi"
 msgstr "hindi"
 
-#: .\dripemails\live.py:173 .\dripemails\settings.py:153
+#: .\dripemails\live.py:174 .\dripemails\settings.py:162
 msgid "Turkish"
 msgstr "török"
 
-#: .\dripemails\live.py:174 .\dripemails\settings.py:154
+#: .\dripemails\live.py:175 .\dripemails\settings.py:163
 msgid "Polish"
 msgstr "lengyel"
 
-#: .\dripemails\live.py:175 .\dripemails\settings.py:155
+#: .\dripemails\live.py:176 .\dripemails\settings.py:164
 msgid "Dutch"
 msgstr "holland"
 
-#: .\dripemails\live.py:176 .\dripemails\settings.py:156
+#: .\dripemails\live.py:177 .\dripemails\settings.py:165
 msgid "Swedish"
 msgstr "svéd"
 
-#: .\dripemails\live.py:177 .\dripemails\settings.py:157
+#: .\dripemails\live.py:178 .\dripemails\settings.py:166
 msgid "Danish"
 msgstr "dán"
 
-#: .\dripemails\live.py:178 .\dripemails\settings.py:158
+#: .\dripemails\live.py:179 .\dripemails\settings.py:167
 msgid "Norwegian"
 msgstr "norvég"
 
-#: .\dripemails\live.py:179 .\dripemails\settings.py:159
+#: .\dripemails\live.py:180 .\dripemails\settings.py:168
 msgid "Finnish"
 msgstr "finn"
 
-#: .\dripemails\live.py:180 .\dripemails\settings.py:160
+#: .\dripemails\live.py:181 .\dripemails\settings.py:169
 msgid "Czech"
 msgstr "cseh"
 
-#: .\dripemails\live.py:181 .\dripemails\settings.py:161
+#: .\dripemails\live.py:182 .\dripemails\settings.py:170
 msgid "Romanian"
 msgstr "román"
 
-#: .\dripemails\live.py:182 .\dripemails\settings.py:162
+#: .\dripemails\live.py:183 .\dripemails\settings.py:171
 msgid "Hungarian"
 msgstr "magyar"
 
-#: .\dripemails\live.py:183 .\dripemails\settings.py:163
+#: .\dripemails\live.py:184 .\dripemails\settings.py:172
 msgid "Greek"
 msgstr "görög"
 
-#: .\dripemails\live.py:184 .\dripemails\settings.py:164
+#: .\dripemails\live.py:185 .\dripemails\settings.py:173
 msgid "Hebrew"
 msgstr "héber"
 
-#: .\dripemails\live.py:185 .\dripemails\settings.py:165
+#: .\dripemails\live.py:186 .\dripemails\settings.py:174
 msgid "Thai"
 msgstr "thai"
 
-#: .\dripemails\live.py:186 .\dripemails\settings.py:166
+#: .\dripemails\live.py:187 .\dripemails\settings.py:175
 msgid "Vietnamese"
 msgstr "vietnami"
 
-#: .\dripemails\live.py:187 .\dripemails\settings.py:167
+#: .\dripemails\live.py:188 .\dripemails\settings.py:176
 msgid "Indonesian"
 msgstr "indonéz"
 
-#: .\dripemails\live.py:188 .\dripemails\settings.py:168
+#: .\dripemails\live.py:189 .\dripemails\settings.py:177
 msgid "Malay"
 msgstr "maláj"
 
-#: .\dripemails\live.py:189 .\dripemails\settings.py:169
+#: .\dripemails\live.py:190 .\dripemails\settings.py:178
 msgid "Ukrainian"
 msgstr "ukrán"
 
-#: .\dripemails\live.py:190 .\dripemails\settings.py:170
+#: .\dripemails\live.py:191 .\dripemails\settings.py:179
 msgid "Bulgarian"
 msgstr "bolgár"
 
-#: .\dripemails\live.py:191 .\dripemails\settings.py:171
+#: .\dripemails\live.py:192 .\dripemails\settings.py:180
 msgid "Croatian"
 msgstr "horvát"
 
-#: .\dripemails\live.py:192 .\dripemails\settings.py:172
+#: .\dripemails\live.py:193 .\dripemails\settings.py:181
 msgid "Serbian"
 msgstr "szerb"
 
-#: .\dripemails\live.py:193 .\dripemails\settings.py:173
+#: .\dripemails\live.py:194 .\dripemails\settings.py:182
 msgid "Slovak"
 msgstr "szlovák"
 
-#: .\dripemails\live.py:194 .\dripemails\settings.py:174
+#: .\dripemails\live.py:195 .\dripemails\settings.py:183
 msgid "Slovenian"
 msgstr "szlovén"
 
-#: .\dripemails\live.py:195 .\dripemails\settings.py:175
+#: .\dripemails\live.py:196 .\dripemails\settings.py:184
 msgid "Lithuanian"
 msgstr "litván"
 
-#: .\dripemails\live.py:196 .\dripemails\settings.py:176
+#: .\dripemails\live.py:197 .\dripemails\settings.py:185
 msgid "Latvian"
 msgstr "lett"
 
-#: .\dripemails\live.py:197 .\dripemails\settings.py:177
+#: .\dripemails\live.py:198 .\dripemails\settings.py:186
 msgid "Estonian"
 msgstr "észt"
 
-#: .\dripemails\live.py:198 .\dripemails\settings.py:178
+#: .\dripemails\live.py:199 .\dripemails\settings.py:187
 msgid "Icelandic"
 msgstr "izlandi"
 
-#: .\dripemails\live.py:199 .\dripemails\settings.py:179
+#: .\dripemails\live.py:200 .\dripemails\settings.py:188
 msgid "Irish"
 msgstr "ír"
 
-#: .\dripemails\live.py:200 .\dripemails\settings.py:180
+#: .\dripemails\live.py:201 .\dripemails\settings.py:189
 msgid "Maltese"
 msgstr "máltai"
 
-#: .\dripemails\live.py:201 .\dripemails\settings.py:181
+#: .\dripemails\live.py:202 .\dripemails\settings.py:190
 msgid "Catalan"
 msgstr "katalán"
 
-#: .\dripemails\live.py:202 .\dripemails\settings.py:182
+#: .\dripemails\live.py:203 .\dripemails\settings.py:191
 msgid "Basque"
 msgstr "baszk"
 
-#: .\dripemails\live.py:203 .\dripemails\settings.py:183
+#: .\dripemails\live.py:204 .\dripemails\settings.py:192
 msgid "Galician"
 msgstr "galíciai"
 
-#: .\dripemails\live.py:204 .\dripemails\settings.py:184
+#: .\dripemails\live.py:205 .\dripemails\settings.py:193
 msgid "Welsh"
 msgstr "walesi"
 
-#: .\dripemails\live.py:205 .\dripemails\settings.py:185
+#: .\dripemails\live.py:206 .\dripemails\settings.py:194
 msgid "Persian"
 msgstr "perzsa"
 
-#: .\dripemails\live.py:206 .\dripemails\settings.py:186
+#: .\dripemails\live.py:207 .\dripemails\settings.py:195
 msgid "Urdu"
 msgstr "urdu"
 
-#: .\dripemails\live.py:207 .\dripemails\settings.py:187
+#: .\dripemails\live.py:208 .\dripemails\settings.py:196
 msgid "Bengali"
 msgstr "bengáli"
 
-#: .\dripemails\live.py:208 .\dripemails\settings.py:188
+#: .\dripemails\live.py:209 .\dripemails\settings.py:197
 msgid "Tamil"
 msgstr "tamil"
 
-#: .\dripemails\live.py:209 .\dripemails\settings.py:189
+#: .\dripemails\live.py:210 .\dripemails\settings.py:198
 msgid "Telugu"
 msgstr "telugu"
 
-#: .\dripemails\live.py:210 .\dripemails\settings.py:190
+#: .\dripemails\live.py:211 .\dripemails\settings.py:199
 msgid "Marathi"
 msgstr "marathi"
 
-#: .\dripemails\live.py:211 .\dripemails\settings.py:191
+#: .\dripemails\live.py:212 .\dripemails\settings.py:200
 msgid "Gujarati"
 msgstr "gudzsaráti"
 
-#: .\dripemails\live.py:212 .\dripemails\settings.py:192
+#: .\dripemails\live.py:213 .\dripemails\settings.py:201
 msgid "Kannada"
 msgstr "kannada"
 
-#: .\dripemails\live.py:213 .\dripemails\settings.py:193
+#: .\dripemails\live.py:214 .\dripemails\settings.py:202
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: .\dripemails\live.py:214 .\dripemails\settings.py:194
+#: .\dripemails\live.py:215 .\dripemails\settings.py:203
 msgid "Punjabi"
 msgstr "pandzsábi"
 
-#: .\dripemails\live.py:215 .\dripemails\settings.py:195
+#: .\dripemails\live.py:216 .\dripemails\settings.py:204
 msgid "Nepali"
 msgstr "nepáli"
 
-#: .\dripemails\live.py:216 .\dripemails\settings.py:196
+#: .\dripemails\live.py:217 .\dripemails\settings.py:205
 msgid "Sinhala"
 msgstr "szingaléz"
 
-#: .\dripemails\live.py:217 .\dripemails\settings.py:197
+#: .\dripemails\live.py:218 .\dripemails\settings.py:206
 msgid "Burmese"
 msgstr "burmai"
 
-#: .\dripemails\live.py:218 .\dripemails\settings.py:198
+#: .\dripemails\live.py:219 .\dripemails\settings.py:207
 msgid "Khmer"
 msgstr "khmer"
 
-#: .\dripemails\live.py:219 .\dripemails\settings.py:199
+#: .\dripemails\live.py:220 .\dripemails\settings.py:208
 msgid "Lao"
 msgstr "Lao"
 
-#: .\dripemails\live.py:220 .\dripemails\settings.py:200
+#: .\dripemails\live.py:221 .\dripemails\settings.py:209
 msgid "Georgian"
 msgstr "grúz"
 
-#: .\dripemails\live.py:221 .\dripemails\settings.py:201
+#: .\dripemails\live.py:222 .\dripemails\settings.py:210
 msgid "Armenian"
 msgstr "örmény"
 
-#: .\dripemails\live.py:222 .\dripemails\settings.py:202
+#: .\dripemails\live.py:223 .\dripemails\settings.py:211
 msgid "Azerbaijani"
 msgstr "azerbajdzsáni"
 
-#: .\dripemails\live.py:223 .\dripemails\settings.py:203
+#: .\dripemails\live.py:224 .\dripemails\settings.py:212
 msgid "Kazakh"
 msgstr "kazah"
 
-#: .\dripemails\live.py:224 .\dripemails\settings.py:204
+#: .\dripemails\live.py:225 .\dripemails\settings.py:213
 msgid "Kyrgyz"
 msgstr "kirgiz"
 
-#: .\dripemails\live.py:225 .\dripemails\settings.py:205
+#: .\dripemails\live.py:226 .\dripemails\settings.py:214
 msgid "Uzbek"
 msgstr "üzbég"
 
-#: .\dripemails\live.py:226 .\dripemails\settings.py:206
+#: .\dripemails\live.py:227 .\dripemails\settings.py:215
 msgid "Mongolian"
 msgstr "mongol"
 
-#: .\dripemails\live.py:227 .\dripemails\settings.py:207
+#: .\dripemails\live.py:228 .\dripemails\settings.py:216
 msgid "Swahili"
 msgstr "szuahéli"
 
-#: .\dripemails\live.py:228 .\dripemails\settings.py:208
+#: .\dripemails\live.py:229 .\dripemails\settings.py:217
 msgid "Afrikaans"
 msgstr "afrikaans"
 
-#: .\dripemails\live.py:229 .\dripemails\settings.py:209
+#: .\dripemails\live.py:230 .\dripemails\settings.py:218
 msgid "Zulu"
 msgstr "zulu"
 
-#: .\dripemails\live.py:230 .\dripemails\settings.py:210
+#: .\dripemails\live.py:231 .\dripemails\settings.py:219
 msgid "Xhosa"
 msgstr "Xhosa"
 
-#: .\dripemails\live.py:231 .\dripemails\settings.py:211
+#: .\dripemails\live.py:232 .\dripemails\settings.py:220
 msgid "Amharic"
 msgstr "amhara"
 
-#: .\dripemails\live.py:232 .\dripemails\settings.py:212
+#: .\dripemails\live.py:233 .\dripemails\settings.py:221
 msgid "Hausa"
 msgstr "Hausa"
 
-#: .\dripemails\live.py:233 .\dripemails\settings.py:213
+#: .\dripemails\live.py:234 .\dripemails\settings.py:222
 msgid "Yoruba"
 msgstr "joruba"
 
-#: .\dripemails\live.py:234 .\dripemails\settings.py:214
+#: .\dripemails\live.py:235 .\dripemails\settings.py:223
 msgid "Igbo"
 msgstr "Igbo"
 
-#: .\dripemails\live.py:235 .\dripemails\settings.py:215
+#: .\dripemails\live.py:236 .\dripemails\settings.py:224
 msgid "Shona"
 msgstr "Shona"
 
-#: .\dripemails\live.py:236 .\dripemails\settings.py:216
+#: .\dripemails\live.py:237 .\dripemails\settings.py:225
 msgid "Sotho"
 msgstr "Sotho"
 
-#: .\dripemails\live.py:237 .\dripemails\settings.py:217
+#: .\dripemails\live.py:238 .\dripemails\settings.py:226
 msgid "Tswana"
 msgstr "Tswana"
 
-#: .\dripemails\live.py:238 .\dripemails\settings.py:218
+#: .\dripemails\live.py:239 .\dripemails\settings.py:227
 msgid "Venda"
 msgstr "Venda"
 
-#: .\dripemails\live.py:239 .\dripemails\settings.py:219
+#: .\dripemails\live.py:240 .\dripemails\settings.py:228
 msgid "Tsonga"
 msgstr "Tsonga"
 
-#: .\dripemails\live.py:240 .\dripemails\settings.py:220
+#: .\dripemails\live.py:241 .\dripemails\settings.py:229
 msgid "Swati"
 msgstr "Swati"
 
-#: .\dripemails\live.py:241 .\dripemails\settings.py:221
+#: .\dripemails\live.py:242 .\dripemails\settings.py:230
 msgid "Ndebele"
 msgstr "Ndebele"
 
-#: .\dripemails\live.py:242 .\dripemails\settings.py:222
+#: .\dripemails\live.py:243 .\dripemails\settings.py:231
 msgid "Northern Sotho"
 msgstr "Észak-Sotho"
 
-#: .\dripemails\live.py:243 .\dripemails\settings.py:223
+#: .\dripemails\live.py:244 .\dripemails\settings.py:232
 msgid "Esperanto"
 msgstr "eszperantó"
+
+#: .\gmail\models.py:10 .\templates\core\dashboard.html:84
+#, fuzzy
+#| msgid "Email"
+msgid "Gmail"
+msgstr "Email"
+
+#: .\gmail\models.py:11
+msgid "Outlook"
+msgstr ""
+
+#: .\gmail\models.py:12 .\templates\core\dashboard.html:124
+msgid "IMAP"
+msgstr ""
+
+#: .\gmail\models.py:19 .\gmail\models.py:72
+msgid "Provider"
+msgstr "Szolgáltató"
+
+#: .\gmail\models.py:22
+#, fuzzy
+#| msgid "Access denied"
+msgid "Access Token"
+msgstr "Hozzáférés megtagadva"
+
+#: .\gmail\models.py:23
+#, fuzzy
+#| msgid "Refresh"
+msgid "Refresh Token"
+msgstr "Frissítés"
+
+#: .\gmail\models.py:24
+msgid "Token Expiry"
+msgstr "Token lejárata"
+
+#: .\gmail\models.py:27 .\templates\core\dashboard.html:142
+#: .\templates\core\home.html:253 .\templates\core\includes\signup_box.html:54
+msgid "IMAP Host"
+msgstr "IMAP gazdagép"
+
+#: .\gmail\models.py:28 .\templates\core\dashboard.html:148
+#: .\templates\core\home.html:260 .\templates\core\includes\signup_box.html:60
+msgid "IMAP Port"
+msgstr "IMAP port"
+
+#: .\gmail\models.py:29
+#, fuzzy
+#| msgid "Email or Username"
+msgid "IMAP Username"
+msgstr "E-mail vagy Felhasználónév"
+
+#: .\gmail\models.py:30 .\templates\core\home.html:271
+#: .\templates\core\includes\signup_box.html:69
+#, fuzzy
+#| msgid "Password"
+msgid "IMAP Password"
+msgstr "Jelszó"
+
+#: .\gmail\models.py:31
+#, fuzzy
+#| msgid "Use \\"
+msgid "Use SSL"
+msgstr "Használja \\"
+
+#: .\gmail\models.py:34 .\templates\campaigns\template.html:453
+#: .\templates\core\contact.html:30 .\templates\core\dashboard.html:138
+#: .\templates\core\dashboard.html:391 .\templates\core\home.html:248
+#: .\templates\core\includes\signup_box.html:50
+#: .\templates\core\settings.html:20 .\templates\core\settings.html:26
+#: .\templates\core\settings.html:207
+msgid "Email Address"
+msgstr "E-mail cím"
+
+#: .\gmail\models.py:36
+msgid "Last Sync At"
+msgstr "Utolsó szinkronizálás:"
+
+#: .\gmail\models.py:37
+#, fuzzy
+#| msgid "Scannable:"
+msgid "Sync Enabled"
+msgstr "Szkennelhető:"
+
+#: .\gmail\models.py:40
+#, fuzzy
+#| msgid "Profile Settings"
+msgid "Provider Settings"
+msgstr "Profilbeállítások"
+
+#: .\gmail\models.py:46
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Credential"
+msgstr "E-mail tartalom"
+
+#: .\gmail\models.py:47
+#, fuzzy
+#| msgid "Email Details"
+msgid "Email Credentials"
+msgstr "E-mail Részletek"
+
+#: .\gmail\models.py:71
+msgid "Credential"
+msgstr "Hitelesítési adat"
+
+#: .\gmail\models.py:75
+#, fuzzy
+#| msgid "Error Message"
+msgid "Provider Message ID"
+msgstr "Hibaüzenet"
+
+#: .\gmail\models.py:76
+msgid "Thread ID"
+msgstr "Szál azonosítója"
+
+#: .\gmail\models.py:80
+#, fuzzy
+#| msgid "From Email:"
+msgid "From Email"
+msgstr "E-mailből:"
+
+#: .\gmail\models.py:81
+#, fuzzy
+#| msgid "Emails"
+msgid "To Emails"
+msgstr "E-mailek"
+
+#: .\gmail\models.py:81 .\gmail\models.py:82 .\gmail\models.py:83
+#, fuzzy
+#| msgid "Name and email address"
+msgid "Comma-separated email addresses"
+msgstr "Név és email cím"
+
+#: .\gmail\models.py:82
+#, fuzzy
+#| msgid "Emails"
+msgid "CC Emails"
+msgstr "E-mailek"
+
+#: .\gmail\models.py:83
+#, fuzzy
+#| msgid "Emails"
+msgid "BCC Emails"
+msgstr "E-mailek"
+
+#: .\gmail\models.py:84
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sender Email"
+msgstr "E-mail küldése"
+
+#: .\gmail\models.py:85
+msgid "Reply To"
+msgstr "Válasz erre"
+
+#: .\gmail\models.py:88
+msgid "Body Text"
+msgstr "Törzsszöveg"
+
+#: .\gmail\models.py:89
+#, fuzzy
+#| msgid "Generated Body HTML"
+msgid "Body HTML"
+msgstr "Generált törzs HTML"
+
+#: .\gmail\models.py:92
+msgid "Received At"
+msgstr "érkezett:"
+
+#: .\gmail\models.py:93
+#, fuzzy
+#| msgid "Created At"
+msgid "Fetched At"
+msgstr "Létrehozva:"
+
+#: .\gmail\models.py:94
+msgid "Processed"
+msgstr "Feldolgozott"
+
+#: .\gmail\models.py:97
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email"
+msgstr "Kampány részletei"
+
+#: .\gmail\models.py:100
+msgid "Provider Data"
+msgstr "Szolgáltató adatok"
+
+#: .\gmail\models.py:103
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Message"
+msgstr "E-mail címek"
+
+#: .\gmail\models.py:104
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Messages"
+msgstr "E-mail címek"
 
 #: .\subscribers\models.py:18
 msgid "List"
 msgstr "Lista"
 
 #: .\subscribers\models.py:19 .\subscribers\models.py:44
-#: .\templates\core\dashboard.html:149
+#: .\templates\core\dashboard.html:290
 #: .\templates\core\tutorials\api_integration.html:65
 #: .\templates\subscribers\list.html:78
 msgid "Lists"
 msgstr "Listák"
 
-#: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:241
+#: .\subscribers\models.py:47 .\templates\campaigns\template.html:458
+#: .\templates\campaigns\template.html:498 .\templates\core\dashboard.html:382
 msgid "First Name"
 msgstr "Keresztnév"
 
-#: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:245
+#: .\subscribers\models.py:48 .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:504 .\templates\core\dashboard.html:386
 msgid "Last Name"
 msgstr "Vezetéknév"
 
@@ -1201,8 +1465,8 @@ msgstr "A visszaigazolás elküldve:"
 msgid "Confirmed At"
 msgstr "Megerősítve at"
 
-#: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:461
+#: .\subscribers\models.py:59 .\templates\analytics\dashboard.html:87
+#: .\templates\core\dashboard.html:242 .\templates\core\dashboard.html:602
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1527,14 +1791,16 @@ msgstr "Vissza a Kezdőlapra"
 msgid "Email Confirmation Sent"
 msgstr "E-mail visszaigazolás elküldve"
 
-#: .\templates\account\login.html:5 .\templates\base.html:143
-#: .\templates\base.html:180
+#: .\templates\account\login.html:5 .\templates\base.html:144
+#: .\templates\base.html:181
 msgid "Login"
 msgstr "Bejelentkezés"
 
 #: .\templates\account\login.html:14 .\templates\account\logout.html:12
 #: .\templates\account\password_reset.html:13
 #: .\templates\account\password_reset_done.html:13
+#: .\templates\account\password_reset_from_key.html:13
+#: .\templates\account\password_reset_from_key_done.html:13
 #: .\templates\account\signup.html:13 .\templates\base.html:14
 #: .\templates\base.html:15 .\templates\base.html:29 .\templates\base.html:38
 msgid "DripEmails.org"
@@ -1552,7 +1818,8 @@ msgstr "Jelentkezzen be e-mail kampányainak kezeléséhez."
 msgid "Email or Username"
 msgstr "E-mail vagy Felhasználónév"
 
-#: .\templates\account\login.html:44
+#: .\templates\account\login.html:44 .\templates\core\dashboard.html:157
+#: .\templates\core\home.html:1179
 msgid "Password"
 msgstr "Jelszó"
 
@@ -1564,8 +1831,8 @@ msgstr "Elfelejtette jelszavát?"
 msgid "Remember Me"
 msgstr "Emlékezz Rám"
 
-#: .\templates\account\login.html:75 .\templates\core\home.html:73
-#: .\templates\core\home.html:749
+#: .\templates\account\login.html:75 .\templates\core\home.html:75
+#: .\templates\core\home.html:1078
 msgid "Sign In"
 msgstr "Jelentkezzen be"
 
@@ -1608,12 +1875,13 @@ msgstr "A rendszer kijelentkezteti fiókjából.Bármikor újra bejelentkezhet."
 #: .\templates\analytics\footer_confirm_delete.html:47
 #: .\templates\analytics\footer_form.html:76
 #: .\templates\campaigns\create.html:64 .\templates\campaigns\drafts.html:232
-#: .\templates\campaigns\edit.html:156 .\templates\campaigns\template.html:270
-#: .\templates\campaigns\template.html:304
-#: .\templates\campaigns\template.html:381
-#: .\templates\campaigns\template.html:435
-#: .\templates\campaigns\template.html:483
-#: .\templates\subscribers\import.html:72
+#: .\templates\campaigns\edit.html:659 .\templates\campaigns\template.html:300
+#: .\templates\campaigns\template.html:337
+#: .\templates\campaigns\template.html:417
+#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:516
+#: .\templates\campaigns\template.html:564 .\templates\core\dashboard.html:172
+#: .\templates\core\home.html:1197 .\templates\subscribers\import.html:72
 #: .\templates\subscribers\import.html:112
 msgid "Cancel"
 msgstr "Mégsem"
@@ -1648,11 +1916,13 @@ msgstr "Reset Link küldése"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Remember your password?"
 msgstr "Emlékszel a jelszavadra?"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Log in here"
 msgstr "Jelentkezzen be itt"
 
@@ -1670,7 +1940,79 @@ msgstr ""
 "mappáját.Ellenkező esetben lépjen kapcsolatba velünk, ha néhány percen belül"
 " nem kapja meg."
 
-#: .\templates\account\signup.html:15
+#: .\templates\account\password_reset_from_key.html:5
+#: .\templates\account\password_reset_from_key.html:15
+#: .\templates\account\password_reset_from_key.html:78
+#: .\templates\account\password_reset_from_key_done.html:15
+#: .\templates\core\tutorials\account_setup.html:79
+msgid "Change Password"
+msgstr "Jelszó módosítása"
+
+#: .\templates\account\password_reset_from_key.html:17
+#: .\templates\account\password_reset_from_key.html:35
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"A jelszó-visszaállítási hivatkozás érvénytelen volt, valószínűleg azért, "
+"mert már használták.Kérjen új jelszó-visszaállítást."
+
+#: .\templates\account\password_reset_from_key.html:19
+#, fuzzy
+#| msgid "Enter your new password below."
+msgid "Please enter your new password below."
+msgstr "Írja be alább az új jelszavát."
+
+#: .\templates\account\password_reset_from_key.html:34
+#, fuzzy
+#| msgid "API Bearer Token"
+msgid "Bad Token"
+msgstr "API Bearer Token"
+
+#: .\templates\account\password_reset_from_key.html:42
+#, fuzzy
+#| msgid "Reset Password"
+msgid "Request New Password Reset"
+msgstr "Jelszó visszaállítása"
+
+#: .\templates\account\password_reset_from_key.html:89
+#: .\templates\account\password_reset_from_key_done.html:5
+#: .\templates\account\password_reset_from_key_done.html:35
+#, fuzzy
+#| msgid "Password"
+msgid "Password Changed"
+msgstr "Jelszó"
+
+#: .\templates\account\password_reset_from_key.html:90
+#: .\templates\account\password_reset_from_key_done.html:36
+msgid "Your password is now changed."
+msgstr "A jelszava most megváltozott."
+
+#: .\templates\account\password_reset_from_key.html:97
+#: .\templates\account\password_reset_from_key_done.html:47
+#: .\templates\core\community_user_forum.html:45
+msgid "Log In"
+msgstr "Bejelentkezés"
+
+#: .\templates\account\password_reset_from_key_done.html:42
+#, fuzzy
+#| msgid "Enter and confirm your new password"
+msgid "You can now log in with your new password."
+msgstr "Írja be és erősítse meg új jelszavát"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Need Help?"
+msgid "Need help?"
+msgstr "Segítségre van szüksége?"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Contact Us"
+msgid "Contact us"
+msgstr "Lépjen kapcsolatba velünk"
+
+#: .\templates\account\signup.html:15 .\templates\core\home.html:1167
 #: .\templates\core\tutorials\quick_start.html:40
 msgid "Create Your Account"
 msgstr "Hozzon létre fiókot"
@@ -1696,6 +2038,123 @@ msgstr "Már van fiókja?"
 msgid "Log in"
 msgstr "Jelentkezzen be"
 
+#: .\templates\analytics\dashboard.html:5
+#: .\templates\analytics\dashboard.html:15
+#: .\templates\core\docs\analytics.html:32
+#: .\templates\core\feature_analytics.html:60
+msgid "Analytics Dashboard"
+msgstr "Analytics irányítópult"
+
+#: .\templates\analytics\dashboard.html:16
+#, fuzzy
+#| msgid "Track your campaign performance"
+msgid "Monitor your email campaign performance"
+msgstr "Kövesse nyomon kampánya teljesítményét"
+
+#: .\templates\analytics\dashboard.html:31
+#, fuzzy
+#| msgid "Total sent"
+msgid "Total Sent"
+msgstr "Összesen elküldve"
+
+#: .\templates\analytics\dashboard.html:48
+#: .\templates\analytics\dashboard.html:63
+#, fuzzy
+#| msgid "Generate"
+msgid "rate"
+msgstr "Generál"
+
+#: .\templates\analytics\dashboard.html:76
+#: .\templates\campaigns\campaign_analysis.html:66
+#: .\templates\campaigns\campaign_analysis.html:92
+msgid "Delivery Rate"
+msgstr "Szállítási arány"
+
+#: .\templates\analytics\dashboard.html:78
+#, fuzzy
+#| msgid "Bounces"
+msgid "bounces"
+msgstr "Pattanások"
+
+#: .\templates\analytics\dashboard.html:89
+#, fuzzy
+#| msgid "Inactive"
+msgid "active"
+msgstr "Inaktív"
+
+#: .\templates\analytics\dashboard.html:90
+#, fuzzy
+#| msgid "Be at least 300 words"
+msgid "in last 30 days"
+msgstr "Legyen legalább 300 szó"
+
+#: .\templates\analytics\dashboard.html:96
+#, fuzzy
+#| msgid "Total campaigns"
+msgid "total campaigns"
+msgstr "Összes kampány"
+
+#: .\templates\analytics\dashboard.html:100
+#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\core\tutorials\performance_dashboard.html:121
+msgid "Unsubscribes"
+msgstr "Leiratkozás"
+
+#: .\templates\analytics\dashboard.html:102
+#, fuzzy
+#| msgid "Total subscribers:"
+msgid "total unsubscribes"
+msgstr "Összes feliratkozó:"
+
+#: .\templates\analytics\dashboard.html:109
+#: .\templates\core\feature_analytics.html:15
+msgid "Campaign Performance"
+msgstr "Kampány teljesítménye"
+
+#: .\templates\analytics\dashboard.html:128
+#: .\templates\campaigns\campaign_analysis.html:58
+#: .\templates\campaigns\campaign_analysis.html:98
+#: .\templates\core\feature_analytics.html:154
+#: .\templates\core\tutorials\email_analytics.html:30
+msgid "Open Rate"
+msgstr "Nyitott arány"
+
+#: .\templates\analytics\dashboard.html:131
+#: .\templates\campaigns\campaign_analysis.html:62
+msgid "Click Rate"
+msgstr "Kattintson az Értékelés elemre"
+
+#: .\templates\analytics\dashboard.html:172
+#, fuzzy
+#| msgid "Create your first campaign to start creating email templates."
+msgid "No campaigns yet. Create your first campaign to see analytics."
+msgstr "Az e-mail sablonok létrehozásához hozza létre első kampányát."
+
+#: .\templates\analytics\dashboard.html:184
+#, fuzzy
+#| msgid "Recent Activity Feed"
+msgid "Recent Activity"
+msgstr "Legutóbbi tevékenység hírcsatornája"
+
+#: .\templates\analytics\dashboard.html:217
+#, fuzzy
+#| msgid "Campaigns:"
+msgid "Campaign:"
+msgstr "Kampányok:"
+
+#: .\templates\analytics\dashboard.html:221
+#: .\templates\campaigns\campaign_emails.html:236
+#, fuzzy
+#| msgid "Lao"
+msgid "ago"
+msgstr "Lao"
+
+#: .\templates\analytics\dashboard.html:229
+#, fuzzy
+#| msgid "No activity"
+msgid "No recent activity"
+msgstr "Nincs tevékenység"
+
 #: .\templates\analytics\footer_confirm_delete.html:4
 #: .\templates\analytics\footer_confirm_delete.html:10
 #: .\templates\analytics\footer_confirm_delete.html:51
@@ -1717,7 +2176,7 @@ msgstr "Ez a művelet nem vonható vissza.A lábléc véglegesen törlődik."
 #: .\templates\analytics\footer_form.html:5
 #: .\templates\analytics\footer_form.html:80
 #: .\templates\analytics\footer_list.html:20
-#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:567
 msgid "Create Footer"
 msgstr "Lábléc létrehozása"
 
@@ -1742,7 +2201,7 @@ msgid "Back to Footers"
 msgstr "Vissza a láblécekhez"
 
 #: .\templates\analytics\footer_form.html:46
-#: .\templates\campaigns\template.html:456
+#: .\templates\campaigns\template.html:537
 msgid "Footer Name"
 msgstr "Lábléc neve"
 
@@ -1763,7 +2222,7 @@ msgstr ""
 "linkeket és formázhat szöveget."
 
 #: .\templates\analytics\footer_form.html:68
-#: .\templates\campaigns\template.html:477
+#: .\templates\campaigns\template.html:558
 msgid "Set as default footer"
 msgstr "Beállítás alapértelmezett láblécként"
 
@@ -1772,7 +2231,7 @@ msgid "Update Footer"
 msgstr "Lábléc frissítése"
 
 #: .\templates\analytics\footer_form.html:89
-#: .\templates\campaigns\template.html:115
+#: .\templates\campaigns\template.html:142
 #: .\templates\campaigns\template_revision.html:142
 #: .\templates\core\feature_email_templates.html:133
 msgid "Preview"
@@ -1803,8 +2262,9 @@ msgid "Preview:"
 msgstr "Előnézet:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
-#: .\templates\core\dashboard.html:463
+#: .\templates\campaigns\campaign_emails.html:148
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:528
+#: .\templates\core\dashboard.html:604
 msgid "Created"
 msgstr "Létrehozva"
 
@@ -1814,7 +2274,7 @@ msgid "Updated"
 msgstr "Frissítve"
 
 #: .\templates\analytics\footer_list.html:68
-#: .\templates\campaigns\edit.html:111
+#: .\templates\campaigns\edit.html:136
 msgid "Edit"
 msgstr "Szerkesztés"
 
@@ -1823,7 +2283,7 @@ msgid "Set Default"
 msgstr "Alapértelmezett"
 
 #: .\templates\analytics\footer_list.html:79
-#: .\templates\campaigns\edit.html:115
+#: .\templates\campaigns\edit.html:140
 msgid "Delete"
 msgstr "Töröl"
 
@@ -1858,7 +2318,7 @@ msgstr ""
 " kövesse nyomon csepegtető kampányokat hatékony e-mail automatizálási "
 "platformunkkal."
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid ""
 "Free drip email marketing software with unlimited campaigns, subscribers, "
 "and automated email sequences"
@@ -1866,50 +2326,50 @@ msgstr ""
 "Ingyenes csepegtető e-mail marketingszoftver korlátlan kampányokkal, "
 "előfizetőkkel és automatizált e-mail sorozatokkal"
 
-#: .\templates\base.html:106
+#: .\templates\base.html:107
 msgid "Search templates & campaigns..."
 msgstr "Keresési sablonok és kampányok..."
 
-#: .\templates\base.html:139 .\templates\base.html:176
+#: .\templates\base.html:140 .\templates\base.html:177
 #: .\templates\campaigns\drafts.html:19 .\templates\core\dashboard.html:52
 #: .\templates\core\feature_email_scheduling.html:39
 msgid "Dashboard"
 msgstr "Műszerfal"
 
-#: .\templates\base.html:140 .\templates\base.html:177
+#: .\templates\base.html:141 .\templates\base.html:178
 #: .\templates\core\dashboard.html:60
 msgid "Settings"
 msgstr "Beállítások elemre"
 
-#: .\templates\base.html:141 .\templates\base.html:178
+#: .\templates\base.html:142 .\templates\base.html:179
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: .\templates\base.html:144 .\templates\base.html:181
-#: .\templates\core\home.html:509 .\templates\core\home.html:746
+#: .\templates\base.html:145 .\templates\base.html:182
+#: .\templates\core\home.html:811 .\templates\core\home.html:1075
 msgid "Sign Up Free"
 msgstr "Regisztráció ingyenes"
 
-#: .\templates\base.html:215
+#: .\templates\base.html:216
 msgid "Free drip email marketing automation for everyone."
 msgstr "Ingyenes csepegtető e-mail marketing automatizálás mindenki számára."
 
-#: .\templates\base.html:233 .\templates\core\docs\campaigns.html:45
+#: .\templates\base.html:234 .\templates\core\docs\campaigns.html:45
 #: .\templates\core\docs\smtp_server.html:40
 msgid "Features"
 msgstr "Jellemzők"
 
-#: .\templates\base.html:235 .\templates\core\feature_drip_campaigns.html:4
+#: .\templates\base.html:236 .\templates\core\feature_drip_campaigns.html:4
 #: .\templates\core\feature_drip_campaigns.html:8
 msgid "Drip Campaigns"
 msgstr "Cseppkampányok"
 
-#: .\templates\base.html:236 .\templates\core\feature_email_scheduling.html:4
+#: .\templates\base.html:237 .\templates\core\feature_email_scheduling.html:4
 #: .\templates\core\feature_email_scheduling.html:8
 msgid "Email Scheduling"
 msgstr "E-mail ütemezés"
 
-#: .\templates\base.html:237 .\templates\core\docs\campaigns.html:60
+#: .\templates\base.html:238 .\templates\core\docs\campaigns.html:60
 #: .\templates\core\docs\getting_started.html:84
 #: .\templates\core\feature_analytics.html:4
 #: .\templates\core\resource_api_reference.html:96
@@ -1917,7 +2377,7 @@ msgstr "E-mail ütemezés"
 msgid "Analytics"
 msgstr "Analitika"
 
-#: .\templates\base.html:238 .\templates\core\docs\base_docs.html:35
+#: .\templates\base.html:239 .\templates\core\docs\base_docs.html:35
 #: .\templates\core\docs\subscribers.html:5
 #: .\templates\core\feature_subscriber_management.html:4
 #: .\templates\core\feature_subscriber_management.html:8
@@ -1926,85 +2386,85 @@ msgstr "Analitika"
 msgid "Subscriber Management"
 msgstr "Előfizetőkezelés"
 
-#: .\templates\base.html:243
+#: .\templates\base.html:244
 msgid "Resources"
 msgstr "Erőforrás"
 
-#: .\templates\base.html:245 .\templates\core\docs\base_docs.html:4
+#: .\templates\base.html:246 .\templates\core\docs\base_docs.html:4
 #: .\templates\core\docs\base_docs.html:11
 #: .\templates\core\tutorials\quick_start.html:184
 #: .\templates\core\tutorials\smtp_setup.html:182
 msgid "Documentation"
 msgstr "Dokumentáció"
 
-#: .\templates\base.html:246
+#: .\templates\base.html:247
 msgid "Tutorials"
 msgstr "Oktatóanyagok"
 
-#: .\templates\base.html:247 .\templates\core\resource_api_reference.html:4
+#: .\templates\base.html:248 .\templates\core\resource_api_reference.html:4
 #: .\templates\core\resource_api_reference.html:79
 msgid "API Reference"
 msgstr "API-referencia"
 
-#: .\templates\base.html:248 .\templates\core\resource_community.html:4
+#: .\templates\base.html:249 .\templates\core\resource_community.html:4
 #: .\templates\core\resource_community.html:8
 #: .\templates\core\tutorials\quick_start.html:185
 msgid "Community"
 msgstr "Közösség"
 
-#: .\templates\base.html:249 .\templates\blog\blog_index.html:4
+#: .\templates\base.html:250 .\templates\blog\blog_index.html:4
 #: .\templates\blog\blog_index.html:8
 msgid "Blog"
 msgstr "Blog"
 
-#: .\templates\base.html:254
+#: .\templates\base.html:255
 msgid "Company"
 msgstr "Vállalat"
 
-#: .\templates\base.html:256 .\templates\core\about.html:5
+#: .\templates\base.html:257 .\templates\core\about.html:5
 msgid "About"
 msgstr "Körülbelül"
 
-#: .\templates\base.html:257
+#: .\templates\base.html:258
 msgid "Contact"
 msgstr "Érintkezés"
 
-#: .\templates\base.html:258 .\templates\core\privacy.html:4
+#: .\templates\base.html:259 .\templates\core\privacy.html:4
 #: .\templates\core\privacy.html:12
 msgid "Privacy Policy"
 msgstr "Adatvédelmi szabályzat"
 
-#: .\templates\base.html:259 .\templates\core\terms.html:4
+#: .\templates\base.html:260 .\templates\core\terms.html:4
 #: .\templates\core\terms.html:12
 msgid "Terms of Service"
 msgstr "Szolgáltatási feltételek"
 
-#: .\templates\base.html:264
+#: .\templates\base.html:265
 msgid "All rights reserved."
 msgstr "Minden jog fenntartva."
 
-#: .\templates\base.html:330
+#: .\templates\base.html:331
 msgid "Searching..."
 msgstr "Keresés..."
 
-#: .\templates\base.html:345
+#: .\templates\base.html:346
 msgid "Error performing search. Please try again."
 msgstr "Hiba a keresés során.Kérjük, próbálja újra."
 
-#: .\templates\base.html:355
+#: .\templates\base.html:356
 msgid "No templates or campaigns found matching"
 msgstr "Nem találhatók megfelelő sablonok vagy kampányok"
 
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:18
+#: .\templates\core\dashboard.html:547 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Inaktív"
 
-#: .\templates\base.html:385
+#: .\templates\base.html:386
 msgid "emails"
 msgstr "e-maileket"
 
-#: .\templates\base.html:396 .\templates\base.html:398
+#: .\templates\base.html:397 .\templates\base.html:399
 #: .\templates\campaigns\drafts.html:3 .\templates\campaigns\drafts.html:9
 #: .\templates\core\docs\base_docs.html:39
 #: .\templates\core\docs\campaigns.html:48
@@ -2029,18 +2489,18 @@ msgid "Back to Blog"
 msgstr "Vissza a Bloghoz"
 
 #: .\templates\campaigns\campaign_analysis.html:5
-#: .\templates\campaigns\campaign_analysis.html:10
+#: .\templates\campaigns\campaign_analysis.html:14
 msgid "Campaign Analysis"
 msgstr "Kampányelemzés"
 
-#: .\templates\campaigns\campaign_analysis.html:12
+#: .\templates\campaigns\campaign_analysis.html:16
 #: .\templates\campaigns\drafts.html:17
 #: .\templates\campaigns\template_revision.html:5
 #: .\templates\campaigns\template_revision.html:29
 msgid "Template Revision"
 msgstr "Sablon felülvizsgálata"
 
-#: .\templates\campaigns\campaign_analysis.html:21
+#: .\templates\campaigns\campaign_analysis.html:25
 #: .\templates\campaigns\template_revision.html:40
 #: .\templates\campaigns\template_revision.html:51
 #: .\templates\core\tutorials\account_setup.html:33
@@ -2048,99 +2508,68 @@ msgstr "Sablon felülvizsgálata"
 msgid "Select"
 msgstr "Válassza ki"
 
-#: .\templates\campaigns\campaign_analysis.html:30
+#: .\templates\campaigns\campaign_analysis.html:34
 msgid "Select a campaign to view analysis."
 msgstr "Válasszon ki egy kampányt az elemzés megtekintéséhez."
 
-#: .\templates\campaigns\campaign_analysis.html:33
+#: .\templates\campaigns\campaign_analysis.html:37
 msgid "Campaign Statistics"
 msgstr "Kampánystatisztika"
 
-#: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1218
+#: .\templates\campaigns\campaign_analysis.html:38
+#: .\templates\core\dashboard.html:1414
 msgid "Loading..."
 msgstr "Terhelés..."
 
-#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:47
 msgid "Opens"
 msgstr "Megnyílik"
 
-#: .\templates\campaigns\campaign_analysis.html:47
+#: .\templates\campaigns\campaign_analysis.html:51
 msgid "Clicks"
 msgstr "Kattintások"
 
-#: .\templates\campaigns\campaign_analysis.html:54
-#: .\templates\core\feature_analytics.html:154
-#: .\templates\core\tutorials\email_analytics.html:30
-msgid "Open Rate"
-msgstr "Nyitott arány"
-
-#: .\templates\campaigns\campaign_analysis.html:58
-msgid "Click Rate"
-msgstr "Kattintson az Értékelés elemre"
-
-#: .\templates\campaigns\campaign_analysis.html:62
-msgid "Delivery Rate"
-msgstr "Szállítási arány"
-
-#: .\templates\campaigns\campaign_analysis.html:69
+#: .\templates\campaigns\campaign_analysis.html:73
 msgid "Bounces"
 msgstr "Pattanások"
 
-#: .\templates\campaigns\campaign_analysis.html:73
-#: .\templates\core\tutorials\performance_dashboard.html:121
-msgid "Unsubscribes"
-msgstr "Leiratkozás"
-
-#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\campaigns\campaign_analysis.html:81
 msgid "Complaints"
 msgstr "Panaszok"
 
-#: .\templates\campaigns\campaign_analysis.html:84
-msgid "Metrics Overview"
-msgstr "A mérőszámok áttekintése"
-
 #: .\templates\campaigns\campaign_analysis.html:88
-msgid "Open Rate (trend)"
-msgstr "Nyitási arány (trend)"
+msgid "Past 7 Days Trends"
+msgstr "Az elmúlt 7 nap trendjei"
 
-#: .\templates\campaigns\campaign_analysis.html:90
-#: .\templates\campaigns\campaign_analysis.html:96
-#: .\templates\campaigns\campaign_analysis.html:102
-msgid "Coming soon"
-msgstr "Hamarosan"
+#: .\templates\campaigns\campaign_analysis.html:104
+#, fuzzy
+#| msgid "Click-through rate"
+msgid "Click-Through Rate"
+msgstr "Átkattintási arány"
 
-#: .\templates\campaigns\campaign_analysis.html:94
-msgid "Click Rate (trend)"
-msgstr "Kattintási arány (trend)"
-
-#: .\templates\campaigns\campaign_analysis.html:100
-msgid "Delivery Rate (trend)"
-msgstr "Szállítási arány (trend)"
-
-#: .\templates\campaigns\campaign_analysis.html:110
+#: .\templates\campaigns\campaign_analysis.html:114
 msgid "Monthly events"
 msgstr "Havi események"
 
-#: .\templates\campaigns\campaign_analysis.html:116
+#: .\templates\campaigns\campaign_analysis.html:120
 msgid "Month"
 msgstr "Hónap"
 
-#: .\templates\campaigns\campaign_analysis.html:135
+#: .\templates\campaigns\campaign_analysis.html:139
 msgid "No events found for this campaign."
 msgstr "Nem találhatók események ehhez a kampányhoz."
 
-#: .\templates\campaigns\campaign_analysis.html:141
+#: .\templates\campaigns\campaign_analysis.html:145
 msgid "Per-email breakdown"
 msgstr "E-mailenkénti bontás"
 
-#: .\templates\campaigns\campaign_analysis.html:166
+#: .\templates\campaigns\campaign_analysis.html:170
 msgid "No emails found for this campaign."
 msgstr "Nem találhatók e-mailek ehhez a kampányhoz."
 
 #: .\templates\campaigns\campaign_edit_page.html:4
 #: .\templates\campaigns\campaign_edit_page.html:8
-#: .\templates\campaigns\edit.html:4
+#: .\templates\campaigns\edit.html:5
 msgid "Edit Campaign"
 msgstr "Kampány szerkesztése"
 
@@ -2157,7 +2586,7 @@ msgid "Add New Email"
 msgstr "Új e-mail hozzáadása"
 
 #: .\templates\campaigns\campaign_edit_page.html:40
-#: .\templates\campaigns\edit.html:102
+#: .\templates\campaigns\edit.html:127
 msgid "Wait"
 msgstr "Várjon"
 
@@ -2189,60 +2618,245 @@ msgstr "API-kód a sablon elindításához"
 msgid "No emails have been added to this campaign yet."
 msgstr "Ehhez a kampányhoz még nem adtak hozzá e-maileket."
 
+#: .\templates\campaigns\campaign_emails.html:14
+msgid "Email Queue and History"
+msgstr "E-mail sor és előzmények"
+
+#: .\templates\campaigns\campaign_emails.html:18
+#, fuzzy
+#| msgid "Save to Campaign"
+msgid "Back to Campaign"
+msgstr "Mentés a kampányba"
+
+#: .\templates\campaigns\campaign_emails.html:28
+#: .\templates\campaigns\campaign_emails.html:46
+#: .\templates\campaigns\edit.html:168 .\templates\campaigns\edit.html:321
+#, fuzzy
+#| msgid "Send Email"
+msgid "Pending Emails"
+msgstr "E-mail küldése"
+
+#: .\templates\campaigns\campaign_emails.html:32
+#: .\templates\campaigns\campaign_emails.html:186
+#: .\templates\campaigns\edit.html:164 .\templates\campaigns\edit.html:180
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Emails"
+msgstr "E-mail küldése"
+
+#: .\templates\campaigns\campaign_emails.html:36
+#: .\templates\campaigns\campaign_emails.html:391
+#, fuzzy
+#| msgid "Send Email"
+msgid "Failed Emails"
+msgstr "E-mail küldése"
+
+#: .\templates\campaigns\campaign_emails.html:47
+#, fuzzy
+#| msgid "Email scheduled for {time}"
+msgid "Emails scheduled to be sent"
+msgstr "E-mail ütemezve ide: {time}"
+
+#: .\templates\campaigns\campaign_emails.html:60
+#: .\templates\campaigns\campaign_emails.html:200
+#: .\templates\campaigns\campaign_emails.html:271
+#: .\templates\campaigns\campaign_emails.html:404
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient"
+msgstr "Címzett e-mail címe"
+
+#: .\templates\campaigns\campaign_emails.html:69
+#: .\templates\campaigns\campaign_emails.html:280
+#: .\templates\campaigns\campaign_emails.html:413
+#: .\templates\core\dashboard.html:530 .\templates\core\dashboard.html:606
+msgid "Actions"
+msgstr "Akciók"
+
+#: .\templates\campaigns\campaign_emails.html:100
+msgid "In"
+msgstr ""
+
+#: .\templates\campaigns\campaign_emails.html:104
+#, fuzzy
+#| msgid "Overview"
+msgid "Overdue"
+msgstr "Áttekintés"
+
+#: .\templates\campaigns\campaign_emails.html:116
+#: .\templates\campaigns\drafts.html:238 .\templates\campaigns\edit.html:354
+#: .\templates\core\dashboard.html:410 .\templates\core\dashboard.html:1281
+#: .\templates\core\feature_email_scheduling.html:44
+#: .\templates\core\tutorials\quick_start.html:148
+msgid "Send Now"
+msgstr "Küldés most"
+
+#: .\templates\campaigns\campaign_emails.html:125
+#: .\templates\campaigns\campaign_emails.html:250
+#: .\templates\campaigns\campaign_emails.html:327
+#: .\templates\campaigns\edit.html:538 .\templates\campaigns\template.html:365
+msgid "Email Details"
+msgstr "E-mail Részletek"
+
+#: .\templates\campaigns\campaign_emails.html:132
+#: .\templates\campaigns\campaign_emails.html:257
+#: .\templates\campaigns\campaign_emails.html:334
+#: .\templates\campaigns\template.html:5
+#: .\templates\campaigns\template.html:104 .\templates\core\dashboard.html:401
+msgid "Email Template"
+msgstr "E-mail sablon"
+
+#: .\templates\campaigns\campaign_emails.html:156
+#: .\templates\campaigns\template.html:432
+#: .\templates\core\dashboard.html:1245
+msgid "Email Preview"
+msgstr "E-mail előnézet"
+
+#: .\templates\campaigns\campaign_emails.html:175
+#, fuzzy
+#| msgid "Top performing emails"
+msgid "No pending emails"
+msgstr "A legjobban teljesítő e-mailek"
+
+#: .\templates\campaigns\campaign_emails.html:176
+msgid "All emails have been sent or there are no scheduled emails."
+msgstr "Az összes e-mailt elküldtük, vagy nincsenek ütemezett e-mailek."
+
+#: .\templates\campaigns\campaign_emails.html:187
+#, fuzzy
+#| msgid "Successfully Unsubscribed"
+msgid "Successfully sent emails"
+msgstr "Sikeresen leiratkozott"
+
+#: .\templates\campaigns\campaign_emails.html:265
+#, fuzzy
+#| msgid "Sent At"
+msgid "Actually Sent At"
+msgstr "Elküldve:"
+
+#: .\templates\campaigns\campaign_emails.html:274
+#: .\templates\campaigns\campaign_emails.html:407
+#: .\templates\core\dashboard.html:1231
+msgid "Error"
+msgstr "Hiba"
+
+#: .\templates\campaigns\campaign_emails.html:318
+#: .\templates\campaigns\campaign_emails.html:444
+#: .\templates\core\dashboard.html:1343
+msgid "Retry"
+msgstr "Próbálja újra"
+
+#: .\templates\campaigns\campaign_emails.html:342
+msgid "Last Attempt"
+msgstr "Utolsó kísérlet"
+
+#: .\templates\campaigns\campaign_emails.html:384
+#: .\templates\campaigns\edit.html:250 .\templates\campaigns\edit.html:400
+#: .\templates\campaigns\edit.html:561 .\templates\campaigns\template.html:136
+#: .\templates\campaigns\template.html:172
+msgid "Email Content"
+msgstr "E-mail tartalom"
+
+#: .\templates\campaigns\campaign_emails.html:392
+#, fuzzy
+#| msgid "Email already sent."
+msgid "Emails that failed to send"
+msgstr "E-mail már elküldve."
+
+#: .\templates\campaigns\campaign_emails.html:457
+#, fuzzy
+#| msgid "Email Details"
+msgid "No failed emails"
+msgstr "E-mail Részletek"
+
+#: .\templates\campaigns\campaign_emails.html:458
+#, fuzzy
+#| msgid "Email sent successfully."
+msgid "All emails were sent successfully."
+msgstr "E-mail sikeresen elküldve."
+
+#: .\templates\campaigns\campaign_emails.html:487
+#, fuzzy
+#| msgid "Are you sure you want to delete this email?"
+msgid "Are you sure you want to send this email now?"
+msgstr "Biztosan törli ezt az e-mailt?"
+
+#: .\templates\campaigns\campaign_emails.html:493
+#: .\templates\campaigns\drafts.html:363 .\templates\campaigns\edit.html:909
+#: .\templates\campaigns\template.html:1085
+#: .\templates\campaigns\template_revision.html:393
+msgid "Sending..."
+msgstr "Küldés..."
+
+#: .\templates\campaigns\campaign_emails.html:505
+#: .\templates\campaigns\edit.html:924
+#: .\templates\campaigns\template.html:1119
+#, fuzzy
+#| msgid "Email sent successfully"
+msgid "Email sent successfully!"
+msgstr "E-mail sikeresen elküldve"
+
+#: .\templates\campaigns\campaign_emails.html:512
+#: .\templates\campaigns\edit.html:932
+#, fuzzy
+#| msgid "Failed to send email: "
+msgid "Failed to send email"
+msgstr "Nem sikerült elküldeni az e-mailt:"
+
 #: .\templates\campaigns\create.html:4 .\templates\campaigns\create.html:78
 #: .\templates\campaigns\drafts.html:55
 #: .\templates\core\feature_drip_campaigns.html:36
 msgid "Create Campaign"
 msgstr "Kampány létrehozása"
 
-#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:665
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Új kampány létrehozása"
 
-#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:29
+#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:54
 msgid "Campaign Name"
 msgstr "Kampány neve"
 
-#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:45
+#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:70
 msgid "Select a list or upload contacts"
 msgstr "Válasszon listát, vagy töltsön fel névjegyeket"
 
 #: .\templates\campaigns\create.html:38 .\templates\campaigns\create.html:46
-#: .\templates\campaigns\edit.html:52 .\templates\campaigns\edit.html:138
+#: .\templates\campaigns\edit.html:77 .\templates\campaigns\edit.html:641
 msgid "Upload Contacts"
 msgstr "Névjegyek feltöltése"
 
-#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:141
+#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:644
 #: .\templates\subscribers\import.html:95
 msgid "List Name"
 msgstr "Lista neve"
 
-#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:144
+#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:647
 msgid "My Contact List"
 msgstr "Saját névjegyzék"
 
-#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:147
+#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:650
 msgid "Contact File"
 msgstr "Kapcsolattartó fájl"
 
-#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:150
+#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:653
 msgid "Supported formats: CSV, Excel (.xls, .xlsx)"
 msgstr "Támogatott formátumok: CSV, Excel (.xls, .xlsx)"
 
-#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:160
+#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:663
 msgid "Upload"
 msgstr "Feltöltés"
 
-#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:187
+#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:690
 msgid "Please select a file to upload"
 msgstr "Kérjük, válasszon egy fájlt a feltöltéshez"
 
-#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:217
+#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:720
 msgid "Contacts uploaded successfully"
 msgstr "A névjegyek sikeresen feltöltve"
 
-#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:220
+#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:723
 msgid "An error occurred while uploading contacts"
 msgstr "Hiba történt a névjegyek feltöltése közben"
 
@@ -2262,7 +2876,7 @@ msgstr "Válasszon kampányt"
 msgid "(Active)"
 msgstr "(Aktív)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:573
 msgid "No campaigns yet"
 msgstr "Még nincsenek kampányok"
 
@@ -2271,7 +2885,7 @@ msgid "Create your first campaign to start creating email templates."
 msgstr "Az e-mail sablonok létrehozásához hozza létre első kampányát."
 
 #: .\templates\campaigns\drafts.html:65
-#: .\templates\campaigns\template.html:296
+#: .\templates\campaigns\template.html:329
 msgid "Select a campaign"
 msgstr "Válasszon ki egy kampányt"
 
@@ -2289,7 +2903,7 @@ msgstr "Nem található sablon"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Ehhez a kampányhoz még nem tartozik e-mail sablon."
 
-#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:683
 msgid "Create Email Template"
 msgstr "Hozzon létre e-mail sablont"
 
@@ -2310,7 +2924,7 @@ msgid "Revise"
 msgstr "Tekintse át"
 
 #: .\templates\campaigns\drafts.html:165
-#: .\templates\campaigns\template.html:438
+#: .\templates\campaigns\template.html:474
 msgid "Send"
 msgstr "Elküld"
 
@@ -2319,11 +2933,12 @@ msgid "Send Email Template"
 msgstr "E-mail sablon küldése"
 
 #: .\templates\campaigns\drafts.html:190
+#: .\templates\campaigns\template.html:492
 msgid "Recipient Email"
 msgstr "Címzett e-mail címe"
 
 #: .\templates\campaigns\drafts.html:219
-#: .\templates\campaigns\template.html:151
+#: .\templates\campaigns\template.html:181
 msgid "No footer"
 msgstr "Nincs lábléc"
 
@@ -2331,14 +2946,7 @@ msgstr "Nincs lábléc"
 msgid "Select a footer to append to your email"
 msgstr "Válassza ki az e-mailhez csatolandó láblécet"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
-#: .\templates\core\dashboard.html:1085
-#: .\templates\core\feature_email_scheduling.html:44
-#: .\templates\core\tutorials\quick_start.html:148
-msgid "Send Now"
-msgstr "Küldés most"
-
-#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:323
+#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:826
 msgid "An error occurred while reordering emails"
 msgstr "Hiba történt az e-mailek átrendezése közben"
 
@@ -2350,82 +2958,269 @@ msgstr "Kérjük, adja meg a címzett e-mail címét."
 msgid "Failed to update email settings: "
 msgstr "Nem sikerült frissíteni az e-mail beállításokat:"
 
-#: .\templates\campaigns\drafts.html:363
-#: .\templates\campaigns\template_revision.html:391
-msgid "Sending..."
-msgstr "Küldés..."
-
 #: .\templates\campaigns\drafts.html:381
-#: .\templates\campaigns\template_revision.html:409
+#: .\templates\campaigns\template_revision.html:411
 msgid "Email sent successfully to "
 msgstr "Az e-mail sikeresen elküldve a címre"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:413
 msgid "Failed to send email: "
 msgstr "Nem sikerült elküldeni az e-mailt:"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:277
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:279
+#: .\templates\campaigns\template_revision.html:413
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
 #: .\templates\campaigns\drafts.html:388
-#: .\templates\campaigns\template_revision.html:415
+#: .\templates\campaigns\template_revision.html:417
 msgid "Failed to send email. Please check your connection and try again."
 msgstr ""
 "Nem sikerült elküldeni az e-mailt.Kérjük, ellenőrizze a kapcsolatot, és "
 "próbálja újra."
 
-#: .\templates\campaigns\edit.html:14
+#: .\templates\campaigns\edit.html:39
 msgid "Deactivate"
 msgstr "Deaktiválás"
 
-#: .\templates\campaigns\edit.html:16
+#: .\templates\campaigns\edit.html:41
 msgid "Activate"
 msgstr "Aktiválja"
 
-#: .\templates\campaigns\edit.html:20
+#: .\templates\campaigns\edit.html:45
 #: .\templates\core\feature_drip_campaigns.html:52
 #: .\templates\core\feature_email_templates.html:48
 msgid "Add Email"
 msgstr "E-mail hozzáadása"
 
-#: .\templates\campaigns\edit.html:62
+#: .\templates\campaigns\edit.html:87
 msgid "Email Sequence"
 msgstr "E-mail sorozat"
 
-#: .\templates\campaigns\edit.html:68
+#: .\templates\campaigns\edit.html:93
 msgid "Create New Email"
 msgstr "Új e-mail létrehozása"
 
-#: .\templates\campaigns\edit.html:97
+#: .\templates\campaigns\edit.html:122
 msgid "Step"
 msgstr "Lépés"
 
-#: .\templates\campaigns\edit.html:123
+#: .\templates\campaigns\edit.html:148
 msgid "No emails in this campaign yet."
 msgstr "Ebben a kampányban még nincsenek e-mailek."
 
-#: .\templates\campaigns\edit.html:126
+#: .\templates\campaigns\edit.html:151
 msgid "Add First Email"
 msgstr "Első e-mail hozzáadása"
 
-#: .\templates\campaigns\edit.html:247
+#: .\templates\campaigns\edit.html:172
+msgid "IMAP Auto-Reply emails"
+msgstr "IMAP automatikus válaszlevelek"
+
+#: .\templates\campaigns\edit.html:191 .\templates\campaigns\edit.html:332
+#: .\templates\campaigns\edit.html:482 .\templates\core\dashboard.html:1643
+#: .\templates\core\dashboard.html:2081
+#, fuzzy
+#| msgid "To"
+msgid "To:"
+msgstr "To"
+
+#: .\templates\campaigns\edit.html:194 .\templates\campaigns\edit.html:495
+#, fuzzy
+#| msgid "Sent"
+msgid "Sent:"
+msgstr "Küldött"
+
+#: .\templates\campaigns\edit.html:197 .\templates\campaigns\edit.html:338
+#: .\templates\campaigns\edit.html:498
+#, fuzzy
+#| msgid "Status"
+msgid "Status:"
+msgstr "Állapot"
+
+#: .\templates\campaigns\edit.html:204 .\templates\campaigns\edit.html:346
+#: .\templates\campaigns\edit.html:505
+#, fuzzy
+#| msgid "View list details:"
+msgid "View Details"
+msgstr "Lista részleteinek megtekintése:"
+
+#: .\templates\campaigns\edit.html:216 .\templates\campaigns\edit.html:364
+#: .\templates\campaigns\edit.html:517
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email Attributes"
+msgstr "E-mail cím"
+
+#: .\templates\campaigns\edit.html:219 .\templates\campaigns\edit.html:367
+#: .\templates\campaigns\edit.html:520
+#, fuzzy
+#| msgid "Email 1"
+msgid "Email ID:"
+msgstr "E-mail 1"
+
+#: .\templates\campaigns\edit.html:223 .\templates\campaigns\edit.html:371
+#, fuzzy
+#| msgid "Order"
+msgid "Order:"
+msgstr "Rendelés"
+
+#: .\templates\campaigns\edit.html:228 .\templates\campaigns\edit.html:376
+#, fuzzy
+#| msgid "Subscribers:"
+msgid "Subscriber:"
+msgstr "Előfizetők:"
+
+#: .\templates\campaigns\edit.html:235 .\templates\campaigns\edit.html:383
+#, fuzzy
+#| msgid "Send in X Days"
+msgid "Sending Details"
+msgstr "Küldje el X napon belül"
+
+#: .\templates\campaigns\edit.html:238
+#, fuzzy
+#| msgid "Scheduled"
+msgid "Scheduled:"
+msgstr "Ütemezett"
+
+#: .\templates\campaigns\edit.html:242 .\templates\campaigns\edit.html:386
+#, fuzzy
+#| msgid "Created"
+msgid "Created:"
+msgstr "Létrehozva"
+
+#: .\templates\campaigns\edit.html:261
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No emails have been sent from this campaign yet."
+msgstr "Ehhez a kampányhoz még nem adtak hozzá e-maileket."
+
+#: .\templates\campaigns\edit.html:270 .\templates\campaigns\edit.html:289
+#: .\templates\campaigns\edit.html:420 .\templates\campaigns\edit.html:439
+#: .\templates\campaigns\edit.html:587 .\templates\campaigns\edit.html:606
+#: .\templates\core\dashboard.html:2464 .\templates\subscribers\list.html:174
+#: .\templates\subscribers\list.html:178
+msgid "Previous"
+msgstr "Előző"
+
+#: .\templates\campaigns\edit.html:275 .\templates\campaigns\edit.html:304
+#: .\templates\campaigns\edit.html:425 .\templates\campaigns\edit.html:454
+#: .\templates\campaigns\edit.html:592 .\templates\campaigns\edit.html:621
+#: .\templates\core\dashboard.html:2469 .\templates\subscribers\list.html:191
+#: .\templates\subscribers\list.html:195
+msgid "Next"
+msgstr "Következő"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "Showing"
+msgstr "Megjelenítés"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "to"
+msgstr "hogy"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599 .\templates\core\dashboard.html:2453
+msgid "of"
+msgstr "a"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+#, fuzzy
+#| msgid "Proven Results"
+msgid "results"
+msgstr "Bizonyított eredmények"
+
+#: .\templates\campaigns\edit.html:335
+#, fuzzy
+#| msgid "Scheduled For"
+msgid "Scheduled for:"
+msgstr "Ütemezett erre"
+
+#: .\templates\campaigns\edit.html:391
+#, fuzzy
+#| msgid "Variables"
+msgid "Variables:"
+msgstr "Változók"
+
+#: .\templates\campaigns\edit.html:411
+#, fuzzy
+#| msgid "No emails found for this campaign."
+msgid "No pending emails for this campaign."
+msgstr "Nem találhatók e-mailek ehhez a kampányhoz."
+
+#: .\templates\campaigns\edit.html:471
+msgid "IMAP Auto-Reply Emails"
+msgstr "IMAP automatikus válasz e-mailek"
+
+#: .\templates\campaigns\edit.html:492 .\templates\core\dashboard.html:2083
+#, fuzzy
+#| msgid "from:"
+msgid "From:"
+msgstr "tól:"
+
+#: .\templates\campaigns\edit.html:525
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email:"
+msgstr "Kampány részletei"
+
+#: .\templates\campaigns\edit.html:531
+msgid "IMAP Account:"
+msgstr "IMAP fiók:"
+
+#: .\templates\campaigns\edit.html:541
+msgid "Received:"
+msgstr "Megérkezett:"
+
+#: .\templates\campaigns\edit.html:546
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient:"
+msgstr "Címzett e-mail címe"
+
+#: .\templates\campaigns\edit.html:552
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient Name:"
+msgstr "Címzett e-mail címe"
+
+#: .\templates\campaigns\edit.html:568
+#, fuzzy
+#| msgid "No campaigns available."
+msgid "No content available"
+msgstr "Nincsenek elérhető kampányok."
+
+#: .\templates\campaigns\edit.html:578
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No IMAP auto-reply emails have been sent from this campaign yet."
+msgstr "Ehhez a kampányhoz még nem adtak hozzá e-maileket."
+
+#: .\templates\campaigns\edit.html:750
 msgid "An error occurred while updating the campaign"
 msgstr "Hiba történt a kampány frissítése közben"
 
-#: .\templates\campaigns\edit.html:267
+#: .\templates\campaigns\edit.html:770
 msgid "An error occurred while updating the campaign status"
 msgstr "Hiba történt a kampány állapotának frissítésekor"
 
-#: .\templates\campaigns\edit.html:274
+#: .\templates\campaigns\edit.html:777
 msgid "Are you sure you want to delete this email?"
 msgstr "Biztosan törli ezt az e-mailt?"
 
-#: .\templates\campaigns\edit.html:290
+#: .\templates\campaigns\edit.html:793
 msgid "An error occurred while deleting the email"
+msgstr "Hiba történt az e-mail törlésekor"
+
+#: .\templates\campaigns\edit.html:938
+#, fuzzy
+#| msgid "An error occurred while deleting the email"
+msgid "An error occurred while sending the email"
 msgstr "Hiba történt az e-mail törlésekor"
 
 #: .\templates\campaigns\email_analysis.html:5
@@ -2444,7 +3239,7 @@ msgstr ""
 "segítségével"
 
 #: .\templates\campaigns\email_analysis.html:116
-#: .\templates\campaigns\template.html:289
+#: .\templates\campaigns\template.html:322
 msgid "Select Campaign"
 msgstr "Válassza a Kampány lehetőséget"
 
@@ -2562,74 +3357,92 @@ msgstr "Téma"
 msgid "Number of Emails"
 msgstr "E-mailek száma"
 
-#: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
-msgid "Email Template"
-msgstr "E-mail sablon"
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "No campaigns yet"
+msgid "No campaign selected."
+msgstr "Még nincsenek kampányok"
 
-#: .\templates\campaigns\template.html:78
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "Choose which campaign to save this template to"
+msgid "You'll be prompted to select a campaign when you save this template."
+msgstr "Válassza ki, hogy melyik kampányba szeretné menteni ezt a sablont"
+
+#: .\templates\campaigns\template.html:89
+#, fuzzy
+#| msgid "Select a campaign"
+msgid "Or select a campaign now:"
+msgstr "Válasszon ki egy kampányt"
+
+#: .\templates\campaigns\template.html:91
+#, fuzzy
+#| msgid "No campaign (optional)"
+msgid "Select a campaign (optional)"
+msgstr "Nincs kampány (opcionális)"
+
+#: .\templates\campaigns\template.html:105
 msgid "Design your email template"
 msgstr "Tervezze meg e-mail sablonját"
 
-#: .\templates\campaigns\template.html:85
+#: .\templates\campaigns\template.html:112
 #: .\templates\campaigns\template_revision.html:101
 #: .\templates\core\feature_email_templates.html:57
 msgid "Email Subject"
 msgstr "E-mail tárgya"
 
-#: .\templates\campaigns\template.html:103
-msgid "Time to wait before sending this email after the previous one"
+#: .\templates\campaigns\template.html:130
+#, fuzzy
+#| msgid "Time to wait before sending this email after the previous one"
+msgid ""
+"Time to wait before sending this email after the previous one (0 = send "
+"immediately)"
 msgstr "Ideje várni, mielőtt elküldi ezt az e-mailt az előző után"
 
-#: .\templates\campaigns\template.html:109
-#: .\templates\campaigns\template.html:142
-msgid "Email Content"
-msgstr "E-mail tartalom"
-
-#: .\templates\campaigns\template.html:112
+#: .\templates\campaigns\template.html:139
 #: .\templates\core\feature_email_templates.html:97
 msgid "AI Generate"
 msgstr "AI generálás"
 
-#: .\templates\campaigns\template.html:118
+#: .\templates\campaigns\template.html:145
 msgid "Send Test"
 msgstr "Teszt küldése"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Available Variables"
 msgstr "Elérhető változók"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Click to copy"
 msgstr "Kattintson a másoláshoz"
 
-#: .\templates\campaigns\template.html:157
+#: .\templates\campaigns\template.html:187
 msgid "New Footer"
 msgstr "Új lábléc"
 
-#: .\templates\campaigns\template.html:161
+#: .\templates\campaigns\template.html:191
 msgid "Select a footer to append to your email, or leave empty for no footer."
 msgstr ""
 "Válassza ki az e-mailhez csatolandó láblécet, vagy hagyja üresen, ha nincs "
 "lábléc."
 
-#: .\templates\campaigns\template.html:167
+#: .\templates\campaigns\template.html:197
 msgid "API Integration"
 msgstr "API integráció"
 
-#: .\templates\campaigns\template.html:173
+#: .\templates\campaigns\template.html:203
 msgid "Your API Key"
 msgstr "Az Ön API-kulcsa"
 
-#: .\templates\campaigns\template.html:174
+#: .\templates\campaigns\template.html:204
 msgid "Use this key to authenticate your API requests"
 msgstr "Ezzel a kulccsal hitelesítheti API-kérelmeit"
 
-#: .\templates\campaigns\template.html:177
+#: .\templates\campaigns\template.html:207
 msgid "No API key found. Please contact support."
 msgstr "Nem található API-kulcs.Kérjük, forduljon az ügyfélszolgálathoz."
 
-#: .\templates\campaigns\template.html:181
+#: .\templates\campaigns\template.html:211
 #: .\templates\core\resource_api_reference.html:104
 #: .\templates\core\resource_api_reference.html:125
 #: .\templates\core\resource_api_reference.html:131
@@ -2641,15 +3454,15 @@ msgstr "Nem található API-kulcs.Kérjük, forduljon az ügyfélszolgálathoz."
 #: .\templates\core\resource_api_reference.html:383
 #: .\templates\core\resource_api_reference.html:469
 #: .\templates\core\resource_api_reference.html:497
-#: .\templates\core\settings.html:103
+#: .\templates\core\settings.html:119
 msgid "Copy"
 msgstr "Másolat"
 
-#: .\templates\campaigns\template.html:185
+#: .\templates\campaigns\template.html:215
 msgid "Regenerate"
 msgstr "Regenerátum"
 
-#: .\templates\campaigns\template.html:194
+#: .\templates\campaigns\template.html:224
 msgid ""
 "Send emails using this template via API. Here's how to trigger this template"
 " programmatically:"
@@ -2657,65 +3470,70 @@ msgstr ""
 "E-mailek küldése ezzel a sablonnal API-n keresztül.A sablon programozott "
 "aktiválásának módja:"
 
-#: .\templates\campaigns\template.html:198
+#: .\templates\campaigns\template.html:228
 msgid "Python"
 msgstr "Piton"
 
-#: .\templates\campaigns\template.html:218
+#: .\templates\campaigns\template.html:248
 msgid "JavaScript"
 msgstr "JavaScript"
 
-#: .\templates\campaigns\template.html:236
+#: .\templates\campaigns\template.html:266
 msgid "Ruby"
 msgstr "Rubin"
 
-#: .\templates\campaigns\template.html:262
+#: .\templates\campaigns\template.html:292
 msgid "Save your email template first to see the API code for sending emails."
 msgstr ""
 "Először mentse el az e-mail sablont, hogy megtekinthesse az e-mailek "
 "küldéséhez szükséges API-kódot."
 
-#: .\templates\campaigns\template.html:274
+#: .\templates\campaigns\template.html:304
+#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:519
+#: .\templates\campaigns\template_revision.html:137
+#: .\templates\core\feature_email_scheduling.html:40
+#: .\templates\core\feature_email_scheduling.html:53
+msgid "Send Email"
+msgstr "E-mail küldése"
+
 #: .\templates\campaigns\template.html:307
+#: .\templates\campaigns\template.html:340
 #: .\templates\campaigns\template_revision.html:131
 #: .\templates\core\feature_drip_campaigns.html:65
 #: .\templates\core\feature_email_templates.html:136
 msgid "Save Template"
 msgstr "Sablon mentése"
 
-#: .\templates\campaigns\template.html:290
+#: .\templates\campaigns\template.html:323
 msgid "Choose which campaign to save this template to"
 msgstr "Válassza ki, hogy melyik kampányba szeretné menteni ezt a sablont"
 
-#: .\templates\campaigns\template.html:318
+#: .\templates\campaigns\template.html:351
 msgid "Generate Email with AI"
 msgstr "E-mail létrehozása mesterséges intelligencia segítségével"
 
-#: .\templates\campaigns\template.html:319
+#: .\templates\campaigns\template.html:352
 msgid "Describe what you want in your email and let AI create the content"
 msgstr ""
 "Írja le, mit szeretne az e-mailjében, és hagyja, hogy a mesterséges "
 "intelligencia létrehozza a tartalmat"
 
-#: .\templates\campaigns\template.html:324
+#: .\templates\campaigns\template.html:357
 msgid "What is the email about?"
 msgstr "Miről szól az email?"
 
-#: .\templates\campaigns\template.html:327
+#: .\templates\campaigns\template.html:360
 msgid ""
 "e.g., New product launch, special discount offer, welcome to our service..."
 msgstr ""
 "pl.: Új termék bevezetése, akciós akció, üdvözöljük szolgáltatásunkban..."
 
-#: .\templates\campaigns\template.html:328
+#: .\templates\campaigns\template.html:361
 msgid "Describe the main topic or purpose of the email"
 msgstr "Írja le az e-mail fő témáját vagy célját"
 
-#: .\templates\campaigns\template.html:332
-msgid "Email Details"
-msgstr "E-mail Részletek"
-
-#: .\templates\campaigns\template.html:340
+#: .\templates\campaigns\template.html:373
 msgid ""
 "Include any specific details, offers, key points, or instructions you want "
 "included"
@@ -2723,107 +3541,113 @@ msgstr ""
 "Adjon meg minden konkrét részletet, ajánlatot, kulcsfontosságú pontot vagy "
 "utasítást, amelyet bele szeretne foglalni"
 
-#: .\templates\campaigns\template.html:345
+#: .\templates\campaigns\template.html:378
 msgid "Who is this for?"
 msgstr "Kinek szól ez?"
 
-#: .\templates\campaigns\template.html:348
+#: .\templates\campaigns\template.html:381
 msgid "e.g., customers, subscribers, users..."
 msgstr "például ügyfelek, előfizetők, felhasználók..."
 
-#: .\templates\campaigns\template.html:351
+#: .\templates\campaigns\template.html:384
 msgid "Tone"
 msgstr "Hang"
 
-#: .\templates\campaigns\template.html:354
+#: .\templates\campaigns\template.html:387
 msgid "Professional"
 msgstr "Szakmai"
 
-#: .\templates\campaigns\template.html:355
+#: .\templates\campaigns\template.html:388
 msgid "Friendly"
 msgstr "Barátságos"
 
-#: .\templates\campaigns\template.html:356
+#: .\templates\campaigns\template.html:389
 msgid "Persuasive"
 msgstr "Meggyőző"
 
-#: .\templates\campaigns\template.html:357
+#: .\templates\campaigns\template.html:390
 msgid "Casual"
 msgstr "Alkalmi"
 
-#: .\templates\campaigns\template.html:358
+#: .\templates\campaigns\template.html:391
 msgid "Formal"
 msgstr "Hivatalos"
 
-#: .\templates\campaigns\template.html:364
+#: .\templates\campaigns\template.html:397
 msgid "Email Length"
 msgstr "E-mail hossza"
 
-#: .\templates\campaigns\template.html:367
+#: .\templates\campaigns\template.html:400
 msgid "Short (concise, 2-3 paragraphs)"
 msgstr "Rövid (tömör, 2-3 bekezdés)"
 
-#: .\templates\campaigns\template.html:368
+#: .\templates\campaigns\template.html:401
 msgid "Medium (balanced, 4-5 paragraphs)"
 msgstr "Közepes (kiegyensúlyozott, 4-5 bekezdés)"
 
-#: .\templates\campaigns\template.html:369
+#: .\templates\campaigns\template.html:402
 msgid "Long (detailed, 6+ paragraphs)"
 msgstr "Hosszú (részletes, 6+ bekezdés)"
 
-#: .\templates\campaigns\template.html:375
-msgid ""
-"AI generation uses Hugging Face API to create email content. The generated "
-"subject and body will replace your current email."
-msgstr ""
-"A mesterséges intelligencia generációja a Hugging Face API-t használja az "
-"e-mail tartalmak létrehozásához.A generált tárgy és törzs helyettesíti a "
-"jelenlegi e-mailt."
-
-#: .\templates\campaigns\template.html:384
+#: .\templates\campaigns\template.html:420
 msgid "Generate Email"
 msgstr "E-mail generálása"
 
-#: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1049
-msgid "Email Preview"
-msgstr "E-mail előnézet"
-
-#: .\templates\campaigns\template.html:398
+#: .\templates\campaigns\template.html:434
 msgid "Close"
 msgstr "Közeli"
 
-#: .\templates\campaigns\template.html:412
+#: .\templates\campaigns\template.html:448
 msgid "Send Test Email"
 msgstr "Teszt e-mail küldése"
 
-#: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
-#: .\templates\core\settings.html:26 .\templates\core\settings.html:191
-msgid "Email Address"
-msgstr "E-mail cím"
-
-#: .\templates\campaigns\template.html:425
+#: .\templates\campaigns\template.html:461
+#: .\templates\campaigns\template.html:501
 msgid "Enter first name..."
 msgstr "Adja meg a keresztnevet..."
 
-#: .\templates\campaigns\template.html:431
+#: .\templates\campaigns\template.html:467
+#: .\templates\campaigns\template.html:507
 msgid "Enter last name..."
 msgstr "Írja be a vezetéknevet..."
 
-#: .\templates\campaigns\template.html:450
+#: .\templates\campaigns\template.html:487
+#, fuzzy
+#| msgid "Send this email to "
+msgid "Send this email template to a recipient"
+msgstr "Küldje el ezt az e-mailt a címre"
+
+#: .\templates\campaigns\template.html:495
+msgid "recipient@example.com"
+msgstr "címzett@example.com"
+
+#: .\templates\campaigns\template.html:511 .\templates\core\dashboard.html:359
+#: .\templates\core\docs\analytics.html:13
+#: .\templates\core\tutorials\quick_start.html:96
+msgid "Note:"
+msgstr "Jegyzet:"
+
+#: .\templates\campaigns\template.html:511
+msgid ""
+"The email will be sent immediately. The recipient will be automatically "
+"added to this campaign's subscriber list."
+msgstr ""
+"Az email azonnal elküldésre kerül.A címzett automatikusan felkerül a kampány"
+" feliratkozói listájára."
+
+#: .\templates\campaigns\template.html:531
 msgid "Create New Footer"
 msgstr "Új lábléc létrehozása"
 
-#: .\templates\campaigns\template.html:460
+#: .\templates\campaigns\template.html:541
 msgid "Enter footer name..."
 msgstr "Adja meg a lábléc nevét..."
 
-#: .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:545
 msgid "Footer Content (HTML)"
 msgstr "Lábléc tartalom (HTML)"
 
-#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:552
 msgid ""
 "Enter the HTML content for your footer. You can use variables like "
 "{{first_name}}, {{last_name}}, {{email}}, etc."
@@ -2831,110 +3655,163 @@ msgstr ""
 "Adja meg a lábléc HTML-tartalmát.Használhat olyan változókat, mint a "
 "{{first_name}}, {{last_name}}, {{email}} stb."
 
-#: .\templates\campaigns\template.html:547
+#: .\templates\campaigns\template.html:628
 msgid "Could not copy variable. Please try again."
 msgstr "Nem sikerült másolni a változót.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template.html:566
+#: .\templates\campaigns\template.html:647
 msgid "Enter your email content here..."
 msgstr "Ide írja be az e-mail tartalmát..."
 
-#: .\templates\campaigns\template.html:579
-#: .\templates\campaigns\template_revision.html:303
+#: .\templates\campaigns\template.html:680
+#: .\templates\campaigns\template_revision.html:305
 msgid "Please enter an email subject."
 msgstr "Kérjük, adja meg az e-mail tárgyát."
 
-#: .\templates\campaigns\template.html:584
-#: .\templates\campaigns\template_revision.html:308
+#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template_revision.html:310
 msgid "Please enter email content."
 msgstr "Kérjük, adja meg az e-mail tartalmát."
 
-#: .\templates\campaigns\template.html:599
+#: .\templates\campaigns\template.html:700
 msgid "Please select a campaign."
 msgstr "Kérjük, válasszon kampányt."
 
-#: .\templates\campaigns\template.html:618
-#: .\templates\campaigns\template.html:923
+#: .\templates\campaigns\template.html:727
+#: .\templates\campaigns\template.html:1144
+#: .\templates\campaigns\template.html:1235
 msgid "Wait time must be a number greater than 0."
 msgstr "A várakozási időnek 0-nál nagyobb számnak kell lennie."
 
-#: .\templates\campaigns\template.html:653
-#: .\templates\campaigns\template.html:967
-#: .\templates\campaigns\template_revision.html:346
+#: .\templates\campaigns\template.html:762
+#: .\templates\campaigns\template.html:1279
+#: .\templates\campaigns\template_revision.html:348
 msgid "Template saved successfully!"
 msgstr "A sablon sikeresen mentve!"
 
-#: .\templates\campaigns\template.html:659
+#: .\templates\campaigns\template.html:768
 msgid "An error occurred while saving the template: "
 msgstr "Hiba történt a sablon mentése közben:"
 
-#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template.html:794
 msgid "Enter footer content here..."
 msgstr "Írja be ide a lábléc tartalmát..."
 
-#: .\templates\campaigns\template.html:730
+#: .\templates\campaigns\template.html:839
 msgid "An error occurred while loading the template. Please try again."
 msgstr "Hiba történt a sablon betöltése közben.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template.html:739
+#: .\templates\campaigns\template.html:848
 msgid "Error: Campaign ID is missing. Please select a campaign first."
 msgstr ""
 "Hiba: a kampányazonosító hiányzik.Kérjük, először válasszon egy kampányt."
 
-#: .\templates\campaigns\template.html:779
+#: .\templates\campaigns\template.html:888
 msgid "Generating..."
 msgstr "Létrehozás..."
 
-#: .\templates\campaigns\template.html:813
+#: .\templates\campaigns\template.html:937
 msgid "Email generated successfully! Review and save when ready."
 msgstr ""
 "Az e-mail sikeresen generálva!Tekintse át és mentse el, ha készen áll."
 
-#: .\templates\campaigns\template.html:815
+#: .\templates\campaigns\template.html:939
 msgid "Error: Invalid response from AI service."
 msgstr "Hiba: Érvénytelen válasz az AI-szolgáltatástól."
 
-#: .\templates\campaigns\template.html:820
+#: .\templates\campaigns\template.html:948
 msgid "Failed to generate email. "
 msgstr "Nem sikerült létrehozni az e-mailt."
 
-#: .\templates\campaigns\template.html:822
-msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#: .\templates\campaigns\template.html:952
+msgid ""
+"Request timed out after 5 minutes. The AI generation is taking too long. "
+"Please try again or check server resources."
 msgstr ""
-"Győződjön meg arról, hogy a HUGGINGFACE_API_KEY környezeti változó be van "
-"állítva."
+"A kérés 5 perc után lejárt.A mesterséges intelligencia generációja túl "
+"sokáig tart.Kérjük, próbálja újra, vagy ellenőrizze a szerver erőforrásait."
 
-#: .\templates\campaigns\template.html:850
+#: .\templates\campaigns\template.html:954
+#, fuzzy
+#| msgid ""
+#| "Network error: Could not connect to server. Please check if the server is "
+#| "running."
+msgid ""
+"Network error: Could not connect to server. Please check your connection and"
+" try again."
+msgstr ""
+"Hálózati hiba: Nem sikerült csatlakozni a szerverhez.Kérjük, ellenőrizze, "
+"hogy a szerver fut-e."
+
+#: .\templates\campaigns\template.html:958
+#, fuzzy
+#| msgid "Error regenerating token. Please try again."
+msgid ""
+"Request timed out. The AI generation is taking too long. Please try again."
+msgstr "Hiba a token újragenerálása során.Kérjük, próbálja újra."
+
+#: .\templates\campaigns\template.html:960
+msgid "Please check the server logs for more details."
+msgstr "Kérjük, ellenőrizze a szerver naplóit további részletekért."
+
+#: .\templates\campaigns\template.html:962
+msgid "Please ensure Ollama is running on the server."
+msgstr "Győződjön meg arról, hogy az Ollama fut a szerveren."
+
+#: .\templates\campaigns\template.html:965
+#, fuzzy
+#| msgid "Error creating list. Please check console for details."
+msgid ""
+"Unknown error occurred. Please check the browser console and server logs for"
+" details."
+msgstr ""
+"Hiba a lista létrehozásakor.Kérjük, ellenőrizze a konzolt a részletekért."
+
+#: .\templates\campaigns\template.html:1000
 msgid "[Footer content would appear here]"
 msgstr "[A lábléc tartalom itt jelenne meg]"
 
-#: .\templates\campaigns\template.html:906
+#: .\templates\campaigns\template.html:1114
+#: .\templates\campaigns\template.html:1124
+#, fuzzy
+#| msgid ""
+#| "An error occurred while sending the test email. Please try again."
+msgid "An error occurred while sending the email. Please try again."
+msgstr "Hiba történt a teszt e-mail küldése közben.Kérjük, próbálja újra."
+
+#: .\templates\campaigns\template.html:1194
+#, fuzzy
+#| msgid "Failed to save template:"
+msgid "Failed to save template: "
+msgstr "Nem sikerült menteni a sablont:"
+
+#: .\templates\campaigns\template.html:1218
 #: .\templates\subscribers\add.html:213
 msgid "Saving..."
 msgstr "Megtakarítás..."
 
-#: .\templates\campaigns\template.html:973
+#: .\templates\campaigns\template.html:1285
 msgid "An error occurred while saving the template. Please try again."
 msgstr "Hiba történt a sablon mentése közben.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template.html:1009
+#: .\templates\campaigns\template.html:1321
 msgid "Please save the email template first before sending a test email."
 msgstr "Mielőtt teszt e-mailt küldene, először mentse el az e-mail sablont."
 
-#: .\templates\campaigns\template.html:1027
-#: .\templates\campaigns\template.html:1036
+#: .\templates\campaigns\template.html:1339
+#: .\templates\campaigns\template.html:1348
 msgid "An error occurred while sending the test email. Please try again."
 msgstr "Hiba történt a teszt e-mail küldése közben.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template.html:1031
+#: .\templates\campaigns\template.html:1343
 msgid "Test email sent successfully!"
 msgstr "A teszt e-mail sikeresen elküldve!"
 
-#: .\templates\campaigns\template.html:1058
+#: .\templates\campaigns\template.html:1370
 msgid "Copied!"
 msgstr "Másolva!"
 
-#: .\templates\campaigns\template.html:1065
+#: .\templates\campaigns\template.html:1377
 msgid ""
 "Are you sure you want to regenerate your API key? This will invalidate your "
 "current key and you will need to update any applications using it."
@@ -2942,25 +3819,25 @@ msgstr ""
 "Biztosan újra szeretné generálni API-kulcsát?Ez érvényteleníti jelenlegi "
 "kulcsát, és frissítenie kell az azt használó alkalmazásokat."
 
-#: .\templates\campaigns\template.html:1071 .\templates\core\settings.html:299
+#: .\templates\campaigns\template.html:1383 .\templates\core\settings.html:315
 msgid "Regenerating..."
 msgstr "Regenerálás..."
 
-#: .\templates\campaigns\template.html:1092
-#: .\templates\campaigns\template.html:1097
+#: .\templates\campaigns\template.html:1404
+#: .\templates\campaigns\template.html:1409
 msgid "Error regenerating API key. Please try again."
 msgstr "Hiba az API-kulcs újra létrehozásakor.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template.html:1140
+#: .\templates\campaigns\template.html:1452
 msgid "Please enter a footer name."
 msgstr "Adja meg a lábléc nevét."
 
-#: .\templates\campaigns\template.html:1145
+#: .\templates\campaigns\template.html:1457
 msgid "Please enter footer content."
 msgstr "Kérjük, adja meg a lábléc tartalmát."
 
-#: .\templates\campaigns\template.html:1189
-#: .\templates\campaigns\template.html:1194
+#: .\templates\campaigns\template.html:1501
+#: .\templates\campaigns\template.html:1506
 msgid "Error creating footer. Please try again."
 msgstr "Hiba a lábléc létrehozásakor.Kérjük, próbálja újra."
 
@@ -3006,57 +3883,51 @@ msgstr "Mentés a kampányba"
 msgid "Email Body"
 msgstr "E-mail törzs"
 
-#: .\templates\campaigns\template_revision.html:137
-#: .\templates\core\feature_email_scheduling.html:40
-#: .\templates\core\feature_email_scheduling.html:53
-msgid "Send Email"
-msgstr "E-mail küldése"
-
 #: .\templates\campaigns\template_revision.html:181
 msgid "Write your email content here..."
 msgstr "Írja ide az e-mail tartalmát..."
 
-#: .\templates\campaigns\template_revision.html:249
+#: .\templates\campaigns\template_revision.html:251
 msgid "Please enter some email content first."
 msgstr "Kérjük, először adjon meg néhány e-mail tartalmat."
 
-#: .\templates\campaigns\template_revision.html:256
+#: .\templates\campaigns\template_revision.html:258
 msgid "Revising..."
 msgstr "Átdolgozás..."
 
-#: .\templates\campaigns\template_revision.html:275
+#: .\templates\campaigns\template_revision.html:277
 msgid "Email revised successfully! Review the changes in the editor."
 msgstr ""
 "Az e-mail átdolgozása sikerült!Tekintse át a változtatásokat a "
 "szerkesztőben."
 
-#: .\templates\campaigns\template_revision.html:277
+#: .\templates\campaigns\template_revision.html:279
 msgid "Revision failed: "
 msgstr "A felülvizsgálat sikertelen:"
 
-#: .\templates\campaigns\template_revision.html:281
+#: .\templates\campaigns\template_revision.html:283
 msgid "Failed to revise email. Please check your connection and try again."
 msgstr ""
 "Nem sikerült az e-mail átdolgozása.Kérjük, ellenőrizze a kapcsolatot, és "
 "próbálja újra."
 
-#: .\templates\campaigns\template_revision.html:350
+#: .\templates\campaigns\template_revision.html:352
 msgid "Failed to save template:"
 msgstr "Nem sikerült menteni a sablont:"
 
-#: .\templates\campaigns\template_revision.html:363
+#: .\templates\campaigns\template_revision.html:365
 msgid "Failed to save template. Please try again."
 msgstr "Nem sikerült menteni a sablont.Kérjük, próbálja újra."
 
-#: .\templates\campaigns\template_revision.html:371
+#: .\templates\campaigns\template_revision.html:373
 msgid "Enter the recipient email address:"
 msgstr "Írja be a címzett e-mail címét:"
 
-#: .\templates\campaigns\template_revision.html:379
+#: .\templates\campaigns\template_revision.html:381
 msgid "Please enter a valid email address."
 msgstr "Kérjük, adjon meg egy érvényes e-mail címet."
 
-#: .\templates\campaigns\template_revision.html:384
+#: .\templates\campaigns\template_revision.html:386
 msgid "Send this email to "
 msgstr "Küldje el ezt az e-mailt a címre"
 
@@ -3400,10 +4271,6 @@ msgstr "Bejegyzés elküldése"
 msgid "You must be logged in to create posts."
 msgstr "A bejegyzések létrehozásához be kell jelentkezned."
 
-#: .\templates\core\community_user_forum.html:45
-msgid "Log In"
-msgstr "Bejelentkezés"
-
 #: .\templates\core\community_user_forum.html:52
 msgid "Recent Posts"
 msgstr "Legutóbbi hozzászólások"
@@ -3467,37 +4334,98 @@ msgstr "Hiba történt.Kérjük, próbálja újra később."
 msgid "Manage your campaigns and subscribers"
 msgstr "Kezelje kampányait és előfizetőit"
 
-#: .\templates\core\dashboard.html:82 .\templates\core\dashboard.html:134
+#: .\templates\core\dashboard.html:70
+#, fuzzy
+#| msgid "API Integration"
+msgid "Integrations"
+msgstr "API integráció"
+
+#: .\templates\core\dashboard.html:71
+msgid "Connect your email accounts to auto-reply to emails"
+msgstr ""
+"Csatlakoztassa e-mail fiókjait az e-mailek automatikus megválaszolásához"
+
+#: .\templates\core\dashboard.html:85
+msgid "Connect your Gmail account to auto-reply to emails"
+msgstr ""
+"Csatlakoztassa Gmail-fiókját az e-mailek automatikus megválaszolásához"
+
+#: .\templates\core\dashboard.html:102
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent Gmail Emails"
+msgstr "Címzett e-mail címe"
+
+#: .\templates\core\dashboard.html:103 .\templates\core\dashboard.html:193
+#, fuzzy
+#| msgid "View and manage all your email campaigns"
+msgid "View and manage your email conversations"
+msgstr "Tekintse meg és kezelje az összes e-mail kampányát"
+
+#: .\templates\core\dashboard.html:125
+msgid "Connect your IMAP email account to auto-reply to emails"
+msgstr ""
+"Csatlakoztassa IMAP e-mail fiókját az e-mailek automatikus megválaszolásához"
+
+#: .\templates\core\dashboard.html:134
+#, fuzzy
+#| msgid "Settings"
+msgid "IMAP Settings"
+msgstr "Beállítások elemre"
+
+#: .\templates\core\dashboard.html:152 .\templates\core\home.html:265
+#: .\templates\core\includes\signup_box.html:64
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "Felhasználó"
+
+#: .\templates\core\dashboard.html:162 .\templates\core\home.html:278
+#: .\templates\core\includes\signup_box.html:74
+msgid "Use SSL/TLS"
+msgstr "SSL/TLS használata"
+
+#: .\templates\core\dashboard.html:167
+msgid "Save & Connect"
+msgstr "Mentés és csatlakozás"
+
+#: .\templates\core\dashboard.html:192
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent IMAP Emails"
+msgstr "Címzett e-mail címe"
+
+#: .\templates\core\dashboard.html:223 .\templates\core\dashboard.html:275
 msgid "View Campaigns"
 msgstr "Kampányok megtekintése"
 
-#: .\templates\core\dashboard.html:86
+#: .\templates\core\dashboard.html:227
 msgid "Add a new Campaign"
 msgstr "Új kampány hozzáadása"
 
-#: .\templates\core\dashboard.html:106
+#: .\templates\core\dashboard.html:247
 msgid "View Subscribers"
 msgstr "Előfizetők megtekintése"
 
-#: .\templates\core\dashboard.html:110 .\templates\core\dashboard.html:154
+#: .\templates\core\dashboard.html:251 .\templates\core\dashboard.html:295
 msgid "View Lists"
 msgstr "Listák megtekintése"
 
-#: .\templates\core\dashboard.html:125
+#: .\templates\core\dashboard.html:266
 #: .\templates\core\tutorials\dashboard_overview.html:60
 #: .\templates\core\tutorials\performance_dashboard.html:39
 msgid "Emails Sent"
 msgstr "E-mailek elküldve"
 
-#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
+#: .\templates\core\dashboard.html:271 .\templates\core\dashboard.html:677
 msgid "View Analytics"
 msgstr "Az Analytics megtekintése"
 
-#: .\templates\core\dashboard.html:158
+#: .\templates\core\dashboard.html:299
 msgid "Add a List"
 msgstr "Lista hozzáadása"
 
-#: .\templates\core\dashboard.html:178
+#: .\templates\core\dashboard.html:319
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -3509,112 +4437,107 @@ msgid ""
 "                        "
 msgstr "%(start)s-%(end)s/%(total)s előfizető megjelenítése"
 
-#: .\templates\core\dashboard.html:195
+#: .\templates\core\dashboard.html:336
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "SPF-rekord beállítása az e-mail kézbesítéshez"
 
-#: .\templates\core\dashboard.html:200
+#: .\templates\core\dashboard.html:341
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Adja hozzá ezt a TXT rekordot a domain DNS-éhez:"
 
-#: .\templates\core\dashboard.html:203
+#: .\templates\core\dashboard.html:344
 msgid "Type:"
 msgstr "Típus:"
 
-#: .\templates\core\dashboard.html:206
+#: .\templates\core\dashboard.html:347
 msgid "Name/Host:"
 msgstr "Név/Host:"
 
-#: .\templates\core\dashboard.html:209
+#: .\templates\core\dashboard.html:350
 msgid "Value:"
 msgstr "Érték:"
 
-#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
-#: .\templates\core\tutorials\quick_start.html:96
-msgid "Note:"
-msgstr "Jegyzet:"
-
-#: .\templates\core\dashboard.html:222
+#: .\templates\core\dashboard.html:363
 msgid "How to add this record:"
 msgstr "A rekord hozzáadása:"
 
-#: .\templates\core\dashboard.html:225
+#: .\templates\core\dashboard.html:366
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Lépjen a DNS-kezelés vagy a DNS-beállítások oldalra"
 
-#: .\templates\core\dashboard.html:226
+#: .\templates\core\dashboard.html:367
 msgid "Add a new TXT record with the values shown above"
 msgstr "Adjon hozzá egy új TXT rekordot a fent látható értékekkel"
 
-#: .\templates\core\dashboard.html:237
+#: .\templates\core\dashboard.html:378
 msgid "Send Email & Subscribe"
 msgstr "E-mail küldése és előfizetés"
 
-#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:397 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Válasszon kampányt..."
 
-#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
+#: .\templates\core\dashboard.html:403 .\templates\core\dashboard.html:1434
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Először válasszon kampányt..."
 
-#: .\templates\core\dashboard.html:267
+#: .\templates\core\dashboard.html:408
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Menetrend"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:411
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "X perc múlva küldje el"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:412
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Küldés X órán belül"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:413
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Küldje el X napon belül"
 
-#: .\templates\core\dashboard.html:273
+#: .\templates\core\dashboard.html:414
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "X hét múlva küldje el"
 
-#: .\templates\core\dashboard.html:274
+#: .\templates\core\dashboard.html:415
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "X hónap múlva küldje el"
 
-#: .\templates\core\dashboard.html:300
+#: .\templates\core\dashboard.html:441
 msgid "Recent Send Activity"
 msgstr "Legutóbbi küldési tevékenység"
 
-#: .\templates\core\dashboard.html:301
+#: .\templates\core\dashboard.html:442
 msgid "Track your email sends and deliveries"
 msgstr "Kövesse nyomon e-mail küldését és kézbesítését"
 
-#: .\templates\core\dashboard.html:308
+#: .\templates\core\dashboard.html:449
 msgid "Refresh"
 msgstr "Frissítés"
 
-#: .\templates\core\dashboard.html:319
+#: .\templates\core\dashboard.html:460
 msgid "Times shown in"
 msgstr "A feltüntetett időpontok"
 
-#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
+#: .\templates\core\dashboard.html:477 .\templates\core\dashboard.html:1314
 msgid "Loading activity..."
 msgstr "Tevékenység betöltése..."
 
-#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:494 .\templates\core\settings.html:255
 msgid "Remove Advertisements from Your Emails"
 msgstr "Távolítsa el a hirdetéseket e-mailjeiből"
 
-#: .\templates\core\dashboard.html:354
+#: .\templates\core\dashboard.html:495
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3623,15 +4546,11 @@ msgstr ""
 " webhelyet X-en vagy a blogodban, hogy eltávolítsd a hirdetéseket az összes "
 "e-mailből."
 
-#: .\templates\core\dashboard.html:369
+#: .\templates\core\dashboard.html:510
 msgid "Your Campaigns"
 msgstr "Az Ön kampányai"
 
-#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
-msgid "Actions"
-msgstr "Akciók"
-
-#: .\templates\core\dashboard.html:433
+#: .\templates\core\dashboard.html:574
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3639,159 +4558,332 @@ msgstr ""
 "Hozza létre első kampányát, hogy elkezdhesse az automatikus e-mailek "
 "küldését előfizetőinek."
 
-#: .\templates\core\dashboard.html:446
+#: .\templates\core\dashboard.html:587
 msgid "Your Subscriber Lists"
 msgstr "Az Ön előfizetői listája"
 
-#: .\templates\core\dashboard.html:501
+#: .\templates\core\dashboard.html:642
 msgid "No subscriber lists yet"
 msgstr "Még nincsenek feliratkozói listák"
 
-#: .\templates\core\dashboard.html:502
+#: .\templates\core\dashboard.html:643
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "A névjegyek rendszerezéséhez hozza létre az első előfizetői listáját."
 
-#: .\templates\core\dashboard.html:518
+#: .\templates\core\dashboard.html:659
 msgid "Quick Actions"
 msgstr "Gyors műveletek"
 
-#: .\templates\core\dashboard.html:530
+#: .\templates\core\dashboard.html:671
 #: .\templates\core\tutorials\quick_start.html:105
 msgid "Add Subscribers"
 msgstr "Előfizetők hozzáadása"
 
-#: .\templates\core\dashboard.html:548
+#: .\templates\core\dashboard.html:689
 #, fuzzy
 #| msgid "Email Templates"
 msgid "View Email Templates"
 msgstr "E-mail sablonok"
 
-#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:696 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Fiókbeállítások"
 
-#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:699 .\templates\core\settings.html:213
 msgid "Ad Removal"
 msgstr "Hirdetés eltávolítása"
 
-#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:711 .\templates\core\settings.html:225
 msgid "Unsubscribe Links"
 msgstr "Leiratkozás Linkek"
 
-#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:723 .\templates\core\settings.html:237
 msgid "Timezone"
 msgstr "Időzóna"
 
-#: .\templates\core\dashboard.html:590
+#: .\templates\core\dashboard.html:731
 #, fuzzy
 #| msgid "Account Settings"
 msgid "Manage Account Settings"
 msgstr "Fiókbeállítások"
 
-#: .\templates\core\dashboard.html:593
+#: .\templates\core\dashboard.html:734
 #, fuzzy
 #| msgid "Email Footers"
 msgid "Manage Email Footers"
 msgstr "E-mail láblécek"
 
-#: .\templates\core\dashboard.html:602
+#: .\templates\core\dashboard.html:743
 msgid "Tips & Resources"
 msgstr "Tippek és források"
 
-#: .\templates\core\dashboard.html:605
+#: .\templates\core\dashboard.html:746
 msgid "Getting Started Guide"
 msgstr "Útmutató az első lépésekhez"
 
-#: .\templates\core\dashboard.html:606
+#: .\templates\core\dashboard.html:747
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "Ismerje meg, hogyan állíthatja be első e-mail kampányát percek alatt."
 
-#: .\templates\core\dashboard.html:609
+#: .\templates\core\dashboard.html:750
 msgid "Email Best Practices"
 msgstr "Bevált módszerek e-mailben"
 
-#: .\templates\core\dashboard.html:610
+#: .\templates\core\dashboard.html:751
 msgid "Tips for creating emails that convert."
 msgstr "Tippek konvertáló e-mailek létrehozásához."
 
-#: .\templates\core\dashboard.html:613
+#: .\templates\core\dashboard.html:754
 msgid "Grow Your Subscriber List"
 msgstr "Növelje előfizetői listáját"
 
-#: .\templates\core\dashboard.html:614
+#: .\templates\core\dashboard.html:755
 msgid "Strategies to increase your subscribers."
 msgstr "Stratégiák az előfizetők számának növelésére."
 
-#: .\templates\core\dashboard.html:628
+#: .\templates\core\dashboard.html:769
 msgid "Physical Address Required"
 msgstr "Fizikai cím szükséges"
 
-#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:774
+#, fuzzy
+#| msgid "Required"
+msgid "Required by Law:"
+msgstr "Kívánt"
+
+#: .\templates\core\dashboard.html:774
+msgid ""
+"Your physical address is required by email regulations (CAN-SPAM, GDPR, "
+"etc.) and will be included in the footer of emails near the unsubscribe "
+"link."
+msgstr ""
+"Az Ön fizikai címét az e-mailekre vonatkozó előírások (CAN-SPAM, GDPR stb.) "
+"írják elő, és az e-mailek láblécében, a leiratkozási hivatkozás mellett "
+"szerepelni fog."
+
+#: .\templates\core\dashboard.html:780 .\templates\core\settings.html:57
+msgid "John Doe"
+msgstr ""
+
+#: .\templates\core\dashboard.html:781 .\templates\core\settings.html:58
+msgid "This name will appear in the From header of emails you send"
+msgstr "Ez a név megjelenik az Ön által küldött e-mailek Feladó fejlécében"
+
+#: .\templates\core\dashboard.html:788 .\templates\core\settings.html:65
 msgid "Address Line 2 (Optional)"
 msgstr "Cím 2. sora (opcionális)"
 
-#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
-#: .\templates\core\dashboard.html:1366
+#: .\templates\core\dashboard.html:813
+#, fuzzy
+#| msgid "IP Address"
+msgid "Update Address"
+msgstr "IP-cím"
+
+#: .\templates\core\dashboard.html:861
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
+msgid "Please fill in all required fields before continuing."
+msgstr ""
+"Kérjük, töltse ki az összes kötelező mezőt: Cím 1. sora, Város, Állam, "
+"Irányítószám és Ország."
+
+#: .\templates\core\dashboard.html:942
+#, fuzzy
+#| msgid "Address updated successfully."
+msgid "Address saved successfully!"
+msgstr "A cím sikeresen frissítve."
+
+#: .\templates\core\dashboard.html:949
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error saving address. Please try again."
+msgstr "Hiba a lábléc létrehozásakor.Kérjük, próbálja újra."
+
+#: .\templates\core\dashboard.html:1057 .\templates\core\dashboard.html:1365
+#: .\templates\core\dashboard.html:2556
 msgid "= 200 && status"
 msgstr "= 200 && állapot"
 
-#: .\templates\core\dashboard.html:915
+#: .\templates\core\dashboard.html:1111
 msgid "No send activity yet"
 msgstr "Még nincs küldési tevékenység"
 
-#: .\templates\core\dashboard.html:916
+#: .\templates\core\dashboard.html:1112
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "A fenti űrlap segítségével e-mailt küldhet, és megtekintheti tevékenységét "
 "itt."
 
-#: .\templates\core\dashboard.html:1001
+#: .\templates\core\dashboard.html:1197
 msgid "To"
 msgstr "To"
 
-#: .\templates\core\dashboard.html:1012
+#: .\templates\core\dashboard.html:1208
 msgid "Scheduled"
 msgstr "Ütemezett"
 
-#: .\templates\core\dashboard.html:1035
-msgid "Error"
-msgstr "Hiba"
-
-#: .\templates\core\dashboard.html:1058
+#: .\templates\core\dashboard.html:1254
 msgid "Full HTML Preview"
 msgstr "Teljes HTML előnézet"
 
-#: .\templates\core\dashboard.html:1062
+#: .\templates\core\dashboard.html:1258
 msgid "Text Version"
 msgstr "Szöveges verzió"
 
-#: .\templates\core\dashboard.html:1066
+#: .\templates\core\dashboard.html:1262
 msgid "Show less"
 msgstr "Mutass kevesebbet"
 
-#: .\templates\core\dashboard.html:1096
+#: .\templates\core\dashboard.html:1292
 msgid "Unsubscribe"
 msgstr "Leiratkozás"
 
-#: .\templates\core\dashboard.html:1144
+#: .\templates\core\dashboard.html:1340
 msgid "Failed to load activity"
 msgstr "Nem sikerült betölteni a tevékenységet"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1341
 msgid "Please try again."
 msgstr "Kérjük, próbálja újra."
 
-#: .\templates\core\dashboard.html:1147
-msgid "Retry"
-msgstr "Próbálja újra"
-
-#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1420 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Válasszon egy e-mail sablont..."
 
-#: .\templates\core\dashboard.html:1234
+#: .\templates\core\dashboard.html:1430
 msgid "Error loading emails"
 msgstr "Hiba az e-mailek betöltésekor"
+
+#: .\templates\core\dashboard.html:1551
+#, fuzzy
+#| msgid "Contact email"
+msgid "Connect Gmail"
+msgstr "Kapcsolattartási e-mail"
+
+#: .\templates\core\dashboard.html:1568 .\templates\core\dashboard.html:1849
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connected"
+msgstr "Sikertelen csatlakozás"
+
+#: .\templates\core\dashboard.html:1569 .\templates\core\dashboard.html:1850
+msgid "Disconnect"
+msgstr "Leválasztás"
+
+#: .\templates\core\dashboard.html:1641
+msgid "No Gmail emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Még nincsenek Gmail e-mailek.Az e-mailek itt jelennek meg, miután lekérték "
+"őket."
+
+#: .\templates\core\dashboard.html:1642 .\templates\core\dashboard.html:2080
+msgid "Replied"
+msgstr "válaszolt"
+
+#: .\templates\core\dashboard.html:1644 .\templates\core\dashboard.html:2085
+#, fuzzy
+#| msgid "Send"
+msgid "Sender:"
+msgstr "Elküld"
+
+#: .\templates\core\dashboard.html:1645
+#, fuzzy
+#| msgid "Send Message"
+msgid "Auto-Reply Message"
+msgstr "Üzenet küldése"
+
+#: .\templates\core\dashboard.html:1646
+#, fuzzy
+#| msgid "Original"
+msgid "Original Email"
+msgstr "Eredeti"
+
+#: .\templates\core\dashboard.html:1647 .\templates\core\dashboard.html:2087
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Content:"
+msgstr "E-mail tartalom"
+
+#: .\templates\core\dashboard.html:1648 .\templates\core\dashboard.html:2088
+#, fuzzy
+#| msgid "Email Content"
+msgid "(No content)"
+msgstr "E-mail tartalom"
+
+#: .\templates\core\dashboard.html:1822
+msgid "Connect IMAP"
+msgstr "Csatlakoztassa az IMAP-ot"
+
+#: .\templates\core\dashboard.html:1933 .\templates\core\home.html:1344
+msgid "To fix this:"
+msgstr "Ennek javításához:"
+
+#: .\templates\core\dashboard.html:1935 .\templates\core\home.html:1346
+msgid "Enable 2-Step Verification on your Google Account"
+msgstr "Engedélyezze a kétlépcsős azonosítást Google-fiókjában"
+
+#: .\templates\core\dashboard.html:1936 .\templates\core\home.html:1347
+msgid "Generate an App Password for IMAP access"
+msgstr "Alkalmazásjelszó létrehozása az IMAP-hozzáféréshez"
+
+#: .\templates\core\dashboard.html:1937 .\templates\core\home.html:1348
+msgid "Use the App Password instead of your regular password"
+msgstr "Használja az alkalmazásjelszót a szokásos jelszava helyett"
+
+#: .\templates\core\dashboard.html:1944 .\templates\core\home.html:299
+#: .\templates\core\home.html:1113 .\templates\core\home.html:1355
+msgid "Learn More"
+msgstr "További információ"
+
+#: .\templates\core\dashboard.html:1950 .\templates\core\home.html:1361
+#, fuzzy
+#| msgid "Change Password"
+msgid "Create App Password"
+msgstr "Jelszó módosítása"
+
+#: .\templates\core\dashboard.html:1990
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error connecting IMAP account. Please try again."
+msgstr "Hiba a lábléc létrehozásakor.Kérjük, próbálja újra."
+
+#: .\templates\core\dashboard.html:2079
+msgid "No IMAP emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Még nincsenek IMAP e-mailek.Az e-mailek itt jelennek meg, miután lekérték "
+"őket."
+
+#: .\templates\core\dashboard.html:2082
+msgid "Auto Reply To:"
+msgstr "Automatikus válasz erre:"
+
+#: .\templates\core\dashboard.html:2084
+#, fuzzy
+#| msgid "Cancel:"
+msgid "Cc:"
+msgstr "Mégse:"
+
+#: .\templates\core\dashboard.html:2086
+msgid "Auto-Reply Sent:"
+msgstr "Automatikus válasz elküldve:"
+
+#: .\templates\core\dashboard.html:2089
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Email"
+msgstr "E-mail küldése"
+
+#: .\templates\core\dashboard.html:2307
+#, fuzzy
+#| msgid "Email Content"
+msgid "Sent Email Content:"
+msgstr "E-mail tartalom"
+
+#: .\templates\core\dashboard.html:2455
+msgid "total"
+msgstr "teljes"
 
 #: .\templates\core\docs\ai_features.html:5
 msgid "AI-Powered Email Features"
@@ -4007,11 +5099,6 @@ msgstr "Leiratkozási arány"
 #: .\templates\core\docs\analytics.html:28
 msgid "Complaint rate"
 msgstr "Reklamációs arány"
-
-#: .\templates\core\docs\analytics.html:32
-#: .\templates\core\feature_analytics.html:60
-msgid "Analytics Dashboard"
-msgstr "Analytics irányítópult"
 
 #: .\templates\core\docs\analytics.html:33
 msgid "Access your campaign analytics by clicking the "
@@ -5427,10 +6514,6 @@ msgstr ""
 #: .\templates\core\feature_analytics.html:12
 msgid "What You Can Track"
 msgstr "Amit nyomon követhet"
-
-#: .\templates\core\feature_analytics.html:15
-msgid "Campaign Performance"
-msgstr "Kampány teljesítménye"
 
 #: .\templates\core\feature_analytics.html:17
 msgid "Open rates for each campaign"
@@ -7285,7 +8368,7 @@ msgstr "Változtassa a látogatókat"
 msgid "Loyal Customers"
 msgstr "Törzsvásárlók"
 
-#: .\templates\core\home.html:61
+#: .\templates\core\home.html:62
 msgid ""
 "The best free drip email marketing software for automated email sequences, "
 "email campaigns, and email marketing automation. Create powerful email drip "
@@ -7306,55 +8389,204 @@ msgstr ""
 "alatt – teljesen ingyenes e-mail marketing szoftver korlátlan kampányokkal, "
 "korlátlan feliratkozóval és korlátlan csepegtető e-mailekkel."
 
-#: .\templates\core\home.html:67
+#: .\templates\core\home.html:69
 msgid "Start Free Today"
 msgstr "Kezdje ingyenesen még ma"
 
-#: .\templates\core\home.html:83
+#: .\templates\core\home.html:85
 msgid "Unlimited Campaigns"
 msgstr "Korlátlan számú kampány"
 
-#: .\templates\core\home.html:89
+#: .\templates\core\home.html:91
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Drip Emails"
 msgstr "Korlátlan számú kampány"
 
-#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:97 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Korlátlan számú előfizető"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:103
 msgid "No Credit Card"
 msgstr "Nincs hitelkártya"
 
-#: .\templates\core\home.html:107
+#: .\templates\core\home.html:109
 msgid "Setup in 5 Minutes"
 msgstr "Beállítás 5 perc alatt"
 
-#: .\templates\core\home.html:120
+#: .\templates\core\home.html:130
+msgid "NEW FEATURE"
+msgstr "ÚJ FUNKCIÓ"
+
+#: .\templates\core\home.html:138
+#, fuzzy
+#| msgid "Never Miss Important Dates"
+msgid "Never Miss a"
+msgstr "Soha ne hagyja ki a fontos dátumokat"
+
+#: .\templates\core\home.html:140
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Conversation Again"
+msgstr "Sikertelen csatlakozás"
+
+#: .\templates\core\home.html:145
+msgid ""
+"Connect your Gmail or IMAP account and let our intelligent auto-reply system"
+" respond to every email in your inbox and sent box. Engage with your "
+"contacts automatically with personalized messages like:"
+msgstr ""
+"Csatlakoztassa Gmail- vagy IMAP-fiókját, és hagyja, hogy intelligens "
+"automatikus válaszrendszerünk válaszoljon minden e-mailre a beérkező levelek"
+" és az elküldött levelek között.Automatikusan kapcsolatba léphet "
+"ismerőseivel személyre szabott üzenetekkel, például:"
+
+#: .\templates\core\home.html:156
+msgid "Hi, did you have any questions?"
+msgstr "Szia, volt kérdése?"
+
+#: .\templates\core\home.html:159
+#, fuzzy
+#| msgid "Automatically add new CRM contacts to email lists"
+msgid "Automatically sent to every contact who emails you"
+msgstr "Új CRM-kapcsolatok automatikus hozzáadása az e-mail listákhoz"
+
+#: .\templates\core\home.html:174
+msgid "Auto-Reply to Inbox"
+msgstr "Automatikus válasz a Beérkezett üzenetek mappába"
+
+#: .\templates\core\home.html:175
+msgid "Automatically respond to incoming emails with personalized messages"
+msgstr ""
+"Automatikusan válaszoljon a bejövő e-mailekre személyre szabott üzenetekkel"
+
+#: .\templates\core\home.html:186
+msgid "Auto-Reply to Sent Box"
+msgstr "Automatikus válasz az elküldött fiókra"
+
+#: .\templates\core\home.html:187
+msgid "Follow up with recipients of your sent emails automatically"
+msgstr "Automatikusan nyomon követheti az elküldött e-mailek címzettjeit"
+
+#: .\templates\core\home.html:198
+#, fuzzy
+#| msgid "Personalization:"
+msgid "Smart Personalization"
+msgstr "Személyre szabás:"
+
+#: .\templates\core\home.html:199
+msgid "Uses recipient names and email context for natural conversations"
+msgstr ""
+"A természetes beszélgetésekhez a címzettek nevét és az e-mail kontextust "
+"használja"
+
+#: .\templates\core\home.html:210
+msgid "Gmail & IMAP Support"
+msgstr "Gmail és IMAP támogatás"
+
+#: .\templates\core\home.html:211
+msgid "Works with Gmail, Outlook, and any IMAP email provider"
+msgstr ""
+"Működik a Gmaillel, az Outlookkal és bármely IMAP e-mail szolgáltatóval"
+
+#: .\templates\core\home.html:219 .\templates\core\includes\signup_box.html:18
+#, fuzzy
+#| msgid "Get Started Today"
+msgid "Get Started in 60 Seconds"
+msgstr "Kezdje el még ma"
+
+#: .\templates\core\home.html:220
+msgid "Connect your email account and start auto-replying immediately"
+msgstr ""
+"Csatlakoztassa e-mail fiókját, és azonnal kezdje el az automatikus "
+"válaszadást"
+
+#: .\templates\core\home.html:229 .\templates\core\includes\signup_box.html:31
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connect with Gmail"
+msgstr "Sikertelen csatlakozás"
+
+#: .\templates\core\home.html:239 .\templates\core\includes\signup_box.html:41
+msgid "OR"
+msgstr "VAGY"
+
+#: .\templates\core\home.html:281 .\templates\core\includes\signup_box.html:77
+msgid "Start Auto-Replying Now"
+msgstr "Kezdje el az automatikus válaszadást most"
+
+#: .\templates\core\home.html:293
+msgid "Set Up Auto-Reply"
+msgstr "Állítsa be az automatikus választ"
+
+#: .\templates\core\home.html:322
+#, fuzzy
+#| msgid "Description of Service"
+msgid "Question about your service"
+msgstr "Szolgáltatás leírása"
+
+#: .\templates\core\home.html:323
+msgid "Hi, I'm interested in learning more about..."
+msgstr "Szia! Szeretnék többet megtudni a..."
+
+#: .\templates\core\home.html:326
+msgid "Auto-Reply Sent"
+msgstr "Automatikus válasz elküldve"
+
+#: .\templates\core\home.html:327
+msgid "Hi John, did you have any questions?"
+msgstr "Szia János, volt még kérdésed?"
+
+#: .\templates\core\home.html:344
+msgid "Re: Project Proposal"
+msgstr "Re: Projektjavaslat"
+
+#: .\templates\core\home.html:345
+#, fuzzy
+#| msgid "Test how your email looks in preview mode"
+msgid "Thanks for your email! I'll review..."
+msgstr "Tesztelje, hogyan néz ki e-mailje előnézeti módban"
+
+#: .\templates\core\home.html:348
+#, fuzzy
+#| msgid "Send follow-up content"
+msgid "Follow-up Sent"
+msgstr "Nyomon követési tartalom küldése"
+
+#: .\templates\core\home.html:349
+msgid "Hi Sarah, did you have any questions?"
+msgstr "Szia Sarah, volt még kérdésed?"
+
+#: .\templates\core\home.html:361
+#, fuzzy
+#| msgid "Active"
+msgid "24/7 Active"
+msgstr "Aktív"
+
+#: .\templates\core\home.html:377
 msgid "Higher ROI"
 msgstr "Magasabb ROI"
 
-#: .\templates\core\home.html:124
+#: .\templates\core\home.html:381
 msgid "More Engagement"
 msgstr "Még több eljegyzés"
 
-#: .\templates\core\home.html:128
+#: .\templates\core\home.html:385
 msgid "Faster Growth"
 msgstr "Gyorsabb növekedés"
 
-#: .\templates\core\home.html:132
+#: .\templates\core\home.html:389
 msgid "Automation"
 msgstr "Automatizálás"
 
-#: .\templates\core\home.html:143
+#: .\templates\core\home.html:409
 #, fuzzy
 #| msgid "How to Create Email Templates"
 msgid "How to Create Drip Email Campaigns in Minutes"
 msgstr "Hogyan készítsünk e-mail sablonokat"
 
-#: .\templates\core\home.html:146
+#: .\templates\core\home.html:412
 msgid ""
 "Setting up email automation and email drip campaigns has never been easier. "
 "Our email marketing automation software makes it simple to create automated "
@@ -7365,13 +8597,13 @@ msgstr ""
 "egyszerűvé teszi az automatikus e-mail sorozatok létrehozását, az e-mailek "
 "ütemezését és az e-mail elemzések nyomon követését."
 
-#: .\templates\core\home.html:155
+#: .\templates\core\home.html:421
 #, fuzzy
 #| msgid "Create Your First Campaign"
 msgid "Create Your Campaign"
 msgstr "Hozza létre első kampányát"
 
-#: .\templates\core\home.html:156
+#: .\templates\core\home.html:422
 msgid ""
 "Build your email drip campaign with our intuitive email marketing tool. "
 "Choose from beautiful email templates or create custom email marketing "
@@ -7381,13 +8613,13 @@ msgstr ""
 "cseppkampányát.Válasszon a gyönyörű e-mail sablonok közül, vagy készítsen "
 "egyedi e-mail marketing kampányokat."
 
-#: .\templates\core\home.html:162
+#: .\templates\core\home.html:428
 #, fuzzy
 #| msgid "Email Sequence"
 msgid "Add Email Sequences"
 msgstr "E-mail sorozat"
 
-#: .\templates\core\home.html:163
+#: .\templates\core\home.html:429
 msgid ""
 "Design automated email sequences with personalized emails. Set up email "
 "scheduling, email nurture sequences, and welcome series for your email "
@@ -7397,13 +8629,13 @@ msgstr ""
 "e-mailekkel.Állítson be e-mail-ütemezést, e-mail-kezelési sorozatokat és "
 "üdvözlősorozatokat e-mail-előfizetői számára."
 
-#: .\templates\core\home.html:169
+#: .\templates\core\home.html:435
 #, fuzzy
 #| msgid "Managing Subscribers"
 msgid "Manage Subscribers"
 msgstr "Előfizetők kezelése"
 
-#: .\templates\core\home.html:170
+#: .\templates\core\home.html:436
 msgid ""
 "Import your email list, segment subscribers with email list management, and "
 "organize your email audience. Perfect for email subscriber management and "
@@ -7413,13 +8645,13 @@ msgstr ""
 "listakezeléssel, és rendszerezze e-mail közönségét.Tökéletes az e-mail-"
 "előfizetők kezeléséhez és az e-mail-szegmentációhoz."
 
-#: .\templates\core\home.html:176
+#: .\templates\core\home.html:442
 #, fuzzy
 #| msgid "What AI Can Optimize"
 msgid "Track & Optimize"
 msgstr "Amit az AI optimalizálhat"
 
-#: .\templates\core\home.html:177
+#: .\templates\core\home.html:443
 msgid ""
 "Monitor email open rates, email click rates, and email engagement with real-"
 "time email analytics. Improve email marketing ROI with data-driven insights."
@@ -7428,13 +8660,13 @@ msgstr ""
 "arányát és az e-mailek elköteleződését a valós idejű e-mail "
 "elemzéssel.Növelje az e-mail marketing ROI-t adatvezérelt betekintésekkel."
 
-#: .\templates\core\home.html:188
+#: .\templates\core\home.html:463
 msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
 msgstr ""
 "Miért működnek jobban az e-mail csepegtető kampányok, mint az egyszeri "
 "e-mailek?"
 
-#: .\templates\core\home.html:191
+#: .\templates\core\home.html:466
 msgid ""
 "Unlike single email blasts, automated drip email campaigns build "
 "relationships over time. Email marketing automation helps you send the right"
@@ -7447,13 +8679,13 @@ msgstr ""
 " küldje el, javítva ezzel az e-mailes elkötelezettséget és az e-mail "
 "marketing ROI-t."
 
-#: .\templates\core\home.html:203
+#: .\templates\core\home.html:478
 #, fuzzy
 #| msgid "Automated Nurturing"
 msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Automatizált gondozás"
 
-#: .\templates\core\home.html:205
+#: .\templates\core\home.html:480
 #, fuzzy
 #| msgid ""
 #| "Send the right message at the right time. Automatically guide leads through "
@@ -7467,13 +8699,13 @@ msgstr ""
 "Küldje el a megfelelő üzenetet a megfelelő időben.A vezetékek automatikus "
 "átvezetése a tölcséren manuális beavatkozás nélkül."
 
-#: .\templates\core\home.html:216
+#: .\templates\core\home.html:491
 #, fuzzy
 #| msgid "Subscriber Segmentation"
 msgid "Email Personalization & Subscriber Segmentation"
 msgstr "Előfizetői szegmentálás"
 
-#: .\templates\core\home.html:218
+#: .\templates\core\home.html:493
 msgid ""
 "Create unique email experiences for each subscriber with personalized "
 "emails. Use email segmentation and email list management to deliver targeted"
@@ -7484,11 +8716,11 @@ msgstr ""
 "kezelését, hogy célzott e-mail marketingkampányokat indítson, amelyek "
 "rezonálnak az e-mail közönségével."
 
-#: .\templates\core\home.html:229
+#: .\templates\core\home.html:504
 msgid "Proven Results"
 msgstr "Bizonyított eredmények"
 
-#: .\templates\core\home.html:231
+#: .\templates\core\home.html:506
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7496,22 +8728,22 @@ msgstr ""
 "A csepegtető kampányok háromszor több bevételt generálnak, mint az egyedi "
 "e-mailek.Tekintse meg a mérhető ROI-t az első naptól kezdve."
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:527
 msgid "Everything You Need to Succeed"
 msgstr "Minden, ami a sikerhez kell"
 
-#: .\templates\core\home.html:246
+#: .\templates\core\home.html:530
 msgid "Powerful features that make email marketing effortless"
 msgstr ""
 "Hatékony funkciók, amelyek az e-mail marketinget erőfeszítés nélkül teszik"
 
-#: .\templates\core\home.html:260
+#: .\templates\core\home.html:544
 #, fuzzy
 #| msgid "Smart Drip Sequences"
 msgid "Smart Drip Email Sequences"
 msgstr "Intelligens cseppsorozatok"
 
-#: .\templates\core\home.html:262
+#: .\templates\core\home.html:546
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7519,11 +8751,11 @@ msgstr ""
 "Hozzon létre többlépcsős e-mail sorozatokat, amelyek automatikusan elküldik "
 "az időzítés, a viselkedés vagy az eseményindítók alapján."
 
-#: .\templates\core\home.html:276
+#: .\templates\core\home.html:560
 msgid "Real-Time Analytics"
 msgstr "Valós idejű elemzés"
 
-#: .\templates\core\home.html:278
+#: .\templates\core\home.html:562
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7531,11 +8763,11 @@ msgstr ""
 "Nyomon követheti a megnyitásokat, a kattintásokat, a konverziókat és a "
 "bevételt.Hozz adatvezérelt döntéseket gyönyörű irányítópultokkal."
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:575
 msgid "Beautiful Templates"
 msgstr "Gyönyörű sablonok"
 
-#: .\templates\core\home.html:293
+#: .\templates\core\home.html:577
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7543,14 +8775,14 @@ msgstr ""
 "Válasszon a professzionális sablonok közül, vagy készítse el sajátját.A fogd"
 " és vidd szerkesztő megkönnyíti a tervezést."
 
-#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:591 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Előfizetői szegmentálás"
 
-#: .\templates\core\home.html:309
+#: .\templates\core\home.html:593
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7558,11 +8790,11 @@ msgstr ""
 "Rendszerezze a feliratkozókat listákba, címkézze meg őket, és küldjön "
 "célzott kampányokat a megfelelő közönségnek."
 
-#: .\templates\core\home.html:323
+#: .\templates\core\home.html:607
 msgid "AI-Powered Content"
 msgstr "AI-alapú tartalom"
 
-#: .\templates\core\home.html:325
+#: .\templates\core\home.html:609
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7570,11 +8802,11 @@ msgstr ""
 "Lenyűgöző e-mail-tartalom létrehozása az AI segítségével.Takarítson meg "
 "időt, miközben professzionális, vonzó üzeneteket hoz létre."
 
-#: .\templates\core\home.html:338
+#: .\templates\core\home.html:622
 msgid "Enterprise Security"
 msgstr "Vállalati biztonság"
 
-#: .\templates\core\home.html:340
+#: .\templates\core\home.html:624
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7582,17 +8814,17 @@ msgstr ""
 "GDPR-kompatibilis, biztonságos infrastruktúra és megbízható szállítás.Adatai"
 " és előfizetői védettek."
 
-#: .\templates\core\home.html:353
+#: .\templates\core\home.html:646
 msgid "Trusted by Growing Businesses"
 msgstr "A növekvő vállalkozások megbízásából"
 
-#: .\templates\core\home.html:356
+#: .\templates\core\home.html:649
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Csatlakozzon több ezer marketingeshez, akik átalakították e-mail "
 "stratégiájukat"
 
-#: .\templates\core\home.html:373
+#: .\templates\core\home.html:666
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7601,11 +8833,11 @@ msgstr ""
 "Konverziós arányunk 340%%-kal nőtt a csepegtető kampányok megvalósítása "
 "után.Az automatizálás minden héten órákat takarít meg."
 
-#: .\templates\core\home.html:381
+#: .\templates\core\home.html:674
 msgid "Marketing Director"
 msgstr "marketing igazgató"
 
-#: .\templates\core\home.html:398
+#: .\templates\core\home.html:691
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7613,11 +8845,11 @@ msgstr ""
 "A legjobb rész?Ez teljesen ingyenes.Több mint 50 000 e-mailt küldtünk el "
 "anélkül, hogy egy fillért sem fizettünk volna.Játékváltó."
 
-#: .\templates\core\home.html:406
+#: .\templates\core\home.html:699
 msgid "Startup Founder"
 msgstr "Startup alapítója"
 
-#: .\templates\core\home.html:423
+#: .\templates\core\home.html:716
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7625,17 +8857,17 @@ msgstr ""
 "A beállítás 5 percig tartott.A felület intuitív, és az eredmények magukért "
 "beszélnek.E-mailes elköteleződésünk megduplázódott."
 
-#: .\templates\core\home.html:431
+#: .\templates\core\home.html:724
 msgid "E-commerce Manager"
 msgstr "E-kereskedelmi menedzser"
 
-#: .\templates\core\home.html:444
+#: .\templates\core\home.html:746
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Perfect Email Marketing Solution for Every Business"
 msgstr "Ingyenes e-mail marketing automatizálás mindenki számára"
 
-#: .\templates\core\home.html:447
+#: .\templates\core\home.html:749
 msgid ""
 "Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
 "email marketing, or B2C email marketing campaigns, our free email marketing "
@@ -7646,13 +8878,13 @@ msgstr ""
 "futtat, ingyenes e-mail marketing automatizálási szoftverünk az Ön "
 "igényeihez igazodik."
 
-#: .\templates\core\home.html:458
+#: .\templates\core\home.html:760
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "SaaS Email Marketing"
 msgstr "Ingyenes e-mail marketing automatizálás"
 
-#: .\templates\core\home.html:459
+#: .\templates\core\home.html:761
 msgid ""
 "Onboard users with automated email sequences, welcome series, and nurture "
 "campaigns. Perfect for startup email marketing and software companies."
@@ -7661,19 +8893,19 @@ msgstr ""
 "sorozatokkal és kampányok támogatásával.Tökéletes kezdő email marketing és "
 "szoftvercégek számára."
 
-#: .\templates\core\home.html:461
+#: .\templates\core\home.html:763
 #, fuzzy
 #| msgid "Start Free Today"
 msgid "Start Free"
 msgstr "Kezdje ingyenesen még ma"
 
-#: .\templates\core\home.html:474
+#: .\templates\core\home.html:776
 #, fuzzy
 #| msgid "E-commerce Manager"
 msgid "Ecommerce Email Marketing"
 msgstr "E-kereskedelmi menedzser"
 
-#: .\templates\core\home.html:475
+#: .\templates\core\home.html:777
 msgid ""
 "Drive sales with abandoned cart emails, product recommendations, and "
 "transactional emails. Boost your email marketing ROI with targeted "
@@ -7683,19 +8915,19 @@ msgstr ""
 "tranzakciós e-mailekkel.Növelje e-mail marketing ROI-ját célzott "
 "kampányokkal."
 
-#: .\templates\core\home.html:477
+#: .\templates\core\home.html:779
 #, fuzzy
 #| msgid "Getting Started"
 msgid "Get Started"
 msgstr "Kezdő lépések"
 
-#: .\templates\core\home.html:490
+#: .\templates\core\home.html:792
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "B2B Email Marketing"
 msgstr "Ingyenes e-mail marketing automatizálás"
 
-#: .\templates\core\home.html:491
+#: .\templates\core\home.html:793
 msgid ""
 "Nurture leads with email marketing automation, email segmentation, and "
 "personalized email campaigns. Perfect for B2B email marketing strategies."
@@ -7704,17 +8936,17 @@ msgstr ""
 " szegmentálással és személyre szabott e-mail kampányokkal.Tökéletes B2B "
 "e-mail marketing stratégiákhoz."
 
-#: .\templates\core\home.html:493
+#: .\templates\core\home.html:795
 #, fuzzy
 #| msgid "Try AI Features"
 msgid "Try Free"
 msgstr "Próbálja ki az AI funkciókat"
 
-#: .\templates\core\home.html:506
+#: .\templates\core\home.html:808
 msgid "Small Business Email Marketing"
 msgstr "Kisvállalkozási e-mail marketing"
 
-#: .\templates\core\home.html:507
+#: .\templates\core\home.html:809
 #, fuzzy
 #| msgid ""
 #| "Free drip email marketing software with unlimited campaigns, subscribers, "
@@ -7727,17 +8959,17 @@ msgstr ""
 "Ingyenes csepegtető e-mail marketingszoftver korlátlan kampányokkal, "
 "előfizetőkkel és automatizált e-mail sorozatokkal"
 
-#: .\templates\core\home.html:519
+#: .\templates\core\home.html:821
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Start Your Free Email Marketing Campaign Today"
 msgstr "Ingyenes e-mail marketing automatizálás"
 
-#: .\templates\core\home.html:533
+#: .\templates\core\home.html:844
 msgid "The Best Free Alternative to Paid Email Marketing Tools"
 msgstr "A fizetős e-mailes marketingeszközök legjobb ingyenes alternatívája"
 
-#: .\templates\core\home.html:536
+#: .\templates\core\home.html:847
 msgid ""
 "Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
 " can get the same email marketing automation features for free? Our email "
@@ -7750,19 +8982,19 @@ msgstr ""
 "e-mail kampányt, korlátlan számú feliratkozót és hatékony e-mail "
 "automatizálást kínál – mindezt ingyenesen."
 
-#: .\templates\core\home.html:543
+#: .\templates\core\home.html:854
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Why Choose Our Free Email Marketing Software?"
 msgstr "Ingyenes Drip e-mail marketing szoftver"
 
-#: .\templates\core\home.html:550
+#: .\templates\core\home.html:861
 #, fuzzy, python-format
 #| msgid "Free Forever Plan"
 msgid "100%% Free Forever"
 msgstr "Ingyenes Forever terv"
 
-#: .\templates\core\home.html:551
+#: .\templates\core\home.html:862
 msgid ""
 "No hidden fees, no credit card required. Unlike Mailchimp alternative or "
 "Constant Contact alternative services, we're completely free email marketing"
@@ -7772,13 +9004,13 @@ msgstr ""
 "vagy a Constant Contact alternatív szolgáltatásaival ellentétben mi teljesen"
 " ingyenes e-mail marketing szoftverek vagyunk."
 
-#: .\templates\core\home.html:559
+#: .\templates\core\home.html:870
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Everything"
 msgstr "Korlátlan számú kampány"
 
-#: .\templates\core\home.html:560
+#: .\templates\core\home.html:871
 msgid ""
 "Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
 "unlimited email automation. No limits on your email marketing growth."
@@ -7787,13 +9019,13 @@ msgstr ""
 "előfizetők száma, korlátlan e-mail automatizálás.Nincsenek korlátok az "
 "e-mail marketing növekedésében."
 
-#: .\templates\core\home.html:568
+#: .\templates\core\home.html:879
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Full Email Marketing Automation"
 msgstr "Ingyenes e-mail marketing automatizálás"
 
-#: .\templates\core\home.html:569
+#: .\templates\core\home.html:880
 msgid ""
 "Complete email automation features: email drip campaigns, email scheduling, "
 "email analytics, email tracking, email segmentation, and email "
@@ -7803,13 +9035,13 @@ msgstr ""
 "e-mail ütemezés, e-mail elemzés, e-mailek követése, e-mailek szegmentálása "
 "és e-mailek személyre szabása."
 
-#: .\templates\core\home.html:577
+#: .\templates\core\home.html:888
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Best Email Marketing Software Features"
 msgstr "Ingyenes Drip e-mail marketing szoftver"
 
-#: .\templates\core\home.html:578
+#: .\templates\core\home.html:889
 msgid ""
 "Email templates, email newsletters, email subscriber management, email list "
 "management, email open rates tracking, email click rates, and email "
@@ -7819,11 +9051,11 @@ msgstr ""
 "lista kezelése, e-mailek megnyitási arányának nyomon követése, e-mailek "
 "kattintási aránya és e-mail marketing ROI elemzés."
 
-#: .\templates\core\home.html:584
+#: .\templates\core\home.html:895
 msgid "Ready to Switch?"
 msgstr "Készen áll a váltásra?"
 
-#: .\templates\core\home.html:586
+#: .\templates\core\home.html:897
 msgid ""
 "Join thousands of businesses who've switched from expensive email marketing "
 "services to our free email marketing platform. Get started with email "
@@ -7834,25 +9066,25 @@ msgstr ""
 "váltottak.Kezdje el az e-mail automatizálást percek alatt – nincs szükség "
 "hitelkártyára."
 
-#: .\templates\core\home.html:590
+#: .\templates\core\home.html:901
 #, fuzzy
 #| msgid "Create Free Account"
 msgid "Create Free Account Now"
 msgstr "Ingyenes fiók létrehozása"
 
-#: .\templates\core\home.html:593
+#: .\templates\core\home.html:904
 #, fuzzy
 #| msgid "Already have an account?"
 msgid "Already Have an Account? Sign In"
 msgstr "Már van fiókja?"
 
-#: .\templates\core\home.html:607
+#: .\templates\core\home.html:927
 #, fuzzy
 #| msgid "Email Design Best Practices"
 msgid "Email Marketing Best Practices & Tips"
 msgstr "Az e-mail tervezés bevált gyakorlatai"
 
-#: .\templates\core\home.html:610
+#: .\templates\core\home.html:930
 msgid ""
 "Learn how to improve email open rates, increase email engagement, and "
 "maximize your email marketing ROI with proven email marketing strategies and"
@@ -7862,13 +9094,13 @@ msgstr ""
 "e-mailek elkötelezettségét, és maximalizálhatja e-mail marketing ROI-ját a "
 "bevált e-mail marketing stratégiák és e-mail marketing tippek segítségével."
 
-#: .\templates\core\home.html:621
+#: .\templates\core\home.html:941
 #, fuzzy
 #| msgid "Average Open Rate"
 msgid "Improve Email Open Rates"
 msgstr "Átlagos nyitási arány"
 
-#: .\templates\core\home.html:622
+#: .\templates\core\home.html:942
 msgid ""
 "Use personalized email subject lines, send emails at optimal times, and "
 "segment your email list. Track email open rates with our email analytics to "
@@ -7879,19 +9111,19 @@ msgstr ""
 "e-mailek megnyitási arányát e-mail-analitikánkkal, hogy optimalizálja e-mail"
 " marketingkampányait."
 
-#: .\templates\core\home.html:624
+#: .\templates\core\home.html:944
 #, fuzzy
 #| msgid "Tracking Improvements"
 msgid "Start Tracking Opens"
 msgstr "Nyomon követési fejlesztések"
 
-#: .\templates\core\home.html:637
+#: .\templates\core\home.html:957
 #, fuzzy
 #| msgid "Bounce management"
 msgid "Increase Email Engagement"
 msgstr "Pattanáskezelés"
 
-#: .\templates\core\home.html:638
+#: .\templates\core\home.html:958
 msgid ""
 "Create engaging email content with email personalization, use email "
 "automation to send timely messages, and monitor email click rates. Our email"
@@ -7902,19 +9134,19 @@ msgstr ""
 "figyelje az e-mailek kattintási arányát.E-mail marketing automatizálásunk "
 "segít abban, hogy a megfelelő üzenetet a megfelelő időben küldje el."
 
-#: .\templates\core\home.html:640
+#: .\templates\core\home.html:960
 #, fuzzy
 #| msgid "More Engagement"
 msgid "Boost Engagement"
 msgstr "Még több eljegyzés"
 
-#: .\templates\core\home.html:653
+#: .\templates\core\home.html:973
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Maximize Email Marketing ROI"
 msgstr "Ingyenes e-mail marketing automatizálás"
 
-#: .\templates\core\home.html:654
+#: .\templates\core\home.html:974
 msgid ""
 "Use email drip campaigns for lead nurturing, implement email segmentation "
 "for targeted campaigns, and track email marketing ROI with comprehensive "
@@ -7925,27 +9157,27 @@ msgstr ""
 "marketing ROI-t átfogó e-mail elemzésekkel.Ingyenes e-mail marketing "
 "szoftver, amely eredményeket hoz."
 
-#: .\templates\core\home.html:656
+#: .\templates\core\home.html:976
 msgid "See Your ROI"
 msgstr "Tekintse meg ROI-ját"
 
-#: .\templates\core\home.html:665
+#: .\templates\core\home.html:985
 msgid "Ready to implement these email marketing best practices?"
 msgstr "Készen áll a bevált e-mail marketing gyakorlatok megvalósítására?"
 
-#: .\templates\core\home.html:667
+#: .\templates\core\home.html:987
 #, fuzzy
 #| msgid "Start automating your email marketing for free."
 msgid "Start Your Email Marketing Journey Free"
 msgstr "Kezdje el ingyen automatizálni e-mail marketingjét."
 
-#: .\templates\core\home.html:681
+#: .\templates\core\home.html:1010
 #, fuzzy
 #| msgid "Frequently Asked Questions"
 msgid "Frequently Asked Questions About Email Marketing"
 msgstr "Gyakran Ismételt Kérdések"
 
-#: .\templates\core\home.html:684
+#: .\templates\core\home.html:1013
 #, fuzzy
 #| msgid "Everything you need to automate your email marketing"
 msgid ""
@@ -7953,13 +9185,13 @@ msgid ""
 "and our free email marketing software."
 msgstr "Minden, amire szüksége van az e-mail marketing automatizálásához"
 
-#: .\templates\core\home.html:690
+#: .\templates\core\home.html:1019
 #, fuzzy
 #| msgid "What Are Drip Campaigns?"
 msgid "What is a drip email campaign?"
 msgstr "Mik azok a csepegtető kampányok?"
 
-#: .\templates\core\home.html:692
+#: .\templates\core\home.html:1021
 msgid ""
 "A drip email campaign, also known as an automated email sequence or email "
 "drip campaign, is a series of automated emails sent to subscribers over "
@@ -7974,14 +9206,14 @@ msgstr ""
 "automatizálás révén konverziókat eredményeznek.E-mail marketing platformunk "
 "megkönnyíti hatékony csepegtető e-mail kampányok létrehozását."
 
-#: .\templates\core\home.html:697
+#: .\templates\core\home.html:1026
 #, fuzzy
 #| msgid "Learn how to create and send your first email campaign"
 msgid "How do I create a drip email campaign?"
 msgstr ""
 "Ismerje meg, hogyan hozhatja létre és küldheti el első e-mail kampányát"
 
-#: .\templates\core\home.html:699
+#: .\templates\core\home.html:1028
 msgid ""
 "Creating a drip email campaign is simple with our email marketing automation"
 " software. Sign up for free, create your email campaign, add email sequences"
@@ -7996,18 +9228,18 @@ msgstr ""
 "sablonjainkat, vagy egyéni e-mail marketing kampányokat hozhat létre.Kezdje "
 "el percek alatt!"
 
-#: .\templates\core\home.html:703
+#: .\templates\core\home.html:1032
 #: .\templates\core\tutorials\quick_start.html:134
 msgid "Create Your First Campaign"
 msgstr "Hozza létre első kampányát"
 
-#: .\templates\core\home.html:712
+#: .\templates\core\home.html:1041
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Is this really free email marketing software?"
 msgstr "Ingyenes Drip e-mail marketing szoftver"
 
-#: .\templates\core\home.html:714
+#: .\templates\core\home.html:1043
 #, python-format
 msgid ""
 "Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
@@ -8023,11 +9255,11 @@ msgstr ""
 " funkciókat kínálunk ingyenesen.Nem szükséges hitelkártya, nincsenek rejtett"
 " díjak."
 
-#: .\templates\core\home.html:719
+#: .\templates\core\home.html:1048
 msgid "What email marketing features are included?"
 msgstr "Milyen e-mail marketing funkciókat tartalmaznak?"
 
-#: .\templates\core\home.html:721
+#: .\templates\core\home.html:1050
 msgid ""
 "Our free email marketing software includes: email drip campaigns, automated "
 "email sequences, email scheduling, email analytics and email tracking (email"
@@ -8044,13 +9276,13 @@ msgstr ""
 "hírlevelek és átfogó e-mail marketing automatizálás.Minden, ami a sikeres "
 "email marketinghez kell!"
 
-#: .\templates\core\home.html:726
+#: .\templates\core\home.html:1055
 #, fuzzy
 #| msgid "Individual email open rates"
 msgid "How can I improve my email open rates?"
 msgstr "Egyedi e-mail megnyitási árak"
 
-#: .\templates\core\home.html:728
+#: .\templates\core\home.html:1057
 msgid ""
 "Improve email open rates by using personalized email subject lines, sending "
 "emails at optimal times, segmenting your email list, and creating engaging "
@@ -8064,17 +9296,17 @@ msgstr ""
 " megnyitási arányát, és optimalizálni e-mail marketingkampányait a jobb "
 "teljesítmény érdekében."
 
-#: .\templates\core\home.html:732
+#: .\templates\core\home.html:1061
 #, fuzzy
 #| msgid "Start Import"
 msgid "Start Improving Opens"
 msgstr "Indítsa el az Importálást"
 
-#: .\templates\core\home.html:742
+#: .\templates\core\home.html:1071
 msgid "Still Have Questions?"
 msgstr "Van még kérdése?"
 
-#: .\templates\core\home.html:743
+#: .\templates\core\home.html:1072
 msgid ""
 "Get started with our free email marketing software and discover how easy "
 "email automation can be!"
@@ -8082,11 +9314,11 @@ msgstr ""
 "Kezdje el ingyenes e-mail marketing szoftverünk használatát, és fedezze fel,"
 " milyen egyszerű lehet az e-mail automatizálás!"
 
-#: .\templates\core\home.html:762
+#: .\templates\core\home.html:1100
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Készen áll az e-mail marketing átalakítására?"
 
-#: .\templates\core\home.html:765
+#: .\templates\core\home.html:1103
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -8095,18 +9327,75 @@ msgstr ""
 "bevétel növelése, a potenciális ügyfelek ápolása és tartós ügyfélkapcsolatok"
 " kialakítása érdekében."
 
-#: .\templates\core\home.html:769
+#: .\templates\core\home.html:1107
 msgid "Start Your Free Account"
 msgstr "Indítsa el ingyenes fiókját"
 
-#: .\templates\core\home.html:775
-msgid "Learn More"
-msgstr "További információ"
-
-#: .\templates\core\home.html:779
+#: .\templates\core\home.html:1117
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Nincs szükség hitelkártyára • Beállítás 5 perc alatt • Bármikor lemondhatja"
+
+#: .\templates\core\home.html:1171
+msgid ""
+"Your email address will be your username. Please create a password to secure"
+" your account:"
+msgstr ""
+"Az e-mail címed lesz a felhasználóneved.Kérjük, hozzon létre egy jelszót "
+"fiókja biztonsága érdekében:"
+
+#: .\templates\core\home.html:1174
+#, fuzzy
+#| msgid "Email or Username"
+msgid "Email (Username)"
+msgstr "E-mail vagy Felhasználónév"
+
+#: .\templates\core\home.html:1182
+#, fuzzy
+#| msgid "Enter your current password"
+msgid "Enter a secure password"
+msgstr "Adja meg jelenlegi jelszavát"
+
+#: .\templates\core\home.html:1183
+msgid "Minimum 8 characters recommended"
+msgstr "Legalább 8 karakter ajánlott"
+
+#: .\templates\core\home.html:1193 .\templates\core\home.html:1374
+#: .\templates\core\home.html:1387
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Account & Connect"
+msgstr "Ingyenes fiók létrehozása"
+
+#: .\templates\core\home.html:1213 .\templates\core\home.html:1256
+#, fuzzy
+#| msgid "Please enter a valid email address."
+msgid "Please enter your Gmail address:"
+msgstr "Kérjük, adjon meg egy érvényes e-mail címet."
+
+#: .\templates\core\home.html:1295
+msgid "Password must be at least 6 characters long"
+msgstr "A jelszónak legalább 6 karakter hosszúnak kell lennie"
+
+#: .\templates\core\home.html:1303
+#, fuzzy
+#| msgid "Create Your Account"
+msgid "Creating Account..."
+msgstr "Hozzon létre fiókot"
+
+#: .\templates\core\home.html:1384
+#, fuzzy
+#| msgid "An error occurred. Please try again later."
+msgid "An error occurred. Please try again."
+msgstr "Hiba történt.Kérjük, próbálja újra később."
+
+#: .\templates\core\includes\signup_box.html:21
+msgid ""
+"Connect your email account and start auto-replying immediately. No credit "
+"card required."
+msgstr ""
+"Csatlakoztassa e-mail fiókját, és azonnal kezdje el az automatikus "
+"válaszadást.Hitelkártya nem szükséges."
 
 #: .\templates\core\pricing.html:4
 msgid "Pricing"
@@ -9212,15 +10501,25 @@ msgid "Your current email address. Change it to update your account email."
 msgstr ""
 "Az Ön jelenlegi e-mail címe.Módosítsa a fiók e-mail-címének frissítéséhez."
 
-#: .\templates\core\settings.html:38
+#: .\templates\core\settings.html:36
+msgid "Auto BCC this email address whenever a new email is sent."
+msgstr "Automatikusan titkosítja ezt az e-mail címet, amikor új e-mailt küld."
+
+#: .\templates\core\settings.html:37
+msgid ""
+"When enabled, you will receive a copy of every email sent from your account."
+msgstr ""
+"Ha engedélyezve van, a fiókjából küldött minden e-mail másolatát megkapja."
+
+#: .\templates\core\settings.html:49
 msgid "Physical Address"
 msgstr "Fizikai cím"
 
-#: .\templates\core\settings.html:81
+#: .\templates\core\settings.html:97
 msgid "API Bearer Token"
 msgstr "API Bearer Token"
 
-#: .\templates\core\settings.html:83
+#: .\templates\core\settings.html:99
 msgid ""
 "Use this bearer token to authenticate API requests. Include it in the "
 "Authorization header as 'Bearer <token>'."
@@ -9228,25 +10527,25 @@ msgstr ""
 "Ezzel a vivőjogkivonattal hitelesítheti az API-kérelmeket.Szerelje be az "
 "Engedélyezés fejlécébe 'Bearer <token>' néven."
 
-#: .\templates\core\settings.html:85
+#: .\templates\core\settings.html:101
 msgid "View API Documentation"
 msgstr "Tekintse meg az API dokumentációját"
 
-#: .\templates\core\settings.html:93
+#: .\templates\core\settings.html:109
 msgid "Your Bearer Token"
 msgstr "A hordozó tokenje"
 
-#: .\templates\core\settings.html:107
+#: .\templates\core\settings.html:123
 msgid "Click the token or use the Copy button to copy it to your clipboard."
 msgstr ""
 "Kattintson a tokenre, vagy használja a Másolás gombot a vágólapra "
 "másolásához."
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid "Security Warning:"
 msgstr "Biztonsági figyelmeztetés:"
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid ""
 "Keep your token secret. Anyone with this token can access your account via "
 "the API."
@@ -9254,11 +10553,11 @@ msgstr ""
 "Tartsa titokban a tokenjét.Bárki, aki rendelkezik ezzel a tokennel, "
 "hozzáférhet fiókjához az API-n keresztül."
 
-#: .\templates\core\settings.html:129
+#: .\templates\core\settings.html:145
 msgid "Regenerate Token"
 msgstr "Token újragenerálása"
 
-#: .\templates\core\settings.html:132
+#: .\templates\core\settings.html:148
 msgid ""
 "Regenerating will create a new token and invalidate the old one. Update any "
 "applications using the old token."
@@ -9266,11 +10565,11 @@ msgstr ""
 "Az újragenerálás új tokent hoz létre, és érvényteleníti a régit.Frissítsen "
 "minden alkalmazást a régi token használatával."
 
-#: .\templates\core\settings.html:139
+#: .\templates\core\settings.html:155
 msgid "Timezone Settings"
 msgstr "Időzóna beállításai"
 
-#: .\templates\core\settings.html:140
+#: .\templates\core\settings.html:156
 msgid ""
 "Set your preferred timezone for displaying scheduled email times on the "
 "dashboard."
@@ -9278,26 +10577,26 @@ msgstr ""
 "Állítsa be a kívánt időzónát az ütemezett e-mailek megjelenítéséhez az "
 "irányítópulton."
 
-#: .\templates\core\settings.html:145
+#: .\templates\core\settings.html:161
 msgid "Preferred Time Zone"
 msgstr "Preferált időzóna"
 
-#: .\templates\core\settings.html:151
+#: .\templates\core\settings.html:167
 msgid ""
 "Scheduled email times on the dashboard will be shown using this time zone."
 msgstr ""
 "Az ütemezett e-mail időpontok az irányítópulton ebben az időzónában jelennek"
 " meg."
 
-#: .\templates\core\settings.html:188
+#: .\templates\core\settings.html:204
 msgid "Account Status"
 msgstr "Fiók állapota"
 
-#: .\templates\core\settings.html:275
+#: .\templates\core\settings.html:291
 msgid "Token copied to clipboard!"
 msgstr "Token a vágólapra másolva!"
 
-#: .\templates\core\settings.html:287
+#: .\templates\core\settings.html:303
 msgid ""
 "Are you sure you want to regenerate your API token? This will invalidate "
 "your current token and you will need to update any applications using it."
@@ -9305,15 +10604,15 @@ msgstr ""
 "Biztosan újra szeretné generálni API-tokenjét?Ez érvényteleníti a jelenlegi "
 "tokenjét, és frissítenie kell az azt használó alkalmazásokat."
 
-#: .\templates\core\settings.html:338
+#: .\templates\core\settings.html:354
 msgid "Token regenerated successfully!"
 msgstr "A token sikeresen újragenerálva!"
 
-#: .\templates\core\settings.html:348
+#: .\templates\core\settings.html:364
 msgid "Failed to regenerate token"
 msgstr "Nem sikerült újragenerálni a tokent"
 
-#: .\templates\core\settings.html:353
+#: .\templates\core\settings.html:369
 msgid "Error regenerating token. Please try again."
 msgstr "Hiba a token újragenerálása során.Kérjük, próbálja újra."
 
@@ -9551,10 +10850,6 @@ msgstr "Új előfizetői értesítések"
 #: .\templates\core\tutorials\account_setup.html:75
 msgid "Bounce and complaint alerts"
 msgstr "Visszapattanási és panaszriasztások"
-
-#: .\templates\core\tutorials\account_setup.html:79
-msgid "Change Password"
-msgstr "Jelszó módosítása"
 
 #: .\templates\core\tutorials\account_setup.html:81
 msgid "Settings → Security"
@@ -15092,10 +16387,6 @@ msgid ""
 "                        "
 msgstr "%(start)s-%(end)s/%(total)s előfizető megjelenítése"
 
-#: .\templates\subscribers\list.html:174 .\templates\subscribers\list.html:178
-msgid "Previous"
-msgstr "Előző"
-
 #: .\templates\subscribers\list.html:183
 #, python-format
 msgid ""
@@ -15103,10 +16394,6 @@ msgid ""
 "                                Page %(number)s of %(total)s\n"
 "                            "
 msgstr "%(number)s oldal / %(total)s"
-
-#: .\templates\subscribers\list.html:191 .\templates\subscribers\list.html:195
-msgid "Next"
-msgstr "Következő"
 
 #: .\templates\subscribers\list.html:204
 msgid "No subscribers match your search"
@@ -15125,6 +16412,41 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Importálja a névjegyeket, vagy vegyen fel előfizetőket manuálisan, hogy "
 "megtekinthesse őket itt."
+
+#~ msgid "This is already your current email address."
+#~ msgstr "Ez már az Ön jelenlegi e-mail címe."
+
+#~ msgid "Email sent successfully (Celery unavailable, sent immediately)"
+#~ msgstr ""
+#~ "Az e-mail sikeres elküldése (a zeller nem elérhető, azonnal elküldjük)"
+
+#~ msgid "Metrics Overview"
+#~ msgstr "A mérőszámok áttekintése"
+
+#~ msgid "Open Rate (trend)"
+#~ msgstr "Nyitási arány (trend)"
+
+#~ msgid "Coming soon"
+#~ msgstr "Hamarosan"
+
+#~ msgid "Click Rate (trend)"
+#~ msgstr "Kattintási arány (trend)"
+
+#~ msgid "Delivery Rate (trend)"
+#~ msgstr "Szállítási arány (trend)"
+
+#~ msgid ""
+#~ "AI generation uses Hugging Face API to create email content. The generated "
+#~ "subject and body will replace your current email."
+#~ msgstr ""
+#~ "A mesterséges intelligencia generációja a Hugging Face API-t használja az "
+#~ "e-mail tartalmak létrehozásához.A generált tárgy és törzs helyettesíti a "
+#~ "jelenlegi e-mailt."
+
+#~ msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#~ msgstr ""
+#~ "Győződjön meg arról, hogy a HUGGINGFACE_API_KEY környezeti változó be van "
+#~ "állítva."
 
 #~ msgid ""
 #~ "Automated email sequences that nurture leads, onboard users, and drive "

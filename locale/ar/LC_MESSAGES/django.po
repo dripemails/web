@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-04 14:16-0600\n"
+"POT-Creation-Date: 2026-01-21 02:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\analytics\models.py:8 .\analytics\models.py:36 .\campaigns\models.py:143
-#: .\subscribers\models.py:10 .\subscribers\models.py:76
+#: .\analytics\models.py:8 .\analytics\models.py:40 .\campaigns\models.py:145
+#: .\gmail\models.py:18 .\gmail\models.py:70 .\subscribers\models.py:10
+#: .\subscribers\models.py:76
 msgid "User"
 msgstr "مستخدم"
 
@@ -47,228 +48,260 @@ msgstr "HTML تذييل مخصص لرسائل البريد الإلكتروني"
 msgid "Time Zone"
 msgstr "المنطقة الزمنية"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
-#: .\templates\core\settings.html:45
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:779
+#: .\templates\core\settings.html:56
+#, fuzzy
+#| msgid "Full name"
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+#: .\analytics\models.py:15
+msgid "Full name to use in email From header"
+msgstr "الاسم الكامل الذي سيتم استخدامه في البريد الإلكتروني من الرأس"
+
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:784
+#: .\templates\core\settings.html:61
 msgid "Address Line 1"
 msgstr "العنوان سطر 1"
 
-#: .\analytics\models.py:15
+#: .\analytics\models.py:17
 msgid "Street address"
 msgstr ".عنوان الشارع"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Address Line 2"
 msgstr "سطر العنوان 2"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Apartment, suite, etc. (optional)"
 msgstr "شقة، جناح، الخ (اختياري)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
-#: .\templates\core\settings.html:54
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:793
+#: .\templates\core\settings.html:70
 msgid "City"
 msgstr "مدينة"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
-#: .\templates\core\settings.html:58
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:797
+#: .\templates\core\settings.html:74
 msgid "State/Province"
 msgstr "الولاية/المقاطعة"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
-#: .\templates\core\settings.html:64
+#: .\analytics\models.py:21 .\templates\core\dashboard.html:803
+#: .\templates\core\settings.html:80
 msgid "Postal Code"
 msgstr "رمز بريدي"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
-#: .\templates\core\settings.html:68
+#: .\analytics\models.py:22 .\templates\core\dashboard.html:807
+#: .\templates\core\settings.html:84
 msgid "Country"
 msgstr "دولة"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "SPF Verified"
 msgstr "تم التحقق من نظام الحماية من الشمس (SPF)."
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "Whether the user has a valid SPF record"
 msgstr "ما إذا كان لدى المستخدم سجل SPF صالح"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "SPF Last Checked"
 msgstr "آخر فحص لنظام SPF"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "Last time SPF record was checked"
 msgstr "آخر مرة تم فيها فحص سجل SPF"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "SPF Record"
 msgstr "سجل SPF"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "The SPF record found for the user's domain"
 msgstr "تم العثور على سجل نظام التعرف على هوية المرسل (SPF) لنطاق المستخدم"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "SPF Missing Includes"
 msgstr "يتضمن نظام التعرف على هوية المرسل (SPF) مفقودًا"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "List of missing required SPF includes"
 msgstr "تتضمن قائمة SPF المطلوبة المفقودة"
 
-#: .\analytics\models.py:28
+#: .\analytics\models.py:29
+msgid "Auto BCC Enabled"
+msgstr "تم تمكين نسخة مخفية الوجهة التلقائية"
+
+#: .\analytics\models.py:29
+#, fuzzy
+#| msgid "Automatically scheduled 2 days after Email 1 is sent"
+msgid "Automatically BCC this email address whenever a new email is sent"
+msgstr "تتم جدولته تلقائيًا بعد يومين من إرسال البريد الإلكتروني 1"
+
+#: .\analytics\models.py:32
 msgid "User Profile"
 msgstr "ملف تعريف المستخدم"
 
-#: .\analytics\models.py:29
+#: .\analytics\models.py:33
 msgid "User Profiles"
 msgstr "ملفات تعريف المستخدمين"
 
-#: .\analytics\models.py:32
+#: .\analytics\models.py:36
 #, python-format
 msgid "Profile for %(username)s"
 msgstr "الملف الشخصي لـ %(username)s"
 
-#: .\analytics\models.py:37 .\campaigns\models.py:20
+#: .\analytics\models.py:41 .\campaigns\models.py:21
 #: .\subscribers\models.py:11 .\subscribers\models.py:77
 #: .\templates\subscribers\list.html:76
 msgid "Name"
 msgstr "اسم"
 
-#: .\analytics\models.py:38
+#: .\analytics\models.py:42
 msgid "HTML Content"
 msgstr "محتوى HTML"
 
-#: .\analytics\models.py:39
+#: .\analytics\models.py:43
 msgid "Is Default"
 msgstr "هو الافتراضي"
 
-#: .\analytics\models.py:40 .\campaigns\models.py:25 .\campaigns\models.py:74
-#: .\campaigns\models.py:121 .\campaigns\models.py:153
-#: .\campaigns\models.py:183 .\subscribers\models.py:14
+#: .\analytics\models.py:44 .\campaigns\models.py:26 .\campaigns\models.py:75
+#: .\campaigns\models.py:123 .\campaigns\models.py:155
+#: .\campaigns\models.py:185 .\gmail\models.py:42 .\subscribers\models.py:14
 #: .\subscribers\models.py:53
 msgid "Created At"
 msgstr "تم الإنشاء في"
 
-#: .\analytics\models.py:41 .\campaigns\models.py:26 .\campaigns\models.py:75
-#: .\campaigns\models.py:154 .\campaigns\models.py:184
+#: .\analytics\models.py:45 .\campaigns\models.py:27 .\campaigns\models.py:76
+#: .\campaigns\models.py:156 .\campaigns\models.py:186 .\gmail\models.py:43
 #: .\subscribers\models.py:15 .\subscribers\models.py:54
 msgid "Updated At"
 msgstr "تم التحديث في"
 
-#: .\analytics\models.py:44 .\templates\campaigns\drafts.html:216
-#: .\templates\campaigns\template.html:148
+#: .\analytics\models.py:48 .\templates\campaigns\drafts.html:216
+#: .\templates\campaigns\template.html:178
 msgid "Email Footer"
 msgstr "تذييل البريد الإلكتروني"
 
-#: .\analytics\models.py:45 .\templates\analytics\footer_list.html:4
+#: .\analytics\models.py:49 .\templates\analytics\footer_list.html:4
 #: .\templates\analytics\footer_list.html:12
 msgid "Email Footers"
 msgstr "تذييلات البريد الإلكتروني"
 
-#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:485 .\templates\campaigns\template.html:1402
 msgid "API key regenerated successfully!"
 msgstr "تم إعادة إنشاء مفتاح API بنجاح!"
 
-#: .\analytics\views.py:426 .\analytics\views.py:463
-#: .\templates\campaigns\template.html:1187
+#: .\analytics\views.py:514 .\analytics\views.py:551
+#: .\templates\campaigns\template.html:1499
 msgid "Footer created successfully!"
 msgstr "تم إنشاء التذييل بنجاح!"
 
-#: .\analytics\views.py:429 .\analytics\views.py:488
+#: .\analytics\views.py:517 .\analytics\views.py:576
 msgid "Please provide both name and content."
 msgstr "يرجى تقديم كل من الاسم والمحتوى."
 
-#: .\analytics\views.py:448
+#: .\analytics\views.py:536
 msgid "Footer name is required"
 msgstr "اسم التذييل مطلوب"
 
-#: .\analytics\views.py:451
+#: .\analytics\views.py:539
 msgid "Footer content is required"
 msgstr "محتوى التذييل مطلوب"
 
-#: .\analytics\views.py:485
+#: .\analytics\views.py:573
 msgid "Footer updated successfully!"
 msgstr "تم تحديث التذييل بنجاح!"
 
-#: .\analytics\views.py:503
+#: .\analytics\views.py:591
 msgid "Footer deleted successfully!"
 msgstr "تم حذف التذييل بنجاح!"
 
-#: .\analytics\views.py:517
+#: .\analytics\views.py:605
 msgid "Default footer updated successfully!"
 msgstr "تم تحديث التذييل الافتراضي بنجاح!"
 
-#: .\campaigns\models.py:11 .\campaigns\views.py:462
+#: .\campaigns\models.py:11 .\campaigns\views.py:526
+#, fuzzy
+#| msgid "In seconds"
+msgid "Seconds"
+msgstr "في ثواني"
+
+#: .\campaigns\models.py:12 .\campaigns\views.py:527
 #: .\templates\campaigns\drafts.html:203
 #: .\templates\core\feature_email_scheduling.html:66
 msgid "Minutes"
 msgstr "دقائق"
 
-#: .\campaigns\models.py:12 .\campaigns\views.py:463
+#: .\campaigns\models.py:13 .\campaigns\views.py:528
 #: .\templates\campaigns\drafts.html:204
 #: .\templates\core\feature_email_scheduling.html:67
 msgid "Hours"
 msgstr "ساعات"
 
-#: .\campaigns\models.py:13 .\campaigns\views.py:464
+#: .\campaigns\models.py:14 .\campaigns\views.py:529
 #: .\templates\campaigns\drafts.html:205
 #: .\templates\core\feature_email_scheduling.html:68
 msgid "Days"
 msgstr "أيام"
 
-#: .\campaigns\models.py:14 .\campaigns\views.py:465
+#: .\campaigns\models.py:15 .\campaigns\views.py:530
 #: .\templates\campaigns\drafts.html:206
 #: .\templates\core\feature_email_scheduling.html:69
 msgid "Weeks"
 msgstr "أسابيع"
 
-#: .\campaigns\models.py:15 .\campaigns\views.py:466
+#: .\campaigns\models.py:16 .\campaigns\views.py:531
 #: .\templates\campaigns\drafts.html:207
 #: .\templates\core\feature_email_scheduling.html:70
 msgid "Months"
 msgstr "شهور"
 
-#: .\campaigns\models.py:21 .\subscribers\models.py:12
+#: .\campaigns\models.py:22 .\subscribers\models.py:12
 #: .\templates\campaigns\campaign_edit_page.html:12
-#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:35
+#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:60
 msgid "Description"
 msgstr "وصف"
 
-#: .\campaigns\models.py:23 .\templates\campaigns\campaign_edit_page.html:13
-#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:41
+#: .\campaigns\models.py:24 .\templates\campaigns\campaign_edit_page.html:13
+#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:66
 msgid "Subscriber List"
 msgstr "قائمة المشتركين"
 
-#: .\campaigns\models.py:24 .\subscribers\models.py:49
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
-#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
+#: .\campaigns\models.py:25 .\gmail\models.py:35 .\subscribers\models.py:49
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:16
+#: .\templates\campaigns\template.html:93
+#: .\templates\campaigns\template.html:331 .\templates\core\dashboard.html:545
+#: .\templates\core\dashboard.html:603 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "نشيط"
 
-#: .\campaigns\models.py:27
+#: .\campaigns\models.py:28
 msgid "Sent Count"
 msgstr "عدد المرسلة"
 
-#: .\campaigns\models.py:28
+#: .\campaigns\models.py:29
 msgid "Open Count"
 msgstr "فتح العد"
 
-#: .\campaigns\models.py:29
+#: .\campaigns\models.py:30
 msgid "Click Count"
 msgstr "انقر فوق العد"
 
-#: .\campaigns\models.py:32 .\campaigns\models.py:66 .\campaigns\models.py:144
-#: .\templates\campaigns\campaign_analysis.html:19
-#: .\templates\campaigns\template.html:293
+#: .\campaigns\models.py:33 .\campaigns\models.py:67 .\campaigns\models.py:146
+#: .\templates\analytics\dashboard.html:116
+#: .\templates\campaigns\campaign_analysis.html:23
+#: .\templates\campaigns\campaign_emails.html:128
+#: .\templates\campaigns\campaign_emails.html:253
+#: .\templates\campaigns\campaign_emails.html:330
+#: .\templates\campaigns\template.html:326
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:395 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "حملة"
 
-#: .\campaigns\models.py:33 .\templates\base.html:369
-#: .\templates\core\dashboard.html:77
+#: .\campaigns\models.py:34 .\templates\analytics\dashboard.html:94
+#: .\templates\base.html:370 .\templates\core\dashboard.html:218
 #: .\templates\core\feature_drip_campaigns.html:35
 #: .\templates\core\resource_api_reference.html:93
 #: .\templates\core\resource_api_reference.html:140
@@ -278,48 +311,54 @@ msgstr "حملة"
 msgid "Campaigns"
 msgstr "الحملات"
 
-#: .\campaigns\models.py:67 .\templates\campaigns\campaign_analysis.html:147
+#: .\campaigns\models.py:68 .\gmail\models.py:79
+#: .\templates\campaigns\campaign_analysis.html:151
+#: .\templates\campaigns\campaign_emails.html:57
+#: .\templates\campaigns\campaign_emails.html:197
+#: .\templates\campaigns\campaign_emails.html:268
+#: .\templates\campaigns\campaign_emails.html:401
 #: .\templates\core\contact.html:35
 msgid "Subject"
 msgstr "موضوع"
 
-#: .\campaigns\models.py:68
+#: .\campaigns\models.py:69
 msgid "HTML Body"
 msgstr "نص HTML"
 
-#: .\campaigns\models.py:69
+#: .\campaigns\models.py:70
 msgid "Text Body"
 msgstr "هيئة النص"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:197
-#: .\templates\campaigns\template.html:91
+#: .\campaigns\models.py:71 .\templates\campaigns\campaign_emails.html:136
+#: .\templates\campaigns\drafts.html:197
+#: .\templates\campaigns\template.html:118
 #: .\templates\core\feature_email_scheduling.html:63
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Time"
 msgstr "وقت الانتظار"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:211
+#: .\campaigns\models.py:71 .\templates\campaigns\drafts.html:211
 msgid "Time to wait before sending this email"
 msgstr "حان الوقت للانتظار قبل إرسال هذا البريد الإلكتروني"
 
-#: .\campaigns\models.py:71 .\templates\core\feature_email_scheduling.html:64
+#: .\campaigns\models.py:72 .\templates\core\feature_email_scheduling.html:64
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Unit"
 msgstr "وحدة الإنتظار"
 
-#: .\campaigns\models.py:72 .\templates\campaigns\campaign_edit_page.html:39
+#: .\campaigns\models.py:73 .\templates\campaigns\campaign_edit_page.html:39
 #: .\templates\core\feature_email_scheduling.html:73
 #: .\templates\core\feature_email_templates.html:65
 msgid "Order"
 msgstr "طلب"
 
-#: .\campaigns\models.py:73
+#: .\campaigns\models.py:74
 msgid "Footer"
 msgstr "تذييل"
 
-#: .\campaigns\models.py:79 .\campaigns\models.py:115
-#: .\campaigns\models.py:145 .\campaigns\models.py:169
-#: .\subscribers\models.py:45 .\templates\base.html:414
+#: .\campaigns\models.py:80 .\campaigns\models.py:117
+#: .\campaigns\models.py:147 .\campaigns\models.py:171
+#: .\subscribers\models.py:45 .\templates\base.html:415
 #: .\templates\campaigns\email_analysis.html:215
 #: .\templates\campaigns\email_analysis.html:399
 #: .\templates\campaigns\template_revision.html:48
@@ -328,231 +367,259 @@ msgstr "تذييل"
 msgid "Email"
 msgstr "بريد إلكتروني"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
+#: .\campaigns\models.py:81 .\templates\campaigns\campaign_emails.html:5
+#: .\templates\core\dashboard.html:526
 msgid "Emails"
 msgstr "رسائل البريد الإلكتروني"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "second"
+msgstr "في ثواني"
+
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "seconds"
+msgstr "في ثواني"
+
+#: .\campaigns\models.py:91
 msgid "minute"
 msgstr "دقيقة"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:91
 msgid "minutes"
 msgstr "دقائق"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hour"
 msgstr "ساعة"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hours"
 msgstr "ساعات"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "day"
 msgstr "يوم"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "days"
 msgstr "أيام"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "week"
 msgstr "أسبوع"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "weeks"
 msgstr "أسابيع"
 
-#: .\campaigns\models.py:93 .\templates\core\pricing.html:20
+#: .\campaigns\models.py:95 .\templates\core\pricing.html:20
 msgid "month"
 msgstr "شهر"
 
-#: .\campaigns\models.py:93
+#: .\campaigns\models.py:95
 msgid "months"
 msgstr "شهور"
 
-#: .\campaigns\models.py:106 .\campaigns\models.py:138
-#: .\templates\campaigns\campaign_analysis.html:39
-#: .\templates\campaigns\campaign_analysis.html:117
-#: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
+#: .\campaigns\models.py:108 .\campaigns\models.py:140
+#: .\templates\analytics\dashboard.html:119
+#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:121
+#: .\templates\campaigns\campaign_analysis.html:152
+#: .\templates\campaigns\campaign_emails.html:241
+#: .\templates\campaigns\edit.html:198 .\templates\campaigns\edit.html:499
+#: .\templates\core\dashboard.html:527 .\templates\core\dashboard.html:1219
 msgid "Sent"
 msgstr "مرسل"
 
-#: .\campaigns\models.py:107 .\templates\campaigns\campaign_analysis.html:118
-#: .\templates\campaigns\campaign_analysis.html:149
+#: .\campaigns\models.py:109 .\templates\analytics\dashboard.html:46
+#: .\templates\analytics\dashboard.html:122
+#: .\templates\campaigns\campaign_analysis.html:122
+#: .\templates\campaigns\campaign_analysis.html:153
 msgid "Opened"
 msgstr "مفتوح"
 
-#: .\campaigns\models.py:108 .\templates\campaigns\campaign_analysis.html:119
-#: .\templates\campaigns\campaign_analysis.html:150
+#: .\campaigns\models.py:110 .\templates\analytics\dashboard.html:61
+#: .\templates\analytics\dashboard.html:125
+#: .\templates\campaigns\campaign_analysis.html:123
+#: .\templates\campaigns\campaign_analysis.html:154
 msgid "Clicked"
 msgstr "تم النقر عليه"
 
-#: .\campaigns\models.py:109
+#: .\campaigns\models.py:111
 msgid "Bounced"
 msgstr "ارتد"
 
-#: .\campaigns\models.py:110
+#: .\campaigns\models.py:112
 msgid "Complained"
 msgstr "اشتكى"
 
-#: .\campaigns\models.py:111
+#: .\campaigns\models.py:113
 #: .\templates\core\feature_subscriber_management.html:167
 msgid "Unsubscribed"
 msgstr "غير مشترك"
 
-#: .\campaigns\models.py:116 .\campaigns\models.py:147
+#: .\campaigns\models.py:118 .\campaigns\models.py:149
 msgid "Subscriber Email"
 msgstr "البريد الإلكتروني للمشترك"
 
-#: .\campaigns\models.py:117
+#: .\campaigns\models.py:119
 msgid "Event Type"
 msgstr "نوع الحدث"
 
-#: .\campaigns\models.py:118
+#: .\campaigns\models.py:120
 msgid "Link Clicked"
 msgstr "تم النقر على الرابط"
 
-#: .\campaigns\models.py:119
+#: .\campaigns\models.py:121
 msgid "User Agent"
 msgstr "وكيل المستخدم"
 
-#: .\campaigns\models.py:120
+#: .\campaigns\models.py:122
 msgid "IP Address"
 msgstr "عنوان IP"
 
-#: .\campaigns\models.py:125
+#: .\campaigns\models.py:127
 msgid "Email Event"
 msgstr "حدث البريد الإلكتروني"
 
-#: .\campaigns\models.py:126
+#: .\campaigns\models.py:128
 msgid "Email Events"
 msgstr "أحداث البريد الإلكتروني"
 
-#: .\campaigns\models.py:136
+#: .\campaigns\models.py:138 .\templates\campaigns\campaign_emails.html:110
 #: .\templates\core\feature_subscriber_management.html:171
 msgid "Pending"
 msgstr "قيد الانتظار"
 
-#: .\campaigns\models.py:137
+#: .\campaigns\models.py:139
 msgid "Queued"
 msgstr "في قائمة الانتظار"
 
-#: .\campaigns\models.py:139
+#: .\campaigns\models.py:141 .\templates\campaigns\campaign_emails.html:312
+#: .\templates\campaigns\campaign_emails.html:438
 msgid "Failed"
 msgstr "فشل"
 
-#: .\campaigns\models.py:146 .\subscribers\models.py:58
+#: .\campaigns\models.py:148 .\subscribers\models.py:58
 #: .\subscribers\models.py:97
 msgid "Subscriber"
 msgstr "المشترك"
 
-#: .\campaigns\models.py:148
+#: .\campaigns\models.py:150 .\templates\campaigns\campaign_emails.html:141
+#: .\templates\campaigns\campaign_emails.html:347
 msgid "Variables"
 msgstr "المتغيرات"
 
-#: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
+#: .\campaigns\models.py:151 .\templates\campaigns\campaign_edit_page.html:14
+#: .\templates\campaigns\campaign_emails.html:66
+#: .\templates\campaigns\campaign_emails.html:206
+#: .\templates\campaigns\campaign_emails.html:277
+#: .\templates\campaigns\campaign_emails.html:410
+#: .\templates\core\dashboard.html:525 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "حالة"
 
-#: .\campaigns\models.py:150
+#: .\campaigns\models.py:152 .\templates\campaigns\campaign_emails.html:63
+#: .\templates\campaigns\campaign_emails.html:261
 msgid "Scheduled For"
 msgstr "المقرر ل"
 
-#: .\campaigns\models.py:151
+#: .\campaigns\models.py:153 .\templates\campaigns\campaign_emails.html:203
 msgid "Sent At"
 msgstr "أرسلت في"
 
-#: .\campaigns\models.py:152
+#: .\campaigns\models.py:154 .\templates\campaigns\campaign_emails.html:338
 msgid "Error Message"
 msgstr "رسالة خطأ"
 
-#: .\campaigns\models.py:158
+#: .\campaigns\models.py:160
 msgid "Email Send Request"
 msgstr "طلب إرسال البريد الإلكتروني"
 
-#: .\campaigns\models.py:159
+#: .\campaigns\models.py:161
 msgid "Email Send Requests"
 msgstr "إرسال الطلبات عبر البريد الإلكتروني"
 
-#: .\campaigns\models.py:172
+#: .\campaigns\models.py:174
 msgid "Generated Subject"
 msgstr "الموضوع الذي تم إنشاؤه"
 
-#: .\campaigns\models.py:173
+#: .\campaigns\models.py:175
 msgid "Generated Body HTML"
 msgstr "HTML النص الذي تم إنشاؤه"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "Generation Prompt"
 msgstr "موجه الجيل"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "The prompt used to generate content"
 msgstr "المطالبة المستخدمة لإنشاء المحتوى"
 
-#: .\campaigns\models.py:175
+#: .\campaigns\models.py:177
 msgid "Generation Model"
 msgstr "نموذج الجيل"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Topics"
 msgstr "المواضيع"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Extracted topics and keywords"
 msgstr "المواضيع والكلمات الرئيسية المستخرجة"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant Topics"
 msgstr "المواضيع المهيمنة"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant topic for this email"
 msgstr "الموضوع السائد لهذا البريد الإلكتروني"
 
-#: .\campaigns\models.py:180 .\templates\campaigns\email_analysis.html:182
+#: .\campaigns\models.py:182 .\templates\campaigns\email_analysis.html:182
 msgid "Emails Analyzed"
 msgstr "تم تحليل رسائل البريد الإلكتروني"
 
-#: .\campaigns\models.py:180
+#: .\campaigns\models.py:182
 msgid "Number of emails used in topic analysis"
 msgstr "عدد رسائل البريد الإلكتروني المستخدمة في تحليل الموضوع"
 
-#: .\campaigns\models.py:187
+#: .\campaigns\models.py:189
 msgid "Email AI Analysis"
 msgstr "تحليل البريد الإلكتروني بالذكاء الاصطناعي"
 
-#: .\campaigns\models.py:188
+#: .\campaigns\models.py:190
 msgid "Email AI Analyses"
 msgstr "تحليلات الذكاء الاصطناعي للبريد الإلكتروني"
 
-#: .\campaigns\views.py:258 .\campaigns\views.py:311
+#: .\campaigns\views.py:270 .\campaigns\views.py:313
 msgid "Email address is required"
 msgstr "عنوان البريد الإلكتروني مطلوب"
 
-#: .\campaigns\views.py:275 .\campaigns\views.py:284 .\campaigns\views.py:294
+#: .\campaigns\views.py:287 .\campaigns\views.py:296
 msgid "Test email sent successfully"
 msgstr "تم إرسال البريد الإلكتروني التجريبي بنجاح"
 
-#: .\campaigns\views.py:278 .\campaigns\views.py:297
+#: .\campaigns\views.py:290 .\campaigns\views.py:299
 #, python-brace-format
 msgid "Failed to send test email: {}"
 msgstr "فشل إرسال بريد إلكتروني تجريبي: {}"
 
-#: .\campaigns\views.py:394 .\core\views.py:802
+#: .\campaigns\views.py:403 .\core\views.py:818 .\core\views.py:839
 msgid "Email sent successfully"
 msgstr "تم إرسال البريد الإلكتروني بنجاح"
 
-#: .\campaigns\views.py:403 .\core\views.py:808 .\core\views.py:829
+#: .\campaigns\views.py:412 .\core\views.py:824 .\core\views.py:845
 #, python-brace-format
 msgid "Failed to send email: {}"
 msgstr "فشل إرسال البريد الإلكتروني: {}"
 
-#: .\campaigns\views.py:410 .\core\views.py:846 .\core\views.py:863
+#: .\campaigns\views.py:419 .\core\views.py:862 .\core\views.py:872
+#: .\core\views.py:879
 #, python-brace-format
 msgid ""
 "Email scheduled for {time}. It will be sent automatically at the scheduled "
@@ -560,102 +627,102 @@ msgid ""
 msgstr ""
 "تمت جدولة البريد الإلكتروني لـ {time}.سيتم إرسالها تلقائيا في الوقت المحدد."
 
-#: .\campaigns\views.py:447
+#: .\campaigns\views.py:511
 msgid "Please create a campaign first before creating email templates."
 msgstr "يرجى إنشاء حملة أولاً قبل إنشاء قوالب البريد الإلكتروني."
 
-#: .\campaigns\views.py:484
+#: .\campaigns\views.py:549
 msgid "Cannot activate a campaign with no emails"
 msgstr "لا يمكن تفعيل حملة بدون رسائل بريد إلكتروني"
 
-#: .\campaigns\views.py:491
+#: .\campaigns\views.py:556
 msgid "Campaign activated successfully"
 msgstr "تم تفعيل الحملة بنجاح"
 
-#: .\campaigns\views.py:504
+#: .\campaigns\views.py:569
 msgid "Campaign deactivated successfully"
 msgstr "تم إلغاء تنشيط الحملة بنجاح"
 
-#: .\campaigns\views.py:518
+#: .\campaigns\views.py:583
 msgid "Email ID and direction are required"
 msgstr "مطلوب معرف البريد الإلكتروني والاتجاه"
 
-#: .\campaigns\views.py:523 .\campaigns\views.py:919
+#: .\campaigns\views.py:588 .\campaigns\views.py:1020
 msgid "Email not found"
 msgstr "لم يتم العثور على البريد الإلكتروني"
 
-#: .\campaigns\views.py:535
+#: .\campaigns\views.py:600
 msgid "Email not found in campaign"
 msgstr "البريد الإلكتروني غير موجود في الحملة"
 
-#: .\campaigns\views.py:543
+#: .\campaigns\views.py:608
 msgid "Cannot move email in that direction"
 msgstr "لا يمكن نقل البريد الإلكتروني في هذا الاتجاه"
 
-#: .\campaigns\views.py:553
+#: .\campaigns\views.py:618
 msgid "Email order updated successfully"
 msgstr "تم تحديث طلب البريد الإلكتروني بنجاح"
 
-#: .\campaigns\views.py:561
+#: .\campaigns\views.py:626
 msgid "No file uploaded"
 msgstr "لم يتم تحميل أي ملف"
 
-#: .\campaigns\views.py:565
+#: .\campaigns\views.py:630
 msgid "Invalid file format. Please upload a CSV or Excel file."
 msgstr "تنسيق الملف غير صالح.يرجى تحميل ملف CSV أو Excel."
 
-#: .\campaigns\views.py:597
+#: .\campaigns\views.py:662
 #, python-brace-format
 msgid "Missing required columns: {}"
 msgstr "الأعمدة المطلوبة مفقودة: {}"
 
-#: .\campaigns\views.py:612
+#: .\campaigns\views.py:677
 msgid "File processed successfully"
 msgstr "تمت معالجة الملف بنجاح"
 
-#: .\campaigns\views.py:618
+#: .\campaigns\views.py:683
 #, python-brace-format
 msgid "Error processing file: {}"
 msgstr "خطأ في معالجة الملف: {}"
 
-#: .\campaigns\views.py:641
+#: .\campaigns\views.py:706
 msgid "Campaign created successfully!"
 msgstr "تم إنشاء الحملة بنجاح!"
 
-#: .\campaigns\views.py:644
+#: .\campaigns\views.py:709
 msgid "Please provide a campaign name."
 msgstr "يرجى تقديم اسم الحملة."
 
-#: .\campaigns\views.py:885
+#: .\campaigns\views.py:986
 msgid "Subject topic is required"
 msgstr "مطلوب موضوع الموضوع"
 
-#: .\campaigns\views.py:913
+#: .\campaigns\views.py:1014
 msgid "Email generated and saved successfully"
 msgstr "تم إنشاء البريد الإلكتروني وحفظه بنجاح"
 
-#: .\campaigns\views.py:923
+#: .\campaigns\views.py:1024
 msgid "Email generated successfully"
 msgstr "تم إنشاء البريد الإلكتروني بنجاح"
 
-#: .\campaigns\views.py:936
+#: .\campaigns\views.py:1041
 #, python-brace-format
 msgid "Failed to generate email: {}"
 msgstr "فشل إنشاء البريد الإلكتروني: {}"
 
-#: .\campaigns\views.py:950
+#: .\campaigns\views.py:1056
 msgid "Email text is required"
 msgstr "مطلوب نص البريد الإلكتروني"
 
-#: .\campaigns\views.py:957
+#: .\campaigns\views.py:1063
 msgid "Email revised successfully"
 msgstr "تمت مراجعة البريد الإلكتروني بنجاح"
 
-#: .\campaigns\views.py:963
+#: .\campaigns\views.py:1069
 msgid "Revision failed"
 msgstr "فشلت المراجعة"
 
-#: .\campaigns\views.py:969
+#: .\campaigns\views.py:1075
 #, python-brace-format
 msgid "Failed to revise email: {}"
 msgstr "فشلت مراجعة البريد الإلكتروني: {}"
@@ -669,146 +736,143 @@ msgid "Invalid token header. Token string should not contain spaces."
 msgstr ""
 "رأس الرمز المميز غير صالح.يجب ألا تحتوي سلسلة الرمز المميز على مسافات."
 
-#: .\core\views.py:211 .\templates\subscribers\add.html:256
+#: .\core\views.py:213 .\templates\subscribers\add.html:256
 msgid "Please provide an email address."
 msgstr "يرجى تقديم عنوان بريد إلكتروني."
 
-#: .\core\views.py:213
-msgid "This is already your current email address."
-msgstr "هذا هو بالفعل عنوان بريدك الإلكتروني الحالي."
+#: .\core\views.py:218
+#, fuzzy
+#| msgid "Settings updated successfully"
+msgid "Auto BCC setting updated successfully."
+msgstr "تم تحديث الإعدادات بنجاح"
 
-#: .\core\views.py:223
+#: .\core\views.py:228
 msgid "This email address is already in use by another account."
 msgstr "عنوان البريد الإلكتروني هذا قيد الاستخدام بالفعل بواسطة حساب آخر."
 
-#: .\core\views.py:228
-#, python-format
-msgid "Email address updated successfully to %(email)s"
+#: .\core\views.py:236
+#, fuzzy, python-format
+#| msgid "Email address updated successfully to %(email)s"
+msgid "Email address and settings updated successfully to %(email)s"
 msgstr "تم تحديث عنوان البريد الإلكتروني بنجاح إلى %(email)s"
 
-#: .\core\views.py:230
+#: .\core\views.py:238
 msgid "Please provide a valid email address."
 msgstr "يرجى تقديم عنوان بريد إلكتروني صالح."
 
-#: .\core\views.py:242 .\core\views.py:368
+#: .\core\views.py:251 .\core\views.py:389
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
 msgid ""
-"Please fill in all required fields: Address Line 1, City, State, Postal "
-"Code, and Country."
+"Please fill in all required fields: Full Name, Address Line 1, City, State, "
+"Postal Code, and Country."
 msgstr ""
 "يرجى ملء جميع الحقول المطلوبة: سطر العنوان 1، المدينة، الولاية، الرمز "
 "البريدي، والدولة."
 
-#: .\core\views.py:252
+#: .\core\views.py:262
 msgid "Address updated successfully."
 msgstr "تم تحديث العنوان بنجاح."
 
-#: .\core\views.py:258
+#: .\core\views.py:268
 msgid "Please select a valid time zone."
 msgstr "الرجاء تحديد منطقة زمنية صالحة."
 
-#: .\core\views.py:262
+#: .\core\views.py:272
 #, python-format
 msgid "Time zone updated to %(tz)s"
 msgstr "تم تحديث المنطقة الزمنية إلى %(tz)s"
 
-#: .\core\views.py:269
+#: .\core\views.py:279
 msgid ""
 "Unsubscribe links are now disabled. This may violate email regulations."
 msgstr ""
 "تم الآن تعطيل روابط إلغاء الاشتراك.وهذا قد ينتهك لوائح البريد الإلكتروني."
 
-#: .\core\views.py:271
+#: .\core\views.py:281
 msgid "Unsubscribe links are now enabled."
 msgstr "تم الآن تفعيل روابط إلغاء الاشتراك."
 
-#: .\core\views.py:302
+#: .\core\views.py:314
 msgid "Please provide a URL to your post"
 msgstr "يرجى تقديم عنوان URL لمشاركتك"
 
-#: .\core\views.py:307
+#: .\core\views.py:319
 msgid "Please provide a valid URL starting with http:// or https://"
 msgstr "يرجى تقديم عنوان URL صالح يبدأ بـ http:// أو https://"
 
-#: .\core\views.py:322
+#: .\core\views.py:334
 msgid "Please provide a valid URL for the selected platform"
 msgstr "يرجى تقديم عنوان URL صالح للنظام الأساسي المحدد"
 
-#: .\core\views.py:330
+#: .\core\views.py:342
 msgid ""
 "Thank you for promoting DripEmails.org! Ads have been disabled for your "
 "account."
 msgstr "شكرًا لك على الترويج لـ DripEmails.org!لقد تم تعطيل الإعلانات لحسابك."
 
-#: .\core\views.py:356
+#: .\core\views.py:372
 msgid "Invalid timezone"
 msgstr "المنطقة الزمنية غير صالحة"
 
-#: .\core\views.py:379
+#: .\core\views.py:402
 msgid "Settings updated successfully"
 msgstr "تم تحديث الإعدادات بنجاح"
 
-#: .\core\views.py:404
+#: .\core\views.py:431
 msgid "An error occurred while saving settings"
 msgstr "حدث خطأ أثناء حفظ الإعدادات"
 
-#: .\core\views.py:552
+#: .\core\views.py:579
 msgid "You must be logged in to post."
 msgstr "يجب عليك تسجيل الدخول للنشر."
 
-#: .\core\views.py:577
+#: .\core\views.py:604
 msgid "Your post has been submitted successfully!"
 msgstr "لقد تم إرسال رسالتك بنجاح!"
 
-#: .\core\views.py:619
+#: .\core\views.py:646
 msgid ""
 "Thank you for sharing your success story! We'll review it and may feature it"
 " on our site."
 msgstr "شكرا لمشاركتنا قصة نجاحك!سنقوم بمراجعتها وقد نعرضها على موقعنا."
 
-#: .\core\views.py:648
+#: .\core\views.py:675
 msgid "Please provide email address, campaign, and email template"
 msgstr "يرجى تقديم عنوان البريد الإلكتروني، والحملة، ونموذج البريد الإلكتروني"
 
-#: .\core\views.py:716
+#: .\core\views.py:743
 #, python-brace-format
 msgid "Failed to create or update subscriber: {}"
 msgstr "فشل في إنشاء المشترك أو تحديثه: {}"
 
-#: .\core\views.py:814
+#: .\core\views.py:830
 msgid "Email scheduled successfully"
 msgstr "تمت جدولة البريد الإلكتروني بنجاح"
 
-#: .\core\views.py:823
-msgid "Email sent successfully (Celery unavailable, sent immediately)"
-msgstr ""
-"تم إرسال البريد الإلكتروني بنجاح (الكرفس غير متوفر، تم إرساله على الفور)"
-
-#: .\core\views.py:856
-#, python-brace-format
-msgid "Email scheduled for {time}"
-msgstr "تمت جدولة البريد الإلكتروني لـ {time}"
-
-#: .\core\views.py:871
+#: .\core\views.py:887
 msgid "Campaign not found"
 msgstr "لم يتم العثور على الحملة"
 
-#: .\core\views.py:873
+#: .\core\views.py:889
 msgid "Email template not found"
 msgstr "لم يتم العثور على قالب البريد الإلكتروني"
 
-#: .\core\views.py:1057
+#: .\core\views.py:1076
 msgid "Email already sent."
 msgstr "تم إرسال البريد الإلكتروني بالفعل."
 
-#: .\core\views.py:1069
+#: .\core\views.py:1088
 msgid "Email sent successfully."
 msgstr "تم إرسال البريد الإلكتروني بنجاح."
 
-#: .\core\views.py:1102
+#: .\core\views.py:1121
 msgid "Subscriber has been unsubscribed."
 msgstr "تم إلغاء اشتراك المشترك."
 
-#: .\core\views.py:1115
+#: .\core\views.py:1134
 msgid ""
 "Invalid unsubscribe link. The subscriber may have already been unsubscribed "
 "or the link is invalid."
@@ -816,368 +880,568 @@ msgstr ""
 "رابط إلغاء الاشتراك غير صالح.ربما تم إلغاء اشتراك المشترك بالفعل أو أن "
 "الرابط غير صالح."
 
-#: .\docs\live.py:146 .\dripemails\live.py:159 .\dripemails\settings.py:139
+#: .\docs\live.py:146 .\dripemails\live.py:160 .\dripemails\settings.py:148
 #: .\smtp_server\docs\live.py:146
 msgid "English"
 msgstr "إنجليزي"
 
-#: .\docs\live.py:147 .\dripemails\live.py:160 .\dripemails\settings.py:140
+#: .\docs\live.py:147 .\dripemails\live.py:161 .\dripemails\settings.py:149
 #: .\smtp_server\docs\live.py:147
 msgid "Spanish"
 msgstr "الأسبانية"
 
-#: .\docs\live.py:148 .\dripemails\live.py:161 .\dripemails\settings.py:141
+#: .\docs\live.py:148 .\dripemails\live.py:162 .\dripemails\settings.py:150
 #: .\smtp_server\docs\live.py:148
 msgid "French"
 msgstr "فرنسي"
 
-#: .\docs\live.py:149 .\dripemails\live.py:162 .\dripemails\settings.py:142
+#: .\docs\live.py:149 .\dripemails\live.py:163 .\dripemails\settings.py:151
 #: .\smtp_server\docs\live.py:149
 msgid "German"
 msgstr "الألمانية"
 
-#: .\dripemails\live.py:163 .\dripemails\settings.py:143
+#: .\dripemails\live.py:164 .\dripemails\settings.py:152
 msgid "Italian"
 msgstr "ايطالي"
 
-#: .\dripemails\live.py:164 .\dripemails\settings.py:144
+#: .\dripemails\live.py:165 .\dripemails\settings.py:153
 msgid "Portuguese"
 msgstr "البرتغالية"
 
-#: .\dripemails\live.py:165 .\dripemails\settings.py:145
+#: .\dripemails\live.py:166 .\dripemails\settings.py:154
 msgid "Portuguese (Brazil)"
 msgstr "البرتغالية (البرازيل)"
 
-#: .\dripemails\live.py:166 .\dripemails\settings.py:146
+#: .\dripemails\live.py:167 .\dripemails\settings.py:155
 msgid "Russian"
 msgstr "الروسية"
 
-#: .\dripemails\live.py:167 .\dripemails\settings.py:147
+#: .\dripemails\live.py:168 .\dripemails\settings.py:156
 msgid "Chinese (Simplified)"
 msgstr "الصينية (المبسطة)"
 
-#: .\dripemails\live.py:168 .\dripemails\settings.py:148
+#: .\dripemails\live.py:169 .\dripemails\settings.py:157
 msgid "Chinese (Traditional)"
 msgstr "الصينية (التقليدية)"
 
-#: .\dripemails\live.py:169 .\dripemails\settings.py:149
+#: .\dripemails\live.py:170 .\dripemails\settings.py:158
 msgid "Japanese"
 msgstr "اليابانية"
 
-#: .\dripemails\live.py:170 .\dripemails\settings.py:150
+#: .\dripemails\live.py:171 .\dripemails\settings.py:159
 msgid "Korean"
 msgstr "كوري"
 
-#: .\dripemails\live.py:171 .\dripemails\settings.py:151
+#: .\dripemails\live.py:172 .\dripemails\settings.py:160
 msgid "Arabic"
 msgstr "عربي"
 
-#: .\dripemails\live.py:172 .\dripemails\settings.py:152
+#: .\dripemails\live.py:173 .\dripemails\settings.py:161
 msgid "Hindi"
 msgstr "الهندية"
 
-#: .\dripemails\live.py:173 .\dripemails\settings.py:153
+#: .\dripemails\live.py:174 .\dripemails\settings.py:162
 msgid "Turkish"
 msgstr "تركي"
 
-#: .\dripemails\live.py:174 .\dripemails\settings.py:154
+#: .\dripemails\live.py:175 .\dripemails\settings.py:163
 msgid "Polish"
 msgstr "بولندي"
 
-#: .\dripemails\live.py:175 .\dripemails\settings.py:155
+#: .\dripemails\live.py:176 .\dripemails\settings.py:164
 msgid "Dutch"
 msgstr "هولندي"
 
-#: .\dripemails\live.py:176 .\dripemails\settings.py:156
+#: .\dripemails\live.py:177 .\dripemails\settings.py:165
 msgid "Swedish"
 msgstr "السويدية"
 
-#: .\dripemails\live.py:177 .\dripemails\settings.py:157
+#: .\dripemails\live.py:178 .\dripemails\settings.py:166
 msgid "Danish"
 msgstr "دانماركي"
 
-#: .\dripemails\live.py:178 .\dripemails\settings.py:158
+#: .\dripemails\live.py:179 .\dripemails\settings.py:167
 msgid "Norwegian"
 msgstr "النرويجية"
 
-#: .\dripemails\live.py:179 .\dripemails\settings.py:159
+#: .\dripemails\live.py:180 .\dripemails\settings.py:168
 msgid "Finnish"
 msgstr "الفنلندية"
 
-#: .\dripemails\live.py:180 .\dripemails\settings.py:160
+#: .\dripemails\live.py:181 .\dripemails\settings.py:169
 msgid "Czech"
 msgstr "التشيكية"
 
-#: .\dripemails\live.py:181 .\dripemails\settings.py:161
+#: .\dripemails\live.py:182 .\dripemails\settings.py:170
 msgid "Romanian"
 msgstr "روماني"
 
-#: .\dripemails\live.py:182 .\dripemails\settings.py:162
+#: .\dripemails\live.py:183 .\dripemails\settings.py:171
 msgid "Hungarian"
 msgstr "المجرية"
 
-#: .\dripemails\live.py:183 .\dripemails\settings.py:163
+#: .\dripemails\live.py:184 .\dripemails\settings.py:172
 msgid "Greek"
 msgstr "اليونانية"
 
-#: .\dripemails\live.py:184 .\dripemails\settings.py:164
+#: .\dripemails\live.py:185 .\dripemails\settings.py:173
 msgid "Hebrew"
 msgstr "العبرية"
 
-#: .\dripemails\live.py:185 .\dripemails\settings.py:165
+#: .\dripemails\live.py:186 .\dripemails\settings.py:174
 msgid "Thai"
 msgstr "التايلاندية"
 
-#: .\dripemails\live.py:186 .\dripemails\settings.py:166
+#: .\dripemails\live.py:187 .\dripemails\settings.py:175
 msgid "Vietnamese"
 msgstr "الفيتنامية"
 
-#: .\dripemails\live.py:187 .\dripemails\settings.py:167
+#: .\dripemails\live.py:188 .\dripemails\settings.py:176
 msgid "Indonesian"
 msgstr "الاندونيسية"
 
-#: .\dripemails\live.py:188 .\dripemails\settings.py:168
+#: .\dripemails\live.py:189 .\dripemails\settings.py:177
 msgid "Malay"
 msgstr "لغة الملايو"
 
-#: .\dripemails\live.py:189 .\dripemails\settings.py:169
+#: .\dripemails\live.py:190 .\dripemails\settings.py:178
 msgid "Ukrainian"
 msgstr "الأوكرانية"
 
-#: .\dripemails\live.py:190 .\dripemails\settings.py:170
+#: .\dripemails\live.py:191 .\dripemails\settings.py:179
 msgid "Bulgarian"
 msgstr "البلغارية"
 
-#: .\dripemails\live.py:191 .\dripemails\settings.py:171
+#: .\dripemails\live.py:192 .\dripemails\settings.py:180
 msgid "Croatian"
 msgstr "الكرواتية"
 
-#: .\dripemails\live.py:192 .\dripemails\settings.py:172
+#: .\dripemails\live.py:193 .\dripemails\settings.py:181
 msgid "Serbian"
 msgstr "الصربية"
 
-#: .\dripemails\live.py:193 .\dripemails\settings.py:173
+#: .\dripemails\live.py:194 .\dripemails\settings.py:182
 msgid "Slovak"
 msgstr "السلوفاكية"
 
-#: .\dripemails\live.py:194 .\dripemails\settings.py:174
+#: .\dripemails\live.py:195 .\dripemails\settings.py:183
 msgid "Slovenian"
 msgstr "السلوفينية"
 
-#: .\dripemails\live.py:195 .\dripemails\settings.py:175
+#: .\dripemails\live.py:196 .\dripemails\settings.py:184
 msgid "Lithuanian"
 msgstr "الليتوانية"
 
-#: .\dripemails\live.py:196 .\dripemails\settings.py:176
+#: .\dripemails\live.py:197 .\dripemails\settings.py:185
 msgid "Latvian"
 msgstr "لاتفيا"
 
-#: .\dripemails\live.py:197 .\dripemails\settings.py:177
+#: .\dripemails\live.py:198 .\dripemails\settings.py:186
 msgid "Estonian"
 msgstr "الإستونية"
 
-#: .\dripemails\live.py:198 .\dripemails\settings.py:178
+#: .\dripemails\live.py:199 .\dripemails\settings.py:187
 msgid "Icelandic"
 msgstr "الأيسلندية"
 
-#: .\dripemails\live.py:199 .\dripemails\settings.py:179
+#: .\dripemails\live.py:200 .\dripemails\settings.py:188
 msgid "Irish"
 msgstr "الأيرلندية"
 
-#: .\dripemails\live.py:200 .\dripemails\settings.py:180
+#: .\dripemails\live.py:201 .\dripemails\settings.py:189
 msgid "Maltese"
 msgstr "المالطية"
 
-#: .\dripemails\live.py:201 .\dripemails\settings.py:181
+#: .\dripemails\live.py:202 .\dripemails\settings.py:190
 msgid "Catalan"
 msgstr "الكاتالونية"
 
-#: .\dripemails\live.py:202 .\dripemails\settings.py:182
+#: .\dripemails\live.py:203 .\dripemails\settings.py:191
 msgid "Basque"
 msgstr "الباسك"
 
-#: .\dripemails\live.py:203 .\dripemails\settings.py:183
+#: .\dripemails\live.py:204 .\dripemails\settings.py:192
 msgid "Galician"
 msgstr "الجاليكية"
 
-#: .\dripemails\live.py:204 .\dripemails\settings.py:184
+#: .\dripemails\live.py:205 .\dripemails\settings.py:193
 msgid "Welsh"
 msgstr "الويلزية"
 
-#: .\dripemails\live.py:205 .\dripemails\settings.py:185
+#: .\dripemails\live.py:206 .\dripemails\settings.py:194
 msgid "Persian"
 msgstr "الفارسية"
 
-#: .\dripemails\live.py:206 .\dripemails\settings.py:186
+#: .\dripemails\live.py:207 .\dripemails\settings.py:195
 msgid "Urdu"
 msgstr "الأردية"
 
-#: .\dripemails\live.py:207 .\dripemails\settings.py:187
+#: .\dripemails\live.py:208 .\dripemails\settings.py:196
 msgid "Bengali"
 msgstr "البنغالية"
 
-#: .\dripemails\live.py:208 .\dripemails\settings.py:188
+#: .\dripemails\live.py:209 .\dripemails\settings.py:197
 msgid "Tamil"
 msgstr "التاميل"
 
-#: .\dripemails\live.py:209 .\dripemails\settings.py:189
+#: .\dripemails\live.py:210 .\dripemails\settings.py:198
 msgid "Telugu"
 msgstr "التيلجو"
 
-#: .\dripemails\live.py:210 .\dripemails\settings.py:190
+#: .\dripemails\live.py:211 .\dripemails\settings.py:199
 msgid "Marathi"
 msgstr "المهاراتية"
 
-#: .\dripemails\live.py:211 .\dripemails\settings.py:191
+#: .\dripemails\live.py:212 .\dripemails\settings.py:200
 msgid "Gujarati"
 msgstr "الغوجاراتية"
 
-#: .\dripemails\live.py:212 .\dripemails\settings.py:192
+#: .\dripemails\live.py:213 .\dripemails\settings.py:201
 msgid "Kannada"
 msgstr "الكانادا"
 
-#: .\dripemails\live.py:213 .\dripemails\settings.py:193
+#: .\dripemails\live.py:214 .\dripemails\settings.py:202
 msgid "Malayalam"
 msgstr "المالايالامية"
 
-#: .\dripemails\live.py:214 .\dripemails\settings.py:194
+#: .\dripemails\live.py:215 .\dripemails\settings.py:203
 msgid "Punjabi"
 msgstr "البنجابية"
 
-#: .\dripemails\live.py:215 .\dripemails\settings.py:195
+#: .\dripemails\live.py:216 .\dripemails\settings.py:204
 msgid "Nepali"
 msgstr "النيبالية"
 
-#: .\dripemails\live.py:216 .\dripemails\settings.py:196
+#: .\dripemails\live.py:217 .\dripemails\settings.py:205
 msgid "Sinhala"
 msgstr "السنهالية"
 
-#: .\dripemails\live.py:217 .\dripemails\settings.py:197
+#: .\dripemails\live.py:218 .\dripemails\settings.py:206
 msgid "Burmese"
 msgstr "البورمية"
 
-#: .\dripemails\live.py:218 .\dripemails\settings.py:198
+#: .\dripemails\live.py:219 .\dripemails\settings.py:207
 msgid "Khmer"
 msgstr "الخمير"
 
-#: .\dripemails\live.py:219 .\dripemails\settings.py:199
+#: .\dripemails\live.py:220 .\dripemails\settings.py:208
 msgid "Lao"
 msgstr "لاو"
 
-#: .\dripemails\live.py:220 .\dripemails\settings.py:200
+#: .\dripemails\live.py:221 .\dripemails\settings.py:209
 msgid "Georgian"
 msgstr "الجورجية"
 
-#: .\dripemails\live.py:221 .\dripemails\settings.py:201
+#: .\dripemails\live.py:222 .\dripemails\settings.py:210
 msgid "Armenian"
 msgstr "الأرمينية"
 
-#: .\dripemails\live.py:222 .\dripemails\settings.py:202
+#: .\dripemails\live.py:223 .\dripemails\settings.py:211
 msgid "Azerbaijani"
 msgstr "أذربيجاني"
 
-#: .\dripemails\live.py:223 .\dripemails\settings.py:203
+#: .\dripemails\live.py:224 .\dripemails\settings.py:212
 msgid "Kazakh"
 msgstr "الكازاخستانية"
 
-#: .\dripemails\live.py:224 .\dripemails\settings.py:204
+#: .\dripemails\live.py:225 .\dripemails\settings.py:213
 msgid "Kyrgyz"
 msgstr "قيرغيزستان"
 
-#: .\dripemails\live.py:225 .\dripemails\settings.py:205
+#: .\dripemails\live.py:226 .\dripemails\settings.py:214
 msgid "Uzbek"
 msgstr "الأوزبكية"
 
-#: .\dripemails\live.py:226 .\dripemails\settings.py:206
+#: .\dripemails\live.py:227 .\dripemails\settings.py:215
 msgid "Mongolian"
 msgstr "المنغولية"
 
-#: .\dripemails\live.py:227 .\dripemails\settings.py:207
+#: .\dripemails\live.py:228 .\dripemails\settings.py:216
 msgid "Swahili"
 msgstr "السواحلية"
 
-#: .\dripemails\live.py:228 .\dripemails\settings.py:208
+#: .\dripemails\live.py:229 .\dripemails\settings.py:217
 msgid "Afrikaans"
 msgstr "الأفريكانية"
 
-#: .\dripemails\live.py:229 .\dripemails\settings.py:209
+#: .\dripemails\live.py:230 .\dripemails\settings.py:218
 msgid "Zulu"
 msgstr "الزولو"
 
-#: .\dripemails\live.py:230 .\dripemails\settings.py:210
+#: .\dripemails\live.py:231 .\dripemails\settings.py:219
 msgid "Xhosa"
 msgstr "خوسا"
 
-#: .\dripemails\live.py:231 .\dripemails\settings.py:211
+#: .\dripemails\live.py:232 .\dripemails\settings.py:220
 msgid "Amharic"
 msgstr "الأمهرية"
 
-#: .\dripemails\live.py:232 .\dripemails\settings.py:212
+#: .\dripemails\live.py:233 .\dripemails\settings.py:221
 msgid "Hausa"
 msgstr "الهوسا"
 
-#: .\dripemails\live.py:233 .\dripemails\settings.py:213
+#: .\dripemails\live.py:234 .\dripemails\settings.py:222
 msgid "Yoruba"
 msgstr "اليوروبا"
 
-#: .\dripemails\live.py:234 .\dripemails\settings.py:214
+#: .\dripemails\live.py:235 .\dripemails\settings.py:223
 msgid "Igbo"
 msgstr "الإيغبو"
 
-#: .\dripemails\live.py:235 .\dripemails\settings.py:215
+#: .\dripemails\live.py:236 .\dripemails\settings.py:224
 msgid "Shona"
 msgstr "شونا"
 
-#: .\dripemails\live.py:236 .\dripemails\settings.py:216
+#: .\dripemails\live.py:237 .\dripemails\settings.py:225
 msgid "Sotho"
 msgstr "سوتو"
 
-#: .\dripemails\live.py:237 .\dripemails\settings.py:217
+#: .\dripemails\live.py:238 .\dripemails\settings.py:226
 msgid "Tswana"
 msgstr "تسوانا"
 
-#: .\dripemails\live.py:238 .\dripemails\settings.py:218
+#: .\dripemails\live.py:239 .\dripemails\settings.py:227
 msgid "Venda"
 msgstr "فيندا"
 
-#: .\dripemails\live.py:239 .\dripemails\settings.py:219
+#: .\dripemails\live.py:240 .\dripemails\settings.py:228
 msgid "Tsonga"
 msgstr "تسونجا"
 
-#: .\dripemails\live.py:240 .\dripemails\settings.py:220
+#: .\dripemails\live.py:241 .\dripemails\settings.py:229
 msgid "Swati"
 msgstr "سواتي"
 
-#: .\dripemails\live.py:241 .\dripemails\settings.py:221
+#: .\dripemails\live.py:242 .\dripemails\settings.py:230
 msgid "Ndebele"
 msgstr "نديبيلي"
 
-#: .\dripemails\live.py:242 .\dripemails\settings.py:222
+#: .\dripemails\live.py:243 .\dripemails\settings.py:231
 msgid "Northern Sotho"
 msgstr "سوتو الشمالية"
 
-#: .\dripemails\live.py:243 .\dripemails\settings.py:223
+#: .\dripemails\live.py:244 .\dripemails\settings.py:232
 msgid "Esperanto"
 msgstr "الاسبرانتو"
+
+#: .\gmail\models.py:10 .\templates\core\dashboard.html:84
+#, fuzzy
+#| msgid "Email"
+msgid "Gmail"
+msgstr "بريد إلكتروني"
+
+#: .\gmail\models.py:11
+msgid "Outlook"
+msgstr "التوقعات"
+
+#: .\gmail\models.py:12 .\templates\core\dashboard.html:124
+msgid "IMAP"
+msgstr "الوصول عبر IMAP"
+
+#: .\gmail\models.py:19 .\gmail\models.py:72
+msgid "Provider"
+msgstr "مزود"
+
+#: .\gmail\models.py:22
+#, fuzzy
+#| msgid "Access denied"
+msgid "Access Token"
+msgstr "تم الرفض"
+
+#: .\gmail\models.py:23
+#, fuzzy
+#| msgid "Refresh"
+msgid "Refresh Token"
+msgstr "ينعش"
+
+#: .\gmail\models.py:24
+msgid "Token Expiry"
+msgstr "انتهاء صلاحية الرمز المميز"
+
+#: .\gmail\models.py:27 .\templates\core\dashboard.html:142
+#: .\templates\core\home.html:253 .\templates\core\includes\signup_box.html:54
+msgid "IMAP Host"
+msgstr "مضيف IMAP"
+
+#: .\gmail\models.py:28 .\templates\core\dashboard.html:148
+#: .\templates\core\home.html:260 .\templates\core\includes\signup_box.html:60
+msgid "IMAP Port"
+msgstr "منفذ IMAP"
+
+#: .\gmail\models.py:29
+#, fuzzy
+#| msgid "Email or Username"
+msgid "IMAP Username"
+msgstr "البريد الإلكتروني أو اسم المستخدم"
+
+#: .\gmail\models.py:30 .\templates\core\home.html:271
+#: .\templates\core\includes\signup_box.html:69
+#, fuzzy
+#| msgid "Password"
+msgid "IMAP Password"
+msgstr "كلمة المرور"
+
+#: .\gmail\models.py:31
+#, fuzzy
+#| msgid "Use \\"
+msgid "Use SSL"
+msgstr "يستخدم \\"
+
+#: .\gmail\models.py:34 .\templates\campaigns\template.html:453
+#: .\templates\core\contact.html:30 .\templates\core\dashboard.html:138
+#: .\templates\core\dashboard.html:391 .\templates\core\home.html:248
+#: .\templates\core\includes\signup_box.html:50
+#: .\templates\core\settings.html:20 .\templates\core\settings.html:26
+#: .\templates\core\settings.html:207
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: .\gmail\models.py:36
+msgid "Last Sync At"
+msgstr "آخر مزامنة في"
+
+#: .\gmail\models.py:37
+#, fuzzy
+#| msgid "Scannable:"
+msgid "Sync Enabled"
+msgstr "قابل للفحص:"
+
+#: .\gmail\models.py:40
+#, fuzzy
+#| msgid "Profile Settings"
+msgid "Provider Settings"
+msgstr "إعدادات الملف الشخصي"
+
+#: .\gmail\models.py:46
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Credential"
+msgstr "محتوى البريد الإلكتروني"
+
+#: .\gmail\models.py:47
+#, fuzzy
+#| msgid "Email Details"
+msgid "Email Credentials"
+msgstr "تفاصيل البريد الإلكتروني"
+
+#: .\gmail\models.py:71
+msgid "Credential"
+msgstr "بيانات الاعتماد"
+
+#: .\gmail\models.py:75
+#, fuzzy
+#| msgid "Error Message"
+msgid "Provider Message ID"
+msgstr "رسالة خطأ"
+
+#: .\gmail\models.py:76
+msgid "Thread ID"
+msgstr "معرف الموضوع"
+
+#: .\gmail\models.py:80
+#, fuzzy
+#| msgid "From Email:"
+msgid "From Email"
+msgstr "من البريد الإلكتروني:"
+
+#: .\gmail\models.py:81
+#, fuzzy
+#| msgid "Emails"
+msgid "To Emails"
+msgstr "رسائل البريد الإلكتروني"
+
+#: .\gmail\models.py:81 .\gmail\models.py:82 .\gmail\models.py:83
+#, fuzzy
+#| msgid "Name and email address"
+msgid "Comma-separated email addresses"
+msgstr "الاسم وعنوان البريد الإلكتروني"
+
+#: .\gmail\models.py:82
+#, fuzzy
+#| msgid "Emails"
+msgid "CC Emails"
+msgstr "رسائل البريد الإلكتروني"
+
+#: .\gmail\models.py:83
+#, fuzzy
+#| msgid "Emails"
+msgid "BCC Emails"
+msgstr "رسائل البريد الإلكتروني"
+
+#: .\gmail\models.py:84
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sender Email"
+msgstr "إرسال البريد الإلكتروني"
+
+#: .\gmail\models.py:85
+msgid "Reply To"
+msgstr "الرد على"
+
+#: .\gmail\models.py:88
+msgid "Body Text"
+msgstr "نص الجسم"
+
+#: .\gmail\models.py:89
+#, fuzzy
+#| msgid "Generated Body HTML"
+msgid "Body HTML"
+msgstr "HTML النص الذي تم إنشاؤه"
+
+#: .\gmail\models.py:92
+msgid "Received At"
+msgstr "تلقى في"
+
+#: .\gmail\models.py:93
+#, fuzzy
+#| msgid "Created At"
+msgid "Fetched At"
+msgstr "تم الإنشاء في"
+
+#: .\gmail\models.py:94
+msgid "Processed"
+msgstr "تمت معالجتها"
+
+#: .\gmail\models.py:97
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email"
+msgstr "تفاصيل الحملة"
+
+#: .\gmail\models.py:100
+msgid "Provider Data"
+msgstr "بيانات المزود"
+
+#: .\gmail\models.py:103
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Message"
+msgstr "عناوين البريد الإلكتروني"
+
+#: .\gmail\models.py:104
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Messages"
+msgstr "عناوين البريد الإلكتروني"
 
 #: .\subscribers\models.py:18
 msgid "List"
 msgstr "قائمة"
 
 #: .\subscribers\models.py:19 .\subscribers\models.py:44
-#: .\templates\core\dashboard.html:149
+#: .\templates\core\dashboard.html:290
 #: .\templates\core\tutorials\api_integration.html:65
 #: .\templates\subscribers\list.html:78
 msgid "Lists"
 msgstr "القوائم"
 
-#: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:241
+#: .\subscribers\models.py:47 .\templates\campaigns\template.html:458
+#: .\templates\campaigns\template.html:498 .\templates\core\dashboard.html:382
 msgid "First Name"
 msgstr "الاسم الأول"
 
-#: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:245
+#: .\subscribers\models.py:48 .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:504 .\templates\core\dashboard.html:386
 msgid "Last Name"
 msgstr "اسم العائلة"
 
@@ -1193,8 +1457,8 @@ msgstr "تم إرسال التأكيد في"
 msgid "Confirmed At"
 msgstr "تم التأكيد عند"
 
-#: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:461
+#: .\subscribers\models.py:59 .\templates\analytics\dashboard.html:87
+#: .\templates\core\dashboard.html:242 .\templates\core\dashboard.html:602
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1514,14 +1778,16 @@ msgstr "العودة إلى المنزل"
 msgid "Email Confirmation Sent"
 msgstr "تم إرسال تأكيد البريد الإلكتروني"
 
-#: .\templates\account\login.html:5 .\templates\base.html:143
-#: .\templates\base.html:180
+#: .\templates\account\login.html:5 .\templates\base.html:144
+#: .\templates\base.html:181
 msgid "Login"
 msgstr "تسجيل الدخول"
 
 #: .\templates\account\login.html:14 .\templates\account\logout.html:12
 #: .\templates\account\password_reset.html:13
 #: .\templates\account\password_reset_done.html:13
+#: .\templates\account\password_reset_from_key.html:13
+#: .\templates\account\password_reset_from_key_done.html:13
 #: .\templates\account\signup.html:13 .\templates\base.html:14
 #: .\templates\base.html:15 .\templates\base.html:29 .\templates\base.html:38
 msgid "DripEmails.org"
@@ -1539,7 +1805,8 @@ msgstr "قم بتسجيل الدخول لإدارة حملات البريد ال
 msgid "Email or Username"
 msgstr "البريد الإلكتروني أو اسم المستخدم"
 
-#: .\templates\account\login.html:44
+#: .\templates\account\login.html:44 .\templates\core\dashboard.html:157
+#: .\templates\core\home.html:1179
 msgid "Password"
 msgstr "كلمة المرور"
 
@@ -1551,8 +1818,8 @@ msgstr "نسيت كلمة السر؟"
 msgid "Remember Me"
 msgstr "تذكرنى"
 
-#: .\templates\account\login.html:75 .\templates\core\home.html:73
-#: .\templates\core\home.html:749
+#: .\templates\account\login.html:75 .\templates\core\home.html:75
+#: .\templates\core\home.html:1078
 msgid "Sign In"
 msgstr "تسجيل الدخول"
 
@@ -1596,12 +1863,13 @@ msgstr ""
 #: .\templates\analytics\footer_confirm_delete.html:47
 #: .\templates\analytics\footer_form.html:76
 #: .\templates\campaigns\create.html:64 .\templates\campaigns\drafts.html:232
-#: .\templates\campaigns\edit.html:156 .\templates\campaigns\template.html:270
-#: .\templates\campaigns\template.html:304
-#: .\templates\campaigns\template.html:381
-#: .\templates\campaigns\template.html:435
-#: .\templates\campaigns\template.html:483
-#: .\templates\subscribers\import.html:72
+#: .\templates\campaigns\edit.html:659 .\templates\campaigns\template.html:300
+#: .\templates\campaigns\template.html:337
+#: .\templates\campaigns\template.html:417
+#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:516
+#: .\templates\campaigns\template.html:564 .\templates\core\dashboard.html:172
+#: .\templates\core\home.html:1197 .\templates\subscribers\import.html:72
 #: .\templates\subscribers\import.html:112
 msgid "Cancel"
 msgstr "يلغي"
@@ -1636,11 +1904,13 @@ msgstr "أرسل رابط إعادة الضبط"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Remember your password?"
 msgstr "تذكر كلمة المرور الخاصة بك؟"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Log in here"
 msgstr "تسجيل الدخول هنا"
 
@@ -1658,7 +1928,79 @@ msgstr ""
 "الرسائل غير المرغوب فيها.بخلاف ذلك، اتصل بنا إذا لم تستلمها خلال دقائق "
 "قليلة."
 
-#: .\templates\account\signup.html:15
+#: .\templates\account\password_reset_from_key.html:5
+#: .\templates\account\password_reset_from_key.html:15
+#: .\templates\account\password_reset_from_key.html:78
+#: .\templates\account\password_reset_from_key_done.html:15
+#: .\templates\core\tutorials\account_setup.html:79
+msgid "Change Password"
+msgstr "تغيير كلمة المرور"
+
+#: .\templates\account\password_reset_from_key.html:17
+#: .\templates\account\password_reset_from_key.html:35
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"رابط إعادة تعيين كلمة المرور غير صالح، ربما لأنه تم استخدامه بالفعل.الرجاء "
+"طلب إعادة تعيين كلمة المرور الجديدة."
+
+#: .\templates\account\password_reset_from_key.html:19
+#, fuzzy
+#| msgid "Enter your new password below."
+msgid "Please enter your new password below."
+msgstr "أدخل كلمة المرور الجديدة أدناه."
+
+#: .\templates\account\password_reset_from_key.html:34
+#, fuzzy
+#| msgid "API Bearer Token"
+msgid "Bad Token"
+msgstr "رمز حامل API"
+
+#: .\templates\account\password_reset_from_key.html:42
+#, fuzzy
+#| msgid "Reset Password"
+msgid "Request New Password Reset"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: .\templates\account\password_reset_from_key.html:89
+#: .\templates\account\password_reset_from_key_done.html:5
+#: .\templates\account\password_reset_from_key_done.html:35
+#, fuzzy
+#| msgid "Password"
+msgid "Password Changed"
+msgstr "كلمة المرور"
+
+#: .\templates\account\password_reset_from_key.html:90
+#: .\templates\account\password_reset_from_key_done.html:36
+msgid "Your password is now changed."
+msgstr "تم الآن تغيير كلمة المرور الخاصة بك."
+
+#: .\templates\account\password_reset_from_key.html:97
+#: .\templates\account\password_reset_from_key_done.html:47
+#: .\templates\core\community_user_forum.html:45
+msgid "Log In"
+msgstr "تسجيل الدخول"
+
+#: .\templates\account\password_reset_from_key_done.html:42
+#, fuzzy
+#| msgid "Enter and confirm your new password"
+msgid "You can now log in with your new password."
+msgstr "أدخل وتأكيد كلمة المرور الجديدة الخاصة بك"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Need Help?"
+msgid "Need help?"
+msgstr "هل تحتاج إلى مساعدة؟"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Contact Us"
+msgid "Contact us"
+msgstr "اتصل بنا"
+
+#: .\templates\account\signup.html:15 .\templates\core\home.html:1167
 #: .\templates\core\tutorials\quick_start.html:40
 msgid "Create Your Account"
 msgstr "قم بإنشاء حسابك"
@@ -1684,6 +2026,123 @@ msgstr "هل لديك حساب بالفعل؟"
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
+#: .\templates\analytics\dashboard.html:5
+#: .\templates\analytics\dashboard.html:15
+#: .\templates\core\docs\analytics.html:32
+#: .\templates\core\feature_analytics.html:60
+msgid "Analytics Dashboard"
+msgstr "لوحة تحكم التحليلات"
+
+#: .\templates\analytics\dashboard.html:16
+#, fuzzy
+#| msgid "Track your campaign performance"
+msgid "Monitor your email campaign performance"
+msgstr "تتبع أداء حملتك"
+
+#: .\templates\analytics\dashboard.html:31
+#, fuzzy
+#| msgid "Total sent"
+msgid "Total Sent"
+msgstr "إجمالي المرسلة"
+
+#: .\templates\analytics\dashboard.html:48
+#: .\templates\analytics\dashboard.html:63
+#, fuzzy
+#| msgid "Generate"
+msgid "rate"
+msgstr "يولد"
+
+#: .\templates\analytics\dashboard.html:76
+#: .\templates\campaigns\campaign_analysis.html:66
+#: .\templates\campaigns\campaign_analysis.html:92
+msgid "Delivery Rate"
+msgstr "معدل التسليم"
+
+#: .\templates\analytics\dashboard.html:78
+#, fuzzy
+#| msgid "Bounces"
+msgid "bounces"
+msgstr "مستبعد"
+
+#: .\templates\analytics\dashboard.html:89
+#, fuzzy
+#| msgid "Inactive"
+msgid "active"
+msgstr "غير نشط"
+
+#: .\templates\analytics\dashboard.html:90
+#, fuzzy
+#| msgid "Be at least 300 words"
+msgid "in last 30 days"
+msgstr "أن تكون على الأقل 300 كلمة"
+
+#: .\templates\analytics\dashboard.html:96
+#, fuzzy
+#| msgid "Total campaigns"
+msgid "total campaigns"
+msgstr "إجمالي الحملات"
+
+#: .\templates\analytics\dashboard.html:100
+#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\core\tutorials\performance_dashboard.html:121
+msgid "Unsubscribes"
+msgstr "إلغاء الاشتراك"
+
+#: .\templates\analytics\dashboard.html:102
+#, fuzzy
+#| msgid "Total subscribers:"
+msgid "total unsubscribes"
+msgstr "إجمالي المشتركين:"
+
+#: .\templates\analytics\dashboard.html:109
+#: .\templates\core\feature_analytics.html:15
+msgid "Campaign Performance"
+msgstr "أداء الحملة"
+
+#: .\templates\analytics\dashboard.html:128
+#: .\templates\campaigns\campaign_analysis.html:58
+#: .\templates\campaigns\campaign_analysis.html:98
+#: .\templates\core\feature_analytics.html:154
+#: .\templates\core\tutorials\email_analytics.html:30
+msgid "Open Rate"
+msgstr "معدل الفتح"
+
+#: .\templates\analytics\dashboard.html:131
+#: .\templates\campaigns\campaign_analysis.html:62
+msgid "Click Rate"
+msgstr "انقر فوق معدل"
+
+#: .\templates\analytics\dashboard.html:172
+#, fuzzy
+#| msgid "Create your first campaign to start creating email templates."
+msgid "No campaigns yet. Create your first campaign to see analytics."
+msgstr "قم بإنشاء حملتك الأولى للبدء في إنشاء قوالب البريد الإلكتروني."
+
+#: .\templates\analytics\dashboard.html:184
+#, fuzzy
+#| msgid "Recent Activity Feed"
+msgid "Recent Activity"
+msgstr "موجز الأنشطة الأخيرة"
+
+#: .\templates\analytics\dashboard.html:217
+#, fuzzy
+#| msgid "Campaigns:"
+msgid "Campaign:"
+msgstr "الحملات:"
+
+#: .\templates\analytics\dashboard.html:221
+#: .\templates\campaigns\campaign_emails.html:236
+#, fuzzy
+#| msgid "Lao"
+msgid "ago"
+msgstr "لاو"
+
+#: .\templates\analytics\dashboard.html:229
+#, fuzzy
+#| msgid "No activity"
+msgid "No recent activity"
+msgstr "لا يوجد نشاط"
+
 #: .\templates\analytics\footer_confirm_delete.html:4
 #: .\templates\analytics\footer_confirm_delete.html:10
 #: .\templates\analytics\footer_confirm_delete.html:51
@@ -1705,7 +2164,7 @@ msgstr "لا يمكن التراجع عن هذا الإجراء.سيتم حذف 
 #: .\templates\analytics\footer_form.html:5
 #: .\templates\analytics\footer_form.html:80
 #: .\templates\analytics\footer_list.html:20
-#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:567
 msgid "Create Footer"
 msgstr "إنشاء تذييل"
 
@@ -1730,7 +2189,7 @@ msgid "Back to Footers"
 msgstr "العودة إلى التذييلات"
 
 #: .\templates\analytics\footer_form.html:46
-#: .\templates\campaigns\template.html:456
+#: .\templates\campaigns\template.html:537
 msgid "Footer Name"
 msgstr "اسم التذييل"
 
@@ -1751,7 +2210,7 @@ msgstr ""
 "وتنسيق النص."
 
 #: .\templates\analytics\footer_form.html:68
-#: .\templates\campaigns\template.html:477
+#: .\templates\campaigns\template.html:558
 msgid "Set as default footer"
 msgstr "تعيين كتذييل افتراضي"
 
@@ -1760,7 +2219,7 @@ msgid "Update Footer"
 msgstr "تحديث التذييل"
 
 #: .\templates\analytics\footer_form.html:89
-#: .\templates\campaigns\template.html:115
+#: .\templates\campaigns\template.html:142
 #: .\templates\campaigns\template_revision.html:142
 #: .\templates\core\feature_email_templates.html:133
 msgid "Preview"
@@ -1791,8 +2250,9 @@ msgid "Preview:"
 msgstr "معاينة:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
-#: .\templates\core\dashboard.html:463
+#: .\templates\campaigns\campaign_emails.html:148
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:528
+#: .\templates\core\dashboard.html:604
 msgid "Created"
 msgstr "مخلوق"
 
@@ -1802,7 +2262,7 @@ msgid "Updated"
 msgstr "تم التحديث"
 
 #: .\templates\analytics\footer_list.html:68
-#: .\templates\campaigns\edit.html:111
+#: .\templates\campaigns\edit.html:136
 msgid "Edit"
 msgstr "يحرر"
 
@@ -1811,7 +2271,7 @@ msgid "Set Default"
 msgstr "تعيين الافتراضي"
 
 #: .\templates\analytics\footer_list.html:79
-#: .\templates\campaigns\edit.html:115
+#: .\templates\campaigns\edit.html:140
 msgid "Delete"
 msgstr "يمسح"
 
@@ -1845,7 +2305,7 @@ msgstr ""
 "الحملات والمشتركين وتسلسلات البريد الإلكتروني الآلية.يمكنك إنشاء حملات "
 "بالتنقيط وجدولتها وتتبعها من خلال منصة أتمتة البريد الإلكتروني القوية لدينا."
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid ""
 "Free drip email marketing software with unlimited campaigns, subscribers, "
 "and automated email sequences"
@@ -1853,50 +2313,50 @@ msgstr ""
 "برنامج تسويق مجاني عبر البريد الإلكتروني بالتنقيط مع عدد غير محدود من "
 "الحملات والمشتركين وتسلسلات البريد الإلكتروني الآلية"
 
-#: .\templates\base.html:106
+#: .\templates\base.html:107
 msgid "Search templates & campaigns..."
 msgstr "نماذج البحث والحملات..."
 
-#: .\templates\base.html:139 .\templates\base.html:176
+#: .\templates\base.html:140 .\templates\base.html:177
 #: .\templates\campaigns\drafts.html:19 .\templates\core\dashboard.html:52
 #: .\templates\core\feature_email_scheduling.html:39
 msgid "Dashboard"
 msgstr "لوحة القيادة"
 
-#: .\templates\base.html:140 .\templates\base.html:177
+#: .\templates\base.html:141 .\templates\base.html:178
 #: .\templates\core\dashboard.html:60
 msgid "Settings"
 msgstr "إعدادات"
 
-#: .\templates\base.html:141 .\templates\base.html:178
+#: .\templates\base.html:142 .\templates\base.html:179
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\templates\base.html:144 .\templates\base.html:181
-#: .\templates\core\home.html:509 .\templates\core\home.html:746
+#: .\templates\base.html:145 .\templates\base.html:182
+#: .\templates\core\home.html:811 .\templates\core\home.html:1075
 msgid "Sign Up Free"
 msgstr "الاشتراك مجاني"
 
-#: .\templates\base.html:215
+#: .\templates\base.html:216
 msgid "Free drip email marketing automation for everyone."
 msgstr "أتمتة التسويق عبر البريد الإلكتروني بالتنقيط مجانًا للجميع."
 
-#: .\templates\base.html:233 .\templates\core\docs\campaigns.html:45
+#: .\templates\base.html:234 .\templates\core\docs\campaigns.html:45
 #: .\templates\core\docs\smtp_server.html:40
 msgid "Features"
 msgstr "سمات"
 
-#: .\templates\base.html:235 .\templates\core\feature_drip_campaigns.html:4
+#: .\templates\base.html:236 .\templates\core\feature_drip_campaigns.html:4
 #: .\templates\core\feature_drip_campaigns.html:8
 msgid "Drip Campaigns"
 msgstr "حملات التنقيط"
 
-#: .\templates\base.html:236 .\templates\core\feature_email_scheduling.html:4
+#: .\templates\base.html:237 .\templates\core\feature_email_scheduling.html:4
 #: .\templates\core\feature_email_scheduling.html:8
 msgid "Email Scheduling"
 msgstr "جدولة البريد الإلكتروني"
 
-#: .\templates\base.html:237 .\templates\core\docs\campaigns.html:60
+#: .\templates\base.html:238 .\templates\core\docs\campaigns.html:60
 #: .\templates\core\docs\getting_started.html:84
 #: .\templates\core\feature_analytics.html:4
 #: .\templates\core\resource_api_reference.html:96
@@ -1904,7 +2364,7 @@ msgstr "جدولة البريد الإلكتروني"
 msgid "Analytics"
 msgstr "التحليلات"
 
-#: .\templates\base.html:238 .\templates\core\docs\base_docs.html:35
+#: .\templates\base.html:239 .\templates\core\docs\base_docs.html:35
 #: .\templates\core\docs\subscribers.html:5
 #: .\templates\core\feature_subscriber_management.html:4
 #: .\templates\core\feature_subscriber_management.html:8
@@ -1913,85 +2373,85 @@ msgstr "التحليلات"
 msgid "Subscriber Management"
 msgstr "إدارة المشتركين"
 
-#: .\templates\base.html:243
+#: .\templates\base.html:244
 msgid "Resources"
 msgstr "موارد"
 
-#: .\templates\base.html:245 .\templates\core\docs\base_docs.html:4
+#: .\templates\base.html:246 .\templates\core\docs\base_docs.html:4
 #: .\templates\core\docs\base_docs.html:11
 #: .\templates\core\tutorials\quick_start.html:184
 #: .\templates\core\tutorials\smtp_setup.html:182
 msgid "Documentation"
 msgstr "التوثيق"
 
-#: .\templates\base.html:246
+#: .\templates\base.html:247
 msgid "Tutorials"
 msgstr "دروس"
 
-#: .\templates\base.html:247 .\templates\core\resource_api_reference.html:4
+#: .\templates\base.html:248 .\templates\core\resource_api_reference.html:4
 #: .\templates\core\resource_api_reference.html:79
 msgid "API Reference"
 msgstr "مرجع واجهة برمجة التطبيقات"
 
-#: .\templates\base.html:248 .\templates\core\resource_community.html:4
+#: .\templates\base.html:249 .\templates\core\resource_community.html:4
 #: .\templates\core\resource_community.html:8
 #: .\templates\core\tutorials\quick_start.html:185
 msgid "Community"
 msgstr "مجتمع"
 
-#: .\templates\base.html:249 .\templates\blog\blog_index.html:4
+#: .\templates\base.html:250 .\templates\blog\blog_index.html:4
 #: .\templates\blog\blog_index.html:8
 msgid "Blog"
 msgstr "مدونة"
 
-#: .\templates\base.html:254
+#: .\templates\base.html:255
 msgid "Company"
 msgstr "شركة"
 
-#: .\templates\base.html:256 .\templates\core\about.html:5
+#: .\templates\base.html:257 .\templates\core\about.html:5
 msgid "About"
 msgstr "عن"
 
-#: .\templates\base.html:257
+#: .\templates\base.html:258
 msgid "Contact"
 msgstr "اتصال"
 
-#: .\templates\base.html:258 .\templates\core\privacy.html:4
+#: .\templates\base.html:259 .\templates\core\privacy.html:4
 #: .\templates\core\privacy.html:12
 msgid "Privacy Policy"
 msgstr "سياسة الخصوصية"
 
-#: .\templates\base.html:259 .\templates\core\terms.html:4
+#: .\templates\base.html:260 .\templates\core\terms.html:4
 #: .\templates\core\terms.html:12
 msgid "Terms of Service"
 msgstr "شروط الخدمة"
 
-#: .\templates\base.html:264
+#: .\templates\base.html:265
 msgid "All rights reserved."
 msgstr "جميع الحقوق محفوظة."
 
-#: .\templates\base.html:330
+#: .\templates\base.html:331
 msgid "Searching..."
 msgstr "جارٍ البحث..."
 
-#: .\templates\base.html:345
+#: .\templates\base.html:346
 msgid "Error performing search. Please try again."
 msgstr "حدث خطأ أثناء إجراء البحث.يرجى المحاولة مرة أخرى."
 
-#: .\templates\base.html:355
+#: .\templates\base.html:356
 msgid "No templates or campaigns found matching"
 msgstr "لم يتم العثور على قوالب أو حملات مطابقة"
 
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:18
+#: .\templates\core\dashboard.html:547 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "غير نشط"
 
-#: .\templates\base.html:385
+#: .\templates\base.html:386
 msgid "emails"
 msgstr "رسائل البريد الإلكتروني"
 
-#: .\templates\base.html:396 .\templates\base.html:398
+#: .\templates\base.html:397 .\templates\base.html:399
 #: .\templates\campaigns\drafts.html:3 .\templates\campaigns\drafts.html:9
 #: .\templates\core\docs\base_docs.html:39
 #: .\templates\core\docs\campaigns.html:48
@@ -2015,18 +2475,18 @@ msgid "Back to Blog"
 msgstr "العودة إلى المدونة"
 
 #: .\templates\campaigns\campaign_analysis.html:5
-#: .\templates\campaigns\campaign_analysis.html:10
+#: .\templates\campaigns\campaign_analysis.html:14
 msgid "Campaign Analysis"
 msgstr "تحليل الحملة"
 
-#: .\templates\campaigns\campaign_analysis.html:12
+#: .\templates\campaigns\campaign_analysis.html:16
 #: .\templates\campaigns\drafts.html:17
 #: .\templates\campaigns\template_revision.html:5
 #: .\templates\campaigns\template_revision.html:29
 msgid "Template Revision"
 msgstr "مراجعة القالب"
 
-#: .\templates\campaigns\campaign_analysis.html:21
+#: .\templates\campaigns\campaign_analysis.html:25
 #: .\templates\campaigns\template_revision.html:40
 #: .\templates\campaigns\template_revision.html:51
 #: .\templates\core\tutorials\account_setup.html:33
@@ -2034,99 +2494,68 @@ msgstr "مراجعة القالب"
 msgid "Select"
 msgstr "يختار"
 
-#: .\templates\campaigns\campaign_analysis.html:30
+#: .\templates\campaigns\campaign_analysis.html:34
 msgid "Select a campaign to view analysis."
 msgstr "حدد حملة لعرض التحليل."
 
-#: .\templates\campaigns\campaign_analysis.html:33
+#: .\templates\campaigns\campaign_analysis.html:37
 msgid "Campaign Statistics"
 msgstr "إحصائيات الحملة"
 
-#: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1218
+#: .\templates\campaigns\campaign_analysis.html:38
+#: .\templates\core\dashboard.html:1414
 msgid "Loading..."
 msgstr "تحميل..."
 
-#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:47
 msgid "Opens"
 msgstr "يفتح"
 
-#: .\templates\campaigns\campaign_analysis.html:47
+#: .\templates\campaigns\campaign_analysis.html:51
 msgid "Clicks"
 msgstr "النقرات"
 
-#: .\templates\campaigns\campaign_analysis.html:54
-#: .\templates\core\feature_analytics.html:154
-#: .\templates\core\tutorials\email_analytics.html:30
-msgid "Open Rate"
-msgstr "معدل الفتح"
-
-#: .\templates\campaigns\campaign_analysis.html:58
-msgid "Click Rate"
-msgstr "انقر فوق معدل"
-
-#: .\templates\campaigns\campaign_analysis.html:62
-msgid "Delivery Rate"
-msgstr "معدل التسليم"
-
-#: .\templates\campaigns\campaign_analysis.html:69
+#: .\templates\campaigns\campaign_analysis.html:73
 msgid "Bounces"
 msgstr "مستبعد"
 
-#: .\templates\campaigns\campaign_analysis.html:73
-#: .\templates\core\tutorials\performance_dashboard.html:121
-msgid "Unsubscribes"
-msgstr "إلغاء الاشتراك"
-
-#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\campaigns\campaign_analysis.html:81
 msgid "Complaints"
 msgstr "الشكاوى"
 
-#: .\templates\campaigns\campaign_analysis.html:84
-msgid "Metrics Overview"
-msgstr "نظرة عامة على المقاييس"
-
 #: .\templates\campaigns\campaign_analysis.html:88
-msgid "Open Rate (trend)"
-msgstr "سعر الفتح (الاتجاه)"
+msgid "Past 7 Days Trends"
+msgstr "اتجاهات الأيام السبعة الماضية"
 
-#: .\templates\campaigns\campaign_analysis.html:90
-#: .\templates\campaigns\campaign_analysis.html:96
-#: .\templates\campaigns\campaign_analysis.html:102
-msgid "Coming soon"
-msgstr "قريباً"
+#: .\templates\campaigns\campaign_analysis.html:104
+#, fuzzy
+#| msgid "Click-through rate"
+msgid "Click-Through Rate"
+msgstr "نسبة النقر إلى الظهور"
 
-#: .\templates\campaigns\campaign_analysis.html:94
-msgid "Click Rate (trend)"
-msgstr "معدل النقر (الاتجاه)"
-
-#: .\templates\campaigns\campaign_analysis.html:100
-msgid "Delivery Rate (trend)"
-msgstr "معدل التسليم (الاتجاه)"
-
-#: .\templates\campaigns\campaign_analysis.html:110
+#: .\templates\campaigns\campaign_analysis.html:114
 msgid "Monthly events"
 msgstr "الأحداث الشهرية"
 
-#: .\templates\campaigns\campaign_analysis.html:116
+#: .\templates\campaigns\campaign_analysis.html:120
 msgid "Month"
 msgstr "شهر"
 
-#: .\templates\campaigns\campaign_analysis.html:135
+#: .\templates\campaigns\campaign_analysis.html:139
 msgid "No events found for this campaign."
 msgstr "لم يتم العثور على أحداث لهذه الحملة."
 
-#: .\templates\campaigns\campaign_analysis.html:141
+#: .\templates\campaigns\campaign_analysis.html:145
 msgid "Per-email breakdown"
 msgstr "تفصيل لكل بريد إلكتروني"
 
-#: .\templates\campaigns\campaign_analysis.html:166
+#: .\templates\campaigns\campaign_analysis.html:170
 msgid "No emails found for this campaign."
 msgstr "لم يتم العثور على رسائل بريد إلكتروني لهذه الحملة."
 
 #: .\templates\campaigns\campaign_edit_page.html:4
 #: .\templates\campaigns\campaign_edit_page.html:8
-#: .\templates\campaigns\edit.html:4
+#: .\templates\campaigns\edit.html:5
 msgid "Edit Campaign"
 msgstr "تحرير الحملة"
 
@@ -2143,7 +2572,7 @@ msgid "Add New Email"
 msgstr "إضافة بريد إلكتروني جديد"
 
 #: .\templates\campaigns\campaign_edit_page.html:40
-#: .\templates\campaigns\edit.html:102
+#: .\templates\campaigns\edit.html:127
 msgid "Wait"
 msgstr "انتظر"
 
@@ -2175,60 +2604,246 @@ msgstr "رمز API لإطلاق القالب"
 msgid "No emails have been added to this campaign yet."
 msgstr "لم تتم إضافة أي رسائل بريد إلكتروني إلى هذه الحملة حتى الآن."
 
+#: .\templates\campaigns\campaign_emails.html:14
+msgid "Email Queue and History"
+msgstr "قائمة انتظار البريد الإلكتروني والتاريخ"
+
+#: .\templates\campaigns\campaign_emails.html:18
+#, fuzzy
+#| msgid "Save to Campaign"
+msgid "Back to Campaign"
+msgstr "حفظ إلى الحملة"
+
+#: .\templates\campaigns\campaign_emails.html:28
+#: .\templates\campaigns\campaign_emails.html:46
+#: .\templates\campaigns\edit.html:168 .\templates\campaigns\edit.html:321
+#, fuzzy
+#| msgid "Send Email"
+msgid "Pending Emails"
+msgstr "إرسال البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:32
+#: .\templates\campaigns\campaign_emails.html:186
+#: .\templates\campaigns\edit.html:164 .\templates\campaigns\edit.html:180
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Emails"
+msgstr "إرسال البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:36
+#: .\templates\campaigns\campaign_emails.html:391
+#, fuzzy
+#| msgid "Send Email"
+msgid "Failed Emails"
+msgstr "إرسال البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:47
+#, fuzzy
+#| msgid "Email scheduled for {time}"
+msgid "Emails scheduled to be sent"
+msgstr "تمت جدولة البريد الإلكتروني لـ {time}"
+
+#: .\templates\campaigns\campaign_emails.html:60
+#: .\templates\campaigns\campaign_emails.html:200
+#: .\templates\campaigns\campaign_emails.html:271
+#: .\templates\campaigns\campaign_emails.html:404
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient"
+msgstr "البريد الإلكتروني للمستلم"
+
+#: .\templates\campaigns\campaign_emails.html:69
+#: .\templates\campaigns\campaign_emails.html:280
+#: .\templates\campaigns\campaign_emails.html:413
+#: .\templates\core\dashboard.html:530 .\templates\core\dashboard.html:606
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: .\templates\campaigns\campaign_emails.html:100
+msgid "In"
+msgstr "في"
+
+#: .\templates\campaigns\campaign_emails.html:104
+#, fuzzy
+#| msgid "Overview"
+msgid "Overdue"
+msgstr "ملخص"
+
+#: .\templates\campaigns\campaign_emails.html:116
+#: .\templates\campaigns\drafts.html:238 .\templates\campaigns\edit.html:354
+#: .\templates\core\dashboard.html:410 .\templates\core\dashboard.html:1281
+#: .\templates\core\feature_email_scheduling.html:44
+#: .\templates\core\tutorials\quick_start.html:148
+msgid "Send Now"
+msgstr "أرسل الآن"
+
+#: .\templates\campaigns\campaign_emails.html:125
+#: .\templates\campaigns\campaign_emails.html:250
+#: .\templates\campaigns\campaign_emails.html:327
+#: .\templates\campaigns\edit.html:538 .\templates\campaigns\template.html:365
+msgid "Email Details"
+msgstr "تفاصيل البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:132
+#: .\templates\campaigns\campaign_emails.html:257
+#: .\templates\campaigns\campaign_emails.html:334
+#: .\templates\campaigns\template.html:5
+#: .\templates\campaigns\template.html:104 .\templates\core\dashboard.html:401
+msgid "Email Template"
+msgstr "قالب البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:156
+#: .\templates\campaigns\template.html:432
+#: .\templates\core\dashboard.html:1245
+msgid "Email Preview"
+msgstr "معاينة البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:175
+#, fuzzy
+#| msgid "Top performing emails"
+msgid "No pending emails"
+msgstr "رسائل البريد الإلكتروني الأعلى أداءً"
+
+#: .\templates\campaigns\campaign_emails.html:176
+msgid "All emails have been sent or there are no scheduled emails."
+msgstr ""
+"تم إرسال جميع رسائل البريد الإلكتروني أو لا توجد رسائل بريد إلكتروني مجدولة."
+
+#: .\templates\campaigns\campaign_emails.html:187
+#, fuzzy
+#| msgid "Successfully Unsubscribed"
+msgid "Successfully sent emails"
+msgstr "تم إلغاء الاشتراك بنجاح"
+
+#: .\templates\campaigns\campaign_emails.html:265
+#, fuzzy
+#| msgid "Sent At"
+msgid "Actually Sent At"
+msgstr "أرسلت في"
+
+#: .\templates\campaigns\campaign_emails.html:274
+#: .\templates\campaigns\campaign_emails.html:407
+#: .\templates\core\dashboard.html:1231
+msgid "Error"
+msgstr "خطأ"
+
+#: .\templates\campaigns\campaign_emails.html:318
+#: .\templates\campaigns\campaign_emails.html:444
+#: .\templates\core\dashboard.html:1343
+msgid "Retry"
+msgstr "أعد المحاولة"
+
+#: .\templates\campaigns\campaign_emails.html:342
+msgid "Last Attempt"
+msgstr "المحاولة الأخيرة"
+
+#: .\templates\campaigns\campaign_emails.html:384
+#: .\templates\campaigns\edit.html:250 .\templates\campaigns\edit.html:400
+#: .\templates\campaigns\edit.html:561 .\templates\campaigns\template.html:136
+#: .\templates\campaigns\template.html:172
+msgid "Email Content"
+msgstr "محتوى البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:392
+#, fuzzy
+#| msgid "Email already sent."
+msgid "Emails that failed to send"
+msgstr "تم إرسال البريد الإلكتروني بالفعل."
+
+#: .\templates\campaigns\campaign_emails.html:457
+#, fuzzy
+#| msgid "Email Details"
+msgid "No failed emails"
+msgstr "تفاصيل البريد الإلكتروني"
+
+#: .\templates\campaigns\campaign_emails.html:458
+#, fuzzy
+#| msgid "Email sent successfully."
+msgid "All emails were sent successfully."
+msgstr "تم إرسال البريد الإلكتروني بنجاح."
+
+#: .\templates\campaigns\campaign_emails.html:487
+#, fuzzy
+#| msgid "Are you sure you want to delete this email?"
+msgid "Are you sure you want to send this email now?"
+msgstr "هل أنت متأكد أنك تريد حذف هذا البريد الإلكتروني؟"
+
+#: .\templates\campaigns\campaign_emails.html:493
+#: .\templates\campaigns\drafts.html:363 .\templates\campaigns\edit.html:909
+#: .\templates\campaigns\template.html:1085
+#: .\templates\campaigns\template_revision.html:393
+msgid "Sending..."
+msgstr "إرسال..."
+
+#: .\templates\campaigns\campaign_emails.html:505
+#: .\templates\campaigns\edit.html:924
+#: .\templates\campaigns\template.html:1119
+#, fuzzy
+#| msgid "Email sent successfully"
+msgid "Email sent successfully!"
+msgstr "تم إرسال البريد الإلكتروني بنجاح"
+
+#: .\templates\campaigns\campaign_emails.html:512
+#: .\templates\campaigns\edit.html:932
+#, fuzzy
+#| msgid "Failed to send email: "
+msgid "Failed to send email"
+msgstr "فشل في إرسال البريد الإلكتروني:"
+
 #: .\templates\campaigns\create.html:4 .\templates\campaigns\create.html:78
 #: .\templates\campaigns\drafts.html:55
 #: .\templates\core\feature_drip_campaigns.html:36
 msgid "Create Campaign"
 msgstr "إنشاء حملة"
 
-#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:665
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "إنشاء حملة جديدة"
 
-#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:29
+#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:54
 msgid "Campaign Name"
 msgstr "اسم الحملة"
 
-#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:45
+#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:70
 msgid "Select a list or upload contacts"
 msgstr "حدد قائمة أو قم بتحميل جهات الاتصال"
 
 #: .\templates\campaigns\create.html:38 .\templates\campaigns\create.html:46
-#: .\templates\campaigns\edit.html:52 .\templates\campaigns\edit.html:138
+#: .\templates\campaigns\edit.html:77 .\templates\campaigns\edit.html:641
 msgid "Upload Contacts"
 msgstr "تحميل جهات الاتصال"
 
-#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:141
+#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:644
 #: .\templates\subscribers\import.html:95
 msgid "List Name"
 msgstr "اسم القائمة"
 
-#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:144
+#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:647
 msgid "My Contact List"
 msgstr "قائمة جهات الاتصال الخاصة بي"
 
-#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:147
+#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:650
 msgid "Contact File"
 msgstr "ملف الاتصال"
 
-#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:150
+#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:653
 msgid "Supported formats: CSV, Excel (.xls, .xlsx)"
 msgstr "التنسيقات المدعومة: CSV، Excel (.xls، .xlsx)"
 
-#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:160
+#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:663
 msgid "Upload"
 msgstr "رفع"
 
-#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:187
+#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:690
 msgid "Please select a file to upload"
 msgstr "الرجاء تحديد ملف لتحميله"
 
-#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:217
+#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:720
 msgid "Contacts uploaded successfully"
 msgstr "تم تحميل جهات الاتصال بنجاح"
 
-#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:220
+#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:723
 msgid "An error occurred while uploading contacts"
 msgstr "حدث خطأ أثناء تحميل جهات الاتصال"
 
@@ -2248,7 +2863,7 @@ msgstr "اختر حملة"
 msgid "(Active)"
 msgstr "(نشيط)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:573
 msgid "No campaigns yet"
 msgstr "لا توجد حملات حتى الآن"
 
@@ -2257,7 +2872,7 @@ msgid "Create your first campaign to start creating email templates."
 msgstr "قم بإنشاء حملتك الأولى للبدء في إنشاء قوالب البريد الإلكتروني."
 
 #: .\templates\campaigns\drafts.html:65
-#: .\templates\campaigns\template.html:296
+#: .\templates\campaigns\template.html:329
 msgid "Select a campaign"
 msgstr "اختر حملة"
 
@@ -2274,7 +2889,7 @@ msgstr "لم يتم العثور على قوالب"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "لا تحتوي هذه الحملة على أي قوالب بريد إلكتروني حتى الآن."
 
-#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:683
 msgid "Create Email Template"
 msgstr "إنشاء قالب البريد الإلكتروني"
 
@@ -2295,7 +2910,7 @@ msgid "Revise"
 msgstr "يراجع"
 
 #: .\templates\campaigns\drafts.html:165
-#: .\templates\campaigns\template.html:438
+#: .\templates\campaigns\template.html:474
 msgid "Send"
 msgstr "يرسل"
 
@@ -2304,11 +2919,12 @@ msgid "Send Email Template"
 msgstr "إرسال قالب البريد الإلكتروني"
 
 #: .\templates\campaigns\drafts.html:190
+#: .\templates\campaigns\template.html:492
 msgid "Recipient Email"
 msgstr "البريد الإلكتروني للمستلم"
 
 #: .\templates\campaigns\drafts.html:219
-#: .\templates\campaigns\template.html:151
+#: .\templates\campaigns\template.html:181
 msgid "No footer"
 msgstr "لا يوجد تذييل"
 
@@ -2316,14 +2932,7 @@ msgstr "لا يوجد تذييل"
 msgid "Select a footer to append to your email"
 msgstr "حدد تذييلًا لإلحاقه ببريدك الإلكتروني"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
-#: .\templates\core\dashboard.html:1085
-#: .\templates\core\feature_email_scheduling.html:44
-#: .\templates\core\tutorials\quick_start.html:148
-msgid "Send Now"
-msgstr "أرسل الآن"
-
-#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:323
+#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:826
 msgid "An error occurred while reordering emails"
 msgstr "حدث خطأ أثناء إعادة ترتيب رسائل البريد الإلكتروني"
 
@@ -2335,81 +2944,268 @@ msgstr "الرجاء إدخال عنوان البريد الإلكتروني ل�
 msgid "Failed to update email settings: "
 msgstr "فشل في تحديث إعدادات البريد الإلكتروني:"
 
-#: .\templates\campaigns\drafts.html:363
-#: .\templates\campaigns\template_revision.html:391
-msgid "Sending..."
-msgstr "إرسال..."
-
 #: .\templates\campaigns\drafts.html:381
-#: .\templates\campaigns\template_revision.html:409
+#: .\templates\campaigns\template_revision.html:411
 msgid "Email sent successfully to "
 msgstr "تم إرسال البريد الإلكتروني بنجاح إلى"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:413
 msgid "Failed to send email: "
 msgstr "فشل في إرسال البريد الإلكتروني:"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:277
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:279
+#: .\templates\campaigns\template_revision.html:413
 msgid "Unknown error"
 msgstr "خطأ غير معروف"
 
 #: .\templates\campaigns\drafts.html:388
-#: .\templates\campaigns\template_revision.html:415
+#: .\templates\campaigns\template_revision.html:417
 msgid "Failed to send email. Please check your connection and try again."
 msgstr ""
 "فشل في إرسال البريد الإلكتروني.يرجى التحقق من اتصالك والمحاولة مرة أخرى."
 
-#: .\templates\campaigns\edit.html:14
+#: .\templates\campaigns\edit.html:39
 msgid "Deactivate"
 msgstr "إلغاء التنشيط"
 
-#: .\templates\campaigns\edit.html:16
+#: .\templates\campaigns\edit.html:41
 msgid "Activate"
 msgstr "فعل"
 
-#: .\templates\campaigns\edit.html:20
+#: .\templates\campaigns\edit.html:45
 #: .\templates\core\feature_drip_campaigns.html:52
 #: .\templates\core\feature_email_templates.html:48
 msgid "Add Email"
 msgstr "إضافة البريد الإلكتروني"
 
-#: .\templates\campaigns\edit.html:62
+#: .\templates\campaigns\edit.html:87
 msgid "Email Sequence"
 msgstr "تسلسل البريد الإلكتروني"
 
-#: .\templates\campaigns\edit.html:68
+#: .\templates\campaigns\edit.html:93
 msgid "Create New Email"
 msgstr "إنشاء بريد إلكتروني جديد"
 
-#: .\templates\campaigns\edit.html:97
+#: .\templates\campaigns\edit.html:122
 msgid "Step"
 msgstr "خطوة"
 
-#: .\templates\campaigns\edit.html:123
+#: .\templates\campaigns\edit.html:148
 msgid "No emails in this campaign yet."
 msgstr "لا توجد رسائل بريد إلكتروني في هذه الحملة حتى الآن."
 
-#: .\templates\campaigns\edit.html:126
+#: .\templates\campaigns\edit.html:151
 msgid "Add First Email"
 msgstr "أضف البريد الإلكتروني الأول"
 
-#: .\templates\campaigns\edit.html:247
+#: .\templates\campaigns\edit.html:172
+msgid "IMAP Auto-Reply emails"
+msgstr "رسائل البريد الإلكتروني للرد التلقائي على IMAP"
+
+#: .\templates\campaigns\edit.html:191 .\templates\campaigns\edit.html:332
+#: .\templates\campaigns\edit.html:482 .\templates\core\dashboard.html:1643
+#: .\templates\core\dashboard.html:2081
+#, fuzzy
+#| msgid "To"
+msgid "To:"
+msgstr "ل"
+
+#: .\templates\campaigns\edit.html:194 .\templates\campaigns\edit.html:495
+#, fuzzy
+#| msgid "Sent"
+msgid "Sent:"
+msgstr "مرسل"
+
+#: .\templates\campaigns\edit.html:197 .\templates\campaigns\edit.html:338
+#: .\templates\campaigns\edit.html:498
+#, fuzzy
+#| msgid "Status"
+msgid "Status:"
+msgstr "حالة"
+
+#: .\templates\campaigns\edit.html:204 .\templates\campaigns\edit.html:346
+#: .\templates\campaigns\edit.html:505
+#, fuzzy
+#| msgid "View list details:"
+msgid "View Details"
+msgstr "عرض تفاصيل القائمة:"
+
+#: .\templates\campaigns\edit.html:216 .\templates\campaigns\edit.html:364
+#: .\templates\campaigns\edit.html:517
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email Attributes"
+msgstr "عنوان البريد الإلكتروني"
+
+#: .\templates\campaigns\edit.html:219 .\templates\campaigns\edit.html:367
+#: .\templates\campaigns\edit.html:520
+#, fuzzy
+#| msgid "Email 1"
+msgid "Email ID:"
+msgstr "البريد الإلكتروني 1"
+
+#: .\templates\campaigns\edit.html:223 .\templates\campaigns\edit.html:371
+#, fuzzy
+#| msgid "Order"
+msgid "Order:"
+msgstr "طلب"
+
+#: .\templates\campaigns\edit.html:228 .\templates\campaigns\edit.html:376
+#, fuzzy
+#| msgid "Subscribers:"
+msgid "Subscriber:"
+msgstr "المشتركون:"
+
+#: .\templates\campaigns\edit.html:235 .\templates\campaigns\edit.html:383
+#, fuzzy
+#| msgid "Send in X Days"
+msgid "Sending Details"
+msgstr "إرسال في X أيام"
+
+#: .\templates\campaigns\edit.html:238
+#, fuzzy
+#| msgid "Scheduled"
+msgid "Scheduled:"
+msgstr "المقرر"
+
+#: .\templates\campaigns\edit.html:242 .\templates\campaigns\edit.html:386
+#, fuzzy
+#| msgid "Created"
+msgid "Created:"
+msgstr "مخلوق"
+
+#: .\templates\campaigns\edit.html:261
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No emails have been sent from this campaign yet."
+msgstr "لم تتم إضافة أي رسائل بريد إلكتروني إلى هذه الحملة حتى الآن."
+
+#: .\templates\campaigns\edit.html:270 .\templates\campaigns\edit.html:289
+#: .\templates\campaigns\edit.html:420 .\templates\campaigns\edit.html:439
+#: .\templates\campaigns\edit.html:587 .\templates\campaigns\edit.html:606
+#: .\templates\core\dashboard.html:2464 .\templates\subscribers\list.html:174
+#: .\templates\subscribers\list.html:178
+msgid "Previous"
+msgstr "سابق"
+
+#: .\templates\campaigns\edit.html:275 .\templates\campaigns\edit.html:304
+#: .\templates\campaigns\edit.html:425 .\templates\campaigns\edit.html:454
+#: .\templates\campaigns\edit.html:592 .\templates\campaigns\edit.html:621
+#: .\templates\core\dashboard.html:2469 .\templates\subscribers\list.html:191
+#: .\templates\subscribers\list.html:195
+msgid "Next"
+msgstr "التالي"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "Showing"
+msgstr "عرض"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "to"
+msgstr "ل"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599 .\templates\core\dashboard.html:2453
+msgid "of"
+msgstr "ل"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+#, fuzzy
+#| msgid "Proven Results"
+msgid "results"
+msgstr "نتائج مثبتة"
+
+#: .\templates\campaigns\edit.html:335
+#, fuzzy
+#| msgid "Scheduled For"
+msgid "Scheduled for:"
+msgstr "المقرر ل"
+
+#: .\templates\campaigns\edit.html:391
+#, fuzzy
+#| msgid "Variables"
+msgid "Variables:"
+msgstr "المتغيرات"
+
+#: .\templates\campaigns\edit.html:411
+#, fuzzy
+#| msgid "No emails found for this campaign."
+msgid "No pending emails for this campaign."
+msgstr "لم يتم العثور على رسائل بريد إلكتروني لهذه الحملة."
+
+#: .\templates\campaigns\edit.html:471
+msgid "IMAP Auto-Reply Emails"
+msgstr "رسائل البريد الإلكتروني للرد التلقائي على IMAP"
+
+#: .\templates\campaigns\edit.html:492 .\templates\core\dashboard.html:2083
+#, fuzzy
+#| msgid "from:"
+msgid "From:"
+msgstr "من:"
+
+#: .\templates\campaigns\edit.html:525
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email:"
+msgstr "تفاصيل الحملة"
+
+#: .\templates\campaigns\edit.html:531
+msgid "IMAP Account:"
+msgstr "حساب IMAP:"
+
+#: .\templates\campaigns\edit.html:541
+msgid "Received:"
+msgstr "تلقى:"
+
+#: .\templates\campaigns\edit.html:546
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient:"
+msgstr "البريد الإلكتروني للمستلم"
+
+#: .\templates\campaigns\edit.html:552
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient Name:"
+msgstr "البريد الإلكتروني للمستلم"
+
+#: .\templates\campaigns\edit.html:568
+#, fuzzy
+#| msgid "No campaigns available."
+msgid "No content available"
+msgstr "لا توجد حملات متاحة."
+
+#: .\templates\campaigns\edit.html:578
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No IMAP auto-reply emails have been sent from this campaign yet."
+msgstr "لم تتم إضافة أي رسائل بريد إلكتروني إلى هذه الحملة حتى الآن."
+
+#: .\templates\campaigns\edit.html:750
 msgid "An error occurred while updating the campaign"
 msgstr "حدث خطأ أثناء تحديث الحملة"
 
-#: .\templates\campaigns\edit.html:267
+#: .\templates\campaigns\edit.html:770
 msgid "An error occurred while updating the campaign status"
 msgstr "حدث خطأ أثناء تحديث حالة الحملة"
 
-#: .\templates\campaigns\edit.html:274
+#: .\templates\campaigns\edit.html:777
 msgid "Are you sure you want to delete this email?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا البريد الإلكتروني؟"
 
-#: .\templates\campaigns\edit.html:290
+#: .\templates\campaigns\edit.html:793
 msgid "An error occurred while deleting the email"
+msgstr "حدث خطأ أثناء حذف البريد الإلكتروني"
+
+#: .\templates\campaigns\edit.html:938
+#, fuzzy
+#| msgid "An error occurred while deleting the email"
+msgid "An error occurred while sending the email"
 msgstr "حدث خطأ أثناء حذف البريد الإلكتروني"
 
 #: .\templates\campaigns\email_analysis.html:5
@@ -2428,7 +3224,7 @@ msgstr ""
 " المواضيع المدعومة بالذكاء الاصطناعي"
 
 #: .\templates\campaigns\email_analysis.html:116
-#: .\templates\campaigns\template.html:289
+#: .\templates\campaigns\template.html:322
 msgid "Select Campaign"
 msgstr "حدد الحملة"
 
@@ -2541,73 +3337,91 @@ msgstr "عنوان"
 msgid "Number of Emails"
 msgstr "عدد رسائل البريد الإلكتروني"
 
-#: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
-msgid "Email Template"
-msgstr "قالب البريد الإلكتروني"
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "No campaigns yet"
+msgid "No campaign selected."
+msgstr "لا توجد حملات حتى الآن"
 
-#: .\templates\campaigns\template.html:78
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "Choose which campaign to save this template to"
+msgid "You'll be prompted to select a campaign when you save this template."
+msgstr "اختر الحملة التي تريد حفظ هذا القالب فيها"
+
+#: .\templates\campaigns\template.html:89
+#, fuzzy
+#| msgid "Select a campaign"
+msgid "Or select a campaign now:"
+msgstr "اختر حملة"
+
+#: .\templates\campaigns\template.html:91
+#, fuzzy
+#| msgid "No campaign (optional)"
+msgid "Select a campaign (optional)"
+msgstr "لا توجد حملة (اختياري)"
+
+#: .\templates\campaigns\template.html:105
 msgid "Design your email template"
 msgstr "صمم قالب البريد الإلكتروني الخاص بك"
 
-#: .\templates\campaigns\template.html:85
+#: .\templates\campaigns\template.html:112
 #: .\templates\campaigns\template_revision.html:101
 #: .\templates\core\feature_email_templates.html:57
 msgid "Email Subject"
 msgstr "موضوع البريد الإلكتروني"
 
-#: .\templates\campaigns\template.html:103
-msgid "Time to wait before sending this email after the previous one"
+#: .\templates\campaigns\template.html:130
+#, fuzzy
+#| msgid "Time to wait before sending this email after the previous one"
+msgid ""
+"Time to wait before sending this email after the previous one (0 = send "
+"immediately)"
 msgstr ""
 "حان الوقت للانتظار قبل إرسال هذه الرسالة الإلكترونية بعد الرسالة السابقة"
 
-#: .\templates\campaigns\template.html:109
-#: .\templates\campaigns\template.html:142
-msgid "Email Content"
-msgstr "محتوى البريد الإلكتروني"
-
-#: .\templates\campaigns\template.html:112
+#: .\templates\campaigns\template.html:139
 #: .\templates\core\feature_email_templates.html:97
 msgid "AI Generate"
 msgstr "إنشاء الذكاء الاصطناعي"
 
-#: .\templates\campaigns\template.html:118
+#: .\templates\campaigns\template.html:145
 msgid "Send Test"
 msgstr "إرسال الاختبار"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Available Variables"
 msgstr "المتغيرات المتاحة"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Click to copy"
 msgstr "انقر للنسخ"
 
-#: .\templates\campaigns\template.html:157
+#: .\templates\campaigns\template.html:187
 msgid "New Footer"
 msgstr "تذييل جديد"
 
-#: .\templates\campaigns\template.html:161
+#: .\templates\campaigns\template.html:191
 msgid "Select a footer to append to your email, or leave empty for no footer."
 msgstr "حدد تذييلاً لإلحاقه ببريدك الإلكتروني، أو اتركه فارغًا بدون أي تذييل."
 
-#: .\templates\campaigns\template.html:167
+#: .\templates\campaigns\template.html:197
 msgid "API Integration"
 msgstr "تكامل واجهة برمجة التطبيقات"
 
-#: .\templates\campaigns\template.html:173
+#: .\templates\campaigns\template.html:203
 msgid "Your API Key"
 msgstr "مفتاح API الخاص بك"
 
-#: .\templates\campaigns\template.html:174
+#: .\templates\campaigns\template.html:204
 msgid "Use this key to authenticate your API requests"
 msgstr "استخدم هذا المفتاح لمصادقة طلبات API الخاصة بك"
 
-#: .\templates\campaigns\template.html:177
+#: .\templates\campaigns\template.html:207
 msgid "No API key found. Please contact support."
 msgstr "لم يتم العثور على مفتاح API.يرجى الاتصال بالدعم."
 
-#: .\templates\campaigns\template.html:181
+#: .\templates\campaigns\template.html:211
 #: .\templates\core\resource_api_reference.html:104
 #: .\templates\core\resource_api_reference.html:125
 #: .\templates\core\resource_api_reference.html:131
@@ -2619,15 +3433,15 @@ msgstr "لم يتم العثور على مفتاح API.يرجى الاتصال �
 #: .\templates\core\resource_api_reference.html:383
 #: .\templates\core\resource_api_reference.html:469
 #: .\templates\core\resource_api_reference.html:497
-#: .\templates\core\settings.html:103
+#: .\templates\core\settings.html:119
 msgid "Copy"
 msgstr "ينسخ"
 
-#: .\templates\campaigns\template.html:185
+#: .\templates\campaigns\template.html:215
 msgid "Regenerate"
 msgstr "تجديد"
 
-#: .\templates\campaigns\template.html:194
+#: .\templates\campaigns\template.html:224
 msgid ""
 "Send emails using this template via API. Here's how to trigger this template"
 " programmatically:"
@@ -2635,169 +3449,181 @@ msgstr ""
 "أرسل رسائل البريد الإلكتروني باستخدام هذا القالب عبر API.إليك كيفية تشغيل "
 "هذا القالب برمجيًا:"
 
-#: .\templates\campaigns\template.html:198
+#: .\templates\campaigns\template.html:228
 msgid "Python"
 msgstr "بايثون"
 
-#: .\templates\campaigns\template.html:218
+#: .\templates\campaigns\template.html:248
 msgid "JavaScript"
 msgstr "جافا سكريبت"
 
-#: .\templates\campaigns\template.html:236
+#: .\templates\campaigns\template.html:266
 msgid "Ruby"
 msgstr "روبي"
 
-#: .\templates\campaigns\template.html:262
+#: .\templates\campaigns\template.html:292
 msgid "Save your email template first to see the API code for sending emails."
 msgstr ""
 "احفظ قالب بريدك الإلكتروني أولاً لترى رمز API لإرسال رسائل البريد "
 "الإلكتروني."
 
-#: .\templates\campaigns\template.html:274
+#: .\templates\campaigns\template.html:304
+#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:519
+#: .\templates\campaigns\template_revision.html:137
+#: .\templates\core\feature_email_scheduling.html:40
+#: .\templates\core\feature_email_scheduling.html:53
+msgid "Send Email"
+msgstr "إرسال البريد الإلكتروني"
+
 #: .\templates\campaigns\template.html:307
+#: .\templates\campaigns\template.html:340
 #: .\templates\campaigns\template_revision.html:131
 #: .\templates\core\feature_drip_campaigns.html:65
 #: .\templates\core\feature_email_templates.html:136
 msgid "Save Template"
 msgstr "حفظ القالب"
 
-#: .\templates\campaigns\template.html:290
+#: .\templates\campaigns\template.html:323
 msgid "Choose which campaign to save this template to"
 msgstr "اختر الحملة التي تريد حفظ هذا القالب فيها"
 
-#: .\templates\campaigns\template.html:318
+#: .\templates\campaigns\template.html:351
 msgid "Generate Email with AI"
 msgstr "إنشاء بريد إلكتروني باستخدام الذكاء الاصطناعي"
 
-#: .\templates\campaigns\template.html:319
+#: .\templates\campaigns\template.html:352
 msgid "Describe what you want in your email and let AI create the content"
 msgstr ""
 "قم بوصف ما تريده في بريدك الإلكتروني ودع الذكاء الاصطناعي ينشئ المحتوى"
 
-#: .\templates\campaigns\template.html:324
+#: .\templates\campaigns\template.html:357
 msgid "What is the email about?"
 msgstr "ما هو موضوع البريد الإلكتروني؟"
 
-#: .\templates\campaigns\template.html:327
+#: .\templates\campaigns\template.html:360
 msgid ""
 "e.g., New product launch, special discount offer, welcome to our service..."
 msgstr "على سبيل المثال، إطلاق منتج جديد، عرض خصم خاص، مرحبًا بك في خدمتنا..."
 
-#: .\templates\campaigns\template.html:328
+#: .\templates\campaigns\template.html:361
 msgid "Describe the main topic or purpose of the email"
 msgstr "صف الموضوع الرئيسي أو الغرض من البريد الإلكتروني"
 
-#: .\templates\campaigns\template.html:332
-msgid "Email Details"
-msgstr "تفاصيل البريد الإلكتروني"
-
-#: .\templates\campaigns\template.html:340
+#: .\templates\campaigns\template.html:373
 msgid ""
 "Include any specific details, offers, key points, or instructions you want "
 "included"
 msgstr ""
 "قم بتضمين أي تفاصيل أو عروض أو نقاط رئيسية أو تعليمات محددة تريد تضمينها"
 
-#: .\templates\campaigns\template.html:345
+#: .\templates\campaigns\template.html:378
 msgid "Who is this for?"
 msgstr "لمن هذا؟"
 
-#: .\templates\campaigns\template.html:348
+#: .\templates\campaigns\template.html:381
 msgid "e.g., customers, subscribers, users..."
 msgstr "على سبيل المثال، العملاء، المشتركون، المستخدمون..."
 
-#: .\templates\campaigns\template.html:351
+#: .\templates\campaigns\template.html:384
 msgid "Tone"
 msgstr "نغمة"
 
-#: .\templates\campaigns\template.html:354
+#: .\templates\campaigns\template.html:387
 msgid "Professional"
 msgstr "احترافي"
 
-#: .\templates\campaigns\template.html:355
+#: .\templates\campaigns\template.html:388
 msgid "Friendly"
 msgstr "ودي"
 
-#: .\templates\campaigns\template.html:356
+#: .\templates\campaigns\template.html:389
 msgid "Persuasive"
 msgstr "مقنع"
 
-#: .\templates\campaigns\template.html:357
+#: .\templates\campaigns\template.html:390
 msgid "Casual"
 msgstr "غير رسمي"
 
-#: .\templates\campaigns\template.html:358
+#: .\templates\campaigns\template.html:391
 msgid "Formal"
 msgstr "رَسمِيّ"
 
-#: .\templates\campaigns\template.html:364
+#: .\templates\campaigns\template.html:397
 msgid "Email Length"
 msgstr "طول البريد الإلكتروني"
 
-#: .\templates\campaigns\template.html:367
+#: .\templates\campaigns\template.html:400
 msgid "Short (concise, 2-3 paragraphs)"
 msgstr "قصيرة (موجزة، 2-3 فقرات)"
 
-#: .\templates\campaigns\template.html:368
+#: .\templates\campaigns\template.html:401
 msgid "Medium (balanced, 4-5 paragraphs)"
 msgstr "متوسط ​​(متوازن، 4-5 فقرات)"
 
-#: .\templates\campaigns\template.html:369
+#: .\templates\campaigns\template.html:402
 msgid "Long (detailed, 6+ paragraphs)"
 msgstr "طويلة (مفصلة، ​​أكثر من 6 فقرات)"
 
-#: .\templates\campaigns\template.html:375
-msgid ""
-"AI generation uses Hugging Face API to create email content. The generated "
-"subject and body will replace your current email."
-msgstr ""
-"يستخدم جيل الذكاء الاصطناعي Hugging Face API لإنشاء محتوى البريد "
-"الإلكتروني.سيحل الموضوع والنص الذي تم إنشاؤه محل بريدك الإلكتروني الحالي."
-
-#: .\templates\campaigns\template.html:384
+#: .\templates\campaigns\template.html:420
 msgid "Generate Email"
 msgstr "إنشاء البريد الإلكتروني"
 
-#: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1049
-msgid "Email Preview"
-msgstr "معاينة البريد الإلكتروني"
-
-#: .\templates\campaigns\template.html:398
+#: .\templates\campaigns\template.html:434
 msgid "Close"
 msgstr "يغلق"
 
-#: .\templates\campaigns\template.html:412
+#: .\templates\campaigns\template.html:448
 msgid "Send Test Email"
 msgstr "إرسال البريد الإلكتروني للاختبار"
 
-#: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
-#: .\templates\core\settings.html:26 .\templates\core\settings.html:191
-msgid "Email Address"
-msgstr "عنوان البريد الإلكتروني"
-
-#: .\templates\campaigns\template.html:425
+#: .\templates\campaigns\template.html:461
+#: .\templates\campaigns\template.html:501
 msgid "Enter first name..."
 msgstr "أدخل الاسم الأول..."
 
-#: .\templates\campaigns\template.html:431
+#: .\templates\campaigns\template.html:467
+#: .\templates\campaigns\template.html:507
 msgid "Enter last name..."
 msgstr "أدخل الاسم الأخير..."
 
-#: .\templates\campaigns\template.html:450
+#: .\templates\campaigns\template.html:487
+#, fuzzy
+#| msgid "Send this email to "
+msgid "Send this email template to a recipient"
+msgstr "أرسل هذا البريد الإلكتروني إلى"
+
+#: .\templates\campaigns\template.html:495
+msgid "recipient@example.com"
+msgstr "المتلقي@example.com"
+
+#: .\templates\campaigns\template.html:511 .\templates\core\dashboard.html:359
+#: .\templates\core\docs\analytics.html:13
+#: .\templates\core\tutorials\quick_start.html:96
+msgid "Note:"
+msgstr "ملحوظة:"
+
+#: .\templates\campaigns\template.html:511
+msgid ""
+"The email will be sent immediately. The recipient will be automatically "
+"added to this campaign's subscriber list."
+msgstr ""
+"سيتم إرسال البريد الإلكتروني على الفور.ستتم إضافة المستلم تلقائيًا إلى قائمة"
+" المشتركين في هذه الحملة."
+
+#: .\templates\campaigns\template.html:531
 msgid "Create New Footer"
 msgstr "إنشاء تذييل جديد"
 
-#: .\templates\campaigns\template.html:460
+#: .\templates\campaigns\template.html:541
 msgid "Enter footer name..."
 msgstr "أدخل اسم التذييل..."
 
-#: .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:545
 msgid "Footer Content (HTML)"
 msgstr "محتوى التذييل (HTML)"
 
-#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:552
 msgid ""
 "Enter the HTML content for your footer. You can use variables like "
 "{{first_name}}, {{last_name}}, {{email}}, etc."
@@ -2805,108 +3631,164 @@ msgstr ""
 "أدخل محتوى HTML للتذييل الخاص بك.يمكنك استخدام متغيرات مثل {{first_name}}، "
 "{{last_name}}، {{email}}، وما إلى ذلك."
 
-#: .\templates\campaigns\template.html:547
+#: .\templates\campaigns\template.html:628
 msgid "Could not copy variable. Please try again."
 msgstr "لا يمكن نسخ المتغير.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template.html:566
+#: .\templates\campaigns\template.html:647
 msgid "Enter your email content here..."
 msgstr "أدخل محتوى بريدك الإلكتروني هنا..."
 
-#: .\templates\campaigns\template.html:579
-#: .\templates\campaigns\template_revision.html:303
+#: .\templates\campaigns\template.html:680
+#: .\templates\campaigns\template_revision.html:305
 msgid "Please enter an email subject."
 msgstr "الرجاء إدخال موضوع البريد الإلكتروني."
 
-#: .\templates\campaigns\template.html:584
-#: .\templates\campaigns\template_revision.html:308
+#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template_revision.html:310
 msgid "Please enter email content."
 msgstr "الرجاء إدخال محتوى البريد الإلكتروني."
 
-#: .\templates\campaigns\template.html:599
+#: .\templates\campaigns\template.html:700
 msgid "Please select a campaign."
 msgstr "الرجاء تحديد حملة."
 
-#: .\templates\campaigns\template.html:618
-#: .\templates\campaigns\template.html:923
+#: .\templates\campaigns\template.html:727
+#: .\templates\campaigns\template.html:1144
+#: .\templates\campaigns\template.html:1235
 msgid "Wait time must be a number greater than 0."
 msgstr "يجب أن يكون وقت الانتظار رقمًا أكبر من 0."
 
-#: .\templates\campaigns\template.html:653
-#: .\templates\campaigns\template.html:967
-#: .\templates\campaigns\template_revision.html:346
+#: .\templates\campaigns\template.html:762
+#: .\templates\campaigns\template.html:1279
+#: .\templates\campaigns\template_revision.html:348
 msgid "Template saved successfully!"
 msgstr "تم حفظ القالب بنجاح!"
 
-#: .\templates\campaigns\template.html:659
+#: .\templates\campaigns\template.html:768
 msgid "An error occurred while saving the template: "
 msgstr "حدث خطأ أثناء حفظ القالب:"
 
-#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template.html:794
 msgid "Enter footer content here..."
 msgstr "أدخل محتوى التذييل هنا..."
 
-#: .\templates\campaigns\template.html:730
+#: .\templates\campaigns\template.html:839
 msgid "An error occurred while loading the template. Please try again."
 msgstr "حدث خطأ أثناء تحميل القالب.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template.html:739
+#: .\templates\campaigns\template.html:848
 msgid "Error: Campaign ID is missing. Please select a campaign first."
 msgstr "خطأ: معرف الحملة مفقود.الرجاء تحديد حملة أولاً."
 
-#: .\templates\campaigns\template.html:779
+#: .\templates\campaigns\template.html:888
 msgid "Generating..."
 msgstr "جارٍ الإنشاء..."
 
-#: .\templates\campaigns\template.html:813
+#: .\templates\campaigns\template.html:937
 msgid "Email generated successfully! Review and save when ready."
 msgstr ""
 "تم إنشاء البريد الإلكتروني بنجاح!قم بالمراجعة والحفظ عندما تكون جاهزًا."
 
-#: .\templates\campaigns\template.html:815
+#: .\templates\campaigns\template.html:939
 msgid "Error: Invalid response from AI service."
 msgstr "خطأ: استجابة غير صالحة من خدمة AI."
 
-#: .\templates\campaigns\template.html:820
+#: .\templates\campaigns\template.html:948
 msgid "Failed to generate email. "
 msgstr "فشل في إنشاء البريد الإلكتروني."
 
-#: .\templates\campaigns\template.html:822
-msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
-msgstr "تأكد من تعيين متغير البيئة HUGGINGFACE_API_KEY."
+#: .\templates\campaigns\template.html:952
+msgid ""
+"Request timed out after 5 minutes. The AI generation is taking too long. "
+"Please try again or check server resources."
+msgstr ""
+"انتهت مهلة الطلب بعد 5 دقائق.يستغرق جيل الذكاء الاصطناعي وقتًا طويلاً.يرجى "
+"المحاولة مرة أخرى أو التحقق من موارد الخادم."
 
-#: .\templates\campaigns\template.html:850
+#: .\templates\campaigns\template.html:954
+#, fuzzy
+#| msgid ""
+#| "Network error: Could not connect to server. Please check if the server is "
+#| "running."
+msgid ""
+"Network error: Could not connect to server. Please check your connection and"
+" try again."
+msgstr ""
+"خطأ في الشبكة: تعذر الاتصال بالخادم.يرجى التحقق مما إذا كان الخادم قيد "
+"التشغيل."
+
+#: .\templates\campaigns\template.html:958
+#, fuzzy
+#| msgid "Error regenerating token. Please try again."
+msgid ""
+"Request timed out. The AI generation is taking too long. Please try again."
+msgstr "حدث خطأ أثناء إعادة إنشاء الرمز المميز.يرجى المحاولة مرة أخرى."
+
+#: .\templates\campaigns\template.html:960
+msgid "Please check the server logs for more details."
+msgstr "يرجى التحقق من سجلات الخادم لمزيد من التفاصيل."
+
+#: .\templates\campaigns\template.html:962
+msgid "Please ensure Ollama is running on the server."
+msgstr "يرجى التأكد من تشغيل Ollama على الخادم."
+
+#: .\templates\campaigns\template.html:965
+#, fuzzy
+#| msgid "Error creating list. Please check console for details."
+msgid ""
+"Unknown error occurred. Please check the browser console and server logs for"
+" details."
+msgstr ""
+"حدث خطأ أثناء إنشاء القائمة.يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
+
+#: .\templates\campaigns\template.html:1000
 msgid "[Footer content would appear here]"
 msgstr "[سيظهر محتوى التذييل هنا]"
 
-#: .\templates\campaigns\template.html:906
+#: .\templates\campaigns\template.html:1114
+#: .\templates\campaigns\template.html:1124
+#, fuzzy
+#| msgid ""
+#| "An error occurred while sending the test email. Please try again."
+msgid "An error occurred while sending the email. Please try again."
+msgstr ""
+"حدث خطأ أثناء إرسال البريد الإلكتروني التجريبي.يرجى المحاولة مرة أخرى."
+
+#: .\templates\campaigns\template.html:1194
+#, fuzzy
+#| msgid "Failed to save template:"
+msgid "Failed to save template: "
+msgstr "فشل حفظ القالب:"
+
+#: .\templates\campaigns\template.html:1218
 #: .\templates\subscribers\add.html:213
 msgid "Saving..."
 msgstr "توفير..."
 
-#: .\templates\campaigns\template.html:973
+#: .\templates\campaigns\template.html:1285
 msgid "An error occurred while saving the template. Please try again."
 msgstr "حدث خطأ أثناء حفظ القالب.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template.html:1009
+#: .\templates\campaigns\template.html:1321
 msgid "Please save the email template first before sending a test email."
 msgstr "يرجى حفظ قالب البريد الإلكتروني أولاً قبل إرسال بريد إلكتروني تجريبي."
 
-#: .\templates\campaigns\template.html:1027
-#: .\templates\campaigns\template.html:1036
+#: .\templates\campaigns\template.html:1339
+#: .\templates\campaigns\template.html:1348
 msgid "An error occurred while sending the test email. Please try again."
 msgstr ""
 "حدث خطأ أثناء إرسال البريد الإلكتروني التجريبي.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template.html:1031
+#: .\templates\campaigns\template.html:1343
 msgid "Test email sent successfully!"
 msgstr "تم إرسال البريد الإلكتروني التجريبي بنجاح!"
 
-#: .\templates\campaigns\template.html:1058
+#: .\templates\campaigns\template.html:1370
 msgid "Copied!"
 msgstr "منسوخ!"
 
-#: .\templates\campaigns\template.html:1065
+#: .\templates\campaigns\template.html:1377
 msgid ""
 "Are you sure you want to regenerate your API key? This will invalidate your "
 "current key and you will need to update any applications using it."
@@ -2914,25 +3796,25 @@ msgstr ""
 "هل أنت متأكد أنك تريد إعادة إنشاء مفتاح API الخاص بك؟سيؤدي هذا إلى إبطال "
 "مفتاحك الحالي وستحتاج إلى تحديث أي تطبيقات تستخدمه."
 
-#: .\templates\campaigns\template.html:1071 .\templates\core\settings.html:299
+#: .\templates\campaigns\template.html:1383 .\templates\core\settings.html:315
 msgid "Regenerating..."
 msgstr "تجديد..."
 
-#: .\templates\campaigns\template.html:1092
-#: .\templates\campaigns\template.html:1097
+#: .\templates\campaigns\template.html:1404
+#: .\templates\campaigns\template.html:1409
 msgid "Error regenerating API key. Please try again."
 msgstr "حدث خطأ أثناء إعادة إنشاء مفتاح API.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template.html:1140
+#: .\templates\campaigns\template.html:1452
 msgid "Please enter a footer name."
 msgstr "الرجاء إدخال اسم التذييل."
 
-#: .\templates\campaigns\template.html:1145
+#: .\templates\campaigns\template.html:1457
 msgid "Please enter footer content."
 msgstr "الرجاء إدخال محتوى التذييل."
 
-#: .\templates\campaigns\template.html:1189
-#: .\templates\campaigns\template.html:1194
+#: .\templates\campaigns\template.html:1501
+#: .\templates\campaigns\template.html:1506
 msgid "Error creating footer. Please try again."
 msgstr "حدث خطأ أثناء إنشاء التذييل.يرجى المحاولة مرة أخرى."
 
@@ -2976,54 +3858,48 @@ msgstr "حفظ إلى الحملة"
 msgid "Email Body"
 msgstr "هيئة البريد الإلكتروني"
 
-#: .\templates\campaigns\template_revision.html:137
-#: .\templates\core\feature_email_scheduling.html:40
-#: .\templates\core\feature_email_scheduling.html:53
-msgid "Send Email"
-msgstr "إرسال البريد الإلكتروني"
-
 #: .\templates\campaigns\template_revision.html:181
 msgid "Write your email content here..."
 msgstr "أكتب محتوى بريدك الإلكتروني هنا..."
 
-#: .\templates\campaigns\template_revision.html:249
+#: .\templates\campaigns\template_revision.html:251
 msgid "Please enter some email content first."
 msgstr "الرجاء إدخال بعض محتوى البريد الإلكتروني أولاً."
 
-#: .\templates\campaigns\template_revision.html:256
+#: .\templates\campaigns\template_revision.html:258
 msgid "Revising..."
 msgstr "مراجعة..."
 
-#: .\templates\campaigns\template_revision.html:275
+#: .\templates\campaigns\template_revision.html:277
 msgid "Email revised successfully! Review the changes in the editor."
 msgstr "تمت مراجعة البريد الإلكتروني بنجاح!قم بمراجعة التغييرات في المحرر."
 
-#: .\templates\campaigns\template_revision.html:277
+#: .\templates\campaigns\template_revision.html:279
 msgid "Revision failed: "
 msgstr "فشلت المراجعة:"
 
-#: .\templates\campaigns\template_revision.html:281
+#: .\templates\campaigns\template_revision.html:283
 msgid "Failed to revise email. Please check your connection and try again."
 msgstr ""
 "فشل في مراجعة البريد الإلكتروني.يرجى التحقق من اتصالك والمحاولة مرة أخرى."
 
-#: .\templates\campaigns\template_revision.html:350
+#: .\templates\campaigns\template_revision.html:352
 msgid "Failed to save template:"
 msgstr "فشل حفظ القالب:"
 
-#: .\templates\campaigns\template_revision.html:363
+#: .\templates\campaigns\template_revision.html:365
 msgid "Failed to save template. Please try again."
 msgstr "فشل حفظ القالب.يرجى المحاولة مرة أخرى."
 
-#: .\templates\campaigns\template_revision.html:371
+#: .\templates\campaigns\template_revision.html:373
 msgid "Enter the recipient email address:"
 msgstr "أدخل عنوان البريد الإلكتروني للمستلم:"
 
-#: .\templates\campaigns\template_revision.html:379
+#: .\templates\campaigns\template_revision.html:381
 msgid "Please enter a valid email address."
 msgstr "يرجى إدخال عنوان بريد إلكتروني صالح."
 
-#: .\templates\campaigns\template_revision.html:384
+#: .\templates\campaigns\template_revision.html:386
 msgid "Send this email to "
 msgstr "أرسل هذا البريد الإلكتروني إلى"
 
@@ -3357,10 +4233,6 @@ msgstr "إرسال المشاركة"
 msgid "You must be logged in to create posts."
 msgstr "يجب عليك تسجيل الدخول لإنشاء المشاركات."
 
-#: .\templates\core\community_user_forum.html:45
-msgid "Log In"
-msgstr "تسجيل الدخول"
-
 #: .\templates\core\community_user_forum.html:52
 msgid "Recent Posts"
 msgstr "المشاركات الأخيرة"
@@ -3424,37 +4296,100 @@ msgstr "حدث خطأ.يرجى المحاولة مرة أخرى في وقت لا
 msgid "Manage your campaigns and subscribers"
 msgstr "إدارة حملاتك والمشتركين"
 
-#: .\templates\core\dashboard.html:82 .\templates\core\dashboard.html:134
+#: .\templates\core\dashboard.html:70
+#, fuzzy
+#| msgid "API Integration"
+msgid "Integrations"
+msgstr "تكامل واجهة برمجة التطبيقات"
+
+#: .\templates\core\dashboard.html:71
+msgid "Connect your email accounts to auto-reply to emails"
+msgstr ""
+"قم بتوصيل حسابات البريد الإلكتروني الخاصة بك للرد التلقائي على رسائل البريد "
+"الإلكتروني"
+
+#: .\templates\core\dashboard.html:85
+msgid "Connect your Gmail account to auto-reply to emails"
+msgstr ""
+"قم بتوصيل حساب Gmail الخاص بك للرد التلقائي على رسائل البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:102
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent Gmail Emails"
+msgstr "البريد الإلكتروني للمستلم"
+
+#: .\templates\core\dashboard.html:103 .\templates\core\dashboard.html:193
+#, fuzzy
+#| msgid "View and manage all your email campaigns"
+msgid "View and manage your email conversations"
+msgstr "عرض وإدارة جميع حملات البريد الإلكتروني الخاصة بك"
+
+#: .\templates\core\dashboard.html:125
+msgid "Connect your IMAP email account to auto-reply to emails"
+msgstr ""
+"قم بتوصيل حساب البريد الإلكتروني IMAP الخاص بك للرد التلقائي على رسائل "
+"البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:134
+#, fuzzy
+#| msgid "Settings"
+msgid "IMAP Settings"
+msgstr "إعدادات"
+
+#: .\templates\core\dashboard.html:152 .\templates\core\home.html:265
+#: .\templates\core\includes\signup_box.html:64
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "مستخدم"
+
+#: .\templates\core\dashboard.html:162 .\templates\core\home.html:278
+#: .\templates\core\includes\signup_box.html:74
+msgid "Use SSL/TLS"
+msgstr "استخدم SSL/TLS"
+
+#: .\templates\core\dashboard.html:167
+msgid "Save & Connect"
+msgstr "حفظ والاتصال"
+
+#: .\templates\core\dashboard.html:192
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent IMAP Emails"
+msgstr "البريد الإلكتروني للمستلم"
+
+#: .\templates\core\dashboard.html:223 .\templates\core\dashboard.html:275
 msgid "View Campaigns"
 msgstr "عرض الحملات"
 
-#: .\templates\core\dashboard.html:86
+#: .\templates\core\dashboard.html:227
 msgid "Add a new Campaign"
 msgstr "أضف حملة جديدة"
 
-#: .\templates\core\dashboard.html:106
+#: .\templates\core\dashboard.html:247
 msgid "View Subscribers"
 msgstr "عرض المشتركين"
 
-#: .\templates\core\dashboard.html:110 .\templates\core\dashboard.html:154
+#: .\templates\core\dashboard.html:251 .\templates\core\dashboard.html:295
 msgid "View Lists"
 msgstr "عرض القوائم"
 
-#: .\templates\core\dashboard.html:125
+#: .\templates\core\dashboard.html:266
 #: .\templates\core\tutorials\dashboard_overview.html:60
 #: .\templates\core\tutorials\performance_dashboard.html:39
 msgid "Emails Sent"
 msgstr "رسائل البريد الإلكتروني المرسلة"
 
-#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
+#: .\templates\core\dashboard.html:271 .\templates\core\dashboard.html:677
 msgid "View Analytics"
 msgstr "عرض التحليلات"
 
-#: .\templates\core\dashboard.html:158
+#: .\templates\core\dashboard.html:299
 msgid "Add a List"
 msgstr "أضف قائمة"
 
-#: .\templates\core\dashboard.html:178
+#: .\templates\core\dashboard.html:319
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -3466,112 +4401,107 @@ msgid ""
 "                        "
 msgstr "عرض %(start)s-%(end)s من %(total)s من المشتركين"
 
-#: .\templates\core\dashboard.html:195
+#: .\templates\core\dashboard.html:336
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "إعداد سجل SPF لتسليم البريد الإلكتروني"
 
-#: .\templates\core\dashboard.html:200
+#: .\templates\core\dashboard.html:341
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "أضف سجل TXT هذا إلى DNS الخاص بنطاقك:"
 
-#: .\templates\core\dashboard.html:203
+#: .\templates\core\dashboard.html:344
 msgid "Type:"
 msgstr "يكتب:"
 
-#: .\templates\core\dashboard.html:206
+#: .\templates\core\dashboard.html:347
 msgid "Name/Host:"
 msgstr "الاسم/المضيف:"
 
-#: .\templates\core\dashboard.html:209
+#: .\templates\core\dashboard.html:350
 msgid "Value:"
 msgstr "قيمة:"
 
-#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
-#: .\templates\core\tutorials\quick_start.html:96
-msgid "Note:"
-msgstr "ملحوظة:"
-
-#: .\templates\core\dashboard.html:222
+#: .\templates\core\dashboard.html:363
 msgid "How to add this record:"
 msgstr "كيفية إضافة هذا السجل:"
 
-#: .\templates\core\dashboard.html:225
+#: .\templates\core\dashboard.html:366
 msgid "Navigate to DNS management or DNS settings"
 msgstr "انتقل إلى إدارة DNS أو إعدادات DNS"
 
-#: .\templates\core\dashboard.html:226
+#: .\templates\core\dashboard.html:367
 msgid "Add a new TXT record with the values shown above"
 msgstr "قم بإضافة سجل TXT جديد بالقيم الموضحة أعلاه"
 
-#: .\templates\core\dashboard.html:237
+#: .\templates\core\dashboard.html:378
 msgid "Send Email & Subscribe"
 msgstr "إرسال البريد الإلكتروني والاشتراك"
 
-#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:397 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "حدد حملة..."
 
-#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
+#: .\templates\core\dashboard.html:403 .\templates\core\dashboard.html:1434
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "حدد حملة أولاً..."
 
-#: .\templates\core\dashboard.html:267
+#: .\templates\core\dashboard.html:408
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "جدول"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:411
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "أرسل في X دقيقة"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:412
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "أرسل في X ساعات"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:413
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "إرسال في X أيام"
 
-#: .\templates\core\dashboard.html:273
+#: .\templates\core\dashboard.html:414
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "أرسل في X أسابيع"
 
-#: .\templates\core\dashboard.html:274
+#: .\templates\core\dashboard.html:415
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "إرسال في X أشهر"
 
-#: .\templates\core\dashboard.html:300
+#: .\templates\core\dashboard.html:441
 msgid "Recent Send Activity"
 msgstr "نشاط الإرسال الأخير"
 
-#: .\templates\core\dashboard.html:301
+#: .\templates\core\dashboard.html:442
 msgid "Track your email sends and deliveries"
 msgstr "تتبع عمليات إرسال البريد الإلكتروني والتسليمات"
 
-#: .\templates\core\dashboard.html:308
+#: .\templates\core\dashboard.html:449
 msgid "Refresh"
 msgstr "ينعش"
 
-#: .\templates\core\dashboard.html:319
+#: .\templates\core\dashboard.html:460
 msgid "Times shown in"
 msgstr "الأوقات المعروضة في"
 
-#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
+#: .\templates\core\dashboard.html:477 .\templates\core\dashboard.html:1314
 msgid "Loading activity..."
 msgstr "جارٍ تحميل النشاط..."
 
-#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:494 .\templates\core\settings.html:255
 msgid "Remove Advertisements from Your Emails"
 msgstr "إزالة الإعلانات من رسائل البريد الإلكتروني الخاصة بك"
 
-#: .\templates\core\dashboard.html:354
+#: .\templates\core\dashboard.html:495
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3580,15 +4510,11 @@ msgstr ""
 "DripEmails.org على X أو مدونتك لإزالة الإعلانات من جميع رسائل البريد "
 "الإلكتروني الخاصة بك."
 
-#: .\templates\core\dashboard.html:369
+#: .\templates\core\dashboard.html:510
 msgid "Your Campaigns"
 msgstr "حملاتك"
 
-#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
-msgid "Actions"
-msgstr "الإجراءات"
-
-#: .\templates\core\dashboard.html:433
+#: .\templates\core\dashboard.html:574
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3596,157 +4522,330 @@ msgstr ""
 "قم بإنشاء حملتك الأولى لبدء إرسال رسائل البريد الإلكتروني الآلية إلى "
 "المشتركين لديك."
 
-#: .\templates\core\dashboard.html:446
+#: .\templates\core\dashboard.html:587
 msgid "Your Subscriber Lists"
 msgstr "قوائم المشتركين الخاصة بك"
 
-#: .\templates\core\dashboard.html:501
+#: .\templates\core\dashboard.html:642
 msgid "No subscriber lists yet"
 msgstr "لا توجد قوائم المشتركين حتى الآن"
 
-#: .\templates\core\dashboard.html:502
+#: .\templates\core\dashboard.html:643
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "أنشئ قائمة المشتركين الأولى للبدء في تنظيم جهات الاتصال الخاصة بك."
 
-#: .\templates\core\dashboard.html:518
+#: .\templates\core\dashboard.html:659
 msgid "Quick Actions"
 msgstr "إجراءات سريعة"
 
-#: .\templates\core\dashboard.html:530
+#: .\templates\core\dashboard.html:671
 #: .\templates\core\tutorials\quick_start.html:105
 msgid "Add Subscribers"
 msgstr "إضافة المشتركين"
 
-#: .\templates\core\dashboard.html:548
+#: .\templates\core\dashboard.html:689
 #, fuzzy
 #| msgid "Email Templates"
 msgid "View Email Templates"
 msgstr "قوالب البريد الإلكتروني"
 
-#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:696 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "إعدادات الحساب"
 
-#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:699 .\templates\core\settings.html:213
 msgid "Ad Removal"
 msgstr "إزالة الإعلانات"
 
-#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:711 .\templates\core\settings.html:225
 msgid "Unsubscribe Links"
 msgstr "روابط إلغاء الاشتراك"
 
-#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:723 .\templates\core\settings.html:237
 msgid "Timezone"
 msgstr "المنطقة الزمنية"
 
-#: .\templates\core\dashboard.html:590
+#: .\templates\core\dashboard.html:731
 #, fuzzy
 #| msgid "Account Settings"
 msgid "Manage Account Settings"
 msgstr "إعدادات الحساب"
 
-#: .\templates\core\dashboard.html:593
+#: .\templates\core\dashboard.html:734
 #, fuzzy
 #| msgid "Email Footers"
 msgid "Manage Email Footers"
 msgstr "تذييلات البريد الإلكتروني"
 
-#: .\templates\core\dashboard.html:602
+#: .\templates\core\dashboard.html:743
 msgid "Tips & Resources"
 msgstr "نصائح وموارد"
 
-#: .\templates\core\dashboard.html:605
+#: .\templates\core\dashboard.html:746
 msgid "Getting Started Guide"
 msgstr "دليل البدء"
 
-#: .\templates\core\dashboard.html:606
+#: .\templates\core\dashboard.html:747
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr "تعرف على كيفية إعداد حملة البريد الإلكتروني الأولى في دقائق."
 
-#: .\templates\core\dashboard.html:609
+#: .\templates\core\dashboard.html:750
 msgid "Email Best Practices"
 msgstr "أفضل ممارسات البريد الإلكتروني"
 
-#: .\templates\core\dashboard.html:610
+#: .\templates\core\dashboard.html:751
 msgid "Tips for creating emails that convert."
 msgstr "نصائح لإنشاء رسائل البريد الإلكتروني التي يتم تحويلها."
 
-#: .\templates\core\dashboard.html:613
+#: .\templates\core\dashboard.html:754
 msgid "Grow Your Subscriber List"
 msgstr "قم بتنمية قائمة المشتركين الخاصة بك"
 
-#: .\templates\core\dashboard.html:614
+#: .\templates\core\dashboard.html:755
 msgid "Strategies to increase your subscribers."
 msgstr "استراتيجيات زيادة المشتركين لديك."
 
-#: .\templates\core\dashboard.html:628
+#: .\templates\core\dashboard.html:769
 msgid "Physical Address Required"
 msgstr "العنوان الفعلي مطلوب"
 
-#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:774
+#, fuzzy
+#| msgid "Required"
+msgid "Required by Law:"
+msgstr "مطلوب"
+
+#: .\templates\core\dashboard.html:774
+msgid ""
+"Your physical address is required by email regulations (CAN-SPAM, GDPR, "
+"etc.) and will be included in the footer of emails near the unsubscribe "
+"link."
+msgstr ""
+"عنوانك الفعلي مطلوب بموجب لوائح البريد الإلكتروني (CAN-SPAM، وGDPR، وما إلى "
+"ذلك) وسيتم تضمينه في تذييل رسائل البريد الإلكتروني بالقرب من رابط إلغاء "
+"الاشتراك."
+
+#: .\templates\core\dashboard.html:780 .\templates\core\settings.html:57
+msgid "John Doe"
+msgstr "جون دو"
+
+#: .\templates\core\dashboard.html:781 .\templates\core\settings.html:58
+msgid "This name will appear in the From header of emails you send"
+msgstr "سيظهر هذا الاسم في رأس رسائل البريد الإلكتروني التي ترسلها"
+
+#: .\templates\core\dashboard.html:788 .\templates\core\settings.html:65
 msgid "Address Line 2 (Optional)"
 msgstr "سطر العنوان 2 (اختياري)"
 
-#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
-#: .\templates\core\dashboard.html:1366
+#: .\templates\core\dashboard.html:813
+#, fuzzy
+#| msgid "IP Address"
+msgid "Update Address"
+msgstr "عنوان IP"
+
+#: .\templates\core\dashboard.html:861
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
+msgid "Please fill in all required fields before continuing."
+msgstr ""
+"يرجى ملء جميع الحقول المطلوبة: سطر العنوان 1، المدينة، الولاية، الرمز "
+"البريدي، والدولة."
+
+#: .\templates\core\dashboard.html:942
+#, fuzzy
+#| msgid "Address updated successfully."
+msgid "Address saved successfully!"
+msgstr "تم تحديث العنوان بنجاح."
+
+#: .\templates\core\dashboard.html:949
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error saving address. Please try again."
+msgstr "حدث خطأ أثناء إنشاء التذييل.يرجى المحاولة مرة أخرى."
+
+#: .\templates\core\dashboard.html:1057 .\templates\core\dashboard.html:1365
+#: .\templates\core\dashboard.html:2556
 msgid "= 200 && status"
 msgstr "= 200 && الحالة"
 
-#: .\templates\core\dashboard.html:915
+#: .\templates\core\dashboard.html:1111
 msgid "No send activity yet"
 msgstr "لا يوجد نشاط إرسال بعد"
 
-#: .\templates\core\dashboard.html:916
+#: .\templates\core\dashboard.html:1112
 msgid "Use the form above to send an email and see your activity here."
 msgstr "استخدم النموذج أعلاه لإرسال بريد إلكتروني ورؤية نشاطك هنا."
 
-#: .\templates\core\dashboard.html:1001
+#: .\templates\core\dashboard.html:1197
 msgid "To"
 msgstr "ل"
 
-#: .\templates\core\dashboard.html:1012
+#: .\templates\core\dashboard.html:1208
 msgid "Scheduled"
 msgstr "المقرر"
 
-#: .\templates\core\dashboard.html:1035
-msgid "Error"
-msgstr "خطأ"
-
-#: .\templates\core\dashboard.html:1058
+#: .\templates\core\dashboard.html:1254
 msgid "Full HTML Preview"
 msgstr "معاينة HTML كاملة"
 
-#: .\templates\core\dashboard.html:1062
+#: .\templates\core\dashboard.html:1258
 msgid "Text Version"
 msgstr "نسخة نصية"
 
-#: .\templates\core\dashboard.html:1066
+#: .\templates\core\dashboard.html:1262
 msgid "Show less"
 msgstr "عرض أقل"
 
-#: .\templates\core\dashboard.html:1096
+#: .\templates\core\dashboard.html:1292
 msgid "Unsubscribe"
 msgstr "إلغاء الاشتراك"
 
-#: .\templates\core\dashboard.html:1144
+#: .\templates\core\dashboard.html:1340
 msgid "Failed to load activity"
 msgstr "فشل تحميل النشاط"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1341
 msgid "Please try again."
 msgstr "يرجى المحاولة مرة أخرى."
 
-#: .\templates\core\dashboard.html:1147
-msgid "Retry"
-msgstr "أعد المحاولة"
-
-#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1420 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "تحديد قالب بريد إلكتروني..."
 
-#: .\templates\core\dashboard.html:1234
+#: .\templates\core\dashboard.html:1430
 msgid "Error loading emails"
 msgstr "حدث خطأ أثناء تحميل رسائل البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:1551
+#, fuzzy
+#| msgid "Contact email"
+msgid "Connect Gmail"
+msgstr "البريد الإلكتروني للاتصال"
+
+#: .\templates\core\dashboard.html:1568 .\templates\core\dashboard.html:1849
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connected"
+msgstr "فشل الاتصال"
+
+#: .\templates\core\dashboard.html:1569 .\templates\core\dashboard.html:1850
+msgid "Disconnect"
+msgstr "قطع الاتصال"
+
+#: .\templates\core\dashboard.html:1641
+msgid "No Gmail emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"لا توجد رسائل بريد إلكتروني في Gmail حتى الآن.ستظهر رسائل البريد الإلكتروني "
+"هنا بمجرد جلبها."
+
+#: .\templates\core\dashboard.html:1642 .\templates\core\dashboard.html:2080
+msgid "Replied"
+msgstr "أجاب"
+
+#: .\templates\core\dashboard.html:1644 .\templates\core\dashboard.html:2085
+#, fuzzy
+#| msgid "Send"
+msgid "Sender:"
+msgstr "يرسل"
+
+#: .\templates\core\dashboard.html:1645
+#, fuzzy
+#| msgid "Send Message"
+msgid "Auto-Reply Message"
+msgstr "أرسل رسالة"
+
+#: .\templates\core\dashboard.html:1646
+#, fuzzy
+#| msgid "Original"
+msgid "Original Email"
+msgstr "إبداعي"
+
+#: .\templates\core\dashboard.html:1647 .\templates\core\dashboard.html:2087
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Content:"
+msgstr "محتوى البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:1648 .\templates\core\dashboard.html:2088
+#, fuzzy
+#| msgid "Email Content"
+msgid "(No content)"
+msgstr "محتوى البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:1822
+msgid "Connect IMAP"
+msgstr "قم بتوصيل IMAP"
+
+#: .\templates\core\dashboard.html:1933 .\templates\core\home.html:1344
+msgid "To fix this:"
+msgstr "لإصلاح هذا:"
+
+#: .\templates\core\dashboard.html:1935 .\templates\core\home.html:1346
+msgid "Enable 2-Step Verification on your Google Account"
+msgstr "قم بتمكين التحقق بخطوتين على حساب Google الخاص بك"
+
+#: .\templates\core\dashboard.html:1936 .\templates\core\home.html:1347
+msgid "Generate an App Password for IMAP access"
+msgstr "قم بإنشاء كلمة مرور التطبيق للوصول عبر IMAP"
+
+#: .\templates\core\dashboard.html:1937 .\templates\core\home.html:1348
+msgid "Use the App Password instead of your regular password"
+msgstr "استخدم كلمة مرور التطبيق بدلاً من كلمة المرور العادية"
+
+#: .\templates\core\dashboard.html:1944 .\templates\core\home.html:299
+#: .\templates\core\home.html:1113 .\templates\core\home.html:1355
+msgid "Learn More"
+msgstr "يتعلم أكثر"
+
+#: .\templates\core\dashboard.html:1950 .\templates\core\home.html:1361
+#, fuzzy
+#| msgid "Change Password"
+msgid "Create App Password"
+msgstr "تغيير كلمة المرور"
+
+#: .\templates\core\dashboard.html:1990
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error connecting IMAP account. Please try again."
+msgstr "حدث خطأ أثناء إنشاء التذييل.يرجى المحاولة مرة أخرى."
+
+#: .\templates\core\dashboard.html:2079
+msgid "No IMAP emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"لا توجد رسائل بريد إلكتروني IMAP حتى الآن.ستظهر رسائل البريد الإلكتروني هنا "
+"بمجرد جلبها."
+
+#: .\templates\core\dashboard.html:2082
+msgid "Auto Reply To:"
+msgstr "الرد التلقائي على:"
+
+#: .\templates\core\dashboard.html:2084
+#, fuzzy
+#| msgid "Cancel:"
+msgid "Cc:"
+msgstr "يلغي:"
+
+#: .\templates\core\dashboard.html:2086
+msgid "Auto-Reply Sent:"
+msgstr "تم إرسال الرد التلقائي:"
+
+#: .\templates\core\dashboard.html:2089
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Email"
+msgstr "إرسال البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:2307
+#, fuzzy
+#| msgid "Email Content"
+msgid "Sent Email Content:"
+msgstr "محتوى البريد الإلكتروني"
+
+#: .\templates\core\dashboard.html:2455
+msgid "total"
+msgstr "المجموع"
 
 #: .\templates\core\docs\ai_features.html:5
 msgid "AI-Powered Email Features"
@@ -3959,11 +5058,6 @@ msgstr "معدل إلغاء الاشتراك"
 #: .\templates\core\docs\analytics.html:28
 msgid "Complaint rate"
 msgstr "معدل الشكوى"
-
-#: .\templates\core\docs\analytics.html:32
-#: .\templates\core\feature_analytics.html:60
-msgid "Analytics Dashboard"
-msgstr "لوحة تحكم التحليلات"
 
 #: .\templates\core\docs\analytics.html:33
 msgid "Access your campaign analytics by clicking the "
@@ -5344,10 +6438,6 @@ msgstr ""
 #: .\templates\core\feature_analytics.html:12
 msgid "What You Can Track"
 msgstr "ما يمكنك تتبعه"
-
-#: .\templates\core\feature_analytics.html:15
-msgid "Campaign Performance"
-msgstr "أداء الحملة"
 
 #: .\templates\core\feature_analytics.html:17
 msgid "Open rates for each campaign"
@@ -7178,7 +8268,7 @@ msgstr "تحويل الزوار إلى"
 msgid "Loyal Customers"
 msgstr "العملاء المخلصون"
 
-#: .\templates\core\home.html:61
+#: .\templates\core\home.html:62
 msgid ""
 "The best free drip email marketing software for automated email sequences, "
 "email campaigns, and email marketing automation. Create powerful email drip "
@@ -7200,55 +8290,197 @@ msgstr ""
 "مجاني تمامًا عبر البريد الإلكتروني مع حملات غير محدودة ومشتركين غير محدودين "
 "ورسائل بريد إلكتروني غير محدودة."
 
-#: .\templates\core\home.html:67
+#: .\templates\core\home.html:69
 msgid "Start Free Today"
 msgstr "ابدأ مجانًا اليوم"
 
-#: .\templates\core\home.html:83
+#: .\templates\core\home.html:85
 msgid "Unlimited Campaigns"
 msgstr "حملات غير محدودة"
 
-#: .\templates\core\home.html:89
+#: .\templates\core\home.html:91
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Drip Emails"
 msgstr "حملات غير محدودة"
 
-#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:97 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "عدد غير محدود من المشتركين"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:103
 msgid "No Credit Card"
 msgstr "لا توجد بطاقة ائتمان"
 
-#: .\templates\core\home.html:107
+#: .\templates\core\home.html:109
 msgid "Setup in 5 Minutes"
 msgstr "الإعداد في 5 دقائق"
 
-#: .\templates\core\home.html:120
+#: .\templates\core\home.html:130
+msgid "NEW FEATURE"
+msgstr "ميزة جديدة"
+
+#: .\templates\core\home.html:138
+#, fuzzy
+#| msgid "Never Miss Important Dates"
+msgid "Never Miss a"
+msgstr "لا تفوت أبدًا التواريخ المهمة"
+
+#: .\templates\core\home.html:140
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Conversation Again"
+msgstr "فشل الاتصال"
+
+#: .\templates\core\home.html:145
+msgid ""
+"Connect your Gmail or IMAP account and let our intelligent auto-reply system"
+" respond to every email in your inbox and sent box. Engage with your "
+"contacts automatically with personalized messages like:"
+msgstr ""
+"قم بتوصيل حساب Gmail أو IMAP الخاص بك ودع نظام الرد التلقائي الذكي الخاص بنا"
+" يستجيب لكل بريد إلكتروني في صندوق الوارد الخاص بك وصندوق المرسل.تفاعل مع "
+"جهات الاتصال الخاصة بك تلقائيًا من خلال رسائل مخصصة مثل:"
+
+#: .\templates\core\home.html:156
+msgid "Hi, did you have any questions?"
+msgstr "مرحبا، هل لديك أي أسئلة؟"
+
+#: .\templates\core\home.html:159
+#, fuzzy
+#| msgid "Automatically add new CRM contacts to email lists"
+msgid "Automatically sent to every contact who emails you"
+msgstr "إضافة جهات اتصال CRM جديدة تلقائيًا إلى قوائم البريد الإلكتروني"
+
+#: .\templates\core\home.html:174
+msgid "Auto-Reply to Inbox"
+msgstr "الرد التلقائي على البريد الوارد"
+
+#: .\templates\core\home.html:175
+msgid "Automatically respond to incoming emails with personalized messages"
+msgstr "الرد تلقائيًا على رسائل البريد الإلكتروني الواردة برسائل مخصصة"
+
+#: .\templates\core\home.html:186
+msgid "Auto-Reply to Sent Box"
+msgstr "الرد التلقائي على صندوق الإرسال"
+
+#: .\templates\core\home.html:187
+msgid "Follow up with recipients of your sent emails automatically"
+msgstr "المتابعة مع مستلمي رسائل البريد الإلكتروني المرسلة تلقائيًا"
+
+#: .\templates\core\home.html:198
+#, fuzzy
+#| msgid "Personalization:"
+msgid "Smart Personalization"
+msgstr "التخصيص:"
+
+#: .\templates\core\home.html:199
+msgid "Uses recipient names and email context for natural conversations"
+msgstr "يستخدم أسماء المستلمين وسياق البريد الإلكتروني للمحادثات الطبيعية"
+
+#: .\templates\core\home.html:210
+msgid "Gmail & IMAP Support"
+msgstr "دعم Gmail وIMAP"
+
+#: .\templates\core\home.html:211
+msgid "Works with Gmail, Outlook, and any IMAP email provider"
+msgstr "يعمل مع Gmail وOutlook وأي مزود بريد إلكتروني عبر IMAP"
+
+#: .\templates\core\home.html:219 .\templates\core\includes\signup_box.html:18
+#, fuzzy
+#| msgid "Get Started Today"
+msgid "Get Started in 60 Seconds"
+msgstr "ابدأ اليوم"
+
+#: .\templates\core\home.html:220
+msgid "Connect your email account and start auto-replying immediately"
+msgstr "قم بتوصيل حساب بريدك الإلكتروني وابدأ بالرد التلقائي على الفور"
+
+#: .\templates\core\home.html:229 .\templates\core\includes\signup_box.html:31
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connect with Gmail"
+msgstr "فشل الاتصال"
+
+#: .\templates\core\home.html:239 .\templates\core\includes\signup_box.html:41
+msgid "OR"
+msgstr "أو"
+
+#: .\templates\core\home.html:281 .\templates\core\includes\signup_box.html:77
+msgid "Start Auto-Replying Now"
+msgstr "ابدأ الرد التلقائي الآن"
+
+#: .\templates\core\home.html:293
+msgid "Set Up Auto-Reply"
+msgstr "إعداد الرد التلقائي"
+
+#: .\templates\core\home.html:322
+#, fuzzy
+#| msgid "Description of Service"
+msgid "Question about your service"
+msgstr "وصف الخدمة"
+
+#: .\templates\core\home.html:323
+msgid "Hi, I'm interested in learning more about..."
+msgstr "مرحباً، أنا مهتم بمعرفة المزيد عن..."
+
+#: .\templates\core\home.html:326
+msgid "Auto-Reply Sent"
+msgstr "تم إرسال الرد التلقائي"
+
+#: .\templates\core\home.html:327
+msgid "Hi John, did you have any questions?"
+msgstr "مرحبًا جون، هل لديك أي أسئلة؟"
+
+#: .\templates\core\home.html:344
+msgid "Re: Project Proposal"
+msgstr "إعادة: اقتراح المشروع"
+
+#: .\templates\core\home.html:345
+#, fuzzy
+#| msgid "Test how your email looks in preview mode"
+msgid "Thanks for your email! I'll review..."
+msgstr "اختبر كيف يبدو بريدك الإلكتروني في وضع المعاينة"
+
+#: .\templates\core\home.html:348
+#, fuzzy
+#| msgid "Send follow-up content"
+msgid "Follow-up Sent"
+msgstr "إرسال محتوى المتابعة"
+
+#: .\templates\core\home.html:349
+msgid "Hi Sarah, did you have any questions?"
+msgstr "مرحبا سارة، هل لديك أي أسئلة؟"
+
+#: .\templates\core\home.html:361
+#, fuzzy
+#| msgid "Active"
+msgid "24/7 Active"
+msgstr "نشيط"
+
+#: .\templates\core\home.html:377
 msgid "Higher ROI"
 msgstr "عائد استثمار أعلى"
 
-#: .\templates\core\home.html:124
+#: .\templates\core\home.html:381
 msgid "More Engagement"
 msgstr "المزيد من المشاركة"
 
-#: .\templates\core\home.html:128
+#: .\templates\core\home.html:385
 msgid "Faster Growth"
 msgstr "نمو أسرع"
 
-#: .\templates\core\home.html:132
+#: .\templates\core\home.html:389
 msgid "Automation"
 msgstr "الأتمتة"
 
-#: .\templates\core\home.html:143
+#: .\templates\core\home.html:409
 #, fuzzy
 #| msgid "How to Create Email Templates"
 msgid "How to Create Drip Email Campaigns in Minutes"
 msgstr "كيفية إنشاء قوالب البريد الإلكتروني"
 
-#: .\templates\core\home.html:146
+#: .\templates\core\home.html:412
 msgid ""
 "Setting up email automation and email drip campaigns has never been easier. "
 "Our email marketing automation software makes it simple to create automated "
@@ -7259,13 +8491,13 @@ msgstr ""
 "إنشاء تسلسلات بريد إلكتروني تلقائية وجدولة رسائل البريد الإلكتروني وتتبع "
 "تحليلات البريد الإلكتروني."
 
-#: .\templates\core\home.html:155
+#: .\templates\core\home.html:421
 #, fuzzy
 #| msgid "Create Your First Campaign"
 msgid "Create Your Campaign"
 msgstr "قم بإنشاء حملتك الأولى"
 
-#: .\templates\core\home.html:156
+#: .\templates\core\home.html:422
 msgid ""
 "Build your email drip campaign with our intuitive email marketing tool. "
 "Choose from beautiful email templates or create custom email marketing "
@@ -7275,13 +8507,13 @@ msgstr ""
 "الإلكتروني سهلة الاستخدام.اختر من بين قوالب البريد الإلكتروني الجميلة أو "
 "أنشئ حملات تسويق مخصصة عبر البريد الإلكتروني."
 
-#: .\templates\core\home.html:162
+#: .\templates\core\home.html:428
 #, fuzzy
 #| msgid "Email Sequence"
 msgid "Add Email Sequences"
 msgstr "تسلسل البريد الإلكتروني"
 
-#: .\templates\core\home.html:163
+#: .\templates\core\home.html:429
 msgid ""
 "Design automated email sequences with personalized emails. Set up email "
 "scheduling, email nurture sequences, and welcome series for your email "
@@ -7291,13 +8523,13 @@ msgstr ""
 "بإعداد جدولة البريد الإلكتروني وتسلسلات رعاية البريد الإلكتروني وسلسلة "
 "الترحيب لمشتركي البريد الإلكتروني لديك."
 
-#: .\templates\core\home.html:169
+#: .\templates\core\home.html:435
 #, fuzzy
 #| msgid "Managing Subscribers"
 msgid "Manage Subscribers"
 msgstr "إدارة المشتركين"
 
-#: .\templates\core\home.html:170
+#: .\templates\core\home.html:436
 msgid ""
 "Import your email list, segment subscribers with email list management, and "
 "organize your email audience. Perfect for email subscriber management and "
@@ -7307,13 +8539,13 @@ msgstr ""
 "باستخدام إدارة قائمة البريد الإلكتروني، وتنظيم جمهور بريدك الإلكتروني.مثالي "
 "لإدارة مشتركي البريد الإلكتروني وتجزئة البريد الإلكتروني."
 
-#: .\templates\core\home.html:176
+#: .\templates\core\home.html:442
 #, fuzzy
 #| msgid "What AI Can Optimize"
 msgid "Track & Optimize"
 msgstr "ما يمكن للذكاء الاصطناعي تحسينه"
 
-#: .\templates\core\home.html:177
+#: .\templates\core\home.html:443
 msgid ""
 "Monitor email open rates, email click rates, and email engagement with real-"
 "time email analytics. Improve email marketing ROI with data-driven insights."
@@ -7323,13 +8555,13 @@ msgstr ""
 "الفعلي.تحسين عائد الاستثمار في التسويق عبر البريد الإلكتروني من خلال الرؤى "
 "المستندة إلى البيانات."
 
-#: .\templates\core\home.html:188
+#: .\templates\core\home.html:463
 msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
 msgstr ""
 "لماذا تعمل حملات البريد الإلكتروني بالتنقيط بشكل أفضل من رسائل البريد "
 "الإلكتروني الفردية"
 
-#: .\templates\core\home.html:191
+#: .\templates\core\home.html:466
 msgid ""
 "Unlike single email blasts, automated drip email campaigns build "
 "relationships over time. Email marketing automation helps you send the right"
@@ -7342,13 +8574,13 @@ msgstr ""
 "الوقت المناسب، مما يؤدي إلى تحسين التفاعل عبر البريد الإلكتروني وعائد "
 "الاستثمار في التسويق عبر البريد الإلكتروني."
 
-#: .\templates\core\home.html:203
+#: .\templates\core\home.html:478
 #, fuzzy
 #| msgid "Automated Nurturing"
 msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "تربية آلية"
 
-#: .\templates\core\home.html:205
+#: .\templates\core\home.html:480
 #, fuzzy
 #| msgid ""
 #| "Send the right message at the right time. Automatically guide leads through "
@@ -7362,13 +8594,13 @@ msgstr ""
 "أرسل الرسالة الصحيحة في الوقت المناسب.قم بتوجيه العملاء المحتملين تلقائيًا "
 "عبر مسار التحويل الخاص بك دون تدخل يدوي."
 
-#: .\templates\core\home.html:216
+#: .\templates\core\home.html:491
 #, fuzzy
 #| msgid "Subscriber Segmentation"
 msgid "Email Personalization & Subscriber Segmentation"
 msgstr "تجزئة المشتركين"
 
-#: .\templates\core\home.html:218
+#: .\templates\core\home.html:493
 msgid ""
 "Create unique email experiences for each subscriber with personalized "
 "emails. Use email segmentation and email list management to deliver targeted"
@@ -7379,11 +8611,11 @@ msgstr ""
 "حملات تسويق عبر البريد الإلكتروني مستهدفة تلقى صدى لدى جمهور بريدك "
 "الإلكتروني."
 
-#: .\templates\core\home.html:229
+#: .\templates\core\home.html:504
 msgid "Proven Results"
 msgstr "نتائج مثبتة"
 
-#: .\templates\core\home.html:231
+#: .\templates\core\home.html:506
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7391,21 +8623,21 @@ msgstr ""
 "تولد الحملات بالتنقيط إيرادات أكثر بثلاثة أضعاف من رسائل البريد الإلكتروني "
 "الفردية.شاهد عائد الاستثمار القابل للقياس من اليوم الأول."
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:527
 msgid "Everything You Need to Succeed"
 msgstr "كل ما تحتاجه للنجاح"
 
-#: .\templates\core\home.html:246
+#: .\templates\core\home.html:530
 msgid "Powerful features that make email marketing effortless"
 msgstr "ميزات قوية تجعل التسويق عبر البريد الإلكتروني أمرًا سهلاً"
 
-#: .\templates\core\home.html:260
+#: .\templates\core\home.html:544
 #, fuzzy
 #| msgid "Smart Drip Sequences"
 msgid "Smart Drip Email Sequences"
 msgstr "تسلسلات التنقيط الذكية"
 
-#: .\templates\core\home.html:262
+#: .\templates\core\home.html:546
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7413,11 +8645,11 @@ msgstr ""
 "قم بإنشاء تسلسلات بريد إلكتروني متعددة الخطوات يتم إرسالها تلقائيًا بناءً "
 "على التوقيت أو السلوك أو المشغلات."
 
-#: .\templates\core\home.html:276
+#: .\templates\core\home.html:560
 msgid "Real-Time Analytics"
 msgstr "تحليلات في الوقت الحقيقي"
 
-#: .\templates\core\home.html:278
+#: .\templates\core\home.html:562
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7425,11 +8657,11 @@ msgstr ""
 "تتبع عمليات الفتح والنقرات والتحويلات والإيرادات.اتخذ قرارات مبنية على "
 "البيانات باستخدام لوحات معلومات جميلة."
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:575
 msgid "Beautiful Templates"
 msgstr "قوالب جميلة"
 
-#: .\templates\core\home.html:293
+#: .\templates\core\home.html:577
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7437,14 +8669,14 @@ msgstr ""
 "اختر من بين القوالب الاحترافية أو أنشئ قالبًا خاصًا بك.محرر السحب والإفلات "
 "يجعل التصميم سهلاً."
 
-#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:591 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "تجزئة المشتركين"
 
-#: .\templates\core\home.html:309
+#: .\templates\core\home.html:593
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7452,11 +8684,11 @@ msgstr ""
 "تنظيم المشتركين في قوائم، ووضع علامات عليهم، وإرسال حملات مستهدفة إلى "
 "الجمهور المناسب."
 
-#: .\templates\core\home.html:323
+#: .\templates\core\home.html:607
 msgid "AI-Powered Content"
 msgstr "محتوى مدعوم بالذكاء الاصطناعي"
 
-#: .\templates\core\home.html:325
+#: .\templates\core\home.html:609
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7464,11 +8696,11 @@ msgstr ""
 "قم بإنشاء محتوى بريد إلكتروني مقنع باستخدام الذكاء الاصطناعي.توفير الوقت "
 "أثناء إنشاء رسائل احترافية وجذابة."
 
-#: .\templates\core\home.html:338
+#: .\templates\core\home.html:622
 msgid "Enterprise Security"
 msgstr "أمن المؤسسات"
 
-#: .\templates\core\home.html:340
+#: .\templates\core\home.html:624
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7476,17 +8708,17 @@ msgstr ""
 "متوافقة مع اللائحة العامة لحماية البيانات (GDPR)، وبنية تحتية آمنة، وتسليم "
 "موثوق.بياناتك والمشتركين محمية."
 
-#: .\templates\core\home.html:353
+#: .\templates\core\home.html:646
 msgid "Trusted by Growing Businesses"
 msgstr "موثوق به من قبل الشركات المتنامية"
 
-#: .\templates\core\home.html:356
+#: .\templates\core\home.html:649
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "انضم إلى الآلاف من المسوقين الذين قاموا بتحويل استراتيجية البريد الإلكتروني "
 "الخاصة بهم"
 
-#: .\templates\core\home.html:373
+#: .\templates\core\home.html:666
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7495,11 +8727,11 @@ msgstr ""
 "ارتفع معدل التحويل لدينا بنسبة 340%% بعد تنفيذ حملات التنقيط.الأتمتة توفر "
 "لنا ساعات كل أسبوع."
 
-#: .\templates\core\home.html:381
+#: .\templates\core\home.html:674
 msgid "Marketing Director"
 msgstr "مدير التسويق"
 
-#: .\templates\core\home.html:398
+#: .\templates\core\home.html:691
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7507,11 +8739,11 @@ msgstr ""
 "أفضل جزء؟إنه مجاني تمامًا.لقد أرسلنا أكثر من 50000 رسالة بريد إلكتروني دون "
 "دفع سنت واحد.مغير اللعبة."
 
-#: .\templates\core\home.html:406
+#: .\templates\core\home.html:699
 msgid "Startup Founder"
 msgstr "مؤسس الشركات الناشئة"
 
-#: .\templates\core\home.html:423
+#: .\templates\core\home.html:716
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7519,17 +8751,17 @@ msgstr ""
 "استغرق الإعداد 5 دقائق.الواجهة بديهية، والنتائج تتحدث عن نفسها.تضاعفت "
 "مشاركتنا في البريد الإلكتروني."
 
-#: .\templates\core\home.html:431
+#: .\templates\core\home.html:724
 msgid "E-commerce Manager"
 msgstr "مدير التجارة الإلكترونية"
 
-#: .\templates\core\home.html:444
+#: .\templates\core\home.html:746
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Perfect Email Marketing Solution for Every Business"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانًا للجميع"
 
-#: .\templates\core\home.html:447
+#: .\templates\core\home.html:749
 msgid ""
 "Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
 "email marketing, or B2C email marketing campaigns, our free email marketing "
@@ -7540,13 +8772,13 @@ msgstr ""
 "حملات التسويق عبر البريد الإلكتروني B2C، فإن برنامج أتمتة التسويق عبر البريد"
 " الإلكتروني المجاني الخاص بنا يتكيف مع احتياجاتك."
 
-#: .\templates\core\home.html:458
+#: .\templates\core\home.html:760
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "SaaS Email Marketing"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانا"
 
-#: .\templates\core\home.html:459
+#: .\templates\core\home.html:761
 msgid ""
 "Onboard users with automated email sequences, welcome series, and nurture "
 "campaigns. Perfect for startup email marketing and software companies."
@@ -7555,19 +8787,19 @@ msgstr ""
 "الترحيب وحملات الرعاية.مثالي للشركات الناشئة في مجال التسويق عبر البريد "
 "الإلكتروني وشركات البرمجيات."
 
-#: .\templates\core\home.html:461
+#: .\templates\core\home.html:763
 #, fuzzy
 #| msgid "Start Free Today"
 msgid "Start Free"
 msgstr "ابدأ مجانًا اليوم"
 
-#: .\templates\core\home.html:474
+#: .\templates\core\home.html:776
 #, fuzzy
 #| msgid "E-commerce Manager"
 msgid "Ecommerce Email Marketing"
 msgstr "مدير التجارة الإلكترونية"
 
-#: .\templates\core\home.html:475
+#: .\templates\core\home.html:777
 msgid ""
 "Drive sales with abandoned cart emails, product recommendations, and "
 "transactional emails. Boost your email marketing ROI with targeted "
@@ -7577,19 +8809,19 @@ msgstr ""
 "المهجورة وتوصيات المنتجات ورسائل البريد الإلكتروني الخاصة بالمعاملات.عزز "
 "عائد الاستثمار في التسويق عبر البريد الإلكتروني من خلال الحملات المستهدفة."
 
-#: .\templates\core\home.html:477
+#: .\templates\core\home.html:779
 #, fuzzy
 #| msgid "Getting Started"
 msgid "Get Started"
 msgstr "ابدء"
 
-#: .\templates\core\home.html:490
+#: .\templates\core\home.html:792
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "B2B Email Marketing"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانا"
 
-#: .\templates\core\home.html:491
+#: .\templates\core\home.html:793
 msgid ""
 "Nurture leads with email marketing automation, email segmentation, and "
 "personalized email campaigns. Perfect for B2B email marketing strategies."
@@ -7598,17 +8830,17 @@ msgstr ""
 "وتجزئة البريد الإلكتروني، وحملات البريد الإلكتروني المخصصة.مثالية "
 "لاستراتيجيات التسويق عبر البريد الإلكتروني B2B."
 
-#: .\templates\core\home.html:493
+#: .\templates\core\home.html:795
 #, fuzzy
 #| msgid "Try AI Features"
 msgid "Try Free"
 msgstr "جرب ميزات الذكاء الاصطناعي"
 
-#: .\templates\core\home.html:506
+#: .\templates\core\home.html:808
 msgid "Small Business Email Marketing"
 msgstr "التسويق عبر البريد الإلكتروني للشركات الصغيرة"
 
-#: .\templates\core\home.html:507
+#: .\templates\core\home.html:809
 #, fuzzy
 #| msgid ""
 #| "Free drip email marketing software with unlimited campaigns, subscribers, "
@@ -7621,17 +8853,17 @@ msgstr ""
 "برنامج تسويق مجاني عبر البريد الإلكتروني بالتنقيط مع عدد غير محدود من "
 "الحملات والمشتركين وتسلسلات البريد الإلكتروني الآلية"
 
-#: .\templates\core\home.html:519
+#: .\templates\core\home.html:821
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Start Your Free Email Marketing Campaign Today"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانا"
 
-#: .\templates\core\home.html:533
+#: .\templates\core\home.html:844
 msgid "The Best Free Alternative to Paid Email Marketing Tools"
 msgstr "أفضل بديل مجاني لأدوات التسويق عبر البريد الإلكتروني المدفوعة"
 
-#: .\templates\core\home.html:536
+#: .\templates\core\home.html:847
 msgid ""
 "Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
 " can get the same email marketing automation features for free? Our email "
@@ -7644,19 +8876,19 @@ msgstr ""
 "إلكتروني غير محدودة، ومشتركين غير محدودين، وأتمتة قوية للبريد الإلكتروني - "
 "كل ذلك بدون أي تكلفة."
 
-#: .\templates\core\home.html:543
+#: .\templates\core\home.html:854
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Why Choose Our Free Email Marketing Software?"
 msgstr "برنامج التسويق عبر البريد الإلكتروني بالتنقيط المجاني"
 
-#: .\templates\core\home.html:550
+#: .\templates\core\home.html:861
 #, fuzzy, python-format
 #| msgid "Free Forever Plan"
 msgid "100%% Free Forever"
 msgstr "خطة مجانية للأبد"
 
-#: .\templates\core\home.html:551
+#: .\templates\core\home.html:862
 msgid ""
 "No hidden fees, no credit card required. Unlike Mailchimp alternative or "
 "Constant Contact alternative services, we're completely free email marketing"
@@ -7666,13 +8898,13 @@ msgstr ""
 "أو خدمات Constant Contact البديلة، فإننا برنامج مجاني تمامًا للتسويق عبر "
 "البريد الإلكتروني."
 
-#: .\templates\core\home.html:559
+#: .\templates\core\home.html:870
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Everything"
 msgstr "حملات غير محدودة"
 
-#: .\templates\core\home.html:560
+#: .\templates\core\home.html:871
 msgid ""
 "Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
 "unlimited email automation. No limits on your email marketing growth."
@@ -7681,13 +8913,13 @@ msgstr ""
 "غير محدودين، وأتمتة غير محدودة للبريد الإلكتروني.لا حدود لنمو التسويق عبر "
 "البريد الإلكتروني الخاص بك."
 
-#: .\templates\core\home.html:568
+#: .\templates\core\home.html:879
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Full Email Marketing Automation"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانا"
 
-#: .\templates\core\home.html:569
+#: .\templates\core\home.html:880
 msgid ""
 "Complete email automation features: email drip campaigns, email scheduling, "
 "email analytics, email tracking, email segmentation, and email "
@@ -7697,13 +8929,13 @@ msgstr ""
 "وجدولة البريد الإلكتروني، وتحليلات البريد الإلكتروني، وتتبع البريد "
 "الإلكتروني، وتجزئة البريد الإلكتروني، وتخصيص البريد الإلكتروني."
 
-#: .\templates\core\home.html:577
+#: .\templates\core\home.html:888
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Best Email Marketing Software Features"
 msgstr "برنامج التسويق عبر البريد الإلكتروني بالتنقيط المجاني"
 
-#: .\templates\core\home.html:578
+#: .\templates\core\home.html:889
 msgid ""
 "Email templates, email newsletters, email subscriber management, email list "
 "management, email open rates tracking, email click rates, and email "
@@ -7714,11 +8946,11 @@ msgstr ""
 "البريد الإلكتروني، ومعدلات النقر على البريد الإلكتروني، وتحليلات عائد "
 "الاستثمار للتسويق عبر البريد الإلكتروني."
 
-#: .\templates\core\home.html:584
+#: .\templates\core\home.html:895
 msgid "Ready to Switch?"
 msgstr "هل أنت مستعد للتبديل؟"
 
-#: .\templates\core\home.html:586
+#: .\templates\core\home.html:897
 msgid ""
 "Join thousands of businesses who've switched from expensive email marketing "
 "services to our free email marketing platform. Get started with email "
@@ -7728,25 +8960,25 @@ msgstr ""
 "باهظة الثمن إلى منصة التسويق عبر البريد الإلكتروني المجانية الخاصة بنا.ابدأ "
 "باستخدام أتمتة البريد الإلكتروني في دقائق - دون الحاجة إلى بطاقة ائتمان."
 
-#: .\templates\core\home.html:590
+#: .\templates\core\home.html:901
 #, fuzzy
 #| msgid "Create Free Account"
 msgid "Create Free Account Now"
 msgstr "إنشاء حساب مجاني"
 
-#: .\templates\core\home.html:593
+#: .\templates\core\home.html:904
 #, fuzzy
 #| msgid "Already have an account?"
 msgid "Already Have an Account? Sign In"
 msgstr "هل لديك حساب بالفعل؟"
 
-#: .\templates\core\home.html:607
+#: .\templates\core\home.html:927
 #, fuzzy
 #| msgid "Email Design Best Practices"
 msgid "Email Marketing Best Practices & Tips"
 msgstr "أفضل ممارسات تصميم البريد الإلكتروني"
 
-#: .\templates\core\home.html:610
+#: .\templates\core\home.html:930
 msgid ""
 "Learn how to improve email open rates, increase email engagement, and "
 "maximize your email marketing ROI with proven email marketing strategies and"
@@ -7757,13 +8989,13 @@ msgstr ""
 " حد من خلال استراتيجيات التسويق عبر البريد الإلكتروني التي أثبتت جدواها "
 "ونصائح التسويق عبر البريد الإلكتروني."
 
-#: .\templates\core\home.html:621
+#: .\templates\core\home.html:941
 #, fuzzy
 #| msgid "Average Open Rate"
 msgid "Improve Email Open Rates"
 msgstr "متوسط ​​سعر الفتح"
 
-#: .\templates\core\home.html:622
+#: .\templates\core\home.html:942
 msgid ""
 "Use personalized email subject lines, send emails at optimal times, and "
 "segment your email list. Track email open rates with our email analytics to "
@@ -7774,19 +9006,19 @@ msgstr ""
 "البريد الإلكتروني من خلال تحليلات البريد الإلكتروني لدينا لتحسين حملات "
 "التسويق عبر البريد الإلكتروني."
 
-#: .\templates\core\home.html:624
+#: .\templates\core\home.html:944
 #, fuzzy
 #| msgid "Tracking Improvements"
 msgid "Start Tracking Opens"
 msgstr "تتبع التحسينات"
 
-#: .\templates\core\home.html:637
+#: .\templates\core\home.html:957
 #, fuzzy
 #| msgid "Bounce management"
 msgid "Increase Email Engagement"
 msgstr "إدارة ترتد"
 
-#: .\templates\core\home.html:638
+#: .\templates\core\home.html:958
 msgid ""
 "Create engaging email content with email personalization, use email "
 "automation to send timely messages, and monitor email click rates. Our email"
@@ -7797,19 +9029,19 @@ msgstr ""
 "النقر على البريد الإلكتروني.تساعدك أتمتة التسويق عبر البريد الإلكتروني لدينا"
 " على إرسال الرسالة الصحيحة في الوقت المناسب."
 
-#: .\templates\core\home.html:640
+#: .\templates\core\home.html:960
 #, fuzzy
 #| msgid "More Engagement"
 msgid "Boost Engagement"
 msgstr "المزيد من المشاركة"
 
-#: .\templates\core\home.html:653
+#: .\templates\core\home.html:973
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Maximize Email Marketing ROI"
 msgstr "أتمتة التسويق عبر البريد الإلكتروني مجانا"
 
-#: .\templates\core\home.html:654
+#: .\templates\core\home.html:974
 msgid ""
 "Use email drip campaigns for lead nurturing, implement email segmentation "
 "for targeted campaigns, and track email marketing ROI with comprehensive "
@@ -7820,27 +9052,27 @@ msgstr ""
 "عبر البريد الإلكتروني من خلال تحليلات البريد الإلكتروني الشاملة.برنامج مجاني"
 " للتسويق عبر البريد الإلكتروني يحقق النتائج."
 
-#: .\templates\core\home.html:656
+#: .\templates\core\home.html:976
 msgid "See Your ROI"
 msgstr "انظر عائد الاستثمار الخاص بك"
 
-#: .\templates\core\home.html:665
+#: .\templates\core\home.html:985
 msgid "Ready to implement these email marketing best practices?"
 msgstr "هل أنت مستعد لتطبيق أفضل ممارسات التسويق عبر البريد الإلكتروني؟"
 
-#: .\templates\core\home.html:667
+#: .\templates\core\home.html:987
 #, fuzzy
 #| msgid "Start automating your email marketing for free."
 msgid "Start Your Email Marketing Journey Free"
 msgstr "ابدأ بأتمتة التسويق عبر البريد الإلكتروني مجانًا."
 
-#: .\templates\core\home.html:681
+#: .\templates\core\home.html:1010
 #, fuzzy
 #| msgid "Frequently Asked Questions"
 msgid "Frequently Asked Questions About Email Marketing"
 msgstr "الأسئلة المتداولة"
 
-#: .\templates\core\home.html:684
+#: .\templates\core\home.html:1013
 #, fuzzy
 #| msgid "Everything you need to automate your email marketing"
 msgid ""
@@ -7848,13 +9080,13 @@ msgid ""
 "and our free email marketing software."
 msgstr "كل ما تحتاجه لأتمتة التسويق عبر البريد الإلكتروني الخاص بك"
 
-#: .\templates\core\home.html:690
+#: .\templates\core\home.html:1019
 #, fuzzy
 #| msgid "What Are Drip Campaigns?"
 msgid "What is a drip email campaign?"
 msgstr "ما هي حملات التنقيط؟"
 
-#: .\templates\core\home.html:692
+#: .\templates\core\home.html:1021
 msgid ""
 "A drip email campaign, also known as an automated email sequence or email "
 "drip campaign, is a series of automated emails sent to subscribers over "
@@ -7870,13 +9102,13 @@ msgstr ""
 "الإستراتيجية.تعمل منصة التسويق عبر البريد الإلكتروني الخاصة بنا على تسهيل "
 "إنشاء حملات بريد إلكتروني قوية بالتنقيط."
 
-#: .\templates\core\home.html:697
+#: .\templates\core\home.html:1026
 #, fuzzy
 #| msgid "Learn how to create and send your first email campaign"
 msgid "How do I create a drip email campaign?"
 msgstr "تعرف على كيفية إنشاء وإرسال حملة البريد الإلكتروني الأولى الخاصة بك"
 
-#: .\templates\core\home.html:699
+#: .\templates\core\home.html:1028
 msgid ""
 "Creating a drip email campaign is simple with our email marketing automation"
 " software. Sign up for free, create your email campaign, add email sequences"
@@ -7891,18 +9123,18 @@ msgstr ""
 "استخدام قوالب البريد الإلكتروني الخاصة بنا أو إنشاء حملات تسويق مخصصة عبر "
 "البريد الإلكتروني.ابدأ في دقائق!"
 
-#: .\templates\core\home.html:703
+#: .\templates\core\home.html:1032
 #: .\templates\core\tutorials\quick_start.html:134
 msgid "Create Your First Campaign"
 msgstr "قم بإنشاء حملتك الأولى"
 
-#: .\templates\core\home.html:712
+#: .\templates\core\home.html:1041
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Is this really free email marketing software?"
 msgstr "برنامج التسويق عبر البريد الإلكتروني بالتنقيط المجاني"
 
-#: .\templates\core\home.html:714
+#: .\templates\core\home.html:1043
 #, python-format
 msgid ""
 "Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
@@ -7917,11 +9149,11 @@ msgstr ""
 "ورسائل بريد إلكتروني غير محدودة وميزات أتمتة كاملة للتسويق عبر البريد "
 "الإلكتروني دون أي تكلفة.لا حاجة لبطاقة ائتمان، ولا رسوم مخفية."
 
-#: .\templates\core\home.html:719
+#: .\templates\core\home.html:1048
 msgid "What email marketing features are included?"
 msgstr "ما هي ميزات التسويق عبر البريد الإلكتروني المضمنة؟"
 
-#: .\templates\core\home.html:721
+#: .\templates\core\home.html:1050
 msgid ""
 "Our free email marketing software includes: email drip campaigns, automated "
 "email sequences, email scheduling, email analytics and email tracking (email"
@@ -7939,13 +9171,13 @@ msgstr ""
 "البريد الإلكتروني، والأتمتة الشاملة لتسويق البريد الإلكتروني.كل ما تحتاجه "
 "لتسويق ناجح عبر البريد الإلكتروني!"
 
-#: .\templates\core\home.html:726
+#: .\templates\core\home.html:1055
 #, fuzzy
 #| msgid "Individual email open rates"
 msgid "How can I improve my email open rates?"
 msgstr "معدلات فتح البريد الإلكتروني الفردي"
 
-#: .\templates\core\home.html:728
+#: .\templates\core\home.html:1057
 msgid ""
 "Improve email open rates by using personalized email subject lines, sending "
 "emails at optimal times, segmenting your email list, and creating engaging "
@@ -7958,17 +9190,17 @@ msgstr ""
 "جذاب.تساعدك أدوات تحليل البريد الإلكتروني لدينا على تتبع معدلات فتح البريد "
 "الإلكتروني وتحسين حملات التسويق عبر البريد الإلكتروني للحصول على أداء أفضل."
 
-#: .\templates\core\home.html:732
+#: .\templates\core\home.html:1061
 #, fuzzy
 #| msgid "Start Import"
 msgid "Start Improving Opens"
 msgstr "ابدأ الاستيراد"
 
-#: .\templates\core\home.html:742
+#: .\templates\core\home.html:1071
 msgid "Still Have Questions?"
 msgstr "لا تزال لديك أسئلة؟"
 
-#: .\templates\core\home.html:743
+#: .\templates\core\home.html:1072
 msgid ""
 "Get started with our free email marketing software and discover how easy "
 "email automation can be!"
@@ -7976,11 +9208,11 @@ msgstr ""
 "ابدأ باستخدام برنامجنا المجاني للتسويق عبر البريد الإلكتروني واكتشف مدى "
 "سهولة أتمتة البريد الإلكتروني!"
 
-#: .\templates\core\home.html:762
+#: .\templates\core\home.html:1100
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "هل أنت مستعد لتحويل التسويق عبر البريد الإلكتروني الخاص بك؟"
 
-#: .\templates\core\home.html:765
+#: .\templates\core\home.html:1103
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7988,17 +9220,74 @@ msgstr ""
 "انضم إلى الآلاف من الشركات التي تستخدم حملات التنقيط لزيادة الإيرادات ورعاية"
 " العملاء المحتملين وبناء علاقات دائمة مع العملاء."
 
-#: .\templates\core\home.html:769
+#: .\templates\core\home.html:1107
 msgid "Start Your Free Account"
 msgstr "ابدأ حسابك المجاني"
 
-#: .\templates\core\home.html:775
-msgid "Learn More"
-msgstr "يتعلم أكثر"
-
-#: .\templates\core\home.html:779
+#: .\templates\core\home.html:1117
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "لا حاجة لبطاقة الائتمان • الإعداد خلال 5 دقائق • الإلغاء في أي وقت"
+
+#: .\templates\core\home.html:1171
+msgid ""
+"Your email address will be your username. Please create a password to secure"
+" your account:"
+msgstr ""
+"سيكون عنوان بريدك الإلكتروني هو اسم المستخدم الخاص بك.الرجاء إنشاء كلمة مرور"
+" لتأمين حسابك:"
+
+#: .\templates\core\home.html:1174
+#, fuzzy
+#| msgid "Email or Username"
+msgid "Email (Username)"
+msgstr "البريد الإلكتروني أو اسم المستخدم"
+
+#: .\templates\core\home.html:1182
+#, fuzzy
+#| msgid "Enter your current password"
+msgid "Enter a secure password"
+msgstr "أدخل كلمة المرور الحالية الخاصة بك"
+
+#: .\templates\core\home.html:1183
+msgid "Minimum 8 characters recommended"
+msgstr "الحد الأدنى الموصى به هو 8 أحرف"
+
+#: .\templates\core\home.html:1193 .\templates\core\home.html:1374
+#: .\templates\core\home.html:1387
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Account & Connect"
+msgstr "إنشاء حساب مجاني"
+
+#: .\templates\core\home.html:1213 .\templates\core\home.html:1256
+#, fuzzy
+#| msgid "Please enter a valid email address."
+msgid "Please enter your Gmail address:"
+msgstr "يرجى إدخال عنوان بريد إلكتروني صالح."
+
+#: .\templates\core\home.html:1295
+msgid "Password must be at least 6 characters long"
+msgstr "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+
+#: .\templates\core\home.html:1303
+#, fuzzy
+#| msgid "Create Your Account"
+msgid "Creating Account..."
+msgstr "قم بإنشاء حسابك"
+
+#: .\templates\core\home.html:1384
+#, fuzzy
+#| msgid "An error occurred. Please try again later."
+msgid "An error occurred. Please try again."
+msgstr "حدث خطأ.يرجى المحاولة مرة أخرى في وقت لاحق."
+
+#: .\templates\core\includes\signup_box.html:21
+msgid ""
+"Connect your email account and start auto-replying immediately. No credit "
+"card required."
+msgstr ""
+"قم بتوصيل حساب بريدك الإلكتروني وابدأ بالرد التلقائي على الفور.لا حاجة "
+"لبطاقة الائتمان."
 
 #: .\templates\core\pricing.html:4
 msgid "Pricing"
@@ -9079,15 +10368,26 @@ msgid "Your current email address. Change it to update your account email."
 msgstr ""
 "عنوان البريد الإلكتروني الحالي.قم بتغييره لتحديث البريد الإلكتروني لحسابك."
 
-#: .\templates\core\settings.html:38
+#: .\templates\core\settings.html:36
+msgid "Auto BCC this email address whenever a new email is sent."
+msgstr ""
+"قم بإرسال نسخة مخفية الوجهة تلقائيًا إلى عنوان البريد الإلكتروني هذا كلما تم"
+" إرسال بريد إلكتروني جديد."
+
+#: .\templates\core\settings.html:37
+msgid ""
+"When enabled, you will receive a copy of every email sent from your account."
+msgstr "عند التمكين، ستتلقى نسخة من كل بريد إلكتروني يتم إرساله من حسابك."
+
+#: .\templates\core\settings.html:49
 msgid "Physical Address"
 msgstr "العنوان الفعلي"
 
-#: .\templates\core\settings.html:81
+#: .\templates\core\settings.html:97
 msgid "API Bearer Token"
 msgstr "رمز حامل API"
 
-#: .\templates\core\settings.html:83
+#: .\templates\core\settings.html:99
 msgid ""
 "Use this bearer token to authenticate API requests. Include it in the "
 "Authorization header as 'Bearer <token>'."
@@ -9095,23 +10395,23 @@ msgstr ""
 "استخدم هذا الرمز المميز لحامله لمصادقة طلبات واجهة برمجة التطبيقات.قم "
 "بتضمينه في رأس التفويض باسم \"Bearer <token>\"."
 
-#: .\templates\core\settings.html:85
+#: .\templates\core\settings.html:101
 msgid "View API Documentation"
 msgstr "عرض وثائق واجهة برمجة التطبيقات"
 
-#: .\templates\core\settings.html:93
+#: .\templates\core\settings.html:109
 msgid "Your Bearer Token"
 msgstr "رمز حاملك"
 
-#: .\templates\core\settings.html:107
+#: .\templates\core\settings.html:123
 msgid "Click the token or use the Copy button to copy it to your clipboard."
 msgstr "انقر فوق الرمز المميز أو استخدم الزر \"نسخ\" لنسخه إلى الحافظة الخاصة بك."
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid "Security Warning:"
 msgstr "تحذير أمني:"
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid ""
 "Keep your token secret. Anyone with this token can access your account via "
 "the API."
@@ -9119,11 +10419,11 @@ msgstr ""
 "حافظ على سر رمزك المميز.يمكن لأي شخص لديه هذا الرمز الوصول إلى حسابك عبر "
 "واجهة برمجة التطبيقات."
 
-#: .\templates\core\settings.html:129
+#: .\templates\core\settings.html:145
 msgid "Regenerate Token"
 msgstr "إعادة إنشاء الرمز المميز"
 
-#: .\templates\core\settings.html:132
+#: .\templates\core\settings.html:148
 msgid ""
 "Regenerating will create a new token and invalidate the old one. Update any "
 "applications using the old token."
@@ -9131,11 +10431,11 @@ msgstr ""
 "ستؤدي إعادة الإنشاء إلى إنشاء رمز مميز جديد وإبطال الرمز القديم.قم بتحديث أي"
 " تطبيقات باستخدام الرمز القديم."
 
-#: .\templates\core\settings.html:139
+#: .\templates\core\settings.html:155
 msgid "Timezone Settings"
 msgstr "إعدادات المنطقة الزمنية"
 
-#: .\templates\core\settings.html:140
+#: .\templates\core\settings.html:156
 msgid ""
 "Set your preferred timezone for displaying scheduled email times on the "
 "dashboard."
@@ -9143,26 +10443,26 @@ msgstr ""
 "قم بتعيين المنطقة الزمنية المفضلة لديك لعرض أوقات البريد الإلكتروني المجدولة"
 " على لوحة المعلومات."
 
-#: .\templates\core\settings.html:145
+#: .\templates\core\settings.html:161
 msgid "Preferred Time Zone"
 msgstr "المنطقة الزمنية المفضلة"
 
-#: .\templates\core\settings.html:151
+#: .\templates\core\settings.html:167
 msgid ""
 "Scheduled email times on the dashboard will be shown using this time zone."
 msgstr ""
 "سيتم عرض أوقات البريد الإلكتروني المجدولة على لوحة المعلومات باستخدام هذه "
 "المنطقة الزمنية."
 
-#: .\templates\core\settings.html:188
+#: .\templates\core\settings.html:204
 msgid "Account Status"
 msgstr "حالة الحساب"
 
-#: .\templates\core\settings.html:275
+#: .\templates\core\settings.html:291
 msgid "Token copied to clipboard!"
 msgstr "تم نسخ الرمز المميز إلى الحافظة!"
 
-#: .\templates\core\settings.html:287
+#: .\templates\core\settings.html:303
 msgid ""
 "Are you sure you want to regenerate your API token? This will invalidate "
 "your current token and you will need to update any applications using it."
@@ -9171,15 +10471,15 @@ msgstr ""
 "بك؟سيؤدي هذا إلى إبطال الرمز المميز الحالي الخاص بك وستحتاج إلى تحديث أي "
 "تطبيقات تستخدمه."
 
-#: .\templates\core\settings.html:338
+#: .\templates\core\settings.html:354
 msgid "Token regenerated successfully!"
 msgstr "تم إعادة إنشاء الرمز المميز بنجاح!"
 
-#: .\templates\core\settings.html:348
+#: .\templates\core\settings.html:364
 msgid "Failed to regenerate token"
 msgstr "فشل في إعادة إنشاء الرمز المميز"
 
-#: .\templates\core\settings.html:353
+#: .\templates\core\settings.html:369
 msgid "Error regenerating token. Please try again."
 msgstr "حدث خطأ أثناء إعادة إنشاء الرمز المميز.يرجى المحاولة مرة أخرى."
 
@@ -9413,10 +10713,6 @@ msgstr "إشعارات المشتركين الجدد"
 #: .\templates\core\tutorials\account_setup.html:75
 msgid "Bounce and complaint alerts"
 msgstr "تنبيهات الارتداد والشكوى"
-
-#: .\templates\core\tutorials\account_setup.html:79
-msgid "Change Password"
-msgstr "تغيير كلمة المرور"
 
 #: .\templates\core\tutorials\account_setup.html:81
 msgid "Settings → Security"
@@ -14868,10 +16164,6 @@ msgid ""
 "                        "
 msgstr "عرض %(start)s-%(end)s من %(total)s من المشتركين"
 
-#: .\templates\subscribers\list.html:174 .\templates\subscribers\list.html:178
-msgid "Previous"
-msgstr "سابق"
-
 #: .\templates\subscribers\list.html:183
 #, python-format
 msgid ""
@@ -14879,10 +16171,6 @@ msgid ""
 "                                Page %(number)s of %(total)s\n"
 "                            "
 msgstr "الصفحة %(number)s من %(total)s"
-
-#: .\templates\subscribers\list.html:191 .\templates\subscribers\list.html:195
-msgid "Next"
-msgstr "التالي"
 
 #: .\templates\subscribers\list.html:204
 msgid "No subscribers match your search"
@@ -14900,6 +16188,38 @@ msgstr "جرّب اسمًا أو عنوان بريد إلكتروني مختلف
 msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "قم باستيراد جهات الاتصال أو إضافة المشتركين يدويًا لرؤيتهم مدرجين هنا."
+
+#~ msgid "This is already your current email address."
+#~ msgstr "هذا هو بالفعل عنوان بريدك الإلكتروني الحالي."
+
+#~ msgid "Email sent successfully (Celery unavailable, sent immediately)"
+#~ msgstr ""
+#~ "تم إرسال البريد الإلكتروني بنجاح (الكرفس غير متوفر، تم إرساله على الفور)"
+
+#~ msgid "Metrics Overview"
+#~ msgstr "نظرة عامة على المقاييس"
+
+#~ msgid "Open Rate (trend)"
+#~ msgstr "سعر الفتح (الاتجاه)"
+
+#~ msgid "Coming soon"
+#~ msgstr "قريباً"
+
+#~ msgid "Click Rate (trend)"
+#~ msgstr "معدل النقر (الاتجاه)"
+
+#~ msgid "Delivery Rate (trend)"
+#~ msgstr "معدل التسليم (الاتجاه)"
+
+#~ msgid ""
+#~ "AI generation uses Hugging Face API to create email content. The generated "
+#~ "subject and body will replace your current email."
+#~ msgstr ""
+#~ "يستخدم جيل الذكاء الاصطناعي Hugging Face API لإنشاء محتوى البريد "
+#~ "الإلكتروني.سيحل الموضوع والنص الذي تم إنشاؤه محل بريدك الإلكتروني الحالي."
+
+#~ msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#~ msgstr "تأكد من تعيين متغير البيئة HUGGINGFACE_API_KEY."
 
 #~ msgid ""
 #~ "Automated email sequences that nurture leads, onboard users, and drive "

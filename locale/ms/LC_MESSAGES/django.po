@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-04 14:16-0600\n"
+"POT-Creation-Date: 2026-01-21 02:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\analytics\models.py:8 .\analytics\models.py:36 .\campaigns\models.py:143
-#: .\subscribers\models.py:10 .\subscribers\models.py:76
+#: .\analytics\models.py:8 .\analytics\models.py:40 .\campaigns\models.py:145
+#: .\gmail\models.py:18 .\gmail\models.py:70 .\subscribers\models.py:10
+#: .\subscribers\models.py:76
 msgid "User"
 msgstr "pengguna"
 
@@ -47,228 +48,260 @@ msgstr "HTML pengaki tersuai untuk e-mel"
 msgid "Time Zone"
 msgstr "Zon Masa"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
-#: .\templates\core\settings.html:45
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:779
+#: .\templates\core\settings.html:56
+#, fuzzy
+#| msgid "Full name"
+msgid "Full Name"
+msgstr "Nama penuh"
+
+#: .\analytics\models.py:15
+msgid "Full name to use in email From header"
+msgstr "Nama penuh untuk digunakan dalam e-mel Dari pengepala"
+
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:784
+#: .\templates\core\settings.html:61
 msgid "Address Line 1"
 msgstr "Talian Alamat 1"
 
-#: .\analytics\models.py:15
+#: .\analytics\models.py:17
 msgid "Street address"
 msgstr "Alamat jalan"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Address Line 2"
 msgstr "Talian Alamat 2"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Pangsapuri, suite, dsb. (pilihan)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
-#: .\templates\core\settings.html:54
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:793
+#: .\templates\core\settings.html:70
 msgid "City"
 msgstr "Bandar"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
-#: .\templates\core\settings.html:58
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:797
+#: .\templates\core\settings.html:74
 msgid "State/Province"
 msgstr "Negeri/Wilayah"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
-#: .\templates\core\settings.html:64
+#: .\analytics\models.py:21 .\templates\core\dashboard.html:803
+#: .\templates\core\settings.html:80
 msgid "Postal Code"
 msgstr "Poskod"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
-#: .\templates\core\settings.html:68
+#: .\analytics\models.py:22 .\templates\core\dashboard.html:807
+#: .\templates\core\settings.html:84
 msgid "Country"
 msgstr "Negara"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "SPF Verified"
 msgstr "SPF Disahkan"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "Whether the user has a valid SPF record"
 msgstr "Sama ada pengguna mempunyai rekod SPF yang sah"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "SPF Last Checked"
 msgstr "SPF Diperiksa Terakhir"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "Last time SPF record was checked"
 msgstr "Kali terakhir rekod SPF disemak"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "SPF Record"
 msgstr "Rekod SPF"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "The SPF record found for the user's domain"
 msgstr "Rekod SPF ditemui untuk domain pengguna"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "SPF Missing Includes"
 msgstr "SPF Hilang Termasuk"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "List of missing required SPF includes"
 msgstr "Senarai SPF diperlukan yang hilang termasuk"
 
-#: .\analytics\models.py:28
+#: .\analytics\models.py:29
+msgid "Auto BCC Enabled"
+msgstr "Auto BCC Didayakan"
+
+#: .\analytics\models.py:29
+#, fuzzy
+#| msgid "Automatically scheduled 2 days after Email 1 is sent"
+msgid "Automatically BCC this email address whenever a new email is sent"
+msgstr "Dijadualkan secara automatik 2 hari selepas E-mel 1 dihantar"
+
+#: .\analytics\models.py:32
 msgid "User Profile"
 msgstr "Profil Pengguna"
 
-#: .\analytics\models.py:29
+#: .\analytics\models.py:33
 msgid "User Profiles"
 msgstr "Profil Pengguna"
 
-#: .\analytics\models.py:32
+#: .\analytics\models.py:36
 #, python-format
 msgid "Profile for %(username)s"
 msgstr "Profil untuk %(username)s"
 
-#: .\analytics\models.py:37 .\campaigns\models.py:20
+#: .\analytics\models.py:41 .\campaigns\models.py:21
 #: .\subscribers\models.py:11 .\subscribers\models.py:77
 #: .\templates\subscribers\list.html:76
 msgid "Name"
 msgstr "Nama"
 
-#: .\analytics\models.py:38
+#: .\analytics\models.py:42
 msgid "HTML Content"
 msgstr "Kandungan HTML"
 
-#: .\analytics\models.py:39
+#: .\analytics\models.py:43
 msgid "Is Default"
 msgstr "Adalah Lalai"
 
-#: .\analytics\models.py:40 .\campaigns\models.py:25 .\campaigns\models.py:74
-#: .\campaigns\models.py:121 .\campaigns\models.py:153
-#: .\campaigns\models.py:183 .\subscribers\models.py:14
+#: .\analytics\models.py:44 .\campaigns\models.py:26 .\campaigns\models.py:75
+#: .\campaigns\models.py:123 .\campaigns\models.py:155
+#: .\campaigns\models.py:185 .\gmail\models.py:42 .\subscribers\models.py:14
 #: .\subscribers\models.py:53
 msgid "Created At"
 msgstr "Dicipta Pada"
 
-#: .\analytics\models.py:41 .\campaigns\models.py:26 .\campaigns\models.py:75
-#: .\campaigns\models.py:154 .\campaigns\models.py:184
+#: .\analytics\models.py:45 .\campaigns\models.py:27 .\campaigns\models.py:76
+#: .\campaigns\models.py:156 .\campaigns\models.py:186 .\gmail\models.py:43
 #: .\subscribers\models.py:15 .\subscribers\models.py:54
 msgid "Updated At"
 msgstr "Dikemaskini Pada"
 
-#: .\analytics\models.py:44 .\templates\campaigns\drafts.html:216
-#: .\templates\campaigns\template.html:148
+#: .\analytics\models.py:48 .\templates\campaigns\drafts.html:216
+#: .\templates\campaigns\template.html:178
 msgid "Email Footer"
 msgstr "Pengaki E-mel"
 
-#: .\analytics\models.py:45 .\templates\analytics\footer_list.html:4
+#: .\analytics\models.py:49 .\templates\analytics\footer_list.html:4
 #: .\templates\analytics\footer_list.html:12
 msgid "Email Footers"
 msgstr "Pengaki E-mel"
 
-#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:485 .\templates\campaigns\template.html:1402
 msgid "API key regenerated successfully!"
 msgstr "Kunci API berjaya dijana semula!"
 
-#: .\analytics\views.py:426 .\analytics\views.py:463
-#: .\templates\campaigns\template.html:1187
+#: .\analytics\views.py:514 .\analytics\views.py:551
+#: .\templates\campaigns\template.html:1499
 msgid "Footer created successfully!"
 msgstr "Pengaki berjaya dibuat!"
 
-#: .\analytics\views.py:429 .\analytics\views.py:488
+#: .\analytics\views.py:517 .\analytics\views.py:576
 msgid "Please provide both name and content."
 msgstr "Sila berikan kedua-dua nama dan kandungan."
 
-#: .\analytics\views.py:448
+#: .\analytics\views.py:536
 msgid "Footer name is required"
 msgstr "Nama pengaki diperlukan"
 
-#: .\analytics\views.py:451
+#: .\analytics\views.py:539
 msgid "Footer content is required"
 msgstr "Kandungan pengaki diperlukan"
 
-#: .\analytics\views.py:485
+#: .\analytics\views.py:573
 msgid "Footer updated successfully!"
 msgstr "Pengaki berjaya dikemas kini!"
 
-#: .\analytics\views.py:503
+#: .\analytics\views.py:591
 msgid "Footer deleted successfully!"
 msgstr "Pengaki berjaya dipadamkan!"
 
-#: .\analytics\views.py:517
+#: .\analytics\views.py:605
 msgid "Default footer updated successfully!"
 msgstr "Pengaki lalai berjaya dikemas kini!"
 
-#: .\campaigns\models.py:11 .\campaigns\views.py:462
+#: .\campaigns\models.py:11 .\campaigns\views.py:526
+#, fuzzy
+#| msgid "In seconds"
+msgid "Seconds"
+msgstr "Dalam beberapa saat"
+
+#: .\campaigns\models.py:12 .\campaigns\views.py:527
 #: .\templates\campaigns\drafts.html:203
 #: .\templates\core\feature_email_scheduling.html:66
 msgid "Minutes"
 msgstr "minit"
 
-#: .\campaigns\models.py:12 .\campaigns\views.py:463
+#: .\campaigns\models.py:13 .\campaigns\views.py:528
 #: .\templates\campaigns\drafts.html:204
 #: .\templates\core\feature_email_scheduling.html:67
 msgid "Hours"
 msgstr "jam"
 
-#: .\campaigns\models.py:13 .\campaigns\views.py:464
+#: .\campaigns\models.py:14 .\campaigns\views.py:529
 #: .\templates\campaigns\drafts.html:205
 #: .\templates\core\feature_email_scheduling.html:68
 msgid "Days"
 msgstr "hari-hari"
 
-#: .\campaigns\models.py:14 .\campaigns\views.py:465
+#: .\campaigns\models.py:15 .\campaigns\views.py:530
 #: .\templates\campaigns\drafts.html:206
 #: .\templates\core\feature_email_scheduling.html:69
 msgid "Weeks"
 msgstr "minggu"
 
-#: .\campaigns\models.py:15 .\campaigns\views.py:466
+#: .\campaigns\models.py:16 .\campaigns\views.py:531
 #: .\templates\campaigns\drafts.html:207
 #: .\templates\core\feature_email_scheduling.html:70
 msgid "Months"
 msgstr "berbulan-bulan"
 
-#: .\campaigns\models.py:21 .\subscribers\models.py:12
+#: .\campaigns\models.py:22 .\subscribers\models.py:12
 #: .\templates\campaigns\campaign_edit_page.html:12
-#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:35
+#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:60
 msgid "Description"
 msgstr "Penerangan"
 
-#: .\campaigns\models.py:23 .\templates\campaigns\campaign_edit_page.html:13
-#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:41
+#: .\campaigns\models.py:24 .\templates\campaigns\campaign_edit_page.html:13
+#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:66
 msgid "Subscriber List"
 msgstr "Senarai Pelanggan"
 
-#: .\campaigns\models.py:24 .\subscribers\models.py:49
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
-#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
+#: .\campaigns\models.py:25 .\gmail\models.py:35 .\subscribers\models.py:49
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:16
+#: .\templates\campaigns\template.html:93
+#: .\templates\campaigns\template.html:331 .\templates\core\dashboard.html:545
+#: .\templates\core\dashboard.html:603 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Aktif"
 
-#: .\campaigns\models.py:27
+#: .\campaigns\models.py:28
 msgid "Sent Count"
 msgstr "Kiraan Dihantar"
 
-#: .\campaigns\models.py:28
+#: .\campaigns\models.py:29
 msgid "Open Count"
 msgstr "Kiraan Terbuka"
 
-#: .\campaigns\models.py:29
+#: .\campaigns\models.py:30
 msgid "Click Count"
 msgstr "Klik Kira"
 
-#: .\campaigns\models.py:32 .\campaigns\models.py:66 .\campaigns\models.py:144
-#: .\templates\campaigns\campaign_analysis.html:19
-#: .\templates\campaigns\template.html:293
+#: .\campaigns\models.py:33 .\campaigns\models.py:67 .\campaigns\models.py:146
+#: .\templates\analytics\dashboard.html:116
+#: .\templates\campaigns\campaign_analysis.html:23
+#: .\templates\campaigns\campaign_emails.html:128
+#: .\templates\campaigns\campaign_emails.html:253
+#: .\templates\campaigns\campaign_emails.html:330
+#: .\templates\campaigns\template.html:326
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:395 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Kempen"
 
-#: .\campaigns\models.py:33 .\templates\base.html:369
-#: .\templates\core\dashboard.html:77
+#: .\campaigns\models.py:34 .\templates\analytics\dashboard.html:94
+#: .\templates\base.html:370 .\templates\core\dashboard.html:218
 #: .\templates\core\feature_drip_campaigns.html:35
 #: .\templates\core\resource_api_reference.html:93
 #: .\templates\core\resource_api_reference.html:140
@@ -278,48 +311,54 @@ msgstr "Kempen"
 msgid "Campaigns"
 msgstr "Kempen"
 
-#: .\campaigns\models.py:67 .\templates\campaigns\campaign_analysis.html:147
+#: .\campaigns\models.py:68 .\gmail\models.py:79
+#: .\templates\campaigns\campaign_analysis.html:151
+#: .\templates\campaigns\campaign_emails.html:57
+#: .\templates\campaigns\campaign_emails.html:197
+#: .\templates\campaigns\campaign_emails.html:268
+#: .\templates\campaigns\campaign_emails.html:401
 #: .\templates\core\contact.html:35
 msgid "Subject"
 msgstr "Subjek"
 
-#: .\campaigns\models.py:68
+#: .\campaigns\models.py:69
 msgid "HTML Body"
 msgstr "Badan HTML"
 
-#: .\campaigns\models.py:69
+#: .\campaigns\models.py:70
 msgid "Text Body"
 msgstr "Badan Teks"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:197
-#: .\templates\campaigns\template.html:91
+#: .\campaigns\models.py:71 .\templates\campaigns\campaign_emails.html:136
+#: .\templates\campaigns\drafts.html:197
+#: .\templates\campaigns\template.html:118
 #: .\templates\core\feature_email_scheduling.html:63
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Time"
 msgstr "Masa Tunggu"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:211
+#: .\campaigns\models.py:71 .\templates\campaigns\drafts.html:211
 msgid "Time to wait before sending this email"
 msgstr "Masa untuk menunggu sebelum menghantar e-mel ini"
 
-#: .\campaigns\models.py:71 .\templates\core\feature_email_scheduling.html:64
+#: .\campaigns\models.py:72 .\templates\core\feature_email_scheduling.html:64
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Unit"
 msgstr "Unit Tunggu"
 
-#: .\campaigns\models.py:72 .\templates\campaigns\campaign_edit_page.html:39
+#: .\campaigns\models.py:73 .\templates\campaigns\campaign_edit_page.html:39
 #: .\templates\core\feature_email_scheduling.html:73
 #: .\templates\core\feature_email_templates.html:65
 msgid "Order"
 msgstr "Pesanan"
 
-#: .\campaigns\models.py:73
+#: .\campaigns\models.py:74
 msgid "Footer"
 msgstr "Pengaki"
 
-#: .\campaigns\models.py:79 .\campaigns\models.py:115
-#: .\campaigns\models.py:145 .\campaigns\models.py:169
-#: .\subscribers\models.py:45 .\templates\base.html:414
+#: .\campaigns\models.py:80 .\campaigns\models.py:117
+#: .\campaigns\models.py:147 .\campaigns\models.py:171
+#: .\subscribers\models.py:45 .\templates\base.html:415
 #: .\templates\campaigns\email_analysis.html:215
 #: .\templates\campaigns\email_analysis.html:399
 #: .\templates\campaigns\template_revision.html:48
@@ -328,231 +367,259 @@ msgstr "Pengaki"
 msgid "Email"
 msgstr "E-mel"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
+#: .\campaigns\models.py:81 .\templates\campaigns\campaign_emails.html:5
+#: .\templates\core\dashboard.html:526
 msgid "Emails"
 msgstr "E-mel"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "second"
+msgstr "Dalam beberapa saat"
+
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "seconds"
+msgstr "Dalam beberapa saat"
+
+#: .\campaigns\models.py:91
 msgid "minute"
 msgstr "minit"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:91
 msgid "minutes"
 msgstr "minit"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hour"
 msgstr "jam"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hours"
 msgstr "jam"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "day"
 msgstr "hari"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "days"
 msgstr "hari"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "week"
 msgstr "minggu"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "weeks"
 msgstr "minggu"
 
-#: .\campaigns\models.py:93 .\templates\core\pricing.html:20
+#: .\campaigns\models.py:95 .\templates\core\pricing.html:20
 msgid "month"
 msgstr "bulan"
 
-#: .\campaigns\models.py:93
+#: .\campaigns\models.py:95
 msgid "months"
 msgstr "bulan"
 
-#: .\campaigns\models.py:106 .\campaigns\models.py:138
-#: .\templates\campaigns\campaign_analysis.html:39
-#: .\templates\campaigns\campaign_analysis.html:117
-#: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
+#: .\campaigns\models.py:108 .\campaigns\models.py:140
+#: .\templates\analytics\dashboard.html:119
+#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:121
+#: .\templates\campaigns\campaign_analysis.html:152
+#: .\templates\campaigns\campaign_emails.html:241
+#: .\templates\campaigns\edit.html:198 .\templates\campaigns\edit.html:499
+#: .\templates\core\dashboard.html:527 .\templates\core\dashboard.html:1219
 msgid "Sent"
 msgstr "Dihantar"
 
-#: .\campaigns\models.py:107 .\templates\campaigns\campaign_analysis.html:118
-#: .\templates\campaigns\campaign_analysis.html:149
+#: .\campaigns\models.py:109 .\templates\analytics\dashboard.html:46
+#: .\templates\analytics\dashboard.html:122
+#: .\templates\campaigns\campaign_analysis.html:122
+#: .\templates\campaigns\campaign_analysis.html:153
 msgid "Opened"
 msgstr "Dibuka"
 
-#: .\campaigns\models.py:108 .\templates\campaigns\campaign_analysis.html:119
-#: .\templates\campaigns\campaign_analysis.html:150
+#: .\campaigns\models.py:110 .\templates\analytics\dashboard.html:61
+#: .\templates\analytics\dashboard.html:125
+#: .\templates\campaigns\campaign_analysis.html:123
+#: .\templates\campaigns\campaign_analysis.html:154
 msgid "Clicked"
 msgstr "Diklik"
 
-#: .\campaigns\models.py:109
+#: .\campaigns\models.py:111
 msgid "Bounced"
 msgstr "melantun"
 
-#: .\campaigns\models.py:110
+#: .\campaigns\models.py:112
 msgid "Complained"
 msgstr "Mengeluh"
 
-#: .\campaigns\models.py:111
+#: .\campaigns\models.py:113
 #: .\templates\core\feature_subscriber_management.html:167
 msgid "Unsubscribed"
 msgstr "Menyahlanggan"
 
-#: .\campaigns\models.py:116 .\campaigns\models.py:147
+#: .\campaigns\models.py:118 .\campaigns\models.py:149
 msgid "Subscriber Email"
 msgstr "E-mel Pelanggan"
 
-#: .\campaigns\models.py:117
+#: .\campaigns\models.py:119
 msgid "Event Type"
 msgstr "Jenis Acara"
 
-#: .\campaigns\models.py:118
+#: .\campaigns\models.py:120
 msgid "Link Clicked"
 msgstr "Pautan Diklik"
 
-#: .\campaigns\models.py:119
+#: .\campaigns\models.py:121
 msgid "User Agent"
 msgstr "Ejen Pengguna"
 
-#: .\campaigns\models.py:120
+#: .\campaigns\models.py:122
 msgid "IP Address"
 msgstr "Alamat IP"
 
-#: .\campaigns\models.py:125
+#: .\campaigns\models.py:127
 msgid "Email Event"
 msgstr "Acara E-mel"
 
-#: .\campaigns\models.py:126
+#: .\campaigns\models.py:128
 msgid "Email Events"
 msgstr "E-mel Acara"
 
-#: .\campaigns\models.py:136
+#: .\campaigns\models.py:138 .\templates\campaigns\campaign_emails.html:110
 #: .\templates\core\feature_subscriber_management.html:171
 msgid "Pending"
 msgstr "Belum selesai"
 
-#: .\campaigns\models.py:137
+#: .\campaigns\models.py:139
 msgid "Queued"
 msgstr "Beratur"
 
-#: .\campaigns\models.py:139
+#: .\campaigns\models.py:141 .\templates\campaigns\campaign_emails.html:312
+#: .\templates\campaigns\campaign_emails.html:438
 msgid "Failed"
 msgstr "gagal"
 
-#: .\campaigns\models.py:146 .\subscribers\models.py:58
+#: .\campaigns\models.py:148 .\subscribers\models.py:58
 #: .\subscribers\models.py:97
 msgid "Subscriber"
 msgstr "Pelanggan"
 
-#: .\campaigns\models.py:148
+#: .\campaigns\models.py:150 .\templates\campaigns\campaign_emails.html:141
+#: .\templates\campaigns\campaign_emails.html:347
 msgid "Variables"
 msgstr "Pembolehubah"
 
-#: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
+#: .\campaigns\models.py:151 .\templates\campaigns\campaign_edit_page.html:14
+#: .\templates\campaigns\campaign_emails.html:66
+#: .\templates\campaigns\campaign_emails.html:206
+#: .\templates\campaigns\campaign_emails.html:277
+#: .\templates\campaigns\campaign_emails.html:410
+#: .\templates\core\dashboard.html:525 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Status"
 
-#: .\campaigns\models.py:150
+#: .\campaigns\models.py:152 .\templates\campaigns\campaign_emails.html:63
+#: .\templates\campaigns\campaign_emails.html:261
 msgid "Scheduled For"
 msgstr "Dijadualkan Untuk"
 
-#: .\campaigns\models.py:151
+#: .\campaigns\models.py:153 .\templates\campaigns\campaign_emails.html:203
 msgid "Sent At"
 msgstr "Dihantar Pada"
 
-#: .\campaigns\models.py:152
+#: .\campaigns\models.py:154 .\templates\campaigns\campaign_emails.html:338
 msgid "Error Message"
 msgstr "Mesej Ralat"
 
-#: .\campaigns\models.py:158
+#: .\campaigns\models.py:160
 msgid "Email Send Request"
 msgstr "Permintaan Hantar E-mel"
 
-#: .\campaigns\models.py:159
+#: .\campaigns\models.py:161
 msgid "Email Send Requests"
 msgstr "Permintaan Hantar E-mel"
 
-#: .\campaigns\models.py:172
+#: .\campaigns\models.py:174
 msgid "Generated Subject"
 msgstr "Subjek Dihasilkan"
 
-#: .\campaigns\models.py:173
+#: .\campaigns\models.py:175
 msgid "Generated Body HTML"
 msgstr "HTML Badan Dijana"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "Generation Prompt"
 msgstr "Prompt Generasi"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "The prompt used to generate content"
 msgstr "Gesaan yang digunakan untuk menjana kandungan"
 
-#: .\campaigns\models.py:175
+#: .\campaigns\models.py:177
 msgid "Generation Model"
 msgstr "Model Penjanaan"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Topics"
 msgstr "Topik"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Extracted topics and keywords"
 msgstr "Topik dan kata kunci yang diekstrak"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant Topics"
 msgstr "Topik Dominan"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant topic for this email"
 msgstr "Topik dominan untuk e-mel ini"
 
-#: .\campaigns\models.py:180 .\templates\campaigns\email_analysis.html:182
+#: .\campaigns\models.py:182 .\templates\campaigns\email_analysis.html:182
 msgid "Emails Analyzed"
 msgstr "E-mel Dianalisis"
 
-#: .\campaigns\models.py:180
+#: .\campaigns\models.py:182
 msgid "Number of emails used in topic analysis"
 msgstr "Bilangan e-mel yang digunakan dalam analisis topik"
 
-#: .\campaigns\models.py:187
+#: .\campaigns\models.py:189
 msgid "Email AI Analysis"
 msgstr "E-mel Analisis AI"
 
-#: .\campaigns\models.py:188
+#: .\campaigns\models.py:190
 msgid "Email AI Analyses"
 msgstr "E-mel Analisis AI"
 
-#: .\campaigns\views.py:258 .\campaigns\views.py:311
+#: .\campaigns\views.py:270 .\campaigns\views.py:313
 msgid "Email address is required"
 msgstr "Alamat e-mel diperlukan"
 
-#: .\campaigns\views.py:275 .\campaigns\views.py:284 .\campaigns\views.py:294
+#: .\campaigns\views.py:287 .\campaigns\views.py:296
 msgid "Test email sent successfully"
 msgstr "E-mel ujian berjaya dihantar"
 
-#: .\campaigns\views.py:278 .\campaigns\views.py:297
+#: .\campaigns\views.py:290 .\campaigns\views.py:299
 #, python-brace-format
 msgid "Failed to send test email: {}"
 msgstr "Gagal menghantar e-mel ujian: {}"
 
-#: .\campaigns\views.py:394 .\core\views.py:802
+#: .\campaigns\views.py:403 .\core\views.py:818 .\core\views.py:839
 msgid "Email sent successfully"
 msgstr "E-mel berjaya dihantar"
 
-#: .\campaigns\views.py:403 .\core\views.py:808 .\core\views.py:829
+#: .\campaigns\views.py:412 .\core\views.py:824 .\core\views.py:845
 #, python-brace-format
 msgid "Failed to send email: {}"
 msgstr "Gagal menghantar e-mel: {}"
 
-#: .\campaigns\views.py:410 .\core\views.py:846 .\core\views.py:863
+#: .\campaigns\views.py:419 .\core\views.py:862 .\core\views.py:872
+#: .\core\views.py:879
 #, python-brace-format
 msgid ""
 "Email scheduled for {time}. It will be sent automatically at the scheduled "
@@ -561,102 +628,102 @@ msgstr ""
 "E-mel dijadualkan untuk {time}.Ia akan dihantar secara automatik pada masa "
 "yang dijadualkan."
 
-#: .\campaigns\views.py:447
+#: .\campaigns\views.py:511
 msgid "Please create a campaign first before creating email templates."
 msgstr "Sila buat kempen terlebih dahulu sebelum membuat templat e-mel."
 
-#: .\campaigns\views.py:484
+#: .\campaigns\views.py:549
 msgid "Cannot activate a campaign with no emails"
 msgstr "Tidak boleh mengaktifkan kempen tanpa e-mel"
 
-#: .\campaigns\views.py:491
+#: .\campaigns\views.py:556
 msgid "Campaign activated successfully"
 msgstr "Kempen berjaya diaktifkan"
 
-#: .\campaigns\views.py:504
+#: .\campaigns\views.py:569
 msgid "Campaign deactivated successfully"
 msgstr "Kempen berjaya dinyahaktifkan"
 
-#: .\campaigns\views.py:518
+#: .\campaigns\views.py:583
 msgid "Email ID and direction are required"
 msgstr "ID e-mel dan arahan diperlukan"
 
-#: .\campaigns\views.py:523 .\campaigns\views.py:919
+#: .\campaigns\views.py:588 .\campaigns\views.py:1020
 msgid "Email not found"
 msgstr "E-mel tidak ditemui"
 
-#: .\campaigns\views.py:535
+#: .\campaigns\views.py:600
 msgid "Email not found in campaign"
 msgstr "E-mel tidak ditemui dalam kempen"
 
-#: .\campaigns\views.py:543
+#: .\campaigns\views.py:608
 msgid "Cannot move email in that direction"
 msgstr "Tidak boleh mengalihkan e-mel ke arah itu"
 
-#: .\campaigns\views.py:553
+#: .\campaigns\views.py:618
 msgid "Email order updated successfully"
 msgstr "Pesanan e-mel berjaya dikemas kini"
 
-#: .\campaigns\views.py:561
+#: .\campaigns\views.py:626
 msgid "No file uploaded"
 msgstr "Tiada fail dimuat naik"
 
-#: .\campaigns\views.py:565
+#: .\campaigns\views.py:630
 msgid "Invalid file format. Please upload a CSV or Excel file."
 msgstr "Format fail tidak sah.Sila muat naik fail CSV atau Excel."
 
-#: .\campaigns\views.py:597
+#: .\campaigns\views.py:662
 #, python-brace-format
 msgid "Missing required columns: {}"
 msgstr "Tiada lajur yang diperlukan: {}"
 
-#: .\campaigns\views.py:612
+#: .\campaigns\views.py:677
 msgid "File processed successfully"
 msgstr "Fail berjaya diproses"
 
-#: .\campaigns\views.py:618
+#: .\campaigns\views.py:683
 #, python-brace-format
 msgid "Error processing file: {}"
 msgstr "Ralat memproses fail: {}"
 
-#: .\campaigns\views.py:641
+#: .\campaigns\views.py:706
 msgid "Campaign created successfully!"
 msgstr "Kempen berjaya dibuat!"
 
-#: .\campaigns\views.py:644
+#: .\campaigns\views.py:709
 msgid "Please provide a campaign name."
 msgstr "Sila berikan nama kempen."
 
-#: .\campaigns\views.py:885
+#: .\campaigns\views.py:986
 msgid "Subject topic is required"
 msgstr "Topik subjek diperlukan"
 
-#: .\campaigns\views.py:913
+#: .\campaigns\views.py:1014
 msgid "Email generated and saved successfully"
 msgstr "E-mel berjaya dijana dan disimpan"
 
-#: .\campaigns\views.py:923
+#: .\campaigns\views.py:1024
 msgid "Email generated successfully"
 msgstr "E-mel berjaya dijana"
 
-#: .\campaigns\views.py:936
+#: .\campaigns\views.py:1041
 #, python-brace-format
 msgid "Failed to generate email: {}"
 msgstr "Gagal menjana e-mel: {}"
 
-#: .\campaigns\views.py:950
+#: .\campaigns\views.py:1056
 msgid "Email text is required"
 msgstr "Teks e-mel diperlukan"
 
-#: .\campaigns\views.py:957
+#: .\campaigns\views.py:1063
 msgid "Email revised successfully"
 msgstr "E-mel berjaya disemak"
 
-#: .\campaigns\views.py:963
+#: .\campaigns\views.py:1069
 msgid "Revision failed"
 msgstr "Semakan gagal"
 
-#: .\campaigns\views.py:969
+#: .\campaigns\views.py:1075
 #, python-brace-format
 msgid "Failed to revise email: {}"
 msgstr "Gagal menyemak e-mel: {}"
@@ -670,71 +737,78 @@ msgid "Invalid token header. Token string should not contain spaces."
 msgstr ""
 "Pengepala token tidak sah.Rentetan token tidak boleh mengandungi ruang."
 
-#: .\core\views.py:211 .\templates\subscribers\add.html:256
+#: .\core\views.py:213 .\templates\subscribers\add.html:256
 msgid "Please provide an email address."
 msgstr "Sila berikan alamat e-mel."
 
-#: .\core\views.py:213
-msgid "This is already your current email address."
-msgstr "Ini sudah menjadi alamat e-mel semasa anda."
+#: .\core\views.py:218
+#, fuzzy
+#| msgid "Settings updated successfully"
+msgid "Auto BCC setting updated successfully."
+msgstr "Tetapan berjaya dikemas kini"
 
-#: .\core\views.py:223
+#: .\core\views.py:228
 msgid "This email address is already in use by another account."
 msgstr "Alamat e-mel ini sudah digunakan oleh akaun lain."
 
-#: .\core\views.py:228
-#, python-format
-msgid "Email address updated successfully to %(email)s"
+#: .\core\views.py:236
+#, fuzzy, python-format
+#| msgid "Email address updated successfully to %(email)s"
+msgid "Email address and settings updated successfully to %(email)s"
 msgstr "Alamat e-mel berjaya dikemas kini kepada %(email)s"
 
-#: .\core\views.py:230
+#: .\core\views.py:238
 msgid "Please provide a valid email address."
 msgstr "Sila berikan alamat e-mel yang sah."
 
-#: .\core\views.py:242 .\core\views.py:368
+#: .\core\views.py:251 .\core\views.py:389
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
 msgid ""
-"Please fill in all required fields: Address Line 1, City, State, Postal "
-"Code, and Country."
+"Please fill in all required fields: Full Name, Address Line 1, City, State, "
+"Postal Code, and Country."
 msgstr ""
 "Sila isi semua medan yang diperlukan: Alamat Baris 1, Bandar, Negeri, Poskod"
 " dan Negara."
 
-#: .\core\views.py:252
+#: .\core\views.py:262
 msgid "Address updated successfully."
 msgstr "Alamat berjaya dikemas kini."
 
-#: .\core\views.py:258
+#: .\core\views.py:268
 msgid "Please select a valid time zone."
 msgstr "Sila pilih zon waktu yang sah."
 
-#: .\core\views.py:262
+#: .\core\views.py:272
 #, python-format
 msgid "Time zone updated to %(tz)s"
 msgstr "Zon waktu dikemas kini kepada %(tz)s"
 
-#: .\core\views.py:269
+#: .\core\views.py:279
 msgid ""
 "Unsubscribe links are now disabled. This may violate email regulations."
 msgstr ""
 "Pautan nyahlanggan kini dilumpuhkan.Ini mungkin melanggar peraturan e-mel."
 
-#: .\core\views.py:271
+#: .\core\views.py:281
 msgid "Unsubscribe links are now enabled."
 msgstr "Pautan nyahlanggan kini didayakan."
 
-#: .\core\views.py:302
+#: .\core\views.py:314
 msgid "Please provide a URL to your post"
 msgstr "Sila berikan URL pada siaran anda"
 
-#: .\core\views.py:307
+#: .\core\views.py:319
 msgid "Please provide a valid URL starting with http:// or https://"
 msgstr "Sila berikan URL yang sah bermula dengan http:// atau https://"
 
-#: .\core\views.py:322
+#: .\core\views.py:334
 msgid "Please provide a valid URL for the selected platform"
 msgstr "Sila berikan URL yang sah untuk platform yang dipilih"
 
-#: .\core\views.py:330
+#: .\core\views.py:342
 msgid ""
 "Thank you for promoting DripEmails.org! Ads have been disabled for your "
 "account."
@@ -742,27 +816,27 @@ msgstr ""
 "Terima kasih kerana mempromosikan DripEmails.org!Iklan telah dilumpuhkan "
 "untuk akaun anda."
 
-#: .\core\views.py:356
+#: .\core\views.py:372
 msgid "Invalid timezone"
 msgstr "Zon waktu tidak sah"
 
-#: .\core\views.py:379
+#: .\core\views.py:402
 msgid "Settings updated successfully"
 msgstr "Tetapan berjaya dikemas kini"
 
-#: .\core\views.py:404
+#: .\core\views.py:431
 msgid "An error occurred while saving settings"
 msgstr "Ralat berlaku semasa menyimpan tetapan"
 
-#: .\core\views.py:552
+#: .\core\views.py:579
 msgid "You must be logged in to post."
 msgstr "Anda mesti log masuk untuk membuat siaran."
 
-#: .\core\views.py:577
+#: .\core\views.py:604
 msgid "Your post has been submitted successfully!"
 msgstr "Catatan anda telah berjaya dihantar!"
 
-#: .\core\views.py:619
+#: .\core\views.py:646
 msgid ""
 "Thank you for sharing your success story! We'll review it and may feature it"
 " on our site."
@@ -770,49 +844,40 @@ msgstr ""
 "Terima kasih kerana berkongsi kisah kejayaan anda!Kami akan menyemaknya dan "
 "mungkin menampilkannya di tapak kami."
 
-#: .\core\views.py:648
+#: .\core\views.py:675
 msgid "Please provide email address, campaign, and email template"
 msgstr "Sila berikan alamat e-mel, kempen dan templat e-mel"
 
-#: .\core\views.py:716
+#: .\core\views.py:743
 #, python-brace-format
 msgid "Failed to create or update subscriber: {}"
 msgstr "Gagal membuat atau mengemas kini pelanggan: {}"
 
-#: .\core\views.py:814
+#: .\core\views.py:830
 msgid "Email scheduled successfully"
 msgstr "E-mel dijadualkan berjaya"
 
-#: .\core\views.py:823
-msgid "Email sent successfully (Celery unavailable, sent immediately)"
-msgstr "E-mel berjaya dihantar (Saderi tidak tersedia, dihantar serta-merta)"
-
-#: .\core\views.py:856
-#, python-brace-format
-msgid "Email scheduled for {time}"
-msgstr "E-mel dijadualkan untuk {time}"
-
-#: .\core\views.py:871
+#: .\core\views.py:887
 msgid "Campaign not found"
 msgstr "Kempen tidak ditemui"
 
-#: .\core\views.py:873
+#: .\core\views.py:889
 msgid "Email template not found"
 msgstr "Templat e-mel tidak ditemui"
 
-#: .\core\views.py:1057
+#: .\core\views.py:1076
 msgid "Email already sent."
 msgstr "E-mel sudah dihantar."
 
-#: .\core\views.py:1069
+#: .\core\views.py:1088
 msgid "Email sent successfully."
 msgstr "E-mel berjaya dihantar."
 
-#: .\core\views.py:1102
+#: .\core\views.py:1121
 msgid "Subscriber has been unsubscribed."
 msgstr "Pelanggan telah berhenti melanggan."
 
-#: .\core\views.py:1115
+#: .\core\views.py:1134
 msgid ""
 "Invalid unsubscribe link. The subscriber may have already been unsubscribed "
 "or the link is invalid."
@@ -820,368 +885,568 @@ msgstr ""
 "Pautan nyahlanggan tidak sah.Pelanggan mungkin telah berhenti melanggan atau"
 " pautan tidak sah."
 
-#: .\docs\live.py:146 .\dripemails\live.py:159 .\dripemails\settings.py:139
+#: .\docs\live.py:146 .\dripemails\live.py:160 .\dripemails\settings.py:148
 #: .\smtp_server\docs\live.py:146
 msgid "English"
 msgstr "Inggeris"
 
-#: .\docs\live.py:147 .\dripemails\live.py:160 .\dripemails\settings.py:140
+#: .\docs\live.py:147 .\dripemails\live.py:161 .\dripemails\settings.py:149
 #: .\smtp_server\docs\live.py:147
 msgid "Spanish"
 msgstr "bahasa Sepanyol"
 
-#: .\docs\live.py:148 .\dripemails\live.py:161 .\dripemails\settings.py:141
+#: .\docs\live.py:148 .\dripemails\live.py:162 .\dripemails\settings.py:150
 #: .\smtp_server\docs\live.py:148
 msgid "French"
 msgstr "Perancis"
 
-#: .\docs\live.py:149 .\dripemails\live.py:162 .\dripemails\settings.py:142
+#: .\docs\live.py:149 .\dripemails\live.py:163 .\dripemails\settings.py:151
 #: .\smtp_server\docs\live.py:149
 msgid "German"
 msgstr "Jerman"
 
-#: .\dripemails\live.py:163 .\dripemails\settings.py:143
+#: .\dripemails\live.py:164 .\dripemails\settings.py:152
 msgid "Italian"
 msgstr "Itali"
 
-#: .\dripemails\live.py:164 .\dripemails\settings.py:144
+#: .\dripemails\live.py:165 .\dripemails\settings.py:153
 msgid "Portuguese"
 msgstr "Portugis"
 
-#: .\dripemails\live.py:165 .\dripemails\settings.py:145
+#: .\dripemails\live.py:166 .\dripemails\settings.py:154
 msgid "Portuguese (Brazil)"
 msgstr "Portugis (Brazil)"
 
-#: .\dripemails\live.py:166 .\dripemails\settings.py:146
+#: .\dripemails\live.py:167 .\dripemails\settings.py:155
 msgid "Russian"
 msgstr "bahasa Rusia"
 
-#: .\dripemails\live.py:167 .\dripemails\settings.py:147
+#: .\dripemails\live.py:168 .\dripemails\settings.py:156
 msgid "Chinese (Simplified)"
 msgstr "Cina (Mudah)"
 
-#: .\dripemails\live.py:168 .\dripemails\settings.py:148
+#: .\dripemails\live.py:169 .\dripemails\settings.py:157
 msgid "Chinese (Traditional)"
 msgstr "Cina (Tradisional)"
 
-#: .\dripemails\live.py:169 .\dripemails\settings.py:149
+#: .\dripemails\live.py:170 .\dripemails\settings.py:158
 msgid "Japanese"
 msgstr "Jepun"
 
-#: .\dripemails\live.py:170 .\dripemails\settings.py:150
+#: .\dripemails\live.py:171 .\dripemails\settings.py:159
 msgid "Korean"
 msgstr "Korea"
 
-#: .\dripemails\live.py:171 .\dripemails\settings.py:151
+#: .\dripemails\live.py:172 .\dripemails\settings.py:160
 msgid "Arabic"
 msgstr "bahasa arab"
 
-#: .\dripemails\live.py:172 .\dripemails\settings.py:152
+#: .\dripemails\live.py:173 .\dripemails\settings.py:161
 msgid "Hindi"
 msgstr "Hindi"
 
-#: .\dripemails\live.py:173 .\dripemails\settings.py:153
+#: .\dripemails\live.py:174 .\dripemails\settings.py:162
 msgid "Turkish"
 msgstr "bahasa Turki"
 
-#: .\dripemails\live.py:174 .\dripemails\settings.py:154
+#: .\dripemails\live.py:175 .\dripemails\settings.py:163
 msgid "Polish"
 msgstr "Poland"
 
-#: .\dripemails\live.py:175 .\dripemails\settings.py:155
+#: .\dripemails\live.py:176 .\dripemails\settings.py:164
 msgid "Dutch"
 msgstr "Belanda"
 
-#: .\dripemails\live.py:176 .\dripemails\settings.py:156
+#: .\dripemails\live.py:177 .\dripemails\settings.py:165
 msgid "Swedish"
 msgstr "bahasa Sweden"
 
-#: .\dripemails\live.py:177 .\dripemails\settings.py:157
+#: .\dripemails\live.py:178 .\dripemails\settings.py:166
 msgid "Danish"
 msgstr "Danish"
 
-#: .\dripemails\live.py:178 .\dripemails\settings.py:158
+#: .\dripemails\live.py:179 .\dripemails\settings.py:167
 msgid "Norwegian"
 msgstr "bahasa Norway"
 
-#: .\dripemails\live.py:179 .\dripemails\settings.py:159
+#: .\dripemails\live.py:180 .\dripemails\settings.py:168
 msgid "Finnish"
 msgstr "bahasa Finland"
 
-#: .\dripemails\live.py:180 .\dripemails\settings.py:160
+#: .\dripemails\live.py:181 .\dripemails\settings.py:169
 msgid "Czech"
 msgstr "bahasa Czech"
 
-#: .\dripemails\live.py:181 .\dripemails\settings.py:161
+#: .\dripemails\live.py:182 .\dripemails\settings.py:170
 msgid "Romanian"
 msgstr "bahasa Romania"
 
-#: .\dripemails\live.py:182 .\dripemails\settings.py:162
+#: .\dripemails\live.py:183 .\dripemails\settings.py:171
 msgid "Hungarian"
 msgstr "bahasa Hungary"
 
-#: .\dripemails\live.py:183 .\dripemails\settings.py:163
+#: .\dripemails\live.py:184 .\dripemails\settings.py:172
 msgid "Greek"
 msgstr "bahasa Yunani"
 
-#: .\dripemails\live.py:184 .\dripemails\settings.py:164
+#: .\dripemails\live.py:185 .\dripemails\settings.py:173
 msgid "Hebrew"
 msgstr "bahasa Ibrani"
 
-#: .\dripemails\live.py:185 .\dripemails\settings.py:165
+#: .\dripemails\live.py:186 .\dripemails\settings.py:174
 msgid "Thai"
 msgstr "Thai"
 
-#: .\dripemails\live.py:186 .\dripemails\settings.py:166
+#: .\dripemails\live.py:187 .\dripemails\settings.py:175
 msgid "Vietnamese"
 msgstr "bahasa Vietnam"
 
-#: .\dripemails\live.py:187 .\dripemails\settings.py:167
+#: .\dripemails\live.py:188 .\dripemails\settings.py:176
 msgid "Indonesian"
 msgstr "Indonesia"
 
-#: .\dripemails\live.py:188 .\dripemails\settings.py:168
+#: .\dripemails\live.py:189 .\dripemails\settings.py:177
 msgid "Malay"
 msgstr "Melayu"
 
-#: .\dripemails\live.py:189 .\dripemails\settings.py:169
+#: .\dripemails\live.py:190 .\dripemails\settings.py:178
 msgid "Ukrainian"
 msgstr "Ukraine"
 
-#: .\dripemails\live.py:190 .\dripemails\settings.py:170
+#: .\dripemails\live.py:191 .\dripemails\settings.py:179
 msgid "Bulgarian"
 msgstr "bahasa Bulgaria"
 
-#: .\dripemails\live.py:191 .\dripemails\settings.py:171
+#: .\dripemails\live.py:192 .\dripemails\settings.py:180
 msgid "Croatian"
 msgstr "bahasa Croatia"
 
-#: .\dripemails\live.py:192 .\dripemails\settings.py:172
+#: .\dripemails\live.py:193 .\dripemails\settings.py:181
 msgid "Serbian"
 msgstr "bahasa Serbia"
 
-#: .\dripemails\live.py:193 .\dripemails\settings.py:173
+#: .\dripemails\live.py:194 .\dripemails\settings.py:182
 msgid "Slovak"
 msgstr "bahasa Slovak"
 
-#: .\dripemails\live.py:194 .\dripemails\settings.py:174
+#: .\dripemails\live.py:195 .\dripemails\settings.py:183
 msgid "Slovenian"
 msgstr "Bahasa Slovenia"
 
-#: .\dripemails\live.py:195 .\dripemails\settings.py:175
+#: .\dripemails\live.py:196 .\dripemails\settings.py:184
 msgid "Lithuanian"
 msgstr "bahasa Lithuania"
 
-#: .\dripemails\live.py:196 .\dripemails\settings.py:176
+#: .\dripemails\live.py:197 .\dripemails\settings.py:185
 msgid "Latvian"
 msgstr "bahasa Latvia"
 
-#: .\dripemails\live.py:197 .\dripemails\settings.py:177
+#: .\dripemails\live.py:198 .\dripemails\settings.py:186
 msgid "Estonian"
 msgstr "bahasa Estonia"
 
-#: .\dripemails\live.py:198 .\dripemails\settings.py:178
+#: .\dripemails\live.py:199 .\dripemails\settings.py:187
 msgid "Icelandic"
 msgstr "bahasa Iceland"
 
-#: .\dripemails\live.py:199 .\dripemails\settings.py:179
+#: .\dripemails\live.py:200 .\dripemails\settings.py:188
 msgid "Irish"
 msgstr "Irish"
 
-#: .\dripemails\live.py:200 .\dripemails\settings.py:180
+#: .\dripemails\live.py:201 .\dripemails\settings.py:189
 msgid "Maltese"
 msgstr "bahasa Malta"
 
-#: .\dripemails\live.py:201 .\dripemails\settings.py:181
+#: .\dripemails\live.py:202 .\dripemails\settings.py:190
 msgid "Catalan"
 msgstr "Catalan"
 
-#: .\dripemails\live.py:202 .\dripemails\settings.py:182
+#: .\dripemails\live.py:203 .\dripemails\settings.py:191
 msgid "Basque"
 msgstr "Basque"
 
-#: .\dripemails\live.py:203 .\dripemails\settings.py:183
+#: .\dripemails\live.py:204 .\dripemails\settings.py:192
 msgid "Galician"
 msgstr "Galicia"
 
-#: .\dripemails\live.py:204 .\dripemails\settings.py:184
+#: .\dripemails\live.py:205 .\dripemails\settings.py:193
 msgid "Welsh"
 msgstr "bahasa Wales"
 
-#: .\dripemails\live.py:205 .\dripemails\settings.py:185
+#: .\dripemails\live.py:206 .\dripemails\settings.py:194
 msgid "Persian"
 msgstr "Parsi"
 
-#: .\dripemails\live.py:206 .\dripemails\settings.py:186
+#: .\dripemails\live.py:207 .\dripemails\settings.py:195
 msgid "Urdu"
 msgstr "bahasa Urdu"
 
-#: .\dripemails\live.py:207 .\dripemails\settings.py:187
+#: .\dripemails\live.py:208 .\dripemails\settings.py:196
 msgid "Bengali"
 msgstr "Benggali"
 
-#: .\dripemails\live.py:208 .\dripemails\settings.py:188
+#: .\dripemails\live.py:209 .\dripemails\settings.py:197
 msgid "Tamil"
 msgstr "bahasa Tamil"
 
-#: .\dripemails\live.py:209 .\dripemails\settings.py:189
+#: .\dripemails\live.py:210 .\dripemails\settings.py:198
 msgid "Telugu"
 msgstr "Telugu"
 
-#: .\dripemails\live.py:210 .\dripemails\settings.py:190
+#: .\dripemails\live.py:211 .\dripemails\settings.py:199
 msgid "Marathi"
 msgstr "Marathi"
 
-#: .\dripemails\live.py:211 .\dripemails\settings.py:191
+#: .\dripemails\live.py:212 .\dripemails\settings.py:200
 msgid "Gujarati"
 msgstr "Gujerat"
 
-#: .\dripemails\live.py:212 .\dripemails\settings.py:192
+#: .\dripemails\live.py:213 .\dripemails\settings.py:201
 msgid "Kannada"
 msgstr "Kannada"
 
-#: .\dripemails\live.py:213 .\dripemails\settings.py:193
+#: .\dripemails\live.py:214 .\dripemails\settings.py:202
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: .\dripemails\live.py:214 .\dripemails\settings.py:194
+#: .\dripemails\live.py:215 .\dripemails\settings.py:203
 msgid "Punjabi"
 msgstr "Punjabi"
 
-#: .\dripemails\live.py:215 .\dripemails\settings.py:195
+#: .\dripemails\live.py:216 .\dripemails\settings.py:204
 msgid "Nepali"
 msgstr "Nepal"
 
-#: .\dripemails\live.py:216 .\dripemails\settings.py:196
+#: .\dripemails\live.py:217 .\dripemails\settings.py:205
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: .\dripemails\live.py:217 .\dripemails\settings.py:197
+#: .\dripemails\live.py:218 .\dripemails\settings.py:206
 msgid "Burmese"
 msgstr "Burma"
 
-#: .\dripemails\live.py:218 .\dripemails\settings.py:198
+#: .\dripemails\live.py:219 .\dripemails\settings.py:207
 msgid "Khmer"
 msgstr "Khmer"
 
-#: .\dripemails\live.py:219 .\dripemails\settings.py:199
+#: .\dripemails\live.py:220 .\dripemails\settings.py:208
 msgid "Lao"
 msgstr "Lao"
 
-#: .\dripemails\live.py:220 .\dripemails\settings.py:200
+#: .\dripemails\live.py:221 .\dripemails\settings.py:209
 msgid "Georgian"
 msgstr "Georgian"
 
-#: .\dripemails\live.py:221 .\dripemails\settings.py:201
+#: .\dripemails\live.py:222 .\dripemails\settings.py:210
 msgid "Armenian"
 msgstr "bahasa Armenia"
 
-#: .\dripemails\live.py:222 .\dripemails\settings.py:202
+#: .\dripemails\live.py:223 .\dripemails\settings.py:211
 msgid "Azerbaijani"
 msgstr "bahasa Azerbaijan"
 
-#: .\dripemails\live.py:223 .\dripemails\settings.py:203
+#: .\dripemails\live.py:224 .\dripemails\settings.py:212
 msgid "Kazakh"
 msgstr "bahasa Kazakhstan"
 
-#: .\dripemails\live.py:224 .\dripemails\settings.py:204
+#: .\dripemails\live.py:225 .\dripemails\settings.py:213
 msgid "Kyrgyz"
 msgstr "Kyrgyz"
 
-#: .\dripemails\live.py:225 .\dripemails\settings.py:205
+#: .\dripemails\live.py:226 .\dripemails\settings.py:214
 msgid "Uzbek"
 msgstr "Uzbek"
 
-#: .\dripemails\live.py:226 .\dripemails\settings.py:206
+#: .\dripemails\live.py:227 .\dripemails\settings.py:215
 msgid "Mongolian"
 msgstr "Mongolia"
 
-#: .\dripemails\live.py:227 .\dripemails\settings.py:207
+#: .\dripemails\live.py:228 .\dripemails\settings.py:216
 msgid "Swahili"
 msgstr "bahasa Swahili"
 
-#: .\dripemails\live.py:228 .\dripemails\settings.py:208
+#: .\dripemails\live.py:229 .\dripemails\settings.py:217
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: .\dripemails\live.py:229 .\dripemails\settings.py:209
+#: .\dripemails\live.py:230 .\dripemails\settings.py:218
 msgid "Zulu"
 msgstr "Zulu"
 
-#: .\dripemails\live.py:230 .\dripemails\settings.py:210
+#: .\dripemails\live.py:231 .\dripemails\settings.py:219
 msgid "Xhosa"
 msgstr "Xhosa"
 
-#: .\dripemails\live.py:231 .\dripemails\settings.py:211
+#: .\dripemails\live.py:232 .\dripemails\settings.py:220
 msgid "Amharic"
 msgstr "Amharic"
 
-#: .\dripemails\live.py:232 .\dripemails\settings.py:212
+#: .\dripemails\live.py:233 .\dripemails\settings.py:221
 msgid "Hausa"
 msgstr "Hausa"
 
-#: .\dripemails\live.py:233 .\dripemails\settings.py:213
+#: .\dripemails\live.py:234 .\dripemails\settings.py:222
 msgid "Yoruba"
 msgstr "Yoruba"
 
-#: .\dripemails\live.py:234 .\dripemails\settings.py:214
+#: .\dripemails\live.py:235 .\dripemails\settings.py:223
 msgid "Igbo"
 msgstr "Igbo"
 
-#: .\dripemails\live.py:235 .\dripemails\settings.py:215
+#: .\dripemails\live.py:236 .\dripemails\settings.py:224
 msgid "Shona"
 msgstr "Shona"
 
-#: .\dripemails\live.py:236 .\dripemails\settings.py:216
+#: .\dripemails\live.py:237 .\dripemails\settings.py:225
 msgid "Sotho"
 msgstr "Sotho"
 
-#: .\dripemails\live.py:237 .\dripemails\settings.py:217
+#: .\dripemails\live.py:238 .\dripemails\settings.py:226
 msgid "Tswana"
 msgstr "Tswana"
 
-#: .\dripemails\live.py:238 .\dripemails\settings.py:218
+#: .\dripemails\live.py:239 .\dripemails\settings.py:227
 msgid "Venda"
 msgstr "Venda"
 
-#: .\dripemails\live.py:239 .\dripemails\settings.py:219
+#: .\dripemails\live.py:240 .\dripemails\settings.py:228
 msgid "Tsonga"
 msgstr "Tsonga"
 
-#: .\dripemails\live.py:240 .\dripemails\settings.py:220
+#: .\dripemails\live.py:241 .\dripemails\settings.py:229
 msgid "Swati"
 msgstr "Swati"
 
-#: .\dripemails\live.py:241 .\dripemails\settings.py:221
+#: .\dripemails\live.py:242 .\dripemails\settings.py:230
 msgid "Ndebele"
 msgstr "Ndebele"
 
-#: .\dripemails\live.py:242 .\dripemails\settings.py:222
+#: .\dripemails\live.py:243 .\dripemails\settings.py:231
 msgid "Northern Sotho"
 msgstr "Sotho Utara"
 
-#: .\dripemails\live.py:243 .\dripemails\settings.py:223
+#: .\dripemails\live.py:244 .\dripemails\settings.py:232
 msgid "Esperanto"
 msgstr "Esperanto"
+
+#: .\gmail\models.py:10 .\templates\core\dashboard.html:84
+#, fuzzy
+#| msgid "Email"
+msgid "Gmail"
+msgstr "E-mel"
+
+#: .\gmail\models.py:11
+msgid "Outlook"
+msgstr "Tinjauan"
+
+#: .\gmail\models.py:12 .\templates\core\dashboard.html:124
+msgid "IMAP"
+msgstr ""
+
+#: .\gmail\models.py:19 .\gmail\models.py:72
+msgid "Provider"
+msgstr "Pembekal"
+
+#: .\gmail\models.py:22
+#, fuzzy
+#| msgid "Access denied"
+msgid "Access Token"
+msgstr "Akses ditolak"
+
+#: .\gmail\models.py:23
+#, fuzzy
+#| msgid "Refresh"
+msgid "Refresh Token"
+msgstr "Segarkan semula"
+
+#: .\gmail\models.py:24
+msgid "Token Expiry"
+msgstr "Token Tamat"
+
+#: .\gmail\models.py:27 .\templates\core\dashboard.html:142
+#: .\templates\core\home.html:253 .\templates\core\includes\signup_box.html:54
+msgid "IMAP Host"
+msgstr "Hos IMAP"
+
+#: .\gmail\models.py:28 .\templates\core\dashboard.html:148
+#: .\templates\core\home.html:260 .\templates\core\includes\signup_box.html:60
+msgid "IMAP Port"
+msgstr "Pelabuhan IMAP"
+
+#: .\gmail\models.py:29
+#, fuzzy
+#| msgid "Email or Username"
+msgid "IMAP Username"
+msgstr "E-mel atau Nama Pengguna"
+
+#: .\gmail\models.py:30 .\templates\core\home.html:271
+#: .\templates\core\includes\signup_box.html:69
+#, fuzzy
+#| msgid "Password"
+msgid "IMAP Password"
+msgstr "Kata laluan"
+
+#: .\gmail\models.py:31
+#, fuzzy
+#| msgid "Use \\"
+msgid "Use SSL"
+msgstr "Gunakan \\"
+
+#: .\gmail\models.py:34 .\templates\campaigns\template.html:453
+#: .\templates\core\contact.html:30 .\templates\core\dashboard.html:138
+#: .\templates\core\dashboard.html:391 .\templates\core\home.html:248
+#: .\templates\core\includes\signup_box.html:50
+#: .\templates\core\settings.html:20 .\templates\core\settings.html:26
+#: .\templates\core\settings.html:207
+msgid "Email Address"
+msgstr "Alamat E-mel"
+
+#: .\gmail\models.py:36
+msgid "Last Sync At"
+msgstr "Penyegerakan Terakhir Pada"
+
+#: .\gmail\models.py:37
+#, fuzzy
+#| msgid "Scannable:"
+msgid "Sync Enabled"
+msgstr "Boleh diimbas:"
+
+#: .\gmail\models.py:40
+#, fuzzy
+#| msgid "Profile Settings"
+msgid "Provider Settings"
+msgstr "Tetapan Profil"
+
+#: .\gmail\models.py:46
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Credential"
+msgstr "Kandungan E-mel"
+
+#: .\gmail\models.py:47
+#, fuzzy
+#| msgid "Email Details"
+msgid "Email Credentials"
+msgstr "Butiran E-mel"
+
+#: .\gmail\models.py:71
+msgid "Credential"
+msgstr "Tauliah"
+
+#: .\gmail\models.py:75
+#, fuzzy
+#| msgid "Error Message"
+msgid "Provider Message ID"
+msgstr "Mesej Ralat"
+
+#: .\gmail\models.py:76
+msgid "Thread ID"
+msgstr "ID benang"
+
+#: .\gmail\models.py:80
+#, fuzzy
+#| msgid "From Email:"
+msgid "From Email"
+msgstr "Daripada E-mel:"
+
+#: .\gmail\models.py:81
+#, fuzzy
+#| msgid "Emails"
+msgid "To Emails"
+msgstr "E-mel"
+
+#: .\gmail\models.py:81 .\gmail\models.py:82 .\gmail\models.py:83
+#, fuzzy
+#| msgid "Name and email address"
+msgid "Comma-separated email addresses"
+msgstr "Nama dan alamat e-mel"
+
+#: .\gmail\models.py:82
+#, fuzzy
+#| msgid "Emails"
+msgid "CC Emails"
+msgstr "E-mel"
+
+#: .\gmail\models.py:83
+#, fuzzy
+#| msgid "Emails"
+msgid "BCC Emails"
+msgstr "E-mel"
+
+#: .\gmail\models.py:84
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sender Email"
+msgstr "Hantar E-mel"
+
+#: .\gmail\models.py:85
+msgid "Reply To"
+msgstr "Balas Kepada"
+
+#: .\gmail\models.py:88
+msgid "Body Text"
+msgstr "Teks Badan"
+
+#: .\gmail\models.py:89
+#, fuzzy
+#| msgid "Generated Body HTML"
+msgid "Body HTML"
+msgstr "HTML Badan Dijana"
+
+#: .\gmail\models.py:92
+msgid "Received At"
+msgstr "Diterima Pada"
+
+#: .\gmail\models.py:93
+#, fuzzy
+#| msgid "Created At"
+msgid "Fetched At"
+msgstr "Dicipta Pada"
+
+#: .\gmail\models.py:94
+msgid "Processed"
+msgstr "Diproses"
+
+#: .\gmail\models.py:97
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email"
+msgstr "Butiran Kempen"
+
+#: .\gmail\models.py:100
+msgid "Provider Data"
+msgstr "Data Pembekal"
+
+#: .\gmail\models.py:103
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Message"
+msgstr "Alamat e-mel"
+
+#: .\gmail\models.py:104
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Messages"
+msgstr "Alamat e-mel"
 
 #: .\subscribers\models.py:18
 msgid "List"
 msgstr "Senaraikan"
 
 #: .\subscribers\models.py:19 .\subscribers\models.py:44
-#: .\templates\core\dashboard.html:149
+#: .\templates\core\dashboard.html:290
 #: .\templates\core\tutorials\api_integration.html:65
 #: .\templates\subscribers\list.html:78
 msgid "Lists"
 msgstr "Senarai"
 
-#: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:241
+#: .\subscribers\models.py:47 .\templates\campaigns\template.html:458
+#: .\templates\campaigns\template.html:498 .\templates\core\dashboard.html:382
 msgid "First Name"
 msgstr "Nama Pertama"
 
-#: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:245
+#: .\subscribers\models.py:48 .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:504 .\templates\core\dashboard.html:386
 msgid "Last Name"
 msgstr "Nama Akhir"
 
@@ -1197,8 +1462,8 @@ msgstr "Pengesahan Dihantar Di"
 msgid "Confirmed At"
 msgstr "Disahkan Pada"
 
-#: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:461
+#: .\subscribers\models.py:59 .\templates\analytics\dashboard.html:87
+#: .\templates\core\dashboard.html:242 .\templates\core\dashboard.html:602
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1525,14 +1790,16 @@ msgstr "Kembali ke Rumah"
 msgid "Email Confirmation Sent"
 msgstr "Pengesahan E-mel Dihantar"
 
-#: .\templates\account\login.html:5 .\templates\base.html:143
-#: .\templates\base.html:180
+#: .\templates\account\login.html:5 .\templates\base.html:144
+#: .\templates\base.html:181
 msgid "Login"
 msgstr "Log masuk"
 
 #: .\templates\account\login.html:14 .\templates\account\logout.html:12
 #: .\templates\account\password_reset.html:13
 #: .\templates\account\password_reset_done.html:13
+#: .\templates\account\password_reset_from_key.html:13
+#: .\templates\account\password_reset_from_key_done.html:13
 #: .\templates\account\signup.html:13 .\templates\base.html:14
 #: .\templates\base.html:15 .\templates\base.html:29 .\templates\base.html:38
 msgid "DripEmails.org"
@@ -1550,7 +1817,8 @@ msgstr "Log masuk untuk mengurus kempen e-mel anda."
 msgid "Email or Username"
 msgstr "E-mel atau Nama Pengguna"
 
-#: .\templates\account\login.html:44
+#: .\templates\account\login.html:44 .\templates\core\dashboard.html:157
+#: .\templates\core\home.html:1179
 msgid "Password"
 msgstr "Kata laluan"
 
@@ -1562,8 +1830,8 @@ msgstr "Terlupa kata laluan anda?"
 msgid "Remember Me"
 msgstr "Ingat Saya"
 
-#: .\templates\account\login.html:75 .\templates\core\home.html:73
-#: .\templates\core\home.html:749
+#: .\templates\account\login.html:75 .\templates\core\home.html:75
+#: .\templates\core\home.html:1078
 msgid "Sign In"
 msgstr "Log Masuk"
 
@@ -1608,12 +1876,13 @@ msgstr ""
 #: .\templates\analytics\footer_confirm_delete.html:47
 #: .\templates\analytics\footer_form.html:76
 #: .\templates\campaigns\create.html:64 .\templates\campaigns\drafts.html:232
-#: .\templates\campaigns\edit.html:156 .\templates\campaigns\template.html:270
-#: .\templates\campaigns\template.html:304
-#: .\templates\campaigns\template.html:381
-#: .\templates\campaigns\template.html:435
-#: .\templates\campaigns\template.html:483
-#: .\templates\subscribers\import.html:72
+#: .\templates\campaigns\edit.html:659 .\templates\campaigns\template.html:300
+#: .\templates\campaigns\template.html:337
+#: .\templates\campaigns\template.html:417
+#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:516
+#: .\templates\campaigns\template.html:564 .\templates\core\dashboard.html:172
+#: .\templates\core\home.html:1197 .\templates\subscribers\import.html:72
 #: .\templates\subscribers\import.html:112
 msgid "Cancel"
 msgstr "Batal"
@@ -1648,11 +1917,13 @@ msgstr "Hantar Pautan Tetapan Semula"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Remember your password?"
 msgstr "Ingat kata laluan anda?"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Log in here"
 msgstr "Log masuk di sini"
 
@@ -1670,7 +1941,79 @@ msgstr ""
 "semak folder spam anda.Jika tidak, hubungi kami jika anda tidak menerimanya "
 "dalam beberapa minit."
 
-#: .\templates\account\signup.html:15
+#: .\templates\account\password_reset_from_key.html:5
+#: .\templates\account\password_reset_from_key.html:15
+#: .\templates\account\password_reset_from_key.html:78
+#: .\templates\account\password_reset_from_key_done.html:15
+#: .\templates\core\tutorials\account_setup.html:79
+msgid "Change Password"
+msgstr "Tukar Kata Laluan"
+
+#: .\templates\account\password_reset_from_key.html:17
+#: .\templates\account\password_reset_from_key.html:35
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"Pautan tetapan semula kata laluan tidak sah, mungkin kerana ia telah "
+"digunakan.Sila minta tetapan semula kata laluan baharu."
+
+#: .\templates\account\password_reset_from_key.html:19
+#, fuzzy
+#| msgid "Enter your new password below."
+msgid "Please enter your new password below."
+msgstr "Masukkan kata laluan baharu anda di bawah."
+
+#: .\templates\account\password_reset_from_key.html:34
+#, fuzzy
+#| msgid "API Bearer Token"
+msgid "Bad Token"
+msgstr "Token Pembawa API"
+
+#: .\templates\account\password_reset_from_key.html:42
+#, fuzzy
+#| msgid "Reset Password"
+msgid "Request New Password Reset"
+msgstr "Tetapkan Semula Kata Laluan"
+
+#: .\templates\account\password_reset_from_key.html:89
+#: .\templates\account\password_reset_from_key_done.html:5
+#: .\templates\account\password_reset_from_key_done.html:35
+#, fuzzy
+#| msgid "Password"
+msgid "Password Changed"
+msgstr "Kata laluan"
+
+#: .\templates\account\password_reset_from_key.html:90
+#: .\templates\account\password_reset_from_key_done.html:36
+msgid "Your password is now changed."
+msgstr "Kata laluan anda kini telah ditukar."
+
+#: .\templates\account\password_reset_from_key.html:97
+#: .\templates\account\password_reset_from_key_done.html:47
+#: .\templates\core\community_user_forum.html:45
+msgid "Log In"
+msgstr "Log Masuk"
+
+#: .\templates\account\password_reset_from_key_done.html:42
+#, fuzzy
+#| msgid "Enter and confirm your new password"
+msgid "You can now log in with your new password."
+msgstr "Masukkan dan sahkan kata laluan baharu anda"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Need Help?"
+msgid "Need help?"
+msgstr "Perlukan Bantuan?"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Contact Us"
+msgid "Contact us"
+msgstr "Hubungi Kami"
+
+#: .\templates\account\signup.html:15 .\templates\core\home.html:1167
 #: .\templates\core\tutorials\quick_start.html:40
 msgid "Create Your Account"
 msgstr "Cipta Akaun Anda"
@@ -1696,6 +2039,123 @@ msgstr "Sudah mempunyai akaun?"
 msgid "Log in"
 msgstr "Log masuk"
 
+#: .\templates\analytics\dashboard.html:5
+#: .\templates\analytics\dashboard.html:15
+#: .\templates\core\docs\analytics.html:32
+#: .\templates\core\feature_analytics.html:60
+msgid "Analytics Dashboard"
+msgstr "Papan Pemuka Analitis"
+
+#: .\templates\analytics\dashboard.html:16
+#, fuzzy
+#| msgid "Track your campaign performance"
+msgid "Monitor your email campaign performance"
+msgstr "Jejaki prestasi kempen anda"
+
+#: .\templates\analytics\dashboard.html:31
+#, fuzzy
+#| msgid "Total sent"
+msgid "Total Sent"
+msgstr "Jumlah yang dihantar"
+
+#: .\templates\analytics\dashboard.html:48
+#: .\templates\analytics\dashboard.html:63
+#, fuzzy
+#| msgid "Generate"
+msgid "rate"
+msgstr "Menjana"
+
+#: .\templates\analytics\dashboard.html:76
+#: .\templates\campaigns\campaign_analysis.html:66
+#: .\templates\campaigns\campaign_analysis.html:92
+msgid "Delivery Rate"
+msgstr "Kadar Penghantaran"
+
+#: .\templates\analytics\dashboard.html:78
+#, fuzzy
+#| msgid "Bounces"
+msgid "bounces"
+msgstr "Melantun"
+
+#: .\templates\analytics\dashboard.html:89
+#, fuzzy
+#| msgid "Inactive"
+msgid "active"
+msgstr "Tidak aktif"
+
+#: .\templates\analytics\dashboard.html:90
+#, fuzzy
+#| msgid "Be at least 300 words"
+msgid "in last 30 days"
+msgstr "Sekurang-kurangnya 300 patah perkataan"
+
+#: .\templates\analytics\dashboard.html:96
+#, fuzzy
+#| msgid "Total campaigns"
+msgid "total campaigns"
+msgstr "Jumlah kempen"
+
+#: .\templates\analytics\dashboard.html:100
+#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\core\tutorials\performance_dashboard.html:121
+msgid "Unsubscribes"
+msgstr "Nyahlanggan"
+
+#: .\templates\analytics\dashboard.html:102
+#, fuzzy
+#| msgid "Total subscribers:"
+msgid "total unsubscribes"
+msgstr "Jumlah pelanggan:"
+
+#: .\templates\analytics\dashboard.html:109
+#: .\templates\core\feature_analytics.html:15
+msgid "Campaign Performance"
+msgstr "Prestasi Kempen"
+
+#: .\templates\analytics\dashboard.html:128
+#: .\templates\campaigns\campaign_analysis.html:58
+#: .\templates\campaigns\campaign_analysis.html:98
+#: .\templates\core\feature_analytics.html:154
+#: .\templates\core\tutorials\email_analytics.html:30
+msgid "Open Rate"
+msgstr "Kadar Terbuka"
+
+#: .\templates\analytics\dashboard.html:131
+#: .\templates\campaigns\campaign_analysis.html:62
+msgid "Click Rate"
+msgstr "Klik Kadar"
+
+#: .\templates\analytics\dashboard.html:172
+#, fuzzy
+#| msgid "Create your first campaign to start creating email templates."
+msgid "No campaigns yet. Create your first campaign to see analytics."
+msgstr "Buat kempen pertama anda untuk mula membuat templat e-mel."
+
+#: .\templates\analytics\dashboard.html:184
+#, fuzzy
+#| msgid "Recent Activity Feed"
+msgid "Recent Activity"
+msgstr "Suapan Aktiviti Terkini"
+
+#: .\templates\analytics\dashboard.html:217
+#, fuzzy
+#| msgid "Campaigns:"
+msgid "Campaign:"
+msgstr "Kempen:"
+
+#: .\templates\analytics\dashboard.html:221
+#: .\templates\campaigns\campaign_emails.html:236
+#, fuzzy
+#| msgid "Lao"
+msgid "ago"
+msgstr "Lao"
+
+#: .\templates\analytics\dashboard.html:229
+#, fuzzy
+#| msgid "No activity"
+msgid "No recent activity"
+msgstr "Tiada aktiviti"
+
 #: .\templates\analytics\footer_confirm_delete.html:4
 #: .\templates\analytics\footer_confirm_delete.html:10
 #: .\templates\analytics\footer_confirm_delete.html:51
@@ -1718,7 +2178,7 @@ msgstr ""
 #: .\templates\analytics\footer_form.html:5
 #: .\templates\analytics\footer_form.html:80
 #: .\templates\analytics\footer_list.html:20
-#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:567
 msgid "Create Footer"
 msgstr "Buat Pengaki"
 
@@ -1743,7 +2203,7 @@ msgid "Back to Footers"
 msgstr "Kembali ke Footers"
 
 #: .\templates\analytics\footer_form.html:46
-#: .\templates\campaigns\template.html:456
+#: .\templates\campaigns\template.html:537
 msgid "Footer Name"
 msgstr "Nama Pengaki"
 
@@ -1764,7 +2224,7 @@ msgstr ""
 "pautan dan format teks."
 
 #: .\templates\analytics\footer_form.html:68
-#: .\templates\campaigns\template.html:477
+#: .\templates\campaigns\template.html:558
 msgid "Set as default footer"
 msgstr "Tetapkan sebagai pengaki lalai"
 
@@ -1773,7 +2233,7 @@ msgid "Update Footer"
 msgstr "Kemas kini Pengaki"
 
 #: .\templates\analytics\footer_form.html:89
-#: .\templates\campaigns\template.html:115
+#: .\templates\campaigns\template.html:142
 #: .\templates\campaigns\template_revision.html:142
 #: .\templates\core\feature_email_templates.html:133
 msgid "Preview"
@@ -1804,8 +2264,9 @@ msgid "Preview:"
 msgstr "Pratonton:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
-#: .\templates\core\dashboard.html:463
+#: .\templates\campaigns\campaign_emails.html:148
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:528
+#: .\templates\core\dashboard.html:604
 msgid "Created"
 msgstr "Dicipta"
 
@@ -1815,7 +2276,7 @@ msgid "Updated"
 msgstr "dikemas kini"
 
 #: .\templates\analytics\footer_list.html:68
-#: .\templates\campaigns\edit.html:111
+#: .\templates\campaigns\edit.html:136
 msgid "Edit"
 msgstr "Sunting"
 
@@ -1824,7 +2285,7 @@ msgid "Set Default"
 msgstr "Tetapkan Lalai"
 
 #: .\templates\analytics\footer_list.html:79
-#: .\templates\campaigns\edit.html:115
+#: .\templates\campaigns\edit.html:140
 msgid "Delete"
 msgstr "Padam"
 
@@ -1858,7 +2319,7 @@ msgstr ""
 "dan urutan e-mel automatik.Buat, jadualkan dan jejak kempen titisan dengan "
 "platform automasi e-mel kami yang berkuasa."
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid ""
 "Free drip email marketing software with unlimited campaigns, subscribers, "
 "and automated email sequences"
@@ -1866,50 +2327,50 @@ msgstr ""
 "Perisian pemasaran e-mel titisan percuma dengan kempen tanpa had, pelanggan "
 "dan urutan e-mel automatik"
 
-#: .\templates\base.html:106
+#: .\templates\base.html:107
 msgid "Search templates & campaigns..."
 msgstr "Templat & kempen carian..."
 
-#: .\templates\base.html:139 .\templates\base.html:176
+#: .\templates\base.html:140 .\templates\base.html:177
 #: .\templates\campaigns\drafts.html:19 .\templates\core\dashboard.html:52
 #: .\templates\core\feature_email_scheduling.html:39
 msgid "Dashboard"
 msgstr "Papan pemuka"
 
-#: .\templates\base.html:140 .\templates\base.html:177
+#: .\templates\base.html:141 .\templates\base.html:178
 #: .\templates\core\dashboard.html:60
 msgid "Settings"
 msgstr "tetapan"
 
-#: .\templates\base.html:141 .\templates\base.html:178
+#: .\templates\base.html:142 .\templates\base.html:179
 msgid "Logout"
 msgstr "Log keluar"
 
-#: .\templates\base.html:144 .\templates\base.html:181
-#: .\templates\core\home.html:509 .\templates\core\home.html:746
+#: .\templates\base.html:145 .\templates\base.html:182
+#: .\templates\core\home.html:811 .\templates\core\home.html:1075
 msgid "Sign Up Free"
 msgstr "Daftar Percuma"
 
-#: .\templates\base.html:215
+#: .\templates\base.html:216
 msgid "Free drip email marketing automation for everyone."
 msgstr "Automasi pemasaran e-mel titisan percuma untuk semua orang."
 
-#: .\templates\base.html:233 .\templates\core\docs\campaigns.html:45
+#: .\templates\base.html:234 .\templates\core\docs\campaigns.html:45
 #: .\templates\core\docs\smtp_server.html:40
 msgid "Features"
 msgstr "Ciri-ciri"
 
-#: .\templates\base.html:235 .\templates\core\feature_drip_campaigns.html:4
+#: .\templates\base.html:236 .\templates\core\feature_drip_campaigns.html:4
 #: .\templates\core\feature_drip_campaigns.html:8
 msgid "Drip Campaigns"
 msgstr "Kempen Titis"
 
-#: .\templates\base.html:236 .\templates\core\feature_email_scheduling.html:4
+#: .\templates\base.html:237 .\templates\core\feature_email_scheduling.html:4
 #: .\templates\core\feature_email_scheduling.html:8
 msgid "Email Scheduling"
 msgstr "Penjadualan E-mel"
 
-#: .\templates\base.html:237 .\templates\core\docs\campaigns.html:60
+#: .\templates\base.html:238 .\templates\core\docs\campaigns.html:60
 #: .\templates\core\docs\getting_started.html:84
 #: .\templates\core\feature_analytics.html:4
 #: .\templates\core\resource_api_reference.html:96
@@ -1917,7 +2378,7 @@ msgstr "Penjadualan E-mel"
 msgid "Analytics"
 msgstr "Analitis"
 
-#: .\templates\base.html:238 .\templates\core\docs\base_docs.html:35
+#: .\templates\base.html:239 .\templates\core\docs\base_docs.html:35
 #: .\templates\core\docs\subscribers.html:5
 #: .\templates\core\feature_subscriber_management.html:4
 #: .\templates\core\feature_subscriber_management.html:8
@@ -1926,85 +2387,85 @@ msgstr "Analitis"
 msgid "Subscriber Management"
 msgstr "Pengurusan Pelanggan"
 
-#: .\templates\base.html:243
+#: .\templates\base.html:244
 msgid "Resources"
 msgstr "Sumber"
 
-#: .\templates\base.html:245 .\templates\core\docs\base_docs.html:4
+#: .\templates\base.html:246 .\templates\core\docs\base_docs.html:4
 #: .\templates\core\docs\base_docs.html:11
 #: .\templates\core\tutorials\quick_start.html:184
 #: .\templates\core\tutorials\smtp_setup.html:182
 msgid "Documentation"
 msgstr "Dokumentasi"
 
-#: .\templates\base.html:246
+#: .\templates\base.html:247
 msgid "Tutorials"
 msgstr "Tutorial"
 
-#: .\templates\base.html:247 .\templates\core\resource_api_reference.html:4
+#: .\templates\base.html:248 .\templates\core\resource_api_reference.html:4
 #: .\templates\core\resource_api_reference.html:79
 msgid "API Reference"
 msgstr "Rujukan API"
 
-#: .\templates\base.html:248 .\templates\core\resource_community.html:4
+#: .\templates\base.html:249 .\templates\core\resource_community.html:4
 #: .\templates\core\resource_community.html:8
 #: .\templates\core\tutorials\quick_start.html:185
 msgid "Community"
 msgstr "Komuniti"
 
-#: .\templates\base.html:249 .\templates\blog\blog_index.html:4
+#: .\templates\base.html:250 .\templates\blog\blog_index.html:4
 #: .\templates\blog\blog_index.html:8
 msgid "Blog"
 msgstr "Blog"
 
-#: .\templates\base.html:254
+#: .\templates\base.html:255
 msgid "Company"
 msgstr "Syarikat"
 
-#: .\templates\base.html:256 .\templates\core\about.html:5
+#: .\templates\base.html:257 .\templates\core\about.html:5
 msgid "About"
 msgstr "Tentang"
 
-#: .\templates\base.html:257
+#: .\templates\base.html:258
 msgid "Contact"
 msgstr "Kenalan"
 
-#: .\templates\base.html:258 .\templates\core\privacy.html:4
+#: .\templates\base.html:259 .\templates\core\privacy.html:4
 #: .\templates\core\privacy.html:12
 msgid "Privacy Policy"
 msgstr "Dasar Privasi"
 
-#: .\templates\base.html:259 .\templates\core\terms.html:4
+#: .\templates\base.html:260 .\templates\core\terms.html:4
 #: .\templates\core\terms.html:12
 msgid "Terms of Service"
 msgstr "Syarat Perkhidmatan"
 
-#: .\templates\base.html:264
+#: .\templates\base.html:265
 msgid "All rights reserved."
 msgstr "Semua hak terpelihara."
 
-#: .\templates\base.html:330
+#: .\templates\base.html:331
 msgid "Searching..."
 msgstr "Mencari..."
 
-#: .\templates\base.html:345
+#: .\templates\base.html:346
 msgid "Error performing search. Please try again."
 msgstr "Ralat semasa melakukan carian.Sila cuba lagi."
 
-#: .\templates\base.html:355
+#: .\templates\base.html:356
 msgid "No templates or campaigns found matching"
 msgstr "Tiada templat atau kempen ditemui sepadan"
 
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:18
+#: .\templates\core\dashboard.html:547 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Tidak aktif"
 
-#: .\templates\base.html:385
+#: .\templates\base.html:386
 msgid "emails"
 msgstr "e-mel"
 
-#: .\templates\base.html:396 .\templates\base.html:398
+#: .\templates\base.html:397 .\templates\base.html:399
 #: .\templates\campaigns\drafts.html:3 .\templates\campaigns\drafts.html:9
 #: .\templates\core\docs\base_docs.html:39
 #: .\templates\core\docs\campaigns.html:48
@@ -2028,18 +2489,18 @@ msgid "Back to Blog"
 msgstr "Kembali ke Blog"
 
 #: .\templates\campaigns\campaign_analysis.html:5
-#: .\templates\campaigns\campaign_analysis.html:10
+#: .\templates\campaigns\campaign_analysis.html:14
 msgid "Campaign Analysis"
 msgstr "Analisis Kempen"
 
-#: .\templates\campaigns\campaign_analysis.html:12
+#: .\templates\campaigns\campaign_analysis.html:16
 #: .\templates\campaigns\drafts.html:17
 #: .\templates\campaigns\template_revision.html:5
 #: .\templates\campaigns\template_revision.html:29
 msgid "Template Revision"
 msgstr "Semakan Templat"
 
-#: .\templates\campaigns\campaign_analysis.html:21
+#: .\templates\campaigns\campaign_analysis.html:25
 #: .\templates\campaigns\template_revision.html:40
 #: .\templates\campaigns\template_revision.html:51
 #: .\templates\core\tutorials\account_setup.html:33
@@ -2047,99 +2508,68 @@ msgstr "Semakan Templat"
 msgid "Select"
 msgstr "Pilih"
 
-#: .\templates\campaigns\campaign_analysis.html:30
+#: .\templates\campaigns\campaign_analysis.html:34
 msgid "Select a campaign to view analysis."
 msgstr "Pilih kempen untuk melihat analisis."
 
-#: .\templates\campaigns\campaign_analysis.html:33
+#: .\templates\campaigns\campaign_analysis.html:37
 msgid "Campaign Statistics"
 msgstr "Perangkaan Kempen"
 
-#: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1218
+#: .\templates\campaigns\campaign_analysis.html:38
+#: .\templates\core\dashboard.html:1414
 msgid "Loading..."
 msgstr "Memuatkan..."
 
-#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:47
 msgid "Opens"
 msgstr "Dibuka"
 
-#: .\templates\campaigns\campaign_analysis.html:47
+#: .\templates\campaigns\campaign_analysis.html:51
 msgid "Clicks"
 msgstr "Klik"
 
-#: .\templates\campaigns\campaign_analysis.html:54
-#: .\templates\core\feature_analytics.html:154
-#: .\templates\core\tutorials\email_analytics.html:30
-msgid "Open Rate"
-msgstr "Kadar Terbuka"
-
-#: .\templates\campaigns\campaign_analysis.html:58
-msgid "Click Rate"
-msgstr "Klik Kadar"
-
-#: .\templates\campaigns\campaign_analysis.html:62
-msgid "Delivery Rate"
-msgstr "Kadar Penghantaran"
-
-#: .\templates\campaigns\campaign_analysis.html:69
+#: .\templates\campaigns\campaign_analysis.html:73
 msgid "Bounces"
 msgstr "Melantun"
 
-#: .\templates\campaigns\campaign_analysis.html:73
-#: .\templates\core\tutorials\performance_dashboard.html:121
-msgid "Unsubscribes"
-msgstr "Nyahlanggan"
-
-#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\campaigns\campaign_analysis.html:81
 msgid "Complaints"
 msgstr "Aduan"
 
-#: .\templates\campaigns\campaign_analysis.html:84
-msgid "Metrics Overview"
-msgstr "Gambaran Keseluruhan Metrik"
-
 #: .\templates\campaigns\campaign_analysis.html:88
-msgid "Open Rate (trend)"
-msgstr "Kadar Terbuka (trend)"
+msgid "Past 7 Days Trends"
+msgstr "Trend 7 Hari Lalu"
 
-#: .\templates\campaigns\campaign_analysis.html:90
-#: .\templates\campaigns\campaign_analysis.html:96
-#: .\templates\campaigns\campaign_analysis.html:102
-msgid "Coming soon"
-msgstr "Akan datang"
+#: .\templates\campaigns\campaign_analysis.html:104
+#, fuzzy
+#| msgid "Click-through rate"
+msgid "Click-Through Rate"
+msgstr "Kadar klikan"
 
-#: .\templates\campaigns\campaign_analysis.html:94
-msgid "Click Rate (trend)"
-msgstr "Kadar Klik (trend)"
-
-#: .\templates\campaigns\campaign_analysis.html:100
-msgid "Delivery Rate (trend)"
-msgstr "Kadar Penghantaran (trend)"
-
-#: .\templates\campaigns\campaign_analysis.html:110
+#: .\templates\campaigns\campaign_analysis.html:114
 msgid "Monthly events"
 msgstr "Acara bulanan"
 
-#: .\templates\campaigns\campaign_analysis.html:116
+#: .\templates\campaigns\campaign_analysis.html:120
 msgid "Month"
 msgstr "bulan"
 
-#: .\templates\campaigns\campaign_analysis.html:135
+#: .\templates\campaigns\campaign_analysis.html:139
 msgid "No events found for this campaign."
 msgstr "Tiada acara ditemui untuk kempen ini."
 
-#: .\templates\campaigns\campaign_analysis.html:141
+#: .\templates\campaigns\campaign_analysis.html:145
 msgid "Per-email breakdown"
 msgstr "Pecahan setiap e-mel"
 
-#: .\templates\campaigns\campaign_analysis.html:166
+#: .\templates\campaigns\campaign_analysis.html:170
 msgid "No emails found for this campaign."
 msgstr "Tiada e-mel ditemui untuk kempen ini."
 
 #: .\templates\campaigns\campaign_edit_page.html:4
 #: .\templates\campaigns\campaign_edit_page.html:8
-#: .\templates\campaigns\edit.html:4
+#: .\templates\campaigns\edit.html:5
 msgid "Edit Campaign"
 msgstr "Edit Kempen"
 
@@ -2156,7 +2586,7 @@ msgid "Add New Email"
 msgstr "Tambah E-mel Baharu"
 
 #: .\templates\campaigns\campaign_edit_page.html:40
-#: .\templates\campaigns\edit.html:102
+#: .\templates\campaigns\edit.html:127
 msgid "Wait"
 msgstr "tunggu"
 
@@ -2188,60 +2618,245 @@ msgstr "Kod API untuk Melancarkan Templat"
 msgid "No emails have been added to this campaign yet."
 msgstr "Tiada e-mel telah ditambahkan pada kempen ini."
 
+#: .\templates\campaigns\campaign_emails.html:14
+msgid "Email Queue and History"
+msgstr "Barisan E-mel dan Sejarah"
+
+#: .\templates\campaigns\campaign_emails.html:18
+#, fuzzy
+#| msgid "Save to Campaign"
+msgid "Back to Campaign"
+msgstr "Simpan ke Kempen"
+
+#: .\templates\campaigns\campaign_emails.html:28
+#: .\templates\campaigns\campaign_emails.html:46
+#: .\templates\campaigns\edit.html:168 .\templates\campaigns\edit.html:321
+#, fuzzy
+#| msgid "Send Email"
+msgid "Pending Emails"
+msgstr "Hantar E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:32
+#: .\templates\campaigns\campaign_emails.html:186
+#: .\templates\campaigns\edit.html:164 .\templates\campaigns\edit.html:180
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Emails"
+msgstr "Hantar E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:36
+#: .\templates\campaigns\campaign_emails.html:391
+#, fuzzy
+#| msgid "Send Email"
+msgid "Failed Emails"
+msgstr "Hantar E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:47
+#, fuzzy
+#| msgid "Email scheduled for {time}"
+msgid "Emails scheduled to be sent"
+msgstr "E-mel dijadualkan untuk {time}"
+
+#: .\templates\campaigns\campaign_emails.html:60
+#: .\templates\campaigns\campaign_emails.html:200
+#: .\templates\campaigns\campaign_emails.html:271
+#: .\templates\campaigns\campaign_emails.html:404
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient"
+msgstr "E-mel Penerima"
+
+#: .\templates\campaigns\campaign_emails.html:69
+#: .\templates\campaigns\campaign_emails.html:280
+#: .\templates\campaigns\campaign_emails.html:413
+#: .\templates\core\dashboard.html:530 .\templates\core\dashboard.html:606
+msgid "Actions"
+msgstr "Tindakan"
+
+#: .\templates\campaigns\campaign_emails.html:100
+msgid "In"
+msgstr "Dalam"
+
+#: .\templates\campaigns\campaign_emails.html:104
+#, fuzzy
+#| msgid "Overview"
+msgid "Overdue"
+msgstr "Gambaran keseluruhan"
+
+#: .\templates\campaigns\campaign_emails.html:116
+#: .\templates\campaigns\drafts.html:238 .\templates\campaigns\edit.html:354
+#: .\templates\core\dashboard.html:410 .\templates\core\dashboard.html:1281
+#: .\templates\core\feature_email_scheduling.html:44
+#: .\templates\core\tutorials\quick_start.html:148
+msgid "Send Now"
+msgstr "Hantar Sekarang"
+
+#: .\templates\campaigns\campaign_emails.html:125
+#: .\templates\campaigns\campaign_emails.html:250
+#: .\templates\campaigns\campaign_emails.html:327
+#: .\templates\campaigns\edit.html:538 .\templates\campaigns\template.html:365
+msgid "Email Details"
+msgstr "Butiran E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:132
+#: .\templates\campaigns\campaign_emails.html:257
+#: .\templates\campaigns\campaign_emails.html:334
+#: .\templates\campaigns\template.html:5
+#: .\templates\campaigns\template.html:104 .\templates\core\dashboard.html:401
+msgid "Email Template"
+msgstr "Templat E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:156
+#: .\templates\campaigns\template.html:432
+#: .\templates\core\dashboard.html:1245
+msgid "Email Preview"
+msgstr "Pratonton E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:175
+#, fuzzy
+#| msgid "Top performing emails"
+msgid "No pending emails"
+msgstr "E-mel berprestasi tinggi"
+
+#: .\templates\campaigns\campaign_emails.html:176
+msgid "All emails have been sent or there are no scheduled emails."
+msgstr "Semua e-mel telah dihantar atau tiada e-mel berjadual."
+
+#: .\templates\campaigns\campaign_emails.html:187
+#, fuzzy
+#| msgid "Successfully Unsubscribed"
+msgid "Successfully sent emails"
+msgstr "Berjaya Menyahlanggan"
+
+#: .\templates\campaigns\campaign_emails.html:265
+#, fuzzy
+#| msgid "Sent At"
+msgid "Actually Sent At"
+msgstr "Dihantar Pada"
+
+#: .\templates\campaigns\campaign_emails.html:274
+#: .\templates\campaigns\campaign_emails.html:407
+#: .\templates\core\dashboard.html:1231
+msgid "Error"
+msgstr "Ralat"
+
+#: .\templates\campaigns\campaign_emails.html:318
+#: .\templates\campaigns\campaign_emails.html:444
+#: .\templates\core\dashboard.html:1343
+msgid "Retry"
+msgstr "Cuba semula"
+
+#: .\templates\campaigns\campaign_emails.html:342
+msgid "Last Attempt"
+msgstr "Percubaan Terakhir"
+
+#: .\templates\campaigns\campaign_emails.html:384
+#: .\templates\campaigns\edit.html:250 .\templates\campaigns\edit.html:400
+#: .\templates\campaigns\edit.html:561 .\templates\campaigns\template.html:136
+#: .\templates\campaigns\template.html:172
+msgid "Email Content"
+msgstr "Kandungan E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:392
+#, fuzzy
+#| msgid "Email already sent."
+msgid "Emails that failed to send"
+msgstr "E-mel sudah dihantar."
+
+#: .\templates\campaigns\campaign_emails.html:457
+#, fuzzy
+#| msgid "Email Details"
+msgid "No failed emails"
+msgstr "Butiran E-mel"
+
+#: .\templates\campaigns\campaign_emails.html:458
+#, fuzzy
+#| msgid "Email sent successfully."
+msgid "All emails were sent successfully."
+msgstr "E-mel berjaya dihantar."
+
+#: .\templates\campaigns\campaign_emails.html:487
+#, fuzzy
+#| msgid "Are you sure you want to delete this email?"
+msgid "Are you sure you want to send this email now?"
+msgstr "Adakah anda pasti mahu memadamkan e-mel ini?"
+
+#: .\templates\campaigns\campaign_emails.html:493
+#: .\templates\campaigns\drafts.html:363 .\templates\campaigns\edit.html:909
+#: .\templates\campaigns\template.html:1085
+#: .\templates\campaigns\template_revision.html:393
+msgid "Sending..."
+msgstr "Menghantar..."
+
+#: .\templates\campaigns\campaign_emails.html:505
+#: .\templates\campaigns\edit.html:924
+#: .\templates\campaigns\template.html:1119
+#, fuzzy
+#| msgid "Email sent successfully"
+msgid "Email sent successfully!"
+msgstr "E-mel berjaya dihantar"
+
+#: .\templates\campaigns\campaign_emails.html:512
+#: .\templates\campaigns\edit.html:932
+#, fuzzy
+#| msgid "Failed to send email: "
+msgid "Failed to send email"
+msgstr "Gagal menghantar e-mel:"
+
 #: .\templates\campaigns\create.html:4 .\templates\campaigns\create.html:78
 #: .\templates\campaigns\drafts.html:55
 #: .\templates\core\feature_drip_campaigns.html:36
 msgid "Create Campaign"
 msgstr "Buat Kempen"
 
-#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:665
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Buat Kempen Baharu"
 
-#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:29
+#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:54
 msgid "Campaign Name"
 msgstr "Nama Kempen"
 
-#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:45
+#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:70
 msgid "Select a list or upload contacts"
 msgstr "Pilih senarai atau muat naik kenalan"
 
 #: .\templates\campaigns\create.html:38 .\templates\campaigns\create.html:46
-#: .\templates\campaigns\edit.html:52 .\templates\campaigns\edit.html:138
+#: .\templates\campaigns\edit.html:77 .\templates\campaigns\edit.html:641
 msgid "Upload Contacts"
 msgstr "Muat naik Kenalan"
 
-#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:141
+#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:644
 #: .\templates\subscribers\import.html:95
 msgid "List Name"
 msgstr "Nama Senarai"
 
-#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:144
+#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:647
 msgid "My Contact List"
 msgstr "Senarai Kenalan Saya"
 
-#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:147
+#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:650
 msgid "Contact File"
 msgstr "Fail Kenalan"
 
-#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:150
+#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:653
 msgid "Supported formats: CSV, Excel (.xls, .xlsx)"
 msgstr "Format yang disokong: CSV, Excel (.xls, .xlsx)"
 
-#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:160
+#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:663
 msgid "Upload"
 msgstr "Muat naik"
 
-#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:187
+#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:690
 msgid "Please select a file to upload"
 msgstr "Sila pilih fail untuk dimuat naik"
 
-#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:217
+#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:720
 msgid "Contacts uploaded successfully"
 msgstr "Kenalan berjaya dimuat naik"
 
-#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:220
+#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:723
 msgid "An error occurred while uploading contacts"
 msgstr "Ralat berlaku semasa memuat naik kenalan"
 
@@ -2261,7 +2876,7 @@ msgstr "Pilih kempen"
 msgid "(Active)"
 msgstr "(Aktif)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:573
 msgid "No campaigns yet"
 msgstr "Tiada kempen lagi"
 
@@ -2270,7 +2885,7 @@ msgid "Create your first campaign to start creating email templates."
 msgstr "Buat kempen pertama anda untuk mula membuat templat e-mel."
 
 #: .\templates\campaigns\drafts.html:65
-#: .\templates\campaigns\template.html:296
+#: .\templates\campaigns\template.html:329
 msgid "Select a campaign"
 msgstr "Pilih kempen"
 
@@ -2287,7 +2902,7 @@ msgstr "Tiada templat ditemui"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Kempen ini belum mempunyai sebarang templat e-mel lagi."
 
-#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:683
 msgid "Create Email Template"
 msgstr "Cipta Templat E-mel"
 
@@ -2308,7 +2923,7 @@ msgid "Revise"
 msgstr "Semak semula"
 
 #: .\templates\campaigns\drafts.html:165
-#: .\templates\campaigns\template.html:438
+#: .\templates\campaigns\template.html:474
 msgid "Send"
 msgstr "Hantar"
 
@@ -2317,11 +2932,12 @@ msgid "Send Email Template"
 msgstr "Hantar Templat E-mel"
 
 #: .\templates\campaigns\drafts.html:190
+#: .\templates\campaigns\template.html:492
 msgid "Recipient Email"
 msgstr "E-mel Penerima"
 
 #: .\templates\campaigns\drafts.html:219
-#: .\templates\campaigns\template.html:151
+#: .\templates\campaigns\template.html:181
 msgid "No footer"
 msgstr "Tiada pengaki"
 
@@ -2329,14 +2945,7 @@ msgstr "Tiada pengaki"
 msgid "Select a footer to append to your email"
 msgstr "Pilih pengaki untuk ditambahkan pada e-mel anda"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
-#: .\templates\core\dashboard.html:1085
-#: .\templates\core\feature_email_scheduling.html:44
-#: .\templates\core\tutorials\quick_start.html:148
-msgid "Send Now"
-msgstr "Hantar Sekarang"
-
-#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:323
+#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:826
 msgid "An error occurred while reordering emails"
 msgstr "Ralat berlaku semasa menyusun semula e-mel"
 
@@ -2348,80 +2957,267 @@ msgstr "Sila masukkan alamat e-mel penerima."
 msgid "Failed to update email settings: "
 msgstr "Gagal mengemas kini tetapan e-mel:"
 
-#: .\templates\campaigns\drafts.html:363
-#: .\templates\campaigns\template_revision.html:391
-msgid "Sending..."
-msgstr "Menghantar..."
-
 #: .\templates\campaigns\drafts.html:381
-#: .\templates\campaigns\template_revision.html:409
+#: .\templates\campaigns\template_revision.html:411
 msgid "Email sent successfully to "
 msgstr "E-mel berjaya dihantar ke"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:413
 msgid "Failed to send email: "
 msgstr "Gagal menghantar e-mel:"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:277
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:279
+#: .\templates\campaigns\template_revision.html:413
 msgid "Unknown error"
 msgstr "Ralat tidak diketahui"
 
 #: .\templates\campaigns\drafts.html:388
-#: .\templates\campaigns\template_revision.html:415
+#: .\templates\campaigns\template_revision.html:417
 msgid "Failed to send email. Please check your connection and try again."
 msgstr "Gagal menghantar e-mel.Sila semak sambungan anda dan cuba lagi."
 
-#: .\templates\campaigns\edit.html:14
+#: .\templates\campaigns\edit.html:39
 msgid "Deactivate"
 msgstr "Nyahaktifkan"
 
-#: .\templates\campaigns\edit.html:16
+#: .\templates\campaigns\edit.html:41
 msgid "Activate"
 msgstr "Aktifkan"
 
-#: .\templates\campaigns\edit.html:20
+#: .\templates\campaigns\edit.html:45
 #: .\templates\core\feature_drip_campaigns.html:52
 #: .\templates\core\feature_email_templates.html:48
 msgid "Add Email"
 msgstr "Tambah E-mel"
 
-#: .\templates\campaigns\edit.html:62
+#: .\templates\campaigns\edit.html:87
 msgid "Email Sequence"
 msgstr "Urutan E-mel"
 
-#: .\templates\campaigns\edit.html:68
+#: .\templates\campaigns\edit.html:93
 msgid "Create New Email"
 msgstr "Cipta E-mel Baharu"
 
-#: .\templates\campaigns\edit.html:97
+#: .\templates\campaigns\edit.html:122
 msgid "Step"
 msgstr "Langkah"
 
-#: .\templates\campaigns\edit.html:123
+#: .\templates\campaigns\edit.html:148
 msgid "No emails in this campaign yet."
 msgstr "Tiada e-mel dalam kempen ini lagi."
 
-#: .\templates\campaigns\edit.html:126
+#: .\templates\campaigns\edit.html:151
 msgid "Add First Email"
 msgstr "Tambah E-mel Pertama"
 
-#: .\templates\campaigns\edit.html:247
+#: .\templates\campaigns\edit.html:172
+msgid "IMAP Auto-Reply emails"
+msgstr "E-mel AutoBalas IMAP"
+
+#: .\templates\campaigns\edit.html:191 .\templates\campaigns\edit.html:332
+#: .\templates\campaigns\edit.html:482 .\templates\core\dashboard.html:1643
+#: .\templates\core\dashboard.html:2081
+#, fuzzy
+#| msgid "To"
+msgid "To:"
+msgstr "Kepada"
+
+#: .\templates\campaigns\edit.html:194 .\templates\campaigns\edit.html:495
+#, fuzzy
+#| msgid "Sent"
+msgid "Sent:"
+msgstr "Dihantar"
+
+#: .\templates\campaigns\edit.html:197 .\templates\campaigns\edit.html:338
+#: .\templates\campaigns\edit.html:498
+#, fuzzy
+#| msgid "Status"
+msgid "Status:"
+msgstr "Status"
+
+#: .\templates\campaigns\edit.html:204 .\templates\campaigns\edit.html:346
+#: .\templates\campaigns\edit.html:505
+#, fuzzy
+#| msgid "View list details:"
+msgid "View Details"
+msgstr "Lihat butiran senarai:"
+
+#: .\templates\campaigns\edit.html:216 .\templates\campaigns\edit.html:364
+#: .\templates\campaigns\edit.html:517
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email Attributes"
+msgstr "Alamat E-mel"
+
+#: .\templates\campaigns\edit.html:219 .\templates\campaigns\edit.html:367
+#: .\templates\campaigns\edit.html:520
+#, fuzzy
+#| msgid "Email 1"
+msgid "Email ID:"
+msgstr "E-mel 1"
+
+#: .\templates\campaigns\edit.html:223 .\templates\campaigns\edit.html:371
+#, fuzzy
+#| msgid "Order"
+msgid "Order:"
+msgstr "Pesanan"
+
+#: .\templates\campaigns\edit.html:228 .\templates\campaigns\edit.html:376
+#, fuzzy
+#| msgid "Subscribers:"
+msgid "Subscriber:"
+msgstr "Pelanggan:"
+
+#: .\templates\campaigns\edit.html:235 .\templates\campaigns\edit.html:383
+#, fuzzy
+#| msgid "Send in X Days"
+msgid "Sending Details"
+msgstr "Hantar dalam X Hari"
+
+#: .\templates\campaigns\edit.html:238
+#, fuzzy
+#| msgid "Scheduled"
+msgid "Scheduled:"
+msgstr "Dijadualkan"
+
+#: .\templates\campaigns\edit.html:242 .\templates\campaigns\edit.html:386
+#, fuzzy
+#| msgid "Created"
+msgid "Created:"
+msgstr "Dicipta"
+
+#: .\templates\campaigns\edit.html:261
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No emails have been sent from this campaign yet."
+msgstr "Tiada e-mel telah ditambahkan pada kempen ini."
+
+#: .\templates\campaigns\edit.html:270 .\templates\campaigns\edit.html:289
+#: .\templates\campaigns\edit.html:420 .\templates\campaigns\edit.html:439
+#: .\templates\campaigns\edit.html:587 .\templates\campaigns\edit.html:606
+#: .\templates\core\dashboard.html:2464 .\templates\subscribers\list.html:174
+#: .\templates\subscribers\list.html:178
+msgid "Previous"
+msgstr "Sebelumnya"
+
+#: .\templates\campaigns\edit.html:275 .\templates\campaigns\edit.html:304
+#: .\templates\campaigns\edit.html:425 .\templates\campaigns\edit.html:454
+#: .\templates\campaigns\edit.html:592 .\templates\campaigns\edit.html:621
+#: .\templates\core\dashboard.html:2469 .\templates\subscribers\list.html:191
+#: .\templates\subscribers\list.html:195
+msgid "Next"
+msgstr "Seterusnya"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "Showing"
+msgstr "Menunjukkan"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "to"
+msgstr "kepada"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599 .\templates\core\dashboard.html:2453
+msgid "of"
+msgstr "daripada"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+#, fuzzy
+#| msgid "Proven Results"
+msgid "results"
+msgstr "Keputusan Terbukti"
+
+#: .\templates\campaigns\edit.html:335
+#, fuzzy
+#| msgid "Scheduled For"
+msgid "Scheduled for:"
+msgstr "Dijadualkan Untuk"
+
+#: .\templates\campaigns\edit.html:391
+#, fuzzy
+#| msgid "Variables"
+msgid "Variables:"
+msgstr "Pembolehubah"
+
+#: .\templates\campaigns\edit.html:411
+#, fuzzy
+#| msgid "No emails found for this campaign."
+msgid "No pending emails for this campaign."
+msgstr "Tiada e-mel ditemui untuk kempen ini."
+
+#: .\templates\campaigns\edit.html:471
+msgid "IMAP Auto-Reply Emails"
+msgstr "E-mel Auto Balas IMAP"
+
+#: .\templates\campaigns\edit.html:492 .\templates\core\dashboard.html:2083
+#, fuzzy
+#| msgid "from:"
+msgid "From:"
+msgstr "daripada:"
+
+#: .\templates\campaigns\edit.html:525
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email:"
+msgstr "Butiran Kempen"
+
+#: .\templates\campaigns\edit.html:531
+msgid "IMAP Account:"
+msgstr "Akaun IMAP:"
+
+#: .\templates\campaigns\edit.html:541
+msgid "Received:"
+msgstr "Diterima:"
+
+#: .\templates\campaigns\edit.html:546
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient:"
+msgstr "E-mel Penerima"
+
+#: .\templates\campaigns\edit.html:552
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient Name:"
+msgstr "E-mel Penerima"
+
+#: .\templates\campaigns\edit.html:568
+#, fuzzy
+#| msgid "No campaigns available."
+msgid "No content available"
+msgstr "Tiada kempen tersedia."
+
+#: .\templates\campaigns\edit.html:578
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No IMAP auto-reply emails have been sent from this campaign yet."
+msgstr "Tiada e-mel telah ditambahkan pada kempen ini."
+
+#: .\templates\campaigns\edit.html:750
 msgid "An error occurred while updating the campaign"
 msgstr "Ralat berlaku semasa mengemas kini kempen"
 
-#: .\templates\campaigns\edit.html:267
+#: .\templates\campaigns\edit.html:770
 msgid "An error occurred while updating the campaign status"
 msgstr "Ralat berlaku semasa mengemas kini status kempen"
 
-#: .\templates\campaigns\edit.html:274
+#: .\templates\campaigns\edit.html:777
 msgid "Are you sure you want to delete this email?"
 msgstr "Adakah anda pasti mahu memadamkan e-mel ini?"
 
-#: .\templates\campaigns\edit.html:290
+#: .\templates\campaigns\edit.html:793
 msgid "An error occurred while deleting the email"
+msgstr "Ralat berlaku semasa memadamkan e-mel"
+
+#: .\templates\campaigns\edit.html:938
+#, fuzzy
+#| msgid "An error occurred while deleting the email"
+msgid "An error occurred while sending the email"
 msgstr "Ralat berlaku semasa memadamkan e-mel"
 
 #: .\templates\campaigns\email_analysis.html:5
@@ -2440,7 +3236,7 @@ msgstr ""
 "dikuasakan AI"
 
 #: .\templates\campaigns\email_analysis.html:116
-#: .\templates\campaigns\template.html:289
+#: .\templates\campaigns\template.html:322
 msgid "Select Campaign"
 msgstr "Pilih Kempen"
 
@@ -2555,75 +3351,93 @@ msgstr "Topik"
 msgid "Number of Emails"
 msgstr "Bilangan E-mel"
 
-#: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
-msgid "Email Template"
-msgstr "Templat E-mel"
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "No campaigns yet"
+msgid "No campaign selected."
+msgstr "Tiada kempen lagi"
 
-#: .\templates\campaigns\template.html:78
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "Choose which campaign to save this template to"
+msgid "You'll be prompted to select a campaign when you save this template."
+msgstr "Pilih kempen untuk menyimpan templat ini"
+
+#: .\templates\campaigns\template.html:89
+#, fuzzy
+#| msgid "Select a campaign"
+msgid "Or select a campaign now:"
+msgstr "Pilih kempen"
+
+#: .\templates\campaigns\template.html:91
+#, fuzzy
+#| msgid "No campaign (optional)"
+msgid "Select a campaign (optional)"
+msgstr "Tiada kempen (pilihan)"
+
+#: .\templates\campaigns\template.html:105
 msgid "Design your email template"
 msgstr "Reka bentuk templat e-mel anda"
 
-#: .\templates\campaigns\template.html:85
+#: .\templates\campaigns\template.html:112
 #: .\templates\campaigns\template_revision.html:101
 #: .\templates\core\feature_email_templates.html:57
 msgid "Email Subject"
 msgstr "Subjek E-mel"
 
-#: .\templates\campaigns\template.html:103
-msgid "Time to wait before sending this email after the previous one"
+#: .\templates\campaigns\template.html:130
+#, fuzzy
+#| msgid "Time to wait before sending this email after the previous one"
+msgid ""
+"Time to wait before sending this email after the previous one (0 = send "
+"immediately)"
 msgstr ""
 "Masa untuk menunggu sebelum menghantar e-mel ini selepas yang sebelumnya"
 
-#: .\templates\campaigns\template.html:109
-#: .\templates\campaigns\template.html:142
-msgid "Email Content"
-msgstr "Kandungan E-mel"
-
-#: .\templates\campaigns\template.html:112
+#: .\templates\campaigns\template.html:139
 #: .\templates\core\feature_email_templates.html:97
 msgid "AI Generate"
 msgstr "AI Menjana"
 
-#: .\templates\campaigns\template.html:118
+#: .\templates\campaigns\template.html:145
 msgid "Send Test"
 msgstr "Hantar Ujian"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Available Variables"
 msgstr "Pembolehubah Tersedia"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Click to copy"
 msgstr "Klik untuk menyalin"
 
-#: .\templates\campaigns\template.html:157
+#: .\templates\campaigns\template.html:187
 msgid "New Footer"
 msgstr "Pengaki Baharu"
 
-#: .\templates\campaigns\template.html:161
+#: .\templates\campaigns\template.html:191
 msgid "Select a footer to append to your email, or leave empty for no footer."
 msgstr ""
 "Pilih pengaki untuk ditambahkan pada e-mel anda atau biarkan kosong tanpa "
 "pengaki."
 
-#: .\templates\campaigns\template.html:167
+#: .\templates\campaigns\template.html:197
 msgid "API Integration"
 msgstr "Penyepaduan API"
 
-#: .\templates\campaigns\template.html:173
+#: .\templates\campaigns\template.html:203
 msgid "Your API Key"
 msgstr "Kunci API anda"
 
-#: .\templates\campaigns\template.html:174
+#: .\templates\campaigns\template.html:204
 msgid "Use this key to authenticate your API requests"
 msgstr "Gunakan kunci ini untuk mengesahkan permintaan API anda"
 
-#: .\templates\campaigns\template.html:177
+#: .\templates\campaigns\template.html:207
 msgid "No API key found. Please contact support."
 msgstr "Tiada kunci API ditemui.Sila hubungi sokongan."
 
-#: .\templates\campaigns\template.html:181
+#: .\templates\campaigns\template.html:211
 #: .\templates\core\resource_api_reference.html:104
 #: .\templates\core\resource_api_reference.html:125
 #: .\templates\core\resource_api_reference.html:131
@@ -2635,15 +3449,15 @@ msgstr "Tiada kunci API ditemui.Sila hubungi sokongan."
 #: .\templates\core\resource_api_reference.html:383
 #: .\templates\core\resource_api_reference.html:469
 #: .\templates\core\resource_api_reference.html:497
-#: .\templates\core\settings.html:103
+#: .\templates\core\settings.html:119
 msgid "Copy"
 msgstr "salin"
 
-#: .\templates\campaigns\template.html:185
+#: .\templates\campaigns\template.html:215
 msgid "Regenerate"
 msgstr "Menjana semula"
 
-#: .\templates\campaigns\template.html:194
+#: .\templates\campaigns\template.html:224
 msgid ""
 "Send emails using this template via API. Here's how to trigger this template"
 " programmatically:"
@@ -2651,66 +3465,71 @@ msgstr ""
 "Hantar e-mel menggunakan templat ini melalui API.Berikut ialah cara untuk "
 "mencetuskan templat ini secara pengaturcaraan:"
 
-#: .\templates\campaigns\template.html:198
+#: .\templates\campaigns\template.html:228
 msgid "Python"
 msgstr "Ular sawa"
 
-#: .\templates\campaigns\template.html:218
+#: .\templates\campaigns\template.html:248
 msgid "JavaScript"
 msgstr "JavaScript"
 
-#: .\templates\campaigns\template.html:236
+#: .\templates\campaigns\template.html:266
 msgid "Ruby"
 msgstr "Ruby"
 
-#: .\templates\campaigns\template.html:262
+#: .\templates\campaigns\template.html:292
 msgid "Save your email template first to see the API code for sending emails."
 msgstr ""
 "Simpan templat e-mel anda dahulu untuk melihat kod API untuk menghantar "
 "e-mel."
 
-#: .\templates\campaigns\template.html:274
+#: .\templates\campaigns\template.html:304
+#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:519
+#: .\templates\campaigns\template_revision.html:137
+#: .\templates\core\feature_email_scheduling.html:40
+#: .\templates\core\feature_email_scheduling.html:53
+msgid "Send Email"
+msgstr "Hantar E-mel"
+
 #: .\templates\campaigns\template.html:307
+#: .\templates\campaigns\template.html:340
 #: .\templates\campaigns\template_revision.html:131
 #: .\templates\core\feature_drip_campaigns.html:65
 #: .\templates\core\feature_email_templates.html:136
 msgid "Save Template"
 msgstr "Simpan Templat"
 
-#: .\templates\campaigns\template.html:290
+#: .\templates\campaigns\template.html:323
 msgid "Choose which campaign to save this template to"
 msgstr "Pilih kempen untuk menyimpan templat ini"
 
-#: .\templates\campaigns\template.html:318
+#: .\templates\campaigns\template.html:351
 msgid "Generate Email with AI"
 msgstr "Hasilkan E-mel dengan AI"
 
-#: .\templates\campaigns\template.html:319
+#: .\templates\campaigns\template.html:352
 msgid "Describe what you want in your email and let AI create the content"
 msgstr ""
 "Terangkan perkara yang anda mahukan dalam e-mel anda dan biarkan AI mencipta"
 " kandungan tersebut"
 
-#: .\templates\campaigns\template.html:324
+#: .\templates\campaigns\template.html:357
 msgid "What is the email about?"
 msgstr "Apakah e-mel itu?"
 
-#: .\templates\campaigns\template.html:327
+#: .\templates\campaigns\template.html:360
 msgid ""
 "e.g., New product launch, special discount offer, welcome to our service..."
 msgstr ""
 "cth., Pelancaran produk baharu, tawaran diskaun istimewa, selamat datang ke "
 "perkhidmatan kami..."
 
-#: .\templates\campaigns\template.html:328
+#: .\templates\campaigns\template.html:361
 msgid "Describe the main topic or purpose of the email"
 msgstr "Terangkan topik atau tujuan utama e-mel"
 
-#: .\templates\campaigns\template.html:332
-msgid "Email Details"
-msgstr "Butiran E-mel"
-
-#: .\templates\campaigns\template.html:340
+#: .\templates\campaigns\template.html:373
 msgid ""
 "Include any specific details, offers, key points, or instructions you want "
 "included"
@@ -2718,106 +3537,113 @@ msgstr ""
 "Sertakan sebarang butiran, tawaran, perkara penting atau arahan yang anda "
 "mahu sertakan"
 
-#: .\templates\campaigns\template.html:345
+#: .\templates\campaigns\template.html:378
 msgid "Who is this for?"
 msgstr "Untuk siapa ini?"
 
-#: .\templates\campaigns\template.html:348
+#: .\templates\campaigns\template.html:381
 msgid "e.g., customers, subscribers, users..."
 msgstr "cth., pelanggan, pelanggan, pengguna..."
 
-#: .\templates\campaigns\template.html:351
+#: .\templates\campaigns\template.html:384
 msgid "Tone"
 msgstr "nada"
 
-#: .\templates\campaigns\template.html:354
+#: .\templates\campaigns\template.html:387
 msgid "Professional"
 msgstr "Profesional"
 
-#: .\templates\campaigns\template.html:355
+#: .\templates\campaigns\template.html:388
 msgid "Friendly"
 msgstr "mesra"
 
-#: .\templates\campaigns\template.html:356
+#: .\templates\campaigns\template.html:389
 msgid "Persuasive"
 msgstr "Memujuk"
 
-#: .\templates\campaigns\template.html:357
+#: .\templates\campaigns\template.html:390
 msgid "Casual"
 msgstr "Santai"
 
-#: .\templates\campaigns\template.html:358
+#: .\templates\campaigns\template.html:391
 msgid "Formal"
 msgstr "formal"
 
-#: .\templates\campaigns\template.html:364
+#: .\templates\campaigns\template.html:397
 msgid "Email Length"
 msgstr "Panjang E-mel"
 
-#: .\templates\campaigns\template.html:367
+#: .\templates\campaigns\template.html:400
 msgid "Short (concise, 2-3 paragraphs)"
 msgstr "Pendek (ringkas, 2-3 perenggan)"
 
-#: .\templates\campaigns\template.html:368
+#: .\templates\campaigns\template.html:401
 msgid "Medium (balanced, 4-5 paragraphs)"
 msgstr "Sederhana (seimbang, 4-5 perenggan)"
 
-#: .\templates\campaigns\template.html:369
+#: .\templates\campaigns\template.html:402
 msgid "Long (detailed, 6+ paragraphs)"
 msgstr "Panjang (terperinci, 6+ perenggan)"
 
-#: .\templates\campaigns\template.html:375
-msgid ""
-"AI generation uses Hugging Face API to create email content. The generated "
-"subject and body will replace your current email."
-msgstr ""
-"Penjanaan AI menggunakan API Hugging Face untuk mencipta kandungan "
-"e-mel.Subjek dan kandungan yang dijana akan menggantikan e-mel semasa anda."
-
-#: .\templates\campaigns\template.html:384
+#: .\templates\campaigns\template.html:420
 msgid "Generate Email"
 msgstr "Hasilkan E-mel"
 
-#: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1049
-msgid "Email Preview"
-msgstr "Pratonton E-mel"
-
-#: .\templates\campaigns\template.html:398
+#: .\templates\campaigns\template.html:434
 msgid "Close"
 msgstr "tutup"
 
-#: .\templates\campaigns\template.html:412
+#: .\templates\campaigns\template.html:448
 msgid "Send Test Email"
 msgstr "Hantar E-mel Ujian"
 
-#: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
-#: .\templates\core\settings.html:26 .\templates\core\settings.html:191
-msgid "Email Address"
-msgstr "Alamat E-mel"
-
-#: .\templates\campaigns\template.html:425
+#: .\templates\campaigns\template.html:461
+#: .\templates\campaigns\template.html:501
 msgid "Enter first name..."
 msgstr "Masukkan nama pertama..."
 
-#: .\templates\campaigns\template.html:431
+#: .\templates\campaigns\template.html:467
+#: .\templates\campaigns\template.html:507
 msgid "Enter last name..."
 msgstr "Masukkan nama keluarga..."
 
-#: .\templates\campaigns\template.html:450
+#: .\templates\campaigns\template.html:487
+#, fuzzy
+#| msgid "Send this email to "
+msgid "Send this email template to a recipient"
+msgstr "Hantar e-mel ini ke"
+
+#: .\templates\campaigns\template.html:495
+msgid "recipient@example.com"
+msgstr ""
+
+#: .\templates\campaigns\template.html:511 .\templates\core\dashboard.html:359
+#: .\templates\core\docs\analytics.html:13
+#: .\templates\core\tutorials\quick_start.html:96
+msgid "Note:"
+msgstr "Nota:"
+
+#: .\templates\campaigns\template.html:511
+msgid ""
+"The email will be sent immediately. The recipient will be automatically "
+"added to this campaign's subscriber list."
+msgstr ""
+"E-mel akan dihantar segera.Penerima akan ditambahkan secara automatik ke "
+"senarai pelanggan kempen ini."
+
+#: .\templates\campaigns\template.html:531
 msgid "Create New Footer"
 msgstr "Buat Pengaki Baharu"
 
-#: .\templates\campaigns\template.html:460
+#: .\templates\campaigns\template.html:541
 msgid "Enter footer name..."
 msgstr "Masukkan nama pengaki..."
 
-#: .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:545
 msgid "Footer Content (HTML)"
 msgstr "Kandungan Pengaki (HTML)"
 
-#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:552
 msgid ""
 "Enter the HTML content for your footer. You can use variables like "
 "{{first_name}}, {{last_name}}, {{email}}, etc."
@@ -2825,108 +3651,161 @@ msgstr ""
 "Masukkan kandungan HTML untuk pengaki anda.Anda boleh menggunakan "
 "pembolehubah seperti {{first_name}}, {{last_name}}, {{email}}, dsb."
 
-#: .\templates\campaigns\template.html:547
+#: .\templates\campaigns\template.html:628
 msgid "Could not copy variable. Please try again."
 msgstr "Tidak dapat menyalin pembolehubah.Sila cuba lagi."
 
-#: .\templates\campaigns\template.html:566
+#: .\templates\campaigns\template.html:647
 msgid "Enter your email content here..."
 msgstr "Masukkan kandungan e-mel anda di sini..."
 
-#: .\templates\campaigns\template.html:579
-#: .\templates\campaigns\template_revision.html:303
+#: .\templates\campaigns\template.html:680
+#: .\templates\campaigns\template_revision.html:305
 msgid "Please enter an email subject."
 msgstr "Sila masukkan subjek e-mel."
 
-#: .\templates\campaigns\template.html:584
-#: .\templates\campaigns\template_revision.html:308
+#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template_revision.html:310
 msgid "Please enter email content."
 msgstr "Sila masukkan kandungan e-mel."
 
-#: .\templates\campaigns\template.html:599
+#: .\templates\campaigns\template.html:700
 msgid "Please select a campaign."
 msgstr "Sila pilih kempen."
 
-#: .\templates\campaigns\template.html:618
-#: .\templates\campaigns\template.html:923
+#: .\templates\campaigns\template.html:727
+#: .\templates\campaigns\template.html:1144
+#: .\templates\campaigns\template.html:1235
 msgid "Wait time must be a number greater than 0."
 msgstr "Masa menunggu mestilah nombor yang lebih besar daripada 0."
 
-#: .\templates\campaigns\template.html:653
-#: .\templates\campaigns\template.html:967
-#: .\templates\campaigns\template_revision.html:346
+#: .\templates\campaigns\template.html:762
+#: .\templates\campaigns\template.html:1279
+#: .\templates\campaigns\template_revision.html:348
 msgid "Template saved successfully!"
 msgstr "Templat berjaya disimpan!"
 
-#: .\templates\campaigns\template.html:659
+#: .\templates\campaigns\template.html:768
 msgid "An error occurred while saving the template: "
 msgstr "Ralat berlaku semasa menyimpan templat:"
 
-#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template.html:794
 msgid "Enter footer content here..."
 msgstr "Masukkan kandungan pengaki di sini..."
 
-#: .\templates\campaigns\template.html:730
+#: .\templates\campaigns\template.html:839
 msgid "An error occurred while loading the template. Please try again."
 msgstr "Ralat berlaku semasa memuatkan templat.Sila cuba lagi."
 
-#: .\templates\campaigns\template.html:739
+#: .\templates\campaigns\template.html:848
 msgid "Error: Campaign ID is missing. Please select a campaign first."
 msgstr "Ralat: ID Kempen tiada.Sila pilih kempen dahulu."
 
-#: .\templates\campaigns\template.html:779
+#: .\templates\campaigns\template.html:888
 msgid "Generating..."
 msgstr "Menjana..."
 
-#: .\templates\campaigns\template.html:813
+#: .\templates\campaigns\template.html:937
 msgid "Email generated successfully! Review and save when ready."
 msgstr "E-mel berjaya dijana!Semak dan simpan apabila sedia."
 
-#: .\templates\campaigns\template.html:815
+#: .\templates\campaigns\template.html:939
 msgid "Error: Invalid response from AI service."
 msgstr "Ralat: Respons tidak sah daripada perkhidmatan AI."
 
-#: .\templates\campaigns\template.html:820
+#: .\templates\campaigns\template.html:948
 msgid "Failed to generate email. "
 msgstr "Gagal menjana e-mel."
 
-#: .\templates\campaigns\template.html:822
-msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#: .\templates\campaigns\template.html:952
+msgid ""
+"Request timed out after 5 minutes. The AI generation is taking too long. "
+"Please try again or check server resources."
 msgstr ""
-"Pastikan pembolehubah persekitaran HUGGINGFACE_API_KEY anda ditetapkan."
+"Permintaan tamat masa selepas 5 minit.Generasi AI mengambil masa terlalu "
+"lama.Sila cuba lagi atau semak sumber pelayan."
 
-#: .\templates\campaigns\template.html:850
+#: .\templates\campaigns\template.html:954
+#, fuzzy
+#| msgid ""
+#| "Network error: Could not connect to server. Please check if the server is "
+#| "running."
+msgid ""
+"Network error: Could not connect to server. Please check your connection and"
+" try again."
+msgstr ""
+"Ralat rangkaian: Tidak dapat menyambung ke pelayan.Sila semak sama ada "
+"pelayan sedang berjalan."
+
+#: .\templates\campaigns\template.html:958
+#, fuzzy
+#| msgid "Error regenerating token. Please try again."
+msgid ""
+"Request timed out. The AI generation is taking too long. Please try again."
+msgstr "Ralat menjana semula token.Sila cuba lagi."
+
+#: .\templates\campaigns\template.html:960
+msgid "Please check the server logs for more details."
+msgstr "Sila semak log pelayan untuk butiran lanjut."
+
+#: .\templates\campaigns\template.html:962
+msgid "Please ensure Ollama is running on the server."
+msgstr "Sila pastikan Ollama berjalan pada pelayan."
+
+#: .\templates\campaigns\template.html:965
+#, fuzzy
+#| msgid "Error creating list. Please check console for details."
+msgid ""
+"Unknown error occurred. Please check the browser console and server logs for"
+" details."
+msgstr "Ralat membuat senarai.Sila semak konsol untuk mendapatkan butiran."
+
+#: .\templates\campaigns\template.html:1000
 msgid "[Footer content would appear here]"
 msgstr "[Kandungan pengaki akan dipaparkan di sini]"
 
-#: .\templates\campaigns\template.html:906
+#: .\templates\campaigns\template.html:1114
+#: .\templates\campaigns\template.html:1124
+#, fuzzy
+#| msgid ""
+#| "An error occurred while sending the test email. Please try again."
+msgid "An error occurred while sending the email. Please try again."
+msgstr "Ralat berlaku semasa menghantar e-mel ujian.Sila cuba lagi."
+
+#: .\templates\campaigns\template.html:1194
+#, fuzzy
+#| msgid "Failed to save template:"
+msgid "Failed to save template: "
+msgstr "Gagal menyimpan templat:"
+
+#: .\templates\campaigns\template.html:1218
 #: .\templates\subscribers\add.html:213
 msgid "Saving..."
 msgstr "Menyimpan..."
 
-#: .\templates\campaigns\template.html:973
+#: .\templates\campaigns\template.html:1285
 msgid "An error occurred while saving the template. Please try again."
 msgstr "Ralat berlaku semasa menyimpan templat.Sila cuba lagi."
 
-#: .\templates\campaigns\template.html:1009
+#: .\templates\campaigns\template.html:1321
 msgid "Please save the email template first before sending a test email."
 msgstr ""
 "Sila simpan templat e-mel terlebih dahulu sebelum menghantar e-mel ujian."
 
-#: .\templates\campaigns\template.html:1027
-#: .\templates\campaigns\template.html:1036
+#: .\templates\campaigns\template.html:1339
+#: .\templates\campaigns\template.html:1348
 msgid "An error occurred while sending the test email. Please try again."
 msgstr "Ralat berlaku semasa menghantar e-mel ujian.Sila cuba lagi."
 
-#: .\templates\campaigns\template.html:1031
+#: .\templates\campaigns\template.html:1343
 msgid "Test email sent successfully!"
 msgstr "E-mel ujian berjaya dihantar!"
 
-#: .\templates\campaigns\template.html:1058
+#: .\templates\campaigns\template.html:1370
 msgid "Copied!"
 msgstr "disalin!"
 
-#: .\templates\campaigns\template.html:1065
+#: .\templates\campaigns\template.html:1377
 msgid ""
 "Are you sure you want to regenerate your API key? This will invalidate your "
 "current key and you will need to update any applications using it."
@@ -2935,25 +3814,25 @@ msgstr ""
 "kunci semasa anda dan anda perlu mengemas kini mana-mana aplikasi yang "
 "menggunakannya."
 
-#: .\templates\campaigns\template.html:1071 .\templates\core\settings.html:299
+#: .\templates\campaigns\template.html:1383 .\templates\core\settings.html:315
 msgid "Regenerating..."
 msgstr "Menjana semula..."
 
-#: .\templates\campaigns\template.html:1092
-#: .\templates\campaigns\template.html:1097
+#: .\templates\campaigns\template.html:1404
+#: .\templates\campaigns\template.html:1409
 msgid "Error regenerating API key. Please try again."
 msgstr "Ralat menjana semula kunci API.Sila cuba lagi."
 
-#: .\templates\campaigns\template.html:1140
+#: .\templates\campaigns\template.html:1452
 msgid "Please enter a footer name."
 msgstr "Sila masukkan nama pengaki."
 
-#: .\templates\campaigns\template.html:1145
+#: .\templates\campaigns\template.html:1457
 msgid "Please enter footer content."
 msgstr "Sila masukkan kandungan pengaki."
 
-#: .\templates\campaigns\template.html:1189
-#: .\templates\campaigns\template.html:1194
+#: .\templates\campaigns\template.html:1501
+#: .\templates\campaigns\template.html:1506
 msgid "Error creating footer. Please try again."
 msgstr "Ralat semasa membuat pengaki.Sila cuba lagi."
 
@@ -2997,53 +3876,47 @@ msgstr "Simpan ke Kempen"
 msgid "Email Body"
 msgstr "Badan E-mel"
 
-#: .\templates\campaigns\template_revision.html:137
-#: .\templates\core\feature_email_scheduling.html:40
-#: .\templates\core\feature_email_scheduling.html:53
-msgid "Send Email"
-msgstr "Hantar E-mel"
-
 #: .\templates\campaigns\template_revision.html:181
 msgid "Write your email content here..."
 msgstr "Tulis kandungan e-mel anda di sini..."
 
-#: .\templates\campaigns\template_revision.html:249
+#: .\templates\campaigns\template_revision.html:251
 msgid "Please enter some email content first."
 msgstr "Sila masukkan beberapa kandungan e-mel dahulu."
 
-#: .\templates\campaigns\template_revision.html:256
+#: .\templates\campaigns\template_revision.html:258
 msgid "Revising..."
 msgstr "Mengkaji..."
 
-#: .\templates\campaigns\template_revision.html:275
+#: .\templates\campaigns\template_revision.html:277
 msgid "Email revised successfully! Review the changes in the editor."
 msgstr "E-mel berjaya disemak!Semak perubahan dalam editor."
 
-#: .\templates\campaigns\template_revision.html:277
+#: .\templates\campaigns\template_revision.html:279
 msgid "Revision failed: "
 msgstr "Semakan gagal:"
 
-#: .\templates\campaigns\template_revision.html:281
+#: .\templates\campaigns\template_revision.html:283
 msgid "Failed to revise email. Please check your connection and try again."
 msgstr "Gagal menyemak e-mel.Sila semak sambungan anda dan cuba lagi."
 
-#: .\templates\campaigns\template_revision.html:350
+#: .\templates\campaigns\template_revision.html:352
 msgid "Failed to save template:"
 msgstr "Gagal menyimpan templat:"
 
-#: .\templates\campaigns\template_revision.html:363
+#: .\templates\campaigns\template_revision.html:365
 msgid "Failed to save template. Please try again."
 msgstr "Gagal menyimpan templat.Sila cuba lagi."
 
-#: .\templates\campaigns\template_revision.html:371
+#: .\templates\campaigns\template_revision.html:373
 msgid "Enter the recipient email address:"
 msgstr "Masukkan alamat e-mel penerima:"
 
-#: .\templates\campaigns\template_revision.html:379
+#: .\templates\campaigns\template_revision.html:381
 msgid "Please enter a valid email address."
 msgstr "Sila masukkan alamat e-mel yang sah."
 
-#: .\templates\campaigns\template_revision.html:384
+#: .\templates\campaigns\template_revision.html:386
 msgid "Send this email to "
 msgstr "Hantar e-mel ini ke"
 
@@ -3389,10 +4262,6 @@ msgstr "Hantar Pos"
 msgid "You must be logged in to create posts."
 msgstr "Anda mesti log masuk untuk membuat siaran."
 
-#: .\templates\core\community_user_forum.html:45
-msgid "Log In"
-msgstr "Log Masuk"
-
 #: .\templates\core\community_user_forum.html:52
 msgid "Recent Posts"
 msgstr "Catatan Terkini"
@@ -3457,37 +4326,95 @@ msgstr "Ralat berlaku.Sila cuba lagi kemudian."
 msgid "Manage your campaigns and subscribers"
 msgstr "Urus kempen dan pelanggan anda"
 
-#: .\templates\core\dashboard.html:82 .\templates\core\dashboard.html:134
+#: .\templates\core\dashboard.html:70
+#, fuzzy
+#| msgid "API Integration"
+msgid "Integrations"
+msgstr "Penyepaduan API"
+
+#: .\templates\core\dashboard.html:71
+msgid "Connect your email accounts to auto-reply to emails"
+msgstr "Sambungkan akaun e-mel anda untuk autobalas kepada e-mel"
+
+#: .\templates\core\dashboard.html:85
+msgid "Connect your Gmail account to auto-reply to emails"
+msgstr "Sambungkan akaun Gmail anda untuk autobalas kepada e-mel"
+
+#: .\templates\core\dashboard.html:102
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent Gmail Emails"
+msgstr "E-mel Penerima"
+
+#: .\templates\core\dashboard.html:103 .\templates\core\dashboard.html:193
+#, fuzzy
+#| msgid "View and manage all your email campaigns"
+msgid "View and manage your email conversations"
+msgstr "Lihat dan urus semua kempen e-mel anda"
+
+#: .\templates\core\dashboard.html:125
+msgid "Connect your IMAP email account to auto-reply to emails"
+msgstr "Sambungkan akaun e-mel IMAP anda untuk autobalas kepada e-mel"
+
+#: .\templates\core\dashboard.html:134
+#, fuzzy
+#| msgid "Settings"
+msgid "IMAP Settings"
+msgstr "tetapan"
+
+#: .\templates\core\dashboard.html:152 .\templates\core\home.html:265
+#: .\templates\core\includes\signup_box.html:64
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "pengguna"
+
+#: .\templates\core\dashboard.html:162 .\templates\core\home.html:278
+#: .\templates\core\includes\signup_box.html:74
+msgid "Use SSL/TLS"
+msgstr "Gunakan SSL/TLS"
+
+#: .\templates\core\dashboard.html:167
+msgid "Save & Connect"
+msgstr "Simpan & Sambung"
+
+#: .\templates\core\dashboard.html:192
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent IMAP Emails"
+msgstr "E-mel Penerima"
+
+#: .\templates\core\dashboard.html:223 .\templates\core\dashboard.html:275
 msgid "View Campaigns"
 msgstr "Lihat Kempen"
 
-#: .\templates\core\dashboard.html:86
+#: .\templates\core\dashboard.html:227
 msgid "Add a new Campaign"
 msgstr "Tambah Kempen baharu"
 
-#: .\templates\core\dashboard.html:106
+#: .\templates\core\dashboard.html:247
 msgid "View Subscribers"
 msgstr "Lihat Pelanggan"
 
-#: .\templates\core\dashboard.html:110 .\templates\core\dashboard.html:154
+#: .\templates\core\dashboard.html:251 .\templates\core\dashboard.html:295
 msgid "View Lists"
 msgstr "Lihat Senarai"
 
-#: .\templates\core\dashboard.html:125
+#: .\templates\core\dashboard.html:266
 #: .\templates\core\tutorials\dashboard_overview.html:60
 #: .\templates\core\tutorials\performance_dashboard.html:39
 msgid "Emails Sent"
 msgstr "E-mel Dihantar"
 
-#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
+#: .\templates\core\dashboard.html:271 .\templates\core\dashboard.html:677
 msgid "View Analytics"
 msgstr "Lihat Analitis"
 
-#: .\templates\core\dashboard.html:158
+#: .\templates\core\dashboard.html:299
 msgid "Add a List"
 msgstr "Tambah Senarai"
 
-#: .\templates\core\dashboard.html:178
+#: .\templates\core\dashboard.html:319
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -3499,112 +4426,107 @@ msgid ""
 "                        "
 msgstr "Menunjukkan %(start)s-%(end)s daripada %(total)s pelanggan"
 
-#: .\templates\core\dashboard.html:195
+#: .\templates\core\dashboard.html:336
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Persediaan Rekod SPF untuk Kebolehhantaran E-mel"
 
-#: .\templates\core\dashboard.html:200
+#: .\templates\core\dashboard.html:341
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Tambahkan rekod TXT ini pada DNS domain anda:"
 
-#: .\templates\core\dashboard.html:203
+#: .\templates\core\dashboard.html:344
 msgid "Type:"
 msgstr "Jenis:"
 
-#: .\templates\core\dashboard.html:206
+#: .\templates\core\dashboard.html:347
 msgid "Name/Host:"
 msgstr "Nama/Hos:"
 
-#: .\templates\core\dashboard.html:209
+#: .\templates\core\dashboard.html:350
 msgid "Value:"
 msgstr "Nilai:"
 
-#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
-#: .\templates\core\tutorials\quick_start.html:96
-msgid "Note:"
-msgstr "Nota:"
-
-#: .\templates\core\dashboard.html:222
+#: .\templates\core\dashboard.html:363
 msgid "How to add this record:"
 msgstr "Bagaimana untuk menambah rekod ini:"
 
-#: .\templates\core\dashboard.html:225
+#: .\templates\core\dashboard.html:366
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Navigasi ke pengurusan DNS atau tetapan DNS"
 
-#: .\templates\core\dashboard.html:226
+#: .\templates\core\dashboard.html:367
 msgid "Add a new TXT record with the values shown above"
 msgstr "Tambahkan rekod TXT baharu dengan nilai yang ditunjukkan di atas"
 
-#: .\templates\core\dashboard.html:237
+#: .\templates\core\dashboard.html:378
 msgid "Send Email & Subscribe"
 msgstr "Hantar E-mel & Langgan"
 
-#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:397 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Pilih kempen..."
 
-#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
+#: .\templates\core\dashboard.html:403 .\templates\core\dashboard.html:1434
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Pilih kempen dahulu..."
 
-#: .\templates\core\dashboard.html:267
+#: .\templates\core\dashboard.html:408
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Jadual"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:411
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Hantar dalam X Minit"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:412
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Hantar dalam X Jam"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:413
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Hantar dalam X Hari"
 
-#: .\templates\core\dashboard.html:273
+#: .\templates\core\dashboard.html:414
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Hantar dalam X Minggu"
 
-#: .\templates\core\dashboard.html:274
+#: .\templates\core\dashboard.html:415
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Hantar dalam X Bulan"
 
-#: .\templates\core\dashboard.html:300
+#: .\templates\core\dashboard.html:441
 msgid "Recent Send Activity"
 msgstr "Aktiviti Hantar Terkini"
 
-#: .\templates\core\dashboard.html:301
+#: .\templates\core\dashboard.html:442
 msgid "Track your email sends and deliveries"
 msgstr "Jejaki penghantaran dan penghantaran e-mel anda"
 
-#: .\templates\core\dashboard.html:308
+#: .\templates\core\dashboard.html:449
 msgid "Refresh"
 msgstr "Segarkan semula"
 
-#: .\templates\core\dashboard.html:319
+#: .\templates\core\dashboard.html:460
 msgid "Times shown in"
 msgstr "Masa ditunjukkan dalam"
 
-#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
+#: .\templates\core\dashboard.html:477 .\templates\core\dashboard.html:1314
 msgid "Loading activity..."
 msgstr "Memuatkan aktiviti..."
 
-#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:494 .\templates\core\settings.html:255
 msgid "Remove Advertisements from Your Emails"
 msgstr "Alih keluar Iklan daripada E-mel Anda"
 
-#: .\templates\core\dashboard.html:354
+#: .\templates\core\dashboard.html:495
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3613,15 +4535,11 @@ msgstr ""
 "DripEmails.org di X atau blog anda untuk mengalih keluar iklan daripada "
 "semua e-mel anda."
 
-#: .\templates\core\dashboard.html:369
+#: .\templates\core\dashboard.html:510
 msgid "Your Campaigns"
 msgstr "Kempen Anda"
 
-#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
-msgid "Actions"
-msgstr "Tindakan"
-
-#: .\templates\core\dashboard.html:433
+#: .\templates\core\dashboard.html:574
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3629,160 +4547,332 @@ msgstr ""
 "Buat kempen pertama anda untuk mula menghantar e-mel automatik kepada "
 "pelanggan anda."
 
-#: .\templates\core\dashboard.html:446
+#: .\templates\core\dashboard.html:587
 msgid "Your Subscriber Lists"
 msgstr "Senarai Pelanggan Anda"
 
-#: .\templates\core\dashboard.html:501
+#: .\templates\core\dashboard.html:642
 msgid "No subscriber lists yet"
 msgstr "Tiada senarai pelanggan lagi"
 
-#: .\templates\core\dashboard.html:502
+#: .\templates\core\dashboard.html:643
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr "Buat senarai pelanggan pertama anda untuk mula mengatur kenalan anda."
 
-#: .\templates\core\dashboard.html:518
+#: .\templates\core\dashboard.html:659
 msgid "Quick Actions"
 msgstr "Tindakan Pantas"
 
-#: .\templates\core\dashboard.html:530
+#: .\templates\core\dashboard.html:671
 #: .\templates\core\tutorials\quick_start.html:105
 msgid "Add Subscribers"
 msgstr "Tambah Pelanggan"
 
-#: .\templates\core\dashboard.html:548
+#: .\templates\core\dashboard.html:689
 #, fuzzy
 #| msgid "Email Templates"
 msgid "View Email Templates"
 msgstr "Templat E-mel"
 
-#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:696 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Tetapan Akaun"
 
-#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:699 .\templates\core\settings.html:213
 msgid "Ad Removal"
 msgstr "Pembuangan Iklan"
 
-#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:711 .\templates\core\settings.html:225
 msgid "Unsubscribe Links"
 msgstr "Nyahlanggan Pautan"
 
-#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:723 .\templates\core\settings.html:237
 msgid "Timezone"
 msgstr "Zon waktu"
 
-#: .\templates\core\dashboard.html:590
+#: .\templates\core\dashboard.html:731
 #, fuzzy
 #| msgid "Account Settings"
 msgid "Manage Account Settings"
 msgstr "Tetapan Akaun"
 
-#: .\templates\core\dashboard.html:593
+#: .\templates\core\dashboard.html:734
 #, fuzzy
 #| msgid "Email Footers"
 msgid "Manage Email Footers"
 msgstr "Pengaki E-mel"
 
-#: .\templates\core\dashboard.html:602
+#: .\templates\core\dashboard.html:743
 msgid "Tips & Resources"
 msgstr "Petua & Sumber"
 
-#: .\templates\core\dashboard.html:605
+#: .\templates\core\dashboard.html:746
 msgid "Getting Started Guide"
 msgstr "Panduan Bermula"
 
-#: .\templates\core\dashboard.html:606
+#: .\templates\core\dashboard.html:747
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Ketahui cara menyediakan kempen e-mel pertama anda dalam beberapa minit."
 
-#: .\templates\core\dashboard.html:609
+#: .\templates\core\dashboard.html:750
 msgid "Email Best Practices"
 msgstr "Amalan Terbaik E-mel"
 
-#: .\templates\core\dashboard.html:610
+#: .\templates\core\dashboard.html:751
 msgid "Tips for creating emails that convert."
 msgstr "Petua untuk membuat e-mel yang menukar."
 
-#: .\templates\core\dashboard.html:613
+#: .\templates\core\dashboard.html:754
 msgid "Grow Your Subscriber List"
 msgstr "Kembangkan Senarai Pelanggan Anda"
 
-#: .\templates\core\dashboard.html:614
+#: .\templates\core\dashboard.html:755
 msgid "Strategies to increase your subscribers."
 msgstr "Strategi untuk meningkatkan pelanggan anda."
 
-#: .\templates\core\dashboard.html:628
+#: .\templates\core\dashboard.html:769
 msgid "Physical Address Required"
 msgstr "Alamat Fizikal Diperlukan"
 
-#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:774
+#, fuzzy
+#| msgid "Required"
+msgid "Required by Law:"
+msgstr "Diperlukan"
+
+#: .\templates\core\dashboard.html:774
+msgid ""
+"Your physical address is required by email regulations (CAN-SPAM, GDPR, "
+"etc.) and will be included in the footer of emails near the unsubscribe "
+"link."
+msgstr ""
+"Alamat fizikal anda diperlukan oleh peraturan e-mel (CAN-SPAM, GDPR, dll.) "
+"dan akan disertakan dalam pengaki e-mel berhampiran pautan nyahlanggan."
+
+#: .\templates\core\dashboard.html:780 .\templates\core\settings.html:57
+msgid "John Doe"
+msgstr ""
+
+#: .\templates\core\dashboard.html:781 .\templates\core\settings.html:58
+msgid "This name will appear in the From header of emails you send"
+msgstr "Nama ini akan muncul dalam pengepala Daripada e-mel yang anda hantar"
+
+#: .\templates\core\dashboard.html:788 .\templates\core\settings.html:65
 msgid "Address Line 2 (Optional)"
 msgstr "Alamat Baris 2 (Pilihan)"
 
-#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
-#: .\templates\core\dashboard.html:1366
+#: .\templates\core\dashboard.html:813
+#, fuzzy
+#| msgid "IP Address"
+msgid "Update Address"
+msgstr "Alamat IP"
+
+#: .\templates\core\dashboard.html:861
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
+msgid "Please fill in all required fields before continuing."
+msgstr ""
+"Sila isi semua medan yang diperlukan: Alamat Baris 1, Bandar, Negeri, Poskod"
+" dan Negara."
+
+#: .\templates\core\dashboard.html:942
+#, fuzzy
+#| msgid "Address updated successfully."
+msgid "Address saved successfully!"
+msgstr "Alamat berjaya dikemas kini."
+
+#: .\templates\core\dashboard.html:949
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error saving address. Please try again."
+msgstr "Ralat semasa membuat pengaki.Sila cuba lagi."
+
+#: .\templates\core\dashboard.html:1057 .\templates\core\dashboard.html:1365
+#: .\templates\core\dashboard.html:2556
 msgid "= 200 && status"
 msgstr "= 200 && status"
 
-#: .\templates\core\dashboard.html:915
+#: .\templates\core\dashboard.html:1111
 msgid "No send activity yet"
 msgstr "Tiada aktiviti hantar lagi"
 
-#: .\templates\core\dashboard.html:916
+#: .\templates\core\dashboard.html:1112
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Gunakan borang di atas untuk menghantar e-mel dan melihat aktiviti anda di "
 "sini."
 
-#: .\templates\core\dashboard.html:1001
+#: .\templates\core\dashboard.html:1197
 msgid "To"
 msgstr "Kepada"
 
-#: .\templates\core\dashboard.html:1012
+#: .\templates\core\dashboard.html:1208
 msgid "Scheduled"
 msgstr "Dijadualkan"
 
-#: .\templates\core\dashboard.html:1035
-msgid "Error"
-msgstr "Ralat"
-
-#: .\templates\core\dashboard.html:1058
+#: .\templates\core\dashboard.html:1254
 msgid "Full HTML Preview"
 msgstr "Pratonton HTML Penuh"
 
-#: .\templates\core\dashboard.html:1062
+#: .\templates\core\dashboard.html:1258
 msgid "Text Version"
 msgstr "Versi Teks"
 
-#: .\templates\core\dashboard.html:1066
+#: .\templates\core\dashboard.html:1262
 msgid "Show less"
 msgstr "Tunjukkan lebih sedikit"
 
-#: .\templates\core\dashboard.html:1096
+#: .\templates\core\dashboard.html:1292
 msgid "Unsubscribe"
 msgstr "Nyahlanggan"
 
-#: .\templates\core\dashboard.html:1144
+#: .\templates\core\dashboard.html:1340
 msgid "Failed to load activity"
 msgstr "Gagal memuatkan aktiviti"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1341
 msgid "Please try again."
 msgstr "Sila cuba lagi."
 
-#: .\templates\core\dashboard.html:1147
-msgid "Retry"
-msgstr "Cuba semula"
-
-#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1420 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Pilih templat e-mel..."
 
-#: .\templates\core\dashboard.html:1234
+#: .\templates\core\dashboard.html:1430
 msgid "Error loading emails"
 msgstr "Ralat memuatkan e-mel"
+
+#: .\templates\core\dashboard.html:1551
+#, fuzzy
+#| msgid "Contact email"
+msgid "Connect Gmail"
+msgstr "E-mel hubungan"
+
+#: .\templates\core\dashboard.html:1568 .\templates\core\dashboard.html:1849
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connected"
+msgstr "Sambungan Gagal"
+
+#: .\templates\core\dashboard.html:1569 .\templates\core\dashboard.html:1850
+msgid "Disconnect"
+msgstr "Putuskan sambungan"
+
+#: .\templates\core\dashboard.html:1641
+msgid "No Gmail emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Tiada e-mel Gmail lagi.E-mel akan dipaparkan di sini sebaik sahaja ia "
+"diambil."
+
+#: .\templates\core\dashboard.html:1642 .\templates\core\dashboard.html:2080
+msgid "Replied"
+msgstr "dibalas"
+
+#: .\templates\core\dashboard.html:1644 .\templates\core\dashboard.html:2085
+#, fuzzy
+#| msgid "Send"
+msgid "Sender:"
+msgstr "Hantar"
+
+#: .\templates\core\dashboard.html:1645
+#, fuzzy
+#| msgid "Send Message"
+msgid "Auto-Reply Message"
+msgstr "Hantar Mesej"
+
+#: .\templates\core\dashboard.html:1646
+#, fuzzy
+#| msgid "Original"
+msgid "Original Email"
+msgstr "Asal"
+
+#: .\templates\core\dashboard.html:1647 .\templates\core\dashboard.html:2087
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Content:"
+msgstr "Kandungan E-mel"
+
+#: .\templates\core\dashboard.html:1648 .\templates\core\dashboard.html:2088
+#, fuzzy
+#| msgid "Email Content"
+msgid "(No content)"
+msgstr "Kandungan E-mel"
+
+#: .\templates\core\dashboard.html:1822
+msgid "Connect IMAP"
+msgstr "Sambungkan IMAP"
+
+#: .\templates\core\dashboard.html:1933 .\templates\core\home.html:1344
+msgid "To fix this:"
+msgstr "Untuk membetulkannya:"
+
+#: .\templates\core\dashboard.html:1935 .\templates\core\home.html:1346
+msgid "Enable 2-Step Verification on your Google Account"
+msgstr "Dayakan Pengesahan 2 Langkah pada Akaun Google anda"
+
+#: .\templates\core\dashboard.html:1936 .\templates\core\home.html:1347
+msgid "Generate an App Password for IMAP access"
+msgstr "Jana Kata Laluan Apl untuk akses IMAP"
+
+#: .\templates\core\dashboard.html:1937 .\templates\core\home.html:1348
+msgid "Use the App Password instead of your regular password"
+msgstr "Gunakan Kata Laluan Apl dan bukannya kata laluan biasa anda"
+
+#: .\templates\core\dashboard.html:1944 .\templates\core\home.html:299
+#: .\templates\core\home.html:1113 .\templates\core\home.html:1355
+msgid "Learn More"
+msgstr "Ketahui Lebih Lanjut"
+
+#: .\templates\core\dashboard.html:1950 .\templates\core\home.html:1361
+#, fuzzy
+#| msgid "Change Password"
+msgid "Create App Password"
+msgstr "Tukar Kata Laluan"
+
+#: .\templates\core\dashboard.html:1990
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error connecting IMAP account. Please try again."
+msgstr "Ralat semasa membuat pengaki.Sila cuba lagi."
+
+#: .\templates\core\dashboard.html:2079
+msgid "No IMAP emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Tiada e-mel IMAP lagi.E-mel akan dipaparkan di sini sebaik sahaja ia "
+"diambil."
+
+#: .\templates\core\dashboard.html:2082
+msgid "Auto Reply To:"
+msgstr "Auto Balas Kepada:"
+
+#: .\templates\core\dashboard.html:2084
+#, fuzzy
+#| msgid "Cancel:"
+msgid "Cc:"
+msgstr "Batalkan:"
+
+#: .\templates\core\dashboard.html:2086
+msgid "Auto-Reply Sent:"
+msgstr "Balas Auto Dihantar:"
+
+#: .\templates\core\dashboard.html:2089
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Email"
+msgstr "Hantar E-mel"
+
+#: .\templates\core\dashboard.html:2307
+#, fuzzy
+#| msgid "Email Content"
+msgid "Sent Email Content:"
+msgstr "Kandungan E-mel"
+
+#: .\templates\core\dashboard.html:2455
+msgid "total"
+msgstr "jumlah"
 
 #: .\templates\core\docs\ai_features.html:5
 msgid "AI-Powered Email Features"
@@ -3991,11 +5081,6 @@ msgstr "Kadar berhenti melanggan"
 #: .\templates\core\docs\analytics.html:28
 msgid "Complaint rate"
 msgstr "Kadar aduan"
-
-#: .\templates\core\docs\analytics.html:32
-#: .\templates\core\feature_analytics.html:60
-msgid "Analytics Dashboard"
-msgstr "Papan Pemuka Analitis"
 
 #: .\templates\core\docs\analytics.html:33
 msgid "Access your campaign analytics by clicking the "
@@ -5392,10 +6477,6 @@ msgstr ""
 #: .\templates\core\feature_analytics.html:12
 msgid "What You Can Track"
 msgstr "Perkara yang Anda Boleh Kesan"
-
-#: .\templates\core\feature_analytics.html:15
-msgid "Campaign Performance"
-msgstr "Prestasi Kempen"
 
 #: .\templates\core\feature_analytics.html:17
 msgid "Open rates for each campaign"
@@ -7240,7 +8321,7 @@ msgstr "Jadikan Pelawat"
 msgid "Loyal Customers"
 msgstr "Pelanggan Setia"
 
-#: .\templates\core\home.html:61
+#: .\templates\core\home.html:62
 msgid ""
 "The best free drip email marketing software for automated email sequences, "
 "email campaigns, and email marketing automation. Create powerful email drip "
@@ -7260,55 +8341,200 @@ msgstr ""
 "perisian pemasaran e-mel percuma sepenuhnya dengan kempen tanpa had, "
 "pelanggan tanpa had dan e-mel titisan tanpa had."
 
-#: .\templates\core\home.html:67
+#: .\templates\core\home.html:69
 msgid "Start Free Today"
 msgstr "Mulakan Percuma Hari Ini"
 
-#: .\templates\core\home.html:83
+#: .\templates\core\home.html:85
 msgid "Unlimited Campaigns"
 msgstr "Kempen tanpa had"
 
-#: .\templates\core\home.html:89
+#: .\templates\core\home.html:91
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Drip Emails"
 msgstr "Kempen tanpa had"
 
-#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:97 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Pelanggan tanpa had"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:103
 msgid "No Credit Card"
 msgstr "Tiada Kad Kredit"
 
-#: .\templates\core\home.html:107
+#: .\templates\core\home.html:109
 msgid "Setup in 5 Minutes"
 msgstr "Persediaan dalam 5 Minit"
 
-#: .\templates\core\home.html:120
+#: .\templates\core\home.html:130
+msgid "NEW FEATURE"
+msgstr "CIRI BARU"
+
+#: .\templates\core\home.html:138
+#, fuzzy
+#| msgid "Never Miss Important Dates"
+msgid "Never Miss a"
+msgstr "Jangan Terlepas Tarikh Penting"
+
+#: .\templates\core\home.html:140
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Conversation Again"
+msgstr "Sambungan Gagal"
+
+#: .\templates\core\home.html:145
+msgid ""
+"Connect your Gmail or IMAP account and let our intelligent auto-reply system"
+" respond to every email in your inbox and sent box. Engage with your "
+"contacts automatically with personalized messages like:"
+msgstr ""
+"Sambungkan akaun Gmail atau IMAP anda dan biarkan sistem autobalas pintar "
+"kami membalas setiap e-mel dalam peti masuk dan kotak dihantar "
+"anda.Berinteraksi dengan kenalan anda secara automatik dengan mesej yang "
+"diperibadikan seperti:"
+
+#: .\templates\core\home.html:156
+msgid "Hi, did you have any questions?"
+msgstr "Hai, adakah anda mempunyai sebarang soalan?"
+
+#: .\templates\core\home.html:159
+#, fuzzy
+#| msgid "Automatically add new CRM contacts to email lists"
+msgid "Automatically sent to every contact who emails you"
+msgstr "Tambah kenalan CRM baharu secara automatik pada senarai e-mel"
+
+#: .\templates\core\home.html:174
+msgid "Auto-Reply to Inbox"
+msgstr "Balas Auto kepada Peti Masuk"
+
+#: .\templates\core\home.html:175
+msgid "Automatically respond to incoming emails with personalized messages"
+msgstr ""
+"Balas secara automatik kepada e-mel masuk dengan mesej yang diperibadikan"
+
+#: .\templates\core\home.html:186
+msgid "Auto-Reply to Sent Box"
+msgstr "Balas Auto kepada Kotak Dihantar"
+
+#: .\templates\core\home.html:187
+msgid "Follow up with recipients of your sent emails automatically"
+msgstr "Susulan dengan penerima e-mel anda yang dihantar secara automatik"
+
+#: .\templates\core\home.html:198
+#, fuzzy
+#| msgid "Personalization:"
+msgid "Smart Personalization"
+msgstr "Pemperibadian:"
+
+#: .\templates\core\home.html:199
+msgid "Uses recipient names and email context for natural conversations"
+msgstr ""
+"Menggunakan nama penerima dan konteks e-mel untuk perbualan semula jadi"
+
+#: .\templates\core\home.html:210
+msgid "Gmail & IMAP Support"
+msgstr "Sokongan Gmail & IMAP"
+
+#: .\templates\core\home.html:211
+msgid "Works with Gmail, Outlook, and any IMAP email provider"
+msgstr "Berfungsi dengan Gmail, Outlook dan mana-mana pembekal e-mel IMAP"
+
+#: .\templates\core\home.html:219 .\templates\core\includes\signup_box.html:18
+#, fuzzy
+#| msgid "Get Started Today"
+msgid "Get Started in 60 Seconds"
+msgstr "Mulakan Hari Ini"
+
+#: .\templates\core\home.html:220
+msgid "Connect your email account and start auto-replying immediately"
+msgstr "Sambungkan akaun e-mel anda dan mulakan autobalas serta-merta"
+
+#: .\templates\core\home.html:229 .\templates\core\includes\signup_box.html:31
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connect with Gmail"
+msgstr "Sambungan Gagal"
+
+#: .\templates\core\home.html:239 .\templates\core\includes\signup_box.html:41
+msgid "OR"
+msgstr "ATAU"
+
+#: .\templates\core\home.html:281 .\templates\core\includes\signup_box.html:77
+msgid "Start Auto-Replying Now"
+msgstr "Mulakan Auto Balas Sekarang"
+
+#: .\templates\core\home.html:293
+msgid "Set Up Auto-Reply"
+msgstr "Sediakan Auto Balas"
+
+#: .\templates\core\home.html:322
+#, fuzzy
+#| msgid "Description of Service"
+msgid "Question about your service"
+msgstr "Perihalan Perkhidmatan"
+
+#: .\templates\core\home.html:323
+msgid "Hi, I'm interested in learning more about..."
+msgstr "Hai, saya berminat untuk mengetahui lebih lanjut tentang..."
+
+#: .\templates\core\home.html:326
+msgid "Auto-Reply Sent"
+msgstr "Balas Auto Dihantar"
+
+#: .\templates\core\home.html:327
+msgid "Hi John, did you have any questions?"
+msgstr "Hai John, adakah anda mempunyai sebarang soalan?"
+
+#: .\templates\core\home.html:344
+msgid "Re: Project Proposal"
+msgstr "Re: Cadangan Projek"
+
+#: .\templates\core\home.html:345
+#, fuzzy
+#| msgid "Test how your email looks in preview mode"
+msgid "Thanks for your email! I'll review..."
+msgstr "Uji rupa e-mel anda dalam mod pratonton"
+
+#: .\templates\core\home.html:348
+#, fuzzy
+#| msgid "Send follow-up content"
+msgid "Follow-up Sent"
+msgstr "Hantar kandungan susulan"
+
+#: .\templates\core\home.html:349
+msgid "Hi Sarah, did you have any questions?"
+msgstr "Hai Sarah, adakah anda mempunyai sebarang soalan?"
+
+#: .\templates\core\home.html:361
+#, fuzzy
+#| msgid "Active"
+msgid "24/7 Active"
+msgstr "Aktif"
+
+#: .\templates\core\home.html:377
 msgid "Higher ROI"
 msgstr "ROI yang lebih tinggi"
 
-#: .\templates\core\home.html:124
+#: .\templates\core\home.html:381
 msgid "More Engagement"
 msgstr "Lagi Penglibatan"
 
-#: .\templates\core\home.html:128
+#: .\templates\core\home.html:385
 msgid "Faster Growth"
 msgstr "Pertumbuhan Lebih Cepat"
 
-#: .\templates\core\home.html:132
+#: .\templates\core\home.html:389
 msgid "Automation"
 msgstr "Automasi"
 
-#: .\templates\core\home.html:143
+#: .\templates\core\home.html:409
 #, fuzzy
 #| msgid "How to Create Email Templates"
 msgid "How to Create Drip Email Campaigns in Minutes"
 msgstr "Cara Membuat Templat E-mel"
 
-#: .\templates\core\home.html:146
+#: .\templates\core\home.html:412
 msgid ""
 "Setting up email automation and email drip campaigns has never been easier. "
 "Our email marketing automation software makes it simple to create automated "
@@ -7318,13 +8544,13 @@ msgstr ""
 "ini.Perisian automasi pemasaran e-mel kami memudahkan untuk membuat urutan "
 "e-mel automatik, menjadualkan e-mel dan menjejak analitis e-mel."
 
-#: .\templates\core\home.html:155
+#: .\templates\core\home.html:421
 #, fuzzy
 #| msgid "Create Your First Campaign"
 msgid "Create Your Campaign"
 msgstr "Buat Kempen Pertama Anda"
 
-#: .\templates\core\home.html:156
+#: .\templates\core\home.html:422
 msgid ""
 "Build your email drip campaign with our intuitive email marketing tool. "
 "Choose from beautiful email templates or create custom email marketing "
@@ -7334,13 +8560,13 @@ msgstr ""
 "kami.Pilih daripada templat e-mel yang cantik atau buat kempen pemasaran "
 "e-mel tersuai."
 
-#: .\templates\core\home.html:162
+#: .\templates\core\home.html:428
 #, fuzzy
 #| msgid "Email Sequence"
 msgid "Add Email Sequences"
 msgstr "Urutan E-mel"
 
-#: .\templates\core\home.html:163
+#: .\templates\core\home.html:429
 msgid ""
 "Design automated email sequences with personalized emails. Set up email "
 "scheduling, email nurture sequences, and welcome series for your email "
@@ -7350,13 +8576,13 @@ msgstr ""
 "penjadualan e-mel, urutan asuhan e-mel dan siri alu-aluan untuk pelanggan "
 "e-mel anda."
 
-#: .\templates\core\home.html:169
+#: .\templates\core\home.html:435
 #, fuzzy
 #| msgid "Managing Subscribers"
 msgid "Manage Subscribers"
 msgstr "Menguruskan Pelanggan"
 
-#: .\templates\core\home.html:170
+#: .\templates\core\home.html:436
 msgid ""
 "Import your email list, segment subscribers with email list management, and "
 "organize your email audience. Perfect for email subscriber management and "
@@ -7366,13 +8592,13 @@ msgstr ""
 "dan atur khalayak e-mel anda.Sesuai untuk pengurusan pelanggan e-mel dan "
 "pembahagian e-mel."
 
-#: .\templates\core\home.html:176
+#: .\templates\core\home.html:442
 #, fuzzy
 #| msgid "What AI Can Optimize"
 msgid "Track & Optimize"
 msgstr "Apa AI Boleh Optimumkan"
 
-#: .\templates\core\home.html:177
+#: .\templates\core\home.html:443
 msgid ""
 "Monitor email open rates, email click rates, and email engagement with real-"
 "time email analytics. Improve email marketing ROI with data-driven insights."
@@ -7381,13 +8607,13 @@ msgstr ""
 "analitis e-mel masa nyata.Tingkatkan ROI pemasaran e-mel dengan cerapan "
 "terdorong data."
 
-#: .\templates\core\home.html:188
+#: .\templates\core\home.html:463
 msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
 msgstr ""
 "Mengapa Kempen Titisan E-mel Berfungsi Lebih Baik Daripada Letupan E-mel "
 "Tunggal"
 
-#: .\templates\core\home.html:191
+#: .\templates\core\home.html:466
 msgid ""
 "Unlike single email blasts, automated drip email campaigns build "
 "relationships over time. Email marketing automation helps you send the right"
@@ -7399,13 +8625,13 @@ msgstr ""
 "menghantar mesej pemasaran e-mel yang betul pada masa yang sesuai, "
 "meningkatkan penglibatan e-mel dan ROI pemasaran e-mel."
 
-#: .\templates\core\home.html:203
+#: .\templates\core\home.html:478
 #, fuzzy
 #| msgid "Automated Nurturing"
 msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Asuhan Automatik"
 
-#: .\templates\core\home.html:205
+#: .\templates\core\home.html:480
 #, fuzzy
 #| msgid ""
 #| "Send the right message at the right time. Automatically guide leads through "
@@ -7419,13 +8645,13 @@ msgstr ""
 "Hantar mesej yang betul pada masa yang betul.Bimbing petunjuk secara "
 "automatik melalui corong anda tanpa campur tangan manual."
 
-#: .\templates\core\home.html:216
+#: .\templates\core\home.html:491
 #, fuzzy
 #| msgid "Subscriber Segmentation"
 msgid "Email Personalization & Subscriber Segmentation"
 msgstr "Segmentasi Pelanggan"
 
-#: .\templates\core\home.html:218
+#: .\templates\core\home.html:493
 msgid ""
 "Create unique email experiences for each subscriber with personalized "
 "emails. Use email segmentation and email list management to deliver targeted"
@@ -7436,11 +8662,11 @@ msgstr ""
 "menyampaikan kempen pemasaran e-mel yang disasarkan yang bergema dengan "
 "khalayak e-mel anda."
 
-#: .\templates\core\home.html:229
+#: .\templates\core\home.html:504
 msgid "Proven Results"
 msgstr "Keputusan Terbukti"
 
-#: .\templates\core\home.html:231
+#: .\templates\core\home.html:506
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7448,21 +8674,21 @@ msgstr ""
 "Kempen titisan menjana hasil 3x lebih banyak daripada e-mel tunggal.Lihat "
 "ROI yang boleh diukur dari hari pertama."
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:527
 msgid "Everything You Need to Succeed"
 msgstr "Semua yang Anda Perlukan untuk Berjaya"
 
-#: .\templates\core\home.html:246
+#: .\templates\core\home.html:530
 msgid "Powerful features that make email marketing effortless"
 msgstr "Ciri berkuasa yang menjadikan pemasaran e-mel mudah"
 
-#: .\templates\core\home.html:260
+#: .\templates\core\home.html:544
 #, fuzzy
 #| msgid "Smart Drip Sequences"
 msgid "Smart Drip Email Sequences"
 msgstr "Urutan Titisan Pintar"
 
-#: .\templates\core\home.html:262
+#: .\templates\core\home.html:546
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7470,11 +8696,11 @@ msgstr ""
 "Buat jujukan e-mel berbilang langkah yang dihantar secara automatik "
 "berdasarkan masa, gelagat atau pencetus."
 
-#: .\templates\core\home.html:276
+#: .\templates\core\home.html:560
 msgid "Real-Time Analytics"
 msgstr "Analitis Masa Nyata"
 
-#: .\templates\core\home.html:278
+#: .\templates\core\home.html:562
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7482,11 +8708,11 @@ msgstr ""
 "Jejak dibuka, klik, penukaran dan hasil.Buat keputusan berdasarkan data "
 "dengan papan pemuka yang cantik."
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:575
 msgid "Beautiful Templates"
 msgstr "Templat Cantik"
 
-#: .\templates\core\home.html:293
+#: .\templates\core\home.html:577
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7494,14 +8720,14 @@ msgstr ""
 "Pilih daripada templat profesional atau buat sendiri.Editor seret dan lepas "
 "menjadikan reka bentuk mudah."
 
-#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:591 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Segmentasi Pelanggan"
 
-#: .\templates\core\home.html:309
+#: .\templates\core\home.html:593
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7509,11 +8735,11 @@ msgstr ""
 "Susun pelanggan ke dalam senarai, tandakan nama mereka dan hantar kempen "
 "yang disasarkan kepada khalayak yang betul."
 
-#: .\templates\core\home.html:323
+#: .\templates\core\home.html:607
 msgid "AI-Powered Content"
 msgstr "Kandungan Dikuasakan AI"
 
-#: .\templates\core\home.html:325
+#: .\templates\core\home.html:609
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7521,11 +8747,11 @@ msgstr ""
 "Hasilkan kandungan e-mel yang menarik dengan AI.Jimat masa semasa membuat "
 "mesej profesional dan menarik."
 
-#: .\templates\core\home.html:338
+#: .\templates\core\home.html:622
 msgid "Enterprise Security"
 msgstr "Keselamatan Perusahaan"
 
-#: .\templates\core\home.html:340
+#: .\templates\core\home.html:624
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7533,15 +8759,15 @@ msgstr ""
 "Mematuhi GDPR, infrastruktur selamat dan penghantaran yang boleh "
 "dipercayai.Data dan pelanggan anda dilindungi."
 
-#: .\templates\core\home.html:353
+#: .\templates\core\home.html:646
 msgid "Trusted by Growing Businesses"
 msgstr "Dipercayai oleh Perniagaan yang Berkembang"
 
-#: .\templates\core\home.html:356
+#: .\templates\core\home.html:649
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr "Sertai beribu-ribu pemasar yang telah mengubah strategi e-mel mereka"
 
-#: .\templates\core\home.html:373
+#: .\templates\core\home.html:666
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7550,11 +8776,11 @@ msgstr ""
 "Kadar penukaran kami meningkat sebanyak 340%% selepas melaksanakan kempen "
 "titisan.Automasi menjimatkan masa kami setiap minggu."
 
-#: .\templates\core\home.html:381
+#: .\templates\core\home.html:674
 msgid "Marketing Director"
 msgstr "Pengarah Pemasaran"
 
-#: .\templates\core\home.html:398
+#: .\templates\core\home.html:691
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7562,11 +8788,11 @@ msgstr ""
 "Bahagian yang terbaik?Ia percuma sepenuhnya.Kami telah menghantar lebih "
 "50,000 e-mel tanpa membayar sepeser pun.Penukar permainan."
 
-#: .\templates\core\home.html:406
+#: .\templates\core\home.html:699
 msgid "Startup Founder"
 msgstr "Pengasas Permulaan"
 
-#: .\templates\core\home.html:423
+#: .\templates\core\home.html:716
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7575,17 +8801,17 @@ msgstr ""
 "bercakap untuk diri mereka sendiri.Penglibatan e-mel kami meningkat dua kali"
 " ganda."
 
-#: .\templates\core\home.html:431
+#: .\templates\core\home.html:724
 msgid "E-commerce Manager"
 msgstr "Pengurus E-dagang"
 
-#: .\templates\core\home.html:444
+#: .\templates\core\home.html:746
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Perfect Email Marketing Solution for Every Business"
 msgstr "Automasi pemasaran e-mel percuma untuk semua orang"
 
-#: .\templates\core\home.html:447
+#: .\templates\core\home.html:749
 msgid ""
 "Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
 "email marketing, or B2C email marketing campaigns, our free email marketing "
@@ -7595,13 +8821,13 @@ msgstr ""
 "pemasaran e-mel B2B atau kempen pemasaran e-mel B2C, perisian automasi "
 "pemasaran e-mel percuma kami menyesuaikan diri dengan keperluan anda."
 
-#: .\templates\core\home.html:458
+#: .\templates\core\home.html:760
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "SaaS Email Marketing"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
-#: .\templates\core\home.html:459
+#: .\templates\core\home.html:761
 msgid ""
 "Onboard users with automated email sequences, welcome series, and nurture "
 "campaigns. Perfect for startup email marketing and software companies."
@@ -7609,19 +8835,19 @@ msgstr ""
 "Pengguna atas kapal dengan urutan e-mel automatik, siri alu-aluan dan kempen"
 " asuhan.Sesuai untuk pemasaran e-mel permulaan dan syarikat perisian."
 
-#: .\templates\core\home.html:461
+#: .\templates\core\home.html:763
 #, fuzzy
 #| msgid "Start Free Today"
 msgid "Start Free"
 msgstr "Mulakan Percuma Hari Ini"
 
-#: .\templates\core\home.html:474
+#: .\templates\core\home.html:776
 #, fuzzy
 #| msgid "E-commerce Manager"
 msgid "Ecommerce Email Marketing"
 msgstr "Pengurus E-dagang"
 
-#: .\templates\core\home.html:475
+#: .\templates\core\home.html:777
 msgid ""
 "Drive sales with abandoned cart emails, product recommendations, and "
 "transactional emails. Boost your email marketing ROI with targeted "
@@ -7630,19 +8856,19 @@ msgstr ""
 "Dorong jualan dengan e-mel troli terbengkalai, pengesyoran produk dan e-mel "
 "transaksi.Tingkatkan ROI pemasaran e-mel anda dengan kempen yang disasarkan."
 
-#: .\templates\core\home.html:477
+#: .\templates\core\home.html:779
 #, fuzzy
 #| msgid "Getting Started"
 msgid "Get Started"
 msgstr "Bermula"
 
-#: .\templates\core\home.html:490
+#: .\templates\core\home.html:792
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "B2B Email Marketing"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
-#: .\templates\core\home.html:491
+#: .\templates\core\home.html:793
 msgid ""
 "Nurture leads with email marketing automation, email segmentation, and "
 "personalized email campaigns. Perfect for B2B email marketing strategies."
@@ -7650,17 +8876,17 @@ msgstr ""
 "Pupuk petunjuk dengan automasi pemasaran e-mel, pembahagian e-mel dan kempen"
 " e-mel yang diperibadikan.Sesuai untuk strategi pemasaran e-mel B2B."
 
-#: .\templates\core\home.html:493
+#: .\templates\core\home.html:795
 #, fuzzy
 #| msgid "Try AI Features"
 msgid "Try Free"
 msgstr "Cuba Ciri AI"
 
-#: .\templates\core\home.html:506
+#: .\templates\core\home.html:808
 msgid "Small Business Email Marketing"
 msgstr "Pemasaran E-mel Perniagaan Kecil"
 
-#: .\templates\core\home.html:507
+#: .\templates\core\home.html:809
 #, fuzzy
 #| msgid ""
 #| "Free drip email marketing software with unlimited campaigns, subscribers, "
@@ -7673,17 +8899,17 @@ msgstr ""
 "Perisian pemasaran e-mel titisan percuma dengan kempen tanpa had, pelanggan "
 "dan urutan e-mel automatik"
 
-#: .\templates\core\home.html:519
+#: .\templates\core\home.html:821
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Start Your Free Email Marketing Campaign Today"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
-#: .\templates\core\home.html:533
+#: .\templates\core\home.html:844
 msgid "The Best Free Alternative to Paid Email Marketing Tools"
 msgstr "Alternatif Percuma Terbaik kepada Alat Pemasaran E-mel Berbayar"
 
-#: .\templates\core\home.html:536
+#: .\templates\core\home.html:847
 msgid ""
 "Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
 " can get the same email marketing automation features for free? Our email "
@@ -7696,19 +8922,19 @@ msgstr ""
 "e-mel tanpa had, pelanggan tanpa had dan automasi e-mel yang berkuasa - "
 "semuanya tanpa kos."
 
-#: .\templates\core\home.html:543
+#: .\templates\core\home.html:854
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Why Choose Our Free Email Marketing Software?"
 msgstr "Perisian Pemasaran E-mel Drip Percuma"
 
-#: .\templates\core\home.html:550
+#: .\templates\core\home.html:861
 #, fuzzy, python-format
 #| msgid "Free Forever Plan"
 msgid "100%% Free Forever"
 msgstr "Pelan Forever Percuma"
 
-#: .\templates\core\home.html:551
+#: .\templates\core\home.html:862
 msgid ""
 "No hidden fees, no credit card required. Unlike Mailchimp alternative or "
 "Constant Contact alternative services, we're completely free email marketing"
@@ -7718,13 +8944,13 @@ msgstr ""
 "perkhidmatan alternatif Mailchimp atau Constant Contact, kami adalah "
 "perisian pemasaran e-mel percuma sepenuhnya."
 
-#: .\templates\core\home.html:559
+#: .\templates\core\home.html:870
 #, fuzzy
 #| msgid "Unlimited Campaigns"
 msgid "Unlimited Everything"
 msgstr "Kempen tanpa had"
 
-#: .\templates\core\home.html:560
+#: .\templates\core\home.html:871
 msgid ""
 "Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
 "unlimited email automation. No limits on your email marketing growth."
@@ -7732,13 +8958,13 @@ msgstr ""
 "Kempen e-mel tanpa had, e-mel titisan tanpa had, pelanggan tanpa had, "
 "automasi e-mel tanpa had.Tiada had pada pertumbuhan pemasaran e-mel anda."
 
-#: .\templates\core\home.html:568
+#: .\templates\core\home.html:879
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Full Email Marketing Automation"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
-#: .\templates\core\home.html:569
+#: .\templates\core\home.html:880
 msgid ""
 "Complete email automation features: email drip campaigns, email scheduling, "
 "email analytics, email tracking, email segmentation, and email "
@@ -7747,13 +8973,13 @@ msgstr ""
 "Ciri automasi e-mel yang lengkap: kempen titisan e-mel, penjadualan e-mel, "
 "analisis e-mel, penjejakan e-mel, pembahagian e-mel dan pemperibadian e-mel."
 
-#: .\templates\core\home.html:577
+#: .\templates\core\home.html:888
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Best Email Marketing Software Features"
 msgstr "Perisian Pemasaran E-mel Drip Percuma"
 
-#: .\templates\core\home.html:578
+#: .\templates\core\home.html:889
 msgid ""
 "Email templates, email newsletters, email subscriber management, email list "
 "management, email open rates tracking, email click rates, and email "
@@ -7763,11 +8989,11 @@ msgstr ""
 "senarai e-mel, penjejakan kadar terbuka e-mel, kadar klik e-mel dan analisis"
 " ROI pemasaran e-mel."
 
-#: .\templates\core\home.html:584
+#: .\templates\core\home.html:895
 msgid "Ready to Switch?"
 msgstr "Bersedia untuk Bertukar?"
 
-#: .\templates\core\home.html:586
+#: .\templates\core\home.html:897
 msgid ""
 "Join thousands of businesses who've switched from expensive email marketing "
 "services to our free email marketing platform. Get started with email "
@@ -7778,25 +9004,25 @@ msgstr ""
 "kami.Bermula dengan automasi e-mel dalam beberapa minit - tiada kad kredit "
 "diperlukan."
 
-#: .\templates\core\home.html:590
+#: .\templates\core\home.html:901
 #, fuzzy
 #| msgid "Create Free Account"
 msgid "Create Free Account Now"
 msgstr "Buat Akaun Percuma"
 
-#: .\templates\core\home.html:593
+#: .\templates\core\home.html:904
 #, fuzzy
 #| msgid "Already have an account?"
 msgid "Already Have an Account? Sign In"
 msgstr "Sudah mempunyai akaun?"
 
-#: .\templates\core\home.html:607
+#: .\templates\core\home.html:927
 #, fuzzy
 #| msgid "Email Design Best Practices"
 msgid "Email Marketing Best Practices & Tips"
 msgstr "Amalan Terbaik Reka Bentuk E-mel"
 
-#: .\templates\core\home.html:610
+#: .\templates\core\home.html:930
 msgid ""
 "Learn how to improve email open rates, increase email engagement, and "
 "maximize your email marketing ROI with proven email marketing strategies and"
@@ -7806,13 +9032,13 @@ msgstr ""
 "e-mel dan memaksimumkan ROI pemasaran e-mel anda dengan strategi pemasaran "
 "e-mel yang terbukti dan petua pemasaran e-mel."
 
-#: .\templates\core\home.html:621
+#: .\templates\core\home.html:941
 #, fuzzy
 #| msgid "Average Open Rate"
 msgid "Improve Email Open Rates"
 msgstr "Purata Kadar Terbuka"
 
-#: .\templates\core\home.html:622
+#: .\templates\core\home.html:942
 msgid ""
 "Use personalized email subject lines, send emails at optimal times, and "
 "segment your email list. Track email open rates with our email analytics to "
@@ -7822,19 +9048,19 @@ msgstr ""
 "optimum dan bahagikan senarai e-mel anda.Jejaki kadar buka e-mel dengan "
 "analitis e-mel kami untuk mengoptimumkan kempen pemasaran e-mel anda."
 
-#: .\templates\core\home.html:624
+#: .\templates\core\home.html:944
 #, fuzzy
 #| msgid "Tracking Improvements"
 msgid "Start Tracking Opens"
 msgstr "Penambahbaikan Penjejakan"
 
-#: .\templates\core\home.html:637
+#: .\templates\core\home.html:957
 #, fuzzy
 #| msgid "Bounce management"
 msgid "Increase Email Engagement"
 msgstr "Pengurusan lantunan"
 
-#: .\templates\core\home.html:638
+#: .\templates\core\home.html:958
 msgid ""
 "Create engaging email content with email personalization, use email "
 "automation to send timely messages, and monitor email click rates. Our email"
@@ -7845,19 +9071,19 @@ msgstr ""
 "klik e-mel.Automasi pemasaran e-mel kami membantu anda menghantar mesej yang"
 " betul pada masa yang sesuai."
 
-#: .\templates\core\home.html:640
+#: .\templates\core\home.html:960
 #, fuzzy
 #| msgid "More Engagement"
 msgid "Boost Engagement"
 msgstr "Lagi Penglibatan"
 
-#: .\templates\core\home.html:653
+#: .\templates\core\home.html:973
 #, fuzzy
 #| msgid "Free Email Marketing Automation"
 msgid "Maximize Email Marketing ROI"
 msgstr "Automasi Pemasaran E-mel Percuma"
 
-#: .\templates\core\home.html:654
+#: .\templates\core\home.html:974
 msgid ""
 "Use email drip campaigns for lead nurturing, implement email segmentation "
 "for targeted campaigns, and track email marketing ROI with comprehensive "
@@ -7868,27 +9094,27 @@ msgstr ""
 "analisis e-mel yang komprehensif.Perisian pemasaran e-mel percuma yang "
 "memberikan hasil."
 
-#: .\templates\core\home.html:656
+#: .\templates\core\home.html:976
 msgid "See Your ROI"
 msgstr "Lihat ROI Anda"
 
-#: .\templates\core\home.html:665
+#: .\templates\core\home.html:985
 msgid "Ready to implement these email marketing best practices?"
 msgstr "Bersedia untuk melaksanakan amalan terbaik pemasaran e-mel ini?"
 
-#: .\templates\core\home.html:667
+#: .\templates\core\home.html:987
 #, fuzzy
 #| msgid "Start automating your email marketing for free."
 msgid "Start Your Email Marketing Journey Free"
 msgstr "Mula mengautomasikan pemasaran e-mel anda secara percuma."
 
-#: .\templates\core\home.html:681
+#: .\templates\core\home.html:1010
 #, fuzzy
 #| msgid "Frequently Asked Questions"
 msgid "Frequently Asked Questions About Email Marketing"
 msgstr "Soalan Lazim"
 
-#: .\templates\core\home.html:684
+#: .\templates\core\home.html:1013
 #, fuzzy
 #| msgid "Everything you need to automate your email marketing"
 msgid ""
@@ -7896,13 +9122,13 @@ msgid ""
 "and our free email marketing software."
 msgstr "Semua yang anda perlukan untuk mengautomasikan pemasaran e-mel anda"
 
-#: .\templates\core\home.html:690
+#: .\templates\core\home.html:1019
 #, fuzzy
 #| msgid "What Are Drip Campaigns?"
 msgid "What is a drip email campaign?"
 msgstr "Apakah Kempen Drip?"
 
-#: .\templates\core\home.html:692
+#: .\templates\core\home.html:1021
 msgid ""
 "A drip email campaign, also known as an automated email sequence or email "
 "drip campaign, is a series of automated emails sent to subscribers over "
@@ -7917,13 +9143,13 @@ msgstr ""
 "strategik.Platform pemasaran e-mel kami memudahkan untuk mencipta kempen "
 "e-mel titisan yang berkuasa."
 
-#: .\templates\core\home.html:697
+#: .\templates\core\home.html:1026
 #, fuzzy
 #| msgid "Learn how to create and send your first email campaign"
 msgid "How do I create a drip email campaign?"
 msgstr "Ketahui cara membuat dan menghantar kempen e-mel pertama anda"
 
-#: .\templates\core\home.html:699
+#: .\templates\core\home.html:1028
 msgid ""
 "Creating a drip email campaign is simple with our email marketing automation"
 " software. Sign up for free, create your email campaign, add email sequences"
@@ -7937,18 +9163,18 @@ msgstr ""
 "kami mengendalikan selebihnya.Anda boleh menggunakan templat e-mel kami atau"
 " membuat kempen pemasaran e-mel tersuai.Bermula dalam beberapa minit!"
 
-#: .\templates\core\home.html:703
+#: .\templates\core\home.html:1032
 #: .\templates\core\tutorials\quick_start.html:134
 msgid "Create Your First Campaign"
 msgstr "Buat Kempen Pertama Anda"
 
-#: .\templates\core\home.html:712
+#: .\templates\core\home.html:1041
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Is this really free email marketing software?"
 msgstr "Perisian Pemasaran E-mel Drip Percuma"
 
-#: .\templates\core\home.html:714
+#: .\templates\core\home.html:1043
 #, python-format
 msgid ""
 "Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
@@ -7963,11 +9189,11 @@ msgstr ""
 "tanpa had dan ciri automasi pemasaran e-mel penuh tanpa sebarang kos.Tiada "
 "kad kredit diperlukan, tiada yuran tersembunyi."
 
-#: .\templates\core\home.html:719
+#: .\templates\core\home.html:1048
 msgid "What email marketing features are included?"
 msgstr "Apakah ciri pemasaran e-mel yang disertakan?"
 
-#: .\templates\core\home.html:721
+#: .\templates\core\home.html:1050
 msgid ""
 "Our free email marketing software includes: email drip campaigns, automated "
 "email sequences, email scheduling, email analytics and email tracking (email"
@@ -7983,13 +9209,13 @@ msgstr ""
 "e-mel, surat berita e-mel dan automasi pemasaran e-mel yang "
 "komprehensif.Semua yang anda perlukan untuk pemasaran e-mel yang berjaya!"
 
-#: .\templates\core\home.html:726
+#: .\templates\core\home.html:1055
 #, fuzzy
 #| msgid "Individual email open rates"
 msgid "How can I improve my email open rates?"
 msgstr "Kadar buka e-mel individu"
 
-#: .\templates\core\home.html:728
+#: .\templates\core\home.html:1057
 msgid ""
 "Improve email open rates by using personalized email subject lines, sending "
 "emails at optimal times, segmenting your email list, and creating engaging "
@@ -8002,17 +9228,17 @@ msgstr ""
 "kami membantu anda menjejaki kadar buka e-mel dan mengoptimumkan kempen "
 "pemasaran e-mel anda untuk prestasi yang lebih baik."
 
-#: .\templates\core\home.html:732
+#: .\templates\core\home.html:1061
 #, fuzzy
 #| msgid "Start Import"
 msgid "Start Improving Opens"
 msgstr "Mula Import"
 
-#: .\templates\core\home.html:742
+#: .\templates\core\home.html:1071
 msgid "Still Have Questions?"
 msgstr "Masih Ada Soalan?"
 
-#: .\templates\core\home.html:743
+#: .\templates\core\home.html:1072
 msgid ""
 "Get started with our free email marketing software and discover how easy "
 "email automation can be!"
@@ -8020,11 +9246,11 @@ msgstr ""
 "Mulakan dengan perisian pemasaran e-mel percuma kami dan temui betapa "
 "mudahnya automasi e-mel!"
 
-#: .\templates\core\home.html:762
+#: .\templates\core\home.html:1100
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Bersedia untuk Mengubah Pemasaran E-mel Anda?"
 
-#: .\templates\core\home.html:765
+#: .\templates\core\home.html:1103
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -8032,19 +9258,76 @@ msgstr ""
 "Sertai beribu-ribu perniagaan menggunakan kempen titisan untuk mengembangkan"
 " hasil, memupuk petunjuk dan membina hubungan pelanggan yang berkekalan."
 
-#: .\templates\core\home.html:769
+#: .\templates\core\home.html:1107
 msgid "Start Your Free Account"
 msgstr "Mulakan Akaun Percuma Anda"
 
-#: .\templates\core\home.html:775
-msgid "Learn More"
-msgstr "Ketahui Lebih Lanjut"
-
-#: .\templates\core\home.html:779
+#: .\templates\core\home.html:1117
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr ""
 "Tiada kad kredit diperlukan • Persediaan dalam masa 5 minit • Batalkan bila-"
 "bila masa"
+
+#: .\templates\core\home.html:1171
+msgid ""
+"Your email address will be your username. Please create a password to secure"
+" your account:"
+msgstr ""
+"Alamat e-mel anda akan menjadi nama pengguna anda.Sila buat kata laluan "
+"untuk melindungi akaun anda:"
+
+#: .\templates\core\home.html:1174
+#, fuzzy
+#| msgid "Email or Username"
+msgid "Email (Username)"
+msgstr "E-mel atau Nama Pengguna"
+
+#: .\templates\core\home.html:1182
+#, fuzzy
+#| msgid "Enter your current password"
+msgid "Enter a secure password"
+msgstr "Masukkan kata laluan semasa anda"
+
+#: .\templates\core\home.html:1183
+msgid "Minimum 8 characters recommended"
+msgstr "Minimum 8 aksara disyorkan"
+
+#: .\templates\core\home.html:1193 .\templates\core\home.html:1374
+#: .\templates\core\home.html:1387
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Account & Connect"
+msgstr "Buat Akaun Percuma"
+
+#: .\templates\core\home.html:1213 .\templates\core\home.html:1256
+#, fuzzy
+#| msgid "Please enter a valid email address."
+msgid "Please enter your Gmail address:"
+msgstr "Sila masukkan alamat e-mel yang sah."
+
+#: .\templates\core\home.html:1295
+msgid "Password must be at least 6 characters long"
+msgstr "Kata laluan mestilah sekurang-kurangnya 6 aksara panjang"
+
+#: .\templates\core\home.html:1303
+#, fuzzy
+#| msgid "Create Your Account"
+msgid "Creating Account..."
+msgstr "Cipta Akaun Anda"
+
+#: .\templates\core\home.html:1384
+#, fuzzy
+#| msgid "An error occurred. Please try again later."
+msgid "An error occurred. Please try again."
+msgstr "Ralat berlaku.Sila cuba lagi kemudian."
+
+#: .\templates\core\includes\signup_box.html:21
+msgid ""
+"Connect your email account and start auto-replying immediately. No credit "
+"card required."
+msgstr ""
+"Sambungkan akaun e-mel anda dan mulakan autobalas serta-merta.Tiada kad "
+"kredit diperlukan."
 
 #: .\templates\core\pricing.html:4
 msgid "Pricing"
@@ -9141,15 +10424,26 @@ msgid "Your current email address. Change it to update your account email."
 msgstr ""
 "Alamat e-mel semasa anda.Tukarnya untuk mengemas kini e-mel akaun anda."
 
-#: .\templates\core\settings.html:38
+#: .\templates\core\settings.html:36
+msgid "Auto BCC this email address whenever a new email is sent."
+msgstr "Auto BCC alamat e-mel ini setiap kali e-mel baharu dihantar."
+
+#: .\templates\core\settings.html:37
+msgid ""
+"When enabled, you will receive a copy of every email sent from your account."
+msgstr ""
+"Apabila didayakan, anda akan menerima salinan setiap e-mel yang dihantar "
+"daripada akaun anda."
+
+#: .\templates\core\settings.html:49
 msgid "Physical Address"
 msgstr "Alamat Fizikal"
 
-#: .\templates\core\settings.html:81
+#: .\templates\core\settings.html:97
 msgid "API Bearer Token"
 msgstr "Token Pembawa API"
 
-#: .\templates\core\settings.html:83
+#: .\templates\core\settings.html:99
 msgid ""
 "Use this bearer token to authenticate API requests. Include it in the "
 "Authorization header as 'Bearer <token>'."
@@ -9157,25 +10451,25 @@ msgstr ""
 "Gunakan token pembawa ini untuk mengesahkan permintaan API.Sertakan ia dalam"
 " pengepala Kebenaran sebagai 'Pembawa <token>'."
 
-#: .\templates\core\settings.html:85
+#: .\templates\core\settings.html:101
 msgid "View API Documentation"
 msgstr "Lihat Dokumentasi API"
 
-#: .\templates\core\settings.html:93
+#: .\templates\core\settings.html:109
 msgid "Your Bearer Token"
 msgstr "Token Pembawa Anda"
 
-#: .\templates\core\settings.html:107
+#: .\templates\core\settings.html:123
 msgid "Click the token or use the Copy button to copy it to your clipboard."
 msgstr ""
 "Klik token atau gunakan butang Salin untuk menyalinnya ke papan keratan "
 "anda."
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid "Security Warning:"
 msgstr "Amaran Keselamatan:"
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid ""
 "Keep your token secret. Anyone with this token can access your account via "
 "the API."
@@ -9183,11 +10477,11 @@ msgstr ""
 "Rahsiakan token anda.Sesiapa sahaja yang mempunyai token ini boleh mengakses"
 " akaun anda melalui API."
 
-#: .\templates\core\settings.html:129
+#: .\templates\core\settings.html:145
 msgid "Regenerate Token"
 msgstr "Menjana semula Token"
 
-#: .\templates\core\settings.html:132
+#: .\templates\core\settings.html:148
 msgid ""
 "Regenerating will create a new token and invalidate the old one. Update any "
 "applications using the old token."
@@ -9195,11 +10489,11 @@ msgstr ""
 "Penjanaan semula akan mencipta token baharu dan membatalkan token lama.Kemas"
 " kini mana-mana aplikasi menggunakan token lama."
 
-#: .\templates\core\settings.html:139
+#: .\templates\core\settings.html:155
 msgid "Timezone Settings"
 msgstr "Tetapan Zon Waktu"
 
-#: .\templates\core\settings.html:140
+#: .\templates\core\settings.html:156
 msgid ""
 "Set your preferred timezone for displaying scheduled email times on the "
 "dashboard."
@@ -9207,26 +10501,26 @@ msgstr ""
 "Tetapkan zon waktu pilihan anda untuk memaparkan masa e-mel yang dijadualkan"
 " pada papan pemuka."
 
-#: .\templates\core\settings.html:145
+#: .\templates\core\settings.html:161
 msgid "Preferred Time Zone"
 msgstr "Zon Waktu Pilihan"
 
-#: .\templates\core\settings.html:151
+#: .\templates\core\settings.html:167
 msgid ""
 "Scheduled email times on the dashboard will be shown using this time zone."
 msgstr ""
 "Masa e-mel yang dijadualkan pada papan pemuka akan ditunjukkan menggunakan "
 "zon waktu ini."
 
-#: .\templates\core\settings.html:188
+#: .\templates\core\settings.html:204
 msgid "Account Status"
 msgstr "Status Akaun"
 
-#: .\templates\core\settings.html:275
+#: .\templates\core\settings.html:291
 msgid "Token copied to clipboard!"
 msgstr "Token disalin ke papan keratan!"
 
-#: .\templates\core\settings.html:287
+#: .\templates\core\settings.html:303
 msgid ""
 "Are you sure you want to regenerate your API token? This will invalidate "
 "your current token and you will need to update any applications using it."
@@ -9235,15 +10529,15 @@ msgstr ""
 "token semasa anda dan anda perlu mengemas kini mana-mana aplikasi yang "
 "menggunakannya."
 
-#: .\templates\core\settings.html:338
+#: .\templates\core\settings.html:354
 msgid "Token regenerated successfully!"
 msgstr "Token berjaya dijana semula!"
 
-#: .\templates\core\settings.html:348
+#: .\templates\core\settings.html:364
 msgid "Failed to regenerate token"
 msgstr "Gagal menjana semula token"
 
-#: .\templates\core\settings.html:353
+#: .\templates\core\settings.html:369
 msgid "Error regenerating token. Please try again."
 msgstr "Ralat menjana semula token.Sila cuba lagi."
 
@@ -9485,10 +10779,6 @@ msgstr "Pemberitahuan pelanggan baharu"
 #: .\templates\core\tutorials\account_setup.html:75
 msgid "Bounce and complaint alerts"
 msgstr "Makluman lantunan dan aduan"
-
-#: .\templates\core\tutorials\account_setup.html:79
-msgid "Change Password"
-msgstr "Tukar Kata Laluan"
 
 #: .\templates\core\tutorials\account_setup.html:81
 msgid "Settings → Security"
@@ -14970,10 +16260,6 @@ msgid ""
 "                        "
 msgstr "Menunjukkan %(start)s-%(end)s daripada %(total)s pelanggan"
 
-#: .\templates\subscribers\list.html:174 .\templates\subscribers\list.html:178
-msgid "Previous"
-msgstr "Sebelumnya"
-
 #: .\templates\subscribers\list.html:183
 #, python-format
 msgid ""
@@ -14981,10 +16267,6 @@ msgid ""
 "                                Page %(number)s of %(total)s\n"
 "                            "
 msgstr "Halaman %(number)s daripada %(total)s"
-
-#: .\templates\subscribers\list.html:191 .\templates\subscribers\list.html:195
-msgid "Next"
-msgstr "Seterusnya"
 
 #: .\templates\subscribers\list.html:204
 msgid "No subscribers match your search"
@@ -15003,6 +16285,38 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Import kenalan atau tambah pelanggan secara manual untuk melihat mereka "
 "disenaraikan di sini."
+
+#~ msgid "This is already your current email address."
+#~ msgstr "Ini sudah menjadi alamat e-mel semasa anda."
+
+#~ msgid "Email sent successfully (Celery unavailable, sent immediately)"
+#~ msgstr "E-mel berjaya dihantar (Saderi tidak tersedia, dihantar serta-merta)"
+
+#~ msgid "Metrics Overview"
+#~ msgstr "Gambaran Keseluruhan Metrik"
+
+#~ msgid "Open Rate (trend)"
+#~ msgstr "Kadar Terbuka (trend)"
+
+#~ msgid "Coming soon"
+#~ msgstr "Akan datang"
+
+#~ msgid "Click Rate (trend)"
+#~ msgstr "Kadar Klik (trend)"
+
+#~ msgid "Delivery Rate (trend)"
+#~ msgstr "Kadar Penghantaran (trend)"
+
+#~ msgid ""
+#~ "AI generation uses Hugging Face API to create email content. The generated "
+#~ "subject and body will replace your current email."
+#~ msgstr ""
+#~ "Penjanaan AI menggunakan API Hugging Face untuk mencipta kandungan "
+#~ "e-mel.Subjek dan kandungan yang dijana akan menggantikan e-mel semasa anda."
+
+#~ msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#~ msgstr ""
+#~ "Pastikan pembolehubah persekitaran HUGGINGFACE_API_KEY anda ditetapkan."
 
 #~ msgid ""
 #~ "Automated email sequences that nurture leads, onboard users, and drive "

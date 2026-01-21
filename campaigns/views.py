@@ -426,6 +426,8 @@ def send_email(request, campaign_id, email_id):
 def campaign_edit(request, campaign_id):
     """Edit campaign and its templates."""
     from .models import EmailSendRequest
+    from gmail.models import EmailMessage, EmailProvider
+    from analytics.models import UserProfile
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     emails = campaign.emails.all().order_by('order')
     lists = List.objects.filter(user=request.user)
@@ -452,55 +454,28 @@ def campaign_edit(request, campaign_id):
     pending_paginator = Paginator(pending_emails_queryset, per_page)
     pending_emails = pending_paginator.get_page(pending_page)
     
-    # Get IMAP Auto-Reply emails (EmailMessage objects for sent auto-replies)
-    # Use same logic as dashboard: check multiple criteria for sent emails
-    from gmail.models import EmailMessage, EmailProvider, EmailCredential
-    
-    # Get user's IMAP credentials
-    imap_credentials = EmailCredential.objects.filter(
+    # Get IMAP/Gmail Auto-Reply emails (EmailMessage objects for sent auto-replies)
+    # We only select messages that:
+    # - Belong to this user
+    # - Are linked to this campaign via campaign_email
+    # - Come from IMAP or Gmail providers
+    # - Are marked as sent in provider_data
+    auto_reply_emails_queryset = EmailMessage.objects.filter(
         user=request.user,
-        provider=EmailProvider.IMAP,
-        is_active=True
-    )
+        campaign_email__campaign=campaign,
+        provider__in=[EmailProvider.IMAP, EmailProvider.GMAIL],
+        provider_data__sent=True,
+    ).select_related(
+        'campaign_email',
+        'campaign_email__campaign',
+        'credential',
+    ).order_by('-received_at')
     
-    # Get all IMAP emails for this user linked to this campaign
-    # Filter by campaign_email__campaign to match this campaign
-    all_imap_emails = EmailMessage.objects.filter(
-        user=request.user,
-        provider=EmailProvider.IMAP,
-        credential__in=imap_credentials,
-        campaign_email__campaign=campaign  # Link to this campaign via campaign_email
-    ).select_related('campaign_email', 'campaign_email__campaign', 'credential').order_by('-received_at')
-    
-    # Filter to only sent emails using same logic as dashboard
-    imap_auto_reply_emails_list = []
-    for email_msg in all_imap_emails:
-        provider_data = email_msg.provider_data or {}
-        folder = provider_data.get('folder', 'INBOX')
-        
-        # Get user's email from credential
-        user_email = ''
-        if email_msg.credential and email_msg.credential.email_address:
-            user_email = email_msg.credential.email_address.lower()
-        
-        # Check if this is a sent email (same logic as dashboard)
-        is_sent_email = (
-            provider_data.get('sent', False) or
-            email_msg.from_email.lower() == user_email or 
-            (email_msg.sender_email and email_msg.sender_email.lower() == user_email) or
-            'sent' in folder.lower() or
-            '[gmail]/sent' in folder.lower()
-        )
-        
-        if is_sent_email:
-            imap_auto_reply_emails_list.append(email_msg)
-    
-    # Paginate IMAP auto-reply emails
-    imap_paginator = Paginator(imap_auto_reply_emails_list, per_page)
+    # Paginate IMAP/Gmail auto-reply emails
+    imap_paginator = Paginator(auto_reply_emails_queryset, per_page)
     imap_auto_reply_emails = imap_paginator.get_page(imap_page)
     
     # Get user's preferred timezone
-    from analytics.models import UserProfile
     profile, _created = UserProfile.objects.get_or_create(user=request.user)
     user_timezone = profile.timezone or 'UTC'
     

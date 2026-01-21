@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-04 14:16-0600\n"
+"POT-Creation-Date: 2026-01-21 02:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\analytics\models.py:8 .\analytics\models.py:36 .\campaigns\models.py:143
-#: .\subscribers\models.py:10 .\subscribers\models.py:76
+#: .\analytics\models.py:8 .\analytics\models.py:40 .\campaigns\models.py:145
+#: .\gmail\models.py:18 .\gmail\models.py:70 .\subscribers\models.py:10
+#: .\subscribers\models.py:76
 msgid "User"
 msgstr "người dùng"
 
@@ -47,228 +48,260 @@ msgstr "HTML chân trang tùy chỉnh cho email"
 msgid "Time Zone"
 msgstr "Múi giờ"
 
-#: .\analytics\models.py:15 .\templates\core\dashboard.html:635
-#: .\templates\core\settings.html:45
+#: .\analytics\models.py:15 .\templates\core\dashboard.html:779
+#: .\templates\core\settings.html:56
+#, fuzzy
+#| msgid "Full name"
+msgid "Full Name"
+msgstr "Tên đầy đủ"
+
+#: .\analytics\models.py:15
+msgid "Full name to use in email From header"
+msgstr "Tên đầy đủ để sử dụng trong email Từ tiêu đề"
+
+#: .\analytics\models.py:17 .\templates\core\dashboard.html:784
+#: .\templates\core\settings.html:61
 msgid "Address Line 1"
 msgstr "Dòng địa chỉ 1"
 
-#: .\analytics\models.py:15
+#: .\analytics\models.py:17
 msgid "Street address"
 msgstr "Địa chỉ đường phố"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Address Line 2"
 msgstr "Dòng địa chỉ 2"
 
-#: .\analytics\models.py:16
+#: .\analytics\models.py:18
 msgid "Apartment, suite, etc. (optional)"
 msgstr "Căn hộ, dãy phòng, v.v. (tùy chọn)"
 
-#: .\analytics\models.py:17 .\templates\core\dashboard.html:644
-#: .\templates\core\settings.html:54
+#: .\analytics\models.py:19 .\templates\core\dashboard.html:793
+#: .\templates\core\settings.html:70
 msgid "City"
 msgstr "Thành phố"
 
-#: .\analytics\models.py:18 .\templates\core\dashboard.html:648
-#: .\templates\core\settings.html:58
+#: .\analytics\models.py:20 .\templates\core\dashboard.html:797
+#: .\templates\core\settings.html:74
 msgid "State/Province"
 msgstr "Tiểu bang/Tỉnh"
 
-#: .\analytics\models.py:19 .\templates\core\dashboard.html:654
-#: .\templates\core\settings.html:64
+#: .\analytics\models.py:21 .\templates\core\dashboard.html:803
+#: .\templates\core\settings.html:80
 msgid "Postal Code"
 msgstr "Mã bưu chính"
 
-#: .\analytics\models.py:20 .\templates\core\dashboard.html:658
-#: .\templates\core\settings.html:68
+#: .\analytics\models.py:22 .\templates\core\dashboard.html:807
+#: .\templates\core\settings.html:84
 msgid "Country"
 msgstr "Quốc gia"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "SPF Verified"
 msgstr "Đã xác minh SPF"
 
-#: .\analytics\models.py:22
+#: .\analytics\models.py:24
 msgid "Whether the user has a valid SPF record"
 msgstr "Liệu người dùng có bản ghi SPF hợp lệ hay không"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "SPF Last Checked"
 msgstr "SPF được kiểm tra lần cuối"
 
-#: .\analytics\models.py:23
+#: .\analytics\models.py:25
 msgid "Last time SPF record was checked"
 msgstr "Lần cuối cùng bản ghi SPF được kiểm tra"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "SPF Record"
 msgstr "Bản ghi SPF"
 
-#: .\analytics\models.py:24
+#: .\analytics\models.py:26
 msgid "The SPF record found for the user's domain"
 msgstr "Bản ghi SPF được tìm thấy cho miền của người dùng"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "SPF Missing Includes"
 msgstr "Thiếu SPF Bao gồm"
 
-#: .\analytics\models.py:25
+#: .\analytics\models.py:27
 msgid "List of missing required SPF includes"
 msgstr "Danh sách SPF yêu cầu còn thiếu bao gồm"
 
-#: .\analytics\models.py:28
+#: .\analytics\models.py:29
+msgid "Auto BCC Enabled"
+msgstr "Đã bật BCC tự động"
+
+#: .\analytics\models.py:29
+#, fuzzy
+#| msgid "Automatically scheduled 2 days after Email 1 is sent"
+msgid "Automatically BCC this email address whenever a new email is sent"
+msgstr "Tự động lên lịch 2 ngày sau khi Email 1 được gửi"
+
+#: .\analytics\models.py:32
 msgid "User Profile"
 msgstr "Hồ sơ người dùng"
 
-#: .\analytics\models.py:29
+#: .\analytics\models.py:33
 msgid "User Profiles"
 msgstr "Hồ sơ người dùng"
 
-#: .\analytics\models.py:32
+#: .\analytics\models.py:36
 #, python-format
 msgid "Profile for %(username)s"
 msgstr "Hồ sơ cho %(username)s"
 
-#: .\analytics\models.py:37 .\campaigns\models.py:20
+#: .\analytics\models.py:41 .\campaigns\models.py:21
 #: .\subscribers\models.py:11 .\subscribers\models.py:77
 #: .\templates\subscribers\list.html:76
 msgid "Name"
 msgstr "Tên"
 
-#: .\analytics\models.py:38
+#: .\analytics\models.py:42
 msgid "HTML Content"
 msgstr "Nội dung HTML"
 
-#: .\analytics\models.py:39
+#: .\analytics\models.py:43
 msgid "Is Default"
 msgstr "Là mặc định"
 
-#: .\analytics\models.py:40 .\campaigns\models.py:25 .\campaigns\models.py:74
-#: .\campaigns\models.py:121 .\campaigns\models.py:153
-#: .\campaigns\models.py:183 .\subscribers\models.py:14
+#: .\analytics\models.py:44 .\campaigns\models.py:26 .\campaigns\models.py:75
+#: .\campaigns\models.py:123 .\campaigns\models.py:155
+#: .\campaigns\models.py:185 .\gmail\models.py:42 .\subscribers\models.py:14
 #: .\subscribers\models.py:53
 msgid "Created At"
 msgstr "Được tạo tại"
 
-#: .\analytics\models.py:41 .\campaigns\models.py:26 .\campaigns\models.py:75
-#: .\campaigns\models.py:154 .\campaigns\models.py:184
+#: .\analytics\models.py:45 .\campaigns\models.py:27 .\campaigns\models.py:76
+#: .\campaigns\models.py:156 .\campaigns\models.py:186 .\gmail\models.py:43
 #: .\subscribers\models.py:15 .\subscribers\models.py:54
 msgid "Updated At"
 msgstr "Cập nhật lúc"
 
-#: .\analytics\models.py:44 .\templates\campaigns\drafts.html:216
-#: .\templates\campaigns\template.html:148
+#: .\analytics\models.py:48 .\templates\campaigns\drafts.html:216
+#: .\templates\campaigns\template.html:178
 msgid "Email Footer"
 msgstr "Chân trang email"
 
-#: .\analytics\models.py:45 .\templates\analytics\footer_list.html:4
+#: .\analytics\models.py:49 .\templates\analytics\footer_list.html:4
 #: .\templates\analytics\footer_list.html:12
 msgid "Email Footers"
 msgstr "Chân trang email"
 
-#: .\analytics\views.py:397 .\templates\campaigns\template.html:1090
+#: .\analytics\views.py:485 .\templates\campaigns\template.html:1402
 msgid "API key regenerated successfully!"
 msgstr "Khóa API đã được tạo lại thành công!"
 
-#: .\analytics\views.py:426 .\analytics\views.py:463
-#: .\templates\campaigns\template.html:1187
+#: .\analytics\views.py:514 .\analytics\views.py:551
+#: .\templates\campaigns\template.html:1499
 msgid "Footer created successfully!"
 msgstr "Đã tạo chân trang thành công!"
 
-#: .\analytics\views.py:429 .\analytics\views.py:488
+#: .\analytics\views.py:517 .\analytics\views.py:576
 msgid "Please provide both name and content."
 msgstr "Vui lòng cung cấp cả tên và nội dung."
 
-#: .\analytics\views.py:448
+#: .\analytics\views.py:536
 msgid "Footer name is required"
 msgstr "Tên chân trang là bắt buộc"
 
-#: .\analytics\views.py:451
+#: .\analytics\views.py:539
 msgid "Footer content is required"
 msgstr "Nội dung chân trang là bắt buộc"
 
-#: .\analytics\views.py:485
+#: .\analytics\views.py:573
 msgid "Footer updated successfully!"
 msgstr "Đã cập nhật chân trang thành công!"
 
-#: .\analytics\views.py:503
+#: .\analytics\views.py:591
 msgid "Footer deleted successfully!"
 msgstr "Đã xóa chân trang thành công!"
 
-#: .\analytics\views.py:517
+#: .\analytics\views.py:605
 msgid "Default footer updated successfully!"
 msgstr "Chân trang mặc định được cập nhật thành công!"
 
-#: .\campaigns\models.py:11 .\campaigns\views.py:462
+#: .\campaigns\models.py:11 .\campaigns\views.py:526
+#, fuzzy
+#| msgid "In seconds"
+msgid "Seconds"
+msgstr "Tính bằng giây"
+
+#: .\campaigns\models.py:12 .\campaigns\views.py:527
 #: .\templates\campaigns\drafts.html:203
 #: .\templates\core\feature_email_scheduling.html:66
 msgid "Minutes"
 msgstr "Phút"
 
-#: .\campaigns\models.py:12 .\campaigns\views.py:463
+#: .\campaigns\models.py:13 .\campaigns\views.py:528
 #: .\templates\campaigns\drafts.html:204
 #: .\templates\core\feature_email_scheduling.html:67
 msgid "Hours"
 msgstr "Giờ"
 
-#: .\campaigns\models.py:13 .\campaigns\views.py:464
+#: .\campaigns\models.py:14 .\campaigns\views.py:529
 #: .\templates\campaigns\drafts.html:205
 #: .\templates\core\feature_email_scheduling.html:68
 msgid "Days"
 msgstr "Ngày"
 
-#: .\campaigns\models.py:14 .\campaigns\views.py:465
+#: .\campaigns\models.py:15 .\campaigns\views.py:530
 #: .\templates\campaigns\drafts.html:206
 #: .\templates\core\feature_email_scheduling.html:69
 msgid "Weeks"
 msgstr "Tuần"
 
-#: .\campaigns\models.py:15 .\campaigns\views.py:466
+#: .\campaigns\models.py:16 .\campaigns\views.py:531
 #: .\templates\campaigns\drafts.html:207
 #: .\templates\core\feature_email_scheduling.html:70
 msgid "Months"
 msgstr "Tháng"
 
-#: .\campaigns\models.py:21 .\subscribers\models.py:12
+#: .\campaigns\models.py:22 .\subscribers\models.py:12
 #: .\templates\campaigns\campaign_edit_page.html:12
-#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:35
+#: .\templates\campaigns\create.html:20 .\templates\campaigns\edit.html:60
 msgid "Description"
 msgstr "Sự miêu tả"
 
-#: .\campaigns\models.py:23 .\templates\campaigns\campaign_edit_page.html:13
-#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:41
+#: .\campaigns\models.py:24 .\templates\campaigns\campaign_edit_page.html:13
+#: .\templates\campaigns\create.html:27 .\templates\campaigns\edit.html:66
 msgid "Subscriber List"
 msgstr "Danh sách người đăng ký"
 
-#: .\campaigns\models.py:24 .\subscribers\models.py:49
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:16
-#: .\templates\campaigns\template.html:298 .\templates\core\dashboard.html:404
-#: .\templates\core\dashboard.html:462 .\templates\subscribers\list.html:142
+#: .\campaigns\models.py:25 .\gmail\models.py:35 .\subscribers\models.py:49
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:16
+#: .\templates\campaigns\template.html:93
+#: .\templates\campaigns\template.html:331 .\templates\core\dashboard.html:545
+#: .\templates\core\dashboard.html:603 .\templates\subscribers\list.html:142
 msgid "Active"
 msgstr "Tích cực"
 
-#: .\campaigns\models.py:27
+#: .\campaigns\models.py:28
 msgid "Sent Count"
 msgstr "Số lượng đã gửi"
 
-#: .\campaigns\models.py:28
+#: .\campaigns\models.py:29
 msgid "Open Count"
 msgstr "Số lượng mở"
 
-#: .\campaigns\models.py:29
+#: .\campaigns\models.py:30
 msgid "Click Count"
 msgstr "Bấm vào Đếm"
 
-#: .\campaigns\models.py:32 .\campaigns\models.py:66 .\campaigns\models.py:144
-#: .\templates\campaigns\campaign_analysis.html:19
-#: .\templates\campaigns\template.html:293
+#: .\campaigns\models.py:33 .\campaigns\models.py:67 .\campaigns\models.py:146
+#: .\templates\analytics\dashboard.html:116
+#: .\templates\campaigns\campaign_analysis.html:23
+#: .\templates\campaigns\campaign_emails.html:128
+#: .\templates\campaigns\campaign_emails.html:253
+#: .\templates\campaigns\campaign_emails.html:330
+#: .\templates\campaigns\template.html:326
 #: .\templates\campaigns\template_revision.html:38
-#: .\templates\core\dashboard.html:254 .\templates\subscribers\add.html:71
+#: .\templates\core\dashboard.html:395 .\templates\subscribers\add.html:71
 msgid "Campaign"
 msgstr "Chiến dịch"
 
-#: .\campaigns\models.py:33 .\templates\base.html:369
-#: .\templates\core\dashboard.html:77
+#: .\campaigns\models.py:34 .\templates\analytics\dashboard.html:94
+#: .\templates\base.html:370 .\templates\core\dashboard.html:218
 #: .\templates\core\feature_drip_campaigns.html:35
 #: .\templates\core\resource_api_reference.html:93
 #: .\templates\core\resource_api_reference.html:140
@@ -278,48 +311,54 @@ msgstr "Chiến dịch"
 msgid "Campaigns"
 msgstr "Chiến dịch"
 
-#: .\campaigns\models.py:67 .\templates\campaigns\campaign_analysis.html:147
+#: .\campaigns\models.py:68 .\gmail\models.py:79
+#: .\templates\campaigns\campaign_analysis.html:151
+#: .\templates\campaigns\campaign_emails.html:57
+#: .\templates\campaigns\campaign_emails.html:197
+#: .\templates\campaigns\campaign_emails.html:268
+#: .\templates\campaigns\campaign_emails.html:401
 #: .\templates\core\contact.html:35
 msgid "Subject"
 msgstr "Chủ thể"
 
-#: .\campaigns\models.py:68
+#: .\campaigns\models.py:69
 msgid "HTML Body"
 msgstr "Nội dung HTML"
 
-#: .\campaigns\models.py:69
+#: .\campaigns\models.py:70
 msgid "Text Body"
 msgstr "Nội dung văn bản"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:197
-#: .\templates\campaigns\template.html:91
+#: .\campaigns\models.py:71 .\templates\campaigns\campaign_emails.html:136
+#: .\templates\campaigns\drafts.html:197
+#: .\templates\campaigns\template.html:118
 #: .\templates\core\feature_email_scheduling.html:63
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Time"
 msgstr "Thời gian chờ"
 
-#: .\campaigns\models.py:70 .\templates\campaigns\drafts.html:211
+#: .\campaigns\models.py:71 .\templates\campaigns\drafts.html:211
 msgid "Time to wait before sending this email"
 msgstr "Thời gian chờ đợi trước khi gửi email này"
 
-#: .\campaigns\models.py:71 .\templates\core\feature_email_scheduling.html:64
+#: .\campaigns\models.py:72 .\templates\core\feature_email_scheduling.html:64
 #: .\templates\core\feature_email_templates.html:58
 msgid "Wait Unit"
 msgstr "Đơn vị chờ"
 
-#: .\campaigns\models.py:72 .\templates\campaigns\campaign_edit_page.html:39
+#: .\campaigns\models.py:73 .\templates\campaigns\campaign_edit_page.html:39
 #: .\templates\core\feature_email_scheduling.html:73
 #: .\templates\core\feature_email_templates.html:65
 msgid "Order"
 msgstr "Đặt hàng"
 
-#: .\campaigns\models.py:73
+#: .\campaigns\models.py:74
 msgid "Footer"
 msgstr "Chân trang"
 
-#: .\campaigns\models.py:79 .\campaigns\models.py:115
-#: .\campaigns\models.py:145 .\campaigns\models.py:169
-#: .\subscribers\models.py:45 .\templates\base.html:414
+#: .\campaigns\models.py:80 .\campaigns\models.py:117
+#: .\campaigns\models.py:147 .\campaigns\models.py:171
+#: .\subscribers\models.py:45 .\templates\base.html:415
 #: .\templates\campaigns\email_analysis.html:215
 #: .\templates\campaigns\email_analysis.html:399
 #: .\templates\campaigns\template_revision.html:48
@@ -328,231 +367,259 @@ msgstr "Chân trang"
 msgid "Email"
 msgstr "E-mail"
 
-#: .\campaigns\models.py:80 .\templates\core\dashboard.html:385
+#: .\campaigns\models.py:81 .\templates\campaigns\campaign_emails.html:5
+#: .\templates\core\dashboard.html:526
 msgid "Emails"
 msgstr "Email"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "second"
+msgstr "Tính bằng giây"
+
+#: .\campaigns\models.py:90
+#, fuzzy
+#| msgid "In seconds"
+msgid "seconds"
+msgstr "Tính bằng giây"
+
+#: .\campaigns\models.py:91
 msgid "minute"
 msgstr "phút"
 
-#: .\campaigns\models.py:89
+#: .\campaigns\models.py:91
 msgid "minutes"
 msgstr "phút"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hour"
 msgstr "giờ"
 
-#: .\campaigns\models.py:90
+#: .\campaigns\models.py:92
 msgid "hours"
 msgstr "giờ"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "day"
 msgstr "ngày"
 
-#: .\campaigns\models.py:91 .\campaigns\models.py:97
+#: .\campaigns\models.py:93 .\campaigns\models.py:99
 msgid "days"
 msgstr "ngày"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "week"
 msgstr "tuần"
 
-#: .\campaigns\models.py:92
+#: .\campaigns\models.py:94
 msgid "weeks"
 msgstr "tuần"
 
-#: .\campaigns\models.py:93 .\templates\core\pricing.html:20
+#: .\campaigns\models.py:95 .\templates\core\pricing.html:20
 msgid "month"
 msgstr "tháng"
 
-#: .\campaigns\models.py:93
+#: .\campaigns\models.py:95
 msgid "months"
 msgstr "tháng"
 
-#: .\campaigns\models.py:106 .\campaigns\models.py:138
-#: .\templates\campaigns\campaign_analysis.html:39
-#: .\templates\campaigns\campaign_analysis.html:117
-#: .\templates\campaigns\campaign_analysis.html:148
-#: .\templates\core\dashboard.html:386 .\templates\core\dashboard.html:1023
+#: .\campaigns\models.py:108 .\campaigns\models.py:140
+#: .\templates\analytics\dashboard.html:119
+#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:121
+#: .\templates\campaigns\campaign_analysis.html:152
+#: .\templates\campaigns\campaign_emails.html:241
+#: .\templates\campaigns\edit.html:198 .\templates\campaigns\edit.html:499
+#: .\templates\core\dashboard.html:527 .\templates\core\dashboard.html:1219
 msgid "Sent"
 msgstr "Đã gửi"
 
-#: .\campaigns\models.py:107 .\templates\campaigns\campaign_analysis.html:118
-#: .\templates\campaigns\campaign_analysis.html:149
+#: .\campaigns\models.py:109 .\templates\analytics\dashboard.html:46
+#: .\templates\analytics\dashboard.html:122
+#: .\templates\campaigns\campaign_analysis.html:122
+#: .\templates\campaigns\campaign_analysis.html:153
 msgid "Opened"
 msgstr "Đã mở"
 
-#: .\campaigns\models.py:108 .\templates\campaigns\campaign_analysis.html:119
-#: .\templates\campaigns\campaign_analysis.html:150
+#: .\campaigns\models.py:110 .\templates\analytics\dashboard.html:61
+#: .\templates\analytics\dashboard.html:125
+#: .\templates\campaigns\campaign_analysis.html:123
+#: .\templates\campaigns\campaign_analysis.html:154
 msgid "Clicked"
 msgstr "Đã nhấp vào"
 
-#: .\campaigns\models.py:109
+#: .\campaigns\models.py:111
 msgid "Bounced"
 msgstr "Bị trả lại"
 
-#: .\campaigns\models.py:110
+#: .\campaigns\models.py:112
 msgid "Complained"
 msgstr "Khiếu nại"
 
-#: .\campaigns\models.py:111
+#: .\campaigns\models.py:113
 #: .\templates\core\feature_subscriber_management.html:167
 msgid "Unsubscribed"
 msgstr "Hủy đăng ký"
 
-#: .\campaigns\models.py:116 .\campaigns\models.py:147
+#: .\campaigns\models.py:118 .\campaigns\models.py:149
 msgid "Subscriber Email"
 msgstr "Email người đăng ký"
 
-#: .\campaigns\models.py:117
+#: .\campaigns\models.py:119
 msgid "Event Type"
 msgstr "Loại sự kiện"
 
-#: .\campaigns\models.py:118
+#: .\campaigns\models.py:120
 msgid "Link Clicked"
 msgstr "Đã nhấp vào liên kết"
 
-#: .\campaigns\models.py:119
+#: .\campaigns\models.py:121
 msgid "User Agent"
 msgstr "Tác nhân người dùng"
 
-#: .\campaigns\models.py:120
+#: .\campaigns\models.py:122
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
-#: .\campaigns\models.py:125
+#: .\campaigns\models.py:127
 msgid "Email Event"
 msgstr "Sự kiện email"
 
-#: .\campaigns\models.py:126
+#: .\campaigns\models.py:128
 msgid "Email Events"
 msgstr "Sự kiện email"
 
-#: .\campaigns\models.py:136
+#: .\campaigns\models.py:138 .\templates\campaigns\campaign_emails.html:110
 #: .\templates\core\feature_subscriber_management.html:171
 msgid "Pending"
 msgstr "Chưa giải quyết"
 
-#: .\campaigns\models.py:137
+#: .\campaigns\models.py:139
 msgid "Queued"
 msgstr "Đã xếp hàng"
 
-#: .\campaigns\models.py:139
+#: .\campaigns\models.py:141 .\templates\campaigns\campaign_emails.html:312
+#: .\templates\campaigns\campaign_emails.html:438
 msgid "Failed"
 msgstr "Thất bại"
 
-#: .\campaigns\models.py:146 .\subscribers\models.py:58
+#: .\campaigns\models.py:148 .\subscribers\models.py:58
 #: .\subscribers\models.py:97
 msgid "Subscriber"
 msgstr "Người đăng ký"
 
-#: .\campaigns\models.py:148
+#: .\campaigns\models.py:150 .\templates\campaigns\campaign_emails.html:141
+#: .\templates\campaigns\campaign_emails.html:347
 msgid "Variables"
 msgstr "Biến"
 
-#: .\campaigns\models.py:149 .\templates\campaigns\campaign_edit_page.html:14
-#: .\templates\core\dashboard.html:384 .\templates\subscribers\list.html:80
+#: .\campaigns\models.py:151 .\templates\campaigns\campaign_edit_page.html:14
+#: .\templates\campaigns\campaign_emails.html:66
+#: .\templates\campaigns\campaign_emails.html:206
+#: .\templates\campaigns\campaign_emails.html:277
+#: .\templates\campaigns\campaign_emails.html:410
+#: .\templates\core\dashboard.html:525 .\templates\subscribers\list.html:80
 msgid "Status"
 msgstr "Trạng thái"
 
-#: .\campaigns\models.py:150
+#: .\campaigns\models.py:152 .\templates\campaigns\campaign_emails.html:63
+#: .\templates\campaigns\campaign_emails.html:261
 msgid "Scheduled For"
 msgstr "Đã lên lịch cho"
 
-#: .\campaigns\models.py:151
+#: .\campaigns\models.py:153 .\templates\campaigns\campaign_emails.html:203
 msgid "Sent At"
 msgstr "Gửi tại"
 
-#: .\campaigns\models.py:152
+#: .\campaigns\models.py:154 .\templates\campaigns\campaign_emails.html:338
 msgid "Error Message"
 msgstr "Thông báo lỗi"
 
-#: .\campaigns\models.py:158
+#: .\campaigns\models.py:160
 msgid "Email Send Request"
 msgstr "Yêu cầu gửi email"
 
-#: .\campaigns\models.py:159
+#: .\campaigns\models.py:161
 msgid "Email Send Requests"
 msgstr "Yêu cầu gửi email"
 
-#: .\campaigns\models.py:172
+#: .\campaigns\models.py:174
 msgid "Generated Subject"
 msgstr "Chủ đề đã tạo"
 
-#: .\campaigns\models.py:173
+#: .\campaigns\models.py:175
 msgid "Generated Body HTML"
 msgstr "HTML nội dung được tạo"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "Generation Prompt"
 msgstr "Lời nhắc thế hệ"
 
-#: .\campaigns\models.py:174
+#: .\campaigns\models.py:176
 msgid "The prompt used to generate content"
 msgstr "Lời nhắc được sử dụng để tạo nội dung"
 
-#: .\campaigns\models.py:175
+#: .\campaigns\models.py:177
 msgid "Generation Model"
 msgstr "Mô hình thế hệ"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Topics"
 msgstr "chủ đề"
 
-#: .\campaigns\models.py:178
+#: .\campaigns\models.py:180
 msgid "Extracted topics and keywords"
 msgstr "Chủ đề và từ khóa được trích xuất"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant Topics"
 msgstr "Chủ đề chiếm ưu thế"
 
-#: .\campaigns\models.py:179
+#: .\campaigns\models.py:181
 msgid "Dominant topic for this email"
 msgstr "Chủ đề chính cho email này"
 
-#: .\campaigns\models.py:180 .\templates\campaigns\email_analysis.html:182
+#: .\campaigns\models.py:182 .\templates\campaigns\email_analysis.html:182
 msgid "Emails Analyzed"
 msgstr "Email được phân tích"
 
-#: .\campaigns\models.py:180
+#: .\campaigns\models.py:182
 msgid "Number of emails used in topic analysis"
 msgstr "Số lượng email được sử dụng trong phân tích chủ đề"
 
-#: .\campaigns\models.py:187
+#: .\campaigns\models.py:189
 msgid "Email AI Analysis"
 msgstr "Phân tích AI qua email"
 
-#: .\campaigns\models.py:188
+#: .\campaigns\models.py:190
 msgid "Email AI Analyses"
 msgstr "Phân tích AI qua email"
 
-#: .\campaigns\views.py:258 .\campaigns\views.py:311
+#: .\campaigns\views.py:270 .\campaigns\views.py:313
 msgid "Email address is required"
 msgstr "Địa chỉ email là bắt buộc"
 
-#: .\campaigns\views.py:275 .\campaigns\views.py:284 .\campaigns\views.py:294
+#: .\campaigns\views.py:287 .\campaigns\views.py:296
 msgid "Test email sent successfully"
 msgstr "Email kiểm tra đã được gửi thành công"
 
-#: .\campaigns\views.py:278 .\campaigns\views.py:297
+#: .\campaigns\views.py:290 .\campaigns\views.py:299
 #, python-brace-format
 msgid "Failed to send test email: {}"
 msgstr "Không gửi được email kiểm tra: {}"
 
-#: .\campaigns\views.py:394 .\core\views.py:802
+#: .\campaigns\views.py:403 .\core\views.py:818 .\core\views.py:839
 msgid "Email sent successfully"
 msgstr "Email đã được gửi thành công"
 
-#: .\campaigns\views.py:403 .\core\views.py:808 .\core\views.py:829
+#: .\campaigns\views.py:412 .\core\views.py:824 .\core\views.py:845
 #, python-brace-format
 msgid "Failed to send email: {}"
 msgstr "Không gửi được email: {}"
 
-#: .\campaigns\views.py:410 .\core\views.py:846 .\core\views.py:863
+#: .\campaigns\views.py:419 .\core\views.py:862 .\core\views.py:872
+#: .\core\views.py:879
 #, python-brace-format
 msgid ""
 "Email scheduled for {time}. It will be sent automatically at the scheduled "
@@ -561,102 +628,102 @@ msgstr ""
 "Email được lên lịch cho {time}.Nó sẽ được gửi tự động vào thời gian đã lên "
 "lịch."
 
-#: .\campaigns\views.py:447
+#: .\campaigns\views.py:511
 msgid "Please create a campaign first before creating email templates."
 msgstr "Vui lòng tạo chiến dịch trước khi tạo mẫu email."
 
-#: .\campaigns\views.py:484
+#: .\campaigns\views.py:549
 msgid "Cannot activate a campaign with no emails"
 msgstr "Không thể kích hoạt chiến dịch không có email"
 
-#: .\campaigns\views.py:491
+#: .\campaigns\views.py:556
 msgid "Campaign activated successfully"
 msgstr "Chiến dịch được kích hoạt thành công"
 
-#: .\campaigns\views.py:504
+#: .\campaigns\views.py:569
 msgid "Campaign deactivated successfully"
 msgstr "Chiến dịch đã bị vô hiệu hóa thành công"
 
-#: .\campaigns\views.py:518
+#: .\campaigns\views.py:583
 msgid "Email ID and direction are required"
 msgstr "Cần có ID email và hướng dẫn"
 
-#: .\campaigns\views.py:523 .\campaigns\views.py:919
+#: .\campaigns\views.py:588 .\campaigns\views.py:1020
 msgid "Email not found"
 msgstr "Không tìm thấy email"
 
-#: .\campaigns\views.py:535
+#: .\campaigns\views.py:600
 msgid "Email not found in campaign"
 msgstr "Không tìm thấy email trong chiến dịch"
 
-#: .\campaigns\views.py:543
+#: .\campaigns\views.py:608
 msgid "Cannot move email in that direction"
 msgstr "Không thể di chuyển email theo hướng đó"
 
-#: .\campaigns\views.py:553
+#: .\campaigns\views.py:618
 msgid "Email order updated successfully"
 msgstr "Đã cập nhật đơn hàng qua email thành công"
 
-#: .\campaigns\views.py:561
+#: .\campaigns\views.py:626
 msgid "No file uploaded"
 msgstr "Không có tập tin nào được tải lên"
 
-#: .\campaigns\views.py:565
+#: .\campaigns\views.py:630
 msgid "Invalid file format. Please upload a CSV or Excel file."
 msgstr "Định dạng tập tin không hợp lệ.Vui lòng tải lên tệp CSV hoặc Excel."
 
-#: .\campaigns\views.py:597
+#: .\campaigns\views.py:662
 #, python-brace-format
 msgid "Missing required columns: {}"
 msgstr "Thiếu cột bắt buộc: {}"
 
-#: .\campaigns\views.py:612
+#: .\campaigns\views.py:677
 msgid "File processed successfully"
 msgstr "Tệp được xử lý thành công"
 
-#: .\campaigns\views.py:618
+#: .\campaigns\views.py:683
 #, python-brace-format
 msgid "Error processing file: {}"
 msgstr "Lỗi xử lý tệp: {}"
 
-#: .\campaigns\views.py:641
+#: .\campaigns\views.py:706
 msgid "Campaign created successfully!"
 msgstr "Chiến dịch được tạo thành công!"
 
-#: .\campaigns\views.py:644
+#: .\campaigns\views.py:709
 msgid "Please provide a campaign name."
 msgstr "Vui lòng cung cấp tên chiến dịch."
 
-#: .\campaigns\views.py:885
+#: .\campaigns\views.py:986
 msgid "Subject topic is required"
 msgstr "Chủ đề chủ đề là bắt buộc"
 
-#: .\campaigns\views.py:913
+#: .\campaigns\views.py:1014
 msgid "Email generated and saved successfully"
 msgstr "Email được tạo và lưu thành công"
 
-#: .\campaigns\views.py:923
+#: .\campaigns\views.py:1024
 msgid "Email generated successfully"
 msgstr "Email được tạo thành công"
 
-#: .\campaigns\views.py:936
+#: .\campaigns\views.py:1041
 #, python-brace-format
 msgid "Failed to generate email: {}"
 msgstr "Không tạo được email: {}"
 
-#: .\campaigns\views.py:950
+#: .\campaigns\views.py:1056
 msgid "Email text is required"
 msgstr "Nội dung email là bắt buộc"
 
-#: .\campaigns\views.py:957
+#: .\campaigns\views.py:1063
 msgid "Email revised successfully"
 msgstr "Email đã được sửa thành công"
 
-#: .\campaigns\views.py:963
+#: .\campaigns\views.py:1069
 msgid "Revision failed"
 msgstr "Sửa đổi không thành công"
 
-#: .\campaigns\views.py:969
+#: .\campaigns\views.py:1075
 #, python-brace-format
 msgid "Failed to revise email: {}"
 msgstr "Không thể sửa lại email: {}"
@@ -672,72 +739,79 @@ msgstr ""
 "Tiêu đề mã thông báo không hợp lệ.Chuỗi mã thông báo không được chứa dấu "
 "cách."
 
-#: .\core\views.py:211 .\templates\subscribers\add.html:256
+#: .\core\views.py:213 .\templates\subscribers\add.html:256
 msgid "Please provide an email address."
 msgstr "Vui lòng cung cấp một địa chỉ email."
 
-#: .\core\views.py:213
-msgid "This is already your current email address."
-msgstr "Đây đã là địa chỉ email hiện tại của bạn."
+#: .\core\views.py:218
+#, fuzzy
+#| msgid "Settings updated successfully"
+msgid "Auto BCC setting updated successfully."
+msgstr "Đã cập nhật cài đặt thành công"
 
-#: .\core\views.py:223
+#: .\core\views.py:228
 msgid "This email address is already in use by another account."
 msgstr "Địa chỉ email này đã được sử dụng bởi một tài khoản khác."
 
-#: .\core\views.py:228
-#, python-format
-msgid "Email address updated successfully to %(email)s"
+#: .\core\views.py:236
+#, fuzzy, python-format
+#| msgid "Email address updated successfully to %(email)s"
+msgid "Email address and settings updated successfully to %(email)s"
 msgstr "Địa chỉ email đã được cập nhật thành công thành %(email)s"
 
-#: .\core\views.py:230
+#: .\core\views.py:238
 msgid "Please provide a valid email address."
 msgstr "Vui lòng cung cấp một địa chỉ email hợp lệ."
 
-#: .\core\views.py:242 .\core\views.py:368
+#: .\core\views.py:251 .\core\views.py:389
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
 msgid ""
-"Please fill in all required fields: Address Line 1, City, State, Postal "
-"Code, and Country."
+"Please fill in all required fields: Full Name, Address Line 1, City, State, "
+"Postal Code, and Country."
 msgstr ""
 "Vui lòng điền vào tất cả các trường bắt buộc: Dòng địa chỉ 1, Thành phố, "
 "Tiểu bang, Mã bưu điện và Quốc gia."
 
-#: .\core\views.py:252
+#: .\core\views.py:262
 msgid "Address updated successfully."
 msgstr "Địa chỉ được cập nhật thành công."
 
-#: .\core\views.py:258
+#: .\core\views.py:268
 msgid "Please select a valid time zone."
 msgstr "Vui lòng chọn múi giờ hợp lệ."
 
-#: .\core\views.py:262
+#: .\core\views.py:272
 #, python-format
 msgid "Time zone updated to %(tz)s"
 msgstr "Đã cập nhật múi giờ thành %(tz)s"
 
-#: .\core\views.py:269
+#: .\core\views.py:279
 msgid ""
 "Unsubscribe links are now disabled. This may violate email regulations."
 msgstr ""
 "Liên kết hủy đăng ký hiện đã bị vô hiệu hóa.Điều này có thể vi phạm các quy "
 "định về email."
 
-#: .\core\views.py:271
+#: .\core\views.py:281
 msgid "Unsubscribe links are now enabled."
 msgstr "Liên kết hủy đăng ký hiện đã được bật."
 
-#: .\core\views.py:302
+#: .\core\views.py:314
 msgid "Please provide a URL to your post"
 msgstr "Vui lòng cung cấp URL cho bài đăng của bạn"
 
-#: .\core\views.py:307
+#: .\core\views.py:319
 msgid "Please provide a valid URL starting with http:// or https://"
 msgstr "Vui lòng cung cấp URL hợp lệ bắt đầu bằng http:// hoặc https://"
 
-#: .\core\views.py:322
+#: .\core\views.py:334
 msgid "Please provide a valid URL for the selected platform"
 msgstr "Vui lòng cung cấp URL hợp lệ cho nền tảng đã chọn"
 
-#: .\core\views.py:330
+#: .\core\views.py:342
 msgid ""
 "Thank you for promoting DripEmails.org! Ads have been disabled for your "
 "account."
@@ -745,27 +819,27 @@ msgstr ""
 "Cảm ơn bạn đã quảng bá DripEmails.org!Quảng cáo đã bị vô hiệu hóa đối với "
 "tài khoản của bạn."
 
-#: .\core\views.py:356
+#: .\core\views.py:372
 msgid "Invalid timezone"
 msgstr "Múi giờ không hợp lệ"
 
-#: .\core\views.py:379
+#: .\core\views.py:402
 msgid "Settings updated successfully"
 msgstr "Đã cập nhật cài đặt thành công"
 
-#: .\core\views.py:404
+#: .\core\views.py:431
 msgid "An error occurred while saving settings"
 msgstr "Đã xảy ra lỗi khi lưu cài đặt"
 
-#: .\core\views.py:552
+#: .\core\views.py:579
 msgid "You must be logged in to post."
 msgstr "Bạn phải đăng nhập để đăng bài."
 
-#: .\core\views.py:577
+#: .\core\views.py:604
 msgid "Your post has been submitted successfully!"
 msgstr "Bài viết của bạn đã được gửi thành công!"
 
-#: .\core\views.py:619
+#: .\core\views.py:646
 msgid ""
 "Thank you for sharing your success story! We'll review it and may feature it"
 " on our site."
@@ -773,49 +847,40 @@ msgstr ""
 "Cảm ơn bạn đã chia sẻ câu chuyện thành công của mình!Chúng tôi sẽ xem xét nó"
 " và có thể giới thiệu nó trên trang web của chúng tôi."
 
-#: .\core\views.py:648
+#: .\core\views.py:675
 msgid "Please provide email address, campaign, and email template"
 msgstr "Vui lòng cung cấp địa chỉ email, chiến dịch và mẫu email"
 
-#: .\core\views.py:716
+#: .\core\views.py:743
 #, python-brace-format
 msgid "Failed to create or update subscriber: {}"
 msgstr "Không tạo hoặc cập nhật được người đăng ký: {}"
 
-#: .\core\views.py:814
+#: .\core\views.py:830
 msgid "Email scheduled successfully"
 msgstr "Đã lên lịch gửi email thành công"
 
-#: .\core\views.py:823
-msgid "Email sent successfully (Celery unavailable, sent immediately)"
-msgstr "Email đã được gửi thành công (Celery không có sẵn, gửi ngay)"
-
-#: .\core\views.py:856
-#, python-brace-format
-msgid "Email scheduled for {time}"
-msgstr "Email được lên lịch cho {time}"
-
-#: .\core\views.py:871
+#: .\core\views.py:887
 msgid "Campaign not found"
 msgstr "Không tìm thấy chiến dịch"
 
-#: .\core\views.py:873
+#: .\core\views.py:889
 msgid "Email template not found"
 msgstr "Không tìm thấy mẫu email"
 
-#: .\core\views.py:1057
+#: .\core\views.py:1076
 msgid "Email already sent."
 msgstr "Email đã được gửi."
 
-#: .\core\views.py:1069
+#: .\core\views.py:1088
 msgid "Email sent successfully."
 msgstr "Email đã được gửi thành công."
 
-#: .\core\views.py:1102
+#: .\core\views.py:1121
 msgid "Subscriber has been unsubscribed."
 msgstr "Người đăng ký đã bị hủy đăng ký."
 
-#: .\core\views.py:1115
+#: .\core\views.py:1134
 msgid ""
 "Invalid unsubscribe link. The subscriber may have already been unsubscribed "
 "or the link is invalid."
@@ -823,368 +888,568 @@ msgstr ""
 "Liên kết hủy đăng ký không hợp lệ.Người đăng ký có thể đã hủy đăng ký hoặc "
 "liên kết không hợp lệ."
 
-#: .\docs\live.py:146 .\dripemails\live.py:159 .\dripemails\settings.py:139
+#: .\docs\live.py:146 .\dripemails\live.py:160 .\dripemails\settings.py:148
 #: .\smtp_server\docs\live.py:146
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: .\docs\live.py:147 .\dripemails\live.py:160 .\dripemails\settings.py:140
+#: .\docs\live.py:147 .\dripemails\live.py:161 .\dripemails\settings.py:149
 #: .\smtp_server\docs\live.py:147
 msgid "Spanish"
 msgstr "tiếng Tây Ban Nha"
 
-#: .\docs\live.py:148 .\dripemails\live.py:161 .\dripemails\settings.py:141
+#: .\docs\live.py:148 .\dripemails\live.py:162 .\dripemails\settings.py:150
 #: .\smtp_server\docs\live.py:148
 msgid "French"
 msgstr "người Pháp"
 
-#: .\docs\live.py:149 .\dripemails\live.py:162 .\dripemails\settings.py:142
+#: .\docs\live.py:149 .\dripemails\live.py:163 .\dripemails\settings.py:151
 #: .\smtp_server\docs\live.py:149
 msgid "German"
 msgstr "tiếng Đức"
 
-#: .\dripemails\live.py:163 .\dripemails\settings.py:143
+#: .\dripemails\live.py:164 .\dripemails\settings.py:152
 msgid "Italian"
 msgstr "người Ý"
 
-#: .\dripemails\live.py:164 .\dripemails\settings.py:144
+#: .\dripemails\live.py:165 .\dripemails\settings.py:153
 msgid "Portuguese"
 msgstr "tiếng Bồ Đào Nha"
 
-#: .\dripemails\live.py:165 .\dripemails\settings.py:145
+#: .\dripemails\live.py:166 .\dripemails\settings.py:154
 msgid "Portuguese (Brazil)"
 msgstr "Tiếng Bồ Đào Nha (Brazil)"
 
-#: .\dripemails\live.py:166 .\dripemails\settings.py:146
+#: .\dripemails\live.py:167 .\dripemails\settings.py:155
 msgid "Russian"
 msgstr "tiếng Nga"
 
-#: .\dripemails\live.py:167 .\dripemails\settings.py:147
+#: .\dripemails\live.py:168 .\dripemails\settings.py:156
 msgid "Chinese (Simplified)"
 msgstr "Tiếng Trung (Giản thể)"
 
-#: .\dripemails\live.py:168 .\dripemails\settings.py:148
+#: .\dripemails\live.py:169 .\dripemails\settings.py:157
 msgid "Chinese (Traditional)"
 msgstr "Tiếng Trung (truyền thống)"
 
-#: .\dripemails\live.py:169 .\dripemails\settings.py:149
+#: .\dripemails\live.py:170 .\dripemails\settings.py:158
 msgid "Japanese"
 msgstr "tiếng Nhật"
 
-#: .\dripemails\live.py:170 .\dripemails\settings.py:150
+#: .\dripemails\live.py:171 .\dripemails\settings.py:159
 msgid "Korean"
 msgstr "Tiếng Hàn"
 
-#: .\dripemails\live.py:171 .\dripemails\settings.py:151
+#: .\dripemails\live.py:172 .\dripemails\settings.py:160
 msgid "Arabic"
 msgstr "tiếng Ả Rập"
 
-#: .\dripemails\live.py:172 .\dripemails\settings.py:152
+#: .\dripemails\live.py:173 .\dripemails\settings.py:161
 msgid "Hindi"
 msgstr "Tiếng Hindi"
 
-#: .\dripemails\live.py:173 .\dripemails\settings.py:153
+#: .\dripemails\live.py:174 .\dripemails\settings.py:162
 msgid "Turkish"
 msgstr "tiếng Thổ Nhĩ Kỳ"
 
-#: .\dripemails\live.py:174 .\dripemails\settings.py:154
+#: .\dripemails\live.py:175 .\dripemails\settings.py:163
 msgid "Polish"
 msgstr "Đánh bóng"
 
-#: .\dripemails\live.py:175 .\dripemails\settings.py:155
+#: .\dripemails\live.py:176 .\dripemails\settings.py:164
 msgid "Dutch"
 msgstr "tiếng Hà Lan"
 
-#: .\dripemails\live.py:176 .\dripemails\settings.py:156
+#: .\dripemails\live.py:177 .\dripemails\settings.py:165
 msgid "Swedish"
 msgstr "tiếng Thụy Điển"
 
-#: .\dripemails\live.py:177 .\dripemails\settings.py:157
+#: .\dripemails\live.py:178 .\dripemails\settings.py:166
 msgid "Danish"
 msgstr "tiếng Đan Mạch"
 
-#: .\dripemails\live.py:178 .\dripemails\settings.py:158
+#: .\dripemails\live.py:179 .\dripemails\settings.py:167
 msgid "Norwegian"
 msgstr "người Na Uy"
 
-#: .\dripemails\live.py:179 .\dripemails\settings.py:159
+#: .\dripemails\live.py:180 .\dripemails\settings.py:168
 msgid "Finnish"
 msgstr "tiếng Phần Lan"
 
-#: .\dripemails\live.py:180 .\dripemails\settings.py:160
+#: .\dripemails\live.py:181 .\dripemails\settings.py:169
 msgid "Czech"
 msgstr "tiếng Séc"
 
-#: .\dripemails\live.py:181 .\dripemails\settings.py:161
+#: .\dripemails\live.py:182 .\dripemails\settings.py:170
 msgid "Romanian"
 msgstr "người Rumani"
 
-#: .\dripemails\live.py:182 .\dripemails\settings.py:162
+#: .\dripemails\live.py:183 .\dripemails\settings.py:171
 msgid "Hungarian"
 msgstr "tiếng Hungary"
 
-#: .\dripemails\live.py:183 .\dripemails\settings.py:163
+#: .\dripemails\live.py:184 .\dripemails\settings.py:172
 msgid "Greek"
 msgstr "tiếng Hy Lạp"
 
-#: .\dripemails\live.py:184 .\dripemails\settings.py:164
+#: .\dripemails\live.py:185 .\dripemails\settings.py:173
 msgid "Hebrew"
 msgstr "tiếng Do Thái"
 
-#: .\dripemails\live.py:185 .\dripemails\settings.py:165
+#: .\dripemails\live.py:186 .\dripemails\settings.py:174
 msgid "Thai"
 msgstr "tiếng Thái"
 
-#: .\dripemails\live.py:186 .\dripemails\settings.py:166
+#: .\dripemails\live.py:187 .\dripemails\settings.py:175
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: .\dripemails\live.py:187 .\dripemails\settings.py:167
+#: .\dripemails\live.py:188 .\dripemails\settings.py:176
 msgid "Indonesian"
 msgstr "tiếng Indonesia"
 
-#: .\dripemails\live.py:188 .\dripemails\settings.py:168
+#: .\dripemails\live.py:189 .\dripemails\settings.py:177
 msgid "Malay"
 msgstr "Mã Lai"
 
-#: .\dripemails\live.py:189 .\dripemails\settings.py:169
+#: .\dripemails\live.py:190 .\dripemails\settings.py:178
 msgid "Ukrainian"
 msgstr "tiếng Ukraina"
 
-#: .\dripemails\live.py:190 .\dripemails\settings.py:170
+#: .\dripemails\live.py:191 .\dripemails\settings.py:179
 msgid "Bulgarian"
 msgstr "tiếng Bungari"
 
-#: .\dripemails\live.py:191 .\dripemails\settings.py:171
+#: .\dripemails\live.py:192 .\dripemails\settings.py:180
 msgid "Croatian"
 msgstr "tiếng Croatia"
 
-#: .\dripemails\live.py:192 .\dripemails\settings.py:172
+#: .\dripemails\live.py:193 .\dripemails\settings.py:181
 msgid "Serbian"
 msgstr "tiếng Serbia"
 
-#: .\dripemails\live.py:193 .\dripemails\settings.py:173
+#: .\dripemails\live.py:194 .\dripemails\settings.py:182
 msgid "Slovak"
 msgstr "Tiếng Slovak"
 
-#: .\dripemails\live.py:194 .\dripemails\settings.py:174
+#: .\dripemails\live.py:195 .\dripemails\settings.py:183
 msgid "Slovenian"
 msgstr "tiếng Slovenia"
 
-#: .\dripemails\live.py:195 .\dripemails\settings.py:175
+#: .\dripemails\live.py:196 .\dripemails\settings.py:184
 msgid "Lithuanian"
 msgstr "tiếng Litva"
 
-#: .\dripemails\live.py:196 .\dripemails\settings.py:176
+#: .\dripemails\live.py:197 .\dripemails\settings.py:185
 msgid "Latvian"
 msgstr "tiếng Latvia"
 
-#: .\dripemails\live.py:197 .\dripemails\settings.py:177
+#: .\dripemails\live.py:198 .\dripemails\settings.py:186
 msgid "Estonian"
 msgstr "tiếng Estonia"
 
-#: .\dripemails\live.py:198 .\dripemails\settings.py:178
+#: .\dripemails\live.py:199 .\dripemails\settings.py:187
 msgid "Icelandic"
 msgstr "tiếng Iceland"
 
-#: .\dripemails\live.py:199 .\dripemails\settings.py:179
+#: .\dripemails\live.py:200 .\dripemails\settings.py:188
 msgid "Irish"
 msgstr "người Ireland"
 
-#: .\dripemails\live.py:200 .\dripemails\settings.py:180
+#: .\dripemails\live.py:201 .\dripemails\settings.py:189
 msgid "Maltese"
 msgstr "tiếng Malta"
 
-#: .\dripemails\live.py:201 .\dripemails\settings.py:181
+#: .\dripemails\live.py:202 .\dripemails\settings.py:190
 msgid "Catalan"
 msgstr "tiếng Catalan"
 
-#: .\dripemails\live.py:202 .\dripemails\settings.py:182
+#: .\dripemails\live.py:203 .\dripemails\settings.py:191
 msgid "Basque"
 msgstr "Tiếng Basque"
 
-#: .\dripemails\live.py:203 .\dripemails\settings.py:183
+#: .\dripemails\live.py:204 .\dripemails\settings.py:192
 msgid "Galician"
 msgstr "tiếng Galicia"
 
-#: .\dripemails\live.py:204 .\dripemails\settings.py:184
+#: .\dripemails\live.py:205 .\dripemails\settings.py:193
 msgid "Welsh"
 msgstr "tiếng xứ Wales"
 
-#: .\dripemails\live.py:205 .\dripemails\settings.py:185
+#: .\dripemails\live.py:206 .\dripemails\settings.py:194
 msgid "Persian"
 msgstr "tiếng Ba Tư"
 
-#: .\dripemails\live.py:206 .\dripemails\settings.py:186
+#: .\dripemails\live.py:207 .\dripemails\settings.py:195
 msgid "Urdu"
 msgstr "tiếng Urdu"
 
-#: .\dripemails\live.py:207 .\dripemails\settings.py:187
+#: .\dripemails\live.py:208 .\dripemails\settings.py:196
 msgid "Bengali"
 msgstr "tiếng Bengali"
 
-#: .\dripemails\live.py:208 .\dripemails\settings.py:188
+#: .\dripemails\live.py:209 .\dripemails\settings.py:197
 msgid "Tamil"
 msgstr "Tiếng Tamil"
 
-#: .\dripemails\live.py:209 .\dripemails\settings.py:189
+#: .\dripemails\live.py:210 .\dripemails\settings.py:198
 msgid "Telugu"
 msgstr "tiếng Telugu"
 
-#: .\dripemails\live.py:210 .\dripemails\settings.py:190
+#: .\dripemails\live.py:211 .\dripemails\settings.py:199
 msgid "Marathi"
 msgstr "Tiếng Marathi"
 
-#: .\dripemails\live.py:211 .\dripemails\settings.py:191
+#: .\dripemails\live.py:212 .\dripemails\settings.py:200
 msgid "Gujarati"
 msgstr "tiếng Gujarati"
 
-#: .\dripemails\live.py:212 .\dripemails\settings.py:192
+#: .\dripemails\live.py:213 .\dripemails\settings.py:201
 msgid "Kannada"
 msgstr "tiếng Kannada"
 
-#: .\dripemails\live.py:213 .\dripemails\settings.py:193
+#: .\dripemails\live.py:214 .\dripemails\settings.py:202
 msgid "Malayalam"
 msgstr "Mã Lai"
 
-#: .\dripemails\live.py:214 .\dripemails\settings.py:194
+#: .\dripemails\live.py:215 .\dripemails\settings.py:203
 msgid "Punjabi"
 msgstr "Tiếng Punjab"
 
-#: .\dripemails\live.py:215 .\dripemails\settings.py:195
+#: .\dripemails\live.py:216 .\dripemails\settings.py:204
 msgid "Nepali"
 msgstr "tiếng Nepal"
 
-#: .\dripemails\live.py:216 .\dripemails\settings.py:196
+#: .\dripemails\live.py:217 .\dripemails\settings.py:205
 msgid "Sinhala"
 msgstr ""
 
-#: .\dripemails\live.py:217 .\dripemails\settings.py:197
+#: .\dripemails\live.py:218 .\dripemails\settings.py:206
 msgid "Burmese"
 msgstr "Miến Điện"
 
-#: .\dripemails\live.py:218 .\dripemails\settings.py:198
+#: .\dripemails\live.py:219 .\dripemails\settings.py:207
 msgid "Khmer"
 msgstr "tiếng Khmer"
 
-#: .\dripemails\live.py:219 .\dripemails\settings.py:199
+#: .\dripemails\live.py:220 .\dripemails\settings.py:208
 msgid "Lao"
 msgstr "tiếng Lào"
 
-#: .\dripemails\live.py:220 .\dripemails\settings.py:200
+#: .\dripemails\live.py:221 .\dripemails\settings.py:209
 msgid "Georgian"
 msgstr "tiếng Gruzia"
 
-#: .\dripemails\live.py:221 .\dripemails\settings.py:201
+#: .\dripemails\live.py:222 .\dripemails\settings.py:210
 msgid "Armenian"
 msgstr "tiếng Armenia"
 
-#: .\dripemails\live.py:222 .\dripemails\settings.py:202
+#: .\dripemails\live.py:223 .\dripemails\settings.py:211
 msgid "Azerbaijani"
 msgstr "Tiếng Azerbaijan"
 
-#: .\dripemails\live.py:223 .\dripemails\settings.py:203
+#: .\dripemails\live.py:224 .\dripemails\settings.py:212
 msgid "Kazakh"
 msgstr "Kazakhstan"
 
-#: .\dripemails\live.py:224 .\dripemails\settings.py:204
+#: .\dripemails\live.py:225 .\dripemails\settings.py:213
 msgid "Kyrgyz"
 msgstr "Tiếng Kyrgyzstan"
 
-#: .\dripemails\live.py:225 .\dripemails\settings.py:205
+#: .\dripemails\live.py:226 .\dripemails\settings.py:214
 msgid "Uzbek"
 msgstr "tiếng Uzbek"
 
-#: .\dripemails\live.py:226 .\dripemails\settings.py:206
+#: .\dripemails\live.py:227 .\dripemails\settings.py:215
 msgid "Mongolian"
 msgstr "tiếng Mông Cổ"
 
-#: .\dripemails\live.py:227 .\dripemails\settings.py:207
+#: .\dripemails\live.py:228 .\dripemails\settings.py:216
 msgid "Swahili"
 msgstr "tiếng Swahili"
 
-#: .\dripemails\live.py:228 .\dripemails\settings.py:208
+#: .\dripemails\live.py:229 .\dripemails\settings.py:217
 msgid "Afrikaans"
 msgstr "tiếng Afrikaans"
 
-#: .\dripemails\live.py:229 .\dripemails\settings.py:209
+#: .\dripemails\live.py:230 .\dripemails\settings.py:218
 msgid "Zulu"
 msgstr "Tiếng Zulu"
 
-#: .\dripemails\live.py:230 .\dripemails\settings.py:210
+#: .\dripemails\live.py:231 .\dripemails\settings.py:219
 msgid "Xhosa"
 msgstr ""
 
-#: .\dripemails\live.py:231 .\dripemails\settings.py:211
+#: .\dripemails\live.py:232 .\dripemails\settings.py:220
 msgid "Amharic"
 msgstr "tiếng Amharic"
 
-#: .\dripemails\live.py:232 .\dripemails\settings.py:212
+#: .\dripemails\live.py:233 .\dripemails\settings.py:221
 msgid "Hausa"
 msgstr "Tiếng Hausa"
 
-#: .\dripemails\live.py:233 .\dripemails\settings.py:213
+#: .\dripemails\live.py:234 .\dripemails\settings.py:222
 msgid "Yoruba"
 msgstr "Tiếng Yoruba"
 
-#: .\dripemails\live.py:234 .\dripemails\settings.py:214
+#: .\dripemails\live.py:235 .\dripemails\settings.py:223
 msgid "Igbo"
 msgstr "người Igbo"
 
-#: .\dripemails\live.py:235 .\dripemails\settings.py:215
+#: .\dripemails\live.py:236 .\dripemails\settings.py:224
 msgid "Shona"
 msgstr ""
 
-#: .\dripemails\live.py:236 .\dripemails\settings.py:216
+#: .\dripemails\live.py:237 .\dripemails\settings.py:225
 msgid "Sotho"
 msgstr ""
 
-#: .\dripemails\live.py:237 .\dripemails\settings.py:217
+#: .\dripemails\live.py:238 .\dripemails\settings.py:226
 msgid "Tswana"
 msgstr ""
 
-#: .\dripemails\live.py:238 .\dripemails\settings.py:218
+#: .\dripemails\live.py:239 .\dripemails\settings.py:227
 msgid "Venda"
 msgstr "bán"
 
-#: .\dripemails\live.py:239 .\dripemails\settings.py:219
+#: .\dripemails\live.py:240 .\dripemails\settings.py:228
 msgid "Tsonga"
 msgstr ""
 
-#: .\dripemails\live.py:240 .\dripemails\settings.py:220
+#: .\dripemails\live.py:241 .\dripemails\settings.py:229
 msgid "Swati"
 msgstr "tiếng Swati"
 
-#: .\dripemails\live.py:241 .\dripemails\settings.py:221
+#: .\dripemails\live.py:242 .\dripemails\settings.py:230
 msgid "Ndebele"
 msgstr ""
 
-#: .\dripemails\live.py:242 .\dripemails\settings.py:222
+#: .\dripemails\live.py:243 .\dripemails\settings.py:231
 msgid "Northern Sotho"
 msgstr "Bắc Sotho"
 
-#: .\dripemails\live.py:243 .\dripemails\settings.py:223
+#: .\dripemails\live.py:244 .\dripemails\settings.py:232
 msgid "Esperanto"
 msgstr "Quốc tế ngữ"
+
+#: .\gmail\models.py:10 .\templates\core\dashboard.html:84
+#, fuzzy
+#| msgid "Email"
+msgid "Gmail"
+msgstr "E-mail"
+
+#: .\gmail\models.py:11
+msgid "Outlook"
+msgstr "Triển vọng"
+
+#: .\gmail\models.py:12 .\templates\core\dashboard.html:124
+msgid "IMAP"
+msgstr ""
+
+#: .\gmail\models.py:19 .\gmail\models.py:72
+msgid "Provider"
+msgstr "nhà cung cấp"
+
+#: .\gmail\models.py:22
+#, fuzzy
+#| msgid "Access denied"
+msgid "Access Token"
+msgstr "Quyền truy cập bị từ chối"
+
+#: .\gmail\models.py:23
+#, fuzzy
+#| msgid "Refresh"
+msgid "Refresh Token"
+msgstr "Làm cho khỏe lại"
+
+#: .\gmail\models.py:24
+msgid "Token Expiry"
+msgstr "Mã thông báo hết hạn"
+
+#: .\gmail\models.py:27 .\templates\core\dashboard.html:142
+#: .\templates\core\home.html:253 .\templates\core\includes\signup_box.html:54
+msgid "IMAP Host"
+msgstr "Máy chủ IMAP"
+
+#: .\gmail\models.py:28 .\templates\core\dashboard.html:148
+#: .\templates\core\home.html:260 .\templates\core\includes\signup_box.html:60
+msgid "IMAP Port"
+msgstr "Cổng IMAP"
+
+#: .\gmail\models.py:29
+#, fuzzy
+#| msgid "Email or Username"
+msgid "IMAP Username"
+msgstr "Email hoặc tên người dùng"
+
+#: .\gmail\models.py:30 .\templates\core\home.html:271
+#: .\templates\core\includes\signup_box.html:69
+#, fuzzy
+#| msgid "Password"
+msgid "IMAP Password"
+msgstr "Mật khẩu"
+
+#: .\gmail\models.py:31
+#, fuzzy
+#| msgid "Use \\"
+msgid "Use SSL"
+msgstr "Sử dụng \\"
+
+#: .\gmail\models.py:34 .\templates\campaigns\template.html:453
+#: .\templates\core\contact.html:30 .\templates\core\dashboard.html:138
+#: .\templates\core\dashboard.html:391 .\templates\core\home.html:248
+#: .\templates\core\includes\signup_box.html:50
+#: .\templates\core\settings.html:20 .\templates\core\settings.html:26
+#: .\templates\core\settings.html:207
+msgid "Email Address"
+msgstr "Địa chỉ email"
+
+#: .\gmail\models.py:36
+msgid "Last Sync At"
+msgstr "Đồng bộ hóa lần cuối vào lúc"
+
+#: .\gmail\models.py:37
+#, fuzzy
+#| msgid "Scannable:"
+msgid "Sync Enabled"
+msgstr "Có thể quét được:"
+
+#: .\gmail\models.py:40
+#, fuzzy
+#| msgid "Profile Settings"
+msgid "Provider Settings"
+msgstr "Cài đặt hồ sơ"
+
+#: .\gmail\models.py:46
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Credential"
+msgstr "Nội dung email"
+
+#: .\gmail\models.py:47
+#, fuzzy
+#| msgid "Email Details"
+msgid "Email Credentials"
+msgstr "Chi tiết email"
+
+#: .\gmail\models.py:71
+msgid "Credential"
+msgstr "Thông tin xác thực"
+
+#: .\gmail\models.py:75
+#, fuzzy
+#| msgid "Error Message"
+msgid "Provider Message ID"
+msgstr "Thông báo lỗi"
+
+#: .\gmail\models.py:76
+msgid "Thread ID"
+msgstr "ID chủ đề"
+
+#: .\gmail\models.py:80
+#, fuzzy
+#| msgid "From Email:"
+msgid "From Email"
+msgstr "Từ Email:"
+
+#: .\gmail\models.py:81
+#, fuzzy
+#| msgid "Emails"
+msgid "To Emails"
+msgstr "Email"
+
+#: .\gmail\models.py:81 .\gmail\models.py:82 .\gmail\models.py:83
+#, fuzzy
+#| msgid "Name and email address"
+msgid "Comma-separated email addresses"
+msgstr "Tên và địa chỉ email"
+
+#: .\gmail\models.py:82
+#, fuzzy
+#| msgid "Emails"
+msgid "CC Emails"
+msgstr "Email"
+
+#: .\gmail\models.py:83
+#, fuzzy
+#| msgid "Emails"
+msgid "BCC Emails"
+msgstr "Email"
+
+#: .\gmail\models.py:84
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sender Email"
+msgstr "Gửi email"
+
+#: .\gmail\models.py:85
+msgid "Reply To"
+msgstr "Trả lời tới"
+
+#: .\gmail\models.py:88
+msgid "Body Text"
+msgstr "Văn bản nội dung"
+
+#: .\gmail\models.py:89
+#, fuzzy
+#| msgid "Generated Body HTML"
+msgid "Body HTML"
+msgstr "HTML nội dung được tạo"
+
+#: .\gmail\models.py:92
+msgid "Received At"
+msgstr "Đã nhận tại"
+
+#: .\gmail\models.py:93
+#, fuzzy
+#| msgid "Created At"
+msgid "Fetched At"
+msgstr "Được tạo tại"
+
+#: .\gmail\models.py:94
+msgid "Processed"
+msgstr "Đã xử lý"
+
+#: .\gmail\models.py:97
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email"
+msgstr "Chi tiết chiến dịch"
+
+#: .\gmail\models.py:100
+msgid "Provider Data"
+msgstr "Dữ liệu nhà cung cấp"
+
+#: .\gmail\models.py:103
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Message"
+msgstr "Địa chỉ email"
+
+#: .\gmail\models.py:104
+#, fuzzy
+#| msgid "Email addresses"
+msgid "Email Messages"
+msgstr "Địa chỉ email"
 
 #: .\subscribers\models.py:18
 msgid "List"
 msgstr "Danh sách"
 
 #: .\subscribers\models.py:19 .\subscribers\models.py:44
-#: .\templates\core\dashboard.html:149
+#: .\templates\core\dashboard.html:290
 #: .\templates\core\tutorials\api_integration.html:65
 #: .\templates\subscribers\list.html:78
 msgid "Lists"
 msgstr "Danh sách"
 
-#: .\subscribers\models.py:47 .\templates\campaigns\template.html:422
-#: .\templates\core\dashboard.html:241
+#: .\subscribers\models.py:47 .\templates\campaigns\template.html:458
+#: .\templates\campaigns\template.html:498 .\templates\core\dashboard.html:382
 msgid "First Name"
 msgstr "Tên"
 
-#: .\subscribers\models.py:48 .\templates\campaigns\template.html:428
-#: .\templates\core\dashboard.html:245
+#: .\subscribers\models.py:48 .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:504 .\templates\core\dashboard.html:386
 msgid "Last Name"
 msgstr "Họ"
 
@@ -1200,8 +1465,8 @@ msgstr "Xác nhận được gửi vào"
 msgid "Confirmed At"
 msgstr "Xác nhận tại"
 
-#: .\subscribers\models.py:59 .\templates\core\dashboard.html:101
-#: .\templates\core\dashboard.html:461
+#: .\subscribers\models.py:59 .\templates\analytics\dashboard.html:87
+#: .\templates\core\dashboard.html:242 .\templates\core\dashboard.html:602
 #: .\templates\core\feature_subscriber_management.html:39
 #: .\templates\core\feature_subscriber_management.html:102
 #: .\templates\core\resource_api_reference.html:94
@@ -1527,14 +1792,16 @@ msgstr "Trở về nhà"
 msgid "Email Confirmation Sent"
 msgstr "Đã gửi xác nhận email"
 
-#: .\templates\account\login.html:5 .\templates\base.html:143
-#: .\templates\base.html:180
+#: .\templates\account\login.html:5 .\templates\base.html:144
+#: .\templates\base.html:181
 msgid "Login"
 msgstr "Đăng nhập"
 
 #: .\templates\account\login.html:14 .\templates\account\logout.html:12
 #: .\templates\account\password_reset.html:13
 #: .\templates\account\password_reset_done.html:13
+#: .\templates\account\password_reset_from_key.html:13
+#: .\templates\account\password_reset_from_key_done.html:13
 #: .\templates\account\signup.html:13 .\templates\base.html:14
 #: .\templates\base.html:15 .\templates\base.html:29 .\templates\base.html:38
 msgid "DripEmails.org"
@@ -1552,7 +1819,8 @@ msgstr "Đăng nhập để quản lý các chiến dịch email của bạn."
 msgid "Email or Username"
 msgstr "Email hoặc tên người dùng"
 
-#: .\templates\account\login.html:44
+#: .\templates\account\login.html:44 .\templates\core\dashboard.html:157
+#: .\templates\core\home.html:1179
 msgid "Password"
 msgstr "Mật khẩu"
 
@@ -1564,8 +1832,8 @@ msgstr "Bạn quên mật khẩu?"
 msgid "Remember Me"
 msgstr "Nhớ tôi"
 
-#: .\templates\account\login.html:75 .\templates\core\home.html:73
-#: .\templates\core\home.html:749
+#: .\templates\account\login.html:75 .\templates\core\home.html:75
+#: .\templates\core\home.html:1078
 msgid "Sign In"
 msgstr "Đăng nhập"
 
@@ -1610,12 +1878,13 @@ msgstr ""
 #: .\templates\analytics\footer_confirm_delete.html:47
 #: .\templates\analytics\footer_form.html:76
 #: .\templates\campaigns\create.html:64 .\templates\campaigns\drafts.html:232
-#: .\templates\campaigns\edit.html:156 .\templates\campaigns\template.html:270
-#: .\templates\campaigns\template.html:304
-#: .\templates\campaigns\template.html:381
-#: .\templates\campaigns\template.html:435
-#: .\templates\campaigns\template.html:483
-#: .\templates\subscribers\import.html:72
+#: .\templates\campaigns\edit.html:659 .\templates\campaigns\template.html:300
+#: .\templates\campaigns\template.html:337
+#: .\templates\campaigns\template.html:417
+#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:516
+#: .\templates\campaigns\template.html:564 .\templates\core\dashboard.html:172
+#: .\templates\core\home.html:1197 .\templates\subscribers\import.html:72
 #: .\templates\subscribers\import.html:112
 msgid "Cancel"
 msgstr "Hủy bỏ"
@@ -1650,11 +1919,13 @@ msgstr "Gửi liên kết đặt lại"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Remember your password?"
 msgstr "Ghi nhớ mật khẩu của bạn?"
 
 #: .\templates\account\password_reset.html:61
 #: .\templates\account\password_reset_done.html:34
+#: .\templates\account\password_reset_from_key.html:45
 msgid "Log in here"
 msgstr "Đăng nhập tại đây"
 
@@ -1672,7 +1943,79 @@ msgstr ""
 " thư mục thư rác.Nếu không, hãy liên hệ với chúng tôi nếu bạn không nhận "
 "được nó sau vài phút."
 
-#: .\templates\account\signup.html:15
+#: .\templates\account\password_reset_from_key.html:5
+#: .\templates\account\password_reset_from_key.html:15
+#: .\templates\account\password_reset_from_key.html:78
+#: .\templates\account\password_reset_from_key_done.html:15
+#: .\templates\core\tutorials\account_setup.html:79
+msgid "Change Password"
+msgstr "Thay đổi mật khẩu"
+
+#: .\templates\account\password_reset_from_key.html:17
+#: .\templates\account\password_reset_from_key.html:35
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"Liên kết đặt lại mật khẩu không hợp lệ, có thể vì nó đã được sử dụng.Vui "
+"lòng yêu cầu đặt lại mật khẩu mới."
+
+#: .\templates\account\password_reset_from_key.html:19
+#, fuzzy
+#| msgid "Enter your new password below."
+msgid "Please enter your new password below."
+msgstr "Nhập mật khẩu mới của bạn dưới đây."
+
+#: .\templates\account\password_reset_from_key.html:34
+#, fuzzy
+#| msgid "API Bearer Token"
+msgid "Bad Token"
+msgstr "Mã thông báo mang API"
+
+#: .\templates\account\password_reset_from_key.html:42
+#, fuzzy
+#| msgid "Reset Password"
+msgid "Request New Password Reset"
+msgstr "Đặt lại mật khẩu"
+
+#: .\templates\account\password_reset_from_key.html:89
+#: .\templates\account\password_reset_from_key_done.html:5
+#: .\templates\account\password_reset_from_key_done.html:35
+#, fuzzy
+#| msgid "Password"
+msgid "Password Changed"
+msgstr "Mật khẩu"
+
+#: .\templates\account\password_reset_from_key.html:90
+#: .\templates\account\password_reset_from_key_done.html:36
+msgid "Your password is now changed."
+msgstr "Mật khẩu của bạn bây giờ đã được thay đổi."
+
+#: .\templates\account\password_reset_from_key.html:97
+#: .\templates\account\password_reset_from_key_done.html:47
+#: .\templates\core\community_user_forum.html:45
+msgid "Log In"
+msgstr "Đăng nhập"
+
+#: .\templates\account\password_reset_from_key_done.html:42
+#, fuzzy
+#| msgid "Enter and confirm your new password"
+msgid "You can now log in with your new password."
+msgstr "Nhập và xác nhận mật khẩu mới của bạn"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Need Help?"
+msgid "Need help?"
+msgstr "Cần trợ giúp?"
+
+#: .\templates\account\password_reset_from_key_done.html:51
+#, fuzzy
+#| msgid "Contact Us"
+msgid "Contact us"
+msgstr "Liên hệ với chúng tôi"
+
+#: .\templates\account\signup.html:15 .\templates\core\home.html:1167
 #: .\templates\core\tutorials\quick_start.html:40
 msgid "Create Your Account"
 msgstr "Tạo tài khoản của bạn"
@@ -1698,6 +2041,123 @@ msgstr "Đã có tài khoản?"
 msgid "Log in"
 msgstr "Đăng nhập"
 
+#: .\templates\analytics\dashboard.html:5
+#: .\templates\analytics\dashboard.html:15
+#: .\templates\core\docs\analytics.html:32
+#: .\templates\core\feature_analytics.html:60
+msgid "Analytics Dashboard"
+msgstr "Trang tổng quan phân tích"
+
+#: .\templates\analytics\dashboard.html:16
+#, fuzzy
+#| msgid "Track your campaign performance"
+msgid "Monitor your email campaign performance"
+msgstr "Theo dõi hiệu suất chiến dịch của bạn"
+
+#: .\templates\analytics\dashboard.html:31
+#, fuzzy
+#| msgid "Total sent"
+msgid "Total Sent"
+msgstr "Tổng số đã gửi"
+
+#: .\templates\analytics\dashboard.html:48
+#: .\templates\analytics\dashboard.html:63
+#, fuzzy
+#| msgid "Generate"
+msgid "rate"
+msgstr "Phát ra"
+
+#: .\templates\analytics\dashboard.html:76
+#: .\templates\campaigns\campaign_analysis.html:66
+#: .\templates\campaigns\campaign_analysis.html:92
+msgid "Delivery Rate"
+msgstr "Tỷ lệ giao hàng"
+
+#: .\templates\analytics\dashboard.html:78
+#, fuzzy
+#| msgid "Bounces"
+msgid "bounces"
+msgstr "Số lần trả lại"
+
+#: .\templates\analytics\dashboard.html:89
+#, fuzzy
+#| msgid "Inactive"
+msgid "active"
+msgstr "Không hoạt động"
+
+#: .\templates\analytics\dashboard.html:90
+#, fuzzy
+#| msgid "Be at least 300 words"
+msgid "in last 30 days"
+msgstr "Có ít nhất 300 từ"
+
+#: .\templates\analytics\dashboard.html:96
+#, fuzzy
+#| msgid "Total campaigns"
+msgid "total campaigns"
+msgstr "Tổng số chiến dịch"
+
+#: .\templates\analytics\dashboard.html:100
+#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\core\tutorials\performance_dashboard.html:121
+msgid "Unsubscribes"
+msgstr "Hủy đăng ký"
+
+#: .\templates\analytics\dashboard.html:102
+#, fuzzy
+#| msgid "Total subscribers:"
+msgid "total unsubscribes"
+msgstr "Tổng số người đăng ký:"
+
+#: .\templates\analytics\dashboard.html:109
+#: .\templates\core\feature_analytics.html:15
+msgid "Campaign Performance"
+msgstr "Hiệu suất chiến dịch"
+
+#: .\templates\analytics\dashboard.html:128
+#: .\templates\campaigns\campaign_analysis.html:58
+#: .\templates\campaigns\campaign_analysis.html:98
+#: .\templates\core\feature_analytics.html:154
+#: .\templates\core\tutorials\email_analytics.html:30
+msgid "Open Rate"
+msgstr "Tỷ lệ mở"
+
+#: .\templates\analytics\dashboard.html:131
+#: .\templates\campaigns\campaign_analysis.html:62
+msgid "Click Rate"
+msgstr "Tỷ lệ nhấp chuột"
+
+#: .\templates\analytics\dashboard.html:172
+#, fuzzy
+#| msgid "Create your first campaign to start creating email templates."
+msgid "No campaigns yet. Create your first campaign to see analytics."
+msgstr "Tạo chiến dịch đầu tiên của bạn để bắt đầu tạo mẫu email."
+
+#: .\templates\analytics\dashboard.html:184
+#, fuzzy
+#| msgid "Recent Activity Feed"
+msgid "Recent Activity"
+msgstr "Nguồn cấp dữ liệu hoạt động gần đây"
+
+#: .\templates\analytics\dashboard.html:217
+#, fuzzy
+#| msgid "Campaigns:"
+msgid "Campaign:"
+msgstr "Chiến dịch:"
+
+#: .\templates\analytics\dashboard.html:221
+#: .\templates\campaigns\campaign_emails.html:236
+#, fuzzy
+#| msgid "Lao"
+msgid "ago"
+msgstr "tiếng Lào"
+
+#: .\templates\analytics\dashboard.html:229
+#, fuzzy
+#| msgid "No activity"
+msgid "No recent activity"
+msgstr "Không có hoạt động"
+
 #: .\templates\analytics\footer_confirm_delete.html:4
 #: .\templates\analytics\footer_confirm_delete.html:10
 #: .\templates\analytics\footer_confirm_delete.html:51
@@ -1719,7 +2179,7 @@ msgstr "Không thể hoàn tác hành động này.Phần chân trang sẽ bị 
 #: .\templates\analytics\footer_form.html:5
 #: .\templates\analytics\footer_form.html:80
 #: .\templates\analytics\footer_list.html:20
-#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:567
 msgid "Create Footer"
 msgstr "Tạo chân trang"
 
@@ -1745,7 +2205,7 @@ msgid "Back to Footers"
 msgstr "Quay lại chân trang"
 
 #: .\templates\analytics\footer_form.html:46
-#: .\templates\campaigns\template.html:456
+#: .\templates\campaigns\template.html:537
 msgid "Footer Name"
 msgstr "Tên chân trang"
 
@@ -1766,7 +2226,7 @@ msgstr ""
 "hình ảnh, liên kết và định dạng văn bản."
 
 #: .\templates\analytics\footer_form.html:68
-#: .\templates\campaigns\template.html:477
+#: .\templates\campaigns\template.html:558
 msgid "Set as default footer"
 msgstr "Đặt làm chân trang mặc định"
 
@@ -1775,7 +2235,7 @@ msgid "Update Footer"
 msgstr "Cập nhật chân trang"
 
 #: .\templates\analytics\footer_form.html:89
-#: .\templates\campaigns\template.html:115
+#: .\templates\campaigns\template.html:142
 #: .\templates\campaigns\template_revision.html:142
 #: .\templates\core\feature_email_templates.html:133
 msgid "Preview"
@@ -1806,8 +2266,9 @@ msgid "Preview:"
 msgstr "Xem trước:"
 
 #: .\templates\analytics\footer_list.html:59
-#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:387
-#: .\templates\core\dashboard.html:463
+#: .\templates\campaigns\campaign_emails.html:148
+#: .\templates\campaigns\drafts.html:135 .\templates\core\dashboard.html:528
+#: .\templates\core\dashboard.html:604
 msgid "Created"
 msgstr "Tạo"
 
@@ -1817,7 +2278,7 @@ msgid "Updated"
 msgstr "Đã cập nhật"
 
 #: .\templates\analytics\footer_list.html:68
-#: .\templates\campaigns\edit.html:111
+#: .\templates\campaigns\edit.html:136
 msgid "Edit"
 msgstr "Biên tập"
 
@@ -1826,7 +2287,7 @@ msgid "Set Default"
 msgstr "Đặt mặc định"
 
 #: .\templates\analytics\footer_list.html:79
-#: .\templates\campaigns\edit.html:115
+#: .\templates\campaigns\edit.html:140
 msgid "Delete"
 msgstr "Xóa bỏ"
 
@@ -1861,7 +2322,7 @@ msgstr ""
 "dõi các chiến dịch nhỏ giọt bằng nền tảng tự động hóa email mạnh mẽ của "
 "chúng tôi."
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid ""
 "Free drip email marketing software with unlimited campaigns, subscribers, "
 "and automated email sequences"
@@ -1869,50 +2330,50 @@ msgstr ""
 "Phần mềm tiếp thị qua email nhỏ giọt miễn phí với số lượng chiến dịch, người"
 " đăng ký và chuỗi email tự động không giới hạn"
 
-#: .\templates\base.html:106
+#: .\templates\base.html:107
 msgid "Search templates & campaigns..."
 msgstr "Tìm kiếm mẫu và chiến dịch..."
 
-#: .\templates\base.html:139 .\templates\base.html:176
+#: .\templates\base.html:140 .\templates\base.html:177
 #: .\templates\campaigns\drafts.html:19 .\templates\core\dashboard.html:52
 #: .\templates\core\feature_email_scheduling.html:39
 msgid "Dashboard"
 msgstr "Trang tổng quan"
 
-#: .\templates\base.html:140 .\templates\base.html:177
+#: .\templates\base.html:141 .\templates\base.html:178
 #: .\templates\core\dashboard.html:60
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: .\templates\base.html:141 .\templates\base.html:178
+#: .\templates\base.html:142 .\templates\base.html:179
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: .\templates\base.html:144 .\templates\base.html:181
-#: .\templates\core\home.html:509 .\templates\core\home.html:746
+#: .\templates\base.html:145 .\templates\base.html:182
+#: .\templates\core\home.html:811 .\templates\core\home.html:1075
 msgid "Sign Up Free"
 msgstr "Đăng ký miễn phí"
 
-#: .\templates\base.html:215
+#: .\templates\base.html:216
 msgid "Free drip email marketing automation for everyone."
 msgstr "Tự động hóa tiếp thị qua email nhỏ giọt miễn phí cho mọi người."
 
-#: .\templates\base.html:233 .\templates\core\docs\campaigns.html:45
+#: .\templates\base.html:234 .\templates\core\docs\campaigns.html:45
 #: .\templates\core\docs\smtp_server.html:40
 msgid "Features"
 msgstr "Đặc trưng"
 
-#: .\templates\base.html:235 .\templates\core\feature_drip_campaigns.html:4
+#: .\templates\base.html:236 .\templates\core\feature_drip_campaigns.html:4
 #: .\templates\core\feature_drip_campaigns.html:8
 msgid "Drip Campaigns"
 msgstr "Chiến dịch nhỏ giọt"
 
-#: .\templates\base.html:236 .\templates\core\feature_email_scheduling.html:4
+#: .\templates\base.html:237 .\templates\core\feature_email_scheduling.html:4
 #: .\templates\core\feature_email_scheduling.html:8
 msgid "Email Scheduling"
 msgstr "Lập kế hoạch email"
 
-#: .\templates\base.html:237 .\templates\core\docs\campaigns.html:60
+#: .\templates\base.html:238 .\templates\core\docs\campaigns.html:60
 #: .\templates\core\docs\getting_started.html:84
 #: .\templates\core\feature_analytics.html:4
 #: .\templates\core\resource_api_reference.html:96
@@ -1920,7 +2381,7 @@ msgstr "Lập kế hoạch email"
 msgid "Analytics"
 msgstr "Phân tích"
 
-#: .\templates\base.html:238 .\templates\core\docs\base_docs.html:35
+#: .\templates\base.html:239 .\templates\core\docs\base_docs.html:35
 #: .\templates\core\docs\subscribers.html:5
 #: .\templates\core\feature_subscriber_management.html:4
 #: .\templates\core\feature_subscriber_management.html:8
@@ -1929,85 +2390,85 @@ msgstr "Phân tích"
 msgid "Subscriber Management"
 msgstr "Quản lý thuê bao"
 
-#: .\templates\base.html:243
+#: .\templates\base.html:244
 msgid "Resources"
 msgstr "Tài nguyên"
 
-#: .\templates\base.html:245 .\templates\core\docs\base_docs.html:4
+#: .\templates\base.html:246 .\templates\core\docs\base_docs.html:4
 #: .\templates\core\docs\base_docs.html:11
 #: .\templates\core\tutorials\quick_start.html:184
 #: .\templates\core\tutorials\smtp_setup.html:182
 msgid "Documentation"
 msgstr "Tài liệu"
 
-#: .\templates\base.html:246
+#: .\templates\base.html:247
 msgid "Tutorials"
 msgstr "Hướng dẫn"
 
-#: .\templates\base.html:247 .\templates\core\resource_api_reference.html:4
+#: .\templates\base.html:248 .\templates\core\resource_api_reference.html:4
 #: .\templates\core\resource_api_reference.html:79
 msgid "API Reference"
 msgstr "Tham chiếu API"
 
-#: .\templates\base.html:248 .\templates\core\resource_community.html:4
+#: .\templates\base.html:249 .\templates\core\resource_community.html:4
 #: .\templates\core\resource_community.html:8
 #: .\templates\core\tutorials\quick_start.html:185
 msgid "Community"
 msgstr "Cộng đồng"
 
-#: .\templates\base.html:249 .\templates\blog\blog_index.html:4
+#: .\templates\base.html:250 .\templates\blog\blog_index.html:4
 #: .\templates\blog\blog_index.html:8
 msgid "Blog"
 msgstr ""
 
-#: .\templates\base.html:254
+#: .\templates\base.html:255
 msgid "Company"
 msgstr "Công ty"
 
-#: .\templates\base.html:256 .\templates\core\about.html:5
+#: .\templates\base.html:257 .\templates\core\about.html:5
 msgid "About"
 msgstr "Về"
 
-#: .\templates\base.html:257
+#: .\templates\base.html:258
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: .\templates\base.html:258 .\templates\core\privacy.html:4
+#: .\templates\base.html:259 .\templates\core\privacy.html:4
 #: .\templates\core\privacy.html:12
 msgid "Privacy Policy"
 msgstr "Chính sách bảo mật"
 
-#: .\templates\base.html:259 .\templates\core\terms.html:4
+#: .\templates\base.html:260 .\templates\core\terms.html:4
 #: .\templates\core\terms.html:12
 msgid "Terms of Service"
 msgstr "Điều khoản dịch vụ"
 
-#: .\templates\base.html:264
+#: .\templates\base.html:265
 msgid "All rights reserved."
 msgstr "Mọi quyền được bảo lưu."
 
-#: .\templates\base.html:330
+#: .\templates\base.html:331
 msgid "Searching..."
 msgstr "Đang tìm kiếm..."
 
-#: .\templates\base.html:345
+#: .\templates\base.html:346
 msgid "Error performing search. Please try again."
 msgstr "Lỗi thực hiện tìm kiếm.Vui lòng thử lại."
 
-#: .\templates\base.html:355
+#: .\templates\base.html:356
 msgid "No templates or campaigns found matching"
 msgstr "Không tìm thấy mẫu hoặc chiến dịch nào phù hợp"
 
-#: .\templates\base.html:382 .\templates\campaigns\campaign_edit_page.html:18
-#: .\templates\core\dashboard.html:406 .\templates\subscribers\list.html:144
+#: .\templates\base.html:383 .\templates\campaigns\campaign_edit_page.html:18
+#: .\templates\core\dashboard.html:547 .\templates\subscribers\list.html:144
 msgid "Inactive"
 msgstr "Không hoạt động"
 
-#: .\templates\base.html:385
+#: .\templates\base.html:386
 msgid "emails"
 msgstr "email"
 
-#: .\templates\base.html:396 .\templates\base.html:398
+#: .\templates\base.html:397 .\templates\base.html:399
 #: .\templates\campaigns\drafts.html:3 .\templates\campaigns\drafts.html:9
 #: .\templates\core\docs\base_docs.html:39
 #: .\templates\core\docs\campaigns.html:48
@@ -2031,18 +2492,18 @@ msgid "Back to Blog"
 msgstr "Quay lại Blog"
 
 #: .\templates\campaigns\campaign_analysis.html:5
-#: .\templates\campaigns\campaign_analysis.html:10
+#: .\templates\campaigns\campaign_analysis.html:14
 msgid "Campaign Analysis"
 msgstr "Phân tích chiến dịch"
 
-#: .\templates\campaigns\campaign_analysis.html:12
+#: .\templates\campaigns\campaign_analysis.html:16
 #: .\templates\campaigns\drafts.html:17
 #: .\templates\campaigns\template_revision.html:5
 #: .\templates\campaigns\template_revision.html:29
 msgid "Template Revision"
 msgstr "Sửa đổi mẫu"
 
-#: .\templates\campaigns\campaign_analysis.html:21
+#: .\templates\campaigns\campaign_analysis.html:25
 #: .\templates\campaigns\template_revision.html:40
 #: .\templates\campaigns\template_revision.html:51
 #: .\templates\core\tutorials\account_setup.html:33
@@ -2050,99 +2511,68 @@ msgstr "Sửa đổi mẫu"
 msgid "Select"
 msgstr "Lựa chọn"
 
-#: .\templates\campaigns\campaign_analysis.html:30
+#: .\templates\campaigns\campaign_analysis.html:34
 msgid "Select a campaign to view analysis."
 msgstr "Chọn một chiến dịch để xem phân tích."
 
-#: .\templates\campaigns\campaign_analysis.html:33
+#: .\templates\campaigns\campaign_analysis.html:37
 msgid "Campaign Statistics"
 msgstr "Thống kê chiến dịch"
 
-#: .\templates\campaigns\campaign_analysis.html:34
-#: .\templates\core\dashboard.html:1218
+#: .\templates\campaigns\campaign_analysis.html:38
+#: .\templates\core\dashboard.html:1414
 msgid "Loading..."
 msgstr "Đang tải..."
 
-#: .\templates\campaigns\campaign_analysis.html:43
+#: .\templates\campaigns\campaign_analysis.html:47
 msgid "Opens"
 msgstr "Mở ra"
 
-#: .\templates\campaigns\campaign_analysis.html:47
+#: .\templates\campaigns\campaign_analysis.html:51
 msgid "Clicks"
 msgstr "Số nhấp chuột"
 
-#: .\templates\campaigns\campaign_analysis.html:54
-#: .\templates\core\feature_analytics.html:154
-#: .\templates\core\tutorials\email_analytics.html:30
-msgid "Open Rate"
-msgstr "Tỷ lệ mở"
-
-#: .\templates\campaigns\campaign_analysis.html:58
-msgid "Click Rate"
-msgstr "Tỷ lệ nhấp chuột"
-
-#: .\templates\campaigns\campaign_analysis.html:62
-msgid "Delivery Rate"
-msgstr "Tỷ lệ giao hàng"
-
-#: .\templates\campaigns\campaign_analysis.html:69
+#: .\templates\campaigns\campaign_analysis.html:73
 msgid "Bounces"
 msgstr "Số lần trả lại"
 
-#: .\templates\campaigns\campaign_analysis.html:73
-#: .\templates\core\tutorials\performance_dashboard.html:121
-msgid "Unsubscribes"
-msgstr "Hủy đăng ký"
-
-#: .\templates\campaigns\campaign_analysis.html:77
+#: .\templates\campaigns\campaign_analysis.html:81
 msgid "Complaints"
 msgstr "Khiếu nại"
 
-#: .\templates\campaigns\campaign_analysis.html:84
-msgid "Metrics Overview"
-msgstr "Tổng quan về số liệu"
-
 #: .\templates\campaigns\campaign_analysis.html:88
-msgid "Open Rate (trend)"
-msgstr "Tỷ lệ mở (xu hướng)"
+msgid "Past 7 Days Trends"
+msgstr "Xu hướng 7 ngày qua"
 
-#: .\templates\campaigns\campaign_analysis.html:90
-#: .\templates\campaigns\campaign_analysis.html:96
-#: .\templates\campaigns\campaign_analysis.html:102
-msgid "Coming soon"
-msgstr "Sắp ra mắt"
+#: .\templates\campaigns\campaign_analysis.html:104
+#, fuzzy
+#| msgid "Click-through rate"
+msgid "Click-Through Rate"
+msgstr "Tỷ lệ nhấp chuột"
 
-#: .\templates\campaigns\campaign_analysis.html:94
-msgid "Click Rate (trend)"
-msgstr "Tỷ lệ nhấp chuột (xu hướng)"
-
-#: .\templates\campaigns\campaign_analysis.html:100
-msgid "Delivery Rate (trend)"
-msgstr "Tỷ lệ phân phối (xu hướng)"
-
-#: .\templates\campaigns\campaign_analysis.html:110
+#: .\templates\campaigns\campaign_analysis.html:114
 msgid "Monthly events"
 msgstr "Sự kiện hàng tháng"
 
-#: .\templates\campaigns\campaign_analysis.html:116
+#: .\templates\campaigns\campaign_analysis.html:120
 msgid "Month"
 msgstr "Tháng"
 
-#: .\templates\campaigns\campaign_analysis.html:135
+#: .\templates\campaigns\campaign_analysis.html:139
 msgid "No events found for this campaign."
 msgstr "Không tìm thấy sự kiện nào cho chiến dịch này."
 
-#: .\templates\campaigns\campaign_analysis.html:141
+#: .\templates\campaigns\campaign_analysis.html:145
 msgid "Per-email breakdown"
 msgstr "Phân tích theo từng email"
 
-#: .\templates\campaigns\campaign_analysis.html:166
+#: .\templates\campaigns\campaign_analysis.html:170
 msgid "No emails found for this campaign."
 msgstr "Không tìm thấy email cho chiến dịch này."
 
 #: .\templates\campaigns\campaign_edit_page.html:4
 #: .\templates\campaigns\campaign_edit_page.html:8
-#: .\templates\campaigns\edit.html:4
+#: .\templates\campaigns\edit.html:5
 msgid "Edit Campaign"
 msgstr "Chỉnh sửa Chiến dịch"
 
@@ -2159,7 +2589,7 @@ msgid "Add New Email"
 msgstr "Thêm email mới"
 
 #: .\templates\campaigns\campaign_edit_page.html:40
-#: .\templates\campaigns\edit.html:102
+#: .\templates\campaigns\edit.html:127
 msgid "Wait"
 msgstr "Chờ đợi"
 
@@ -2191,60 +2621,245 @@ msgstr "Mã API để khởi chạy mẫu"
 msgid "No emails have been added to this campaign yet."
 msgstr "Chưa có email nào được thêm vào chiến dịch này."
 
+#: .\templates\campaigns\campaign_emails.html:14
+msgid "Email Queue and History"
+msgstr "Hàng đợi email và lịch sử"
+
+#: .\templates\campaigns\campaign_emails.html:18
+#, fuzzy
+#| msgid "Save to Campaign"
+msgid "Back to Campaign"
+msgstr "Lưu vào chiến dịch"
+
+#: .\templates\campaigns\campaign_emails.html:28
+#: .\templates\campaigns\campaign_emails.html:46
+#: .\templates\campaigns\edit.html:168 .\templates\campaigns\edit.html:321
+#, fuzzy
+#| msgid "Send Email"
+msgid "Pending Emails"
+msgstr "Gửi email"
+
+#: .\templates\campaigns\campaign_emails.html:32
+#: .\templates\campaigns\campaign_emails.html:186
+#: .\templates\campaigns\edit.html:164 .\templates\campaigns\edit.html:180
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Emails"
+msgstr "Gửi email"
+
+#: .\templates\campaigns\campaign_emails.html:36
+#: .\templates\campaigns\campaign_emails.html:391
+#, fuzzy
+#| msgid "Send Email"
+msgid "Failed Emails"
+msgstr "Gửi email"
+
+#: .\templates\campaigns\campaign_emails.html:47
+#, fuzzy
+#| msgid "Email scheduled for {time}"
+msgid "Emails scheduled to be sent"
+msgstr "Email được lên lịch cho {time}"
+
+#: .\templates\campaigns\campaign_emails.html:60
+#: .\templates\campaigns\campaign_emails.html:200
+#: .\templates\campaigns\campaign_emails.html:271
+#: .\templates\campaigns\campaign_emails.html:404
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient"
+msgstr "Email người nhận"
+
+#: .\templates\campaigns\campaign_emails.html:69
+#: .\templates\campaigns\campaign_emails.html:280
+#: .\templates\campaigns\campaign_emails.html:413
+#: .\templates\core\dashboard.html:530 .\templates\core\dashboard.html:606
+msgid "Actions"
+msgstr "hành động"
+
+#: .\templates\campaigns\campaign_emails.html:100
+msgid "In"
+msgstr "TRONG"
+
+#: .\templates\campaigns\campaign_emails.html:104
+#, fuzzy
+#| msgid "Overview"
+msgid "Overdue"
+msgstr "Tổng quan"
+
+#: .\templates\campaigns\campaign_emails.html:116
+#: .\templates\campaigns\drafts.html:238 .\templates\campaigns\edit.html:354
+#: .\templates\core\dashboard.html:410 .\templates\core\dashboard.html:1281
+#: .\templates\core\feature_email_scheduling.html:44
+#: .\templates\core\tutorials\quick_start.html:148
+msgid "Send Now"
+msgstr "Gửi ngay"
+
+#: .\templates\campaigns\campaign_emails.html:125
+#: .\templates\campaigns\campaign_emails.html:250
+#: .\templates\campaigns\campaign_emails.html:327
+#: .\templates\campaigns\edit.html:538 .\templates\campaigns\template.html:365
+msgid "Email Details"
+msgstr "Chi tiết email"
+
+#: .\templates\campaigns\campaign_emails.html:132
+#: .\templates\campaigns\campaign_emails.html:257
+#: .\templates\campaigns\campaign_emails.html:334
+#: .\templates\campaigns\template.html:5
+#: .\templates\campaigns\template.html:104 .\templates\core\dashboard.html:401
+msgid "Email Template"
+msgstr "Mẫu email"
+
+#: .\templates\campaigns\campaign_emails.html:156
+#: .\templates\campaigns\template.html:432
+#: .\templates\core\dashboard.html:1245
+msgid "Email Preview"
+msgstr "Xem trước email"
+
+#: .\templates\campaigns\campaign_emails.html:175
+#, fuzzy
+#| msgid "Top performing emails"
+msgid "No pending emails"
+msgstr "Email hoạt động tốt nhất"
+
+#: .\templates\campaigns\campaign_emails.html:176
+msgid "All emails have been sent or there are no scheduled emails."
+msgstr "Tất cả email đã được gửi hoặc không có email nào được lên lịch."
+
+#: .\templates\campaigns\campaign_emails.html:187
+#, fuzzy
+#| msgid "Successfully Unsubscribed"
+msgid "Successfully sent emails"
+msgstr "Hủy đăng ký thành công"
+
+#: .\templates\campaigns\campaign_emails.html:265
+#, fuzzy
+#| msgid "Sent At"
+msgid "Actually Sent At"
+msgstr "Gửi tại"
+
+#: .\templates\campaigns\campaign_emails.html:274
+#: .\templates\campaigns\campaign_emails.html:407
+#: .\templates\core\dashboard.html:1231
+msgid "Error"
+msgstr "Lỗi"
+
+#: .\templates\campaigns\campaign_emails.html:318
+#: .\templates\campaigns\campaign_emails.html:444
+#: .\templates\core\dashboard.html:1343
+msgid "Retry"
+msgstr "Thử lại"
+
+#: .\templates\campaigns\campaign_emails.html:342
+msgid "Last Attempt"
+msgstr "Lần thử cuối cùng"
+
+#: .\templates\campaigns\campaign_emails.html:384
+#: .\templates\campaigns\edit.html:250 .\templates\campaigns\edit.html:400
+#: .\templates\campaigns\edit.html:561 .\templates\campaigns\template.html:136
+#: .\templates\campaigns\template.html:172
+msgid "Email Content"
+msgstr "Nội dung email"
+
+#: .\templates\campaigns\campaign_emails.html:392
+#, fuzzy
+#| msgid "Email already sent."
+msgid "Emails that failed to send"
+msgstr "Email đã được gửi."
+
+#: .\templates\campaigns\campaign_emails.html:457
+#, fuzzy
+#| msgid "Email Details"
+msgid "No failed emails"
+msgstr "Chi tiết email"
+
+#: .\templates\campaigns\campaign_emails.html:458
+#, fuzzy
+#| msgid "Email sent successfully."
+msgid "All emails were sent successfully."
+msgstr "Email đã được gửi thành công."
+
+#: .\templates\campaigns\campaign_emails.html:487
+#, fuzzy
+#| msgid "Are you sure you want to delete this email?"
+msgid "Are you sure you want to send this email now?"
+msgstr "Bạn có chắc chắn muốn xóa email này không?"
+
+#: .\templates\campaigns\campaign_emails.html:493
+#: .\templates\campaigns\drafts.html:363 .\templates\campaigns\edit.html:909
+#: .\templates\campaigns\template.html:1085
+#: .\templates\campaigns\template_revision.html:393
+msgid "Sending..."
+msgstr "Đang gửi..."
+
+#: .\templates\campaigns\campaign_emails.html:505
+#: .\templates\campaigns\edit.html:924
+#: .\templates\campaigns\template.html:1119
+#, fuzzy
+#| msgid "Email sent successfully"
+msgid "Email sent successfully!"
+msgstr "Email đã được gửi thành công"
+
+#: .\templates\campaigns\campaign_emails.html:512
+#: .\templates\campaigns\edit.html:932
+#, fuzzy
+#| msgid "Failed to send email: "
+msgid "Failed to send email"
+msgstr "Không gửi được email:"
+
 #: .\templates\campaigns\create.html:4 .\templates\campaigns\create.html:78
 #: .\templates\campaigns\drafts.html:55
 #: .\templates\core\feature_drip_campaigns.html:36
 msgid "Create Campaign"
 msgstr "Tạo chiến dịch"
 
-#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:524
+#: .\templates\campaigns\create.html:9 .\templates\core\dashboard.html:665
 #: .\templates\core\tutorials\creating_campaign.html:29
 msgid "Create New Campaign"
 msgstr "Tạo chiến dịch mới"
 
-#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:29
+#: .\templates\campaigns\create.html:14 .\templates\campaigns\edit.html:54
 msgid "Campaign Name"
 msgstr "Tên chiến dịch"
 
-#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:45
+#: .\templates\campaigns\create.html:31 .\templates\campaigns\edit.html:70
 msgid "Select a list or upload contacts"
 msgstr "Chọn danh sách hoặc tải lên liên hệ"
 
 #: .\templates\campaigns\create.html:38 .\templates\campaigns\create.html:46
-#: .\templates\campaigns\edit.html:52 .\templates\campaigns\edit.html:138
+#: .\templates\campaigns\edit.html:77 .\templates\campaigns\edit.html:641
 msgid "Upload Contacts"
 msgstr "Tải lên danh bạ"
 
-#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:141
+#: .\templates\campaigns\create.html:49 .\templates\campaigns\edit.html:644
 #: .\templates\subscribers\import.html:95
 msgid "List Name"
 msgstr "Tên danh sách"
 
-#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:144
+#: .\templates\campaigns\create.html:52 .\templates\campaigns\edit.html:647
 msgid "My Contact List"
 msgstr "Danh sách liên hệ của tôi"
 
-#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:147
+#: .\templates\campaigns\create.html:55 .\templates\campaigns\edit.html:650
 msgid "Contact File"
 msgstr "Tệp liên hệ"
 
-#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:150
+#: .\templates\campaigns\create.html:58 .\templates\campaigns\edit.html:653
 msgid "Supported formats: CSV, Excel (.xls, .xlsx)"
 msgstr "Các định dạng được hỗ trợ: CSV, Excel (.xls, .xlsx)"
 
-#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:160
+#: .\templates\campaigns\create.html:68 .\templates\campaigns\edit.html:663
 msgid "Upload"
 msgstr "Tải lên"
 
-#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:187
+#: .\templates\campaigns\create.html:106 .\templates\campaigns\edit.html:690
 msgid "Please select a file to upload"
 msgstr "Vui lòng chọn một tập tin để tải lên"
 
-#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:217
+#: .\templates\campaigns\create.html:136 .\templates\campaigns\edit.html:720
 msgid "Contacts uploaded successfully"
 msgstr "Danh bạ được tải lên thành công"
 
-#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:220
+#: .\templates\campaigns\create.html:139 .\templates\campaigns\edit.html:723
 msgid "An error occurred while uploading contacts"
 msgstr "Đã xảy ra lỗi khi tải danh bạ lên"
 
@@ -2264,7 +2879,7 @@ msgstr "Chọn một chiến dịch"
 msgid "(Active)"
 msgstr "(Tích cực)"
 
-#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:432
+#: .\templates\campaigns\drafts.html:48 .\templates\core\dashboard.html:573
 msgid "No campaigns yet"
 msgstr "Chưa có chiến dịch nào"
 
@@ -2273,7 +2888,7 @@ msgid "Create your first campaign to start creating email templates."
 msgstr "Tạo chiến dịch đầu tiên của bạn để bắt đầu tạo mẫu email."
 
 #: .\templates\campaigns\drafts.html:65
-#: .\templates\campaigns\template.html:296
+#: .\templates\campaigns\template.html:329
 msgid "Select a campaign"
 msgstr "Chọn một chiến dịch"
 
@@ -2291,7 +2906,7 @@ msgstr "Không tìm thấy mẫu nào"
 msgid "This campaign doesn't have any email templates yet."
 msgstr "Chiến dịch này chưa có bất kỳ mẫu email nào."
 
-#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:542
+#: .\templates\campaigns\drafts.html:81 .\templates\core\dashboard.html:683
 msgid "Create Email Template"
 msgstr "Tạo mẫu email"
 
@@ -2312,7 +2927,7 @@ msgid "Revise"
 msgstr "Ôn lại"
 
 #: .\templates\campaigns\drafts.html:165
-#: .\templates\campaigns\template.html:438
+#: .\templates\campaigns\template.html:474
 msgid "Send"
 msgstr "Gửi"
 
@@ -2321,11 +2936,12 @@ msgid "Send Email Template"
 msgstr "Gửi mẫu email"
 
 #: .\templates\campaigns\drafts.html:190
+#: .\templates\campaigns\template.html:492
 msgid "Recipient Email"
 msgstr "Email người nhận"
 
 #: .\templates\campaigns\drafts.html:219
-#: .\templates\campaigns\template.html:151
+#: .\templates\campaigns\template.html:181
 msgid "No footer"
 msgstr "Không có chân trang"
 
@@ -2333,14 +2949,7 @@ msgstr "Không có chân trang"
 msgid "Select a footer to append to your email"
 msgstr "Chọn chân trang để thêm vào email của bạn"
 
-#: .\templates\campaigns\drafts.html:238 .\templates\core\dashboard.html:269
-#: .\templates\core\dashboard.html:1085
-#: .\templates\core\feature_email_scheduling.html:44
-#: .\templates\core\tutorials\quick_start.html:148
-msgid "Send Now"
-msgstr "Gửi ngay"
-
-#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:323
+#: .\templates\campaigns\drafts.html:288 .\templates\campaigns\edit.html:826
 msgid "An error occurred while reordering emails"
 msgstr "Đã xảy ra lỗi khi sắp xếp lại email"
 
@@ -2352,80 +2961,267 @@ msgstr "Vui lòng nhập địa chỉ email người nhận."
 msgid "Failed to update email settings: "
 msgstr "Không thể cập nhật cài đặt email:"
 
-#: .\templates\campaigns\drafts.html:363
-#: .\templates\campaigns\template_revision.html:391
-msgid "Sending..."
-msgstr "Đang gửi..."
-
 #: .\templates\campaigns\drafts.html:381
-#: .\templates\campaigns\template_revision.html:409
+#: .\templates\campaigns\template_revision.html:411
 msgid "Email sent successfully to "
 msgstr "Email được gửi thành công tới"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:413
 msgid "Failed to send email: "
 msgstr "Không gửi được email:"
 
 #: .\templates\campaigns\drafts.html:384
-#: .\templates\campaigns\template_revision.html:277
-#: .\templates\campaigns\template_revision.html:411
+#: .\templates\campaigns\template_revision.html:279
+#: .\templates\campaigns\template_revision.html:413
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
 #: .\templates\campaigns\drafts.html:388
-#: .\templates\campaigns\template_revision.html:415
+#: .\templates\campaigns\template_revision.html:417
 msgid "Failed to send email. Please check your connection and try again."
 msgstr "Không gửi được email.Vui lòng kiểm tra kết nối của bạn và thử lại."
 
-#: .\templates\campaigns\edit.html:14
+#: .\templates\campaigns\edit.html:39
 msgid "Deactivate"
 msgstr "Vô hiệu hóa"
 
-#: .\templates\campaigns\edit.html:16
+#: .\templates\campaigns\edit.html:41
 msgid "Activate"
 msgstr "Kích hoạt"
 
-#: .\templates\campaigns\edit.html:20
+#: .\templates\campaigns\edit.html:45
 #: .\templates\core\feature_drip_campaigns.html:52
 #: .\templates\core\feature_email_templates.html:48
 msgid "Add Email"
 msgstr "Thêm email"
 
-#: .\templates\campaigns\edit.html:62
+#: .\templates\campaigns\edit.html:87
 msgid "Email Sequence"
 msgstr "Trình tự email"
 
-#: .\templates\campaigns\edit.html:68
+#: .\templates\campaigns\edit.html:93
 msgid "Create New Email"
 msgstr "Tạo email mới"
 
-#: .\templates\campaigns\edit.html:97
+#: .\templates\campaigns\edit.html:122
 msgid "Step"
 msgstr "Bước chân"
 
-#: .\templates\campaigns\edit.html:123
+#: .\templates\campaigns\edit.html:148
 msgid "No emails in this campaign yet."
 msgstr "Chưa có email nào trong chiến dịch này."
 
-#: .\templates\campaigns\edit.html:126
+#: .\templates\campaigns\edit.html:151
 msgid "Add First Email"
 msgstr "Thêm email đầu tiên"
 
-#: .\templates\campaigns\edit.html:247
+#: .\templates\campaigns\edit.html:172
+msgid "IMAP Auto-Reply emails"
+msgstr "Email trả lời tự động IMAP"
+
+#: .\templates\campaigns\edit.html:191 .\templates\campaigns\edit.html:332
+#: .\templates\campaigns\edit.html:482 .\templates\core\dashboard.html:1643
+#: .\templates\core\dashboard.html:2081
+#, fuzzy
+#| msgid "To"
+msgid "To:"
+msgstr "ĐẾN"
+
+#: .\templates\campaigns\edit.html:194 .\templates\campaigns\edit.html:495
+#, fuzzy
+#| msgid "Sent"
+msgid "Sent:"
+msgstr "Đã gửi"
+
+#: .\templates\campaigns\edit.html:197 .\templates\campaigns\edit.html:338
+#: .\templates\campaigns\edit.html:498
+#, fuzzy
+#| msgid "Status"
+msgid "Status:"
+msgstr "Trạng thái"
+
+#: .\templates\campaigns\edit.html:204 .\templates\campaigns\edit.html:346
+#: .\templates\campaigns\edit.html:505
+#, fuzzy
+#| msgid "View list details:"
+msgid "View Details"
+msgstr "Xem chi tiết danh sách:"
+
+#: .\templates\campaigns\edit.html:216 .\templates\campaigns\edit.html:364
+#: .\templates\campaigns\edit.html:517
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email Attributes"
+msgstr "Địa chỉ email"
+
+#: .\templates\campaigns\edit.html:219 .\templates\campaigns\edit.html:367
+#: .\templates\campaigns\edit.html:520
+#, fuzzy
+#| msgid "Email"
+msgid "Email ID:"
+msgstr "E-mail"
+
+#: .\templates\campaigns\edit.html:223 .\templates\campaigns\edit.html:371
+#, fuzzy
+#| msgid "Order"
+msgid "Order:"
+msgstr "Đặt hàng"
+
+#: .\templates\campaigns\edit.html:228 .\templates\campaigns\edit.html:376
+#, fuzzy
+#| msgid "Subscribers:"
+msgid "Subscriber:"
+msgstr "Người đăng ký:"
+
+#: .\templates\campaigns\edit.html:235 .\templates\campaigns\edit.html:383
+#, fuzzy
+#| msgid "Send in X Days"
+msgid "Sending Details"
+msgstr "Gửi trong X ngày"
+
+#: .\templates\campaigns\edit.html:238
+#, fuzzy
+#| msgid "Scheduled"
+msgid "Scheduled:"
+msgstr "Đã lên lịch"
+
+#: .\templates\campaigns\edit.html:242 .\templates\campaigns\edit.html:386
+#, fuzzy
+#| msgid "Created"
+msgid "Created:"
+msgstr "Tạo"
+
+#: .\templates\campaigns\edit.html:261
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No emails have been sent from this campaign yet."
+msgstr "Chưa có email nào được thêm vào chiến dịch này."
+
+#: .\templates\campaigns\edit.html:270 .\templates\campaigns\edit.html:289
+#: .\templates\campaigns\edit.html:420 .\templates\campaigns\edit.html:439
+#: .\templates\campaigns\edit.html:587 .\templates\campaigns\edit.html:606
+#: .\templates\core\dashboard.html:2464 .\templates\subscribers\list.html:174
+#: .\templates\subscribers\list.html:178
+msgid "Previous"
+msgstr "Trước"
+
+#: .\templates\campaigns\edit.html:275 .\templates\campaigns\edit.html:304
+#: .\templates\campaigns\edit.html:425 .\templates\campaigns\edit.html:454
+#: .\templates\campaigns\edit.html:592 .\templates\campaigns\edit.html:621
+#: .\templates\core\dashboard.html:2469 .\templates\subscribers\list.html:191
+#: .\templates\subscribers\list.html:195
+msgid "Next"
+msgstr "Kế tiếp"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "Showing"
+msgstr "Đang hiển thị"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+msgid "to"
+msgstr "ĐẾN"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599 .\templates\core\dashboard.html:2453
+msgid "of"
+msgstr "của"
+
+#: .\templates\campaigns\edit.html:282 .\templates\campaigns\edit.html:432
+#: .\templates\campaigns\edit.html:599
+#, fuzzy
+#| msgid "Proven Results"
+msgid "results"
+msgstr "Kết quả đã được chứng minh"
+
+#: .\templates\campaigns\edit.html:335
+#, fuzzy
+#| msgid "Scheduled For"
+msgid "Scheduled for:"
+msgstr "Đã lên lịch cho"
+
+#: .\templates\campaigns\edit.html:391
+#, fuzzy
+#| msgid "Variables"
+msgid "Variables:"
+msgstr "Biến"
+
+#: .\templates\campaigns\edit.html:411
+#, fuzzy
+#| msgid "No emails found for this campaign."
+msgid "No pending emails for this campaign."
+msgstr "Không tìm thấy email cho chiến dịch này."
+
+#: .\templates\campaigns\edit.html:471
+msgid "IMAP Auto-Reply Emails"
+msgstr "Email trả lời tự động IMAP"
+
+#: .\templates\campaigns\edit.html:492 .\templates\core\dashboard.html:2083
+#, fuzzy
+#| msgid "from:"
+msgid "From:"
+msgstr "từ:"
+
+#: .\templates\campaigns\edit.html:525
+#, fuzzy
+#| msgid "Campaign Details"
+msgid "Campaign Email:"
+msgstr "Chi tiết chiến dịch"
+
+#: .\templates\campaigns\edit.html:531
+msgid "IMAP Account:"
+msgstr "Tài khoản IMAP:"
+
+#: .\templates\campaigns\edit.html:541
+msgid "Received:"
+msgstr "Đã nhận:"
+
+#: .\templates\campaigns\edit.html:546
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient:"
+msgstr "Email người nhận"
+
+#: .\templates\campaigns\edit.html:552
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recipient Name:"
+msgstr "Email người nhận"
+
+#: .\templates\campaigns\edit.html:568
+#, fuzzy
+#| msgid "No campaigns available."
+msgid "No content available"
+msgstr "Không có chiến dịch nào có sẵn."
+
+#: .\templates\campaigns\edit.html:578
+#, fuzzy
+#| msgid "No emails have been added to this campaign yet."
+msgid "No IMAP auto-reply emails have been sent from this campaign yet."
+msgstr "Chưa có email nào được thêm vào chiến dịch này."
+
+#: .\templates\campaigns\edit.html:750
 msgid "An error occurred while updating the campaign"
 msgstr "Đã xảy ra lỗi khi cập nhật chiến dịch"
 
-#: .\templates\campaigns\edit.html:267
+#: .\templates\campaigns\edit.html:770
 msgid "An error occurred while updating the campaign status"
 msgstr "Đã xảy ra lỗi khi cập nhật trạng thái chiến dịch"
 
-#: .\templates\campaigns\edit.html:274
+#: .\templates\campaigns\edit.html:777
 msgid "Are you sure you want to delete this email?"
 msgstr "Bạn có chắc chắn muốn xóa email này không?"
 
-#: .\templates\campaigns\edit.html:290
+#: .\templates\campaigns\edit.html:793
 msgid "An error occurred while deleting the email"
+msgstr "Đã xảy ra lỗi khi xóa email"
+
+#: .\templates\campaigns\edit.html:938
+#, fuzzy
+#| msgid "An error occurred while deleting the email"
+msgid "An error occurred while sending the email"
 msgstr "Đã xảy ra lỗi khi xóa email"
 
 #: .\templates\campaigns\email_analysis.html:5
@@ -2444,7 +3240,7 @@ msgstr ""
 "hình chủ đề do AI cung cấp"
 
 #: .\templates\campaigns\email_analysis.html:116
-#: .\templates\campaigns\template.html:289
+#: .\templates\campaigns\template.html:322
 msgid "Select Campaign"
 msgstr "Chọn chiến dịch"
 
@@ -2559,74 +3355,92 @@ msgstr "Đề tài"
 msgid "Number of Emails"
 msgstr "Số lượng email"
 
-#: .\templates\campaigns\template.html:5
-#: .\templates\campaigns\template.html:77 .\templates\core\dashboard.html:260
-msgid "Email Template"
-msgstr "Mẫu email"
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "No campaigns yet"
+msgid "No campaign selected."
+msgstr "Chưa có chiến dịch nào"
 
-#: .\templates\campaigns\template.html:78
+#: .\templates\campaigns\template.html:86
+#, fuzzy
+#| msgid "Choose which campaign to save this template to"
+msgid "You'll be prompted to select a campaign when you save this template."
+msgstr "Chọn chiến dịch để lưu mẫu này vào"
+
+#: .\templates\campaigns\template.html:89
+#, fuzzy
+#| msgid "Select a campaign"
+msgid "Or select a campaign now:"
+msgstr "Chọn một chiến dịch"
+
+#: .\templates\campaigns\template.html:91
+#, fuzzy
+#| msgid "No campaign (optional)"
+msgid "Select a campaign (optional)"
+msgstr "Không có chiến dịch (tùy chọn)"
+
+#: .\templates\campaigns\template.html:105
 msgid "Design your email template"
 msgstr "Thiết kế mẫu email của bạn"
 
-#: .\templates\campaigns\template.html:85
+#: .\templates\campaigns\template.html:112
 #: .\templates\campaigns\template_revision.html:101
 #: .\templates\core\feature_email_templates.html:57
 msgid "Email Subject"
 msgstr "Chủ đề email"
 
-#: .\templates\campaigns\template.html:103
-msgid "Time to wait before sending this email after the previous one"
+#: .\templates\campaigns\template.html:130
+#, fuzzy
+#| msgid "Time to wait before sending this email after the previous one"
+msgid ""
+"Time to wait before sending this email after the previous one (0 = send "
+"immediately)"
 msgstr "Thời gian chờ đợi trước khi gửi email này sau email trước"
 
-#: .\templates\campaigns\template.html:109
-#: .\templates\campaigns\template.html:142
-msgid "Email Content"
-msgstr "Nội dung email"
-
-#: .\templates\campaigns\template.html:112
+#: .\templates\campaigns\template.html:139
 #: .\templates\core\feature_email_templates.html:97
 msgid "AI Generate"
 msgstr "Tạo AI"
 
-#: .\templates\campaigns\template.html:118
+#: .\templates\campaigns\template.html:145
 msgid "Send Test"
 msgstr "Gửi bài kiểm tra"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Available Variables"
 msgstr "Các biến có sẵn"
 
-#: .\templates\campaigns\template.html:124
+#: .\templates\campaigns\template.html:151
 msgid "Click to copy"
 msgstr "Bấm để sao chép"
 
-#: .\templates\campaigns\template.html:157
+#: .\templates\campaigns\template.html:187
 msgid "New Footer"
 msgstr "Chân trang mới"
 
-#: .\templates\campaigns\template.html:161
+#: .\templates\campaigns\template.html:191
 msgid "Select a footer to append to your email, or leave empty for no footer."
 msgstr ""
 "Chọn chân trang để thêm vào email của bạn hoặc để trống nếu không có chân "
 "trang."
 
-#: .\templates\campaigns\template.html:167
+#: .\templates\campaigns\template.html:197
 msgid "API Integration"
 msgstr "Tích hợp API"
 
-#: .\templates\campaigns\template.html:173
+#: .\templates\campaigns\template.html:203
 msgid "Your API Key"
 msgstr "Khóa API của bạn"
 
-#: .\templates\campaigns\template.html:174
+#: .\templates\campaigns\template.html:204
 msgid "Use this key to authenticate your API requests"
 msgstr "Sử dụng khóa này để xác thực các yêu cầu API của bạn"
 
-#: .\templates\campaigns\template.html:177
+#: .\templates\campaigns\template.html:207
 msgid "No API key found. Please contact support."
 msgstr "Không tìm thấy khóa API nào.Vui lòng liên hệ với bộ phận hỗ trợ."
 
-#: .\templates\campaigns\template.html:181
+#: .\templates\campaigns\template.html:211
 #: .\templates\core\resource_api_reference.html:104
 #: .\templates\core\resource_api_reference.html:125
 #: .\templates\core\resource_api_reference.html:131
@@ -2638,15 +3452,15 @@ msgstr "Không tìm thấy khóa API nào.Vui lòng liên hệ với bộ phận
 #: .\templates\core\resource_api_reference.html:383
 #: .\templates\core\resource_api_reference.html:469
 #: .\templates\core\resource_api_reference.html:497
-#: .\templates\core\settings.html:103
+#: .\templates\core\settings.html:119
 msgid "Copy"
 msgstr "Sao chép"
 
-#: .\templates\campaigns\template.html:185
+#: .\templates\campaigns\template.html:215
 msgid "Regenerate"
 msgstr "tái sinh"
 
-#: .\templates\campaigns\template.html:194
+#: .\templates\campaigns\template.html:224
 msgid ""
 "Send emails using this template via API. Here's how to trigger this template"
 " programmatically:"
@@ -2654,62 +3468,67 @@ msgstr ""
 "Gửi email bằng mẫu này qua API.Đây là cách kích hoạt mẫu này theo chương "
 "trình:"
 
-#: .\templates\campaigns\template.html:198
+#: .\templates\campaigns\template.html:228
 msgid "Python"
 msgstr ""
 
-#: .\templates\campaigns\template.html:218
+#: .\templates\campaigns\template.html:248
 msgid "JavaScript"
 msgstr ""
 
-#: .\templates\campaigns\template.html:236
+#: .\templates\campaigns\template.html:266
 msgid "Ruby"
 msgstr "hồng ngọc"
 
-#: .\templates\campaigns\template.html:262
+#: .\templates\campaigns\template.html:292
 msgid "Save your email template first to see the API code for sending emails."
 msgstr "Trước tiên hãy lưu mẫu email của bạn để xem mã API gửi email."
 
-#: .\templates\campaigns\template.html:274
+#: .\templates\campaigns\template.html:304
+#: .\templates\campaigns\template.html:486
+#: .\templates\campaigns\template.html:519
+#: .\templates\campaigns\template_revision.html:137
+#: .\templates\core\feature_email_scheduling.html:40
+#: .\templates\core\feature_email_scheduling.html:53
+msgid "Send Email"
+msgstr "Gửi email"
+
 #: .\templates\campaigns\template.html:307
+#: .\templates\campaigns\template.html:340
 #: .\templates\campaigns\template_revision.html:131
 #: .\templates\core\feature_drip_campaigns.html:65
 #: .\templates\core\feature_email_templates.html:136
 msgid "Save Template"
 msgstr "Lưu mẫu"
 
-#: .\templates\campaigns\template.html:290
+#: .\templates\campaigns\template.html:323
 msgid "Choose which campaign to save this template to"
 msgstr "Chọn chiến dịch để lưu mẫu này vào"
 
-#: .\templates\campaigns\template.html:318
+#: .\templates\campaigns\template.html:351
 msgid "Generate Email with AI"
 msgstr "Tạo email bằng AI"
 
-#: .\templates\campaigns\template.html:319
+#: .\templates\campaigns\template.html:352
 msgid "Describe what you want in your email and let AI create the content"
 msgstr "Mô tả những gì bạn muốn trong email của mình và để AI tạo ra nội dung"
 
-#: .\templates\campaigns\template.html:324
+#: .\templates\campaigns\template.html:357
 msgid "What is the email about?"
 msgstr "Email nói về cái gì?"
 
-#: .\templates\campaigns\template.html:327
+#: .\templates\campaigns\template.html:360
 msgid ""
 "e.g., New product launch, special discount offer, welcome to our service..."
 msgstr ""
 "ví dụ: Ra mắt sản phẩm mới, ưu đãi giảm giá đặc biệt, chào mừng bạn đến với "
 "dịch vụ của chúng tôi..."
 
-#: .\templates\campaigns\template.html:328
+#: .\templates\campaigns\template.html:361
 msgid "Describe the main topic or purpose of the email"
 msgstr "Mô tả chủ đề hoặc mục đích chính của email"
 
-#: .\templates\campaigns\template.html:332
-msgid "Email Details"
-msgstr "Chi tiết email"
-
-#: .\templates\campaigns\template.html:340
+#: .\templates\campaigns\template.html:373
 msgid ""
 "Include any specific details, offers, key points, or instructions you want "
 "included"
@@ -2717,106 +3536,113 @@ msgstr ""
 "Bao gồm mọi chi tiết, ưu đãi, điểm chính hoặc hướng dẫn cụ thể mà bạn muốn "
 "đưa vào"
 
-#: .\templates\campaigns\template.html:345
+#: .\templates\campaigns\template.html:378
 msgid "Who is this for?"
 msgstr "Cái này dành cho ai?"
 
-#: .\templates\campaigns\template.html:348
+#: .\templates\campaigns\template.html:381
 msgid "e.g., customers, subscribers, users..."
 msgstr "ví dụ: khách hàng, người đăng ký, người dùng..."
 
-#: .\templates\campaigns\template.html:351
+#: .\templates\campaigns\template.html:384
 msgid "Tone"
 msgstr "Giai điệu"
 
-#: .\templates\campaigns\template.html:354
+#: .\templates\campaigns\template.html:387
 msgid "Professional"
 msgstr "Chuyên nghiệp"
 
-#: .\templates\campaigns\template.html:355
+#: .\templates\campaigns\template.html:388
 msgid "Friendly"
 msgstr "Thân thiện"
 
-#: .\templates\campaigns\template.html:356
+#: .\templates\campaigns\template.html:389
 msgid "Persuasive"
 msgstr "thuyết phục"
 
-#: .\templates\campaigns\template.html:357
+#: .\templates\campaigns\template.html:390
 msgid "Casual"
 msgstr "Bình thường"
 
-#: .\templates\campaigns\template.html:358
+#: .\templates\campaigns\template.html:391
 msgid "Formal"
 msgstr "Chính thức"
 
-#: .\templates\campaigns\template.html:364
+#: .\templates\campaigns\template.html:397
 msgid "Email Length"
 msgstr "Độ dài email"
 
-#: .\templates\campaigns\template.html:367
+#: .\templates\campaigns\template.html:400
 msgid "Short (concise, 2-3 paragraphs)"
 msgstr "Ngắn (ngắn gọn, 2-3 đoạn)"
 
-#: .\templates\campaigns\template.html:368
+#: .\templates\campaigns\template.html:401
 msgid "Medium (balanced, 4-5 paragraphs)"
 msgstr "Trung bình (cân bằng, 4-5 đoạn)"
 
-#: .\templates\campaigns\template.html:369
+#: .\templates\campaigns\template.html:402
 msgid "Long (detailed, 6+ paragraphs)"
 msgstr "Dài (chi tiết, hơn 6 đoạn)"
 
-#: .\templates\campaigns\template.html:375
-msgid ""
-"AI generation uses Hugging Face API to create email content. The generated "
-"subject and body will replace your current email."
-msgstr ""
-"Thế hệ AI sử dụng API ôm khuôn mặt để tạo nội dung email.Chủ đề và nội dung "
-"được tạo sẽ thay thế email hiện tại của bạn."
-
-#: .\templates\campaigns\template.html:384
+#: .\templates\campaigns\template.html:420
 msgid "Generate Email"
 msgstr "Tạo email"
 
-#: .\templates\campaigns\template.html:396
-#: .\templates\core\dashboard.html:1049
-msgid "Email Preview"
-msgstr "Xem trước email"
-
-#: .\templates\campaigns\template.html:398
+#: .\templates\campaigns\template.html:434
 msgid "Close"
 msgstr "Đóng"
 
-#: .\templates\campaigns\template.html:412
+#: .\templates\campaigns\template.html:448
 msgid "Send Test Email"
 msgstr "Gửi email kiểm tra"
 
-#: .\templates\campaigns\template.html:417 .\templates\core\contact.html:30
-#: .\templates\core\dashboard.html:250 .\templates\core\settings.html:20
-#: .\templates\core\settings.html:26 .\templates\core\settings.html:191
-msgid "Email Address"
-msgstr "Địa chỉ email"
-
-#: .\templates\campaigns\template.html:425
+#: .\templates\campaigns\template.html:461
+#: .\templates\campaigns\template.html:501
 msgid "Enter first name..."
 msgstr "Nhập tên..."
 
-#: .\templates\campaigns\template.html:431
+#: .\templates\campaigns\template.html:467
+#: .\templates\campaigns\template.html:507
 msgid "Enter last name..."
 msgstr "Nhập họ..."
 
-#: .\templates\campaigns\template.html:450
+#: .\templates\campaigns\template.html:487
+#, fuzzy
+#| msgid "Send this email to "
+msgid "Send this email template to a recipient"
+msgstr "Gửi email này đến"
+
+#: .\templates\campaigns\template.html:495
+msgid "recipient@example.com"
+msgstr "người nhận@example.com"
+
+#: .\templates\campaigns\template.html:511 .\templates\core\dashboard.html:359
+#: .\templates\core\docs\analytics.html:13
+#: .\templates\core\tutorials\quick_start.html:96
+msgid "Note:"
+msgstr "Ghi chú:"
+
+#: .\templates\campaigns\template.html:511
+msgid ""
+"The email will be sent immediately. The recipient will be automatically "
+"added to this campaign's subscriber list."
+msgstr ""
+"Email sẽ được gửi ngay lập tức.Người nhận sẽ được tự động thêm vào danh sách"
+" người đăng ký của chiến dịch này."
+
+#: .\templates\campaigns\template.html:531
 msgid "Create New Footer"
 msgstr "Tạo chân trang mới"
 
-#: .\templates\campaigns\template.html:460
+#: .\templates\campaigns\template.html:541
 msgid "Enter footer name..."
 msgstr "Nhập tên chân trang..."
 
-#: .\templates\campaigns\template.html:464
+#: .\templates\campaigns\template.html:545
 msgid "Footer Content (HTML)"
 msgstr "Nội dung chân trang (HTML)"
 
-#: .\templates\campaigns\template.html:471
+#: .\templates\campaigns\template.html:552
 msgid ""
 "Enter the HTML content for your footer. You can use variables like "
 "{{first_name}}, {{last_name}}, {{email}}, etc."
@@ -2824,106 +3650,160 @@ msgstr ""
 "Nhập nội dung HTML cho footer của bạn.Bạn có thể sử dụng các biến như "
 "{{first_name}}, {{last_name}}, {{email}}, v.v."
 
-#: .\templates\campaigns\template.html:547
+#: .\templates\campaigns\template.html:628
 msgid "Could not copy variable. Please try again."
 msgstr "Không thể sao chép biến.Vui lòng thử lại."
 
-#: .\templates\campaigns\template.html:566
+#: .\templates\campaigns\template.html:647
 msgid "Enter your email content here..."
 msgstr "Nhập nội dung email của bạn vào đây..."
 
-#: .\templates\campaigns\template.html:579
-#: .\templates\campaigns\template_revision.html:303
+#: .\templates\campaigns\template.html:680
+#: .\templates\campaigns\template_revision.html:305
 msgid "Please enter an email subject."
 msgstr "Vui lòng nhập chủ đề email."
 
-#: .\templates\campaigns\template.html:584
-#: .\templates\campaigns\template_revision.html:308
+#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template_revision.html:310
 msgid "Please enter email content."
 msgstr "Vui lòng nhập nội dung email."
 
-#: .\templates\campaigns\template.html:599
+#: .\templates\campaigns\template.html:700
 msgid "Please select a campaign."
 msgstr "Vui lòng chọn một chiến dịch."
 
-#: .\templates\campaigns\template.html:618
-#: .\templates\campaigns\template.html:923
+#: .\templates\campaigns\template.html:727
+#: .\templates\campaigns\template.html:1144
+#: .\templates\campaigns\template.html:1235
 msgid "Wait time must be a number greater than 0."
 msgstr "Thời gian chờ phải là một số lớn hơn 0."
 
-#: .\templates\campaigns\template.html:653
-#: .\templates\campaigns\template.html:967
-#: .\templates\campaigns\template_revision.html:346
+#: .\templates\campaigns\template.html:762
+#: .\templates\campaigns\template.html:1279
+#: .\templates\campaigns\template_revision.html:348
 msgid "Template saved successfully!"
 msgstr "Đã lưu mẫu thành công!"
 
-#: .\templates\campaigns\template.html:659
+#: .\templates\campaigns\template.html:768
 msgid "An error occurred while saving the template: "
 msgstr "Đã xảy ra lỗi khi lưu mẫu:"
 
-#: .\templates\campaigns\template.html:685
+#: .\templates\campaigns\template.html:794
 msgid "Enter footer content here..."
 msgstr "Nhập nội dung chân trang vào đây..."
 
-#: .\templates\campaigns\template.html:730
+#: .\templates\campaigns\template.html:839
 msgid "An error occurred while loading the template. Please try again."
 msgstr "Đã xảy ra lỗi khi tải mẫu.Vui lòng thử lại."
 
-#: .\templates\campaigns\template.html:739
+#: .\templates\campaigns\template.html:848
 msgid "Error: Campaign ID is missing. Please select a campaign first."
 msgstr "Lỗi: Thiếu ID chiến dịch.Vui lòng chọn một chiến dịch trước tiên."
 
-#: .\templates\campaigns\template.html:779
+#: .\templates\campaigns\template.html:888
 msgid "Generating..."
 msgstr "Đang tạo..."
 
-#: .\templates\campaigns\template.html:813
+#: .\templates\campaigns\template.html:937
 msgid "Email generated successfully! Review and save when ready."
 msgstr "Email được tạo thành công!Xem lại và lưu khi sẵn sàng."
 
-#: .\templates\campaigns\template.html:815
+#: .\templates\campaigns\template.html:939
 msgid "Error: Invalid response from AI service."
 msgstr "Lỗi: Phản hồi không hợp lệ từ dịch vụ AI."
 
-#: .\templates\campaigns\template.html:820
+#: .\templates\campaigns\template.html:948
 msgid "Failed to generate email. "
 msgstr "Không tạo được email."
 
-#: .\templates\campaigns\template.html:822
-msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
-msgstr "Đảm bảo biến môi trường HUGGINGFACE_API_KEY của bạn được đặt."
+#: .\templates\campaigns\template.html:952
+msgid ""
+"Request timed out after 5 minutes. The AI generation is taking too long. "
+"Please try again or check server resources."
+msgstr ""
+"Yêu cầu hết thời gian sau 5 phút.Thế hệ AI mất quá nhiều thời gian.Vui lòng "
+"thử lại hoặc kiểm tra tài nguyên máy chủ."
 
-#: .\templates\campaigns\template.html:850
+#: .\templates\campaigns\template.html:954
+#, fuzzy
+#| msgid ""
+#| "Network error: Could not connect to server. Please check if the server is "
+#| "running."
+msgid ""
+"Network error: Could not connect to server. Please check your connection and"
+" try again."
+msgstr ""
+"Lỗi mạng: Không thể kết nối với máy chủ.Vui lòng kiểm tra xem máy chủ có "
+"đang chạy không."
+
+#: .\templates\campaigns\template.html:958
+#, fuzzy
+#| msgid "Error regenerating token. Please try again."
+msgid ""
+"Request timed out. The AI generation is taking too long. Please try again."
+msgstr "Lỗi tạo lại mã thông báo.Vui lòng thử lại."
+
+#: .\templates\campaigns\template.html:960
+msgid "Please check the server logs for more details."
+msgstr "Vui lòng kiểm tra nhật ký máy chủ để biết thêm chi tiết."
+
+#: .\templates\campaigns\template.html:962
+msgid "Please ensure Ollama is running on the server."
+msgstr "Hãy đảm bảo Ollama đang chạy trên máy chủ."
+
+#: .\templates\campaigns\template.html:965
+#, fuzzy
+#| msgid "Error creating list. Please check console for details."
+msgid ""
+"Unknown error occurred. Please check the browser console and server logs for"
+" details."
+msgstr "Lỗi tạo danh sách.Vui lòng kiểm tra bảng điều khiển để biết chi tiết."
+
+#: .\templates\campaigns\template.html:1000
 msgid "[Footer content would appear here]"
 msgstr "[Nội dung chân trang sẽ xuất hiện ở đây]"
 
-#: .\templates\campaigns\template.html:906
+#: .\templates\campaigns\template.html:1114
+#: .\templates\campaigns\template.html:1124
+#, fuzzy
+#| msgid ""
+#| "An error occurred while sending the test email. Please try again."
+msgid "An error occurred while sending the email. Please try again."
+msgstr "Đã xảy ra lỗi khi gửi email kiểm tra.Vui lòng thử lại."
+
+#: .\templates\campaigns\template.html:1194
+#, fuzzy
+#| msgid "Failed to save template:"
+msgid "Failed to save template: "
+msgstr "Không lưu được mẫu:"
+
+#: .\templates\campaigns\template.html:1218
 #: .\templates\subscribers\add.html:213
 msgid "Saving..."
 msgstr "Đang lưu..."
 
-#: .\templates\campaigns\template.html:973
+#: .\templates\campaigns\template.html:1285
 msgid "An error occurred while saving the template. Please try again."
 msgstr "Đã xảy ra lỗi khi lưu mẫu.Vui lòng thử lại."
 
-#: .\templates\campaigns\template.html:1009
+#: .\templates\campaigns\template.html:1321
 msgid "Please save the email template first before sending a test email."
 msgstr "Vui lòng lưu mẫu email trước khi gửi email kiểm tra."
 
-#: .\templates\campaigns\template.html:1027
-#: .\templates\campaigns\template.html:1036
+#: .\templates\campaigns\template.html:1339
+#: .\templates\campaigns\template.html:1348
 msgid "An error occurred while sending the test email. Please try again."
 msgstr "Đã xảy ra lỗi khi gửi email kiểm tra.Vui lòng thử lại."
 
-#: .\templates\campaigns\template.html:1031
+#: .\templates\campaigns\template.html:1343
 msgid "Test email sent successfully!"
 msgstr "Email kiểm tra đã được gửi thành công!"
 
-#: .\templates\campaigns\template.html:1058
+#: .\templates\campaigns\template.html:1370
 msgid "Copied!"
 msgstr "Đã sao chép!"
 
-#: .\templates\campaigns\template.html:1065
+#: .\templates\campaigns\template.html:1377
 msgid ""
 "Are you sure you want to regenerate your API key? This will invalidate your "
 "current key and you will need to update any applications using it."
@@ -2932,25 +3812,25 @@ msgstr ""
 "hiệu lực khóa hiện tại của bạn và bạn sẽ cần cập nhật mọi ứng dụng sử dụng "
 "nó."
 
-#: .\templates\campaigns\template.html:1071 .\templates\core\settings.html:299
+#: .\templates\campaigns\template.html:1383 .\templates\core\settings.html:315
 msgid "Regenerating..."
 msgstr "Tái sinh..."
 
-#: .\templates\campaigns\template.html:1092
-#: .\templates\campaigns\template.html:1097
+#: .\templates\campaigns\template.html:1404
+#: .\templates\campaigns\template.html:1409
 msgid "Error regenerating API key. Please try again."
 msgstr "Lỗi khi tạo lại khóa API.Vui lòng thử lại."
 
-#: .\templates\campaigns\template.html:1140
+#: .\templates\campaigns\template.html:1452
 msgid "Please enter a footer name."
 msgstr "Vui lòng nhập tên chân trang."
 
-#: .\templates\campaigns\template.html:1145
+#: .\templates\campaigns\template.html:1457
 msgid "Please enter footer content."
 msgstr "Vui lòng nhập nội dung chân trang."
 
-#: .\templates\campaigns\template.html:1189
-#: .\templates\campaigns\template.html:1194
+#: .\templates\campaigns\template.html:1501
+#: .\templates\campaigns\template.html:1506
 msgid "Error creating footer. Please try again."
 msgstr "Lỗi tạo chân trang.Vui lòng thử lại."
 
@@ -2994,54 +3874,48 @@ msgstr "Lưu vào chiến dịch"
 msgid "Email Body"
 msgstr "Nội dung email"
 
-#: .\templates\campaigns\template_revision.html:137
-#: .\templates\core\feature_email_scheduling.html:40
-#: .\templates\core\feature_email_scheduling.html:53
-msgid "Send Email"
-msgstr "Gửi email"
-
 #: .\templates\campaigns\template_revision.html:181
 msgid "Write your email content here..."
 msgstr "Viết nội dung email của bạn ở đây..."
 
-#: .\templates\campaigns\template_revision.html:249
+#: .\templates\campaigns\template_revision.html:251
 msgid "Please enter some email content first."
 msgstr "Vui lòng nhập một số nội dung email trước."
 
-#: .\templates\campaigns\template_revision.html:256
+#: .\templates\campaigns\template_revision.html:258
 msgid "Revising..."
 msgstr "Đang sửa lại..."
 
-#: .\templates\campaigns\template_revision.html:275
+#: .\templates\campaigns\template_revision.html:277
 msgid "Email revised successfully! Review the changes in the editor."
 msgstr ""
 "Email đã được sửa thành công!Xem lại những thay đổi trong trình soạn thảo."
 
-#: .\templates\campaigns\template_revision.html:277
+#: .\templates\campaigns\template_revision.html:279
 msgid "Revision failed: "
 msgstr "Sửa đổi không thành công:"
 
-#: .\templates\campaigns\template_revision.html:281
+#: .\templates\campaigns\template_revision.html:283
 msgid "Failed to revise email. Please check your connection and try again."
 msgstr "Không thể sửa lại email.Vui lòng kiểm tra kết nối của bạn và thử lại."
 
-#: .\templates\campaigns\template_revision.html:350
+#: .\templates\campaigns\template_revision.html:352
 msgid "Failed to save template:"
 msgstr "Không lưu được mẫu:"
 
-#: .\templates\campaigns\template_revision.html:363
+#: .\templates\campaigns\template_revision.html:365
 msgid "Failed to save template. Please try again."
 msgstr "Không lưu được mẫu.Vui lòng thử lại."
 
-#: .\templates\campaigns\template_revision.html:371
+#: .\templates\campaigns\template_revision.html:373
 msgid "Enter the recipient email address:"
 msgstr "Nhập địa chỉ email người nhận:"
 
-#: .\templates\campaigns\template_revision.html:379
+#: .\templates\campaigns\template_revision.html:381
 msgid "Please enter a valid email address."
 msgstr "Vui lòng nhập địa chỉ email hợp lệ."
 
-#: .\templates\campaigns\template_revision.html:384
+#: .\templates\campaigns\template_revision.html:386
 msgid "Send this email to "
 msgstr "Gửi email này đến"
 
@@ -3382,10 +4256,6 @@ msgstr "Gửi bài"
 msgid "You must be logged in to create posts."
 msgstr "Bạn phải đăng nhập để tạo bài viết."
 
-#: .\templates\core\community_user_forum.html:45
-msgid "Log In"
-msgstr "Đăng nhập"
-
 #: .\templates\core\community_user_forum.html:52
 msgid "Recent Posts"
 msgstr "Bài viết gần đây"
@@ -3449,37 +4319,95 @@ msgstr "Đã xảy ra lỗi.Vui lòng thử lại sau."
 msgid "Manage your campaigns and subscribers"
 msgstr "Quản lý chiến dịch và người đăng ký của bạn"
 
-#: .\templates\core\dashboard.html:82 .\templates\core\dashboard.html:134
+#: .\templates\core\dashboard.html:70
+#, fuzzy
+#| msgid "API Integration"
+msgid "Integrations"
+msgstr "Tích hợp API"
+
+#: .\templates\core\dashboard.html:71
+msgid "Connect your email accounts to auto-reply to emails"
+msgstr "Kết nối tài khoản email của bạn để tự động trả lời email"
+
+#: .\templates\core\dashboard.html:85
+msgid "Connect your Gmail account to auto-reply to emails"
+msgstr "Kết nối tài khoản Gmail của bạn để tự động trả lời email"
+
+#: .\templates\core\dashboard.html:102
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent Gmail Emails"
+msgstr "Email người nhận"
+
+#: .\templates\core\dashboard.html:103 .\templates\core\dashboard.html:193
+#, fuzzy
+#| msgid "View and manage all your email campaigns"
+msgid "View and manage your email conversations"
+msgstr "Xem và quản lý tất cả các chiến dịch email của bạn"
+
+#: .\templates\core\dashboard.html:125
+msgid "Connect your IMAP email account to auto-reply to emails"
+msgstr "Kết nối tài khoản email IMAP của bạn để tự động trả lời email"
+
+#: .\templates\core\dashboard.html:134
+#, fuzzy
+#| msgid "Settings"
+msgid "IMAP Settings"
+msgstr "Cài đặt"
+
+#: .\templates\core\dashboard.html:152 .\templates\core\home.html:265
+#: .\templates\core\includes\signup_box.html:64
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "người dùng"
+
+#: .\templates\core\dashboard.html:162 .\templates\core\home.html:278
+#: .\templates\core\includes\signup_box.html:74
+msgid "Use SSL/TLS"
+msgstr "Sử dụng SSL/TLS"
+
+#: .\templates\core\dashboard.html:167
+msgid "Save & Connect"
+msgstr "Lưu & Kết nối"
+
+#: .\templates\core\dashboard.html:192
+#, fuzzy
+#| msgid "Recipient Email"
+msgid "Recent IMAP Emails"
+msgstr "Email người nhận"
+
+#: .\templates\core\dashboard.html:223 .\templates\core\dashboard.html:275
 msgid "View Campaigns"
 msgstr "Xem chiến dịch"
 
-#: .\templates\core\dashboard.html:86
+#: .\templates\core\dashboard.html:227
 msgid "Add a new Campaign"
 msgstr "Thêm chiến dịch mới"
 
-#: .\templates\core\dashboard.html:106
+#: .\templates\core\dashboard.html:247
 msgid "View Subscribers"
 msgstr "Xem người đăng ký"
 
-#: .\templates\core\dashboard.html:110 .\templates\core\dashboard.html:154
+#: .\templates\core\dashboard.html:251 .\templates\core\dashboard.html:295
 msgid "View Lists"
 msgstr "Xem danh sách"
 
-#: .\templates\core\dashboard.html:125
+#: .\templates\core\dashboard.html:266
 #: .\templates\core\tutorials\dashboard_overview.html:60
 #: .\templates\core\tutorials\performance_dashboard.html:39
 msgid "Emails Sent"
 msgstr "Email đã gửi"
 
-#: .\templates\core\dashboard.html:130 .\templates\core\dashboard.html:536
+#: .\templates\core\dashboard.html:271 .\templates\core\dashboard.html:677
 msgid "View Analytics"
 msgstr "Xem phân tích"
 
-#: .\templates\core\dashboard.html:158
+#: .\templates\core\dashboard.html:299
 msgid "Add a List"
 msgstr "Thêm danh sách"
 
-#: .\templates\core\dashboard.html:178
+#: .\templates\core\dashboard.html:319
 #, python-format
 msgid ""
 "\n"
@@ -3489,112 +4417,107 @@ msgstr ""
 "Cảm ơn bạn đã bao gồm %(site_domain)s bản ghi SPF trong cài đặt DNS miền của"
 " bạn!"
 
-#: .\templates\core\dashboard.html:195
+#: .\templates\core\dashboard.html:336
 msgid "SPF Record Setup for Email Deliverability"
 msgstr "Thiết lập bản ghi SPF cho khả năng gửi email"
 
-#: .\templates\core\dashboard.html:200
+#: .\templates\core\dashboard.html:341
 msgid "Add this TXT record to your domain's DNS:"
 msgstr "Thêm bản ghi TXT này vào DNS tên miền của bạn:"
 
-#: .\templates\core\dashboard.html:203
+#: .\templates\core\dashboard.html:344
 msgid "Type:"
 msgstr "Kiểu:"
 
-#: .\templates\core\dashboard.html:206
+#: .\templates\core\dashboard.html:347
 msgid "Name/Host:"
 msgstr "Tên/Máy chủ:"
 
-#: .\templates\core\dashboard.html:209
+#: .\templates\core\dashboard.html:350
 msgid "Value:"
 msgstr "Giá trị:"
 
-#: .\templates\core\dashboard.html:218 .\templates\core\docs\analytics.html:13
-#: .\templates\core\tutorials\quick_start.html:96
-msgid "Note:"
-msgstr "Ghi chú:"
-
-#: .\templates\core\dashboard.html:222
+#: .\templates\core\dashboard.html:363
 msgid "How to add this record:"
 msgstr "Cách thêm bản ghi này:"
 
-#: .\templates\core\dashboard.html:225
+#: .\templates\core\dashboard.html:366
 msgid "Navigate to DNS management or DNS settings"
 msgstr "Điều hướng đến quản lý DNS hoặc cài đặt DNS"
 
-#: .\templates\core\dashboard.html:226
+#: .\templates\core\dashboard.html:367
 msgid "Add a new TXT record with the values shown above"
 msgstr "Thêm bản ghi TXT mới với các giá trị được hiển thị ở trên"
 
-#: .\templates\core\dashboard.html:237
+#: .\templates\core\dashboard.html:378
 msgid "Send Email & Subscribe"
 msgstr "Gửi email và đăng ký"
 
-#: .\templates\core\dashboard.html:256 .\templates\subscribers\import.html:23
+#: .\templates\core\dashboard.html:397 .\templates\subscribers\import.html:23
 msgid "Select a campaign..."
 msgstr "Chọn chiến dịch..."
 
-#: .\templates\core\dashboard.html:262 .\templates\core\dashboard.html:1238
+#: .\templates\core\dashboard.html:403 .\templates\core\dashboard.html:1434
 #: .\templates\subscribers\add.html:82 .\templates\subscribers\add.html:179
 #: .\templates\subscribers\add.html:233
 msgid "Select a campaign first..."
 msgstr "Trước tiên hãy chọn chiến dịch..."
 
-#: .\templates\core\dashboard.html:267
+#: .\templates\core\dashboard.html:408
 #: .\templates\core\tutorials\quick_start.html:148
 msgid "Schedule"
 msgstr "Lịch trình"
 
-#: .\templates\core\dashboard.html:270
+#: .\templates\core\dashboard.html:411
 #: .\templates\core\feature_email_scheduling.html:45
 msgid "Send in X Minutes"
 msgstr "Gửi trong X phút"
 
-#: .\templates\core\dashboard.html:271
+#: .\templates\core\dashboard.html:412
 #: .\templates\core\feature_email_scheduling.html:46
 msgid "Send in X Hours"
 msgstr "Gửi trong X giờ"
 
-#: .\templates\core\dashboard.html:272
+#: .\templates\core\dashboard.html:413
 #: .\templates\core\feature_email_scheduling.html:47
 msgid "Send in X Days"
 msgstr "Gửi trong X ngày"
 
-#: .\templates\core\dashboard.html:273
+#: .\templates\core\dashboard.html:414
 #: .\templates\core\feature_email_scheduling.html:48
 msgid "Send in X Weeks"
 msgstr "Gửi trong X tuần"
 
-#: .\templates\core\dashboard.html:274
+#: .\templates\core\dashboard.html:415
 #: .\templates\core\feature_email_scheduling.html:49
 msgid "Send in X Months"
 msgstr "Gửi trong X Tháng"
 
-#: .\templates\core\dashboard.html:300
+#: .\templates\core\dashboard.html:441
 msgid "Recent Send Activity"
 msgstr "Hoạt động gửi gần đây"
 
-#: .\templates\core\dashboard.html:301
+#: .\templates\core\dashboard.html:442
 msgid "Track your email sends and deliveries"
 msgstr "Theo dõi việc gửi và gửi email của bạn"
 
-#: .\templates\core\dashboard.html:308
+#: .\templates\core\dashboard.html:449
 msgid "Refresh"
 msgstr "Làm cho khỏe lại"
 
-#: .\templates\core\dashboard.html:319
+#: .\templates\core\dashboard.html:460
 msgid "Times shown in"
 msgstr "Thời gian hiển thị trong"
 
-#: .\templates\core\dashboard.html:336 .\templates\core\dashboard.html:1118
+#: .\templates\core\dashboard.html:477 .\templates\core\dashboard.html:1314
 msgid "Loading activity..."
 msgstr "Đang tải hoạt động..."
 
-#: .\templates\core\dashboard.html:353 .\templates\core\settings.html:239
+#: .\templates\core\dashboard.html:494 .\templates\core\settings.html:255
 msgid "Remove Advertisements from Your Emails"
 msgstr "Xóa quảng cáo khỏi email của bạn"
 
-#: .\templates\core\dashboard.html:354
+#: .\templates\core\dashboard.html:495
 msgid ""
 "Your emails currently include our branding. Share about DripEmails.org on X "
 "or your blog to remove ads from all your emails."
@@ -3603,15 +4526,11 @@ msgstr ""
 "DripEmails.org trên X hoặc blog của bạn để xóa quảng cáo khỏi tất cả email "
 "của bạn."
 
-#: .\templates\core\dashboard.html:369
+#: .\templates\core\dashboard.html:510
 msgid "Your Campaigns"
 msgstr "Chiến dịch của bạn"
 
-#: .\templates\core\dashboard.html:389 .\templates\core\dashboard.html:465
-msgid "Actions"
-msgstr "hành động"
-
-#: .\templates\core\dashboard.html:433
+#: .\templates\core\dashboard.html:574
 msgid ""
 "Create your first campaign to start sending automated emails to your "
 "subscribers."
@@ -3619,161 +4538,331 @@ msgstr ""
 "Tạo chiến dịch đầu tiên của bạn để bắt đầu gửi email tự động đến người đăng "
 "ký của bạn."
 
-#: .\templates\core\dashboard.html:446
+#: .\templates\core\dashboard.html:587
 msgid "Your Subscriber Lists"
 msgstr "Danh sách người đăng ký của bạn"
 
-#: .\templates\core\dashboard.html:501
+#: .\templates\core\dashboard.html:642
 msgid "No subscriber lists yet"
 msgstr "Chưa có danh sách người đăng ký"
 
-#: .\templates\core\dashboard.html:502
+#: .\templates\core\dashboard.html:643
 msgid "Create your first subscriber list to start organizing your contacts."
 msgstr ""
 "Tạo danh sách người đăng ký đầu tiên của bạn để bắt đầu sắp xếp danh bạ của "
 "bạn."
 
-#: .\templates\core\dashboard.html:518
+#: .\templates\core\dashboard.html:659
 msgid "Quick Actions"
 msgstr "Thao tác nhanh"
 
-#: .\templates\core\dashboard.html:530
+#: .\templates\core\dashboard.html:671
 #: .\templates\core\tutorials\quick_start.html:105
 msgid "Add Subscribers"
 msgstr "Thêm người đăng ký"
 
-#: .\templates\core\dashboard.html:548
+#: .\templates\core\dashboard.html:689
 #, fuzzy
 #| msgid "Email Templates"
 msgid "View Email Templates"
 msgstr "Mẫu email"
 
-#: .\templates\core\dashboard.html:555 .\templates\core\settings.html:13
+#: .\templates\core\dashboard.html:696 .\templates\core\settings.html:13
 msgid "Account Settings"
 msgstr "Cài đặt tài khoản"
 
-#: .\templates\core\dashboard.html:558 .\templates\core\settings.html:197
+#: .\templates\core\dashboard.html:699 .\templates\core\settings.html:213
 msgid "Ad Removal"
 msgstr "Xóa quảng cáo"
 
-#: .\templates\core\dashboard.html:570 .\templates\core\settings.html:209
+#: .\templates\core\dashboard.html:711 .\templates\core\settings.html:225
 msgid "Unsubscribe Links"
 msgstr "Hủy đăng ký liên kết"
 
-#: .\templates\core\dashboard.html:582 .\templates\core\settings.html:221
+#: .\templates\core\dashboard.html:723 .\templates\core\settings.html:237
 msgid "Timezone"
 msgstr "Múi giờ"
 
-#: .\templates\core\dashboard.html:590
+#: .\templates\core\dashboard.html:731
 #, fuzzy
 #| msgid "Account Settings"
 msgid "Manage Account Settings"
 msgstr "Cài đặt tài khoản"
 
-#: .\templates\core\dashboard.html:593
+#: .\templates\core\dashboard.html:734
 #, fuzzy
 #| msgid "Email Footers"
 msgid "Manage Email Footers"
 msgstr "Chân trang email"
 
-#: .\templates\core\dashboard.html:602
+#: .\templates\core\dashboard.html:743
 msgid "Tips & Resources"
 msgstr "Mẹo & Tài nguyên"
 
-#: .\templates\core\dashboard.html:605
+#: .\templates\core\dashboard.html:746
 msgid "Getting Started Guide"
 msgstr "Hướng dẫn bắt đầu"
 
-#: .\templates\core\dashboard.html:606
+#: .\templates\core\dashboard.html:747
 msgid "Learn how to set up your first email campaign in minutes."
 msgstr ""
 "Tìm hiểu cách thiết lập chiến dịch email đầu tiên của bạn trong vài phút."
 
-#: .\templates\core\dashboard.html:609
+#: .\templates\core\dashboard.html:750
 msgid "Email Best Practices"
 msgstr "Các phương pháp hay nhất về email"
 
-#: .\templates\core\dashboard.html:610
+#: .\templates\core\dashboard.html:751
 msgid "Tips for creating emails that convert."
 msgstr "Mẹo tạo email chuyển đổi."
 
-#: .\templates\core\dashboard.html:613
+#: .\templates\core\dashboard.html:754
 msgid "Grow Your Subscriber List"
 msgstr "Phát triển danh sách người đăng ký của bạn"
 
-#: .\templates\core\dashboard.html:614
+#: .\templates\core\dashboard.html:755
 msgid "Strategies to increase your subscribers."
 msgstr "Các chiến lược để tăng lượng người đăng ký của bạn."
 
-#: .\templates\core\dashboard.html:628
+#: .\templates\core\dashboard.html:769
 msgid "Physical Address Required"
 msgstr "Cần có địa chỉ vật lý"
 
-#: .\templates\core\dashboard.html:639 .\templates\core\settings.html:49
+#: .\templates\core\dashboard.html:774
+#, fuzzy
+#| msgid "Required"
+msgid "Required by Law:"
+msgstr "Yêu cầu"
+
+#: .\templates\core\dashboard.html:774
+msgid ""
+"Your physical address is required by email regulations (CAN-SPAM, GDPR, "
+"etc.) and will be included in the footer of emails near the unsubscribe "
+"link."
+msgstr ""
+"Địa chỉ thực của bạn được yêu cầu theo quy định về email (CAN-SPAM, GDPR, "
+"v.v.) và sẽ được đưa vào phần chân trang của email gần liên kết hủy đăng ký."
+
+#: .\templates\core\dashboard.html:780 .\templates\core\settings.html:57
+msgid "John Doe"
+msgstr ""
+
+#: .\templates\core\dashboard.html:781 .\templates\core\settings.html:58
+msgid "This name will appear in the From header of emails you send"
+msgstr "Tên này sẽ xuất hiện trong tiêu đề From của email bạn gửi"
+
+#: .\templates\core\dashboard.html:788 .\templates\core\settings.html:65
 msgid "Address Line 2 (Optional)"
 msgstr "Dòng địa chỉ 2 (Tùy chọn)"
 
-#: .\templates\core\dashboard.html:861 .\templates\core\dashboard.html:1169
-#: .\templates\core\dashboard.html:1366
+#: .\templates\core\dashboard.html:813
+#, fuzzy
+#| msgid "IP Address"
+msgid "Update Address"
+msgstr "Địa chỉ IP"
+
+#: .\templates\core\dashboard.html:861
+#, fuzzy
+#| msgid ""
+#| "Please fill in all required fields: Address Line 1, City, State, Postal "
+#| "Code, and Country."
+msgid "Please fill in all required fields before continuing."
+msgstr ""
+"Vui lòng điền vào tất cả các trường bắt buộc: Dòng địa chỉ 1, Thành phố, "
+"Tiểu bang, Mã bưu điện và Quốc gia."
+
+#: .\templates\core\dashboard.html:942
+#, fuzzy
+#| msgid "Address updated successfully."
+msgid "Address saved successfully!"
+msgstr "Địa chỉ được cập nhật thành công."
+
+#: .\templates\core\dashboard.html:949
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error saving address. Please try again."
+msgstr "Lỗi tạo chân trang.Vui lòng thử lại."
+
+#: .\templates\core\dashboard.html:1057 .\templates\core\dashboard.html:1365
+#: .\templates\core\dashboard.html:2556
 msgid "= 200 && status"
 msgstr "= 200 && trạng thái"
 
-#: .\templates\core\dashboard.html:915
+#: .\templates\core\dashboard.html:1111
 msgid "No send activity yet"
 msgstr "Chưa có hoạt động gửi"
 
-#: .\templates\core\dashboard.html:916
+#: .\templates\core\dashboard.html:1112
 msgid "Use the form above to send an email and see your activity here."
 msgstr ""
 "Sử dụng biểu mẫu ở trên để gửi email và xem hoạt động của bạn tại đây."
 
-#: .\templates\core\dashboard.html:1001
+#: .\templates\core\dashboard.html:1197
 msgid "To"
 msgstr "ĐẾN"
 
-#: .\templates\core\dashboard.html:1012
+#: .\templates\core\dashboard.html:1208
 msgid "Scheduled"
 msgstr "Đã lên lịch"
 
-#: .\templates\core\dashboard.html:1035
-msgid "Error"
-msgstr "Lỗi"
-
-#: .\templates\core\dashboard.html:1058
+#: .\templates\core\dashboard.html:1254
 msgid "Full HTML Preview"
 msgstr "Xem trước HTML đầy đủ"
 
-#: .\templates\core\dashboard.html:1062
+#: .\templates\core\dashboard.html:1258
 msgid "Text Version"
 msgstr "Phiên bản văn bản"
 
-#: .\templates\core\dashboard.html:1066
+#: .\templates\core\dashboard.html:1262
 msgid "Show less"
 msgstr "Hiển thị ít hơn"
 
-#: .\templates\core\dashboard.html:1096
+#: .\templates\core\dashboard.html:1292
 msgid "Unsubscribe"
 msgstr "Hủy đăng ký"
 
-#: .\templates\core\dashboard.html:1144
+#: .\templates\core\dashboard.html:1340
 msgid "Failed to load activity"
 msgstr "Không thể tải hoạt động"
 
-#: .\templates\core\dashboard.html:1145
+#: .\templates\core\dashboard.html:1341
 msgid "Please try again."
 msgstr "Vui lòng thử lại."
 
-#: .\templates\core\dashboard.html:1147
-msgid "Retry"
-msgstr "Thử lại"
-
-#: .\templates\core\dashboard.html:1224 .\templates\subscribers\add.html:198
+#: .\templates\core\dashboard.html:1420 .\templates\subscribers\add.html:198
 msgid "Select an email template..."
 msgstr "Chọn mẫu email..."
 
-#: .\templates\core\dashboard.html:1234
+#: .\templates\core\dashboard.html:1430
 msgid "Error loading emails"
 msgstr "Lỗi tải email"
+
+#: .\templates\core\dashboard.html:1551
+#, fuzzy
+#| msgid "Contact email"
+msgid "Connect Gmail"
+msgstr "Email liên hệ"
+
+#: .\templates\core\dashboard.html:1568 .\templates\core\dashboard.html:1849
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connected"
+msgstr "Kết nối không thành công"
+
+#: .\templates\core\dashboard.html:1569 .\templates\core\dashboard.html:1850
+msgid "Disconnect"
+msgstr "Ngắt kết nối"
+
+#: .\templates\core\dashboard.html:1641
+msgid "No Gmail emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Chưa có email Gmail nào.Email sẽ xuất hiện ở đây sau khi chúng được tìm nạp."
+
+#: .\templates\core\dashboard.html:1642 .\templates\core\dashboard.html:2080
+msgid "Replied"
+msgstr "đã trả lời"
+
+#: .\templates\core\dashboard.html:1644 .\templates\core\dashboard.html:2085
+#, fuzzy
+#| msgid "Send"
+msgid "Sender:"
+msgstr "Gửi"
+
+#: .\templates\core\dashboard.html:1645
+#, fuzzy
+#| msgid "Send Message"
+msgid "Auto-Reply Message"
+msgstr "Gửi tin nhắn"
+
+#: .\templates\core\dashboard.html:1646
+#, fuzzy
+#| msgid "Original"
+msgid "Original Email"
+msgstr "Nguyên bản"
+
+#: .\templates\core\dashboard.html:1647 .\templates\core\dashboard.html:2087
+#, fuzzy
+#| msgid "Email Content"
+msgid "Email Content:"
+msgstr "Nội dung email"
+
+#: .\templates\core\dashboard.html:1648 .\templates\core\dashboard.html:2088
+#, fuzzy
+#| msgid "Email Content"
+msgid "(No content)"
+msgstr "Nội dung email"
+
+#: .\templates\core\dashboard.html:1822
+msgid "Connect IMAP"
+msgstr "Kết nối IMAP"
+
+#: .\templates\core\dashboard.html:1933 .\templates\core\home.html:1344
+msgid "To fix this:"
+msgstr "Để khắc phục điều này:"
+
+#: .\templates\core\dashboard.html:1935 .\templates\core\home.html:1346
+msgid "Enable 2-Step Verification on your Google Account"
+msgstr "Bật Xác minh 2 bước trên Tài khoản Google của bạn"
+
+#: .\templates\core\dashboard.html:1936 .\templates\core\home.html:1347
+msgid "Generate an App Password for IMAP access"
+msgstr "Tạo mật khẩu ứng dụng để truy cập IMAP"
+
+#: .\templates\core\dashboard.html:1937 .\templates\core\home.html:1348
+msgid "Use the App Password instead of your regular password"
+msgstr "Sử dụng Mật khẩu ứng dụng thay vì mật khẩu thông thường của bạn"
+
+#: .\templates\core\dashboard.html:1944 .\templates\core\home.html:299
+#: .\templates\core\home.html:1113 .\templates\core\home.html:1355
+msgid "Learn More"
+msgstr "Tìm hiểu thêm"
+
+#: .\templates\core\dashboard.html:1950 .\templates\core\home.html:1361
+#, fuzzy
+#| msgid "Change Password"
+msgid "Create App Password"
+msgstr "Thay đổi mật khẩu"
+
+#: .\templates\core\dashboard.html:1990
+#, fuzzy
+#| msgid "Error creating footer. Please try again."
+msgid "Error connecting IMAP account. Please try again."
+msgstr "Lỗi tạo chân trang.Vui lòng thử lại."
+
+#: .\templates\core\dashboard.html:2079
+msgid "No IMAP emails yet. Emails will appear here once they are fetched."
+msgstr ""
+"Chưa có email IMAP nào.Email sẽ xuất hiện ở đây sau khi chúng được tìm nạp."
+
+#: .\templates\core\dashboard.html:2082
+msgid "Auto Reply To:"
+msgstr "Tự động trả lời tới:"
+
+#: .\templates\core\dashboard.html:2084
+#, fuzzy
+#| msgid "Cancel:"
+msgid "Cc:"
+msgstr "Hủy bỏ:"
+
+#: .\templates\core\dashboard.html:2086
+msgid "Auto-Reply Sent:"
+msgstr "Trả lời tự động đã gửi:"
+
+#: .\templates\core\dashboard.html:2089
+#, fuzzy
+#| msgid "Send Email"
+msgid "Sent Email"
+msgstr "Gửi email"
+
+#: .\templates\core\dashboard.html:2307
+#, fuzzy
+#| msgid "Email Content"
+msgid "Sent Email Content:"
+msgstr "Nội dung email"
+
+#: .\templates\core\dashboard.html:2455
+msgid "total"
+msgstr "tổng cộng"
 
 #: .\templates\core\docs\ai_features.html:5
 msgid "AI-Powered Email Features"
@@ -3983,11 +5072,6 @@ msgstr "Tỷ lệ hủy đăng ký"
 #: .\templates\core\docs\analytics.html:28
 msgid "Complaint rate"
 msgstr "Tỷ lệ khiếu nại"
-
-#: .\templates\core\docs\analytics.html:32
-#: .\templates\core\feature_analytics.html:60
-msgid "Analytics Dashboard"
-msgstr "Trang tổng quan phân tích"
 
 #: .\templates\core\docs\analytics.html:33
 msgid "Access your campaign analytics by clicking the "
@@ -5382,10 +6466,6 @@ msgstr ""
 #: .\templates\core\feature_analytics.html:12
 msgid "What You Can Track"
 msgstr "Những gì bạn có thể theo dõi"
-
-#: .\templates\core\feature_analytics.html:15
-msgid "Campaign Performance"
-msgstr "Hiệu suất chiến dịch"
 
 #: .\templates\core\feature_analytics.html:17
 msgid "Open rates for each campaign"
@@ -7218,7 +8298,7 @@ msgstr "Biến khách truy cập thành"
 msgid "Loyal Customers"
 msgstr "Khách hàng trung thành"
 
-#: .\templates\core\home.html:61
+#: .\templates\core\home.html:62
 msgid ""
 "The best free drip email marketing software for automated email sequences, "
 "email campaigns, and email marketing automation. Create powerful email drip "
@@ -7239,53 +8319,198 @@ msgstr ""
 "hoàn toàn miễn phí với các chiến dịch không giới hạn, số người đăng ký không"
 " giới hạn và email nhỏ giọt không giới hạn."
 
-#: .\templates\core\home.html:67
+#: .\templates\core\home.html:69
 msgid "Start Free Today"
 msgstr "Bắt đầu miễn phí ngay hôm nay"
 
-#: .\templates\core\home.html:83
+#: .\templates\core\home.html:85
 msgid "Unlimited Campaigns"
 msgstr "Chiến dịch không giới hạn"
 
-#: .\templates\core\home.html:89
+#: .\templates\core\home.html:91
 msgid "Unlimited Drip Emails"
 msgstr "Email nhỏ giọt không giới hạn"
 
-#: .\templates\core\home.html:95 .\templates\core\pricing.html:39
+#: .\templates\core\home.html:97 .\templates\core\pricing.html:39
 msgid "Unlimited Subscribers"
 msgstr "Người đăng ký không giới hạn"
 
-#: .\templates\core\home.html:101
+#: .\templates\core\home.html:103
 msgid "No Credit Card"
 msgstr "Không có thẻ tín dụng"
 
-#: .\templates\core\home.html:107
+#: .\templates\core\home.html:109
 msgid "Setup in 5 Minutes"
 msgstr "Thiết lập trong 5 phút"
 
-#: .\templates\core\home.html:120
+#: .\templates\core\home.html:130
+msgid "NEW FEATURE"
+msgstr "TÍNH NĂNG MỚI"
+
+#: .\templates\core\home.html:138
+#, fuzzy
+#| msgid "Never Miss Important Dates"
+msgid "Never Miss a"
+msgstr "Không bao giờ bỏ lỡ những ngày quan trọng"
+
+#: .\templates\core\home.html:140
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Conversation Again"
+msgstr "Kết nối không thành công"
+
+#: .\templates\core\home.html:145
+msgid ""
+"Connect your Gmail or IMAP account and let our intelligent auto-reply system"
+" respond to every email in your inbox and sent box. Engage with your "
+"contacts automatically with personalized messages like:"
+msgstr ""
+"Kết nối tài khoản Gmail hoặc IMAP của bạn và để hệ thống trả lời tự động "
+"thông minh của chúng tôi phản hồi mọi email trong hộp thư đến và hộp thư đã "
+"gửi của bạn.Tự động tương tác với các liên hệ của bạn bằng các tin nhắn được"
+" cá nhân hóa như:"
+
+#: .\templates\core\home.html:156
+msgid "Hi, did you have any questions?"
+msgstr "Xin chào, bạn có câu hỏi nào không?"
+
+#: .\templates\core\home.html:159
+#, fuzzy
+#| msgid "Automatically add new CRM contacts to email lists"
+msgid "Automatically sent to every contact who emails you"
+msgstr "Tự động thêm địa chỉ liên hệ CRM mới vào danh sách email"
+
+#: .\templates\core\home.html:174
+msgid "Auto-Reply to Inbox"
+msgstr "Tự động trả lời hộp thư đến"
+
+#: .\templates\core\home.html:175
+msgid "Automatically respond to incoming emails with personalized messages"
+msgstr "Tự động trả lời email đến bằng tin nhắn được cá nhân hóa"
+
+#: .\templates\core\home.html:186
+msgid "Auto-Reply to Sent Box"
+msgstr "Tự động trả lời hộp thư đã gửi"
+
+#: .\templates\core\home.html:187
+msgid "Follow up with recipients of your sent emails automatically"
+msgstr "Tự động theo dõi người nhận email đã gửi của bạn"
+
+#: .\templates\core\home.html:198
+#, fuzzy
+#| msgid "Personalization:"
+msgid "Smart Personalization"
+msgstr "Cá nhân hóa:"
+
+#: .\templates\core\home.html:199
+msgid "Uses recipient names and email context for natural conversations"
+msgstr ""
+"Sử dụng tên người nhận và ngữ cảnh email để có cuộc trò chuyện tự nhiên"
+
+#: .\templates\core\home.html:210
+msgid "Gmail & IMAP Support"
+msgstr "Hỗ trợ Gmail & IMAP"
+
+#: .\templates\core\home.html:211
+msgid "Works with Gmail, Outlook, and any IMAP email provider"
+msgstr "Hoạt động với Gmail, Outlook và bất kỳ nhà cung cấp email IMAP nào"
+
+#: .\templates\core\home.html:219 .\templates\core\includes\signup_box.html:18
+#, fuzzy
+#| msgid "Get Started Today"
+msgid "Get Started in 60 Seconds"
+msgstr "Bắt đầu ngay hôm nay"
+
+#: .\templates\core\home.html:220
+msgid "Connect your email account and start auto-replying immediately"
+msgstr ""
+"Kết nối tài khoản email của bạn và bắt đầu trả lời tự động ngay lập tức"
+
+#: .\templates\core\home.html:229 .\templates\core\includes\signup_box.html:31
+#, fuzzy
+#| msgid "Connection Failed"
+msgid "Connect with Gmail"
+msgstr "Kết nối không thành công"
+
+#: .\templates\core\home.html:239 .\templates\core\includes\signup_box.html:41
+msgid "OR"
+msgstr "HOẶC"
+
+#: .\templates\core\home.html:281 .\templates\core\includes\signup_box.html:77
+msgid "Start Auto-Replying Now"
+msgstr "Bắt đầu trả lời tự động ngay bây giờ"
+
+#: .\templates\core\home.html:293
+msgid "Set Up Auto-Reply"
+msgstr "Thiết lập trả lời tự động"
+
+#: .\templates\core\home.html:322
+#, fuzzy
+#| msgid "Description of Service"
+msgid "Question about your service"
+msgstr "Mô tả dịch vụ"
+
+#: .\templates\core\home.html:323
+msgid "Hi, I'm interested in learning more about..."
+msgstr "Xin chào, tôi muốn tìm hiểu thêm về..."
+
+#: .\templates\core\home.html:326
+msgid "Auto-Reply Sent"
+msgstr "Đã gửi trả lời tự động"
+
+#: .\templates\core\home.html:327
+msgid "Hi John, did you have any questions?"
+msgstr "Xin chào John, bạn có câu hỏi nào không?"
+
+#: .\templates\core\home.html:344
+msgid "Re: Project Proposal"
+msgstr "Re: Đề xuất dự án"
+
+#: .\templates\core\home.html:345
+#, fuzzy
+#| msgid "Test how your email looks in preview mode"
+msgid "Thanks for your email! I'll review..."
+msgstr "Kiểm tra xem email của bạn trông như thế nào ở chế độ xem trước"
+
+#: .\templates\core\home.html:348
+#, fuzzy
+#| msgid "Send follow-up content"
+msgid "Follow-up Sent"
+msgstr "Gửi nội dung theo dõi"
+
+#: .\templates\core\home.html:349
+msgid "Hi Sarah, did you have any questions?"
+msgstr "Xin chào Sarah, bạn có câu hỏi nào không?"
+
+#: .\templates\core\home.html:361
+#, fuzzy
+#| msgid "Active"
+msgid "24/7 Active"
+msgstr "Tích cực"
+
+#: .\templates\core\home.html:377
 msgid "Higher ROI"
 msgstr "ROI cao hơn"
 
-#: .\templates\core\home.html:124
+#: .\templates\core\home.html:381
 msgid "More Engagement"
 msgstr "Tương tác nhiều hơn"
 
-#: .\templates\core\home.html:128
+#: .\templates\core\home.html:385
 msgid "Faster Growth"
 msgstr "Tăng trưởng nhanh hơn"
 
-#: .\templates\core\home.html:132
+#: .\templates\core\home.html:389
 msgid "Automation"
 msgstr "Tự động hóa"
 
-#: .\templates\core\home.html:143
+#: .\templates\core\home.html:409
 #, fuzzy
 #| msgid "How to Create Email Templates"
 msgid "How to Create Drip Email Campaigns in Minutes"
 msgstr "Cách tạo mẫu email"
 
-#: .\templates\core\home.html:146
+#: .\templates\core\home.html:412
 msgid ""
 "Setting up email automation and email drip campaigns has never been easier. "
 "Our email marketing automation software makes it simple to create automated "
@@ -7296,13 +8521,13 @@ msgstr ""
 "việc tạo chuỗi email tự động, lên lịch gửi email và theo dõi phân tích email"
 " trở nên đơn giản."
 
-#: .\templates\core\home.html:155
+#: .\templates\core\home.html:421
 #, fuzzy
 #| msgid "Create Campaign"
 msgid "Create Your Campaign"
 msgstr "Tạo chiến dịch"
 
-#: .\templates\core\home.html:156
+#: .\templates\core\home.html:422
 msgid ""
 "Build your email drip campaign with our intuitive email marketing tool. "
 "Choose from beautiful email templates or create custom email marketing "
@@ -7312,13 +8537,13 @@ msgstr ""
 "quan của chúng tôi.Chọn từ các mẫu email đẹp hoặc tạo các chiến dịch tiếp "
 "thị qua email tùy chỉnh."
 
-#: .\templates\core\home.html:162
+#: .\templates\core\home.html:428
 #, fuzzy
 #| msgid "Email Sequence"
 msgid "Add Email Sequences"
 msgstr "Trình tự email"
 
-#: .\templates\core\home.html:163
+#: .\templates\core\home.html:429
 msgid ""
 "Design automated email sequences with personalized emails. Set up email "
 "scheduling, email nurture sequences, and welcome series for your email "
@@ -7328,13 +8553,13 @@ msgstr ""
 "gửi email, trình tự nuôi dưỡng email và chuỗi chào mừng cho người đăng ký "
 "email của bạn."
 
-#: .\templates\core\home.html:169
+#: .\templates\core\home.html:435
 #, fuzzy
 #| msgid "Adding Subscribers"
 msgid "Manage Subscribers"
 msgstr "Thêm người đăng ký"
 
-#: .\templates\core\home.html:170
+#: .\templates\core\home.html:436
 msgid ""
 "Import your email list, segment subscribers with email list management, and "
 "organize your email audience. Perfect for email subscriber management and "
@@ -7344,11 +8569,11 @@ msgstr ""
 " danh sách email và sắp xếp đối tượng email của bạn.Hoàn hảo cho việc quản "
 "lý người đăng ký email và phân đoạn email."
 
-#: .\templates\core\home.html:176
+#: .\templates\core\home.html:442
 msgid "Track & Optimize"
 msgstr "Theo dõi & Tối ưu hóa"
 
-#: .\templates\core\home.html:177
+#: .\templates\core\home.html:443
 msgid ""
 "Monitor email open rates, email click rates, and email engagement with real-"
 "time email analytics. Improve email marketing ROI with data-driven insights."
@@ -7357,13 +8582,13 @@ msgstr ""
 "bằng phân tích email theo thời gian thực.Cải thiện ROI tiếp thị qua email "
 "với thông tin chi tiết dựa trên dữ liệu."
 
-#: .\templates\core\home.html:188
+#: .\templates\core\home.html:463
 msgid "Why Email Drip Campaigns Work Better Than Single Email Blasts"
 msgstr ""
 "Tại sao các chiến dịch nhỏ giọt email hoạt động tốt hơn các vụ nổ email đơn "
 "lẻ"
 
-#: .\templates\core\home.html:191
+#: .\templates\core\home.html:466
 msgid ""
 "Unlike single email blasts, automated drip email campaigns build "
 "relationships over time. Email marketing automation helps you send the right"
@@ -7375,11 +8600,11 @@ msgstr ""
 " bạn gửi đúng thông điệp tiếp thị qua email vào đúng thời điểm, cải thiện "
 "mức độ tương tác qua email và ROI tiếp thị qua email."
 
-#: .\templates\core\home.html:203
+#: .\templates\core\home.html:478
 msgid "Automated Email Nurturing & Lead Nurturing"
 msgstr "Nuôi dưỡng email tự động & Nuôi dưỡng khách hàng tiềm năng"
 
-#: .\templates\core\home.html:205
+#: .\templates\core\home.html:480
 msgid ""
 "Send the right email marketing message at the right time with email "
 "automation. Automatically guide leads through your funnel with automated "
@@ -7391,11 +8616,11 @@ msgstr ""
 " bằng các chuỗi email tự động, chiến dịch nuôi dưỡng email và tiếp thị qua "
 "email được cá nhân hóa mà không cần can thiệp thủ công."
 
-#: .\templates\core\home.html:216
+#: .\templates\core\home.html:491
 msgid "Email Personalization & Subscriber Segmentation"
 msgstr "Cá nhân hóa email và phân khúc người đăng ký"
 
-#: .\templates\core\home.html:218
+#: .\templates\core\home.html:493
 msgid ""
 "Create unique email experiences for each subscriber with personalized "
 "emails. Use email segmentation and email list management to deliver targeted"
@@ -7406,11 +8631,11 @@ msgstr ""
 "chiến dịch tiếp thị qua email được nhắm mục tiêu phù hợp với đối tượng email"
 " của bạn."
 
-#: .\templates\core\home.html:229
+#: .\templates\core\home.html:504
 msgid "Proven Results"
 msgstr "Kết quả đã được chứng minh"
 
-#: .\templates\core\home.html:231
+#: .\templates\core\home.html:506
 msgid ""
 "Drip campaigns generate 3x more revenue than single emails. See measurable "
 "ROI from day one."
@@ -7418,21 +8643,21 @@ msgstr ""
 "Các chiến dịch nhỏ giọt tạo ra doanh thu gấp 3 lần so với các email đơn "
 "lẻ.Xem ROI có thể đo lường được ngay từ ngày đầu tiên."
 
-#: .\templates\core\home.html:243
+#: .\templates\core\home.html:527
 msgid "Everything You Need to Succeed"
 msgstr "Mọi thứ bạn cần để thành công"
 
-#: .\templates\core\home.html:246
+#: .\templates\core\home.html:530
 msgid "Powerful features that make email marketing effortless"
 msgstr "Các tính năng mạnh mẽ giúp tiếp thị qua email trở nên dễ dàng"
 
-#: .\templates\core\home.html:260
+#: .\templates\core\home.html:544
 #, fuzzy
 #| msgid "Email Sequence"
 msgid "Smart Drip Email Sequences"
 msgstr "Trình tự email"
 
-#: .\templates\core\home.html:262
+#: .\templates\core\home.html:546
 msgid ""
 "Create multi-step email sequences that automatically send based on timing, "
 "behavior, or triggers."
@@ -7440,11 +8665,11 @@ msgstr ""
 "Tạo chuỗi email gồm nhiều bước tự động gửi dựa trên thời gian, hành vi hoặc "
 "trình kích hoạt."
 
-#: .\templates\core\home.html:276
+#: .\templates\core\home.html:560
 msgid "Real-Time Analytics"
 msgstr "Phân tích thời gian thực"
 
-#: .\templates\core\home.html:278
+#: .\templates\core\home.html:562
 msgid ""
 "Track opens, clicks, conversions, and revenue. Make data-driven decisions "
 "with beautiful dashboards."
@@ -7452,11 +8677,11 @@ msgstr ""
 "Theo dõi lượt mở, số lần nhấp, chuyển đổi và doanh thu.Đưa ra quyết định dựa"
 " trên dữ liệu với bảng thông tin đẹp mắt."
 
-#: .\templates\core\home.html:291
+#: .\templates\core\home.html:575
 msgid "Beautiful Templates"
 msgstr "Mẫu đẹp"
 
-#: .\templates\core\home.html:293
+#: .\templates\core\home.html:577
 msgid ""
 "Choose from professional templates or create your own. Drag-and-drop editor "
 "makes design easy."
@@ -7464,14 +8689,14 @@ msgstr ""
 "Chọn từ các mẫu chuyên nghiệp hoặc tạo mẫu của riêng bạn.Trình chỉnh sửa kéo"
 " và thả giúp thiết kế dễ dàng."
 
-#: .\templates\core\home.html:307 .\templates\core\resource_tutorials.html:172
+#: .\templates\core\home.html:591 .\templates\core\resource_tutorials.html:172
 #: .\templates\core\tutorials\data_optimization.html:186
 #: .\templates\core\tutorials\importing_subscribers.html:118
 #: .\templates\core\tutorials\managing_lists.html:122
 msgid "Subscriber Segmentation"
 msgstr "Phân khúc người đăng ký"
 
-#: .\templates\core\home.html:309
+#: .\templates\core\home.html:593
 msgid ""
 "Organize subscribers into lists, tag them, and send targeted campaigns to "
 "the right audience."
@@ -7479,11 +8704,11 @@ msgstr ""
 "Sắp xếp người đăng ký thành danh sách, gắn thẻ họ và gửi các chiến dịch được"
 " nhắm mục tiêu đến đúng đối tượng."
 
-#: .\templates\core\home.html:323
+#: .\templates\core\home.html:607
 msgid "AI-Powered Content"
 msgstr "Nội dung được hỗ trợ bởi AI"
 
-#: .\templates\core\home.html:325
+#: .\templates\core\home.html:609
 msgid ""
 "Generate compelling email content with AI. Save time while creating "
 "professional, engaging messages."
@@ -7491,11 +8716,11 @@ msgstr ""
 "Tạo nội dung email hấp dẫn bằng AI.Tiết kiệm thời gian trong khi tạo tin "
 "nhắn chuyên nghiệp, hấp dẫn."
 
-#: .\templates\core\home.html:338
+#: .\templates\core\home.html:622
 msgid "Enterprise Security"
 msgstr "Bảo mật doanh nghiệp"
 
-#: .\templates\core\home.html:340
+#: .\templates\core\home.html:624
 msgid ""
 "GDPR compliant, secure infrastructure, and reliable delivery. Your data and "
 "subscribers are protected."
@@ -7503,16 +8728,16 @@ msgstr ""
 "Tuân thủ GDPR, cơ sở hạ tầng an toàn và phân phối đáng tin cậy.Dữ liệu và "
 "người đăng ký của bạn được bảo vệ."
 
-#: .\templates\core\home.html:353
+#: .\templates\core\home.html:646
 msgid "Trusted by Growing Businesses"
 msgstr "Được các doanh nghiệp đang phát triển tin cậy"
 
-#: .\templates\core\home.html:356
+#: .\templates\core\home.html:649
 msgid "Join thousands of marketers who've transformed their email strategy"
 msgstr ""
 "Tham gia cùng hàng nghìn nhà tiếp thị đã chuyển đổi chiến lược email của họ"
 
-#: .\templates\core\home.html:373
+#: .\templates\core\home.html:666
 #, python-format
 msgid ""
 "Our conversion rate increased by 340%% after implementing drip campaigns. "
@@ -7521,11 +8746,11 @@ msgstr ""
 "Tỷ lệ chuyển đổi của chúng tôi đã tăng 340%% sau khi triển khai các chiến "
 "dịch nhỏ giọt.Việc tự động hóa giúp chúng tôi tiết kiệm hàng giờ mỗi tuần."
 
-#: .\templates\core\home.html:381
+#: .\templates\core\home.html:674
 msgid "Marketing Director"
 msgstr "Giám đốc tiếp thị"
 
-#: .\templates\core\home.html:398
+#: .\templates\core\home.html:691
 msgid ""
 "The best part? It's completely free. We've sent over 50,000 emails without "
 "paying a dime. Game changer."
@@ -7533,11 +8758,11 @@ msgstr ""
 "Phần tốt nhất?Nó hoàn toàn miễn phí.Chúng tôi đã gửi hơn 50.000 email mà "
 "không phải trả một xu nào.Người thay đổi trò chơi."
 
-#: .\templates\core\home.html:406
+#: .\templates\core\home.html:699
 msgid "Startup Founder"
 msgstr "Người sáng lập khởi nghiệp"
 
-#: .\templates\core\home.html:423
+#: .\templates\core\home.html:716
 msgid ""
 "Setup took 5 minutes. The interface is intuitive, and the results speak for "
 "themselves. Our email engagement doubled."
@@ -7545,17 +8770,17 @@ msgstr ""
 "Quá trình thiết lập mất 5 phút.Giao diện trực quan và kết quả tự nói lên "
 "điều đó.Sự tham gia email của chúng tôi đã tăng gấp đôi."
 
-#: .\templates\core\home.html:431
+#: .\templates\core\home.html:724
 msgid "E-commerce Manager"
 msgstr "Giám đốc thương mại điện tử"
 
-#: .\templates\core\home.html:444
+#: .\templates\core\home.html:746
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Perfect Email Marketing Solution for Every Business"
 msgstr "Tự động hóa tiếp thị qua email miễn phí cho mọi người"
 
-#: .\templates\core\home.html:447
+#: .\templates\core\home.html:749
 msgid ""
 "Whether you're running SaaS email marketing, ecommerce email marketing, B2B "
 "email marketing, or B2C email marketing campaigns, our free email marketing "
@@ -7566,11 +8791,11 @@ msgstr ""
 "mềm tự động hóa tiếp thị qua email miễn phí của chúng tôi đều thích ứng với "
 "nhu cầu của bạn."
 
-#: .\templates\core\home.html:458
+#: .\templates\core\home.html:760
 msgid "SaaS Email Marketing"
 msgstr "Tiếp thị qua email SaaS"
 
-#: .\templates\core\home.html:459
+#: .\templates\core\home.html:761
 msgid ""
 "Onboard users with automated email sequences, welcome series, and nurture "
 "campaigns. Perfect for startup email marketing and software companies."
@@ -7579,17 +8804,17 @@ msgstr ""
 "nuôi dưỡng.Hoàn hảo cho các công ty phần mềm và tiếp thị qua email khởi "
 "nghiệp."
 
-#: .\templates\core\home.html:461
+#: .\templates\core\home.html:763
 msgid "Start Free"
 msgstr "Bắt đầu miễn phí"
 
-#: .\templates\core\home.html:474
+#: .\templates\core\home.html:776
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Ecommerce Email Marketing"
 msgstr "Phần mềm tiếp thị qua email nhỏ giọt miễn phí"
 
-#: .\templates\core\home.html:475
+#: .\templates\core\home.html:777
 msgid ""
 "Drive sales with abandoned cart emails, product recommendations, and "
 "transactional emails. Boost your email marketing ROI with targeted "
@@ -7599,19 +8824,19 @@ msgstr ""
 "và email giao dịch.Tăng ROI tiếp thị qua email của bạn với các chiến dịch "
 "được nhắm mục tiêu."
 
-#: .\templates\core\home.html:477
+#: .\templates\core\home.html:779
 #, fuzzy
 #| msgid "Getting Started"
 msgid "Get Started"
 msgstr "Bắt đầu"
 
-#: .\templates\core\home.html:490
+#: .\templates\core\home.html:792
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "B2B Email Marketing"
 msgstr "Phần mềm tiếp thị qua email nhỏ giọt miễn phí"
 
-#: .\templates\core\home.html:491
+#: .\templates\core\home.html:793
 msgid ""
 "Nurture leads with email marketing automation, email segmentation, and "
 "personalized email campaigns. Perfect for B2B email marketing strategies."
@@ -7620,15 +8845,15 @@ msgstr ""
 "email, phân khúc email và chiến dịch email được cá nhân hóa.Hoàn hảo cho các"
 " chiến lược tiếp thị qua email B2B."
 
-#: .\templates\core\home.html:493
+#: .\templates\core\home.html:795
 msgid "Try Free"
 msgstr "Dùng thử miễn phí"
 
-#: .\templates\core\home.html:506
+#: .\templates\core\home.html:808
 msgid "Small Business Email Marketing"
 msgstr "Tiếp thị qua Email dành cho doanh nghiệp nhỏ"
 
-#: .\templates\core\home.html:507
+#: .\templates\core\home.html:809
 #, fuzzy
 #| msgid ""
 #| "Free drip email marketing software with unlimited campaigns, subscribers, "
@@ -7641,19 +8866,19 @@ msgstr ""
 "Phần mềm tiếp thị qua email nhỏ giọt miễn phí với số lượng chiến dịch, người"
 " đăng ký và chuỗi email tự động không giới hạn"
 
-#: .\templates\core\home.html:519
+#: .\templates\core\home.html:821
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Start Your Free Email Marketing Campaign Today"
 msgstr "Tự động hóa tiếp thị qua email miễn phí cho mọi người"
 
-#: .\templates\core\home.html:533
+#: .\templates\core\home.html:844
 msgid "The Best Free Alternative to Paid Email Marketing Tools"
 msgstr ""
 "Giải pháp thay thế miễn phí tốt nhất cho các công cụ tiếp thị qua email trả "
 "phí"
 
-#: .\templates\core\home.html:536
+#: .\templates\core\home.html:847
 msgid ""
 "Why pay for Mailchimp, Constant Contact, Sendinblue, or GetResponse when you"
 " can get the same email marketing automation features for free? Our email "
@@ -7666,18 +8891,18 @@ msgstr ""
 "các chiến dịch email không giới hạn, số lượng người đăng ký không giới hạn "
 "và khả năng tự động hóa email mạnh mẽ - tất cả đều miễn phí."
 
-#: .\templates\core\home.html:543
+#: .\templates\core\home.html:854
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Why Choose Our Free Email Marketing Software?"
 msgstr "Phần mềm tiếp thị qua email nhỏ giọt miễn phí"
 
-#: .\templates\core\home.html:550
+#: .\templates\core\home.html:861
 #, python-format
 msgid "100%% Free Forever"
 msgstr "Miễn phí 100% mãi mãi"
 
-#: .\templates\core\home.html:551
+#: .\templates\core\home.html:862
 msgid ""
 "No hidden fees, no credit card required. Unlike Mailchimp alternative or "
 "Constant Contact alternative services, we're completely free email marketing"
@@ -7687,11 +8912,11 @@ msgstr ""
 " Mailchimp hoặc Constant Contact, chúng tôi là phần mềm tiếp thị qua email "
 "hoàn toàn miễn phí."
 
-#: .\templates\core\home.html:559
+#: .\templates\core\home.html:870
 msgid "Unlimited Everything"
 msgstr "Không giới hạn mọi thứ"
 
-#: .\templates\core\home.html:560
+#: .\templates\core\home.html:871
 msgid ""
 "Unlimited email campaigns, unlimited drip emails, unlimited subscribers, "
 "unlimited email automation. No limits on your email marketing growth."
@@ -7700,13 +8925,13 @@ msgstr ""
 "đăng ký không giới hạn, tự động hóa email không giới hạn.Không có giới hạn "
 "về tăng trưởng tiếp thị qua email của bạn."
 
-#: .\templates\core\home.html:568
+#: .\templates\core\home.html:879
 #, fuzzy
 #| msgid "Free email marketing automation for everyone"
 msgid "Full Email Marketing Automation"
 msgstr "Tự động hóa tiếp thị qua email miễn phí cho mọi người"
 
-#: .\templates\core\home.html:569
+#: .\templates\core\home.html:880
 msgid ""
 "Complete email automation features: email drip campaigns, email scheduling, "
 "email analytics, email tracking, email segmentation, and email "
@@ -7716,13 +8941,13 @@ msgstr ""
 "lịch email, phân tích email, theo dõi email, phân đoạn email và cá nhân hóa "
 "email."
 
-#: .\templates\core\home.html:577
+#: .\templates\core\home.html:888
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Best Email Marketing Software Features"
 msgstr "Phần mềm tiếp thị qua email nhỏ giọt miễn phí"
 
-#: .\templates\core\home.html:578
+#: .\templates\core\home.html:889
 msgid ""
 "Email templates, email newsletters, email subscriber management, email list "
 "management, email open rates tracking, email click rates, and email "
@@ -7732,11 +8957,11 @@ msgstr ""
 "email, theo dõi tỷ lệ mở email, tỷ lệ nhấp vào email và phân tích ROI tiếp "
 "thị qua email."
 
-#: .\templates\core\home.html:584
+#: .\templates\core\home.html:895
 msgid "Ready to Switch?"
 msgstr "Sẵn sàng để chuyển đổi?"
 
-#: .\templates\core\home.html:586
+#: .\templates\core\home.html:897
 msgid ""
 "Join thousands of businesses who've switched from expensive email marketing "
 "services to our free email marketing platform. Get started with email "
@@ -7746,25 +8971,25 @@ msgstr ""
 "email đắt tiền sang nền tảng tiếp thị qua email miễn phí của chúng tôi.Bắt "
 "đầu tự động hóa email trong vài phút - không cần thẻ tín dụng."
 
-#: .\templates\core\home.html:590
+#: .\templates\core\home.html:901
 #, fuzzy
 #| msgid "Create Free Account"
 msgid "Create Free Account Now"
 msgstr "Tạo tài khoản miễn phí"
 
-#: .\templates\core\home.html:593
+#: .\templates\core\home.html:904
 #, fuzzy
 #| msgid "Already have an account?"
 msgid "Already Have an Account? Sign In"
 msgstr "Đã có tài khoản?"
 
-#: .\templates\core\home.html:607
+#: .\templates\core\home.html:927
 #, fuzzy
 #| msgid "Email Best Practices"
 msgid "Email Marketing Best Practices & Tips"
 msgstr "Các phương pháp hay nhất về email"
 
-#: .\templates\core\home.html:610
+#: .\templates\core\home.html:930
 msgid ""
 "Learn how to improve email open rates, increase email engagement, and "
 "maximize your email marketing ROI with proven email marketing strategies and"
@@ -7774,13 +8999,13 @@ msgstr ""
 "tối đa hóa ROI tiếp thị qua email của bạn bằng các chiến lược tiếp thị qua "
 "email và mẹo tiếp thị qua email đã được chứng minh."
 
-#: .\templates\core\home.html:621
+#: .\templates\core\home.html:941
 #, fuzzy
 #| msgid "Individual email open rates"
 msgid "Improve Email Open Rates"
 msgstr "Tỷ lệ mở email cá nhân"
 
-#: .\templates\core\home.html:622
+#: .\templates\core\home.html:942
 msgid ""
 "Use personalized email subject lines, send emails at optimal times, and "
 "segment your email list. Track email open rates with our email analytics to "
@@ -7790,17 +9015,17 @@ msgstr ""
 "và phân đoạn danh sách email của bạn.Theo dõi tỷ lệ mở email bằng phân tích "
 "email của chúng tôi để tối ưu hóa các chiến dịch tiếp thị qua email của bạn."
 
-#: .\templates\core\home.html:624
+#: .\templates\core\home.html:944
 msgid "Start Tracking Opens"
 msgstr "Bắt đầu theo dõi Mở"
 
-#: .\templates\core\home.html:637
+#: .\templates\core\home.html:957
 #, fuzzy
 #| msgid "Bounce management"
 msgid "Increase Email Engagement"
 msgstr "Quản lý thoát"
 
-#: .\templates\core\home.html:638
+#: .\templates\core\home.html:958
 msgid ""
 "Create engaging email content with email personalization, use email "
 "automation to send timely messages, and monitor email click rates. Our email"
@@ -7811,17 +9036,17 @@ msgstr ""
 "email.Tự động hóa tiếp thị qua email của chúng tôi giúp bạn gửi đúng thông "
 "điệp vào đúng thời điểm."
 
-#: .\templates\core\home.html:640
+#: .\templates\core\home.html:960
 #, fuzzy
 #| msgid "Bounce management"
 msgid "Boost Engagement"
 msgstr "Quản lý thoát"
 
-#: .\templates\core\home.html:653
+#: .\templates\core\home.html:973
 msgid "Maximize Email Marketing ROI"
 msgstr "Tối đa hóa ROI tiếp thị qua email"
 
-#: .\templates\core\home.html:654
+#: .\templates\core\home.html:974
 msgid ""
 "Use email drip campaigns for lead nurturing, implement email segmentation "
 "for targeted campaigns, and track email marketing ROI with comprehensive "
@@ -7832,27 +9057,27 @@ msgstr ""
 "theo dõi ROI tiếp thị qua email bằng các phân tích email toàn diện.Phần mềm "
 "tiếp thị qua email miễn phí mang lại kết quả."
 
-#: .\templates\core\home.html:656
+#: .\templates\core\home.html:976
 msgid "See Your ROI"
 msgstr "Xem ROI của bạn"
 
-#: .\templates\core\home.html:665
+#: .\templates\core\home.html:985
 msgid "Ready to implement these email marketing best practices?"
 msgstr ""
 "Bạn đã sẵn sàng triển khai các phương pháp hay nhất về tiếp thị qua email "
 "này chưa?"
 
-#: .\templates\core\home.html:667
+#: .\templates\core\home.html:987
 #, fuzzy
 #| msgid "Start automating your email marketing for free."
 msgid "Start Your Email Marketing Journey Free"
 msgstr "Bắt đầu tự động hóa tiếp thị qua email của bạn miễn phí."
 
-#: .\templates\core\home.html:681
+#: .\templates\core\home.html:1010
 msgid "Frequently Asked Questions About Email Marketing"
 msgstr "Câu hỏi thường gặp về tiếp thị qua email"
 
-#: .\templates\core\home.html:684
+#: .\templates\core\home.html:1013
 msgid ""
 "Everything you need to know about drip email campaigns, email automation, "
 "and our free email marketing software."
@@ -7860,13 +9085,13 @@ msgstr ""
 "Mọi thứ bạn cần biết về chiến dịch email nhỏ giọt, tự động hóa email và phần"
 " mềm tiếp thị qua email miễn phí của chúng tôi."
 
-#: .\templates\core\home.html:690
+#: .\templates\core\home.html:1019
 #, fuzzy
 #| msgid "What is the email about?"
 msgid "What is a drip email campaign?"
 msgstr "Email nói về cái gì?"
 
-#: .\templates\core\home.html:692
+#: .\templates\core\home.html:1021
 msgid ""
 "A drip email campaign, also known as an automated email sequence or email "
 "drip campaign, is a series of automated emails sent to subscribers over "
@@ -7881,7 +9106,7 @@ msgstr ""
 " hóa email chiến lược.Nền tảng tiếp thị qua email của chúng tôi giúp bạn dễ "
 "dàng tạo các chiến dịch email nhỏ giọt mạnh mẽ."
 
-#: .\templates\core\home.html:697
+#: .\templates\core\home.html:1026
 #, fuzzy
 #| msgid ""
 #| "Learn how to create, manage, and optimize your email campaigns."
@@ -7889,7 +9114,7 @@ msgid "How do I create a drip email campaign?"
 msgstr ""
 "Tìm hiểu cách tạo, quản lý và tối ưu hóa các chiến dịch email của bạn."
 
-#: .\templates\core\home.html:699
+#: .\templates\core\home.html:1028
 msgid ""
 "Creating a drip email campaign is simple with our email marketing automation"
 " software. Sign up for free, create your email campaign, add email sequences"
@@ -7904,18 +9129,18 @@ msgstr ""
 "chúng tôi hoặc tạo các chiến dịch tiếp thị qua email tùy chỉnh.Bắt đầu trong"
 " vài phút!"
 
-#: .\templates\core\home.html:703
+#: .\templates\core\home.html:1032
 #: .\templates\core\tutorials\quick_start.html:134
 msgid "Create Your First Campaign"
 msgstr "Tạo chiến dịch đầu tiên của bạn"
 
-#: .\templates\core\home.html:712
+#: .\templates\core\home.html:1041
 #, fuzzy
 #| msgid "Free Drip Email Marketing Software"
 msgid "Is this really free email marketing software?"
 msgstr "Phần mềm tiếp thị qua email nhỏ giọt miễn phí"
 
-#: .\templates\core\home.html:714
+#: .\templates\core\home.html:1043
 #, python-format
 msgid ""
 "Yes! Our email marketing platform is 100%% free forever. Unlike Mailchimp, "
@@ -7931,11 +9156,11 @@ msgstr ""
 "tính năng tự động hóa tiếp thị qua email đầy đủ.Không cần thẻ tín dụng, "
 "không có phí ẩn."
 
-#: .\templates\core\home.html:719
+#: .\templates\core\home.html:1048
 msgid "What email marketing features are included?"
 msgstr "Những tính năng tiếp thị qua email được bao gồm?"
 
-#: .\templates\core\home.html:721
+#: .\templates\core\home.html:1050
 msgid ""
 "Our free email marketing software includes: email drip campaigns, automated "
 "email sequences, email scheduling, email analytics and email tracking (email"
@@ -7951,13 +9176,13 @@ msgstr ""
 "tin email và tự động hóa tiếp thị email toàn diện.Mọi thứ bạn cần để tiếp "
 "thị qua email thành công!"
 
-#: .\templates\core\home.html:726
+#: .\templates\core\home.html:1055
 #, fuzzy
 #| msgid "Individual email open rates"
 msgid "How can I improve my email open rates?"
 msgstr "Tỷ lệ mở email cá nhân"
 
-#: .\templates\core\home.html:728
+#: .\templates\core\home.html:1057
 msgid ""
 "Improve email open rates by using personalized email subject lines, sending "
 "emails at optimal times, segmenting your email list, and creating engaging "
@@ -7970,15 +9195,15 @@ msgstr ""
 "bạn theo dõi tỷ lệ mở email và tối ưu hóa các chiến dịch tiếp thị qua email "
 "của bạn để có hiệu suất tốt hơn."
 
-#: .\templates\core\home.html:732
+#: .\templates\core\home.html:1061
 msgid "Start Improving Opens"
 msgstr "Bắt đầu cải thiện mở"
 
-#: .\templates\core\home.html:742
+#: .\templates\core\home.html:1071
 msgid "Still Have Questions?"
 msgstr "Vẫn còn thắc mắc?"
 
-#: .\templates\core\home.html:743
+#: .\templates\core\home.html:1072
 msgid ""
 "Get started with our free email marketing software and discover how easy "
 "email automation can be!"
@@ -7986,11 +9211,11 @@ msgstr ""
 "Hãy bắt đầu với phần mềm tiếp thị qua email miễn phí của chúng tôi và khám "
 "phá việc tự động hóa email có thể dễ dàng như thế nào!"
 
-#: .\templates\core\home.html:762
+#: .\templates\core\home.html:1100
 msgid "Ready to Transform Your Email Marketing?"
 msgstr "Sẵn sàng để chuyển đổi tiếp thị qua email của bạn?"
 
-#: .\templates\core\home.html:765
+#: .\templates\core\home.html:1103
 msgid ""
 "Join thousands of businesses using drip campaigns to grow revenue, nurture "
 "leads, and build lasting customer relationships."
@@ -7999,17 +9224,74 @@ msgstr ""
 "doanh thu, nuôi dưỡng khách hàng tiềm năng và xây dựng mối quan hệ khách "
 "hàng lâu dài."
 
-#: .\templates\core\home.html:769
+#: .\templates\core\home.html:1107
 msgid "Start Your Free Account"
 msgstr "Bắt đầu tài khoản miễn phí của bạn"
 
-#: .\templates\core\home.html:775
-msgid "Learn More"
-msgstr "Tìm hiểu thêm"
-
-#: .\templates\core\home.html:779
+#: .\templates\core\home.html:1117
 msgid "No credit card required • Setup in 5 minutes • Cancel anytime"
 msgstr "Không cần thẻ tín dụng • Thiết lập trong 5 phút • Hủy bất cứ lúc nào"
+
+#: .\templates\core\home.html:1171
+msgid ""
+"Your email address will be your username. Please create a password to secure"
+" your account:"
+msgstr ""
+"Địa chỉ email của bạn sẽ là tên người dùng của bạn.Vui lòng tạo mật khẩu để "
+"bảo mật tài khoản của bạn:"
+
+#: .\templates\core\home.html:1174
+#, fuzzy
+#| msgid "Email or Username"
+msgid "Email (Username)"
+msgstr "Email hoặc tên người dùng"
+
+#: .\templates\core\home.html:1182
+#, fuzzy
+#| msgid "Enter your current password"
+msgid "Enter a secure password"
+msgstr "Nhập mật khẩu hiện tại của bạn"
+
+#: .\templates\core\home.html:1183
+msgid "Minimum 8 characters recommended"
+msgstr "Khuyến nghị tối thiểu 8 ký tự"
+
+#: .\templates\core\home.html:1193 .\templates\core\home.html:1374
+#: .\templates\core\home.html:1387
+#, fuzzy
+#| msgid "Create Free Account"
+msgid "Create Account & Connect"
+msgstr "Tạo tài khoản miễn phí"
+
+#: .\templates\core\home.html:1213 .\templates\core\home.html:1256
+#, fuzzy
+#| msgid "Please enter a valid email address."
+msgid "Please enter your Gmail address:"
+msgstr "Vui lòng nhập địa chỉ email hợp lệ."
+
+#: .\templates\core\home.html:1295
+msgid "Password must be at least 6 characters long"
+msgstr "Mật khẩu phải dài ít nhất 6 ký tự"
+
+#: .\templates\core\home.html:1303
+#, fuzzy
+#| msgid "Create Your Account"
+msgid "Creating Account..."
+msgstr "Tạo tài khoản của bạn"
+
+#: .\templates\core\home.html:1384
+#, fuzzy
+#| msgid "An error occurred. Please try again later."
+msgid "An error occurred. Please try again."
+msgstr "Đã xảy ra lỗi.Vui lòng thử lại sau."
+
+#: .\templates\core\includes\signup_box.html:21
+msgid ""
+"Connect your email account and start auto-replying immediately. No credit "
+"card required."
+msgstr ""
+"Kết nối tài khoản email của bạn và bắt đầu trả lời tự động ngay lập "
+"tức.Không cần thẻ tín dụng."
 
 #: .\templates\core\pricing.html:4
 msgid "Pricing"
@@ -9105,15 +10387,26 @@ msgstr ""
 "Địa chỉ email hiện tại của bạn.Thay đổi nó để cập nhật email tài khoản của "
 "bạn."
 
-#: .\templates\core\settings.html:38
+#: .\templates\core\settings.html:36
+msgid "Auto BCC this email address whenever a new email is sent."
+msgstr "Tự động BCC địa chỉ email này bất cứ khi nào có email mới được gửi."
+
+#: .\templates\core\settings.html:37
+msgid ""
+"When enabled, you will receive a copy of every email sent from your account."
+msgstr ""
+"Khi được bật, bạn sẽ nhận được bản sao của mọi email được gửi từ tài khoản "
+"của mình."
+
+#: .\templates\core\settings.html:49
 msgid "Physical Address"
 msgstr "Địa chỉ vật lý"
 
-#: .\templates\core\settings.html:81
+#: .\templates\core\settings.html:97
 msgid "API Bearer Token"
 msgstr "Mã thông báo mang API"
 
-#: .\templates\core\settings.html:83
+#: .\templates\core\settings.html:99
 msgid ""
 "Use this bearer token to authenticate API requests. Include it in the "
 "Authorization header as 'Bearer <token>'."
@@ -9121,25 +10414,25 @@ msgstr ""
 "Sử dụng mã thông báo mang này để xác thực các yêu cầu API.Đưa nó vào tiêu đề"
 " Ủy quyền dưới dạng 'Người mang <mã thông báo>'."
 
-#: .\templates\core\settings.html:85
+#: .\templates\core\settings.html:101
 msgid "View API Documentation"
 msgstr "Xem tài liệu API"
 
-#: .\templates\core\settings.html:93
+#: .\templates\core\settings.html:109
 msgid "Your Bearer Token"
 msgstr "Mã thông báo mang của bạn"
 
-#: .\templates\core\settings.html:107
+#: .\templates\core\settings.html:123
 msgid "Click the token or use the Copy button to copy it to your clipboard."
 msgstr ""
 "Nhấp vào mã thông báo hoặc sử dụng nút Sao chép để sao chép nó vào khay nhớ "
 "tạm của bạn."
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid "Security Warning:"
 msgstr "Cảnh báo bảo mật:"
 
-#: .\templates\core\settings.html:119
+#: .\templates\core\settings.html:135
 msgid ""
 "Keep your token secret. Anyone with this token can access your account via "
 "the API."
@@ -9147,11 +10440,11 @@ msgstr ""
 "Giữ bí mật mã thông báo của bạn.Bất kỳ ai có mã thông báo này đều có thể "
 "truy cập vào tài khoản của bạn thông qua API."
 
-#: .\templates\core\settings.html:129
+#: .\templates\core\settings.html:145
 msgid "Regenerate Token"
 msgstr "Tạo lại mã thông báo"
 
-#: .\templates\core\settings.html:132
+#: .\templates\core\settings.html:148
 msgid ""
 "Regenerating will create a new token and invalidate the old one. Update any "
 "applications using the old token."
@@ -9159,11 +10452,11 @@ msgstr ""
 "Việc tái tạo sẽ tạo mã thông báo mới và làm mất hiệu lực mã cũ.Cập nhật bất "
 "kỳ ứng dụng nào bằng mã thông báo cũ."
 
-#: .\templates\core\settings.html:139
+#: .\templates\core\settings.html:155
 msgid "Timezone Settings"
 msgstr "Cài đặt múi giờ"
 
-#: .\templates\core\settings.html:140
+#: .\templates\core\settings.html:156
 msgid ""
 "Set your preferred timezone for displaying scheduled email times on the "
 "dashboard."
@@ -9171,26 +10464,26 @@ msgstr ""
 "Đặt múi giờ ưa thích của bạn để hiển thị thời gian gửi email theo lịch trên "
 "trang tổng quan."
 
-#: .\templates\core\settings.html:145
+#: .\templates\core\settings.html:161
 msgid "Preferred Time Zone"
 msgstr "Múi giờ ưa thích"
 
-#: .\templates\core\settings.html:151
+#: .\templates\core\settings.html:167
 msgid ""
 "Scheduled email times on the dashboard will be shown using this time zone."
 msgstr ""
 "Thời gian gửi email đã lên lịch trên trang tổng quan sẽ được hiển thị bằng "
 "múi giờ này."
 
-#: .\templates\core\settings.html:188
+#: .\templates\core\settings.html:204
 msgid "Account Status"
 msgstr "Trạng thái tài khoản"
 
-#: .\templates\core\settings.html:275
+#: .\templates\core\settings.html:291
 msgid "Token copied to clipboard!"
 msgstr "Đã sao chép mã thông báo vào bảng nhớ tạm!"
 
-#: .\templates\core\settings.html:287
+#: .\templates\core\settings.html:303
 msgid ""
 "Are you sure you want to regenerate your API token? This will invalidate "
 "your current token and you will need to update any applications using it."
@@ -9199,15 +10492,15 @@ msgstr ""
 "làm mất hiệu lực mã thông báo hiện tại của bạn và bạn sẽ cần cập nhật mọi "
 "ứng dụng sử dụng nó."
 
-#: .\templates\core\settings.html:338
+#: .\templates\core\settings.html:354
 msgid "Token regenerated successfully!"
 msgstr "Mã thông báo đã được tạo lại thành công!"
 
-#: .\templates\core\settings.html:348
+#: .\templates\core\settings.html:364
 msgid "Failed to regenerate token"
 msgstr "Không thể tạo lại mã thông báo"
 
-#: .\templates\core\settings.html:353
+#: .\templates\core\settings.html:369
 msgid "Error regenerating token. Please try again."
 msgstr "Lỗi tạo lại mã thông báo.Vui lòng thử lại."
 
@@ -9447,10 +10740,6 @@ msgstr "Thông báo về người đăng ký mới"
 #: .\templates\core\tutorials\account_setup.html:75
 msgid "Bounce and complaint alerts"
 msgstr "Thông báo trả lại và khiếu nại"
-
-#: .\templates\core\tutorials\account_setup.html:79
-msgid "Change Password"
-msgstr "Thay đổi mật khẩu"
 
 #: .\templates\core\tutorials\account_setup.html:81
 msgid "Settings → Security"
@@ -12151,79 +13440,80 @@ msgstr ""
 
 #: .\templates\core\tutorials\email_analytics.html:42
 msgid "Formula: (Unique Clicks ÷ Unique Opens) × 100"
-msgstr ""
+msgstr "Công thức: (Số lần nhấp duy nhất `Số lần mở duy nhất) × 100"
 
 #: .\templates\core\tutorials\email_analytics.html:45
 msgid "Bounce Rate"
-msgstr ""
+msgstr "Tỷ lệ thoát"
 
 #: .\templates\core\tutorials\email_analytics.html:46
 msgid "Percentage that couldn't be delivered. Target:"
-msgstr ""
+msgstr "Phần trăm không thể giao được.Mục tiêu:"
 
 #: .\templates\core\tutorials\email_analytics.html:47
 msgid "Hard bounces = invalid email | Soft bounces = temporary issues"
 msgstr ""
+"Bị trả lại cứng = email không hợp lệ |Bị trả lại mềm = vấn đề tạm thời"
 
 #: .\templates\core\tutorials\email_analytics.html:50
 msgid "Unsubscribe Rate"
-msgstr ""
+msgstr "Tỷ lệ hủy đăng ký"
 
 #: .\templates\core\tutorials\email_analytics.html:51
 msgid "Percentage who opted out. Target:"
-msgstr ""
+msgstr "Tỷ lệ người đã chọn không tham gia.Mục tiêu:"
 
 #: .\templates\core\tutorials\email_analytics.html:52
 msgid "Formula: (Unsubscribes ÷ Emails Delivered) × 100"
-msgstr ""
+msgstr "Công thức: (Hủy đăng ký `Số email đã gửi) × 100"
 
 #: .\templates\core\tutorials\email_analytics.html:56
 msgid "Accessing Analytics"
-msgstr ""
+msgstr "Truy cập Analytics"
 
 #: .\templates\core\tutorials\email_analytics.html:58
 msgid "Campaigns → Sent"
-msgstr ""
+msgstr "Chiến dịch → Đã gửi"
 
 #: .\templates\core\tutorials\email_analytics.html:59
 msgid "Click on any campaign name"
-msgstr ""
+msgstr "Nhấp vào bất kỳ tên chiến dịch nào"
 
 #: .\templates\core\tutorials\email_analytics.html:60
 msgid "View the analytics dashboard"
-msgstr ""
+msgstr "Xem bảng điều khiển phân tích"
 
 #: .\templates\core\tutorials\email_analytics.html:61
 msgid "Scroll down for detailed engagement data"
-msgstr ""
+msgstr "Cuộn xuống để xem dữ liệu tương tác chi tiết"
 
 #: .\templates\core\tutorials\email_analytics.html:62
 msgid "Click tabs to see opens, clicks, and geographical data"
-msgstr ""
+msgstr "Nhấp vào tab để xem số lần mở, số lần nhấp và dữ liệu địa lý"
 
 #: .\templates\core\tutorials\email_analytics.html:65
 msgid "What Each Metric Tells You"
-msgstr ""
+msgstr "Mỗi số liệu cho bạn biết điều gì"
 
 #: .\templates\core\tutorials\email_analytics.html:68
 msgid "Low open rate:"
-msgstr ""
+msgstr "Tỷ lệ mở thấp:"
 
 #: .\templates\core\tutorials\email_analytics.html:69
 msgid "High opens, low clicks:"
-msgstr ""
+msgstr "Tỷ lệ mở cao, nhấp chuột thấp:"
 
 #: .\templates\core\tutorials\email_analytics.html:70
 msgid "High bounce rate:"
-msgstr ""
+msgstr "Tỷ lệ thoát cao:"
 
 #: .\templates\core\tutorials\email_analytics.html:71
 msgid "High unsubscribe rate:"
-msgstr ""
+msgstr "Tỷ lệ hủy đăng ký cao:"
 
 #: .\templates\core\tutorials\email_analytics.html:72
 msgid "Good CTOR:"
-msgstr ""
+msgstr "CTOR tốt:"
 
 #: .\templates\core\tutorials\email_analytics.html:76
 msgid "Click Maps"
@@ -14909,10 +16199,6 @@ msgid ""
 "                        "
 msgstr "Đang hiển thị %(start)s-%(end)s trong tổng số %(total)s người đăng ký"
 
-#: .\templates\subscribers\list.html:174 .\templates\subscribers\list.html:178
-msgid "Previous"
-msgstr "Trước"
-
 #: .\templates\subscribers\list.html:183
 #, python-format
 msgid ""
@@ -14920,10 +16206,6 @@ msgid ""
 "                                Page %(number)s of %(total)s\n"
 "                            "
 msgstr "Trang %(number)s trong số %(total)s"
-
-#: .\templates\subscribers\list.html:191 .\templates\subscribers\list.html:195
-msgid "Next"
-msgstr "Kế tiếp"
 
 #: .\templates\subscribers\list.html:204
 msgid "No subscribers match your search"
@@ -14942,3 +16224,34 @@ msgid "Import contacts or add subscribers manually to see them listed here."
 msgstr ""
 "Nhập danh bạ hoặc thêm người đăng ký theo cách thủ công để xem chúng được "
 "liệt kê ở đây."
+
+#~ msgid "This is already your current email address."
+#~ msgstr "Đây đã là địa chỉ email hiện tại của bạn."
+
+#~ msgid "Email sent successfully (Celery unavailable, sent immediately)"
+#~ msgstr "Email đã được gửi thành công (Celery không có sẵn, gửi ngay)"
+
+#~ msgid "Metrics Overview"
+#~ msgstr "Tổng quan về số liệu"
+
+#~ msgid "Open Rate (trend)"
+#~ msgstr "Tỷ lệ mở (xu hướng)"
+
+#~ msgid "Coming soon"
+#~ msgstr "Sắp ra mắt"
+
+#~ msgid "Click Rate (trend)"
+#~ msgstr "Tỷ lệ nhấp chuột (xu hướng)"
+
+#~ msgid "Delivery Rate (trend)"
+#~ msgstr "Tỷ lệ phân phối (xu hướng)"
+
+#~ msgid ""
+#~ "AI generation uses Hugging Face API to create email content. The generated "
+#~ "subject and body will replace your current email."
+#~ msgstr ""
+#~ "Thế hệ AI sử dụng API ôm khuôn mặt để tạo nội dung email.Chủ đề và nội dung "
+#~ "được tạo sẽ thay thế email hiện tại của bạn."
+
+#~ msgid "Make sure your HUGGINGFACE_API_KEY environment variable is set."
+#~ msgstr "Đảm bảo biến môi trường HUGGINGFACE_API_KEY của bạn được đặt."

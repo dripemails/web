@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.template import TemplateDoesNotExist
 from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
+from django.core.paginator import Paginator
 import csv
 import io
 import logging
@@ -429,17 +430,79 @@ def campaign_edit(request, campaign_id):
     emails = campaign.emails.all().order_by('order')
     lists = List.objects.filter(user=request.user)
     
-    # Get sent emails (status='sent')
-    sent_emails = EmailSendRequest.objects.filter(
+    # Pagination parameters
+    sent_page = request.GET.get('sent_page', 1)
+    pending_page = request.GET.get('pending_page', 1)
+    imap_page = request.GET.get('imap_page', 1)
+    per_page = 20
+    
+    # Get sent emails (status='sent') with pagination
+    sent_emails_queryset = EmailSendRequest.objects.filter(
         campaign=campaign,
         status='sent'
     ).select_related('email', 'subscriber').order_by('-sent_at')
+    sent_paginator = Paginator(sent_emails_queryset, per_page)
+    sent_emails = sent_paginator.get_page(sent_page)
     
-    # Get pending emails (status='pending' or 'queued')
-    pending_emails = EmailSendRequest.objects.filter(
+    # Get pending emails (status='pending' or 'queued') with pagination
+    pending_emails_queryset = EmailSendRequest.objects.filter(
         campaign=campaign,
         status__in=['pending', 'queued']
     ).select_related('email', 'subscriber').order_by('scheduled_for')
+    pending_paginator = Paginator(pending_emails_queryset, per_page)
+    pending_emails = pending_paginator.get_page(pending_page)
+    
+    # Get IMAP Auto-Reply emails (EmailMessage objects for sent auto-replies)
+    # Use same logic as dashboard: check multiple criteria for sent emails
+    from gmail.models import EmailMessage, EmailProvider, EmailCredential
+    
+    # Get user's IMAP credentials
+    imap_credentials = EmailCredential.objects.filter(
+        user=request.user,
+        provider=EmailProvider.IMAP,
+        is_active=True
+    )
+    
+    # Get all IMAP emails for this user linked to this campaign
+    # Filter by campaign_email__campaign to match this campaign
+    all_imap_emails = EmailMessage.objects.filter(
+        user=request.user,
+        provider=EmailProvider.IMAP,
+        credential__in=imap_credentials,
+        campaign_email__campaign=campaign  # Link to this campaign via campaign_email
+    ).select_related('campaign_email', 'campaign_email__campaign', 'credential').order_by('-received_at')
+    
+    # Filter to only sent emails using same logic as dashboard
+    imap_auto_reply_emails_list = []
+    for email_msg in all_imap_emails:
+        provider_data = email_msg.provider_data or {}
+        folder = provider_data.get('folder', 'INBOX')
+        
+        # Get user's email from credential
+        user_email = ''
+        if email_msg.credential and email_msg.credential.email_address:
+            user_email = email_msg.credential.email_address.lower()
+        
+        # Check if this is a sent email (same logic as dashboard)
+        is_sent_email = (
+            provider_data.get('sent', False) or
+            email_msg.from_email.lower() == user_email or 
+            (email_msg.sender_email and email_msg.sender_email.lower() == user_email) or
+            'sent' in folder.lower() or
+            '[gmail]/sent' in folder.lower()
+        )
+        
+        if is_sent_email:
+            imap_auto_reply_emails_list.append(email_msg)
+    
+    # Paginate IMAP auto-reply emails
+    imap_paginator = Paginator(imap_auto_reply_emails_list, per_page)
+    imap_auto_reply_emails = imap_paginator.get_page(imap_page)
+    
+    # Get user's preferred timezone
+    from analytics.models import UserProfile
+    profile, _created = UserProfile.objects.get_or_create(user=request.user)
+    user_timezone = profile.timezone or 'UTC'
     
     return render(request, 'campaigns/edit.html', {
         'campaign': campaign,
@@ -447,6 +510,8 @@ def campaign_edit(request, campaign_id):
         'lists': lists,
         'sent_emails': sent_emails,
         'pending_emails': pending_emails,
+        'imap_auto_reply_emails': imap_auto_reply_emails,
+        'user_timezone': user_timezone,
     })
 
 @login_required

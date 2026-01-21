@@ -1662,14 +1662,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         emails.forEach((email, index) => {
             const previewId = `gmail-preview-${email.id}`;
-            const date = new Date(email.received_at);
-            const dateStr = date.toLocaleString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit'
-            });
+            const dateStr = formatDateInTimezone(email.received_at);
             const isExpanded = index === 0; // Expand first email by default
             const hasReply = email.campaign_email_id ? true : false;
             const displaySubject = hasReply ? `Re: ${email.subject || '(No Subject)'}` : (email.subject || '(No Subject)');
@@ -1758,15 +1751,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
                                             ${(() => {
                                                 // Format date for separator
-                                                const date = new Date(email.received_at);
-                                                const dateStr = date.toLocaleString('en-US', { 
-                                                    weekday: 'short',
-                                                    month: 'short', 
-                                                    day: 'numeric', 
-                                                    year: 'numeric',
-                                                    hour: 'numeric',
-                                                    minute: '2-digit'
-                                                });
+                                                const dateStr = formatDateInTimezone(email.received_at, true);
                                                 // Use display name if available, otherwise use email
                                                 const fromName = email.from_display_name || email.from_email || 'Unknown';
                                                 const fromEmail = email.from_email || '';
@@ -2057,6 +2042,39 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIMAPPage = 1;
     let imapPagination = null;
     
+    // Helper function to format date in user's preferred timezone
+    function formatDateInTimezone(dateString, includeWeekday = false) {
+        const userTimezone = '{{ user_timezone|default:"UTC" }}';
+        const date = new Date(dateString);
+        
+        const options = {
+            month: 'short', 
+            day: 'numeric', 
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            timeZone: userTimezone
+        };
+        
+        if (includeWeekday) {
+            options.weekday = 'short';
+        }
+        
+        try {
+            return date.toLocaleString('en-US', options);
+        } catch (e) {
+            // Fallback to default timezone if user timezone is invalid
+            return date.toLocaleString('en-US', {
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                ...(includeWeekday ? { weekday: 'short' } : {})
+            });
+        }
+    }
+    
     function renderIMAPEmails(emails, pagination) {
         const noEmailsMsg = '{% trans "No IMAP emails yet. Emails will appear here once they are fetched." %}';
         const repliedText = '{% trans "Replied" %}';
@@ -2107,14 +2125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let html = '';
         emails.forEach((email, index) => {
             const previewId = `imap-preview-${email.id}`;
-            const date = new Date(email.received_at);
-            const dateStr = date.toLocaleString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit'
-            });
+            const dateStr = formatDateInTimezone(email.received_at);
             const isExpanded = index === 0; // Expand first email by default
             const hasReply = email.campaign_email_id ? true : false;
             const isSentEmail = email.is_sent_email || false;
@@ -2337,15 +2348,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 const origReceivedAt = origEmail.received_at || email.received_at;
                                                 
                                                 // Format date for separator
-                                                const date = new Date(origReceivedAt);
-                                                const dateStr = date.toLocaleString('en-US', { 
-                                                    weekday: 'short',
-                                                    month: 'short', 
-                                                    day: 'numeric', 
-                                                    year: 'numeric',
-                                                    hour: 'numeric',
-                                                    minute: '2-digit'
-                                                });
+                                                const dateStr = formatDateInTimezone(origReceivedAt, true);
                                                 // Use original email's from_email for sent emails, otherwise use display name
                                                 const fromEmail = origEmail.from_email || email.from_email || '';
                                                 const fromName = origEmail.from_name || origEmail.from_email || fromEmail || 'Unknown';

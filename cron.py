@@ -748,15 +748,17 @@ def crawl_imap(limit=None):
                     
                     logger.info(f"  Found IMAP campaign: {imap_campaign.id} - {imap_campaign.name}")
                     
-                    # Get the first email template from the campaign
-                    campaign_email = imap_campaign.emails.first()
+                    # Get the first email template from the campaign (ordered by 'order' field)
+                    # This ensures we use the first email in the sequence (order=1 typically)
+                    # and will include newly added emails if they're ordered first
+                    campaign_email = imap_campaign.emails.order_by('order', 'created_at').first()
                     if not campaign_email:
                         logger.warning(f"  No email template found in IMAP campaign {imap_campaign.id}, marking as processed and skipping")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
                         continue
                     
-                    logger.info(f"  Found campaign email template: {campaign_email.id} - {campaign_email.subject}")
+                    logger.info(f"  Found campaign email template: {campaign_email.id} - {campaign_email.subject} (order: {campaign_email.order})")
                     
                     # Get or create IMAP subscriber list
                     imap_list = imap_campaign.subscriber_list
@@ -925,12 +927,28 @@ def send_scheduled_emails(limit=None):
             send_request.status = 'queued'
             send_request.save(update_fields=['status', 'updated_at'])
             
+            # For IMAP auto-reply campaigns, retrieve the original email message
+            # so subsequent emails in the sequence can include the original email content
+            original_email_message = None
+            campaign_name_lower = send_request.campaign.name.lower() if send_request.campaign else ''
+            is_auto_reply = 'auto' in campaign_name_lower or 'reply' in campaign_name_lower
+            if is_auto_reply and send_request.variables:
+                original_email_id = send_request.variables.get('_original_email_id')
+                if original_email_id:
+                    from gmail.models import EmailMessage
+                    try:
+                        original_email_message = EmailMessage.objects.get(id=original_email_id)
+                        logger.info(f"Retrieved original email message {original_email_id} for scheduled email {send_request.id}")
+                    except EmailMessage.DoesNotExist:
+                        logger.warning(f"Original email message {original_email_id} not found for scheduled email {send_request.id}")
+            
             # Send the email using the sync function
             _send_single_email_sync(
                 str(send_request.email.id),
                 send_request.subscriber_email,
                 send_request.variables,
-                request_id=str(send_request.id)
+                request_id=str(send_request.id),
+                original_email_message=original_email_message
             )
             
             # The _send_single_email_sync function updates the status to 'sent' on success

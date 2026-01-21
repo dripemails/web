@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load email_utils %}
 
 {% block title %}{% trans "Edit Campaign" %} - {{ campaign.name }}{% endblock %}
 
@@ -160,11 +161,15 @@
                 <nav class="-mb-px flex space-x-8">
                     <button onclick="switchEmailTab('sent')" id="sent-email-tab" 
                             class="email-tab-button border-b-2 border-indigo-500 py-4 px-1 text-center text-sm font-medium text-indigo-600">
-                        {% trans "Sent Emails" %} ({{ sent_emails.count }})
+                        {% trans "Sent Emails" %} ({{ sent_emails.paginator.count }})
                     </button>
                     <button onclick="switchEmailTab('pending')" id="pending-email-tab"
                             class="email-tab-button border-b-2 border-transparent py-4 px-1 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                        {% trans "Pending Emails" %} ({{ pending_emails.count }})
+                        {% trans "Pending Emails" %} ({{ pending_emails.paginator.count }})
+                    </button>
+                    <button onclick="switchEmailTab('imap-auto-reply')" id="imap-auto-reply-email-tab"
+                            class="email-tab-button border-b-2 border-transparent py-4 px-1 text-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        {% trans "IMAP Auto-Reply emails" %} ({{ imap_auto_reply_emails.paginator.count }})
                     </button>
                 </nav>
             </div>
@@ -186,7 +191,7 @@
                                                     <span class="font-medium">{% trans "To:" %}</span> {{ send_request.subscriber_email }}
                                                 </p>
                                                 <p class="text-sm text-gray-600">
-                                                    <span class="font-medium">{% trans "Sent:" %}</span> {{ send_request.sent_at|date:"M d, Y g:i A" }}
+                                                    <span class="font-medium">{% trans "Sent:" %}</span> {{ send_request.sent_at|timezone_format:user_timezone }}
                                                 </p>
                                                 <p class="text-sm text-gray-600">
                                                     <span class="font-medium">{% trans "Status:" %}</span> 
@@ -231,11 +236,11 @@
                                                     <dl class="space-y-1 text-sm">
                                                         <div class="flex">
                                                             <dt class="font-medium text-gray-600 w-32">{% trans "Scheduled:" %}</dt>
-                                                            <dd class="text-gray-800">{{ send_request.scheduled_for|date:"M d, Y g:i A" }}</dd>
+                                                            <dd class="text-gray-800">{{ send_request.scheduled_for|timezone_format:user_timezone }}</dd>
                                                         </div>
                                                         <div class="flex">
                                                             <dt class="font-medium text-gray-600 w-32">{% trans "Created:" %}</dt>
-                                                            <dd class="text-gray-800">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                            <dd class="text-gray-800">{{ send_request.created_at|timezone_format:user_timezone }}</dd>
                                                         </div>
                                                     </dl>
                                                 </div>
@@ -254,6 +259,58 @@
                         </div>
                     {% else %}
                         <p class="text-gray-600">{% trans "No emails have been sent from this campaign yet." %}</p>
+                    {% endif %}
+                    
+                    <!-- Pagination for Sent Emails -->
+                    {% if sent_emails.has_other_pages %}
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                {% if sent_emails.has_previous %}
+                                    <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Previous" %}
+                                    </a>
+                                {% endif %}
+                                {% if sent_emails.has_next %}
+                                    <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Next" %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        {% trans "Showing" %} <span class="font-medium">{{ sent_emails.start_index }}</span> {% trans "to" %} <span class="font-medium">{{ sent_emails.end_index }}</span> {% trans "of" %} <span class="font-medium">{{ sent_emails.paginator.count }}</span> {% trans "results" %}
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        {% if sent_emails.has_previous %}
+                                            <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Previous" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                        {% for num in sent_emails.paginator.page_range %}
+                                            {% if num == sent_emails.number %}
+                                                <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
+                                            {% elif num > sent_emails.number|add:'-3' and num < sent_emails.number|add:'3' %}
+                                                <a href="?sent_page={{ num }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if sent_emails.has_next %}
+                                            <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Next" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -275,7 +332,7 @@
                                                     <span class="font-medium">{% trans "To:" %}</span> {{ send_request.subscriber_email }}
                                                 </p>
                                                 <p class="text-sm text-gray-600">
-                                                    <span class="font-medium">{% trans "Scheduled for:" %}</span> {{ send_request.scheduled_for|date:"M d, Y g:i A" }}
+                                                    <span class="font-medium">{% trans "Scheduled for:" %}</span> {{ send_request.scheduled_for|timezone_format:user_timezone }}
                                                 </p>
                                                 <p class="text-sm text-gray-600">
                                                     <span class="font-medium">{% trans "Status:" %}</span> 
@@ -327,7 +384,7 @@
                                                     <dl class="space-y-1 text-sm">
                                                         <div class="flex">
                                                             <dt class="font-medium text-gray-600 w-32">{% trans "Created:" %}</dt>
-                                                            <dd class="text-gray-800">{{ send_request.created_at|date:"M d, Y g:i A" }}</dd>
+                                                            <dd class="text-gray-800">{{ send_request.created_at|timezone_format:user_timezone }}</dd>
                                                         </div>
                                                         {% if send_request.variables %}
                                                         <div class="flex">
@@ -352,6 +409,225 @@
                         </div>
                     {% else %}
                         <p class="text-gray-600">{% trans "No pending emails for this campaign." %}</p>
+                    {% endif %}
+                    
+                    <!-- Pagination for Pending Emails -->
+                    {% if pending_emails.has_other_pages %}
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                {% if pending_emails.has_previous %}
+                                    <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Previous" %}
+                                    </a>
+                                {% endif %}
+                                {% if pending_emails.has_next %}
+                                    <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Next" %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        {% trans "Showing" %} <span class="font-medium">{{ pending_emails.start_index }}</span> {% trans "to" %} <span class="font-medium">{{ pending_emails.end_index }}</span> {% trans "of" %} <span class="font-medium">{{ pending_emails.paginator.count }}</span> {% trans "results" %}
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        {% if pending_emails.has_previous %}
+                                            <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Previous" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                        {% for num in pending_emails.paginator.page_range %}
+                                            {% if num == pending_emails.number %}
+                                                <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
+                                            {% elif num > pending_emails.number|add:'-3' and num < pending_emails.number|add:'3' %}
+                                                <a href="?pending_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if pending_emails.has_next %}
+                                            <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Next" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- IMAP Auto-Reply Emails Tab -->
+            <div id="imap-auto-reply-email-content" class="email-tab-content hidden">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">{% trans "IMAP Auto-Reply Emails" %}</h3>
+                    
+                    {% if imap_auto_reply_emails %}
+                        <div class="space-y-4">
+                            {% for email_msg in imap_auto_reply_emails %}
+                                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 hover:shadow-md transition-shadow">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-semibold text-gray-900">{{ email_msg.subject }}</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "To:" %}</span> 
+                                                    {% if email_msg.provider_data.recipient_email %}
+                                                        {{ email_msg.provider_data.recipient_email }}
+                                                    {% elif email_msg.to_emails %}
+                                                        {{ email_msg.to_emails }}
+                                                    {% else %}
+                                                        N/A
+                                                    {% endif %}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "From:" %}</span> {{ email_msg.from_email }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Sent:" %}</span> {{ email_msg.received_at|timezone_format:user_timezone }}
+                                                </p>
+                                                <p class="text-sm text-gray-600">
+                                                    <span class="font-medium">{% trans "Status:" %}</span> 
+                                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">{% trans "Sent" %}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button onclick="toggleEmailDetails('imap-auto-reply-{{ email_msg.id }}')" 
+                                                class="ml-4 text-indigo-600 hover:text-indigo-800 font-medium text-sm flex items-center">
+                                            <span>{% trans "View Details" %}</span>
+                                            <svg class="w-5 h-5 ml-1 rotate-icon" id="icon-imap-auto-reply-{{ email_msg.id }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Expanded Content -->
+                                    <div id="imap-auto-reply-{{ email_msg.id }}" class="email-details-expanded mt-4 hidden">
+                                        <div class="border-t border-gray-300 pt-4">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Attributes" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Email ID:" %}</dt>
+                                                            <dd class="text-gray-800 text-xs">{{ email_msg.id }}</dd>
+                                                        </div>
+                                                        {% if email_msg.campaign_email %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Campaign Email:" %}</dt>
+                                                            <dd class="text-gray-800">{{ email_msg.campaign_email.subject }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if email_msg.credential %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "IMAP Account:" %}</dt>
+                                                            <dd class="text-gray-800">{{ email_msg.credential.email_address }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                    </dl>
+                                                </div>
+                                                <div>
+                                                    <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Details" %}</h5>
+                                                    <dl class="space-y-1 text-sm">
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Received:" %}</dt>
+                                                            <dd class="text-gray-800">{{ email_msg.received_at|timezone_format:user_timezone }}</dd>
+                                                        </div>
+                                                        {% if email_msg.provider_data.recipient_email %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Recipient:" %}</dt>
+                                                            <dd class="text-gray-800">{{ email_msg.provider_data.recipient_email }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if email_msg.provider_data.recipient_name %}
+                                                        <div class="flex">
+                                                            <dt class="font-medium text-gray-600 w-32">{% trans "Recipient Name:" %}</dt>
+                                                            <dd class="text-gray-800">{{ email_msg.provider_data.recipient_name }}</dd>
+                                                        </div>
+                                                        {% endif %}
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <h5 class="font-semibold text-gray-700 mb-2">{% trans "Email Content" %}</h5>
+                                                <div class="bg-white border border-gray-300 rounded p-4 max-h-96 overflow-y-auto">
+                                                    {% if email_msg.body_html %}
+                                                        {{ email_msg.body_html|safe|truncatewords:100 }}
+                                                    {% elif email_msg.body_text %}
+                                                        <pre class="whitespace-pre-wrap text-sm">{{ email_msg.body_text|truncatewords:100 }}</pre>
+                                                    {% else %}
+                                                        <p class="text-gray-500 italic">{% trans "No content available" %}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-600">{% trans "No IMAP auto-reply emails have been sent from this campaign yet." %}</p>
+                    {% endif %}
+                    
+                    <!-- Pagination for IMAP Auto-Reply Emails -->
+                    {% if imap_auto_reply_emails.has_other_pages %}
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                {% if imap_auto_reply_emails.has_previous %}
+                                    <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Previous" %}
+                                    </a>
+                                {% endif %}
+                                {% if imap_auto_reply_emails.has_next %}
+                                    <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                        {% trans "Next" %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        {% trans "Showing" %} <span class="font-medium">{{ imap_auto_reply_emails.start_index }}</span> {% trans "to" %} <span class="font-medium">{{ imap_auto_reply_emails.end_index }}</span> {% trans "of" %} <span class="font-medium">{{ imap_auto_reply_emails.paginator.count }}</span> {% trans "results" %}
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        {% if imap_auto_reply_emails.has_previous %}
+                                            <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Previous" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                        {% for num in imap_auto_reply_emails.paginator.page_range %}
+                                            {% if num == imap_auto_reply_emails.number %}
+                                                <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
+                                            {% elif num > imap_auto_reply_emails.number|add:'-3' and num < imap_auto_reply_emails.number|add:'3' %}
+                                                <a href="?imap_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if imap_auto_reply_emails.has_next %}
+                                            <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">{% trans "Next" %}</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        {% endif %}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -598,6 +874,21 @@ function switchEmailTab(tabName) {
     selectedTab.classList.add('border-indigo-500', 'text-indigo-600');
     selectedTab.classList.remove('border-transparent', 'text-gray-500');
 }
+
+// Auto-switch tab based on URL parameters on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Check for pagination parameters and switch to corresponding tab
+    if (urlParams.has('pending_page')) {
+        switchEmailTab('pending');
+    } else if (urlParams.has('imap_page')) {
+        switchEmailTab('imap-auto-reply');
+    } else if (urlParams.has('sent_page')) {
+        switchEmailTab('sent');
+    }
+    // If no pagination parameter is present, default to 'sent' tab (which is already shown)
+});
 
 // Toggle email details expansion
 function toggleEmailDetails(elementId) {

@@ -570,7 +570,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         
         # Schedule the next email in the campaign sequence
         try:
-            schedule_next_email_in_sequence(email, request_obj, subscriber_email, variables)
+            schedule_next_email_in_sequence(email, request_obj, subscriber_email, variables, original_email_message)
         except Exception as next_email_error:
             # Log but don't fail the current email send if scheduling next email fails
             logger.warning(f"Failed to schedule next email in sequence: {str(next_email_error)}")
@@ -583,7 +583,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         raise
 
 
-def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email, variables):
+def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email, variables, original_email_message=None):
     """
     Schedule the next email in the campaign sequence after an email is sent.
     
@@ -592,6 +592,9 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
         request_obj: The EmailSendRequest object for the email that was sent
         subscriber_email: The email address of the subscriber
         variables: Variables dictionary for personalization
+        original_email_message: Optional EmailMessage object representing the original incoming email
+                               that triggered the auto-reply sequence. This will be stored so subsequent
+                               emails in the sequence can include it.
     """
     from .models import Email, EmailSendRequest
     from subscribers.models import Subscriber
@@ -650,6 +653,34 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
     # Get user from request_obj or campaign
     user = request_obj.user if request_obj else campaign.user
     
+    # Store original email message ID in variables so subsequent emails can include it
+    next_variables = (variables or {}).copy()
+    if original_email_message:
+        next_variables['_original_email_id'] = str(original_email_message.id)
+    # Also check if it's already in variables (passed from send_campaign_email)
+    elif variables and '_original_email_id' in variables:
+        # Already stored, keep it
+        pass
+    else:
+        # Try to find the original email from the first EmailMessage in the sequence
+        # For IMAP campaigns, we need to trace back to the original incoming email
+        campaign_name_lower = campaign.name.lower()
+        is_auto_reply = 'auto' in campaign_name_lower or 'reply' in campaign_name_lower
+        if is_auto_reply:
+            from gmail.models import EmailMessage, EmailProvider
+            # Find the first email in the sequence that was sent to this subscriber
+            first_email_message = EmailMessage.objects.filter(
+                campaign_email__campaign=campaign,
+                credential__user=user,
+                provider=EmailProvider.IMAP,
+                provider_data__recipient_email__iexact=subscriber_email
+            ).order_by('received_at').first()
+            
+            if first_email_message and first_email_message.provider_data:
+                original_email_id = first_email_message.provider_data.get('original_email_id')
+                if original_email_id:
+                    next_variables['_original_email_id'] = original_email_id
+    
     # Create EmailSendRequest for the next email
     next_send_request = EmailSendRequest.objects.create(
         user=user,
@@ -657,7 +688,7 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
         email=next_email,
         subscriber=subscriber,
         subscriber_email=subscriber_email,
-        variables=variables or {},
+        variables=next_variables,
         scheduled_for=scheduled_for,
         status='pending'
     )
@@ -1048,6 +1079,11 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
             scheduled_for = timezone.now() + send_delay
             
             # Use EmailSendRequest to schedule the next email
+            # Store original email message ID in variables so subsequent emails can include it
+            next_variables = (variables or {}).copy()
+            if original_email_message:
+                next_variables['_original_email_id'] = str(original_email_message.id)
+            
             from .models import EmailSendRequest
             EmailSendRequest.objects.create(
                 user=email.campaign.user,
@@ -1055,7 +1091,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                 email=next_email,
                 subscriber=subscriber,
                 subscriber_email=subscriber.email,
-                variables=variables or {},
+                variables=next_variables,
                 scheduled_for=scheduled_for,
                 status='pending'
             )

@@ -516,6 +516,7 @@ GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', 'https://dripemails.
 
 # Data Retention Policy (in days)
 DATA_RETENTION_DAYS = int(os.environ.get('DATA_RETENTION_DAYS', '30'))
+SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS = os.environ.get('SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS', 'True').lower() in ('true', '1', 'yes')
 
 # Admin site customization
 ADMIN_SITE_HEADER = "DripEmails Administration"

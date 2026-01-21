@@ -34,6 +34,7 @@ env = environ.Env(
     GOOGLE_CLIENT_SECRET=(str, ''),
     GOOGLE_REDIRECT_URI=(str, 'https://dripemails.org/api/gmail/callback/'),
     DATA_RETENTION_DAYS=(int, 30),  # Number of days to retain email messages and send activity
+    SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS=(bool, True),  # Show CAN-SPAM address modal for new accounts
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -367,3 +368,10 @@ SITE_URL = env('SITE_URL')
 OLLAMA_BASE_URL = env('OLLAMA_BASE_URL')
 OLLAMA_MODEL = env('OLLAMA_MODEL')
 OLLAMA_TIMEOUT = env('OLLAMA_TIMEOUT')  # Timeout in seconds (default: 300 = 5 minutes)
+
+# Data Retention Policy (in days)
+DATA_RETENTION_DAYS = env('DATA_RETENTION_DAYS')
+
+# Show CAN-SPAM address modal for new accounts
+# If True, show modal when address/name missing. If False, users must edit on settings page.
+SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS = env('SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS')

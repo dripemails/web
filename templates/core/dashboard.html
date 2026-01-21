@@ -902,8 +902,10 @@ function checkAddressRequired() {
 
 // Handle address form submission
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if address is required on page load
+    // Check if address is required on page load (only if modal is enabled)
+    {% if show_address_name_modal %}
     checkAddressRequired();
+    {% endif %}
     
     const addressForm = document.getElementById('addressForm');
     if (addressForm) {

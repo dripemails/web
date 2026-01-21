@@ -141,6 +141,7 @@ def dashboard(request):
         'user_email_domain': user_email_domain,
         'user_timezone': user_timezone,
         'spf_verified': spf_verified,
+        'show_address_name_modal': settings.SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS,
     }
     
     return render(request, 'core/dashboard.html', context)

@@ -499,11 +499,19 @@ def campaign_template(request, campaign_id=None):
     # Get all user campaigns
     all_campaigns = Campaign.objects.filter(user=request.user).order_by('-created_at')
     
+    # Check if this is the first email in the sequence (for IMAP auto-reply explanation)
+    is_first_email = False
     if campaign_id:
         campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
         template_id = request.GET.get('template_id')
         if template_id:
             template = get_object_or_404(Email, id=template_id, campaign=campaign)
+            # If editing existing template, check if it's order 0 or 1
+            is_first_email = template.order == 0 or template.order == 1
+        else:
+            # If creating new template, check if there are any emails with order 0 or 1
+            existing_first_emails = campaign.emails.filter(order__in=[0, 1]).exists()
+            is_first_email = not existing_first_emails
     else:
         # If no campaign_id provided from dashboard, show campaign selection modal on save
         if not all_campaigns.exists():
@@ -522,6 +530,7 @@ def campaign_template(request, campaign_id=None):
         'user_footers': user_footers,
         'all_campaigns': all_campaigns,
         'show_campaign_modal': show_campaign_modal,
+        'is_first_email': is_first_email if campaign_id else False,
         'wait_units': [
             ('seconds', _('Seconds')),
             ('minutes', _('Minutes')),

@@ -129,6 +129,86 @@
                             <p class="mt-1 text-sm text-gray-500">
                                 {% trans "Time to wait before sending this email after the previous one (0 = send immediately)" %}
                             </p>
+                            
+                            <!-- IMAP Auto-Reply Explanation - Only show for first email -->
+                            {% if campaign and "IMAP" in campaign.name|upper and "AUTO-REPLY" in campaign.name|upper and is_first_email %}
+                            <div id="imap-wait-time-info" class="mt-4 p-5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border-l-4 border-indigo-500 rounded-lg shadow-md">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="text-base font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                            {% trans "IMAP Auto-Reply Wait Time Explained" %}
+                                        </h4>
+                                        <div class="space-y-3 text-sm text-gray-700">
+                                            <div class="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-indigo-200">
+                                                <p class="font-semibold text-indigo-900 mb-2 flex items-center gap-2">
+                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    {% trans "First Email (Order 1) - Should Be 0 Minutes" %}
+                                                </p>
+                                                <p class="leading-relaxed">
+                                                    {% trans "For IMAP auto-reply campaigns, the first email in your sequence should have a wait time of 0 minutes. This ensures immediate responses to incoming emails, providing instant acknowledgment to your contacts and creating a professional, responsive experience." %}
+                                                </p>
+                                            </div>
+                                            
+                                            <!-- Collapsible content -->
+                                            <div id="imap-explanation-expanded" class="hidden space-y-3">
+                                                <div class="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-purple-200">
+                                                    <p class="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                                                        <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        {% trans "How It Works" %}
+                                                    </p>
+                                                    <ul class="space-y-2 mt-2 ml-1">
+                                                        <li class="flex items-start gap-2">
+                                                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+                                                            <span>{% trans "When someone emails you, the system immediately sends your first email (0 minutes wait)" %}</span>
+                                                        </li>
+                                                        <li class="flex items-start gap-2">
+                                                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+                                                            <span>{% trans "Subsequent emails in your sequence will use their own wait times (e.g., Email 2 waits 3 days, Email 3 waits 7 days)" %}</span>
+                                                        </li>
+                                                        <li class="flex items-start gap-2">
+                                                            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+                                                            <span>{% trans "Each wait time is calculated from when the previous email in the sequence was sent" %}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="flex items-start gap-3 p-3 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-lg">
+                                                    <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    <div>
+                                                        <p class="font-semibold text-emerald-900">{% trans "Pro Tip" %}</p>
+                                                        <p class="text-emerald-800 text-sm mt-1">{% trans "Setting the first email to 0 minutes ensures your auto-replies are sent instantly when emails arrive, maintaining engagement and showing responsiveness to your contacts." %}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Read more/less toggle button -->
+                                            <button type="button" id="imap-explanation-toggle" class="mt-3 flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                                                <span>{% trans "Read more" %}</span>
+                                                <svg id="imap-explanation-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                         
                         <div class="border-t border-gray-200 pt-6">
@@ -193,6 +273,20 @@
                             </div>
                         </div>
                         
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-200 mb-6">
+                            <button type="button" onclick="history.back()" class="text-gray-600 hover:text-gray-800">
+                                {% trans "Cancel" %}
+                            </button>
+                            <div class="flex space-x-3">
+                                <button type="button" id="sendEmailBtn" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                    {% trans "Send Email" %}
+                                </button>
+                                <button type="{% if show_campaign_modal %}button{% else %}submit{% endif %}" {% if show_campaign_modal %}onclick="showCampaignModal()"{% endif %} class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    {% trans "Save Template" %}
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="border-t border-gray-200 pt-6">
                             <h2 class="text-lg font-medium text-gray-900 mb-4">{% trans "API Integration" %}</h2>
                             
@@ -228,7 +322,7 @@
                                     <h3 class="text-sm font-medium text-gray-700">{% trans "Python" %}</h3>
                                     <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>import requests
 
-        url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
+url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/"
 headers = {
     "Authorization": "Bearer {% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}",
     "Content-Type": "application/json"
@@ -284,6 +378,39 @@ http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Post.new(uri.request_uri, headers)
 request.body = data.to_json
 response = http.request(request)</code></pre>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <h3 class="text-sm font-medium text-gray-700">{% trans "PHP" %}</h3>
+                                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto"><code>$url = "{{ request.scheme }}://{{ request.get_host }}/api/campaigns/{{ campaign.id }}/emails/{{ template.id }}/send/";
+$apiKey = "{% if request.user.auth_token %}{{ request.user.auth_token.key }}{% else %}YOUR_API_TOKEN{% endif %}";
+
+$data = [
+    'email' => 'subscriber@example.com',
+    'variables' => [
+        'first_name' => 'John',
+        'last_name' => 'Doe'
+    ]
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $apiKey,
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($httpCode === 200) {
+    echo "Email sent successfully!";
+} else {
+    echo "Error: " . $response;
+}</code></pre>
                                 </div>
                             </div>
                             {% else %}
@@ -718,19 +845,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Get wait_time value and ensure it's a valid integer
         const waitTimeInput = document.getElementById('wait_time');
+        const waitUnitSelect = document.getElementById('wait_unit');
         const waitTimeValue = waitTimeInput.value.trim();
-        const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+        const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 0;
         
-        // Validate wait_time
-        if (isNaN(waitTime) || waitTime < 1) {
-            alert('{% trans "Wait time must be a number greater than 0." %}');
+        // Validate wait_time (0 is allowed for immediate sending)
+        if (isNaN(waitTime) || waitTime < 0) {
+            alert('{% trans "Wait time must be a number greater than or equal to 0 (0 = send immediately)." %}');
             return;
         }
+        
+        // Get wait_unit value even if disabled
+        const waitUnit = waitUnitSelect.value || 'minutes';
         
         const data = {
             subject: document.getElementById('subject').value,
             wait_time: waitTime,
-            wait_unit: document.getElementById('wait_unit').value,
+            wait_unit: waitUnit,
             body_html: htmlContent,
             body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
         };
@@ -806,10 +937,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const testForm = document.getElementById('testForm');
     const campaignId = '{{ campaign.id }}';
     const templateId = '{{ template.id|default:"" }}';
+    const campaignName = '{{ campaign.name|default:"" }}';
+    
+    // Check if this is an IMAP Auto-Reply campaign
+    const isImapAutoReply = campaignName && (campaignName.toUpperCase().includes('IMAP') && campaignName.toUpperCase().includes('AUTO-REPLY'));
     
     // Debug: Log campaignId and templateId
     console.log('campaignId:', campaignId);
     console.log('templateId:', templateId);
+    console.log('isImapAutoReply:', isImapAutoReply);
     // Footer modal elements
     const newFooterBtn = document.getElementById('newFooterBtn');
     const newFooterModal = document.getElementById('newFooterModal');
@@ -822,8 +958,29 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 document.getElementById('subject').value = data.subject;
-                document.getElementById('wait_time').value = data.wait_time;
-                document.getElementById('wait_unit').value = data.wait_unit;
+                const waitTimeInput = document.getElementById('wait_time');
+                const waitUnitSelect = document.getElementById('wait_unit');
+                waitTimeInput.value = data.wait_time;
+                waitUnitSelect.value = data.wait_unit;
+                
+                // Check if this is the first email (order 0 or 1)
+                const isFirstEmail = data.order === 0 || data.order === 1;
+                
+                // If wait_time is 0 and this is the first email in an IMAP auto-reply campaign, disable the inputs
+                if (data.wait_time === 0 && isImapAutoReply && isFirstEmail) {
+                    waitTimeInput.disabled = true;
+                    waitUnitSelect.disabled = true;
+                    waitTimeInput.setAttribute('disabled', 'disabled');
+                    waitUnitSelect.setAttribute('disabled', 'disabled');
+                }
+                
+                // If this is NOT the first email, hide the explanation box
+                if (!isFirstEmail) {
+                    const imapExplanationBox = document.getElementById('imap-wait-time-info');
+                    if (imapExplanationBox) {
+                        imapExplanationBox.style.display = 'none';
+                    }
+                }
                 
                 // Set content in Quill editor
                 quill.root.innerHTML = cleanQuillContent(data.body_html);
@@ -837,6 +994,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error loading template:', error);
                 alert('{% trans "An error occurred while loading the template. Please try again." %}');
             });
+    } else if (isImapAutoReply && campaignId) {
+        // For new emails in IMAP Auto-Reply campaigns, check if this will be the first email
+        // If campaign has no emails yet, or we're creating the first one, default wait_time to 0
+        fetch(`/api/campaigns/${campaignId}/emails/`)
+            .then(response => response.json())
+            .then(data => {
+                const emails = Array.isArray(data) ? data : [];
+                // Get the minimum order from existing emails
+                const minOrder = emails.length > 0 ? Math.min(...emails.map(e => e.order || 0)) : null;
+                
+                // Check if this will be the first email (order 0 or 1)
+                const willBeFirstEmail = emails.length === 0 || minOrder >= 1;
+                
+                // If no emails exist, or if this will be the first email (order 0 or 1), automatically set wait_time to 0
+                if (willBeFirstEmail) {
+                    // This will be the first email, automatically set wait_time to 0 and disable the field
+                    const waitTimeInput = document.getElementById('wait_time');
+                    const waitUnitSelect = document.getElementById('wait_unit');
+                    waitTimeInput.value = '0';
+                    waitUnitSelect.value = 'minutes';
+                    waitTimeInput.disabled = true;
+                    waitUnitSelect.disabled = true;
+                    waitTimeInput.setAttribute('disabled', 'disabled');
+                    waitUnitSelect.setAttribute('disabled', 'disabled');
+                    console.log('Auto-set wait_time to 0 and disabled input for IMAP Auto-Reply first email');
+                } else {
+                    // This is NOT the first email, hide the explanation box if it exists
+                    const imapExplanationBox = document.getElementById('imap-wait-time-info');
+                    if (imapExplanationBox) {
+                        imapExplanationBox.style.display = 'none';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error checking campaign emails:', error);
+                // If error, still set to 0 as safe default for IMAP campaigns and disable
+                const waitTimeInput = document.getElementById('wait_time');
+                const waitUnitSelect = document.getElementById('wait_unit');
+                if (waitTimeInput && !waitTimeInput.value) {
+                    waitTimeInput.value = '0';
+                    waitUnitSelect.value = 'minutes';
+                    waitTimeInput.disabled = true;
+                    waitUnitSelect.disabled = true;
+                    waitTimeInput.setAttribute('disabled', 'disabled');
+                    waitUnitSelect.setAttribute('disabled', 'disabled');
+                }
+            });
+    }
+    
+    // Toggle IMAP explanation expand/collapse
+    const imapExplanationToggle = document.getElementById('imap-explanation-toggle');
+    const imapExplanationExpanded = document.getElementById('imap-explanation-expanded');
+    const imapExplanationArrow = document.getElementById('imap-explanation-arrow');
+    
+    if (imapExplanationToggle && imapExplanationExpanded) {
+        imapExplanationToggle.addEventListener('click', function() {
+            const isExpanded = !imapExplanationExpanded.classList.contains('hidden');
+            if (isExpanded) {
+                // Collapse
+                imapExplanationExpanded.classList.add('hidden');
+                imapExplanationToggle.querySelector('span').textContent = '{% trans "Read more" %}';
+                if (imapExplanationArrow) {
+                    imapExplanationArrow.style.transform = 'rotate(0deg)';
+                }
+            } else {
+                // Expand
+                imapExplanationExpanded.classList.remove('hidden');
+                imapExplanationToggle.querySelector('span').textContent = '{% trans "Read less" %}';
+                if (imapExplanationArrow) {
+                    imapExplanationArrow.style.transform = 'rotate(180deg)';
+                }
+            }
+        });
     }
     
     // AI Generate functionality - Show modal for user input
@@ -1137,10 +1367,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const waitTimeInput = document.getElementById('wait_time');
                 const waitTimeValue = waitTimeInput.value.trim();
-                const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+                const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 0;
                 
-                if (isNaN(waitTime) || waitTime < 1) {
-                    alert('{% trans "Wait time must be a number greater than 0." %}');
+                // Validate wait_time (0 is allowed for immediate sending)
+                if (isNaN(waitTime) || waitTime < 0) {
+                    alert('{% trans "Wait time must be a number greater than or equal to 0 (0 = send immediately)." %}');
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                     return;
@@ -1226,21 +1457,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Get wait_time value and ensure it's a valid integer
             const waitTimeInput = document.getElementById('wait_time');
+            const waitUnitSelect = document.getElementById('wait_unit');
             const waitTimeValue = waitTimeInput.value.trim();
-            const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 1;
+            const waitTime = waitTimeValue ? parseInt(waitTimeValue, 10) : 0;
             
-            // Validate wait_time
-            if (isNaN(waitTime) || waitTime < 1) {
-                alert('{% trans "Wait time must be a number greater than 0." %}');
+            // Validate wait_time (0 is allowed for immediate sending)
+            if (isNaN(waitTime) || waitTime < 0) {
+                alert('{% trans "Wait time must be a number greater than or equal to 0 (0 = send immediately)." %}');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 return;
             }
             
+            // Get wait_unit value even if disabled
+            const waitUnit = waitUnitSelect.value || 'minutes';
+            
             const data = {
                 subject: document.getElementById('subject').value,
                 wait_time: waitTime,
-                wait_unit: document.getElementById('wait_unit').value,
+                wait_unit: waitUnit,
                 body_html: htmlContent,
                 body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
             };

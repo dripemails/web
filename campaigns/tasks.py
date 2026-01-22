@@ -56,6 +56,53 @@ def _html_to_plain_text(html_content):
     return html_content.strip()
 
 
+def _add_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=None):
+    """Add a 1x1 transparent tracking pixel to the end of HTML content."""
+    from django.conf import settings
+    from core.context_processors import site_detection
+    from urllib.parse import quote
+    
+    # Get base URL - prefer provided base_url, then try site detection, then DEFAULT_URL, then fallback
+    if base_url:
+        site_base_url = base_url
+    else:
+        # Try to detect site from settings
+        try:
+            class MockRequest:
+                def get_host(self):
+                    return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
+            
+            site_info = site_detection(MockRequest())
+            site_base_url = site_info['site_url']
+        except Exception:
+            # Fall back to DEFAULT_URL or SITE_URL
+            site_base_url = getattr(settings, 'DEFAULT_URL', None) or getattr(settings, 'SITE_URL', 'http://localhost:8000')
+    
+    # Ensure base_url doesn't end with a slash (we'll add it in the path)
+    site_base_url = site_base_url.rstrip('/')
+    
+    # URL-encode the email and include it in the path instead of query string
+    encoded_email = quote(subscriber_email, safe='')
+    # Clean URL that doesn't mention tracking or pixel - looks like a regular image
+    tracking_url = f"{site_base_url}/analytics/message_split.gif?t={tracking_id}&e={encoded_email}"
+    
+    # Create 1x1 transparent tracking pixel (invisible)
+    tracking_pixel = f'<img src="{tracking_url}" alt="" width="1" height="1" style="display:none; width:1px; height:1px; border:none; margin:0; padding:0;" />'
+    
+    # Add tracking pixel at the end of the HTML content
+    if '</body>' in html_content:
+        # Insert before closing body tag
+        html_content = html_content.replace('</body>', f'{tracking_pixel}</body>')
+    elif '</html>' in html_content:
+        # Insert before closing html tag
+        html_content = html_content.replace('</html>', f'{tracking_pixel}</html>')
+    else:
+        # Append to the end
+        html_content += tracking_pixel
+    
+    return html_content
+
+
 def _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=None):
     """Replace <hr/> tags with decorative separator image that also tracks opens."""
     from django.conf import settings
@@ -299,6 +346,9 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Replace HR tags with separator image and wrap links
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=site_url)
+    
+    # Always add tracking pixel for open tracking (especially important for IMAP/Gmail auto-replies)
+    html_content = _add_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=site_url)
     
     # If we have HTML content but no text content, convert HTML to plain text
     if html_content and not text_content:
@@ -833,6 +883,9 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     # Replace HR tags with separator image and wrap all links with tracking
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email, base_url=site_url)
+    
+    # Always add tracking pixel for open tracking (especially important for IMAP/Gmail auto-replies)
+    html_content = _add_tracking_pixel(html_content, tracking_id, subscriber.email, base_url=site_url)
     
     # Add email footer if one is assigned
     if email.footer:

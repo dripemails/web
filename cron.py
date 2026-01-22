@@ -1021,14 +1021,34 @@ def main():
     """Main entry point for the cron script."""
     # Re-parse arguments now that we have the full command line
     # (we already parsed --settings above, but need to handle the rest)
-    parser = argparse.ArgumentParser(description='DripEmails Cron Script')
+    parser = argparse.ArgumentParser(
+        description='DripEmails Cron Script - Manage email campaigns, IMAP/Gmail auto-replies, and system tasks',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Available Commands:
+  check_spf              Check SPF records for user domains to ensure email delivery
+  send_scheduled_emails  Send queued emails that are ready to be delivered
+  process_gmail_emails   Fetch Gmail emails and send auto-replies (Gmail Auto-Reply campaigns)
+  crawl_imap             Fetch IMAP emails and send auto-replies (IMAP Auto-Reply campaigns)
+  garbage_collect        Clean up old database records and optimize storage
+
+Examples:
+  python cron.py check_spf --all-users
+  python cron.py send_scheduled_emails
+  python cron.py process_gmail_emails --periodic --interval 120
+  python cron.py crawl_imap --periodic --interval 120
+  python cron.py garbage_collect --periodic --interval 86400
+        '''
+    )
     parser.add_argument('--settings', type=str, default='dripemails.settings',
                         help='Django settings module (default: dripemails.settings)')
-    parser.add_argument('command', nargs='?', help='Command to run (check_spf, send_scheduled_emails, process_gmail_emails, crawl_imap)')
-    parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID')
-    parser.add_argument('--all-users', action='store_true', help='Check SPF for all users')
-    parser.add_argument('--limit', type=int, help='Limit number of scheduled emails to process')
-    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (for process_gmail_emails or crawl_imap)')
+    parser.add_argument('command', nargs='?', 
+                        choices=['check_spf', 'send_scheduled_emails', 'process_gmail_emails', 'crawl_imap', 'garbage_collect'],
+                        help='Command to run')
+    parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID (check_spf only)')
+    parser.add_argument('--all-users', action='store_true', help='Check SPF for all users (check_spf only)')
+    parser.add_argument('--limit', type=int, help='Limit number of items to process')
+    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (process_gmail_emails, crawl_imap, garbage_collect)')
     parser.add_argument('--interval', type=int, default=120, help='Interval in seconds between executions when using --periodic (default: 120 = 2 minutes)')
     
     args = parser.parse_args()

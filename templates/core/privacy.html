@@ -1,81 +1,212 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Privacy Policy" %} - DripEmails.org{% endblock %}
+{% block title %}{% trans "Privacy Policy" %} - {{ site_name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .privacy-content {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #374151;
+    }
+    .privacy-content h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e5e7eb;
+    }
+    .privacy-content h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #374151;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    .privacy-content p {
+        margin-bottom: 1.25rem;
+        text-align: justify;
+    }
+    .privacy-content ul, .privacy-content ol {
+        margin-bottom: 1.25rem;
+        padding-left: 1.75rem;
+    }
+    .privacy-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.7;
+    }
+    .privacy-content strong {
+        color: #1f2937;
+        font-weight: 600;
+    }
+    .liability-section {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 0.5rem;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 py-16">
+<div class="bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 py-16 min-h-screen">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-indigo-600 p-8 text-white">
-                    <h1 class="text-3xl font-bold mb-4">{% trans "Privacy Policy" %}</h1>
-                    <p class="text-xl opacity-90">{% trans "Last updated: May 13, 2025" %}</p>
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 p-8 md:p-12 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h1 class="text-4xl md:text-5xl font-extrabold mb-3">{% trans "Privacy Policy" %}</h1>
+                            <p class="text-lg md:text-xl opacity-90">{% trans "Last updated: January 18, 2026" %}</p>
+                        </div>
+                        <div class="hidden md:block">
+                            <svg class="w-20 h-20 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="p-8">
-                    <div class="prose max-w-none">
+                <div class="p-8 md:p-12">
+                    <div class="privacy-content">
+                        <h2>{% trans "Introduction" %}</h2>
+                        <p>{% blocktrans %}This Privacy Policy describes how {{ site_name }} ("we," "our," or "us") collects, uses, and protects your personal information when you use our email marketing automation service. By using our service, you agree to the collection and use of information in accordance with this policy.{% endblocktrans %}</p>
+
                         <h2>{% trans "Information We Collect" %}</h2>
-                        <p>{% trans "We collect the following information to provide and improve our service:" %}</p>
+                        <p>{% blocktrans %}We collect several types of information to provide and improve our service:{% endblocktrans %}</p>
+                        <h3>{% trans "Account Information" %}</h3>
                         <ul>
-                            <li>{% trans "Account information (email, name, password)" %}</li>
-                            <li>{% trans "Usage data (login times, features used)" %}</li>
-                            <li>{% trans "Email campaign statistics" %}</li>
-                            <li>{% trans "Subscriber lists you create" %}</li>
-                            <li>{% trans "Technical information (IP address, browser type)" %}</li>
+                            <li>{% trans "Email address (used as your username)" %}</li>
+                            <li>{% trans "Password (encrypted and hashed)" %}</li>
+                            <li>{% trans "Full name and contact information" %}</li>
+                            <li>{% trans "Billing address (if applicable)" %}</li>
+                        </ul>
+                        <h3>{% trans "Usage Data" %}</h3>
+                        <ul>
+                            <li>{% trans "Login times and session information" %}</li>
+                            <li>{% trans "Features and services you use" %}</li>
+                            <li>{% trans "Email campaign statistics (opens, clicks, bounces)" %}</li>
+                            <li>{% trans "Subscriber lists and contact information you upload" %}</li>
+                            <li>{% trans "Email templates and content you create" %}</li>
+                        </ul>
+                        <h3>{% trans "Technical Information" %}</h3>
+                        <ul>
+                            <li>{% trans "IP address and location data" %}</li>
+                            <li>{% trans "Browser type and version" %}</li>
+                            <li>{% trans "Device information" %}</li>
+                            <li>{% trans "Cookies and similar tracking technologies" %}</li>
+                        </ul>
+                        <h3>{% trans "Third-Party Account Information" %}</h3>
+                        <ul>
+                            <li>{% trans "Gmail OAuth tokens (stored securely)" %}</li>
+                            <li>{% trans "IMAP credentials (encrypted)" %}</li>
+                            <li>{% trans "Email messages fetched from your connected accounts" %}</li>
                         </ul>
 
                         <h2>{% trans "How We Use Your Information" %}</h2>
-                        <p>{% trans "We use your information to:" %}</p>
+                        <p>{% blocktrans %}We use the collected information for various purposes:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Provide and maintain the service" %}</li>
-                            <li>{% trans "Send system notifications" %}</li>
-                            <li>{% trans "Improve our service" %}</li>
-                            <li>{% trans "Detect and prevent fraud" %}</li>
-                            <li>{% trans "Comply with legal obligations" %}</li>
+                            <li>{% trans "To provide, maintain, and improve our service" %}</li>
+                            <li>{% trans "To process and deliver email campaigns" %}</li>
+                            <li>{% trans "To enable IMAP/Gmail auto-reply functionality" %}</li>
+                            <li>{% trans "To send you system notifications and service updates" %}</li>
+                            <li>{% trans "To detect, prevent, and address technical issues and fraud" %}</li>
+                            <li>{% trans "To comply with legal obligations" %}</li>
+                            <li>{% trans "To analyze usage patterns and improve user experience" %}</li>
                         </ul>
 
-                        <h2>{% trans "Information Sharing" %}</h2>
-                        <p>{% trans "We do not sell your personal information. We may share data with:" %}</p>
+                        <h2>{% trans "Information Sharing and Disclosure" %}</h2>
+                        <p>{% blocktrans %}{{ site_name }} does not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Service providers (email delivery, analytics)" %}</li>
-                            <li>{% trans "Law enforcement when required by law" %}</li>
+                            <li>{% trans "With service providers who assist us in operating our service (email delivery services, analytics providers, cloud hosting providers)" %}</li>
+                            <li>{% trans "When required by law or to respond to legal process" %}</li>
+                            <li>{% trans "To protect our rights, privacy, safety, or property" %}</li>
+                            <li>{% trans "In connection with a merger, acquisition, or sale of assets (with notice to users)" %}</li>
                         </ul>
 
                         <h2>{% trans "Data Security" %}</h2>
-                        <p>{% trans "We implement appropriate security measures to protect your data, including:" %}</p>
+                        <p>{% blocktrans %}We implement appropriate technical and organizational security measures to protect your personal information:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Encryption in transit and at rest" %}</li>
-                            <li>{% trans "Regular security audits" %}</li>
-                            <li>{% trans "Access controls and monitoring" %}</li>
+                            <li>{% trans "Encryption of data in transit (SSL/TLS)" %}</li>
+                            <li>{% trans "Encryption of sensitive data at rest" %}</li>
+                            <li>{% trans "Regular security audits and vulnerability assessments" %}</li>
+                            <li>{% trans "Access controls and authentication mechanisms" %}</li>
+                            <li>{% trans "Secure password hashing (bcrypt)" %}</li>
+                            <li>{% trans "Regular backups and disaster recovery procedures" %}</li>
                         </ul>
+                        <p>{% blocktrans %}However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee absolute security.{% endblocktrans %}</p>
+
+                        <h2>{% trans "Data Retention" %}</h2>
+                        <p>{% blocktrans %}We retain your personal information for as long as necessary to provide our service and fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When you delete your account, we will delete or anonymize your personal information, except where we are required to retain it for legal, regulatory, or legitimate business purposes.{% endblocktrans %}</p>
 
                         <h2>{% trans "Your Rights" %}</h2>
-                        <p>{% trans "You have the right to:" %}</p>
+                        <p>{% blocktrans %}Depending on your location, you may have certain rights regarding your personal information:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Access your personal data" %}</li>
-                            <li>{% trans "Correct inaccurate data" %}</li>
-                            <li>{% trans "Delete your account and data" %}</li>
-                            <li>{% trans "Export your data" %}</li>
-                            <li>{% trans "Object to data processing" %}</li>
+                            <li>{% trans "Right to Access: Request a copy of the personal information we hold about you" %}</li>
+                            <li>{% trans "Right to Rectification: Request correction of inaccurate or incomplete information" %}</li>
+                            <li>{% trans "Right to Erasure: Request deletion of your personal information" %}</li>
+                            <li>{% trans "Right to Data Portability: Request transfer of your data to another service" %}</li>
+                            <li>{% trans "Right to Object: Object to processing of your personal information" %}</li>
+                            <li>{% trans "Right to Restrict Processing: Request limitation of how we process your data" %}</li>
+                            <li>{% trans "Right to Withdraw Consent: Withdraw consent where processing is based on consent" %}</li>
                         </ul>
+                        <p>{% blocktrans %}To exercise these rights, please contact us at founders@dripemails.org. We will respond to your request within 30 days.{% endblocktrans %}</p>
 
-                        <h2>{% trans "Cookies" %}</h2>
-                        <p>{% trans "We use cookies to:" %}</p>
+                        <h2>{% trans "Cookies and Tracking Technologies" %}</h2>
+                        <p>{% blocktrans %}We use cookies and similar tracking technologies to:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Keep you logged in" %}</li>
-                            <li>{% trans "Remember your preferences" %}</li>
-                            <li>{% trans "Analyze site usage" %}</li>
+                            <li>{% trans "Keep you logged in and maintain your session" %}</li>
+                            <li>{% trans "Remember your preferences and settings" %}</li>
+                            <li>{% trans "Analyze site usage and improve our service" %}</li>
+                            <li>{% trans "Track email opens and link clicks for analytics" %}</li>
                         </ul>
+                        <p>{% trans "You can control cookies through your browser settings, but disabling cookies may limit your ability to use certain features of our service." %}</p>
+
+                        <h2>{% trans "Third-Party Services" %}</h2>
+                        <p>{% blocktrans %}Our service integrates with third-party services, including:{% endblocktrans %}</p>
+                        <ul>
+                            <li>{% trans "Gmail API for email access and auto-reply functionality" %}</li>
+                            <li>{% trans "IMAP servers for email retrieval" %}</li>
+                            <li>{% trans "Email delivery services (SMTP providers)" %}</li>
+                            <li>{% trans "Analytics and monitoring services" %}</li>
+                        </ul>
+                        <p>{% blocktrans %}These third-party services have their own privacy policies. We encourage you to review their privacy policies. {{ site_name }} is not responsible for the privacy practices of third-party services.{% endblocktrans %}</p>
 
                         <h2>{% trans "Children's Privacy" %}</h2>
-                        <p>{% trans "Our service is not intended for children under 13. We do not knowingly collect data from children." %}</p>
+                        <p>{% blocktrans %}Our service is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information.{% endblocktrans %}</p>
 
-                        <h2>{% trans "Changes to Privacy Policy" %}</h2>
-                        <p>{% trans "We may update this policy. We will notify you of significant changes via email." %}</p>
+                        <div class="liability-section">
+                            <h3>{% trans "Limitation of Liability Regarding Privacy and Data" %}</h3>
+                            <p><strong>{% blocktrans %}TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, {{ site_name }}, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND LICENSORS SHALL NOT BE LIABLE FOR ANY UNAUTHORIZED ACCESS, USE, ALTERATION, OR DISCLOSURE OF YOUR PERSONAL INFORMATION, REGARDLESS OF WHETHER SUCH INCIDENT ARISES FROM A SECURITY BREACH, SYSTEM FAILURE, HUMAN ERROR, OR ANY OTHER CAUSE.{% endblocktrans %}</strong></p>
+                            
+                            <p>{% blocktrans %}You acknowledge and agree that {{ site_name }} is not responsible for any data breaches, unauthorized access, or security incidents that may occur, even if such incidents result from vulnerabilities in our systems, third-party services, or other factors beyond our reasonable control.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}{{ site_name }} does not guarantee the security of data transmitted over the Internet or stored on our servers. You use our service at your own risk, and you are responsible for taking appropriate measures to protect your personal information, including using strong passwords and keeping your account credentials secure.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}In the event of a data breach or security incident, {{ site_name }} will make reasonable efforts to notify affected users as required by applicable law, but {{ site_name }} shall not be liable for any damages, losses, or harm resulting from such incidents, including but not limited to identity theft, financial loss, or reputational damage.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}You agree to indemnify and hold harmless {{ site_name }} from any claims, damages, or losses arising from your use of the service, your failure to secure your account, or any unauthorized access to your account or data that occurs as a result of your actions or omissions.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}{{ site_name }} is not responsible for the privacy practices, data handling, or security measures of third-party services that you may access or integrate with through our service. You acknowledge that when you connect third-party accounts (such as Gmail or IMAP), you are subject to those services' privacy policies and terms of service.{% endblocktrans %}</p>
+                        </div>
+
+                        <h2>{% trans "International Data Transfers" %}</h2>
+                        <p>{% blocktrans %}Your information may be transferred to and processed in countries other than your country of residence. These countries may have data protection laws that differ from those in your country. By using our service, you consent to the transfer of your information to these countries. We will take appropriate measures to ensure that your information receives an adequate level of protection.{% endblocktrans %}</p>
+
+                        <h2>{% trans "Changes to This Privacy Policy" %}</h2>
+                        <p>{% blocktrans %}We may update our Privacy Policy from time to time. We will notify you of any material changes by posting the new Privacy Policy on this page and updating the "Last updated" date. We may also notify you via email or through a prominent notice on our service.{% endblocktrans %}</p>
+                        <p>{% blocktrans %}You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page. Your continued use of the service after any changes constitutes your acceptance of the updated Privacy Policy.{% endblocktrans %}</p>
 
                         <h2>{% trans "Contact Us" %}</h2>
-                        <p>{% trans "For privacy questions, contact:" %} founders@dripemails.org</p>
+                        <p>{% blocktrans %}If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:{% endblocktrans %}</p>
+                        <p><strong>{% trans "Email:" %} founders@dripemails.org</strong><br>
+                        <strong>{% trans "Phone:" %} 415.683.0579</strong></p>
+                        <p>{% blocktrans %}We will respond to your inquiry within 30 days.{% endblocktrans %}</p>
                     </div>
                 </div>
             </div>

@@ -1,64 +1,165 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Terms of Service" %} - DripEmails.org{% endblock %}
+{% block title %}{% trans "Terms of Service" %} - {{ site_name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .terms-content {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #374151;
+    }
+    .terms-content h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e5e7eb;
+    }
+    .terms-content h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #374151;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    .terms-content p {
+        margin-bottom: 1.25rem;
+        text-align: justify;
+    }
+    .terms-content ul, .terms-content ol {
+        margin-bottom: 1.25rem;
+        padding-left: 1.75rem;
+    }
+    .terms-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.7;
+    }
+    .terms-content strong {
+        color: #1f2937;
+        font-weight: 600;
+    }
+    .liability-section {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 0.5rem;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 py-16">
+<div class="bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 py-16 min-h-screen">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-indigo-600 p-8 text-white">
-                    <h1 class="text-3xl font-bold mb-4">{% trans "Terms of Service" %}</h1>
-                    <p class="text-xl opacity-90">{% trans "Last updated: May 13, 2025" %}</p>
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 p-8 md:p-12 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h1 class="text-4xl md:text-5xl font-extrabold mb-3">{% trans "Terms of Service" %}</h1>
+                            <p class="text-lg md:text-xl opacity-90">{% trans "Last updated: January 18, 2026" %}</p>
+                        </div>
+                        <div class="hidden md:block">
+                            <svg class="w-20 h-20 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="p-8">
-                    <div class="prose max-w-none">
+                <div class="p-8 md:p-12">
+                    <div class="terms-content">
                         <h2>1. {% trans "Acceptance of Terms" %}</h2>
-                        <p>{% trans "By accessing and using DripEmails.org, you accept and agree to be bound by the terms and provision of this agreement." %}</p>
+                        <p>{% blocktrans %}By accessing and using {{ site_name }}, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by the above, please do not use this service.{% endblocktrans %}</p>
 
                         <h2>2. {% trans "Description of Service" %}</h2>
-                        <p>{% trans "DripEmails.org provides email marketing automation services. The service is provided 'as is' and we make no warranties about its reliability or availability." %}</p>
+                        <p>{% blocktrans %}{{ site_name }} provides email marketing automation services, including but not limited to drip email campaigns, automated email sequences, IMAP/Gmail auto-reply functionality, and email analytics. The service is provided "as is" and we make no warranties, express or implied, about its reliability, availability, or suitability for any particular purpose.{% endblocktrans %}</p>
 
                         <h2>3. {% trans "User Responsibilities" %}</h2>
+                        <p>{% blocktrans %}As a user of {{ site_name }}, you are responsible for:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "You must comply with all applicable laws and regulations" %}</li>
-                            <li>{% trans "You must obtain proper consent from email recipients" %}</li>
-                            <li>{% trans "You are responsible for maintaining the security of your account" %}</li>
-                            <li>{% trans "You must not use the service for spam or malicious purposes" %}</li>
+                            <li>{% trans "Complying with all applicable laws and regulations, including but not limited to CAN-SPAM Act, GDPR, and other email marketing regulations" %}</li>
+                            <li>{% trans "Obtaining proper consent from email recipients before sending marketing communications" %}</li>
+                            <li>{% trans "Maintaining the security and confidentiality of your account credentials" %}</li>
+                            <li>{% trans "Ensuring that all content you send through our service complies with applicable laws and does not infringe on third-party rights" %}</li>
+                            <li>{% trans "Not using the service for spam, phishing, or any malicious purposes" %}</li>
+                            <li>{% trans "Providing accurate and up-to-date information when registering and using the service" %}</li>
                         </ul>
 
-                        <h2>4. {% trans "Limitation of Liability" %}</h2>
-                        <p>{% trans "DripEmails.org and its operators shall not be liable for any damages arising from the use of the service. This includes but is not limited to direct, indirect, incidental, punitive, and consequential damages." %}</p>
+                        <h2>4. {% trans "Limitation of Liability and Waiver" %}</h2>
+                        <div class="liability-section">
+                            <h3>{% trans "Comprehensive Liability Waiver" %}</h3>
+                            <p><strong>{% blocktrans %}TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, {{ site_name }}, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND LICENSORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO YOUR USE OF OR INABILITY TO USE THE SERVICE.{% endblocktrans %}</strong></p>
+                            
+                            <p>{% blocktrans %}This limitation of liability applies regardless of whether the damages arise from breach of contract, tort (including negligence), strict liability, or any other legal theory, and even if {{ site_name }} has been advised of the possibility of such damages.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}In no event shall {{ site_name }}'s total liability to you for all damages, losses, or causes of action exceed the amount you have paid to {{ site_name }} in the twelve (12) months preceding the claim, or one hundred dollars ($100), whichever is greater. If you have not paid any amounts to {{ site_name }}, our total liability shall not exceed fifty dollars ($50).{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}{{ site_name }} shall not be liable for any failure or delay in performance under these Terms which is due to fire, flood, earthquake, elements of nature or acts of God, acts of war, terrorism, riots, civil disorders, rebellions or revolutions, strikes, lockouts, labor disputes, or any other cause beyond the reasonable control of {{ site_name }}.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}You acknowledge and agree that {{ site_name }} does not control the content, messages, or information sent through the service by users. {{ site_name }} is not responsible for and disclaims all liability related to any such content, messages, or information. You are solely responsible for the content you create, send, or distribute through the service.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}{{ site_name }} makes no representations or warranties regarding the accuracy, reliability, or completeness of any information, data, or content provided through the service. You acknowledge that any reliance on such information, data, or content is at your own risk.{% endblocktrans %}</p>
+                            
+                            <p>{% blocktrans %}You agree to indemnify, defend, and hold harmless {{ site_name }}, its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, damages, obligations, losses, liabilities, costs, or debt, and expenses (including but not limited to attorney's fees) arising from your use of the service, your violation of these Terms, or your violation of any third-party rights.{% endblocktrans %}</p>
+                        </div>
 
-                        <h2>5. {% trans "Service Modifications" %}</h2>
-                        <p>{% trans "We reserve the right to modify or discontinue the service at any time without notice." %}</p>
+                        <h2>5. {% trans "Service Availability and Modifications" %}</h2>
+                        <p>{% blocktrans %}{{ site_name }} reserves the right to modify, suspend, or discontinue the service (or any part thereof) at any time, with or without notice, for any reason. {{ site_name }} shall not be liable to you or any third party for any modification, suspension, or discontinuation of the service.{% endblocktrans %}</p>
+                        <p>{% blocktrans %}We do not guarantee that the service will be available at all times or that it will be free from errors, bugs, or interruptions. You acknowledge that the service may be subject to scheduled and unscheduled maintenance, and {{ site_name }} shall not be liable for any downtime or service interruptions.{% endblocktrans %}</p>
 
                         <h2>6. {% trans "Account Terms" %}</h2>
                         <ul>
-                            <li>{% trans "You must provide accurate information when registering" %}</li>
-                            <li>{% trans "You are responsible for all activity under your account" %}</li>
-                            <li>{% trans "We may terminate accounts that violate our terms" %}</li>
+                            <li>{% blocktrans %}You must provide accurate, current, and complete information when registering for an account with {{ site_name }}{% endblocktrans %}</li>
+                            <li>{% trans "You are responsible for all activity that occurs under your account, regardless of whether you authorized such activity" %}</li>
+                            <li>{% blocktrans %}{{ site_name }} may terminate or suspend your account immediately, without prior notice or liability, for any reason, including but not limited to breach of these Terms{% endblocktrans %}</li>
+                            <li>{% trans "Upon termination, your right to use the service will immediately cease" %}</li>
                         </ul>
 
-                        <h2>7. {% trans "Content Ownership" %}</h2>
-                        <p>{% trans "You retain all rights to the content you create and distribute through our service." %}</p>
+                        <h2>7. {% trans "Content Ownership and License" %}</h2>
+                        <p>{% trans "You retain all ownership rights to the content you create and distribute through our service. However, by using the service, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and distribute your content solely for the purpose of providing and improving the service." %}</p>
 
                         <h2>8. {% trans "Prohibited Uses" %}</h2>
-                        <p>{% trans "You may not use DripEmails.org for:" %}</p>
+                        <p>{% blocktrans %}You may not use {{ site_name }} for any unlawful purpose or to solicit others to perform unlawful acts. Prohibited uses include, but are not limited to:{% endblocktrans %}</p>
                         <ul>
-                            <li>{% trans "Sending spam or unsolicited emails" %}</li>
-                            <li>{% trans "Distributing malware or harmful content" %}</li>
-                            <li>{% trans "Violating any laws or regulations" %}</li>
-                            <li>{% trans "Impersonating others" %}</li>
+                            <li>{% trans "Sending spam, unsolicited bulk emails, or any form of unsolicited commercial messages" %}</li>
+                            <li>{% trans "Distributing malware, viruses, or any other harmful code" %}</li>
+                            <li>{% trans "Violating any applicable local, state, national, or international law or regulation" %}</li>
+                            <li>{% trans "Impersonating any person or entity, or falsely stating or misrepresenting your affiliation with any person or entity" %}</li>
+                            <li>{% trans "Harvesting or collecting email addresses or other contact information from the service" %}</li>
+                            <li>{% trans "Interfering with or disrupting the service or servers connected to the service" %}</li>
                         </ul>
 
                         <h2>9. {% trans "Disclaimer of Warranties" %}</h2>
-                        <p>{% trans "THE SERVICE IS PROVIDED 'AS IS' WITHOUT ANY WARRANTIES OF ANY KIND." %}</p>
+                        <p><strong>{% blocktrans %}THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR COURSE OF PERFORMANCE.{% endblocktrans %}</strong></p>
+                        <p>{% blocktrans %}{{ site_name }} does not warrant that the service will be uninterrupted, timely, secure, or error-free, that defects will be corrected, or that the service or the server that makes it available are free of viruses or other harmful components.{% endblocktrans %}</p>
+                        <p>{% blocktrans %}You expressly agree that your use of the service is at your sole risk. {{ site_name }} makes no warranty or representation regarding the accuracy, completeness, or reliability of any information, content, or materials provided through the service.{% endblocktrans %}</p>
 
-                        <h2>10. {% trans "Changes to Terms" %}</h2>
-                        <p>{% trans "We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of new terms." %}</p>
+                        <h2>10. {% trans "Third-Party Services" %}</h2>
+                        <p>{% blocktrans %}The service may integrate with or provide access to third-party services, including but not limited to email providers (Gmail, IMAP), analytics services, and other external platforms. {{ site_name }} is not responsible for the availability, accuracy, or reliability of any third-party services, and you acknowledge that {{ site_name }} shall not be liable for any damages or losses arising from your use of such third-party services.{% endblocktrans %}</p>
+
+                        <h2>11. {% trans "Data and Privacy" %}</h2>
+                        <p>{% blocktrans %}Your use of the service is also governed by our Privacy Policy. By using the service, you consent to the collection and use of your information as described in the Privacy Policy. {{ site_name }} is not responsible for the privacy practices of third-party services that you may access through our service.{% endblocktrans %}</p>
+
+                        <h2>12. {% trans "Changes to Terms" %}</h2>
+                        <p>{% blocktrans %}{{ site_name }} reserves the right, at its sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.{% endblocktrans %}</p>
+                        <p>{% blocktrans %}By continuing to access or use the service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you must stop using the service.{% endblocktrans %}</p>
+
+                        <h2>13. {% trans "Governing Law and Dispute Resolution" %}</h2>
+                        <p>{% blocktrans %}These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which {{ site_name }} operates, without regard to its conflict of law provisions. Any disputes arising out of or relating to these Terms or the service shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.{% endblocktrans %}</p>
+
+                        <h2>14. {% trans "Severability" %}</h2>
+                        <p>{% blocktrans %}If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable.{% endblocktrans %}</p>
+
+                        <h2>15. {% trans "Contact Information" %}</h2>
+                        <p>{% blocktrans %}If you have any questions about these Terms, please contact us at:{% endblocktrans %}</p>
+                        <p><strong>{% trans "Email:" %} founders@dripemails.org</strong><br>
+                        <strong>{% trans "Phone:" %} 415.683.0579</strong></p>
                     </div>
                 </div>
             </div>

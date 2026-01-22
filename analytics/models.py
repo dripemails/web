@@ -27,7 +27,12 @@ class UserProfile(models.Model):
     spf_missing_includes = models.JSONField(_('SPF Missing Includes'), default=list, blank=True, help_text=_('List of missing required SPF includes'))
     # Auto BCC setting
     auto_bcc_enabled = models.BooleanField(_('Auto BCC Enabled'), default=True, help_text=_('Automatically BCC this email address whenever a new email is sent'))
-    
+    # Registration and login IPs
+    registration_ipv4 = models.GenericIPAddressField(_('Registration IPv4'), protocol='IPv4', null=True, blank=True, help_text=_('IPv4 address at registration'))
+    registration_ipv6 = models.GenericIPAddressField(_('Registration IPv6'), protocol='IPv6', null=True, blank=True, help_text=_('IPv6 address at registration'))
+    last_login_ipv4 = models.GenericIPAddressField(_('Last login IPv4'), protocol='IPv4', null=True, blank=True, help_text=_('IPv4 address at last login'))
+    last_login_ipv6 = models.GenericIPAddressField(_('Last login IPv6'), protocol='IPv6', null=True, blank=True, help_text=_('IPv6 address at last login'))
+
     class Meta:
         verbose_name = _('User Profile')
         verbose_name_plural = _('User Profiles')

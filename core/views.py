@@ -903,47 +903,42 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     Generate the full email preview including footer and advertisement.
     Returns both HTML and text versions.
     """
-    # Get site information from request context
-    from .context_processors import site_detection
-    # Create a mock request to get site info
-    class MockRequest:
-        def get_host(self):
-            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
-    
-    site_info = site_detection(MockRequest())
-    site_url = site_info['site_url']
-    site_name = site_info['site_name']
-    site_logo = site_info['site_logo']
-    
-    # Replace variables in content
-    html_content = email_obj.body_html
-    text_content = email_obj.body_text
-    subject = email_obj.subject
-    
-    if variables:
-        for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value))
-            text_content = text_content.replace(placeholder, str(value))
-            subject = subject.replace(placeholder, str(value))
-    
-    # Get user profile for ad settings
+    from campaigns.tasks import _get_site_info, _html_to_plain_text
+
+    # Get site information (use request if it has get_host, e.g. HttpRequest; else MockRequest)
+    request_for_site = request_obj if (request_obj is not None and hasattr(request_obj, 'get_host')) else None
+    site_url, site_name, site_logo = _get_site_info(request=request_for_site)
+
+    # Build vars with site_name/site_url/sender_email so {{site_name}}, {{site_url}} work in emails
     user = request_obj.user if request_obj else email_obj.campaign.user
     user_profile, _ = UserProfile.objects.get_or_create(user=user)
+    user_email = user.email if user else ''
+    vars_for_replace = dict(variables) if variables else {}
+    vars_for_replace['site_name'] = site_name
+    vars_for_replace['site_url'] = site_url
+    vars_for_replace['sender_email'] = user_email
+
+    # Replace variables in content
+    html_content = email_obj.body_html or ''
+    text_content = email_obj.body_text or ''
+    subject = email_obj.subject or ''
+    for key, value in vars_for_replace.items():
+        placeholder = f"{{{{{key}}}}}"
+        html_content = html_content.replace(placeholder, str(value))
+        text_content = text_content.replace(placeholder, str(value))
+        subject = subject.replace(placeholder, str(value))
+
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
-    
+
     # Add email footer if one is assigned
     if email_obj.footer:
         footer_html = email_obj.footer.html_content
-        # Replace variables in footer if needed
-        if variables:
-            for key, value in variables.items():
-                placeholder = f"{{{{{key}}}}}"
-                footer_html = footer_html.replace(placeholder, str(value))
+        for key, value in vars_for_replace.items():
+            placeholder = f"{{{{{key}}}}}"
+            footer_html = footer_html.replace(placeholder, str(value))
         html_content += footer_html
         # Convert footer HTML to text for plain text version using proper HTML to text conversion
-        from campaigns.tasks import _html_to_plain_text
         footer_text = _html_to_plain_text(footer_html)
         if footer_text:
             text_content += f"\n\n{footer_text}"
@@ -956,12 +951,13 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
     
     # Add ads if required
     if show_ads:
-        # Render ad footer with site context
-        ads_html = render_to_string('emails/ad_footer.html', {
-            'site_url': site_url,
-            'site_name': site_name,
-            'site_logo': site_logo,
-        })
+        # Render ad footer with site context; use RequestContext when request available
+        ctx = {'site_url': site_url, 'site_name': site_name, 'site_logo': site_logo}
+        ads_html = render_to_string(
+            'emails/ad_footer.html',
+            ctx,
+            request=request_obj if (request_obj is not None and hasattr(request_obj, 'get_host')) else None,
+        )
         ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
         text_content += f"\n\n{ads_text}"
@@ -1039,7 +1035,7 @@ def send_email_requests_list(request):
         sent_iso, sent_display = format_datetime(req.sent_at)
         
         # Generate email preview
-        preview = generate_email_preview(req.email, req.variables, req.subscriber, req)
+        preview = generate_email_preview(req.email, req.variables, req.subscriber, request)
         
         # Create preview snippet (first 200 chars of text, strip HTML)
         import re as re_module

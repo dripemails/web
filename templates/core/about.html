@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load i18n static %}
 
-{% block title %}{% trans "About" %} - DripEmails.org{% endblock %}
+{% block title %}{% trans "About" %} - {{ site_name }}{% endblock %}
 
 {% block content %}
 <div class="bg-gray-100 py-16">
@@ -10,7 +10,7 @@
         <div class="max-w-4xl mx-auto">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <div class="bg-indigo-600 p-8 text-white">
-                    <h1 class="text-3xl font-bold mb-4">{% trans "About DripEmails.org" %}</h1>
+                    <h1 class="text-3xl font-bold mb-4">{% blocktrans %}About {{ site_name }}{% endblocktrans %}</h1>
                     <p class="text-xl opacity-90">{% trans "Free email marketing automation for everyone" %}</p>
                 </div>
 
@@ -73,8 +73,8 @@
                             </div>
                         </div>
 
-                        <h2 class="text-2xl font-bold text-gray-900 mb-6">{% trans "About DripEmails.org" %}</h2>
-                        <p class="text-gray-600 mb-4">{% trans "DripEmails.org represents Alex's vision of making email marketing automation accessible to everyone. Drawing from his extensive experience with CureCRM and Follow-up Robot, he created a platform that combines powerful features with simplicity and accessibility." %}</p>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">{% blocktrans %}About {{ site_name }}{% endblocktrans %}</h2>
+                        <p class="text-gray-600 mb-4">{% blocktrans %}{{ site_name }} represents Alex's vision of making email marketing automation accessible to everyone. Drawing from his extensive experience with CureCRM and Follow-up Robot, he created a platform that combines powerful features with simplicity and accessibility.{% endblocktrans %}</p>
                         
                         <div class="bg-gray-50 p-6 rounded-lg mb-8">
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">{% trans "Our Mission" %}</h3>
@@ -83,7 +83,7 @@
 
                         <div class="border-t border-gray-200 pt-8 mt-8">
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">{% trans "Get Started Today" %}</h3>
-                            <p class="text-gray-600 mb-6">{% trans "Join thousands of users who trust DripEmails.org for their email marketing needs. Experience the power of professional automation tools, completely free." %}</p>
+                            <p class="text-gray-600 mb-6">{% blocktrans %}Join thousands of users who trust {{ site_name }} for their email marketing needs. Experience the power of professional automation tools, completely free.{% endblocktrans %}</p>
                             <a href="{% url 'account_signup' %}" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
                                 {% trans "Create Free Account" %}
                             </a>

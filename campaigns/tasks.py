@@ -12,6 +12,26 @@ from analytics.models import UserProfile
 logger = logging.getLogger(__name__)
 
 
+def _get_site_info(request=None):
+    """Return site_url, site_name, site_logo from site_detection. Use request if provided, else MockRequest."""
+    from core.context_processors import site_detection
+
+    if request is not None and hasattr(request, 'get_host'):
+        try:
+            info = site_detection(request)
+            return info['site_url'], info['site_name'], info['site_logo']
+        except Exception:
+            pass
+    host = (settings.ALLOWED_HOSTS or ['dripemails.org'])[0]
+
+    class MockRequest:
+        def get_host(self):
+            return host
+
+    info = site_detection(MockRequest())
+    return info['site_url'], info['site_name'], info['site_logo']
+
+
 def _html_to_plain_text(html_content):
     """Convert HTML to plain text, preserving URLs from links."""
     if not html_content:
@@ -215,34 +235,34 @@ def _is_celery_available():
 def _send_test_email_sync(email_id, test_email, variables=None):
     """Send a test email synchronously (non-Celery version)."""
     from .models import Email
-    
+
     try:
         email = Email.objects.select_related('campaign').get(id=email_id)
     except Email.DoesNotExist:
         error_msg = f"Email {email_id} not found"
         logger.error(error_msg)
         raise ValueError(error_msg)
-    
+
     # Replace variables in content
     html_content = email.body_html or ""
     text_content = email.body_text or ""
     subject = email.subject or "Test Email"
-    
+
     # Get user email for sender_email variable
     user_email = email.campaign.user.email if email.campaign and email.campaign.user else settings.DEFAULT_FROM_EMAIL
-    
-    if variables:
-        for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value))
-            text_content = text_content.replace(placeholder, str(value))
-            subject = subject.replace(placeholder, str(value))
-    
-    # Always replace sender_email variable
-    sender_email_placeholder = "{{sender_email}}"
-    html_content = html_content.replace(sender_email_placeholder, user_email)
-    text_content = text_content.replace(sender_email_placeholder, user_email)
-    subject = subject.replace(sender_email_placeholder, user_email)
+
+    # Build vars with site_name/site_url so {{site_name}} and {{site_url}} work in emails
+    site_url, site_name, _ = _get_site_info(request=None)
+    vars_for_replace = dict(variables) if variables else {}
+    vars_for_replace['site_name'] = site_name
+    vars_for_replace['site_url'] = site_url
+    vars_for_replace['sender_email'] = user_email
+
+    for key, value in vars_for_replace.items():
+        placeholder = f"{{{{{key}}}}}"
+        html_content = html_content.replace(placeholder, str(value))
+        text_content = text_content.replace(placeholder, str(value))
+        subject = subject.replace(placeholder, str(value))
     
     # Ensure we have at least some content
     if not html_content and not text_content:
@@ -303,28 +323,28 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             request_obj.error_message = f"Email {email_id} not found"
             request_obj.save(update_fields=['status', 'error_message', 'updated_at'])
         raise
-    
-    # Replace variables in content
+
+    # Get site info early so {{site_name}} and {{site_url}} work in email body
+    site_url, site_name, site_logo = _get_site_info(request=None)
+    site_info = {'site_url': site_url, 'site_name': site_name, 'site_logo': site_logo}
+
+    # Replace variables in content (include site_name, site_url, sender_email)
     html_content = email.body_html
     text_content = email.body_text
     subject = email.subject
-    
-    # Get user email for sender_email variable
+
     user_email_for_var = email.campaign.user.email if email.campaign and email.campaign.user else settings.DEFAULT_FROM_EMAIL
-    
-    if variables:
-        for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value))
-            text_content = text_content.replace(placeholder, str(value))
-            subject = subject.replace(placeholder, str(value))
-    
-    # Always replace sender_email variable
-    sender_email_placeholder = "{{sender_email}}"
-    html_content = html_content.replace(sender_email_placeholder, user_email_for_var)
-    text_content = text_content.replace(sender_email_placeholder, user_email_for_var)
-    subject = subject.replace(sender_email_placeholder, user_email_for_var)
-    
+    vars_for_replace = dict(variables) if variables else {}
+    vars_for_replace['site_name'] = site_name
+    vars_for_replace['site_url'] = site_url
+    vars_for_replace['sender_email'] = user_email_for_var
+
+    for key, value in vars_for_replace.items():
+        placeholder = f"{{{{{key}}}}}"
+        html_content = html_content.replace(placeholder, str(value))
+        text_content = text_content.replace(placeholder, str(value))
+        subject = subject.replace(placeholder, str(value))
+
     # Create the sent event first to get tracking ID
     sent_event = EmailEvent.objects.create(
         email=email,
@@ -333,17 +353,8 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     )
     tracking_id = str(sent_event.id)
     logger.info(f"Created EmailEvent {tracking_id} for email {email.id}, campaign {email.campaign.id}, subscriber {subscriber_email}")
-    
-    # Get site information for tracking URLs
-    from core.context_processors import site_detection
-    class MockRequest:
-        def get_host(self):
-            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
-    
-    site_info = site_detection(MockRequest())
-    site_url = site_info['site_url']
-    
-    # Replace HR tags with separator image and wrap links
+
+    # Replace HR tags with separator image and wrap links (site_url from site_info above)
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber_email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber_email, base_url=site_url)
     
@@ -396,13 +407,9 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Add email footer if one is assigned
     if email.footer:
         footer_html = email.footer.html_content
-        # Replace variables in footer if needed
-        if variables:
-            for key, value in variables.items():
-                placeholder = f"{{{{{key}}}}}"
-                footer_html = footer_html.replace(placeholder, str(value))
-        # Replace sender_email in footer
-        footer_html = footer_html.replace("{{sender_email}}", user_email_for_var)
+        for key, value in vars_for_replace.items():
+            placeholder = f"{{{{{key}}}}}"
+            footer_html = footer_html.replace(placeholder, str(value))
         html_content += footer_html
         # Convert footer HTML to text for plain text version using proper HTML to text conversion
         footer_text = _html_to_plain_text(footer_html)
@@ -430,12 +437,8 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         from_email_header = user_email
     show_ads = not user_profile.has_verified_promo
     show_unsubscribe = not user_profile.send_without_unsubscribe
-    
-    # Get site information for unsubscribe links and tracking (already done above, reuse)
-    site_name = site_info['site_name']
-    site_logo = site_info['site_logo']
-    
-    # Get subscriber UUID for unsubscribe link
+
+    # Get subscriber UUID for unsubscribe link (site_url, site_name, site_logo from site_info above)
     subscriber_uuid = None
     if request_obj and request_obj.subscriber:
         subscriber_uuid = request_obj.subscriber.uuid
@@ -851,17 +854,13 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     )
     tracking_id = str(sent_event.id)
     
-    # Get site information for tracking and unsubscribe links
-    from core.context_processors import site_detection
-    class MockRequest:
-        def get_host(self):
-            return settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else 'dripemails.org'
-    
-    site_info = site_detection(MockRequest())
-    site_url = site_info['site_url']
-    site_name = site_info['site_name']
-    site_logo = site_info['site_logo']
-    
+    # Get site information for tracking, unsubscribe links, and {{site_name}}/{{site_url}} in body
+    site_url, site_name, site_logo = _get_site_info(request=None)
+    variables['site_name'] = site_name
+    variables['site_url'] = site_url
+    user_email_for_sender = email.campaign.user.email
+    variables['sender_email'] = user_email_for_sender
+
     # Generate URLs (clean, no mention of tracking or pixel)
     from urllib.parse import quote
     encoded_email = quote(subscriber.email, safe='')

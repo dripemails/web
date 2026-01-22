@@ -11,11 +11,11 @@
     {% get_site_url as site_url %}
     
     <!-- Primary Meta Tags -->
-    <title>{% block title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}</title>
-    <meta name="title" content="{% block meta_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <title>{% block title %}{{ site_name }} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}</title>
+    <meta name="title" content="{% block meta_title %}{{ site_name }} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
     <meta name="description" content="{% block meta_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}{% get_seo_keywords %}{% endblock %}">
-    <meta name="author" content="DripEmails.org">
+    <meta name="author" content="{{ site_name }}">
     <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
     <meta name="language" content="{{ LANGUAGE_CODE }}">
     <meta name="revisit-after" content="7 days">
@@ -26,16 +26,16 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:url" content="{% block og_url %}{{ site_url }}{{ request.path }}{% endblock %}">
-    <meta property="og:title" content="{% block og_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{{ site_name }} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ site_url }}{% static 'core/img/logo_dripemails.org.png' %}{% endblock %}">
-    <meta property="og:site_name" content="DripEmails.org">
+    <meta property="og:site_name" content="{{ site_name }}">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
     <meta name="twitter:url" content="{% block twitter_url %}{{ site_url }}{{ request.path }}{% endblock %}">
-    <meta name="twitter:title" content="{% block twitter_title %}{% trans "DripEmails.org" %} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ site_name }} - {% trans "Free Drip Email Marketing Software" %}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences. Create, schedule, and track drip campaigns with our powerful email automation platform." %}{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{{ site_url }}{% static 'core/img/logo_dripemails.org.png' %}{% endblock %}">
     
@@ -44,7 +44,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="DripEmails.org">
+    <meta name="apple-mobile-web-app-title" content="{{ site_name }}">
     
     <!-- Schema.org JSON-LD -->
     {% block schema_org %}
@@ -52,7 +52,7 @@
     {
         "@context": "https://schema.org",
         "@type": "{% block schema_type %}WebApplication{% endblock %}",
-        "name": "DripEmails.org",
+        "name": "{{ site_name }}",
         "description": "{% trans "Free drip email marketing software with unlimited campaigns, subscribers, and automated email sequences" %}",
         "url": "{{ site_url }}",
         "applicationCategory": "MarketingApplication",
@@ -97,7 +97,7 @@
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
                 <a href="{% url 'core:home' %}" class="flex items-center">
-                    <img src="/static/core/img/{{ site_logo|default:'logo_dripemails.org.png' }}" alt="{{ site_name|default:'DripEmails.org' }}" title="{{ site_name|default:'DripEmails.org' }}" class="h-12 w-auto">
+                    <img src="/static/core/img/{{ site_logo|default:'logo_dripemails.org.png' }}" alt="{{ site_name }}" title="{{ site_name }}" class="h-12 w-auto">
                 </a>
                 
                 {% if user.is_authenticated %}
@@ -208,9 +208,9 @@
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         {% if site_logo %}
-                        <img src="/static/core/img/{{ site_logo }}" alt="{{ site_name|default:'DripEmails.org' }}" title="{{ site_name|default:'DripEmails.org' }}" class="h-12 w-auto">
+                        <img src="/static/core/img/{{ site_logo }}" alt="{{ site_name }}" title="{{ site_name }}" class="h-12 w-auto">
                         {% else %}
-                        <span class="text-xl font-bold">{{ site_name|default:"DripEmails.org" }}</span>
+                        <span class="text-xl font-bold">{{ site_name }}</span>
                         {% endif %}
                     </div>
                     <p class="text-gray-400 mb-4">{% trans "Free drip email marketing automation for everyone." %}</p>
@@ -262,7 +262,7 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-                <p>&copy; {% now "Y" %} {{ site_name|default:"DripEmails.org" }}. {% trans "All rights reserved." %}</p>
+                <p>&copy; {% now "Y" %} {{ site_name }}. {% trans "All rights reserved." %}</p>
             </div>
         </div>
     </footer>

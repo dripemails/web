@@ -22,13 +22,15 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable is required for production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # enabled for now
+#DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() in ('true', '1', 'yes')
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'dripemails.org',
     'www.dripemails.org',
     'api.dripemails.org',
     'docs.dripemails.org',
+    'dripemail.org',
     'localhost',
     '127.0.0.1',
     '127.0.0.1:8005',
@@ -36,7 +38,6 @@ ALLOWED_HOSTS = [
     '0.0.0.0:8005',
     '10.124.0.8',
     '10.124.0.8:8005',
-    '*'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -45,6 +46,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://api.dripemails.org',
     'https://docs.dripemails.org',
     'http://dripemails.org',  # For development/testing
+    'https://dripemail.org',
+    'https://www.dripemail.org',
+    'http://dripemail.org', 
     'http://localhost',
     'http://127.0.0.1',
 ]
@@ -80,6 +84,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'core.middleware.RequestStorageMiddleware',
     'django.middleware.locale.LocaleMiddleware',  # Add locale middleware for i18n
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -361,9 +366,8 @@ CORS_ALLOW_METHODS = [
 ]
 
 # Security Settings
-SECURE_BROWSER_XSS_FILTER = False
-SECURE_CONTENT_TYPE_NOSNIFF = False
-#X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -393,8 +397,6 @@ SESSION_COOKIE_NAME = 'sessionid'  # Explicitly set cookie name (default, but be
 SESSION_COOKIE_AGE = 3600000000  # hopefully doesn't expire soon
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Save session on every request to ensure it persists
-SESSION_SAVE_EVERY_REQUEST = True
-# Save session on every request to ensure it persists (important for cache backend)
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Logging Configuration

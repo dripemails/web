@@ -53,15 +53,15 @@
                     <h1 class="text-2xl md:text-3xl font-bold">{% trans "Dashboard" %}</h1>
                     <p class="text-indigo-100 mt-0.5">{% trans "Manage your campaigns and subscribers" %}</p>
                 </div>
-                <div class="flex flex-nowrap gap-1.5 justify-end overflow-x-auto pb-1 lg:overflow-visible lg:pb-0" style="scrollbar-width: thin;">
+                <div class="flex flex-wrap gap-1.5 justify-end">
                     <!-- Campaigns Dropdown -->
-                    <div class="relative group flex-shrink-0">
-                        <button type="button" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/20 hover:bg-white/35 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/30 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
+                    <div class="relative dropdown-container flex-shrink-0">
+                        <button type="button" id="campaigns-dropdown-btn" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/20 hover:bg-white/35 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/30 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                             <span>{% trans "Campaigns" %}</span>
-                            <svg class="w-4 h-4 flex-shrink-0 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="campaigns-arrow" class="w-4 h-4 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div id="campaigns-dropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible transition-all duration-200 z-50 dropdown-menu">
                             <div class="py-1">
                                 <a href="{% url 'campaigns:create' %}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
@@ -76,13 +76,13 @@
                     </div>
                     
                     <!-- Analytics Dropdown -->
-                    <div class="relative group flex-shrink-0">
-                        <button type="button" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/20 hover:bg-white/35 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/30 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
+                    <div class="relative dropdown-container flex-shrink-0">
+                        <button type="button" id="analytics-dropdown-btn" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/20 hover:bg-white/35 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/30 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             <span>{% trans "Analytics" %}</span>
-                            <svg class="w-4 h-4 flex-shrink-0 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="analytics-arrow" class="w-4 h-4 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div id="analytics-dropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible transition-all duration-200 z-50 dropdown-menu">
                             <div class="py-1">
                                 <a href="{% url 'campaigns:analysis' %}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
@@ -97,13 +97,13 @@
                     </div>
                     
                     <!-- Email & Subscribe Dropdown -->
-                    <div class="relative group flex-shrink-0">
-                        <button type="button" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-500/90 hover:bg-emerald-400 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-emerald-400/50 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
+                    <div class="relative dropdown-container flex-shrink-0">
+                        <button type="button" id="email-dropdown-btn" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-500/90 hover:bg-emerald-400 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-emerald-400/50 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 whitespace-nowrap">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             <span>{% trans "Email & Subscribe" %}</span>
-                            <svg class="w-4 h-4 flex-shrink-0 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="email-arrow" class="w-4 h-4 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div id="email-dropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible transition-all duration-200 z-50 dropdown-menu">
                             <div class="py-1">
                                 <a href="{% url 'subscribers:import' %}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
@@ -896,6 +896,114 @@
 </div>
 
 <script>
+// Dropdown menu functionality for mobile and desktop
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = [
+        { btn: 'campaigns-dropdown-btn', menu: 'campaigns-dropdown', arrow: 'campaigns-arrow' },
+        { btn: 'analytics-dropdown-btn', menu: 'analytics-dropdown', arrow: 'analytics-arrow' },
+        { btn: 'email-dropdown-btn', menu: 'email-dropdown', arrow: 'email-arrow' }
+    ];
+    
+    dropdowns.forEach(function(dropdown) {
+        const btn = document.getElementById(dropdown.btn);
+        const menu = document.getElementById(dropdown.menu);
+        const arrow = document.getElementById(dropdown.arrow);
+        
+        if (!btn || !menu) return;
+        
+        // Toggle dropdown on click
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = !menu.classList.contains('opacity-0');
+            
+            // Close all other dropdowns
+            dropdowns.forEach(function(d) {
+                const m = document.getElementById(d.menu);
+                const a = document.getElementById(d.arrow);
+                if (m && m !== menu) {
+                    m.classList.add('opacity-0', 'invisible');
+                    m.classList.remove('opacity-100', 'visible');
+                }
+                if (a && a !== arrow) {
+                    a.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current dropdown
+            if (isOpen) {
+                menu.classList.add('opacity-0', 'invisible');
+                menu.classList.remove('opacity-100', 'visible');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            } else {
+                menu.classList.remove('opacity-0', 'invisible');
+                menu.classList.add('opacity-100', 'visible');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+            }
+        });
+        
+        // Desktop hover support (only on non-touch devices)
+        if (window.matchMedia('(hover: hover)').matches) {
+            let hoverTimeout;
+            
+            const openDropdown = function() {
+                // Close all other dropdowns first
+                dropdowns.forEach(function(d) {
+                    const m = document.getElementById(d.menu);
+                    const a = document.getElementById(d.arrow);
+                    if (m && m !== menu) {
+                        m.classList.add('opacity-0', 'invisible');
+                        m.classList.remove('opacity-100', 'visible');
+                    }
+                    if (a && a !== arrow) {
+                        a.style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Open current dropdown
+                clearTimeout(hoverTimeout);
+                menu.classList.remove('opacity-0', 'invisible');
+                menu.classList.add('opacity-100', 'visible');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+            };
+            
+            const closeDropdown = function() {
+                hoverTimeout = setTimeout(function() {
+                    menu.classList.add('opacity-0', 'invisible');
+                    menu.classList.remove('opacity-100', 'visible');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }, 100); // Small delay to allow moving from button to menu
+            };
+            
+            const cancelClose = function() {
+                clearTimeout(hoverTimeout);
+            };
+            
+            // Hover on button
+            btn.addEventListener('mouseenter', openDropdown);
+            btn.addEventListener('mouseleave', closeDropdown);
+            
+            // Hover on menu
+            menu.addEventListener('mouseenter', cancelClose);
+            menu.addEventListener('mouseleave', closeDropdown);
+        }
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown-container')) {
+            dropdowns.forEach(function(dropdown) {
+                const menu = document.getElementById(dropdown.menu);
+                const arrow = document.getElementById(dropdown.arrow);
+                if (menu) {
+                    menu.classList.add('opacity-0', 'invisible');
+                    menu.classList.remove('opacity-100', 'visible');
+                }
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            });
+        }
+    });
+});
+
 // Make toggleEmailPreview globally accessible
 function toggleEmailPreview(previewId) {
     const snippet = document.getElementById(previewId + '-snippet');

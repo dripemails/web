@@ -102,7 +102,7 @@
                 
                 {% if user.is_authenticated %}
                 <!-- Template Search -->
-                <div class="hidden md:block flex-1 max-w-md mx-8 relative">
+                <div class="hidden md:block flex-1 max-w-2xl mx-8 relative">
                     <div class="relative">
                         <input type="text" id="templateSearch" placeholder="{% trans 'Search templates & campaigns...' %}"
                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
@@ -111,7 +111,7 @@
                         </svg>
                     </div>
                     <!-- Search Results Dropdown -->
-                    <div id="searchResults" class="hidden absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50">
+                    <div id="searchResults" class="hidden absolute top-full left-0 mt-2 w-[32rem] max-w-[36rem] bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50">
                         <div id="searchResultsContent" class="p-2">
                             <!-- Results will be inserted here -->
                         </div>

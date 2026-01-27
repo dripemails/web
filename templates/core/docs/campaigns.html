@@ -35,7 +35,7 @@
       <ul class="list-disc list-inside text-sm text-yellow-800 mt-2 space-y-1">
         <li>{% trans "Each email's wait time determines when the" %} <strong>next</strong> email will be sent</li>
         <li>{% trans "Emails are scheduled automatically when the previous email is successfully sent" %}</li>
-        <li>{% trans "All scheduled emails appear in "Recent Send Activity" on your dashboard" %}</li>
+        <li>{% trans "All scheduled emails appear in \"Recent Manual/API Send Activity\" on your dashboard" %}</li>
         <li>{% trans "The system uses" %} <code>cron.py</code> to process scheduled emails (no Celery required)</li>
         <li>{% trans "If you add a new email to a campaign that has already sent emails, it will automatically schedule to all active subscribers" %}</li>
       </ul>

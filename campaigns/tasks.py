@@ -871,13 +871,19 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     text_content = email.body_text
     subject = email.subject
     
-    # Replace variables in content
+    # Replace variables in content (robustly handle {{ key }} with optional whitespace/case)
     if variables:
+        import re
         for key, value in variables.items():
-            placeholder = f"{{{{{key}}}}}"
-            html_content = html_content.replace(placeholder, str(value)) if html_content else html_content
-            text_content = text_content.replace(placeholder, str(value)) if text_content else text_content
-            subject = subject.replace(placeholder, str(value)) if subject else subject
+            # Match {{key}}, {{ key }}, {{   Key   }}, etc.
+            pattern = re.compile(r"\{\{\s*" + re.escape(key) + r"\s*\}\}", re.IGNORECASE)
+            replacement = "" if value is None else str(value)
+            if html_content:
+                html_content = pattern.sub(replacement, html_content)
+            if text_content:
+                text_content = pattern.sub(replacement, text_content)
+            if subject:
+                subject = pattern.sub(replacement, subject)
     
     # Replace HR tags with separator image and wrap all links with tracking
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)

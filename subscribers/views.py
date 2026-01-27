@@ -69,7 +69,7 @@ def subscriber_list_create(request):
         else:
             subscribers = Subscriber.objects.filter(lists__user=request.user).distinct()
         
-        serializer = SubscriberSerializer(subscribers, many=True)
+        serializer = SubscriberSerializer(subscribers, many=True, context={'request': request})
         return Response(serializer.data)
     
     list_id = request.data.get('list_id') or None
@@ -125,11 +125,15 @@ def subscriber_detail(request, pk):
     subscriber = get_object_or_404(Subscriber, id=pk, lists__user=request.user)
     
     if request.method == 'GET':
-        serializer = SubscriberSerializer(subscriber)
+        serializer = SubscriberSerializer(subscriber, context={'request': request})
         return Response(serializer.data)
     
     elif request.method == 'PUT':
-        serializer = SubscriberSerializer(subscriber, data=request.data)
+        serializer = SubscriberSerializer(
+            subscriber, 
+            data=request.data,
+            context={'request': request}
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -357,6 +361,38 @@ def subscriber_directory(request):
         'total_count': paginator.count,
     }
     return render(request, 'subscribers/list.html', context)
+
+
+@login_required
+def list_view_edit(request, pk):
+    """View and edit a subscriber list with its subscribers."""
+    list_obj = get_object_or_404(List, id=pk, user=request.user)
+    
+    # Handle POST for editing list
+    if request.method == 'POST':
+        list_obj.name = request.POST.get('name', list_obj.name)
+        list_obj.description = request.POST.get('description', list_obj.description)
+        list_obj.save()
+        messages.success(request, _('List updated successfully!'))
+        return redirect('subscribers:list-view-edit', pk=pk)
+    
+    # Get subscribers in this list
+    subscribers = list_obj.subscribers.all().prefetch_related('lists').order_by('-created_at')
+    
+    # Get campaigns using this list
+    campaigns = Campaign.objects.filter(subscriber_list=list_obj, user=request.user)
+    
+    # Pagination for subscribers
+    paginator = Paginator(subscribers, 25)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    
+    context = {
+        'list_obj': list_obj,
+        'page_obj': page_obj,
+        'campaigns': campaigns,
+        'total_count': paginator.count,
+    }
+    return render(request, 'subscribers/list_view_edit.html', context)
 
 
 @login_required

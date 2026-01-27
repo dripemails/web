@@ -10,7 +10,8 @@ urlpatterns = [
     path('import/', views.import_subscribers, name='import'),
     path('export/', views.export_subscribers_csv, name='export'),
     path('lists/', views.list_list_create, name='list-list-create'),
-    path('lists/<uuid:pk>/', views.list_detail, name='list-detail'),
+    path('lists/<uuid:pk>/', views.list_detail, name='list-detail'),  # API endpoint
+    path('lists/<uuid:pk>/view/', views.list_view_edit, name='list-view-edit'),  # HTML view
     
     # API endpoints (moved to main urls.py as non-prefixed patterns)
 ]

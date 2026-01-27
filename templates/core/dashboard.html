@@ -689,7 +689,7 @@
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="font-medium text-gray-900">
-                                            <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ list.name }}</a>
+                                            <a href="{% url 'subscribers:list-view-edit' list.id %}" class="text-indigo-600 hover:text-indigo-900 hover:underline">{{ list.name }}</a>
                                         </div>
                                         <div class="text-sm text-gray-500">{{ list.description|truncatechars:50 }}</div>
                                     </td>
@@ -703,8 +703,8 @@
                                         {{ list.created_at|date:"M d, Y" }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900 mr-3">View</a>
-                                        <a href="{% url 'subscribers:list-detail' list.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{% url 'subscribers:list-view-edit' list.id %}" class="text-indigo-600 hover:text-indigo-900 mr-3">View</a>
+                                        <a href="{% url 'subscribers:list-view-edit' list.id %}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
                                 {% endfor %}

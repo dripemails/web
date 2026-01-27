@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     'api.dripemails.org',
     'docs.dripemails.org',
     'dripemail.org',
+    'www.dripemail.org',
     'localhost',
     '127.0.0.1',
     '127.0.0.1:8005',
@@ -38,6 +39,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0:8005',
     '10.124.0.8',
     '10.124.0.8:8005',
+    '*'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -51,6 +53,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://dripemail.org', 
     'http://localhost',
     'http://127.0.0.1',
+    '*'
 ]
 
 # Application definition

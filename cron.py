@@ -487,10 +487,15 @@ def process_gmail_emails(limit=None):
     service = GmailService()
     
     for credential in credentials:
+        credential_processed = 0
+        credential_sent = 0
+        credential_errors = 0
+        
         try:
             # Fetch latest emails
             logger.info(f"Fetching emails for {credential.email_address}")
             email_messages = service.fetch_emails(credential, max_results=limit or 50)
+            logger.info(f"Fetched {len(email_messages)} emails for {credential.email_address}")
             
             # Update last sync time
             credential.last_sync_at = timezone.now()
@@ -499,15 +504,22 @@ def process_gmail_emails(limit=None):
             # Process each email
             for email_msg in email_messages:
                 if email_msg.processed:
+                    logger.debug(f"Email {email_msg.id} already processed, skipping")
                     continue
                 
                 try:
+                    logger.info(f"Processing Gmail email {email_msg.id} (subject: {email_msg.subject}, from: {email_msg.from_email})")
+                    
                     # Get recipient emails (From, To, Sender)
                     recipients = set()
-                    recipients.add(email_msg.from_email)
-                    recipients.update(email_msg.to_emails_list)
+                    if email_msg.from_email:
+                        recipients.add(email_msg.from_email)
+                    if email_msg.to_emails_list:
+                        recipients.update(email_msg.to_emails_list)
                     if email_msg.sender_email:
                         recipients.add(email_msg.sender_email)
+                    
+                    logger.info(f"  Found {len(recipients)} unique recipients: {list(recipients)}")
                     
                     # Find or get Gmail campaign for this credential
                     gmail_campaign = Campaign.objects.filter(
@@ -517,31 +529,51 @@ def process_gmail_emails(limit=None):
                     ).first()
                     
                     if not gmail_campaign:
-                        logger.warning(f"No Gmail campaign found for user {credential.user.id}")
+                        logger.warning(f"  No Gmail campaign found for user {credential.user.id} (email: {credential.email_address})")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
+                        credential_errors += 1
                         continue
+                    
+                    logger.info(f"  Using Gmail campaign: {gmail_campaign.id} ({gmail_campaign.name})")
                     
                     # Get the first email template from the campaign
                     campaign_email = gmail_campaign.emails.first()
                     if not campaign_email:
-                        logger.warning(f"No email template found in Gmail campaign {gmail_campaign.id}")
+                        logger.warning(f"  No email template found in Gmail campaign {gmail_campaign.id}")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
+                        credential_errors += 1
                         continue
+                    
+                    logger.info(f"  Using email template: {campaign_email.id} (subject: {campaign_email.subject})")
                     
                     # Get or create Gmail subscriber list
                     gmail_list = gmail_campaign.subscriber_list
                     if not gmail_list:
-                        logger.warning(f"No subscriber list found for Gmail campaign {gmail_campaign.id}")
+                        logger.warning(f"  No subscriber list found for Gmail campaign {gmail_campaign.id}")
                         email_msg.processed = True
                         email_msg.save(update_fields=['processed'])
+                        credential_errors += 1
                         continue
                     
+                    logger.info(f"  Using subscriber list: {gmail_list.id} ({gmail_list.name})")
+                    
                     # Send auto-reply to each recipient
+                    recipients_sent = 0
+                    recipients_skipped = 0
                     for recipient_email in recipients:
-                        if not recipient_email or recipient_email == credential.email_address:
+                        if not recipient_email:
+                            logger.debug(f"    Skipping empty recipient email")
+                            recipients_skipped += 1
+                            continue
+                        
+                        if recipient_email == credential.email_address:
+                            logger.debug(f"    Skipping recipient {recipient_email} (same as credential email)")
+                            recipients_skipped += 1
                             continue  # Don't send to self
+                        
+                        logger.info(f"    Processing recipient: {recipient_email}")
                         
                         # Extract first name from email or use email prefix
                         first_name = recipient_email.split('@')[0].split('.')[0].title()
@@ -556,33 +588,57 @@ def process_gmail_emails(limit=None):
                             }
                         )
                         
+                        if created:
+                            logger.info(f"    Created new subscriber: {recipient_email}")
+                        else:
+                            logger.debug(f"    Found existing subscriber: {recipient_email}")
+                        
                         # Add to Gmail list if not already
                         if gmail_list not in subscriber.lists.all():
                             subscriber.lists.add(gmail_list)
+                            logger.info(f"    Added subscriber {recipient_email} to list {gmail_list.name}")
+                        else:
+                            logger.debug(f"    Subscriber {recipient_email} already in list {gmail_list.name}")
                         
                         # Send the email
                         try:
+                            logger.info(f"    Attempting to send auto-reply to {recipient_email}...")
                             send_campaign_email(
                                 str(campaign_email.id),
                                 str(subscriber.id),
                                 variables={'first_name': subscriber.first_name or first_name, 'subject': email_msg.subject},
                                 original_email_message=email_msg  # Pass the original incoming email message
                             )
+                            recipients_sent += 1
                             total_sent += 1
-                            logger.info(f"Sent auto-reply to {recipient_email} for Gmail message {email_msg.id}")
+                            credential_sent += 1
+                            logger.info(f"    ✓ Successfully sent auto-reply to {recipient_email} for Gmail message {email_msg.id}")
                         except Exception as e:
-                            logger.error(f"Error sending auto-reply to {recipient_email}: {str(e)}")
+                            logger.error(f"    ✗ Error sending auto-reply to {recipient_email} for Gmail message {email_msg.id}: {str(e)}", exc_info=True)
+                            credential_errors += 1
+                            error_count += 1
+                    
+                    logger.info(f"  Email {email_msg.id} processing complete: {recipients_sent} sent, {recipients_skipped} skipped")
                     
                     # Mark email as processed
                     email_msg.processed = True
                     email_msg.campaign_email = campaign_email
                     email_msg.save(update_fields=['processed', 'campaign_email'])
                     total_processed += 1
+                    credential_processed += 1
                     
                 except Exception as e:
-                    logger.error(f"Error processing Gmail email {email_msg.id}: {str(e)}")
+                    logger.error(f"Error processing Gmail email {email_msg.id}: {str(e)}", exc_info=True)
                     error_count += 1
+                    credential_errors += 1
                     continue
+            
+            logger.info(f"Credential {credential.email_address} summary: {credential_processed} processed, {credential_sent} sent, {credential_errors} errors")
+            
+        except Exception as e:
+            logger.error(f"Error processing Gmail for credential {credential.id} ({credential.email_address}): {str(e)}", exc_info=True)
+            error_count += 1
+            continue
             
         except Exception as e:
             logger.error(f"Error processing Gmail for credential {credential.id}: {str(e)}")

@@ -1834,6 +1834,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailContentText = '{% trans "Email Content:" %}';
         const noContentText = '{% trans "(No content)" %}';
         
+        // Capture currently expanded email IDs before re-rendering
+        const expandedEmailIds = new Set();
+        if (gmailEmailsList) {
+            const previewDivs = gmailEmailsList.querySelectorAll('[id^="gmail-preview-"]');
+            previewDivs.forEach(div => {
+                if (!div.classList.contains('hidden')) {
+                    expandedEmailIds.add(div.id);
+                }
+            });
+        }
+        
         if (!emails || emails.length === 0) {
             gmailEmailsList.innerHTML = `
                 <div class="px-6 py-12 text-center">
@@ -1850,7 +1861,9 @@ document.addEventListener('DOMContentLoaded', function() {
         emails.forEach((email, index) => {
             const previewId = `gmail-preview-${email.id}`;
             const dateStr = formatDateInTimezone(email.received_at);
-            const isExpanded = index === 0; // Expand first email by default
+            // Check if this email was expanded before refresh
+            const wasExpanded = expandedEmailIds.has(previewId);
+            const isExpanded = wasExpanded || (index === 0 && expandedEmailIds.size === 0); // Expand first email by default only if nothing was expanded
             const hasReply = email.campaign_email_id ? true : false;
             const displaySubject = hasReply ? `Re: ${email.subject || '(No Subject)'}` : (email.subject || '(No Subject)');
             
@@ -1928,9 +1941,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 content = content.replace(/\{\{Email\}\}/gi, vars.email || '');
                                                 content = content.replace(/\{\{Subject\}\}/gi, vars.subject || '');
                                                 
-                                                return email.campaign_email_body_html ? 
-                                                    `<div class="leading-relaxed">${content}</div>` : 
-                                                    `<div class="whitespace-pre-wrap leading-relaxed">${content}</div>`;
+                                                // Strip ALL HTML tags including style/link/script to prevent page styling issues
+                                                // Always use stripAllHTML to ensure consistent rendering with IMAP
+                                                if (email.campaign_email_body_html) {
+                                                    content = stripAllHTML(content);
+                                                }
+                                                // Double-check: if content still has HTML tags, strip them again
+                                                if (content && /<[^>]+>/.test(content)) {
+                                                    content = stripAllHTML(content);
+                                                }
+                                                
+                                                return `<div class="whitespace-pre-wrap leading-relaxed">${content || noContentText}</div>`;
                                             })()}
                                         </div>
                                     </div>
@@ -1983,6 +2004,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         gmailEmailsList.innerHTML = html;
+        
+        // Restore expanded state for emails that were expanded before refresh
+        expandedEmailIds.forEach(previewId => {
+            const previewDiv = document.getElementById(previewId);
+            const icon = document.getElementById(previewId + '-icon');
+            if (previewDiv && icon) {
+                previewDiv.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                // Also update the parent container background to match expanded state
+                const parent = previewDiv.closest('.border-b');
+                if (parent) {
+                    parent.classList.add('bg-red-50/30');
+                    parent.classList.remove('hover:bg-gray-50/50');
+                }
+            }
+        });
     }
     
     // Make toggleGmailEmail globally accessible

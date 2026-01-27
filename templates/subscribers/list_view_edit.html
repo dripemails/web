@@ -94,17 +94,79 @@
             <!-- Subscribers Card -->
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900">
-                            {% blocktrans count total=total_count %}
-                                {{ total }} Subscriber
-                            {% plural %}
-                                {{ total }} Subscribers
-                            {% endblocktrans %}
-                        </h2>
-                        <a href="{% url 'subscribers:add' %}" class="text-sm text-indigo-600 hover:text-indigo-800">
-                            {% trans "Add Subscriber" %}
-                        </a>
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-gray-900">
+                                {% blocktrans count total=total_count %}
+                                    {{ total }} Subscriber
+                                {% plural %}
+                                    {{ total }} Subscribers
+                                {% endblocktrans %}
+                            </h2>
+                            <div class="flex space-x-2">
+                                <button type="button" id="showAddFormBtn" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                    {% trans "Add Subscriber" %}
+                                </button>
+                                <a href="{% url 'subscribers:import' %}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                    {% trans "Import from File" %}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Manual Add Subscriber Form -->
+                        <div id="addSubscriberForm" class="hidden bg-gray-50 p-4 rounded-lg mb-4">
+                            <h3 class="text-sm font-medium text-gray-900 mb-3">{% trans "Add Subscriber to List" %}</h3>
+                            <form id="addSubscriberToListForm" class="space-y-3">
+                                {% csrf_token %}
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <div>
+                                        <label for="subscriber_email" class="block text-xs font-medium text-gray-700 mb-1">
+                                            {% trans "Email" %} <span class="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="subscriber_email"
+                                            name="email"
+                                            required
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                            placeholder="email@example.com"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label for="subscriber_first_name" class="block text-xs font-medium text-gray-700 mb-1">
+                                            {% trans "First Name" %}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="subscriber_first_name"
+                                            name="first_name"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                            placeholder="{% trans 'First name' %}"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label for="subscriber_last_name" class="block text-xs font-medium text-gray-700 mb-1">
+                                            {% trans "Last Name" %}
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="subscriber_last_name"
+                                            name="last_name"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                            placeholder="{% trans 'Last name' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex justify-end space-x-2">
+                                    <button type="button" id="cancelAddFormBtn" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-500">
+                                        {% trans "Cancel" %}
+                                    </button>
+                                    <button type="submit" class="px-3 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        {% trans "Add to List" %}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                     {% if page_obj.object_list %}
@@ -188,4 +250,114 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const showAddFormBtn = document.getElementById('showAddFormBtn');
+    const addSubscriberForm = document.getElementById('addSubscriberForm');
+    const cancelAddFormBtn = document.getElementById('cancelAddFormBtn');
+    const addSubscriberToListForm = document.getElementById('addSubscriberToListForm');
+    
+    // Show/hide add subscriber form
+    showAddFormBtn.addEventListener('click', function() {
+        addSubscriberForm.classList.toggle('hidden');
+        if (!addSubscriberForm.classList.contains('hidden')) {
+            document.getElementById('subscriber_email').focus();
+        }
+    });
+    
+    cancelAddFormBtn.addEventListener('click', function() {
+        addSubscriberForm.classList.add('hidden');
+        addSubscriberToListForm.reset();
+    });
+    
+    // Handle form submission
+    addSubscriberToListForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(addSubscriberToListForm);
+        const subscriberData = {
+            email: formData.get('email'),
+            first_name: formData.get('first_name') || '',
+            last_name: formData.get('last_name') || '',
+            list_id: '{{ list_obj.id }}'
+        };
+        
+        // Get CSRF token
+        let csrftoken = null;
+        const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfInput) {
+            csrftoken = csrfInput.value;
+        } else {
+            // Fallback: get from cookies
+            const name = 'csrftoken';
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    csrftoken = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        
+        if (!csrftoken) {
+            alert('{% trans "CSRF token not found. Please refresh the page and try again." %}');
+            return;
+        }
+        
+        fetch('/api/subscribers/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(subscriberData)
+        })
+        .then(response => {
+            return response.json().then(data => {
+                if (!response.ok) {
+                    // Handle validation errors
+                    let errorMessage = '{% trans "Failed to add subscriber" %}';
+                    if (data.error) {
+                        errorMessage = data.error;
+                    } else if (data.detail) {
+                        errorMessage = data.detail;
+                    } else if (typeof data === 'object') {
+                        // Handle serializer validation errors
+                        const errors = [];
+                        for (const [field, messages] of Object.entries(data)) {
+                            if (Array.isArray(messages)) {
+                                errors.push(`${field}: ${messages.join(', ')}`);
+                            } else {
+                                errors.push(`${field}: ${messages}`);
+                            }
+                        }
+                        if (errors.length > 0) {
+                            errorMessage = errors.join('\n');
+                        }
+                    }
+                    throw new Error(errorMessage);
+                }
+                return data;
+            });
+        })
+        .then(data => {
+            // Show success message
+            alert('{% trans "Subscriber added successfully!" %}');
+            // Reset form and hide it
+            addSubscriberToListForm.reset();
+            addSubscriberForm.classList.add('hidden');
+            // Reload page to show new subscriber
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            console.error('Error details:', error.message);
+            alert(error.message || '{% trans "An error occurred while adding the subscriber. Please try again." %}');
+        });
+    });
+});
+</script>
 {% endblock %}

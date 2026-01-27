@@ -179,23 +179,37 @@ def process_import(request):
             rows = list(reader)
             columns = reader.fieldnames or []
         elif file.name.endswith(('.xls', '.xlsx')):
-            # Read Excel file
-            workbook = load_workbook(filename=file, read_only=True, data_only=True)
-            worksheet = workbook.active
-            rows = []
-            columns = None
-            for idx, row in enumerate(worksheet.iter_rows(values_only=True)):
-                if idx == 0:
-                    # First row is headers
-                    columns = [str(cell) if cell else f'Column_{i+1}' for i, cell in enumerate(row)]
-                else:
-                    # Convert row to dict
-                    row_dict = {}
-                    for i, cell in enumerate(row):
-                        if i < len(columns):
-                            row_dict[columns[i]] = cell
-                    rows.append(row_dict)
-            workbook.close()
+            # Read Excel file - use pandas for better .xls/.xlsx support
+            try:
+                import pandas as pd
+                # Read Excel file into DataFrame
+                df = pd.read_excel(file, engine='openpyxl' if file.name.endswith('.xlsx') else 'xlrd')
+                # Convert to list of dictionaries
+                rows = df.to_dict('records')
+                # Get column names
+                columns = list(df.columns)
+            except ImportError:
+                # Fallback to openpyxl if pandas not available (only works for .xlsx)
+                if file.name.endswith('.xls'):
+                    return Response({
+                        'error': _('Please install pandas and xlrd to support .xls files, or convert to .xlsx format')
+                    }, status=400)
+                workbook = load_workbook(filename=file, read_only=True, data_only=True)
+                worksheet = workbook.active
+                rows = []
+                columns = None
+                for idx, row in enumerate(worksheet.iter_rows(values_only=True)):
+                    if idx == 0:
+                        # First row is headers
+                        columns = [str(cell) if cell else f'Column_{i+1}' for i, cell in enumerate(row)]
+                    else:
+                        # Convert row to dict
+                        row_dict = {}
+                        for i, cell in enumerate(row):
+                            if i < len(columns):
+                                row_dict[columns[i]] = cell
+                        rows.append(row_dict)
+                workbook.close()
         else:
             return Response({
                 'error': _('Unsupported file format')
@@ -293,23 +307,38 @@ def validate_file(request):
                     break
                 preview.append(row)
         elif file.name.endswith(('.xls', '.xlsx')):
-            workbook = load_workbook(filename=file, read_only=True, data_only=True)
-            worksheet = workbook.active
-            columns = []
-            preview = []
-            
-            for idx, row in enumerate(worksheet.iter_rows(values_only=True)):
-                if idx == 0:
-                    columns = [str(cell) if cell else f'Column_{i+1}' for i, cell in enumerate(row)]
-                elif idx <= 5:
-                    row_dict = {}
-                    for i, cell in enumerate(row):
-                        if i < len(columns):
-                            row_dict[columns[i]] = cell
-                    preview.append(row_dict)
-                else:
-                    break
-            workbook.close()
+            # Read Excel file - use pandas for better .xls/.xlsx support
+            try:
+                import pandas as pd
+                # Read Excel file into DataFrame
+                df = pd.read_excel(file, engine='openpyxl' if file.name.endswith('.xlsx') else 'xlrd', nrows=6)
+                # Get column names
+                columns = list(df.columns)
+                # Get first 5 rows for preview
+                preview = df.head(5).to_dict('records')
+            except ImportError:
+                # Fallback to openpyxl if pandas not available (only works for .xlsx)
+                if file.name.endswith('.xls'):
+                    return Response({
+                        'error': _('Please install pandas and xlrd to support .xls files, or convert to .xlsx format')
+                    }, status=400)
+                workbook = load_workbook(filename=file, read_only=True, data_only=True)
+                worksheet = workbook.active
+                columns = []
+                preview = []
+                
+                for idx, row in enumerate(worksheet.iter_rows(values_only=True)):
+                    if idx == 0:
+                        columns = [str(cell) if cell else f'Column_{i+1}' for i, cell in enumerate(row)]
+                    elif idx <= 5:
+                        row_dict = {}
+                        for i, cell in enumerate(row):
+                            if i < len(columns):
+                                row_dict[columns[i]] = cell
+                        preview.append(row_dict)
+                    else:
+                        break
+                workbook.close()
         else:
             return Response({'error': _('Unsupported file format')}, status=400)
         
@@ -370,11 +399,55 @@ def list_view_edit(request, pk):
     
     # Handle POST for editing list
     if request.method == 'POST':
-        list_obj.name = request.POST.get('name', list_obj.name)
-        list_obj.description = request.POST.get('description', list_obj.description)
-        list_obj.save()
-        messages.success(request, _('List updated successfully!'))
-        return redirect('subscribers:list-view-edit', pk=pk)
+        # Check if this is a list edit or subscriber add
+        if 'subscriber_action' in request.POST and request.POST.get('subscriber_action') == 'add':
+            # Handle adding subscriber to list
+            email = request.POST.get('email', '').strip()
+            first_name = request.POST.get('first_name', '').strip()
+            last_name = request.POST.get('last_name', '').strip()
+            
+            if not email:
+                messages.error(request, _('Email is required'))
+            else:
+                subscriber, created = Subscriber.objects.get_or_create(
+                    email=email,
+                    defaults={
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'is_active': True
+                    }
+                )
+                
+                if not created:
+                    # Update existing subscriber if name fields provided
+                    updated = False
+                    if first_name and subscriber.first_name != first_name:
+                        subscriber.first_name = first_name
+                        updated = True
+                    if last_name and subscriber.last_name != last_name:
+                        subscriber.last_name = last_name
+                        updated = True
+                    if not subscriber.is_active:
+                        subscriber.is_active = True
+                        updated = True
+                    if updated:
+                        subscriber.save()
+                
+                # Add to list if not already in it
+                if list_obj not in subscriber.lists.all():
+                    subscriber.lists.add(list_obj)
+                    messages.success(request, _('Subscriber added to list successfully!'))
+                else:
+                    messages.info(request, _('Subscriber is already in this list'))
+                
+                return redirect('subscribers:list-view-edit', pk=pk)
+        else:
+            # Handle list edit
+            list_obj.name = request.POST.get('name', list_obj.name)
+            list_obj.description = request.POST.get('description', list_obj.description)
+            list_obj.save()
+            messages.success(request, _('List updated successfully!'))
+            return redirect('subscribers:list-view-edit', pk=pk)
     
     # Get subscribers in this list
     subscribers = list_obj.subscribers.all().prefetch_related('lists').order_by('-created_at')

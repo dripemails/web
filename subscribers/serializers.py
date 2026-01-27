@@ -77,10 +77,13 @@ class SubscriberSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if lists_data and request and getattr(request, 'user', None):
             user_lists = List.objects.filter(user=request.user)
+            user_list_ids = set(user_lists.values_list('id', flat=True))
             for list_item in lists_data:
-                if list_item not in user_lists:
+                # list_item could be a List object or a UUID
+                list_id = list_item.id if hasattr(list_item, 'id') else list_item
+                if list_id not in user_list_ids:
                     raise serializers.ValidationError(
-                        f"List '{list_item.name}' does not belong to you or does not exist."
+                        f"List does not belong to you or does not exist."
                     )
  
         # Ensure is_active has a default value if not provided

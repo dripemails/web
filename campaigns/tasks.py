@@ -32,6 +32,32 @@ def _get_site_info(request=None):
     return info['site_url'], info['site_name'], info['site_logo']
 
 
+def _normalize_html_line_breaks(html_content: str) -> str:
+    """
+    Normalize HTML so we don't send <p> tags, but instead use <br/> for line breaks.
+    This runs server-side to catch any HTML regardless of where it came from (Quill, API, etc.).
+    """
+    if not html_content:
+        return html_content
+
+    # Convert explicit empty paragraphs into double <br/> to keep blank lines
+    html_content = re.sub(r"<p><br\s*/?></p>", "<br/><br/>", html_content, flags=re.IGNORECASE)
+
+    # Strip remaining <p> wrappers:
+    # - Opening <p> tags become nothing
+    # - Closing </p> tags become a single <br/>
+    html_content = re.sub(r"<p>", "", html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r"</p>", "<br/>", html_content, flags=re.IGNORECASE)
+
+    # Collapse 3+ consecutive <br/> into just 2 to avoid extra spacing
+    html_content = re.sub(r"(<br\s*/?>\s*){3,}", "<br/><br/>", html_content, flags=re.IGNORECASE)
+
+    # Remove trailing <br/>s
+    html_content = re.sub(r"(<br\s*/?>\s*)+$", "", html_content, flags=re.IGNORECASE)
+
+    return html_content.strip()
+
+
 def _html_to_plain_text(html_content):
     """Convert HTML to plain text, preserving URLs from links."""
     if not html_content:
@@ -867,7 +893,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     unsubscribe_link = f"{site_url}/unsubscribe/{subscriber.uuid}/"
     
     # Prepare email with tracking and replace variables
-    html_content = email.body_html
+    html_content = _normalize_html_line_breaks(email.body_html or "")
     text_content = email.body_text
     subject = email.subject
     

@@ -15,6 +15,14 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
     }
+    /* Make Quill paragraphs visually behave like simple line breaks */
+    .ql-editor p {
+        margin: 0;
+        padding: 0;
+    }
+    .ql-editor p + p {
+        margin-top: -0.4rem; /* tighten spacing between lines to remove extra paragraph gap */
+    }
     
     /* Ensure variables don't carry background styling when copied */
     .variable-code {
@@ -704,9 +712,10 @@ if ($httpCode === 200) {
 let quill;
 let footerQuill;
 
-// Function to clean HTML content by removing empty paragraph tags with breaks
-// This removes leading/trailing empty paragraphs and collapses consecutive ones,
-// but preserves single empty paragraphs between content (intentional spacing)
+// Function to clean HTML content inside Quill (editor-facing).
+// - Removes leading/trailing empty paragraphs
+// - Collapses multiple consecutive empty paragraphs
+// This keeps Quill's internal <p>-based structure looking nice in the editor.
 function cleanQuillContent(html) {
     if (!html) return html;
     
@@ -719,8 +728,35 @@ function cleanQuillContent(html) {
     // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
     // This replaces 2+ consecutive empty paragraphs with just one
     html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
-    
     return html;
+}
+
+// Function to normalize HTML for saving/sending.
+// This converts Quill's <p>-based HTML into <br/>-based line breaks so that
+// stored templates and outgoing emails don't contain <p> tags.
+function normalizeHtmlForSending(html) {
+    if (!html) return html;
+
+    // First, clean empty paragraphs but keep Quill structure
+    html = cleanQuillContent(html);
+
+    // Convert explicit empty paragraphs into double <br/> to keep blank lines.
+    html = html.replace(/<p><br\s*\/?><\/p>/gi, '<br/><br/>');
+
+    // Strip remaining <p> wrappers:
+    // - Opening <p> tags become nothing
+    // - Closing </p> tags become a single <br/>
+    html = html.replace(/<p>/gi, '');
+    html = html.replace(/<\/p>/gi, '<br/>');
+
+    // Collapse 3+ consecutive <br/> into just 2 to avoid extra spacing
+    html = html.replace(/(<br\s*\/?>\s*){3,}/gi, '<br/><br/>');
+
+    // Remove trailing <br/>s
+    html = html.replace(/(<br\s*\/?>\s*)+$/gi, '');
+
+    // Trim any leading whitespace
+    return html.trim();
 }
 
 // Function to copy variable to clipboard and insert into editor
@@ -729,16 +765,19 @@ function copyVariable(variable, element) {
     navigator.clipboard.writeText(variable).then(function() {
         // Insert into Quill editor at current cursor position
         if (quill) {
-            const range = quill.getSelection();
-            if (range) {
-                quill.insertText(range.index, variable);
-                quill.setSelection(range.index + variable.length);
-            } else {
-                // If no selection, append to end
+            // Ensure editor has focus so selection is valid
+            quill.focus();
+            let range = quill.getSelection();
+
+            // If there's still no range (e.g., click from outside), append near end
+            if (!range) {
                 const length = quill.getLength();
-                quill.insertText(length - 1, variable);
-                quill.setSelection(length + variable.length - 1);
+                range = { index: Math.max(length - 1, 0), length: 0 };
             }
+
+            // Insert variable at the current cursor position
+            quill.insertText(range.index, variable);
+            quill.setSelection(range.index + variable.length);
         }
         
         // Show brief success feedback
@@ -839,7 +878,9 @@ document.addEventListener('DOMContentLoaded', function() {
         hideCampaignModal();
         
         // Get form data
-        const htmlContent = cleanQuillContent(quill.root.innerHTML);
+        // Use Quill's HTML, cleaned for empties but normalized to <br/> for saving/sending
+        const rawHtml = quill.root.innerHTML;
+        const htmlContent = normalizeHtmlForSending(rawHtml);
         const footerSelect = document.getElementById('footer_select');
         const selectedFooterId = footerSelect.value;
         

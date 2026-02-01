@@ -260,7 +260,7 @@ def _is_celery_available():
 
 def _send_test_email_sync(email_id, test_email, variables=None):
     """Send a test email synchronously (non-Celery version)."""
-    from .models import Email
+    from .models import Email, EmailEvent
 
     try:
         email = Email.objects.select_related('campaign').get(id=email_id)
@@ -302,6 +302,18 @@ def _send_test_email_sync(email_id, test_email, variables=None):
     
     # Create and send email
     try:
+        # Create a sent EmailEvent so analytics track this test send as well
+        try:
+            sent_event = EmailEvent.objects.create(
+                email=email,
+                subscriber_email=test_email,
+                event_type='sent'
+            )
+            logger.debug(f"Created test EmailEvent {sent_event.id} for {test_email}")
+        except Exception:
+            # If EmailEvent cannot be created, log and continue to send the test email
+            logger.exception("Failed to create EmailEvent for test email")
+
         msg = EmailMultiAlternatives(
             subject=subject,
             body=text_content or "This is a test email.",
@@ -558,10 +570,9 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     try:
         msg.send()
         
-        # Update campaign metrics
+        # Campaign metrics are updated via EmailEvent post_save signal
         campaign = email.campaign
-        campaign.sent_count += 1
-        campaign.save(update_fields=['sent_count'])
+        logger.debug(f"Email sent; campaign {campaign.id} metrics updated by signal")
         
         # Update send request status
         if request_obj:
@@ -1063,10 +1074,9 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     try:
         msg.send()
         
-        # Update campaign metrics (event was already created before sending)
+        # Campaign metrics are updated via EmailEvent post_save signal
         campaign = email.campaign
-        campaign.sent_count += 1
-        campaign.save(update_fields=['sent_count'])
+        logger.debug(f"Email sent; campaign {campaign.id} metrics updated by signal")
         
         logger.info(f"Sent email '{subject}' to {subscriber.email}")
         

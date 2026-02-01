@@ -172,21 +172,29 @@ def campaign_analytics(request, campaign_id):
     
     for email in emails:
         sent_count = EmailEvent.objects.filter(email=email, event_type='sent').count()
-        open_count = EmailEvent.objects.filter(email=email, event_type='opened').count()
+        # Count unique opens (distinct subscriber emails that opened)
+        unique_opens = EmailEvent.objects.filter(
+            email=email, 
+            event_type='opened'
+        ).values('subscriber_email').distinct().count()
         click_count = EmailEvent.objects.filter(email=email, event_type='clicked').count()
+        bounce_count = EmailEvent.objects.filter(email=email, event_type='bounced').count()
         
-        open_rate = (open_count / sent_count * 100) if sent_count > 0 else 0
-        click_rate = (click_count / sent_count * 100) if sent_count > 0 else 0
+        open_rate = round((unique_opens / sent_count * 100), 2) if sent_count > 0 else 0
+        click_rate = round((click_count / sent_count * 100), 2) if sent_count > 0 else 0
+        bounce_rate = round((bounce_count / sent_count * 100), 2) if sent_count > 0 else 0
         
         email_metrics.append({
             'id': str(email.id),
             'subject': email.subject,
             'order': email.order,
             'sent': sent_count,
-            'opened': open_count,
+            'opened': unique_opens,
             'clicked': click_count,
+            'bounced': bounce_count,
             'open_rate': open_rate,
             'click_rate': click_rate,
+            'bounce_rate': bounce_rate,
         })
     
     # Get link click analytics
@@ -216,8 +224,12 @@ def campaign_analytics(request, campaign_id):
             'sent': campaign.sent_count,
             'opened': campaign.open_count,
             'clicked': campaign.click_count,
+            'bounced': campaign.bounce_count,
+            'unsubscribed': campaign.unsubscribe_count,
+            'complained': campaign.complaint_count,
             'open_rate': campaign.open_rate,
             'click_rate': campaign.click_rate,
+            'delivery_rate': campaign.delivery_rate,
         },
         'emails': email_metrics,
         'link_clicks': link_clicks,

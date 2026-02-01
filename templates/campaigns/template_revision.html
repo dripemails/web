@@ -154,6 +154,11 @@
 {% block extra_scripts %}
 <script>
   (function(){
+    // Read CSRF token from the rendered form to use in fetch requests
+    const CSRF_TOKEN = (function(){
+      const el = document.querySelector('input[name="csrfmiddlewaretoken"]');
+      return el ? el.value : '';
+    })();
     // Initialize Quill editor
     let quill;
     const toolbarOptions = [
@@ -262,7 +267,7 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'X-CSRFToken': '{{ csrf_token }}'
+              'X-CSRFToken': CSRF_TOKEN
             },
             body: JSON.stringify({
               email_text: currentText
@@ -337,7 +342,7 @@
             method: method,
             headers: {
               'Content-Type': 'application/json',
-              'X-CSRFToken': '{{ csrf_token }}'
+              'X-CSRFToken': CSRF_TOKEN
             },
             body: JSON.stringify(requestBody)
           });
@@ -397,7 +402,7 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'X-CSRFToken': '{{ csrf_token }}'
+              'X-CSRFToken': CSRF_TOKEN
             },
             body: JSON.stringify({
               email: recipientEmail,

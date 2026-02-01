@@ -1195,10 +1195,9 @@ def send_pending_email(request, request_id):
                 'error': f'Email sending failed: {send_request.error_message}'
             }, status=500)
         
-        # Update campaign statistics
+        # Campaign statistics are updated by EmailEvent post_save signal
         campaign = send_request.campaign
-        campaign.sent_count += 1
-        campaign.save(update_fields=['sent_count', 'updated_at'])
+        logger.debug(f"Send request {send_request.id} sent; campaign {campaign.id} metrics updated by signal")
         
         return Response({
             'success': True,

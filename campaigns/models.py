@@ -28,6 +28,9 @@ class Campaign(models.Model):
     sent_count = models.IntegerField(_('Sent Count'), default=0)
     open_count = models.IntegerField(_('Open Count'), default=0)
     click_count = models.IntegerField(_('Click Count'), default=0)
+    bounce_count = models.IntegerField(_('Bounce Count'), default=0)
+    unsubscribe_count = models.IntegerField(_('Unsubscribe Count'), default=0)
+    complaint_count = models.IntegerField(_('Complaint Count'), default=0)
     
     class Meta:
         verbose_name = _('Campaign')
@@ -52,13 +55,20 @@ class Campaign(models.Model):
     def open_rate(self):
         if self.sent_count == 0:
             return 0
-        return (self.open_count / self.sent_count) * 100
+        return round((self.open_count / self.sent_count) * 100, 2)
     
     @property
     def click_rate(self):
         if self.sent_count == 0:
             return 0
-        return (self.click_count / self.sent_count) * 100
+        return round((self.click_count / self.sent_count) * 100, 2)
+    
+    @property
+    def delivery_rate(self):
+        if self.sent_count == 0:
+            return 0
+        delivered = self.sent_count - self.bounce_count
+        return round((delivered / self.sent_count) * 100, 2)
 
 
 class Email(models.Model):

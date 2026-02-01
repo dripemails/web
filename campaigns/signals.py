@@ -69,3 +69,18 @@ def update_campaign_metrics(sender, instance, created, **kwargs):
         campaign.click_count += 1
         campaign.save(update_fields=['click_count'])
         logger.info(f"Campaign {campaign.id} click_count incremented to {campaign.click_count}")
+        
+    elif instance.event_type == 'bounced':
+        campaign.bounce_count += 1
+        campaign.save(update_fields=['bounce_count'])
+        logger.info(f"Campaign {campaign.id} bounce_count incremented to {campaign.bounce_count}")
+        
+    elif instance.event_type == 'unsubscribed':
+        campaign.unsubscribe_count += 1
+        campaign.save(update_fields=['unsubscribe_count'])
+        logger.info(f"Campaign {campaign.id} unsubscribe_count incremented to {campaign.unsubscribe_count}")
+        
+    elif instance.event_type == 'complained':
+        campaign.complaint_count += 1
+        campaign.save(update_fields=['complaint_count'])
+        logger.info(f"Campaign {campaign.id} complaint_count incremented to {campaign.complaint_count}")

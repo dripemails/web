@@ -181,18 +181,6 @@
       placeholder: '{% trans "Write your email content here..." %}'
     });
 
-    // Load initial content if available
-    {% if email.body_html %}
-    const initialContent = `{{ email.body_html|escapejs }}`;
-    {% elif email.body_text %}
-    const initialContent = `{{ email.body_text|escapejs }}`;
-    {% else %}
-    const initialContent = '';
-    {% endif %}
-    if(initialContent){
-      quill.root.innerHTML = initialContent;
-    }
-
     const textarea = document.getElementById('draft-textarea');
     const preview = document.getElementById('draft-preview');
     const live = document.getElementById('live-preview');
@@ -215,8 +203,20 @@
       preview.innerHTML = htmlContent;
     }
 
+    // Load initial content if available
+    {% if email.body_html %}
+    const initialContent = `{{ email.body_html|escapejs }}`;
+    {% elif email.body_text %}
+    const initialContent = `{{ email.body_text|escapejs }}`;
+    {% else %}
+    const initialContent = '';
+    {% endif %}
+    if(initialContent){
+      quill.root.innerHTML = initialContent;
+    }
+
     if(quill && preview){
-      // Initial preview update
+      // Initial preview update (after content is loaded)
       updatePreview();
       
       // Live preview on content change

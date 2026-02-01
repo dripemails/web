@@ -152,6 +152,8 @@
                   <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Sent" %}</th>
                   <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Opened" %}</th>
                   <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Clicked" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Open Rate" %}</th>
+                  <th class="px-4 py-2 text-left text-sm text-gray-600">{% trans "Click Rate" %}</th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-100">
@@ -161,6 +163,8 @@
                   <td class="px-4 py-2 text-sm text-gray-700">{{ r.sent }}</td>
                   <td class="px-4 py-2 text-sm text-gray-700">{{ r.opened }}</td>
                   <td class="px-4 py-2 text-sm text-gray-700">{{ r.clicked }}</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.open_rate }}%</td>
+                  <td class="px-4 py-2 text-sm text-gray-700">{{ r.click_rate }}%</td>
                 </tr>
                 {% endfor %}
               </tbody>

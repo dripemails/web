@@ -50,10 +50,11 @@ CSRF_TRUSTED_ORIGINS = [
     'http://dripemails.org',  # For development/testing
     'https://dripemail.org',
     'https://www.dripemail.org',
-    'http://dripemail.org', 
+    'http://dripemail.org',
     'http://localhost',
+    'http://localhost:8000',
     'http://127.0.0.1',
-    '*'
+    'http://127.0.0.1:8000',
 ]
 
 # Application definition

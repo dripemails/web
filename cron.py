@@ -507,6 +507,16 @@ def process_gmail_emails(limit=None):
                     logger.debug(f"Email {email_msg.id} already processed, skipping")
                     continue
                 
+                # Check for bounce/DSN (Undelivered Mail Returned to Sender, etc.) and unsubscribe failed recipients
+                try:
+                    from gmail.bounce import process_bounce_and_unsubscribe
+                    was_bounce, unsubscribed = process_bounce_and_unsubscribe(email_msg, credential, logger_instance=logger)
+                    if was_bounce:
+                        logger.info(f"Processed as bounce: {email_msg.id}; unsubscribed: {unsubscribed}")
+                        continue
+                except Exception as e:
+                    logger.warning(f"Bounce check failed for Gmail message {email_msg.id}: {e}")
+                
                 try:
                     logger.info(f"Processing Gmail email {email_msg.id} (subject: {email_msg.subject}, from: {email_msg.from_email})")
                     
@@ -723,6 +733,17 @@ def crawl_imap(limit=None):
                 if email_msg.processed and email_msg.campaign_email:
                     logger.info(f"  SKIPPING: Email message {email_msg.id} already processed with campaign_email {email_msg.campaign_email.id}")
                     continue
+                
+                # Check for bounce/DSN (Undelivered Mail Returned to Sender, etc.) and unsubscribe failed recipients
+                if not email_msg.processed:
+                    try:
+                        from gmail.bounce import process_bounce_and_unsubscribe
+                        was_bounce, unsubscribed = process_bounce_and_unsubscribe(email_msg, credential, logger_instance=logger)
+                        if was_bounce:
+                            logger.info(f"  Processed as bounce: {email_msg.id}; unsubscribed: {unsubscribed}")
+                            continue
+                    except Exception as e:
+                        logger.warning(f"  Bounce check failed for IMAP message {email_msg.id}: {e}")
                 
                 try:
                     # Get folder and names from provider_data

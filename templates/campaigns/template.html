@@ -712,21 +712,23 @@ if ($httpCode === 200) {
 let quill;
 let footerQuill;
 
-// Function to clean HTML content inside Quill (editor-facing).
+// Function to clean HTML when loading into Quill (editor-facing).
+// - Strips all <p><br></p> / <p><br/></p> so they never appear in the editor
 // - Removes leading/trailing empty paragraphs
-// - Collapses multiple consecutive empty paragraphs
-// This keeps Quill's internal <p>-based structure looking nice in the editor.
+// - Collapses multiple consecutive empty paragraphs to a single one
 function cleanQuillContent(html) {
     if (!html) return html;
     
-    // Remove leading empty paragraphs
+    // Strip every empty paragraph (so loaded content never shows <p><br></p> in Quill)
+    html = html.replace(/<p><br\s*\/?><\/p>/gi, '');
+    
+    // Remove leading empty paragraphs (any remaining <p></p> or similar)
     html = html.replace(/^(<p><br\s*\/?><\/p>\s*)+/gi, '');
     
     // Remove trailing empty paragraphs
     html = html.replace(/(<p><br\s*\/?><\/p>\s*)+$/gi, '');
     
     // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
-    // This replaces 2+ consecutive empty paragraphs with just one
     html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
     return html;
 }
@@ -740,8 +742,8 @@ function normalizeHtmlForSending(html) {
     // First, clean empty paragraphs but keep Quill structure
     html = cleanQuillContent(html);
 
-    // Convert explicit empty paragraphs into double <br/> to keep blank lines.
-    html = html.replace(/<p><br\s*\/?><\/p>/gi, '<br/><br/>');
+    // Discard empty paragraphs entirely (do not save <p><br></p> as blank lines).
+    html = html.replace(/<p><br\s*\/?><\/p>/gi, '');
 
     // Strip remaining <p> wrappers:
     // - Opening <p> tags become nothing
@@ -1401,8 +1403,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // If template is not saved, save it first
             if (!templateId) {
-                // Get form data
-                const htmlContent = cleanQuillContent(quill.root.innerHTML);
+                // Get form data (normalize so <p><br></p> are discarded and HTML is br-only)
+                const htmlContent = normalizeHtmlForSending(quill.root.innerHTML);
                 const footerSelect = document.getElementById('footer_select');
                 const selectedFooterId = footerSelect.value;
                 
@@ -1489,8 +1491,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = '{% trans "Saving..." %}';
             submitBtn.disabled = true;
             
-            // Get content from Quill editor
-            const htmlContent = cleanQuillContent(quill.root.innerHTML);
+            // Get content from Quill editor (normalize so <p><br></p> are discarded and HTML is br-only)
+            const htmlContent = normalizeHtmlForSending(quill.root.innerHTML);
             
             // Get selected footer
             const footerSelect = document.getElementById('footer_select');

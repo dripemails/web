@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.error);
             } else {
                 alert(data.message || '{% trans "Subscribers imported successfully!" %}');
-                window.location.href = '/dashboard/';
+                window.location.href='/dashboard/{% if agent %}?agent={{ agent }}{% endif %}';
             }
         })
         .catch(error => {

@@ -41,7 +41,7 @@
     <!-- Login Prompt -->
     <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-6 mb-8">
         <p class="text-indigo-800 mb-4">{% trans "You must be logged in to create posts." %}</p>
-        <a href="{% url 'account_login' %}?next={{ request.path }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors inline-block">
+        <a href="{% url 'account_login' %}?next={{ request.path }}{% if agent %}&agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors inline-block">
             {% trans "Log In" %}
         </a>
     </div>

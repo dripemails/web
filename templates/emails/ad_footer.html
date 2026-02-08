@@ -1,9 +1,9 @@
 <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #eaeaea; font-size: 12px; color: #666; font-family: Arial, sans-serif; text-align: center;">
   <p style="margin: 10px 0;">
-    <a href="{{ site_url|default:'https://dripemails.org' }}" style="color: #3B82F6; text-decoration: none; display: inline-block;">
+    <a href="{{ site_url|default:'https://dripemails.org' }}{% if agent %}?agent={{ agent }}{% endif %}" style="color: #3B82F6; text-decoration: none; display: inline-block;">
       <img src="{{ site_url|default:'https://dripemails.org' }}/static/core/img/{{ site_logo|default:'logo_dripemails.org.png' }}" alt="{{ site_name|default:'DripEmails.org' }}" style="max-width: 200px; height: auto; margin-bottom: 10px;">
     </a>
   </p>
-  <p style="margin: 10px 0;">This email was sent using <a href="{{ site_url|default:'https://dripemails.org' }}" style="color: #3B82F6; text-decoration: none;">{{ site_name|default:'DripEmails.org' }}</a> - Free email marketing automation</p>
-  <p style="margin: 10px 0;">Want to send emails without this footer? <a href="{{ site_url|default:'https://dripemails.org' }}/promo-verification/" style="color: #3B82F6; text-decoration: none;">Share about {{ site_name|default:'DripEmails.org' }}</a> and remove this message.</p>
+  <p style="margin: 10px 0;">This email was sent using <a href="{{ site_url|default:'https://dripemails.org' }}{% if agent %}?agent={{ agent }}{% endif %}" style="color: #3B82F6; text-decoration: none;">{{ site_name|default:'DripEmails.org' }}</a> - Free email marketing automation</p>
+  <p style="margin: 10px 0;">Want to send emails without this footer? <a href="{{ site_url|default:'https://dripemails.org' }}/promo-verification/{% if agent %}?agent={{ agent }}{% endif %}" style="color: #3B82F6; text-decoration: none;">Share about {{ site_name|default:'DripEmails.org' }}</a> and remove this message.</p>
 </div>

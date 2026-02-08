@@ -27,4 +27,9 @@ def site_detection(request):
         'site_url': site_url,
         'site_name': site_name,
         'site_logo': logo_file,
-    } 
+    }
+
+
+def agent(request):
+    """Add ?agent= query param to context (e.g. agent=mobile for agent-specific templates)."""
+    return {'agent': (request.GET.get('agent') or '').strip()} 

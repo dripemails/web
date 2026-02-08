@@ -97,7 +97,7 @@
                         <h2 class="text-xl font-semibold text-gray-800 mb-4">{% trans "API Bearer Token" %}</h2>
                         <p class="text-gray-600 mb-4">
                             {% trans "Use this bearer token to authenticate API requests. Include it in the Authorization header as 'Bearer <token>'." %}
-                            <a href="{% url 'core:resource_api_reference' %}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium ml-1">
+                            <a href="{% url 'core:resource_api_reference' %}{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium ml-1">
                                 {% trans "View API Documentation" %}
                                 <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -256,7 +256,7 @@
                                     {% blocktrans %}Your emails currently include our branding. Share about {{ site_name }} on Twitter or your blog to remove ads from all your emails.{% endblocktrans %}
                                 </p>
                                 <div class="mt-4">
-                                    <a href="{% url 'core:promo_verification' %}" class="inline-block bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 transition-colors text-sm font-medium">
+                                    <a href="{% url 'core:promo_verification' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-block bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 transition-colors text-sm font-medium">
                                         Remove Ads
                                     </a>
                                 </div>

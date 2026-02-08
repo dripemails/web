@@ -20,7 +20,7 @@
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                 {% trans "Connect your email account and start auto-replying immediately. No credit card required." %}
             </p>
-            <a href="{% url 'account_signup' %}" class="mt-4 inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="mt-4 inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                 {% trans "Signup without Gmail or IMAP" %}
                 <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -83,7 +83,7 @@
                 <input type="checkbox" class="signup-imap-terms h-4 w-4 mt-1 {% if color_scheme == 'indigo' %}text-indigo-600 focus:ring-indigo-500{% elif color_scheme == 'blue' %}text-blue-600 focus:ring-blue-500{% elif color_scheme == 'purple' %}text-purple-600 focus:ring-purple-500{% elif color_scheme == 'emerald' %}text-emerald-600 focus:ring-emerald-500{% elif color_scheme == 'amber' %}text-amber-600 focus:ring-amber-500{% elif color_scheme == 'violet' %}text-violet-600 focus:ring-violet-500{% elif color_scheme == 'sky' %}text-sky-600 focus:ring-sky-500{% elif color_scheme == 'green' %}text-green-600 focus:ring-green-500{% elif color_scheme == 'rose' %}text-rose-600 focus:ring-rose-500{% else %}text-emerald-600 focus:ring-emerald-500{% endif %} border-gray-300 rounded" required>
                 <label class="ml-2 block text-sm text-gray-700">
                     {% url 'core:terms' as terms_url %}
-                    {% blocktrans %}I agree to the <a href="{{ terms_url }}" target="_blank" class="underline text-indigo-600 hover:text-indigo-500">Terms of Service</a>{% endblocktrans %}
+                    {% blocktrans %}I agree to the{% endblocktrans %} <a href="{{ terms_url }}{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="underline text-indigo-600 hover:text-indigo-500">{% trans "Terms of Service" %}</a>
                 </label>
             </div>
             <button type="submit" class="w-full px-6 py-4 {% if color_scheme == 'indigo' %}bg-gradient-to-r from-indigo-600 to-purple-600{% elif color_scheme == 'blue' %}bg-gradient-to-r from-blue-600 to-cyan-600{% elif color_scheme == 'purple' %}bg-gradient-to-r from-purple-600 to-pink-600{% elif color_scheme == 'emerald' %}bg-gradient-to-r from-emerald-600 to-teal-600{% elif color_scheme == 'amber' %}bg-gradient-to-r from-amber-600 to-orange-600{% elif color_scheme == 'violet' %}bg-gradient-to-r from-violet-600 to-indigo-600{% elif color_scheme == 'sky' %}bg-gradient-to-r from-sky-600 to-blue-600{% elif color_scheme == 'green' %}bg-gradient-to-r from-green-600 to-emerald-600{% elif color_scheme == 'rose' %}bg-gradient-to-r from-rose-600 to-pink-600{% else %}bg-gradient-to-r from-emerald-600 to-teal-600{% endif %} text-white font-bold text-lg rounded-xl hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
@@ -92,7 +92,7 @@
         </form>
         <div class="signup-error mt-4 hidden bg-red-50 border border-red-200 text-red-800 p-3 rounded-lg text-sm"></div>
         <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-            <a href="{% url 'account_signup' %}" class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                 {% trans "Signup without Gmail or IMAP" %}
                 <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

@@ -242,7 +242,7 @@
         {{ post.content|markdownify }}
     </div>
     <div class="mt-8">
-        <a href="{% url 'core:blog_index' %}" class="text-indigo-600 hover:underline">&larr; {% trans "Back to Blog" %}</a>
+        <a href="{% url 'core:blog_index' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline">&larr; {% trans "Back to Blog" %}</a>
     </div>
 </div>
 {% endblock %} 

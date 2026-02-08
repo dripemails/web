@@ -41,7 +41,7 @@
                         {% trans "Activate" %}
                     {% endif %}
                 </button>
-                <a href="{% url 'campaigns:template' campaign.id %}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                     {% trans "Add Email" %}
                 </a>
             </div>
@@ -85,7 +85,7 @@
         <div class="mt-8">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-900">{% trans "Email Sequence" %}</h2>
-                <a href="{% url 'campaigns:template' campaign.id %}" 
+                <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -131,7 +131,7 @@
                             
                             <!-- Action Buttons -->
                             <div class="flex space-x-2">
-                                <a href="{% url 'campaigns:template' campaign.id %}?template_id={{ email.id }}" 
+                                <a href="{% url 'campaigns:template' campaign.id %}?template_id={{ email.id }}{% if agent %}&agent={{ agent }}{% endif %}" 
                                    class="text-indigo-600 hover:text-indigo-900">
                                     {% trans "Edit" %}
                                 </a>
@@ -146,7 +146,7 @@
                 {% empty %}
                 <div class="text-center py-12 bg-white shadow rounded-lg">
                     <p class="text-gray-500">{% trans "No emails in this campaign yet." %}</p>
-                    <a href="{% url 'campaigns:template' campaign.id %}" 
+                    <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                        class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                         {% trans "Add First Email" %}
                     </a>
@@ -266,12 +266,12 @@
                         <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
                             <div class="flex-1 flex justify-between sm:hidden">
                                 {% if sent_emails.has_previous %}
-                                    <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Previous" %}
                                     </a>
                                 {% endif %}
                                 {% if sent_emails.has_next %}
-                                    <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Next" %}
                                     </a>
                                 {% endif %}
@@ -285,7 +285,7 @@
                                 <div>
                                     <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                                         {% if sent_emails.has_previous %}
-                                            <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?sent_page={{ sent_emails.previous_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Previous" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -296,11 +296,11 @@
                                             {% if num == sent_emails.number %}
                                                 <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
                                             {% elif num > sent_emails.number|add:'-3' and num < sent_emails.number|add:'3' %}
-                                                <a href="?sent_page={{ num }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                                <a href="?sent_page={{ num }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
                                             {% endif %}
                                         {% endfor %}
                                         {% if sent_emails.has_next %}
-                                            <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?sent_page={{ sent_emails.next_page_number }}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Next" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -416,12 +416,12 @@
                         <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
                             <div class="flex-1 flex justify-between sm:hidden">
                                 {% if pending_emails.has_previous %}
-                                    <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Previous" %}
                                     </a>
                                 {% endif %}
                                 {% if pending_emails.has_next %}
-                                    <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Next" %}
                                     </a>
                                 {% endif %}
@@ -435,7 +435,7 @@
                                 <div>
                                     <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                                         {% if pending_emails.has_previous %}
-                                            <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?pending_page={{ pending_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Previous" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -446,11 +446,11 @@
                                             {% if num == pending_emails.number %}
                                                 <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
                                             {% elif num > pending_emails.number|add:'-3' and num < pending_emails.number|add:'3' %}
-                                                <a href="?pending_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                                <a href="?pending_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
                                             {% endif %}
                                         {% endfor %}
                                         {% if pending_emails.has_next %}
-                                            <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?pending_page={{ pending_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.imap_page %}&imap_page={{ request.GET.imap_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Next" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -583,12 +583,12 @@
                         <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
                             <div class="flex-1 flex justify-between sm:hidden">
                                 {% if imap_auto_reply_emails.has_previous %}
-                                    <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Previous" %}
                                     </a>
                                 {% endif %}
                                 {% if imap_auto_reply_emails.has_next %}
-                                    <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                         {% trans "Next" %}
                                     </a>
                                 {% endif %}
@@ -602,7 +602,7 @@
                                 <div>
                                     <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                                         {% if imap_auto_reply_emails.has_previous %}
-                                            <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?imap_page={{ imap_auto_reply_emails.previous_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Previous" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -613,11 +613,11 @@
                                             {% if num == imap_auto_reply_emails.number %}
                                                 <span class="relative inline-flex items-center px-4 py-2 border border-indigo-500 bg-indigo-50 text-sm font-medium text-indigo-600">{{ num }}</span>
                                             {% elif num > imap_auto_reply_emails.number|add:'-3' and num < imap_auto_reply_emails.number|add:'3' %}
-                                                <a href="?imap_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
+                                                <a href="?imap_page={{ num }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">{{ num }}</a>
                                             {% endif %}
                                         {% endfor %}
                                         {% if imap_auto_reply_emails.has_next %}
-                                            <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <a href="?imap_page={{ imap_auto_reply_emails.next_page_number }}{% if request.GET.sent_page %}&sent_page={{ request.GET.sent_page }}{% endif %}{% if request.GET.pending_page %}&pending_page={{ request.GET.pending_page }}{% endif %}{% if agent %}&agent={{ agent }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                                 <span class="sr-only">{% trans "Next" %}</span>
                                                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />

@@ -86,7 +86,7 @@
 
                 <div class="mt-8 pt-8 border-t border-gray-200">
                     <div class="text-center">
-                        <a href="{% url 'account_signup' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+                        <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
                             {% trans "Get Started Free" %}
                         </a>
                         <p class="mt-4 text-sm text-gray-500">{% trans "No credit card required" %}</p>

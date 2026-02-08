@@ -9,7 +9,7 @@
   <div class="container mx-auto px-4">
     <div class="max-w-lg mx-auto bg-white p-8 md:p-12 rounded-xl shadow-xl">
       <div class="text-center mb-8">
-        <a href="/" class="inline-block mb-6">
+        <a href="/{% if agent %}?agent={{ agent }}{% endif %}" class="inline-block mb-6">
           <span class="text-3xl font-bold text-indigo-600">{{ site_name }}</span>
         </a>
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3">{% trans "Create Your Account" %}</h1>
@@ -53,7 +53,7 @@
                    class="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
             <label for="terms-checkbox" class="ml-2 block text-sm text-gray-700">
                 {% url 'core:terms' as terms_url %}
-                {% blocktrans %}I agree to the <a href="{{ terms_url }}" target="_blank" class="text-indigo-600 hover:text-indigo-500 underline">Terms of Service</a>{% endblocktrans %}
+                {% blocktrans %}I agree to the{% endblocktrans %} <a href="{{ terms_url }}{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="text-indigo-600 hover:text-indigo-500 underline">{% trans "Terms of Service" %}</a>
             </label>
         </div>
 
@@ -81,7 +81,7 @@
           <div class="mt-6 grid grid-cols-1 gap-3">
             {% for provider in socialaccount_providers %}
             {% if provider.id == 'google' %}
-            <a href="{% provider_login_url provider.id process='connect' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <a href="{% provider_login_url provider.id process='connect' %}{% if agent %}?agent={{ agent }}{% endif %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <span class="sr-only">{% blocktrans with provider.name as name %}Sign up with {{ name }}{% endblocktrans %}</span>
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10c5.522 0 10-4.478 10-10S15.522 0 10 0zm5.615 11.046c-.14.496-.439.94-.804 1.32C14.11 12.91 13.26 13.3 12.08 13.3c-1.425 0-2.535-.67-3.296-1.875-.769-1.22-.75-2.888.053-4.08.787-1.163 1.89-1.82 3.243-1.82 1.012 0 1.8.324 2.37.86.285.256.478.553.591.868.072.202.108.403.108.576 0 .144-.018.28-.054.41-.036.122-.09.23-.162.324-.072.094-.153.153-.243.188-.09.036-.19.054-.297.054h-2.56c.009.333.072.621.189.86.117.24.297.442.54.595.243.153.513.225.81.225.522 0 .972-.153 1.35-.45.378-.297.648-.702.792-1.215H12.73v-1.35h2.885c.063.225.094.477.094.756.001.37-.062.766-.197 1.188z" clip-rule="evenodd" />
@@ -96,7 +96,7 @@
 
       <div class="mt-8 text-center text-sm text-gray-600">
         {% blocktrans %}Already have an account?{% endblocktrans %}
-        <a href="{% url 'account_login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
+        <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="font-medium text-indigo-600 hover:text-indigo-500">
           {% trans "Log in" %}
         </a>
       </div>

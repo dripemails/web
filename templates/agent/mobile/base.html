@@ -1,0 +1,355 @@
+{% load i18n %}
+{% load i18n_utils %}
+{% load static %}
+{% load seo_tags %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" class="mobile-app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#1e1b4b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{{ site_name }}">
+    {% get_site_url as site_url %}
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <script src="{% static 'core/js/tailwind.3.4.17.js' %}"></script>
+    <style>
+        :root {
+            --mobile-bg: #0f0e17;
+            --mobile-surface: #1a1926;
+            --mobile-surface-elevated: #242235;
+            --mobile-primary: #818cf8;
+            --mobile-primary-soft: rgba(129, 140, 248, 0.15);
+            --mobile-accent: #a78bfa;
+            --mobile-text: #e2e8f0;
+            --mobile-text-muted: #94a3b8;
+            --mobile-border: rgba(255,255,255,0.06);
+            --mobile-nav-height: 64px;
+            --mobile-header-height: 56px;
+            --safe-top: env(safe-area-inset-top, 0);
+            --safe-bottom: env(safe-area-inset-bottom, 0);
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { -webkit-tap-highlight-color: transparent; }
+        body {
+            margin: 0;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--mobile-bg);
+            background-image: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(129, 140, 248, 0.15), transparent),
+                              radial-gradient(ellipse 80% 50% at 100% 50%, rgba(167, 139, 250, 0.08), transparent);
+            color: var(--mobile-text);
+            min-height: 100dvh;
+            min-height: 100vh;
+            padding-top: var(--mobile-header-height);
+            padding-top: calc(var(--mobile-header-height) + var(--safe-top));
+            padding-bottom: var(--mobile-nav-height);
+            padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom));
+            overflow-x: hidden;
+        }
+        .mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: var(--mobile-header-height);
+            padding-top: var(--safe-top);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 16px;
+            padding-right: 16px;
+            background: rgba(15, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--mobile-border);
+        }
+        .mobile-header a.logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--mobile-text);
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .mobile-header a.logo img {
+            height: 32px;
+            width: auto;
+            margin-right: 10px;
+        }
+        .mobile-menu-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 12px;
+            background: var(--mobile-surface-elevated);
+            color: var(--mobile-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .mobile-menu-btn:active { transform: scale(0.96); }
+        .mobile-menu-btn svg { width: 24px; height: 24px; }
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(320px, 88vw);
+            z-index: 200;
+            background: var(--mobile-surface);
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            box-shadow: -8px 0 32px rgba(0,0,0,0.4);
+            padding-top: var(--safe-top);
+            padding-top: calc(var(--safe-top) + 16px);
+            padding-bottom: var(--safe-bottom);
+            overflow-y: auto;
+        }
+        .mobile-drawer.open { transform: translateX(0); }
+        .mobile-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 199;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-drawer-close {
+            position: absolute;
+            top: calc(var(--safe-top) + 12px);
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background: var(--mobile-surface-elevated);
+            color: var(--mobile-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .mobile-drawer nav {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mobile-drawer a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            color: var(--mobile-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.2s ease;
+        }
+        .mobile-drawer a:hover, .mobile-drawer a:focus {
+            background: var(--mobile-primary-soft);
+            color: var(--mobile-primary);
+        }
+        .mobile-drawer a svg { width: 22px; height: 22px; flex-shrink: 0; opacity: 0.9; }
+        .mobile-drawer .nav-divider {
+            height: 1px;
+            background: var(--mobile-border);
+            margin: 12px 0;
+        }
+        .mobile-main {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            padding: 20px 16px 24px;
+        }
+        .mobile-main.with-messages { padding-top: 12px; }
+        .mobile-messages {
+            margin-bottom: 16px;
+        }
+        .mobile-message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            margin-bottom: 8px;
+        }
+        .mobile-message.success { background: rgba(34, 197, 94, 0.15); color: #86efac; }
+        .mobile-message.error { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+        .mobile-message.warning { background: rgba(234, 179, 8, 0.15); color: #fde047; }
+        .mobile-message.info { background: rgba(59, 130, 246, 0.15); color: #93c5fd; }
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            height: var(--mobile-nav-height);
+            padding-bottom: var(--safe-bottom);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: rgba(26, 25, 38, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--mobile-border);
+        }
+        .mobile-bottom-nav a {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 10px 8px;
+            color: var(--mobile-text-muted);
+            text-decoration: none;
+            font-size: 0.6875rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            min-height: 52px;
+        }
+        .mobile-bottom-nav a:hover, .mobile-bottom-nav a:active { color: var(--mobile-primary); }
+        .mobile-bottom-nav a svg { width: 24px; height: 24px; }
+        .mobile-content-sheet {
+            width: 100%;
+            max-width: 100%;
+            background: var(--mobile-surface);
+            border-radius: 24px 24px 0 0;
+            min-height: 60vh;
+            box-shadow: 0 -4px 32px rgba(0,0,0,0.25);
+            border: 1px solid var(--mobile-border);
+            border-bottom: none;
+        }
+        .mobile-content-sheet .prose, .mobile-content-sheet [class*="text-gray"] { color: var(--mobile-text) !important; }
+        .mobile-content-sheet a:not(.mobile-message a) { color: var(--mobile-primary); }
+        /* Tablet: full width, slightly more padding */
+        @media (min-width: 768px) {
+            .mobile-main { padding: 24px 24px 32px; }
+            .mobile-content-sheet { border-radius: 28px 28px 0 0; padding-left: 24px; padding-right: 24px; }
+            .mobile-header { padding-left: 24px; padding-right: 24px; }
+            .mobile-drawer { width: min(360px, 40vw); }
+        }
+        /* Optional: cap width on very large desktop so it doesn’t stretch infinitely */
+        @media (min-width: 1280px) {
+            body { max-width: 1280px; margin: 0 auto; }
+            .mobile-header, .mobile-bottom-nav { max-width: 1280px; left: 50%; transform: translateX(-50%); }
+        }
+        {% block extra_head %}{% endblock %}
+    </style>
+</head>
+<body>
+    <header class="mobile-header">
+        <a href="{% url 'core:home' %}{% if agent %}?agent={{ agent }}{% endif %}" class="logo">
+            <img src="/static/core/img/{{ site_logo|default:'logo_dripemails.org.png' }}" alt="{{ site_name }}">
+            <span>{{ site_name }}</span>
+        </a>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="{% trans 'Menu' %}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </header>
+
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <button type="button" class="mobile-drawer-close" id="mobileDrawerClose" aria-label="{% trans 'Close' %}">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <nav>
+            {% if user.is_authenticated %}
+                <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6h6a2 2 0 012 2v2a2 2 0 01-2 2h-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h2a2 2 0 002-2v-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 14h6"/></svg>
+                    {% trans "Dashboard" %}
+                </a>
+                <a href="{% url 'core:settings' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {% trans "Settings" %}
+                </a>
+                <div class="nav-divider"></div>
+                <a href="{% url 'account_logout' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    {% trans "Logout" %}
+                </a>
+            {% else %}
+                <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                    {% trans "Login" %}
+                </a>
+                <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                    {% trans "Sign Up Free" %}
+                </a>
+            {% endif %}
+        </nav>
+    </aside>
+
+    <main class="mobile-main{% if messages %} with-messages{% endif %}">
+        {% if messages %}
+            <div class="mobile-messages">
+                {% for message in messages %}
+                    <div class="mobile-message {{ message.tags|default:'info' }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="mobile-content-sheet px-4 pt-6 pb-8">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <nav class="mobile-bottom-nav" aria-label="{% trans 'Main navigation' %}">
+        {% if user.is_authenticated %}
+            <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6h6a2 2 0 012 2v2a2 2 0 01-2 2h-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h2a2 2 0 002-2v-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 14h6"/></svg>
+                {% trans "Dashboard" %}
+            </a>
+            <a href="{% url 'core:settings' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                {% trans "Settings" %}
+            </a>
+        {% else %}
+            <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                {% trans "Login" %}
+            </a>
+            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                {% trans "Sign up" %}
+            </a>
+        {% endif %}
+    </nav>
+
+    <script>
+        (function() {
+            var drawer = document.getElementById('mobileDrawer');
+            var overlay = document.getElementById('mobileDrawerOverlay');
+            var openBtn = document.getElementById('mobileMenuBtn');
+            var closeBtn = document.getElementById('mobileDrawerClose');
+            function openDrawer() {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            openBtn && openBtn.addEventListener('click', openDrawer);
+            closeBtn && closeBtn.addEventListener('click', closeDrawer);
+            overlay && overlay.addEventListener('click', closeDrawer);
+            drawer && drawer.addEventListener('click', function(e) { if (e.target === drawer) closeDrawer(); });
+        })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

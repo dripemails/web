@@ -98,7 +98,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -107,6 +106,12 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.current_year',
                 'core.context_processors.site_detection',
+                'core.context_processors.agent',
+            ],
+            'loaders': [
+                'core.template_loaders.AgentTemplateLoader',
+                ('django.template.loaders.filesystem.Loader', [os.path.join(BASE_DIR, 'templates')]),
+                'django.template.loaders.app_directories.Loader',
             ],
         },
     },

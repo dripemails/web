@@ -9,12 +9,12 @@
 <p>{% blocktrans %}To confirm this is correct, please click the button below:{% endblocktrans %}</p>
 
 <div style="text-align: center; margin: 30px 0;">
-    <a href="{{ activate_url }}" class="button">{% trans "Confirm Email Address" %}</a>
+    <a href="{{ activate_url }}{% if agent %}?agent={{ agent }}{% endif %}" class="button">{% trans "Confirm Email Address" %}</a>
 </div>
 
 <p style="font-size: 14px; color: #718096;">
     {% blocktrans %}Or copy and paste this link into your browser:{% endblocktrans %}<br>
-    <a href="{{ activate_url }}" style="color: #667eea; word-break: break-all;">{{ activate_url }}</a>
+    <a href="{{ activate_url }}{% if agent %}?agent={{ agent }}{% endif %}" style="color: #667eea; word-break: break-all;">{{ activate_url }}</a>
 </p>
 {% endblock content %}
 

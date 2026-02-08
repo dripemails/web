@@ -11,12 +11,12 @@
 <p>{% blocktrans %}If it was you, you can sign up for an account using the button below:{% endblocktrans %}</p>
 
 <div style="text-align: center; margin: 30px 0;">
-    <a href="{{ signup_url }}" class="button">{% trans "Sign Up" %}</a>
+    <a href="{{ signup_url }}{% if agent %}?agent={{ agent }}{% endif %}" class="button">{% trans "Sign Up" %}</a>
 </div>
 
 <p style="font-size: 14px; color: #718096;">
     {% blocktrans %}Or copy and paste this link into your browser:{% endblocktrans %}<br>
-    <a href="{{ signup_url }}" style="color: #667eea; word-break: break-all;">{{ signup_url }}</a>
+    <a href="{{ signup_url }}{% if agent %}?agent={{ agent }}{% endif %}" style="color: #667eea; word-break: break-all;">{{ signup_url }}</a>
 </p>
 {% endblock content %}
 

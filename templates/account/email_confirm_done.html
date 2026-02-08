@@ -14,7 +14,7 @@
             <p class="text-gray-600 mb-6 text-center">
                 {% blocktrans %}We have sent you an email. Please check your inbox and click the confirmation link to activate your account.{% endblocktrans %}
             </p>
-            <a href="/" class="w-full py-3 px-6 bg-indigo-600 text-white rounded-md font-semibold hover:bg-indigo-700 transition text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <a href="/{% if agent %}?agent={{ agent }}{% endif %}" class="w-full py-3 px-6 bg-indigo-600 text-white rounded-md font-semibold hover:bg-indigo-700 transition text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 {% trans "Return to Home" %}
             </a>
         </div>

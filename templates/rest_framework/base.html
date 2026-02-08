@@ -11,11 +11,11 @@
     <title>{% block title %}{% if name %}{{ name }} – {% endif %}{{ site_name|default:"DripEmails.org" }}{% endblock %}</title>
     {% block style %}
     {% block bootstrap_theme %}
-    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/bootstrap-tweaks.css" %}"/>
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/default.css" %}"/>
     {% if code_style %}<style>{{ code_style }}</style>{% endif %}
     {% endblock %}
     {% endblock %}
@@ -27,7 +27,7 @@
             <div class="container">
                 <span>
                     {% block branding %}
-                    <a class="navbar-brand" rel="nofollow" href="/">
+                    <a class="navbar-brand" rel="nofollow" href="/{% if agent %}?agent={{ agent }}{% endif %}">
                         {{ site_name|default:"DripEmails.org" }}
                     </a>
                     {% endblock %}
@@ -49,9 +49,9 @@
             <ul class="breadcrumb">
                 {% for breadcrumb_name, breadcrumb_url in breadcrumblist %}
                     {% if forloop.last %}
-                        <li class="active"><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
+                        <li class="active"><a href="{{ breadcrumb_url }}{% if agent %}?agent={{ agent }}{% endif %}">{{ breadcrumb_name }}</a></li>
                     {% else %}
-                        <li><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
+                        <li><a href="{{ breadcrumb_url }}{% if agent %}?agent={{ agent }}{% endif %}">{{ breadcrumb_name }}</a></li>
                     {% endif %}
                 {% empty %}
                     {% block breadcrumbs_empty %}&nbsp;{% endblock breadcrumbs_empty %}

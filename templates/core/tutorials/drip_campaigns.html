@@ -6,7 +6,7 @@
   <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
+        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-opacity-80 font-medium">← {% trans "Back to Tutorials" %}</a>
       </div>
       <h1 class="text-4xl font-bold mb-4">💧 {% trans "Building Drip Campaigns" %}</h1>
       <p class="text-xl text-white text-opacity-90">{% trans "Create automated email sequences that nurture leads" %}</p>
@@ -147,11 +147,11 @@
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <a href="{% url 'core:tutorial_scheduling_campaigns' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+          <a href="{% url 'core:tutorial_scheduling_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
             <h4 class="font-semibold text-indigo-900">{% trans "Scheduling Campaigns" %}</h4>
             <p class="text-sm text-indigo-700">{% trans "Master timing and scheduling" %}</p>
           </a>
-          <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
+          <a href="{% url 'core:tutorial_email_analytics' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
             <h4 class="font-semibold text-purple-900">{% trans "Understanding Email Analytics" %}</h4>
             <p class="text-sm text-purple-700">{% trans "Track your campaign performance" %}</p>
           </a>

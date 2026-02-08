@@ -13,7 +13,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">{{ campaign.name }}</h1>
                 <p class="text-gray-600 mt-1">{% trans "Email Queue and History" %}</p>
             </div>
-            <a href="{% url 'campaigns:edit' campaign.id %}" 
+            <a href="{% url 'campaigns:edit' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
                 {% trans "Back to Campaign" %}
             </a>

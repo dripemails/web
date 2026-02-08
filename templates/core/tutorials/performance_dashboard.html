@@ -7,7 +7,7 @@
   <div class="bg-gradient-to-r from-blue-600 to-indigo-600 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
       <h1 class="text-4xl font-bold mb-4">{% trans "📈 Campaign Performance Dashboard" %}</h1>
       <p class="text-xl text-white text-opacity-90">{% trans "Monitor all your campaigns at a glance" %}</p>
@@ -160,11 +160,11 @@
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <a href="{% url 'core:tutorial_email_analytics' %}" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+          <a href="{% url 'core:tutorial_email_analytics' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
             <h4 class="font-semibold text-blue-900">{% trans "Understanding Email Analytics" %}</h4>
             <p class="text-sm text-blue-700">{% trans "Learn what each metric means" %}</p>
           </a>
-          <a href="{% url 'core:tutorial_data_optimization' %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+          <a href="{% url 'core:tutorial_data_optimization' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
             <h4 class="font-semibold text-indigo-900">{% trans "Optimizing Based on Data" %}</h4>
             <p class="text-sm text-indigo-700">{% trans "Apply insights to improve" %}</p>
           </a>

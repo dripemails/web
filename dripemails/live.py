@@ -113,6 +113,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.current_year',
                 'core.context_processors.site_detection',
+                'core.context_processors.agent',
             ],
         },
     },

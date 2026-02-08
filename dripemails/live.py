@@ -115,6 +115,11 @@ TEMPLATES = [
                 'core.context_processors.site_detection',
                 'core.context_processors.agent',
             ],
+            'loaders': [
+                'core.template_loaders.AgentTemplateLoader',
+                ('django.template.loaders.filesystem.Loader', [str(BASE_DIR / 'templates')]),
+                'django.template.loaders.app_directories.Loader',
+            ],
         },
     },
 ]

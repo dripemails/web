@@ -23,6 +23,42 @@ from .ai_utils import generate_email_content
 
 logger = logging.getLogger(__name__)
 
+# Column name aliases for upload: file header (normalized) -> our internal key.
+# Normalization: strip, lower, replace runs of spaces with single space.
+UPLOAD_COLUMN_ALIASES = {
+    'email': ['email', 'email address', 'e-mail', 'emailaddress', 'mail'],
+    'first_name': ['first name', 'firstname', 'first', 'given name', 'givenname'],
+    'last_name': ['last name', 'lastname', 'last', 'surname', 'family name', 'familyname'],
+    'full_name': ['full name', 'fullname', 'name'],
+    'company': ['company', 'organization', 'org'],
+}
+
+
+def _normalize_header(name):
+    if name is None:
+        return ''
+    return ' '.join(str(name).strip().lower().split())
+
+
+def _build_upload_column_map(columns):
+    """
+    Map file column names to our keys (email, first_name, last_name, etc.).
+    Returns dict: our_key -> file_column_name (the first matching file column).
+    """
+    alias_to_key = {}
+    for key, aliases in UPLOAD_COLUMN_ALIASES.items():
+        for a in aliases:
+            alias_to_key[a] = key
+    column_map = {}  # our_key -> file_column_name
+    for file_col in columns:
+        norm = _normalize_header(file_col)
+        if norm in alias_to_key:
+            key = alias_to_key[norm]
+            if key not in column_map:
+                column_map[key] = file_col
+    return column_map
+
+
 @login_required
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -663,23 +699,30 @@ def upload_contacts(request):
                     rows.append(row_dict)
             workbook.close()
         
-        # Validate required columns
-        required_columns = ['email']
-        missing_columns = [col for col in required_columns if col not in columns]
-        if missing_columns:
+        # Auto-match columns (e.g. "Email Address" -> email, "First Name" -> first_name)
+        column_map = _build_upload_column_map(columns)
+        if 'email' not in column_map:
             return Response({
-                'error': _('Missing required columns: {}').format(', '.join(missing_columns))
+                'error': _('Missing required columns: email. Your file must have a column for email (e.g. "Email", "Email Address", "E-mail").')
             }, status=400)
         
-        # Process the data
+        # Process the data using mapped columns
         contacts = []
         for row in rows:
+            def get_mapped(key, default=''):
+                file_col = column_map.get(key)
+                if not file_col:
+                    return default
+                val = row.get(file_col)
+                return (str(val).strip() if val is not None else '') or default
             contact = {
-                'email': row.get('email', ''),
-                'first_name': row.get('first_name', '') or '',
-                'last_name': row.get('last_name', '') or '',
-                'full_name': row.get('full_name', '') or ''
+                'email': get_mapped('email', ''),
+                'first_name': get_mapped('first_name', ''),
+                'last_name': get_mapped('last_name', ''),
+                'full_name': get_mapped('full_name', ''),
+                'company': get_mapped('company', ''),
             }
+            # If we have full_name but no first/last, optionally split (keep as-is for now)
             contacts.append(contact)
         
         return Response({

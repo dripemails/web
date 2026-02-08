@@ -635,22 +635,17 @@
     </div>
 </div>
 
-<!-- File Upload Modal -->
+<!-- File Upload Modal - uses same importer as /subscribers/import/ -->
 <div id="uploadModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white rounded-lg p-6 max-w-md w-full">
         <h3 class="text-lg font-medium text-gray-900 mb-4">{% trans "Upload Contacts" %}</h3>
+        <p class="text-sm text-gray-600 mb-4">{% trans "Contacts will be added to the subscriber list selected above. Use a file with columns like Email Address, First Name, Last Name, Company." %}</p>
         <div class="space-y-4">
-            <div>
-                <label for="list_name" class="block text-sm font-medium text-gray-700">{% trans "List Name" %}</label>
-                <input type="text" id="list_name" name="list_name"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                       placeholder="{% trans 'My Contact List' %}">
-            </div>
             <div>
                 <label for="contact_file" class="block text-sm font-medium text-gray-700">{% trans "Contact File" %}</label>
                 <input type="file" id="contact_file" name="file" accept=".csv,.xls,.xlsx"
                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                <p class="mt-1 text-sm text-gray-500">{% trans "Supported formats: CSV, Excel (.xls, .xlsx)" %}</p>
+                <p class="mt-1 text-sm text-gray-500">{% trans "Supported formats: CSV, Excel (.xls, .xlsx). Columns are auto-matched (e.g. Email Address, First Name, Last Name)." %}</p>
             </div>
         </div>
         <div class="mt-6 flex justify-end space-x-3">
@@ -678,27 +673,29 @@ $(document).ready(function() {
     $('#cancelUpload').click(function() {
         $('#uploadModal').addClass('hidden');
         $('#contact_file').val('');
-        $('#list_name').val('');
     });
     
-    // Handle file upload
+    // Handle file upload - use same import API as /subscribers/import/
     $('#submitUpload').click(function() {
         const file = $('#contact_file')[0].files[0];
-        const listName = $('#list_name').val();
+        const listId = $('#subscriber_list').val();
         
         if (!file) {
             alert('{% trans "Please select a file to upload" %}');
             return;
         }
+        if (!listId) {
+            alert('{% trans "Please select a subscriber list above first. Contacts will be added to that list." %}');
+            return;
+        }
         
         const formData = new FormData();
         formData.append('file', file);
-        if (listName) {
-            formData.append('list_name', listName);
-        }
+        formData.append('list_id', listId);
+        formData.append('mappings', '{}');
         
         $.ajax({
-            url: '/api/upload-contacts/',
+            url: '/api/subscribers/import/',
             type: 'POST',
             data: formData,
             processData: false,
@@ -707,20 +704,13 @@ $(document).ready(function() {
                 'X-CSRFToken': getCookie('csrftoken')
             },
             success: function(response) {
-                // Add the new list to the select dropdown
-                const option = new Option(response.list_name, response.list_id, true, true);
-                $('#subscriber_list').append(option);
-                
-                // Close modal and reset form
                 $('#uploadModal').addClass('hidden');
                 $('#contact_file').val('');
-                $('#list_name').val('');
-                
-                // Show success message
-                alert('{% trans "Contacts uploaded successfully" %}');
+                alert(response.message || '{% trans "Contacts imported successfully" %}');
             },
             error: function(xhr) {
-                alert(xhr.responseJSON.error || '{% trans "An error occurred while uploading contacts" %}');
+                const msg = (xhr.responseJSON && xhr.responseJSON.error) ? xhr.responseJSON.error : '{% trans "An error occurred while uploading contacts" %}';
+                alert(msg);
             }
         });
     });

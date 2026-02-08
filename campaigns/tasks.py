@@ -1,5 +1,5 @@
 from django.core.mail import EmailMultiAlternatives
-from django.utils import timezone
+from django.utils import timezone as tz
 from django.conf import settings
 from django.template.loader import render_to_string
 from datetime import timedelta
@@ -377,11 +377,23 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     vars_for_replace['site_url'] = site_url
     vars_for_replace['sender_email'] = user_email_for_var
 
+    def _var_str(val):
+        """Convert variable value to string for substitution; avoid 'nan' from pandas/float."""
+        if val is None:
+            return ''
+        if isinstance(val, float) and (val != val or val == float('inf') or val == float('-inf')):
+            return ''
+        s = str(val).strip()
+        return '' if s.lower() == 'nan' else s
+
+    for key in list(vars_for_replace.keys()):
+        vars_for_replace[key] = _var_str(vars_for_replace[key])
+
     for key, value in vars_for_replace.items():
         placeholder = f"{{{{{key}}}}}"
-        html_content = html_content.replace(placeholder, str(value))
-        text_content = text_content.replace(placeholder, str(value))
-        subject = subject.replace(placeholder, str(value))
+        html_content = html_content.replace(placeholder, value)
+        text_content = text_content.replace(placeholder, value)
+        subject = subject.replace(placeholder, value)
 
     # Create the sent event first to get tracking ID
     sent_event = EmailEvent.objects.create(
@@ -578,7 +590,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         if request_obj:
             request_obj.status = 'sent'
             request_obj.error_message = ''
-            request_obj.sent_at = timezone.now()
+            request_obj.sent_at = tz.now()
             request_obj.save(update_fields=['status', 'error_message', 'sent_at', 'updated_at'])
         
         logger.info(f"Sent single email '{subject}' to {subscriber_email}")
@@ -608,7 +620,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
                 try:
                     # Create EmailMessage to represent the sent email
                     # Use a unique provider_message_id based on timestamp and subscriber email
-                    provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber_email}"
+                    provider_message_id = f"sent-{tz.now().timestamp()}-{subscriber_email}"
                     
                     # Get the actual sent email content (with variables replaced)
                     sent_subject = subject
@@ -638,7 +650,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
                         sender_email=from_email_for_message,
                         body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
                         body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
-                        received_at=timezone.now(),  # When it was sent
+                        received_at=tz.now(),  # When it was sent
                         processed=True,  # Mark as processed since we just sent it
                         campaign_email=email,  # Link to the campaign email template
                         provider_data={
@@ -656,7 +668,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
                 except Exception as e:
                     logger.error(f"Error creating EmailMessage for sent email: {str(e)}", exc_info=True)
             else:
-                logger.warning(f"Could not find {provider} credential for user {user.id} to create EmailMessage for sent email")
+                logger.debug(f"Could not find {provider} credential for user {user.id} to create EmailMessage for sent email (optional; email was still sent)")
         
         # Schedule the next email in the campaign sequence
         try:
@@ -738,11 +750,11 @@ def schedule_next_email_in_sequence(current_email, request_obj, subscriber_email
         elif wait_unit == 'months':
             send_delay = timedelta(days=wait_time * 30)
     
-    scheduled_for = timezone.now() + send_delay
-    
+    scheduled_for = tz.now() + send_delay
+
     # Get user from request_obj or campaign
     user = request_obj.user if request_obj else campaign.user
-    
+
     # Store original email message ID in variables so subsequent emails can include it
     next_variables = (variables or {}).copy()
     if original_email_message:
@@ -877,6 +889,9 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
         variables['last_name'] = subscriber.last_name
     if not variables.get('email'):
         variables['email'] = subscriber.email
+    # Include subject from original email when present (for "Re: {{subject}}" in templates)
+    if original_email_message and getattr(original_email_message, 'subject', None):
+        variables.setdefault('subject', original_email_message.subject)
     
     # Get user profile for ad settings
     user_profile, created = UserProfile.objects.get_or_create(user=email.campaign.user)
@@ -909,12 +924,20 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     subject = email.subject
     
     # Replace variables in content (robustly handle {{ key }} with optional whitespace/case)
+    # Sanitize values so nan/None never appear in email (same as _send_single_email_sync)
+    def _safe_replacement(val):
+        if val is None:
+            return ''
+        if isinstance(val, float) and (val != val or val == float('inf') or val == float('-inf')):
+            return ''
+        s = str(val).strip()
+        return '' if s.lower() == 'nan' else s
+
     if variables:
         import re
         for key, value in variables.items():
-            # Match {{key}}, {{ key }}, {{   Key   }}, etc.
             pattern = re.compile(r"\{\{\s*" + re.escape(key) + r"\s*\}\}", re.IGNORECASE)
-            replacement = "" if value is None else str(value)
+            replacement = _safe_replacement(value)
             if html_content:
                 html_content = pattern.sub(replacement, html_content)
             if text_content:
@@ -932,11 +955,10 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
     # Add email footer if one is assigned
     if email.footer:
         footer_html = email.footer.html_content
-        # Replace variables in footer if needed
         if variables:
             for key, value in variables.items():
                 placeholder = f"{{{{{key}}}}}"
-                footer_html = footer_html.replace(placeholder, str(value))
+                footer_html = footer_html.replace(placeholder, _safe_replacement(value))
         html_content += footer_html
         # Convert footer HTML to text for plain text version using proper HTML to text conversion
         footer_text = _html_to_plain_text(footer_html)
@@ -1090,7 +1112,6 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
         
         if is_gmail_campaign or is_imap_campaign:
             from gmail.models import EmailCredential, EmailMessage, EmailProvider
-            from django.utils import timezone
             import uuid
             
             # Find the credential for this user and provider
@@ -1107,7 +1128,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                 try:
                     # Create EmailMessage to represent the sent email
                     # Use a unique provider_message_id based on timestamp and subscriber
-                    provider_message_id = f"sent-{timezone.now().timestamp()}-{subscriber.id}"
+                    provider_message_id = f"sent-{tz.now().timestamp()}-{subscriber.id}"
                     
                     # Get the actual sent email content (with variables replaced)
                     sent_subject = subject
@@ -1129,7 +1150,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                         sender_email=from_email_for_message,
                         body_text=sent_body_text[:1000] if sent_body_text else '',  # Limit length
                         body_html=sent_body_html[:2000] if sent_body_html else '',  # Limit length
-                        received_at=timezone.now(),  # When it was sent
+                        received_at=tz.now(),  # When it was sent
                         processed=True,  # Mark as processed since we just sent it
                         campaign_email=email,  # Link to the campaign email template
                         provider_data={
@@ -1147,7 +1168,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                 except Exception as e:
                     logger.error(f"Error creating EmailMessage for sent email: {str(e)}", exc_info=True)
             else:
-                logger.warning(f"Could not find {provider} credential for user {campaign.user.id} to create EmailMessage for sent email")
+                logger.debug(f"Could not find {provider} credential for user {campaign.user.id} to create EmailMessage for sent email (optional; email was still sent)")
         
         # Schedule the next email in sequence if one exists
         next_email = email.campaign.emails.filter(order__gt=email.order).order_by('order').first()
@@ -1170,8 +1191,8 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
             elif wait_unit_val == 'months':
                 send_delay = timedelta(days=wait_time_val * 30)
             
-            scheduled_for = timezone.now() + send_delay
-            
+            scheduled_for = tz.now() + send_delay
+
             # Use EmailSendRequest to schedule the next email
             # Store original email message ID in variables so subsequent emails can include it
             next_variables = (variables or {}).copy()

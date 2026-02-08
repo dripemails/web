@@ -15,8 +15,74 @@ from .serializers import ListSerializer, SubscriberSerializer
 from campaigns.models import Campaign
 import csv
 import json
+import math
+import time
 from openpyxl import load_workbook
 from datetime import datetime
+from django.db import connection
+from django.db.utils import OperationalError
+
+
+def _json_safe(val):
+    """Convert NaN/Inf and non-JSON types to JSON-serializable values."""
+    if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
+        return None
+    if isinstance(val, dict):
+        return {k: _json_safe(v) for k, v in val.items()}
+    if isinstance(val, (list, tuple)):
+        return [_json_safe(v) for v in val]
+    if hasattr(val, 'item'):  # numpy scalar
+        try:
+            return val.item()
+        except (ValueError, AttributeError):
+            return None
+    return val
+
+
+# Column name aliases for import: file header (normalized) -> our internal key.
+IMPORT_COLUMN_ALIASES = {
+    'email': ['email', 'email address', 'e-mail', 'emailaddress', 'mail'],
+    'first_name': ['first name', 'firstname', 'first', 'given name', 'givenname'],
+    'last_name': ['last name', 'lastname', 'last', 'surname', 'family name', 'familyname'],
+    'company': ['company', 'organization', 'org'],
+}
+
+
+def _normalize_header(name):
+    if name is None:
+        return ''
+    return ' '.join(str(name).strip().lower().split())
+
+
+def _build_import_column_map(columns):
+    """Map file column names to our keys (email, first_name, last_name). Returns dict: our_key -> file_column_name."""
+    alias_to_key = {}
+    for key, aliases in IMPORT_COLUMN_ALIASES.items():
+        for a in aliases:
+            alias_to_key[a] = key
+    column_map = {}
+    for file_col in (columns or []):
+        norm = _normalize_header(file_col)
+        if norm in alias_to_key:
+            key = alias_to_key[norm]
+            if key not in column_map:
+                column_map[key] = file_col
+    return column_map
+
+
+def _cell_str(val, default=''):
+    """Get a string from a cell value; handle pandas NaN and None."""
+    if val is None:
+        return default
+    if hasattr(val, 'item') and hasattr(val, 'dtype'):
+        try:
+            val = val.item()
+        except (ValueError, AttributeError):
+            return default
+    if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
+        return default
+    s = str(val).strip()
+    return s if s and s.lower() != 'nan' else default
 
 @login_required
 @api_view(['GET', 'POST'])
@@ -215,69 +281,89 @@ def process_import(request):
                 'error': _('Unsupported file format')
             }, status=400)
         
-        subscriber_list = List.objects.get(id=list_id, user=request.user)
-        campaign = None
-        if campaign_id:
-            campaign = Campaign.objects.get(id=campaign_id, user=request.user)
+        # Auto-map columns when mappings are empty or don't match (e.g. "Email Address" -> email)
+        column_map = _build_import_column_map(columns)
+        email_column = (mappings.get('email') or column_map.get('email') or 'email').strip() or column_map.get('email')
+        first_name_col = (mappings.get('first_name') or column_map.get('first_name') or '').strip() or column_map.get('first_name')
+        last_name_col = (mappings.get('last_name') or column_map.get('last_name') or '').strip() or column_map.get('last_name')
         
-        imported_count = 0
-        skipped_count = 0
+        file_columns = columns or (list(rows[0].keys()) if rows else [])
+        if not email_column or email_column not in file_columns:
+            return Response({
+                'error': _('Could not find an email column. Your file must have a column named "Email", "Email Address", or similar.')
+            }, status=400)
         
-        # Process each row
-        for row in rows:
-            email_column = mappings.get('email', 'email')
-            if email_column not in row:
-                continue
+        skip_cols = {c for c in (email_column, first_name_col, last_name_col) if c}
+        
+        # Retry on SQLite "database is locked" (common when many rows are imported)
+        max_retries = 8
+        for attempt in range(max_retries):
+            try:
+                connection.close()  # Release any stale connection before retry
+                subscriber_list = List.objects.get(id=list_id, user=request.user)
+                campaign = None
+                if campaign_id:
+                    campaign = Campaign.objects.get(id=campaign_id, user=request.user)
                 
-            email = row[email_column]
-            if not email or not str(email).strip():
-                skipped_count += 1
-                continue
-            
-            # Get mapped fields
-            first_name = row.get(mappings.get('first_name', 'first_name'), '') or ''
-            last_name = row.get(mappings.get('last_name', 'last_name'), '') or ''
-            
-            subscriber, created = Subscriber.objects.get_or_create(
-                email=str(email).strip(),
-                defaults={
-                    'first_name': str(first_name).strip() if first_name else '',
-                    'last_name': str(last_name).strip() if last_name else '',
-                    'is_active': True
-                }
-            )
-            
-            # Add to list if not already in it
-            if subscriber_list not in subscriber.lists.all():
-                subscriber.lists.add(subscriber_list)
-            
-            # Handle custom fields
-            for column in columns or row.keys():
-                if column not in [email_column, mappings.get('first_name'), mappings.get('last_name')]:
-                    value = row.get(column)
-                    if not value or not str(value).strip():
+                imported_count = 0
+                skipped_count = 0
+                
+                for row in rows:
+                    email = _cell_str(row.get(email_column))
+                    if not email:
+                        skipped_count += 1
                         continue
-                        
-                    field, field_created = CustomField.objects.get_or_create(
-                        user=request.user,
-                        key=column.lower().replace(' ', '_'),
-                        defaults={'name': column}
+                    
+                    first_name = _cell_str(row.get(first_name_col)) if first_name_col else ''
+                    last_name = _cell_str(row.get(last_name_col)) if last_name_col else ''
+                    
+                    subscriber, created = Subscriber.objects.get_or_create(
+                        email=email,
+                        defaults={
+                            'first_name': first_name,
+                            'last_name': last_name,
+                            'is_active': True
+                        }
                     )
                     
-                    CustomValue.objects.update_or_create(
-                        subscriber=subscriber,
-                        field=field,
-                        defaults={'value': str(value).strip()}
-                    )
-            
-            imported_count += 1
-        
-        return Response({
-            'message': _('Successfully imported %(imported)d subscribers (%(skipped)d skipped)') % {
-                'imported': imported_count,
-                'skipped': skipped_count
-            }
-        })
+                    if subscriber_list not in subscriber.lists.all():
+                        subscriber.lists.add(subscriber_list)
+                    
+                    for column in (columns or list(row.keys())):
+                        if column in skip_cols:
+                            continue
+                        value = _cell_str(row.get(column))
+                        if not value:
+                            continue
+                        field, field_created = CustomField.objects.get_or_create(
+                            user=request.user,
+                            key=column.lower().replace(' ', '_'),
+                            defaults={'name': column}
+                        )
+                        CustomValue.objects.update_or_create(
+                            subscriber=subscriber,
+                            field=field,
+                            defaults={'value': value}
+                        )
+                    
+                    imported_count += 1
+                
+                return Response({
+                    'message': _('Successfully imported %(imported)d subscribers (%(skipped)d skipped)') % {
+                        'imported': imported_count,
+                        'skipped': skipped_count
+                    }
+                })
+            except OperationalError as e:
+                err_msg = str(e).lower()
+                if 'locked' in err_msg or 'database is locked' in err_msg:
+                    if attempt < max_retries - 1:
+                        time.sleep(0.15 * (attempt + 1))
+                        continue
+                    return Response({
+                        'error': _('The database is busy. Please try again in a moment (e.g. wait a few seconds and re-upload).')
+                    }, status=503)
+                raise
         
     except Exception as e:
         return Response({
@@ -342,6 +428,9 @@ def validate_file(request):
         else:
             return Response({'error': _('Unsupported file format')}, status=400)
         
+        # Sanitize so NaN/Inf from pandas don't break JSON serialization
+        preview = _json_safe(preview)
+        columns = [str(c) if c not in (None, '') else f'Column_{i+1}' for i, c in enumerate(_json_safe(columns))]
         return Response({
             'columns': columns,
             'preview': preview

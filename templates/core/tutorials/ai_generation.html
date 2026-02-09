@@ -7,7 +7,7 @@
   <div class="bg-gradient-to-r from-teal-500 to-cyan-600 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
       <h1 class="text-4xl font-bold mb-4">{% trans "✨ Generating Email Content with AI" %}</h1>
       <p class="text-xl text-white text-opacity-90">{% trans "Use AI to create engaging email campaigns" %}</p>
@@ -139,11 +139,11 @@
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <a href="{% url 'core:tutorial_ai_optimization' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition">
+          <a href="{% url 'core:tutorial_ai_optimization' %}" class="block p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition">
             <h4 class="font-semibold text-teal-900">{% trans "AI Email Revision & Optimization" %}</h4>
             <p class="text-sm text-teal-700">{% trans "Improve existing content with AI" %}</p>
           </a>
-          <a href="{% url 'core:tutorial_email_editor' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition">
+          <a href="{% url 'core:tutorial_email_editor' %}" class="block p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition">
             <h4 class="font-semibold text-cyan-900">{% trans "Using the Email Editor" %}</h4>
             <p class="text-sm text-cyan-700">{% trans "Format and enhance your content" %}</p>
           </a>

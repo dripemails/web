@@ -251,7 +251,7 @@
 </head>
 <body>
     <header class="mobile-header">
-        <a href="{% url 'core:home' %}{% if agent %}?agent={{ agent }}{% endif %}" class="logo">
+        <a href="{% url 'core:home' %}" class="logo">
             <img src="/static/core/img/{{ site_logo|default:'logo_dripemails.org.png' }}" alt="{{ site_name }}">
             <span>{{ site_name }}</span>
         </a>
@@ -267,25 +267,25 @@
         </button>
         <nav>
             {% if user.is_authenticated %}
-                <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <a href="{% url 'core:dashboard' %}">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6h6a2 2 0 012 2v2a2 2 0 01-2 2h-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h2a2 2 0 002-2v-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 14h6"/></svg>
                     {% trans "Dashboard" %}
                 </a>
-                <a href="{% url 'core:settings' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <a href="{% url 'core:settings' %}">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     {% trans "Settings" %}
                 </a>
                 <div class="nav-divider"></div>
-                <a href="{% url 'account_logout' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <a href="{% url 'account_logout' %}">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                     {% trans "Logout" %}
                 </a>
             {% else %}
-                <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <a href="{% url 'account_login' %}">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
                     {% trans "Login" %}
                 </a>
-                <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}">
+                <a href="{% url 'account_signup' %}">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
                     {% trans "Sign Up Free" %}
                 </a>
@@ -308,20 +308,20 @@
 
     <nav class="mobile-bottom-nav" aria-label="{% trans 'Main navigation' %}">
         {% if user.is_authenticated %}
-            <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}">
+            <a href="{% url 'core:dashboard' %}">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6h6a2 2 0 012 2v2a2 2 0 01-2 2h-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h2a2 2 0 002-2v-2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 14h6"/></svg>
                 {% trans "Dashboard" %}
             </a>
-            <a href="{% url 'core:settings' %}{% if agent %}?agent={{ agent }}{% endif %}">
+            <a href="{% url 'core:settings' %}">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 {% trans "Settings" %}
             </a>
         {% else %}
-            <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}">
+            <a href="{% url 'account_login' %}">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
                 {% trans "Login" %}
             </a>
-            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}">
+            <a href="{% url 'account_signup' %}">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
                 {% trans "Sign up" %}
             </a>

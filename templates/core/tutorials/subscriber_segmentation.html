@@ -7,7 +7,7 @@
   <div class="bg-gradient-to-r from-pink-500 to-red-500 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
       <h1 class="text-4xl font-bold mb-4">{% trans "🎯 Subscriber Segmentation" %}</h1>
       <p class="text-xl text-white text-opacity-90">{% trans "Send targeted campaigns to specific audience groups" %}</p>
@@ -132,11 +132,11 @@
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <a href="{% url 'core:tutorial_managing_lists' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition">
+          <a href="{% url 'core:tutorial_managing_lists' %}" class="block p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition">
             <h4 class="font-semibold text-pink-900">{% trans "Managing Subscriber Lists" %}</h4>
             <p class="text-sm text-pink-700">{% trans "Organize your database" %}</p>
           </a>
-          <a href="{% url 'core:tutorial_creating_campaign' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-red-50 rounded-lg hover:bg-red-100 transition">
+          <a href="{% url 'core:tutorial_creating_campaign' %}" class="block p-4 bg-red-50 rounded-lg hover:bg-red-100 transition">
             <h4 class="font-semibold text-red-900">{% trans "Creating Your First Campaign" %}</h4>
             <p class="text-sm text-red-700">{% trans "Send to your segments" %}</p>
           </a>

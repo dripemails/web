@@ -6,8 +6,8 @@
 
 {% block extra_head %}
 <!-- Quill.js - Free WYSIWYG Editor -->
-<link href="{% static 'js/quill.core.css' %}{% if agent %}?agent={{ agent }}{% endif %}" rel="stylesheet">
-<link href="{% static 'js/quill.snow.css' %}{% if agent %}?agent={{ agent }}{% endif %}" rel="stylesheet">
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
+<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
 <script src="{% static 'js/quill.min.js' %}"></script>
 
 <style>
@@ -28,7 +28,7 @@
   <div class="flex items-center justify-between mb-6">
     <h1 class="text-2xl font-semibold">{% trans "Template Revision" %}</h1>
     <div>
-      <a href="{% url 'campaigns:analysis' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Analysis" %}</a>
+      <a href="{% url 'campaigns:analysis' %}" class="text-indigo-600 hover:text-indigo-800">{% trans "Analysis" %}</a>
     </div>
   </div>
 

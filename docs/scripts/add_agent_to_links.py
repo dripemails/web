@@ -29,6 +29,9 @@ def should_skip_href(href: str) -> bool:
     # Already has agent param (idempotent)
     if 'agent={{ agent }}' in href or '?agent=' in href or '&agent=' in href:
         return True
+    # Don't add agent inside Django tags that output URLs - would break tag syntax
+    if '{% static' in href or '{% url' in href:
+        return True
     # Anchors and scripts
     if href.startswith('#') or href.startswith('javascript:') or href.startswith('mailto:'):
         return True

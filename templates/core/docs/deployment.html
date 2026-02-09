@@ -70,27 +70,27 @@
   <h2 class="text-2xl font-bold text-gray-900 mb-4">{% trans "Deployment Topics" %}</h2>
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
-    <a href="{% url 'core:docs_deployment_prerequisites' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
+    <a href="{% url 'core:docs_deployment_prerequisites' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "📋 Prerequisites" %}</h3>
       <p class="text-gray-600">{% trans "System requirements and dependencies needed before deployment" %}</p>
     </a>
 
-    <a href="{% url 'core:docs_deployment_installation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
+    <a href="{% url 'core:docs_deployment_installation' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "⚙️ Installation" %}</h3>
       <p class="text-gray-600">{% trans "Step-by-step installation guide for setting up the application" %}</p>
     </a>
 
-    <a href="{% url 'core:docs_deployment_configuration' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
+    <a href="{% url 'core:docs_deployment_configuration' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🔧 Configuration" %}</h3>
       <p class="text-gray-600">{% trans "Configure environment variables, database, and email settings" %}</p>
     </a>
 
-    <a href="{% url 'core:docs_deployment_production' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
+    <a href="{% url 'core:docs_deployment_production' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🚀 Production Setup" %}</h3>
       <p class="text-gray-600">{% trans "Deploy to production with Nginx, SSL, and process management" %}</p>
     </a>
 
-    <a href="{% url 'core:docs_deployment_troubleshooting' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
+    <a href="{% url 'core:docs_deployment_troubleshooting' %}" class="block p-6 bg-white border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-lg transition-all">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{% trans "🔍 Troubleshooting" %}</h3>
       <p class="text-gray-600">{% trans "Common issues and solutions for deployment problems" %}</p>
     </a>

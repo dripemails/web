@@ -3,6 +3,9 @@
 Remove {% if agent %}?agent={{ agent }}{% endif %} and
 {% if agent %}&agent={{ agent }}{% endif %} from Django templates.
 
+Also repairs broken {% static %} tags where the agent snippet was incorrectly
+inserted (e.g. {% static"path" %} -> {% static "path" %}).
+
 Run from the project root (dripemails.org) or with --templates pointing at
 the templates directory. Modifies files in place. Safe to run multiple times
 (idempotent).
@@ -47,6 +50,10 @@ def process_file(filepath: str, dry_run: bool) -> bool:
     # Then any whitespace variants
     text = AGENT_SUFFIX_RE.sub('', text)
     text = AGENT_SUFFIX_AMP_RE.sub('', text)
+
+    # Repair broken {% static %} tags: {% static"path" %} or {% static'path' %} -> valid
+    text = text.replace('{% static"', '{% static "')
+    text = text.replace("{% static'", "{% static '")
 
     changed = text != original
     if changed and not dry_run:

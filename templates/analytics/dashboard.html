@@ -136,7 +136,7 @@
                         {% for campaign in recent_campaigns %}
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{% url 'campaigns:edit' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-sm font-medium text-indigo-600 hover:text-indigo-900">
+                                <a href="{% url 'campaigns:edit' campaign.id %}" class="text-sm font-medium text-indigo-600 hover:text-indigo-900">
                                     {{ campaign.name }}
                                 </a>
                             </td>

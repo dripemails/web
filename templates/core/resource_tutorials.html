@@ -33,7 +33,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Quick Start Guide" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Get up and running with DripEmails in under 6 minutes. Create your account, add subscribers, and send your first campaign." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_quick_start' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_quick_start' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Dashboard Overview" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Tour of the DripEmails dashboard. Learn where everything is and how to navigate the platform efficiently." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_dashboard_overview' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_dashboard_overview' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Account Setup & Settings" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Configure your account settings, set up your profile, and customize your sending preferences." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_account_setup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_account_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Campaign Management Section -->
@@ -86,7 +86,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Creating Your First Campaign" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Step-by-step guide to creating a one-time email campaign. From setup to sending." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_creating_campaign' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_creating_campaign' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Building Drip Campaigns" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Learn how to create automated drip campaigns with multiple emails and time delays." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_drip_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_drip_campaigns' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Scheduling Campaigns" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Schedule your campaigns for optimal send times and manage your email calendar." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_scheduling_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_scheduling_campaigns' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Subscriber Management Section -->
@@ -139,7 +139,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Importing Subscribers from CSV" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Upload and import your subscriber lists from CSV files. Includes data formatting tips." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_importing_subscribers' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_importing_subscribers' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Managing Subscriber Lists" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Organize subscribers into lists, manage unsubscribes, and maintain list hygiene." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_managing_lists' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_managing_lists' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Subscriber Segmentation" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Create targeted segments based on subscriber data and engagement for better results." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_subscriber_segmentation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_subscriber_segmentation' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Email Design Section -->
@@ -192,7 +192,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Using the Email Editor" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Master the Quill rich text editor. Format text, add images, links, and create beautiful emails." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_email_editor' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_email_editor' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Creating Reusable Templates" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Build and save email templates for consistent branding and faster campaign creation." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_reusable_templates' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_reusable_templates' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Email Design Best Practices" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Learn design principles for high-converting emails. Mobile optimization, CTAs, and more." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_design_best_practices' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_design_best_practices' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- AI Features Section -->
@@ -245,7 +245,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Setting Up AI Features" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Configure Hugging Face API and enable AI-powered email generation and editing." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_ai_setup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -261,7 +261,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Generating Email Content with AI" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Use AI to generate complete email campaigns from simple prompts. Save hours of writing time." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_ai_generation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_generation' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "AI Email Revision & Optimization" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Improve existing emails with AI-powered grammar, tone, and clarity enhancements." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_ai_optimization' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_ai_optimization' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Analytics Section -->
@@ -298,7 +298,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Understanding Email Analytics" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Learn what metrics matter: open rates, click rates, bounces, and how to interpret them." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_email_analytics' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_email_analytics' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -314,7 +314,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Campaign Performance Dashboard" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Navigate the analytics dashboard and track real-time campaign performance." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_performance_dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_performance_dashboard' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -330,7 +330,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Optimizing Based on Data" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Use analytics insights to improve your campaigns and boost engagement rates." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_data_optimization' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_data_optimization' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Advanced Topics Section -->
@@ -351,7 +351,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "SMTP Server Setup" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Configure the built-in SMTP server for sending emails. Includes authentication and port setup." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_smtp_setup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_smtp_setup' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -367,7 +367,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "Deploying to Production" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Complete guide to deploying DripEmails on a production server with Nginx, SSL, and more." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_deployment' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
+            <div class="text-right"><a href="{% url 'core:tutorial_deployment' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a>
             </div>
           </div>
         </div>
@@ -383,7 +383,7 @@
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">{% trans "API Integration Guide" %}</h3>
             <p class="text-gray-600 mb-4">{% trans "Integrate DripEmails with your applications using our REST API. Includes authentication." %}</p>
-            <div class="text-right"><a href="{% url 'core:tutorial_api_integration' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
+            <div class="text-right"><a href="{% url 'core:tutorial_api_integration' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Read Guide</a></div></div></div>
     </section>
 
     <!-- Need More Help Section -->
@@ -393,13 +393,13 @@
         <p class="text-lg text-gray-700">{% trans "Can't find the tutorial you're looking for?" %}</p>
       </div>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="{% url 'core:resource_documentation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+        <a href="{% url 'core:resource_documentation' %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
           📚 Read Documentation
         </a>
-        <a href="{% url 'core:resource_community' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+        <a href="{% url 'core:resource_community' %}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
           💬 Join Community
         </a>
-        <a href="{% url 'core:contact' %}{% if agent %}?agent={{ agent }}{% endif %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+        <a href="{% url 'core:contact' %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
           📧 Contact Support
         </a>
       </div>

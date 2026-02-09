@@ -84,7 +84,7 @@
                         <div class="border-t border-gray-200 pt-8 mt-8">
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">{% trans "Get Started Today" %}</h3>
                             <p class="text-gray-600 mb-6">{% blocktrans %}Join thousands of users who trust {{ site_name }} for their email marketing needs. Experience the power of professional automation tools, completely free.{% endblocktrans %}</p>
-                            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+                            <a href="{% url 'account_signup' %}" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
                                 {% trans "Create Free Account" %}
                             </a>
                         </div>

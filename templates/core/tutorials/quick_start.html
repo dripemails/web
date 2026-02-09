@@ -9,7 +9,7 @@
   <div class="bg-gradient-to-r from-green-400 to-green-600 text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-green-100 font-medium">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-green-100 font-medium">
           ← {% trans "Back to Tutorials" %}
         </a>
       </div>
@@ -44,7 +44,7 @@
             {% trans "First, you'll need to create a free account on DripEmails.org:" %}
           </p>
           <ol class="list-decimal pl-6 text-gray-700 space-y-2 mb-4">
-            <li>{% trans "Navigate to the" %} <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline">{% trans "Sign Up page" %}</a></li>
+            <li>{% trans "Navigate to the" %} <a href="{% url 'account_signup' %}" class="text-indigo-600 hover:underline">{% trans "Sign Up page" %}</a></li>
             <li>{% trans "Enter your email address and create a strong password" %}</li>
             <li>{% trans "Verify your email address by clicking the link sent to your inbox" %}</li>
             <li>{% trans "Log in to your new account" %}</li>
@@ -157,19 +157,19 @@
       <section class="mb-8">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">🎯 {% trans "What's Next?" %}</h2>
         <div class="grid md:grid-cols-2 gap-6">
-          <a href="{% url 'core:docs_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <a href="{% url 'core:docs_campaigns' %}" class="block bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">📧 {% trans "Learn About Campaigns" %}</h3>
             <p class="text-gray-700">{% trans "Discover advanced campaign features like drip sequences and scheduling" %}</p>
           </a>
-          <a href="{% url 'core:docs_ai_features' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <a href="{% url 'core:docs_ai_features' %}" class="block bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">🤖 {% trans "Try AI Features" %}</h3>
             <p class="text-gray-700">{% trans "Use AI to generate and optimize your email content automatically" %}</p>
           </a>
-          <a href="{% url 'core:docs_analytics' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <a href="{% url 'core:docs_analytics' %}" class="block bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">📊 {% trans "Track Performance" %}</h3>
             <p class="text-gray-700">{% trans "Learn how to analyze opens, clicks, and campaign effectiveness" %}</p>
           </a>
-          <a href="{% url 'core:docs_templates' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <a href="{% url 'core:docs_templates' %}" class="block bg-gradient-to-br from-pink-50 to-pink-100 border-2 border-pink-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">📝 {% trans "Design Templates" %}</h3>
             <p class="text-gray-700">{% trans "Create reusable email templates for consistent branding" %}</p>
           </a>
@@ -181,9 +181,9 @@
         <h3 class="text-lg font-semibold text-indigo-900 mb-2">{% trans "Need Help?" %}</h3>
         <p class="text-indigo-800 mb-4">{% trans "If you run into any issues or have questions:" %}</p>
         <div class="flex gap-4">
-          <a href="{% url 'core:resource_documentation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline font-medium">📚 {% trans "Documentation" %}</a>
-          <a href="{% url 'core:resource_community' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline font-medium">💬 {% trans "Community" %}</a>
-          <a href="{% url 'core:contact' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline font-medium">📧 {% trans "Contact Support" %}</a>
+          <a href="{% url 'core:resource_documentation' %}" class="text-indigo-600 hover:underline font-medium">📚 {% trans "Documentation" %}</a>
+          <a href="{% url 'core:resource_community' %}" class="text-indigo-600 hover:underline font-medium">💬 {% trans "Community" %}</a>
+          <a href="{% url 'core:contact' %}" class="text-indigo-600 hover:underline font-medium">📧 {% trans "Contact Support" %}</a>
         </div>
       </div>
     </div>

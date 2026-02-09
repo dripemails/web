@@ -9,7 +9,7 @@
   <div class="bg-gradient-to-r from-purple-400 to-purple-600 text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-purple-100 font-medium">
+        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-purple-100 font-medium">
           ← Back to Tutorials
         </a>
       </div>
@@ -104,8 +104,8 @@
           <h3 class="text-lg font-semibold text-indigo-900 mb-2">{% trans "🎯 Next Steps" %}</h3>
           <p class="text-indigo-800 mb-4">{% trans "Now that your account is configured:" %}</p>
           <div class="flex gap-4">
-            <a href="{% url 'core:tutorial_quick_start' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline font-medium">Create Your First Campaign</a>
-            <a href="{% url 'core:docs_subscribers' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline font-medium">Add Subscribers</a>
+            <a href="{% url 'core:tutorial_quick_start' %}" class="text-indigo-600 hover:underline font-medium">Create Your First Campaign</a>
+            <a href="{% url 'core:docs_subscribers' %}" class="text-indigo-600 hover:underline font-medium">Add Subscribers</a>
           </div>
         </div>
       </div>

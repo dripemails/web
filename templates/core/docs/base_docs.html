@@ -19,57 +19,57 @@
       <aside class="lg:w-64 flex-shrink-0">
         <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
           <nav class="space-y-2">
-            <a href="{% url 'core:resource_documentation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if request.path == '/resources/documentation/' %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:resource_documentation' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if request.path == '/resources/documentation/' %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               📚 {% trans "Overview" %}
             </a>
             
-            <a href="{% url 'core:docs_getting_started' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'getting-started' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_getting_started' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'getting-started' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               🚀 {% trans "Getting Started" %}
             </a>
             
-            <a href="{% url 'core:docs_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'campaigns' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_campaigns' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'campaigns' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               📧 {% trans "Campaign Management" %}
             </a>
             
-            <a href="{% url 'core:docs_subscribers' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'subscribers' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_subscribers' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'subscribers' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               👥 {% trans "Subscriber Management" %}
             </a>
             
-            <a href="{% url 'core:docs_templates' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'templates' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_templates' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'templates' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               📝 {% trans "Email Templates" %}
             </a>
             
-            <a href="{% url 'core:docs_analytics' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'analytics' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_analytics' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'analytics' in request.path and 'deployment' not in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               📊 {% trans "Analytics & Tracking" %}
             </a>
             
-            <a href="{% url 'core:docs_ai_features' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'ai-features' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_ai_features' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'ai-features' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               🤖 {% trans "AI Features" %}
             </a>
             
-            <a href="{% url 'core:docs_smtp_server' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'smtp-server' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+            <a href="{% url 'core:docs_smtp_server' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'smtp-server' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
               🔧 {% trans "SMTP Server" %}
             </a>
             
             <div class="mt-4 pt-4 border-t">
-              <a href="{% url 'core:docs_deployment' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'deployment' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+              <a href="{% url 'core:docs_deployment' %}" class="block px-4 py-2 rounded hover:bg-gray-100 {% if 'deployment' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                 🚀 {% trans "Deployment" %}
               </a>
               {% if 'deployment' in request.path %}
               <div class="ml-4 mt-2 space-y-1">
-                <a href="{% url 'core:docs_deployment_prerequisites' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'prerequisites' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+                <a href="{% url 'core:docs_deployment_prerequisites' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'prerequisites' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                   {% trans "Prerequisites" %}
                 </a>
-                <a href="{% url 'core:docs_deployment_installation' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'installation' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+                <a href="{% url 'core:docs_deployment_installation' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'installation' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                   {% trans "Installation" %}
                 </a>
-                <a href="{% url 'core:docs_deployment_configuration' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'configuration' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+                <a href="{% url 'core:docs_deployment_configuration' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'configuration' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                   {% trans "Configuration" %}
                 </a>
-                <a href="{% url 'core:docs_deployment_production' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'production' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+                <a href="{% url 'core:docs_deployment_production' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'production' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                   {% trans "Production Setup" %}
                 </a>
-                <a href="{% url 'core:docs_deployment_troubleshooting' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'troubleshooting' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
+                <a href="{% url 'core:docs_deployment_troubleshooting' %}" class="block px-4 py-2 text-sm rounded hover:bg-gray-100 {% if 'troubleshooting' in request.path %}bg-indigo-50 text-indigo-600 font-medium{% endif %}">
                   {% trans "Troubleshooting" %}
                 </a>
               </div>

@@ -6,8 +6,8 @@
 
 {% block extra_head %}
 <!-- Quill.js - Free WYSIWYG Editor -->
-<link href="{% static 'js/quill.core.css' %}{% if agent %}?agent={{ agent }}{% endif %}" rel="stylesheet">
-<link href="{% static 'js/quill.snow.css' %}{% if agent %}?agent={{ agent }}{% endif %}" rel="stylesheet">
+<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
+<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
 <script src="{% static 'js/quill.min.js' %}"></script>
 <style>
     .ql-editor {

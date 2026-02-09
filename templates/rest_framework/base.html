@@ -11,11 +11,11 @@
     <title>{% block title %}{% if name %}{{ name }} – {% endif %}{{ site_name|default:"DripEmails.org" }}{% endblock %}</title>
     {% block style %}
     {% block bootstrap_theme %}
-    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/bootstrap.min.css" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/bootstrap-tweaks.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/>
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/prettify.css" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static{% if agent %}?agent={{ agent }}{% endif %}"rest_framework/css/default.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
     {% if code_style %}<style>{{ code_style }}</style>{% endif %}
     {% endblock %}
     {% endblock %}

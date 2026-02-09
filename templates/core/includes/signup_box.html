@@ -20,7 +20,7 @@
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                 {% trans "Connect your email account and start auto-replying immediately. No credit card required." %}
             </p>
-            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="mt-4 inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+            <a href="{% url 'account_signup' %}" class="mt-4 inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                 {% trans "Signup without Gmail or IMAP" %}
                 <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -92,7 +92,7 @@
         </form>
         <div class="signup-error mt-4 hidden bg-red-50 border border-red-200 text-red-800 p-3 rounded-lg text-sm"></div>
         <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+            <a href="{% url 'account_signup' %}" class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                 {% trans "Signup without Gmail or IMAP" %}
                 <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

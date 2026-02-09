@@ -7,7 +7,7 @@
 <div class="min-h-screen bg-gray-100 py-12">
     <div class="container mx-auto px-4">
         <div class="mb-6">
-            <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:text-indigo-800 text-sm mb-4 inline-block">
+            <a href="{% url 'core:dashboard' %}" class="text-indigo-600 hover:text-indigo-800 text-sm mb-4 inline-block">
                 ← {% trans "Back to Dashboard" %}
             </a>
             <h1 class="text-3xl font-bold text-gray-900">{{ list_obj.name }}</h1>
@@ -81,7 +81,7 @@
                     <ul class="space-y-2">
                         {% for campaign in campaigns %}
                         <li>
-                            <a href="{% url 'campaigns:edit' campaign_id=campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:text-indigo-800 text-sm">
+                            <a href="{% url 'campaigns:edit' campaign_id=campaign.id %}" class="text-indigo-600 hover:text-indigo-800 text-sm">
                                 {{ campaign.name }}
                             </a>
                         </li>
@@ -107,7 +107,7 @@
                                 <button type="button" id="showAddFormBtn" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
                                     {% trans "Add Subscriber" %}
                                 </button>
-                                <a href="{% url 'subscribers:import' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                <a href="{% url 'subscribers:import' %}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
                                     {% trans "Import from File" %}
                                 </a>
                             </div>
@@ -240,7 +240,7 @@
                     {% else %}
                         <div class="px-6 py-12 text-center">
                             <p class="text-gray-500">{% trans "No subscribers in this list yet." %}</p>
-                            <a href="{% url 'subscribers:add' %}{% if agent %}?agent={{ agent }}{% endif %}" class="mt-4 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
+                            <a href="{% url 'subscribers:add' %}" class="mt-4 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
                                 {% trans "Add Your First Subscriber" %}
                             </a>
                         </div>

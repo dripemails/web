@@ -713,23 +713,9 @@ let quill;
 let footerQuill;
 
 // Function to clean HTML when loading into Quill (editor-facing).
-// - Strips all <p><br></p> / <p><br/></p> so they never appear in the editor
-// - Removes leading/trailing empty paragraphs
-// - Collapses multiple consecutive empty paragraphs to a single one
+// No <p><br></p> stripping or replacement - pass content through as-is for the editor.
 function cleanQuillContent(html) {
     if (!html) return html;
-    
-    // Strip every empty paragraph (so loaded content never shows <p><br></p> in Quill)
-    html = html.replace(/<p><br\s*\/?><\/p>/gi, '');
-    
-    // Remove leading empty paragraphs (any remaining <p></p> or similar)
-    html = html.replace(/^(<p><br\s*\/?><\/p>\s*)+/gi, '');
-    
-    // Remove trailing empty paragraphs
-    html = html.replace(/(<p><br\s*\/?><\/p>\s*)+$/gi, '');
-    
-    // Collapse multiple consecutive empty paragraphs to a single one (preserves intentional spacing)
-    html = html.replace(/(<p><br\s*\/?><\/p>\s*){2,}/gi, '<p><br></p>');
     return html;
 }
 

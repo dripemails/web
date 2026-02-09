@@ -40,8 +40,8 @@ def _normalize_html_line_breaks(html_content: str) -> str:
     if not html_content:
         return html_content
 
-    # Convert explicit empty paragraphs into double <br/> to keep blank lines
-    html_content = re.sub(r"<p><br\s*/?></p>", "<br/><br/>", html_content, flags=re.IGNORECASE)
+    # Convert explicit empty paragraphs into double <br/> to keep blank lines (disabled to preserve Quill content)
+    # html_content = re.sub(r"<p><br\s*/?></p>", "<br/><br/>", html_content, flags=re.IGNORECASE)
 
     # Strip remaining <p> wrappers:
     # - Opening <p> tags become nothing

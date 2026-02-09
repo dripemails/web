@@ -41,10 +41,14 @@ class FrameAncestorsMiddleware:
         if not allowed:
             return response
         # Remove X-Frame-Options so CSP frame-ancestors can allow embedding
-        response.pop('X-Frame-Options', None)
+        if 'X-Frame-Options' in response:
+            del response['X-Frame-Options']
         # frame-ancestors lists who can embed this page in a frame
         ancestors = ' '.join(allowed)
-        csp = response.get('Content-Security-Policy', '')
+        try:
+            csp = response['Content-Security-Policy']
+        except KeyError:
+            csp = ''
         if csp and not csp.strip().endswith(';'):
             csp = csp.rstrip() + '; '
         response['Content-Security-Policy'] = csp + f"frame-ancestors {ancestors};"

@@ -733,6 +733,34 @@ function cleanQuillContent(html) {
     return html;
 }
 
+// Set HTML in the main Quill editor using the clipboard API so the document model stays in sync.
+// Using root.innerHTML alone does not update Quill's internal model, so content can disappear.
+function setQuillHtml(editor, html) {
+    if (!editor) return;
+    const cleaned = html ? cleanQuillContent(html) : '';
+    editor.deleteText(0, editor.getLength());
+    editor.clipboard.dangerouslyPasteHTML(0, cleaned);
+}
+
+// Convert a plain-text body (body_text) into simple HTML paragraphs for Quill.
+// This is used when an older email/template only has body_text and body_html is empty.
+function bodyTextToHtml(text) {
+    if (!text) return '';
+    // Basic HTML escaping
+    let escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;/');
+    const lines = escaped.split(/\r?\n/);
+    // Map each line to a <p>...</p>; empty lines become <p><br></p> for visual spacing
+    return lines.map(function(line) {
+        if (!line.trim()) {
+            return '<p><br></p>';
+        }
+        return '<p>' + line + '</p>';
+    }).join('');
+}
+
 // Function to normalize HTML for saving/sending.
 // This converts Quill's <p>-based HTML into <br/>-based line breaks so that
 // stored templates and outgoing emails don't contain <p> tags.
@@ -1025,8 +1053,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Set content in Quill editor
-                quill.root.innerHTML = cleanQuillContent(data.body_html);
+                // Set content in Quill editor:
+                // - Prefer HTML body when available
+                // - Fallback to body_text (converted to simple HTML) when body_html is empty
+                let htmlToLoad = data.body_html;
+                if ((!htmlToLoad || htmlToLoad.trim() === '') && data.body_text) {
+                    htmlToLoad = bodyTextToHtml(data.body_text);
+                }
+                setQuillHtml(quill, htmlToLoad);
                 
                 // Set footer if available
                 if (data.footer_id) {
@@ -1203,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.subject) {
                     document.getElementById('subject').value = data.subject;
-                    quill.root.innerHTML = cleanQuillContent(data.body_html);
+                    setQuillHtml(quill, data.body_html);
                     aiModal.classList.add('hidden');
                     aiGenerateForm.reset();
                     alert('{% trans "Email generated successfully! Review and save when ready." %}');

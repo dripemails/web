@@ -13,9 +13,9 @@
     <meta name="apple-mobile-web-app-title" content="{{ site_name }}">
     {% get_site_url as site_url %}
     <title>{% block title %}{{ site_name }}{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com{% if agent %}?agent={{ agent }}{% endif %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com{% if agent %}?agent={{ agent }}{% endif %}" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap{% if agent %}&agent={{ agent }}{% endif %}" rel="stylesheet">
     <script src="{% static 'core/js/tailwind.3.4.17.js' %}"></script>
     <style>
         :root {
@@ -262,8 +262,8 @@
             body { max-width: 1280px; margin: 0 auto; }
             .mobile-header, .mobile-bottom-nav { max-width: 1280px; left: 50%; transform: translateX(-50%); }
         }
-        {% block extra_head %}{% endblock %}
     </style>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <header class="mobile-header">

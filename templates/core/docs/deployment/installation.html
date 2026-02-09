@@ -111,7 +111,7 @@ pip install -r requirements.txt</code></pre>
   <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
     <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "✅ Success!" %}</h3>
     <p class="text-green-800">
-      Visit <a href="http://127.0.0.1:8000" class="underline font-semibold">http://127.0.0.1:8000</a> to see your DripEmails installation.
+      Visit <a href="http://127.0.0.1:8000{% if agent %}?agent={{ agent }}{% endif %}" class="underline font-semibold">http://127.0.0.1:8000</a> to see your DripEmails installation.
     </p>
   </div>
 
@@ -122,7 +122,7 @@ pip install -r requirements.txt</code></pre>
   <div class="space-y-4 mb-6">
     <div>
       <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Get Hugging Face API Key" %}</h3>
-      <p class="text-gray-700 mb-2">{% trans "Sign up at" %} <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">https://huggingface.co/settings/tokens</a></p>
+      <p class="text-gray-700 mb-2">{% trans "Sign up at" %} <a href="https://huggingface.co/settings/tokens{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="text-indigo-600 hover:underline">https://huggingface.co/settings/tokens</a></p>
     </div>
 
     <div>
@@ -173,7 +173,7 @@ python manage.py run_smtp_server --debug</code></pre>
     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-2">{% trans "✅ Check Installation" %}</h3>
       <ol class="list-decimal pl-6 text-gray-700 space-y-2">
-        <li>{% trans "Visit" %} <a href="http://127.0.0.1:8000" class="text-indigo-600 hover:underline">http://127.0.0.1:8000</a></li>
+        <li>{% trans "Visit" %} <a href="http://127.0.0.1:8000{% if agent %}?agent={{ agent }}{% endif %}" class="text-indigo-600 hover:underline">http://127.0.0.1:8000</a></li>
         <li>{% trans "Log in with your superuser credentials" %}</li>
         <li>{% trans "Navigate to the dashboard" %}</li>
         <li>{% trans "Try creating a test campaign" %}</li>

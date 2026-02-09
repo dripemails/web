@@ -20,9 +20,7 @@
         margin: 0;
         padding: 0;
     }
-    .ql-editor p + p {
-        margin-top: -0.4rem; /* tighten spacing between lines to remove extra paragraph gap */
-    }
+    
     
     /* Ensure variables don't carry background styling when copied */
     .variable-code {
@@ -837,7 +835,7 @@ document.addEventListener('DOMContentLoaded', function() {
         campaignSelector.addEventListener('change', function() {
             if (this.value) {
                 // Redirect to template page with selected campaign
-                window.location.href = `/campaigns/template/${this.value}/`;
+                window.location.href = `/campaigns/template/${this.value}/{% if agent %}?agent={{ agent }}{% endif %}`;
             }
         });
     }
@@ -948,7 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             alert('{% trans "Template saved successfully!" %}');
             // Redirect to the campaign template page
-            window.location.href = `/campaigns/template/${selectedCampaignId}/`;
+            window.location.href = `/campaigns/template/${selectedCampaignId}/{% if agent %}?agent={{ agent }}{% endif %}`;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -1575,7 +1573,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show success message
                 alert('{% trans "Template saved successfully!" %}');
                 // Redirect to campaign edit page
-                window.location.href = `/campaigns/${campaignId}/edit/`;
+                window.location.href = `/campaigns/${campaignId}/edit/{% if agent %}?agent={{ agent }}{% endif %}`;
             })
             .catch(error => {
                 console.error('Error:', error);

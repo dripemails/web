@@ -271,7 +271,7 @@
                                             <div class="ml-3 flex-1">
                                                 <p class="text-sm text-blue-700">
                                                     {% blocktrans %}If you're using <strong>imap.gmail.com</strong> for your IMAP settings, you may need an app password for your account.{% endblocktrans %}
-                                                    <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-800 hover:text-blue-900 underline ml-1">
+                                                    <a href="https://myaccount.google.com/apppasswords{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-800 hover:text-blue-900 underline ml-1">
                                                         {% trans "Click here to create an app password" %}
                                                     </a>
                                                     <span class="text-blue-600">{% trans "(make sure you are signed in to the email account you need an IMAP connection for)" %}</span>.

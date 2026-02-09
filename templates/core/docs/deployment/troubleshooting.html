@@ -203,7 +203,7 @@ sudo systemctl restart redis-server</code></pre>
     <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "💬 Need More Help?" %}</h3>
     <ul class="list-disc pl-6 text-green-800 space-y-2">
       <li>Check the <a href="{% url 'core:resource_community' %}{% if agent %}?agent={{ agent }}{% endif %}" class="underline font-semibold">community forums</a></li>
-      <li>Report issues on <a href="https://github.com/dripemails/web/issues" target="_blank" class="underline font-semibold">{% trans "GitHub" %}</a></li>
+      <li>Report issues on <a href="https://github.com/dripemails/web/issues{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="underline font-semibold">{% trans "GitHub" %}</a></li>
       <li>Email us at <a href="mailto:{% trans "founders@dripemails.org" %}" class="underline font-semibold">founders@dripemails.org</a></li>
     </ul>
   </div>

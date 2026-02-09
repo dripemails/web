@@ -109,7 +109,7 @@ REDIS_URL=redis://localhost:6379/0</code></pre>
   <pre class="bg-gray-800 text-gray-100 p-4 rounded overflow-x-auto mb-6"><code>{% trans "HUGGINGFACE_API_KEY=hf_your_api_key_here" %}</code></pre>
 
   <p class="text-gray-700 mb-4">
-    Get your free API key from <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-indigo-600 hover:underline">{% trans "Hugging Face" %}</a>
+    Get your free API key from <a href="https://huggingface.co/settings/tokens{% if agent %}?agent={{ agent }}{% endif %}" target="_blank" class="text-indigo-600 hover:underline">{% trans "Hugging Face" %}</a>
   </p>
 
   <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">{% trans "SMTP Server Configuration" %}</h2>

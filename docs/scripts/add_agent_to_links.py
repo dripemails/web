@@ -29,17 +29,15 @@ def should_skip_href(href: str) -> bool:
     # Already has agent param (idempotent)
     if 'agent={{ agent }}' in href or '?agent=' in href or '&agent=' in href:
         return True
-    # Don't add agent inside {% static %} - would break tag syntax. {% url %} is fine: we append after it.
-    if '{% static' in href:
+    # Don't add agent inside {% static %} or {% trans %}/{% blocktrans %} - would break tag syntax (regex stops at inner quote).
+    if '{% static' in href or '{% trans' in href or '{% blocktrans' in href:
         return True
     # Anchors and scripts
     if href.startswith('#') or href.startswith('javascript:') or href.startswith('mailto:'):
         return True
     if href.startswith('tel:') or href.startswith('data:'):
         return True
-    # External URLs
-    if href.startswith('http://') or href.startswith('https://') or href.startswith('//'):
-        return True
+    # Do not skip full URLs (http/https) — we still add agent so same-site and localhost links keep agent
     return False
 
 

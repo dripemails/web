@@ -97,7 +97,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.FrameAncestorsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+]
+
+# Origins allowed to embed the site in an iframe (mobile wrapper)
+FRAME_ANCESTORS_ALLOWED = [
+    "'self'",
+    'https://localhost:5173',
+    'http://localhost:5173',
+    'https://dripemails.org',
+    'https://www.dripemails.org',
 ]
 
 ROOT_URLCONF = 'dripemails.urls'

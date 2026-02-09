@@ -12,7 +12,7 @@
                     <h1 class="text-2xl md:text-3xl font-bold">{% trans "Email Footers" %}</h1>
                     <p class="text-indigo-100">{% trans "Manage your email footer templates" %}</p>
                 </div>
-                <a href="{% url 'analytics:footer_create' %}" 
+                <a href="{% url 'analytics:footer_create' %}{% if agent %}?agent={{ agent }}{% endif %}" 
                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -63,18 +63,18 @@
                         
                         <div class="px-6 py-3 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
                             <div class="flex space-x-2">
-                                <a href="{% url 'analytics:footer_edit' footer.id %}" 
+                                <a href="{% url 'analytics:footer_edit' footer.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                                    class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">
                                     {% trans "Edit" %}
                                 </a>
                                 {% if not footer.is_default %}
-                                    <a href="{% url 'analytics:footer_set_default' footer.id %}" 
+                                    <a href="{% url 'analytics:footer_set_default' footer.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                                        class="text-green-600 hover:text-green-900 text-sm font-medium">
                                         {% trans "Set Default" %}
                                     </a>
                                 {% endif %}
                             </div>
-                            <a href="{% url 'analytics:footer_delete' footer.id %}" 
+                            <a href="{% url 'analytics:footer_delete' footer.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                                class="text-red-600 hover:text-red-900 text-sm font-medium">
                                 {% trans "Delete" %}
                             </a>
@@ -89,7 +89,7 @@
                 </svg>
                 <h3 class="text-lg font-medium text-gray-900 mb-2">{% trans "No footers yet" %}</h3>
                 <p class="text-gray-500 max-w-md mx-auto mb-6">{% trans "Create your first email footer to add branding and links to your emails." %}</p>
-                <a href="{% url 'analytics:footer_create' %}" 
+                <a href="{% url 'analytics:footer_create' %}{% if agent %}?agent={{ agent }}{% endif %}" 
                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

@@ -96,7 +96,7 @@
 
       <div class="mt-8 text-center text-sm text-gray-600">
         {% blocktrans %}Already have an account?{% endblocktrans %}
-        <a href="{% url 'account_login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
+        <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="font-medium text-indigo-600 hover:text-indigo-500">
           {% trans "Log in" %}
         </a>
       </div>

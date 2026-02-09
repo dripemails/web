@@ -202,17 +202,17 @@ sudo systemctl restart redis-server</code></pre>
   <div class="bg-green-50 border-l-4 border-green-500 p-6">
     <h3 class="text-lg font-semibold text-green-900 mb-2">{% trans "💬 Need More Help?" %}</h3>
     <ul class="list-disc pl-6 text-green-800 space-y-2">
-      <li>Check the <a href="{% url 'core:resource_community' %}" class="underline font-semibold">community forums</a></li>
+      <li>Check the <a href="{% url 'core:resource_community' %}{% if agent %}?agent={{ agent }}{% endif %}" class="underline font-semibold">community forums</a></li>
       <li>Report issues on <a href="https://github.com/dripemails/web/issues" target="_blank" class="underline font-semibold">{% trans "GitHub" %}</a></li>
       <li>Email us at <a href="mailto:{% trans "founders@dripemails.org" %}" class="underline font-semibold">founders@dripemails.org</a></li>
     </ul>
   </div>
 
   <div class="flex gap-4 mt-8">
-    <a href="{% url 'core:docs_deployment_production' %}" class="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
+    <a href="{% url 'core:docs_deployment_production' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
       ← Production Setup
     </a>
-    <a href="{% url 'core:docs_deployment' %}" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
+    <a href="{% url 'core:docs_deployment' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">
       Back to Deployment Guide
     </a>
   </div>

@@ -25,7 +25,7 @@
                             class="w-full lg:w-80 rounded-md border border-gray-300 py-2 pl-4 pr-10 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         />
                         {% if query %}
-                            <a href="{% url 'subscribers:list' %}"
+                            <a href="{% url 'subscribers:list' %}{% if agent %}?agent={{ agent }}{% endif %}"
                                class="absolute inset-y-0 right-9 flex items-center text-xs text-indigo-600 hover:text-indigo-800 px-2">
                                 {% trans "Clear" %}
                             </a>
@@ -36,11 +36,11 @@
                         </button>
                     </div>
                 </form>
-                <a href="{% url 'subscribers:add' %}"
+                <a href="{% url 'subscribers:add' %}{% if agent %}?agent={{ agent }}{% endif %}"
                    class="inline-flex items-center justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                     {% trans "Add subscriber" %}
                 </a>
-                <a href="{% url 'subscribers:export' %}"
+                <a href="{% url 'subscribers:export' %}{% if agent %}?agent={{ agent }}{% endif %}"
                    class="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -213,7 +213,7 @@
                             {% trans "Import contacts or add subscribers manually to see them listed here." %}
                         {% endif %}
                     </p>
-                    <a href="{% url 'subscribers:import' %}"
+                    <a href="{% url 'subscribers:import' %}{% if agent %}?agent={{ agent }}{% endif %}"
                        class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         {% trans "Import Subscribers" %}
                     </a>

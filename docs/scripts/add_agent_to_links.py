@@ -29,8 +29,8 @@ def should_skip_href(href: str) -> bool:
     # Already has agent param (idempotent)
     if 'agent={{ agent }}' in href or '?agent=' in href or '&agent=' in href:
         return True
-    # Don't add agent inside Django tags that output URLs - would break tag syntax
-    if '{% static' in href or '{% url' in href:
+    # Don't add agent inside {% static %} - would break tag syntax. {% url %} is fine: we append after it.
+    if '{% static' in href:
         return True
     # Anchors and scripts
     if href.startswith('#') or href.startswith('javascript:') or href.startswith('mailto:'):
@@ -55,7 +55,12 @@ def add_agent_to_href_content(content: str):
     return stripped + AGENT_SUFFIX
 
 
-def process_file(filepath: str, dry_run: bool, include_forms: bool) -> bool:
+def _truncate(s: str, max_len: int = 72) -> str:
+    s = s.replace('\n', ' ').strip()
+    return (s[: max_len] + '...') if len(s) > max_len else s
+
+
+def process_file(filepath: str, rel_path: str, dry_run: bool, include_forms: bool) -> bool:
     """Process one template file; return True if changed."""
     with open(filepath, 'r', encoding='utf-8') as f:
         text = f.read()
@@ -85,6 +90,8 @@ def process_file(filepath: str, dry_run: bool, include_forms: bool) -> bool:
                 if new_full != old_full and old_full in new_text:
                     new_text = new_text.replace(old_full, new_full, 1)
                     changed = True
+                    print(f"  {rel_path}: {attr} {_truncate(content)}")
+                    print(f"    → {_truncate(new_content)}")
 
     if changed and not dry_run:
         with open(filepath, 'w', encoding='utf-8') as f:
@@ -125,7 +132,7 @@ def main():
                 continue
             path = os.path.join(root, name)
             rel = os.path.relpath(path, templates_dir)
-            if process_file(path, args.dry_run, args.forms):
+            if process_file(path, rel, args.dry_run, args.forms):
                 count += 1
                 print(f'Updated: {rel}')
 

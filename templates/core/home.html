@@ -65,13 +65,13 @@
                 
                 <!-- CTA Buttons -->
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="{% url 'account_signup' %}" class="group relative px-8 py-4 bg-white text-indigo-600 font-bold text-lg rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 flex items-center">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="group relative px-8 py-4 bg-white text-indigo-600 font-bold text-lg rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 flex items-center">
                         <span>{% trans "Start Free Today" %}</span>
                         <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
-                    <a href="{% url 'account_login' %}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300">
+                    <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300">
                         {% trans "Sign In" %}
                     </a>
                 </div>
@@ -218,7 +218,7 @@
                             <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-emerald-200 mb-6">
                                 <h3 class="text-xl font-bold text-gray-900 mb-4">{% trans "Get Started in 60 Seconds" %}</h3>
                                 <p class="text-sm text-gray-600 mb-4">{% trans "Connect your email account and start auto-replying immediately" %}</p>
-                                <a href="{% url 'account_signup' %}" class="mb-4 inline-flex items-center px-4 py-2 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+                                <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="mb-4 inline-flex items-center px-4 py-2 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                                     {% trans "Signup without Gmail or IMAP" %}
                                     <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -315,7 +315,7 @@
                                 </form>
                                 <div id="home-imap-error" class="mt-4 hidden bg-red-50 border border-red-200 text-red-800 p-3 rounded-md text-sm"></div>
                                 <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-                                    <a href="{% url 'account_signup' %}" class="inline-flex items-center px-4 py-2 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
+                                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-4 py-2 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group">
                                         {% trans "Signup without Gmail or IMAP" %}
                                         <svg class="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -326,7 +326,7 @@
                             {% else %}
                             <!-- CTA Button for authenticated users -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="{% url 'core:dashboard' %}" class="group px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+                                <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}" class="group px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                     </svg>
@@ -799,7 +799,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "SaaS Email Marketing" %}</h3>
                     <p class="text-gray-600 mb-6">{% trans "Onboard users with automated email sequences, welcome series, and nurture campaigns. Perfect for startup email marketing and software companies." %}</p>
-                    <a href="{% url 'account_signup' %}" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700">
                         {% trans "Start Free" %}
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -815,7 +815,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Ecommerce Email Marketing" %}</h3>
                     <p class="text-gray-600 mb-6">{% trans "Drive sales with abandoned cart emails, product recommendations, and transactional emails. Boost your email marketing ROI with targeted campaigns." %}</p>
-                    <a href="{% url 'account_signup' %}" class="inline-flex items-center text-pink-600 font-semibold hover:text-pink-700">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-pink-600 font-semibold hover:text-pink-700">
                         {% trans "Get Started" %}
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -831,7 +831,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "B2B Email Marketing" %}</h3>
                     <p class="text-gray-600 mb-6">{% trans "Nurture leads with email marketing automation, email segmentation, and personalized email campaigns. Perfect for B2B email marketing strategies." %}</p>
-                    <a href="{% url 'account_signup' %}" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700">
                         {% trans "Try Free" %}
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -847,7 +847,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Small Business Email Marketing" %}</h3>
                     <p class="text-gray-600 mb-6">{% trans "Affordable email marketing for small businesses. Free email marketing software with unlimited campaigns, subscribers, and email automation features." %}</p>
-                    <a href="{% url 'account_signup' %}" class="inline-flex items-center text-green-600 font-semibold hover:text-green-700">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-green-600 font-semibold hover:text-green-700">
                         {% trans "Sign Up Free" %}
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -857,7 +857,7 @@
             </div>
 
             <div class="text-center mt-12">
-                <a href="{% url 'account_signup' %}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                     <span>{% trans "Start Your Free Email Marketing Campaign Today" %}</span>
                     <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -937,10 +937,10 @@
                             {% trans "Join thousands of businesses who've switched from expensive email marketing services to our free email marketing platform. Get started with email automation in minutes - no credit card required." %}
                         </p>
                         <div class="space-y-4">
-                            <a href="{% url 'account_signup' %}" class="block w-full px-6 py-4 bg-indigo-600 text-white font-bold text-center rounded-xl hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block w-full px-6 py-4 bg-indigo-600 text-white font-bold text-center rounded-xl hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                 {% trans "Create Free Account Now" %}
                             </a>
-                            <a href="{% url 'account_login' %}" class="block w-full px-6 py-4 bg-white text-indigo-600 font-semibold text-center rounded-xl border-2 border-indigo-200 hover:border-indigo-300 transition-colors">
+                            <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block w-full px-6 py-4 bg-white text-indigo-600 font-semibold text-center rounded-xl border-2 border-indigo-200 hover:border-indigo-300 transition-colors">
                                 {% trans "Already Have an Account? Sign In" %}
                             </a>
                         </div>
@@ -980,7 +980,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Improve Email Open Rates" %}</h3>
                     <p class="text-gray-600 mb-4">{% trans "Use personalized email subject lines, send emails at optimal times, and segment your email list. Track email open rates with our email analytics to optimize your email marketing campaigns." %}</p>
-                    <a href="{% url 'account_signup' %}" class="text-yellow-600 font-semibold hover:text-yellow-700 inline-flex items-center">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-yellow-600 font-semibold hover:text-yellow-700 inline-flex items-center">
                         {% trans "Start Tracking Opens" %}
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -996,7 +996,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Increase Email Engagement" %}</h3>
                     <p class="text-gray-600 mb-4">{% trans "Create engaging email content with email personalization, use email automation to send timely messages, and monitor email click rates. Our email marketing automation helps you send the right message at the right time." %}</p>
-                    <a href="{% url 'account_signup' %}" class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
                         {% trans "Boost Engagement" %}
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1012,7 +1012,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{% trans "Maximize Email Marketing ROI" %}</h3>
                     <p class="text-gray-600 mb-4">{% trans "Use email drip campaigns for lead nurturing, implement email segmentation for targeted campaigns, and track email marketing ROI with comprehensive email analytics. Free email marketing software that delivers results." %}</p>
-                    <a href="{% url 'account_signup' %}" class="text-green-600 font-semibold hover:text-green-700 inline-flex items-center">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-green-600 font-semibold hover:text-green-700 inline-flex items-center">
                         {% trans "See Your ROI" %}
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1023,7 +1023,7 @@
 
             <div class="text-center">
                 <p class="text-lg text-gray-700 mb-6">{% trans "Ready to implement these email marketing best practices?" %}</p>
-                <a href="{% url 'account_signup' %}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                     <span>{% trans "Start Your Email Marketing Journey Free" %}</span>
                     <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -1068,7 +1068,7 @@
                         {% trans "Creating a drip email campaign is simple with our email marketing automation software. Sign up for free, create your email campaign, add email sequences with scheduled emails, and let our email automation handle the rest. You can use our email templates or create custom email marketing campaigns. Get started in minutes!" %}
                     </p>
                     <div class="mt-4">
-                        <a href="{% url 'account_signup' %}" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700">
+                        <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700">
                             {% trans "Create Your First Campaign" %}
                             <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1097,7 +1097,7 @@
                         {% trans "Improve email open rates by using personalized email subject lines, sending emails at optimal times, segmenting your email list, and creating engaging email content. Our email analytics tools help you track email open rates and optimize your email marketing campaigns for better performance." %}
                     </p>
                     <div class="mt-4">
-                        <a href="{% url 'account_signup' %}" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700">
+                        <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700">
                             {% trans "Start Improving Opens" %}
                             <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1111,10 +1111,10 @@
                 <h3 class="text-3xl font-bold mb-4">{% trans "Still Have Questions?" %}</h3>
                 <p class="text-xl text-indigo-100 mb-8">{% trans "Get started with our free email marketing software and discover how easy email automation can be!" %}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{% url 'account_signup' %}" class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl hover:bg-indigo-50 transition-colors shadow-lg">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl hover:bg-indigo-50 transition-colors shadow-lg">
                         {% trans "Sign Up Free" %}
                     </a>
-                    <a href="{% url 'account_login' %}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-colors">
+                    <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-colors">
                         {% trans "Sign In" %}
                     </a>
                 </div>
@@ -1143,13 +1143,13 @@
                     {% trans "Join thousands of businesses using drip campaigns to grow revenue, nurture leads, and build lasting customer relationships." %}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{% url 'account_signup' %}" class="group relative px-10 py-5 bg-white text-indigo-600 font-bold text-lg rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+                    <a href="{% url 'account_signup' %}{% if agent %}?agent={{ agent }}{% endif %}" class="group relative px-10 py-5 bg-white text-indigo-600 font-bold text-lg rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
                         <span>{% trans "Start Your Free Account" %}</span>
                         <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
-                    <a href="{% url 'core:feature_drip_campaigns' %}" class="px-10 py-5 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300">
+                    <a href="{% url 'core:feature_drip_campaigns' %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-10 py-5 bg-white/10 backdrop-blur-sm text-white font-semibold text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300">
                         {% trans "Learn More" %}
                     </a>
                 </div>

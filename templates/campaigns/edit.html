@@ -41,7 +41,7 @@
                         {% trans "Activate" %}
                     {% endif %}
                 </button>
-                <a href="{% url 'campaigns:template' campaign.id %}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                     {% trans "Add Email" %}
                 </a>
             </div>
@@ -85,7 +85,7 @@
         <div class="mt-8">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-900">{% trans "Email Sequence" %}</h2>
-                <a href="{% url 'campaigns:template' campaign.id %}" 
+                <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -131,7 +131,7 @@
                             
                             <!-- Action Buttons -->
                             <div class="flex space-x-2">
-                                <a href="{% url 'campaigns:template' campaign.id %}?template_id={{ email.id }}" 
+                                <a href="{% url 'campaigns:template' campaign.id %}?template_id={{ email.id }}{% if agent %}&agent={{ agent }}{% endif %}" 
                                    class="text-indigo-600 hover:text-indigo-900">
                                     {% trans "Edit" %}
                                 </a>
@@ -146,7 +146,7 @@
                 {% empty %}
                 <div class="text-center py-12 bg-white shadow rounded-lg">
                     <p class="text-gray-500">{% trans "No emails in this campaign yet." %}</p>
-                    <a href="{% url 'campaigns:template' campaign.id %}" 
+                    <a href="{% url 'campaigns:template' campaign.id %}{% if agent %}?agent={{ agent }}{% endif %}" 
                        class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                         {% trans "Add First Email" %}
                     </a>

@@ -7,7 +7,7 @@
   <div class="bg-gradient-to-r from-gray-700 to-gray-900 h-48 flex items-center justify-center text-white py-12">
     <div class="container mx-auto px-4">
       <div class="mb-4">
-        <a href="{% url 'core:resource_tutorials' %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
+        <a href="{% url 'core:resource_tutorials' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-white hover:text-opacity-80 font-medium">← Back to Tutorials</a>
       </div>
       <h1 class="text-4xl font-bold mb-4">{% trans "🔌 API Integration Guide" %}</h1>
       <p class="text-xl text-white text-opacity-90">{% trans "Connect external applications to DripEmails.org" %}</p>
@@ -214,11 +214,11 @@ GET /api/v1/campaigns/?ordering=-created_at
 
         <h3 class="text-xl font-semibold text-gray-900 mb-4">{% trans "Next Steps" %}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <a href="{% url 'core:docs_getting_started' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+          <a href="{% url 'core:docs_getting_started' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
             <h4 class="font-semibold">{% trans "Full Documentation" %}</h4>
             <p class="text-sm text-gray-300">{% trans "Complete technical docs" %}</p>
           </a>
-          <a href="{% url 'core:tutorial_deployment' %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+          <a href="{% url 'core:tutorial_deployment' %}{% if agent %}?agent={{ agent }}{% endif %}" class="block p-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
             <h4 class="font-semibold">{% trans "Deploying to Production" %}</h4>
             <p class="text-sm text-gray-300">{% trans "Launch your instance" %}</p>
           </a>

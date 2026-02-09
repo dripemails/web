@@ -127,7 +127,7 @@
     </div>
 
     <div class="mt-8 text-center">
-        <a href="{% url 'core:dashboard' %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+        <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
             {% trans "Schedule an Email Now" %}
         </a>
     </div>

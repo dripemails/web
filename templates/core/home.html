@@ -20,7 +20,7 @@
                         {% endblocktrans %}
                     </p>
                 </div>
-                <a href="{% url 'core:dashboard' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 transition-colors">
+                <a href="{% url 'core:dashboard' %}{% if agent %}?agent={{ agent }}{% endif %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 transition-colors">
                     {% trans "Go to Dashboard" %}
                     <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

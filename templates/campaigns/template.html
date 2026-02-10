@@ -272,6 +272,9 @@
                                     <button type="button" id="newFooterBtn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                         {% trans "New Footer" %}
                                     </button>
+                                    <button type="button" id="editFooterBtn" class="px-4 py-2 text-sm font-medium text-indigo-700 bg-indigo-100 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                                        {% trans "Edit Footer" %}
+                                    </button>
                                 </div>
                                 <p class="mt-1 text-sm text-gray-500">
                                     {% trans "Select a footer to append to your email, or leave empty for no footer." %}
@@ -1003,9 +1006,43 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('isImapAutoReply:', isImapAutoReply);
     // Footer modal elements
     const newFooterBtn = document.getElementById('newFooterBtn');
+    const editFooterBtn = document.getElementById('editFooterBtn');
     const newFooterModal = document.getElementById('newFooterModal');
     const cancelNewFooter = document.getElementById('cancelNewFooter');
     const newFooterForm = document.getElementById('newFooterForm');
+    
+    // Enable/disable \"Edit Footer\" based on selection and open analytics edit page when clicked
+    const footerSelect = document.getElementById('footer_select');
+    if (footerSelect && editFooterBtn) {
+        const agent = '{{ agent|default_if_none:""|escapejs }}';
+        
+        function updateEditFooterState() {
+            const val = footerSelect.value;
+            const hasFooter = !!(val && val.trim());
+            editFooterBtn.disabled = !hasFooter;
+        }
+        
+        updateEditFooterState();
+        footerSelect.addEventListener('change', updateEditFooterState);
+        
+        editFooterBtn.addEventListener('click', function() {
+            const val = footerSelect.value;
+            if (!val || !val.trim()) {
+                alert('{% trans "Please select a footer to edit." %}');
+                return;
+            }
+            // Use Django's URL reversing so language prefixes and URL structure are correct.
+            // We generate the URL for footer_id=0 and replace the \"0\" with the selected ID.
+            let url = "{% url 'analytics:footer_edit' 0 %}";
+            url = url.replace('/0/', `/${val}/`);
+            if (agent) {
+                const sep = url.includes('?') ? '&' : '?';
+                url += `${sep}agent=${agent}`;
+            }
+            // Open in a new tab so the template editor stays open
+            window.open(url, '_blank');
+        });
+    }
     
     // Load template data if editing
     if (templateId) {

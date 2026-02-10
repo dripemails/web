@@ -1,21 +1,55 @@
 from django.contrib import admin
+from django.contrib.auth import login
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from django.views import View
+
 from .models import UserProfile, EmailFooter
+
+
+class LoginAsUserView(View):
+    """Log in as the user associated with the given UserProfile (superuser only)."""
+    def get(self, request, profile_id):
+        if not request.user.is_superuser:
+            from django.contrib import messages
+            messages.error(request, _('Only superusers can log in as another user.'))
+            return redirect('admin:analytics_userprofile_changelist')
+        profile = get_object_or_404(UserProfile, pk=profile_id)
+        target_user = profile.user
+        # Use the same backend as the user's last login, or default
+        backend = 'django.contrib.auth.backends.ModelBackend'
+        target_user.backend = backend
+        login(request, target_user, backend=backend)
+        return redirect('core:dashboard')
 
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     """Admin interface for User Profiles - Extended user settings and preferences."""
-    list_display = ('user', 'has_verified_promo', 'send_without_unsubscribe', 'spf_verified_badge', 'timezone', 'country')
+    list_display = ('user', 'user_email', 'login_as_link', 'has_verified_promo', 'send_without_unsubscribe', 'spf_verified_badge', 'timezone', 'country')
+    
+    def get_list_display(self, request):
+        base = list(super().get_list_display(request))
+        if not request.user.is_superuser and 'login_as_link' in base:
+            base = [x for x in base if x != 'login_as_link']
+        return base
+
+    def user_email(self, obj):
+        return obj.user.email if obj.user_id else ''
+    user_email.short_description = _('Email')
+    user_email.admin_order_field = 'user__email'
+
     list_filter = ('has_verified_promo', 'send_without_unsubscribe', 'spf_verified', 'country', 'timezone')
+    ordering = ('-pk',)
     search_fields = ('user__username', 'user__email', 'promo_url', 'city', 'state', 'country')
-    readonly_fields = ('spf_verified_badge', 'spf_last_checked', 'address_display')
+    readonly_fields = ('spf_verified_badge', 'spf_last_checked', 'address_display', 'login_as_display')
     raw_id_fields = ('user',)
     
     fieldsets = (
         ('User Information', {
-            'fields': ('user',)
+            'fields': ('user', 'login_as_display')
         }),
         ('Promo Verification', {
             'fields': ('has_verified_promo', 'promo_url')
@@ -62,6 +96,48 @@ class UserProfileAdmin(admin.ModelAdmin):
             return format_html('<div style="line-height: 1.6;">{}</div>', formatted.replace(', ', '<br>'))
         return format_html('<span style="color: #999;">No address provided</span>')
     address_display.short_description = 'Formatted Address'
+    
+    def get_readonly_fields(self, request, obj=None):
+        fields = list(super().get_readonly_fields(request, obj))
+        if not request.user.is_superuser and 'login_as_display' in fields:
+            fields = [f for f in fields if f != 'login_as_display']
+        return fields
+    
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if not request.user.is_superuser:
+            # Remove login_as_display from User Information
+            new = []
+            for name, opts in fieldsets:
+                if name == 'User Information' and 'login_as_display' in opts.get('fields', ()):
+                    opts = dict(opts)
+                    opts['fields'] = tuple(f for f in opts['fields'] if f != 'login_as_display')
+                new.append((name, opts))
+            return new
+        return fieldsets
+    
+    def get_urls(self):
+        urls = super().get_urls()
+        custom = [
+            path('<int:profile_id>/login-as/', self.admin_site.admin_view(LoginAsUserView.as_view()), name='analytics_userprofile_login_as'),
+        ]
+        return custom + urls
+    
+    def login_as_link(self, obj):
+        """Show 'Log in as' button in list (superuser only)."""
+        if not obj or not obj.user_id:
+            return ''
+        url = reverse('admin:analytics_userprofile_login_as', args=[obj.pk])
+        return format_html('<a class="button" href="{}">Log in as</a>', url)
+    login_as_link.short_description = _('Log in as')
+    
+    def login_as_display(self, obj):
+        """Show 'Log in as' link on the profile change form (superuser only)."""
+        if not obj or not obj.pk or not obj.user_id:
+            return format_html('<span style="color: #999;">Save to enable</span>')
+        url = reverse('admin:analytics_userprofile_login_as', args=[obj.pk])
+        return format_html('<a class="button" href="{}" style="padding: 6px 12px; background: #417690; color: white; text-decoration: none; border-radius: 4px;">Log in as this user</a>', url)
+    login_as_display.short_description = _('Log in as user')
     
     actions = ['verify_spf_for_selected', 'unverify_spf_for_selected']
     

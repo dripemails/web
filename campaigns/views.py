@@ -462,7 +462,6 @@ def send_email(request, campaign_id, email_id):
 def campaign_edit(request, campaign_id):
     """Edit campaign and its templates."""
     from .models import EmailSendRequest
-    from gmail.models import EmailMessage, EmailProvider
     from analytics.models import UserProfile
     campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
     emails = campaign.emails.all().order_by('order')
@@ -471,7 +470,6 @@ def campaign_edit(request, campaign_id):
     # Pagination parameters
     sent_page = request.GET.get('sent_page', 1)
     pending_page = request.GET.get('pending_page', 1)
-    imap_page = request.GET.get('imap_page', 1)
     per_page = 20
     
     # Get sent emails (status='sent') with pagination
@@ -489,27 +487,17 @@ def campaign_edit(request, campaign_id):
     ).select_related('email', 'subscriber').order_by('scheduled_for')
     pending_paginator = Paginator(pending_emails_queryset, per_page)
     pending_emails = pending_paginator.get_page(pending_page)
-    
-    # Get IMAP/Gmail Auto-Reply emails (EmailMessage objects for sent auto-replies)
-    # We only select messages that:
-    # - Belong to this user
-    # - Are linked to this campaign via campaign_email
-    # - Come from IMAP or Gmail providers
-    # - Are marked as sent in provider_data
-    auto_reply_emails_queryset = EmailMessage.objects.filter(
-        user=request.user,
-        campaign_email__campaign=campaign,
-        provider__in=[EmailProvider.IMAP, EmailProvider.GMAIL],
-        provider_data__sent=True,
-    ).select_related(
-        'campaign_email',
-        'campaign_email__campaign',
-        'credential',
-    ).order_by('-received_at')
-    
-    # Paginate IMAP/Gmail auto-reply emails
-    imap_paginator = Paginator(auto_reply_emails_queryset, per_page)
-    imap_auto_reply_emails = imap_paginator.get_page(imap_page)
+
+    # Next in sequence: campaign emails with order > highest order that has been sent (so user sees what's coming next)
+    from django.db.models import Max
+    sent_max_order = EmailSendRequest.objects.filter(
+        campaign=campaign,
+        status='sent'
+    ).aggregate(max_order=Max('email__order'))['max_order']
+    sent_max_order = sent_max_order if sent_max_order is not None else -1
+    next_emails_in_sequence = list(
+        campaign.emails.filter(order__gt=sent_max_order).order_by('order')
+    )
     
     # Get user's preferred timezone
     profile, _created = UserProfile.objects.get_or_create(user=request.user)
@@ -521,7 +509,7 @@ def campaign_edit(request, campaign_id):
         'lists': lists,
         'sent_emails': sent_emails,
         'pending_emails': pending_emails,
-        'imap_auto_reply_emails': imap_auto_reply_emails,
+        'next_emails_in_sequence': next_emails_in_sequence,
         'user_timezone': user_timezone,
     })
 

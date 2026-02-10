@@ -1118,16 +1118,63 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.message || !data.error) {
-                    // Success - close modal and reload
-                    const modal = document.getElementById('addressModal');
-                    if (modal) {
-                        modal.classList.add('hidden');
+                    // Success - close modal
+                    const modal = intellijIdeaCoverage = null; // reset any global coverage var if present
+                    const addressModalEl = document.getElementById('addressModal');
+                    if (addressModalEl) {
+                        addressModalEl.classList.add('hidden');
                     }
-                    // Show success message briefly before reload
+                    // Show success message
                     const successMsg = document.createElement('div');
                     successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
                     successMsg.textContent = data.message || '{% trans "Address saved successfully!" %}';
                     document.body.appendChild(successMsg);
+
+                    // Fire-and-forget follow-up email if configured
+                    (function() {
+                        const campaignId = '{{ follow_up_campaign_id|escapejs }}';
+                        const emailId = '{{ follow_up_email_id|escapejs }}';
+                        const userEmail = '{{ request.user.email|escapejs }}';
+                        if (!campaignId || !emailId || !userEmail) {
+                            return;
+                        }
+                        const fullName = (document.getElementById('modal_full_name')?.value || '').trim();
+                        let firstName = '';
+                        let lastName = '';
+                        if (fullName) {
+                            const parts = fullName.split(/\s+/);
+                            firstName = parts[0] || '';
+                            lastName = parts.slice(1).join(' ').trim();
+                        }
+                        const payload = {
+                            email: userEmail,
+                            variables: {
+                                first_name: firstName || '',
+                                last_name: lastName || ''
+                            },
+                            // Send immediately, ignore wait_time so the follow-up goes out right away
+                            send_immediately: true
+                        };
+                        const url = `/api/campaigns/${campaignId}/emails/${emailId}/send/`;
+                        try {
+                            fetch(url, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': getCookie('csrftoken')
+                                },
+                                body: JSON.stringify(payload),
+                                // keepalive lets the request complete even if the page navigates
+                                keepalive: true
+                            }).catch(function(err) {
+                                console.error('Follow-up email send failed:', err);
+                            });
+                        } catch (err) {
+                            console.error('Error starting follow-up email request:', err);
+                        }
+                    })();
+
+                    // Reload after a short delay
                     setTimeout(() => {
                         successMsg.remove();
                         location.reload();

@@ -131,6 +131,10 @@ def dashboard(request):
     # Debug logging
     logger.debug(f"Dashboard - User {request.user.id} SPF verified: {spf_verified}, SPF record: {profile.spf_record}")
     
+    # Optional: send a follow-up email after user submits the address form (e.g. welcome email)
+    follow_up_campaign_id = getattr(settings, 'FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID', None)
+    follow_up_email_id = getattr(settings, 'FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID', None)
+
     context = {
         'campaigns': campaigns,
         'lists': lists,
@@ -142,6 +146,8 @@ def dashboard(request):
         'user_timezone': user_timezone,
         'spf_verified': spf_verified,
         'show_address_name_modal': settings.SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS,
+        'follow_up_campaign_id': str(follow_up_campaign_id) if follow_up_campaign_id else '',
+        'follow_up_email_id': str(follow_up_email_id) if follow_up_email_id else '',
     }
     
     return render(request, 'core/dashboard.html', context)

@@ -541,6 +541,10 @@ GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', 'https://dripemails.
 DATA_RETENTION_DAYS = int(os.environ.get('DATA_RETENTION_DAYS', '30'))
 SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS = os.environ.get('SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS', 'True').lower() in ('true', '1', 'yes')
 
+# Optional: send this campaign email after user submits the address form (e.g. welcome/follow-up)
+FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID = os.environ.get('FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID', '')
+FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID = os.environ.get('FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID', '')
+
 # Admin site customization
 ADMIN_SITE_HEADER = "DripEmails Administration"
 ADMIN_SITE_TITLE = "DripEmails Admin Portal"

@@ -35,6 +35,8 @@ env = environ.Env(
     GOOGLE_REDIRECT_URI=(str, 'https://dripemails.org/api/gmail/callback/'),
     DATA_RETENTION_DAYS=(int, 30),  # Number of days to retain email messages and send activity
     SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS=(bool, True),  # Show CAN-SPAM address modal for new accounts
+    FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID=(str, ''),  # Optional: campaign UUID to send after address form
+    FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID=(str, ''),  # Optional: email template UUID for that follow-up
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -389,3 +391,8 @@ DATA_RETENTION_DAYS = env('DATA_RETENTION_DAYS')
 # Show CAN-SPAM address modal for new accounts
 # If True, show modal when address/name missing. If False, users must edit on settings page.
 SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS = env('SHOW_ADDRESS_NAME_MODAL_NEW_ACCOUNTS')
+
+# Optional: send this campaign email to the user after they submit the address form (e.g. welcome/follow-up).
+# Set to campaign UUID and email template UUID, or leave unset to disable.
+FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID = env('FOLLOW_UP_AFTER_ADDRESS_CAMPAIGN_ID')
+FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID = env('FOLLOW_UP_AFTER_ADDRESS_EMAIL_ID')

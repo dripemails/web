@@ -73,7 +73,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     
     # Local apps
-    'core',
+    'core.apps.CoreConfig',
     'campaigns',
     'subscribers',
     'analytics',

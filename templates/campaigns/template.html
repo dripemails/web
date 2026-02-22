@@ -73,6 +73,24 @@
             max-height: calc(90vh - 250px);
         }
     }
+
+    {% if agent == 'mobile' %}
+    /* Mobile-agent dropdown UX */
+    select {
+        min-height: 48px;
+        font-size: 16px;
+        line-height: 1.25rem;
+        border-radius: 0.75rem;
+        padding-left: 0.75rem;
+        padding-right: 2.5rem;
+        -webkit-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.1rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    }
+    {% endif %}
 </style>
 {% endblock %}
 
@@ -855,7 +873,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitWithSpecificCampaign(topCampaignSelector.value);
             return;
         }
-        
+
         // Otherwise show modal for selection
         // Validate form first
         const subject = document.getElementById('subject').value.trim();

@@ -257,11 +257,6 @@
             .mobile-header { padding-left: 24px; padding-right: 24px; }
             .mobile-drawer { width: min(360px, 40vw); }
         }
-        /* Optional: cap width on very large desktop so it doesn’t stretch infinitely */
-        @media (min-width: 1280px) {
-            body { max-width: 1280px; margin: 0 auto; }
-            .mobile-header, .mobile-bottom-nav { max-width: 1280px; left: 50%; transform: translateX(-50%); }
-        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>

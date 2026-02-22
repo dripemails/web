@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from .models import Campaign, Email, EmailEvent, EmailAIAnalysis
 from django.urls import reverse
 from django.template import TemplateDoesNotExist
+from django.core.exceptions import ValidationError
 from .serializers import CampaignSerializer, EmailSerializer
 from subscribers.models import List
 from django.core.paginator import Paginator
@@ -850,7 +851,12 @@ def campaign_analysis_view(request):
 
     campaign_id = request.GET.get('campaign_id')
     if campaign_id:
-        campaign = get_object_or_404(Campaign, id=campaign_id, user=request.user)
+        try:
+            campaign = campaigns.filter(id=campaign_id).first()
+        except (ValidationError, ValueError, TypeError):
+            campaign = None
+
+    if campaign:
 
         events = EmailEvent.objects.filter(email__campaign=campaign)
         from collections import defaultdict

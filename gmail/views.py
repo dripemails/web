@@ -201,7 +201,61 @@ def gmail_disconnect(request):
 def _create_gmail_resources(user, credential):
     """Auto-create Gmail subscriber list and campaign."""
     from django.utils.text import slugify
-    import uuid
+
+    def _merge_duplicate_lists(canonical_list, user_obj, target_name, target_description):
+        duplicate_lists = List.objects.filter(
+            user=user_obj,
+            name=target_name,
+            description=target_description
+        ).exclude(pk=canonical_list.pk)
+
+        for duplicate_list in duplicate_lists:
+            # Preserve subscribers
+            subscribers = list(duplicate_list.subscribers.all())
+            if subscribers:
+                canonical_list.subscribers.add(*subscribers)
+
+            # Preserve campaign -> list linkage
+            Campaign.objects.filter(subscriber_list=duplicate_list).update(subscriber_list=canonical_list)
+
+            duplicate_list.delete()
+
+    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, target_description, canonical_list):
+        duplicate_campaigns = Campaign.objects.filter(
+            user=user_obj,
+            name=target_name,
+            description=target_description
+        ).exclude(pk=canonical_campaign.pk)
+
+        if duplicate_campaigns.exists():
+            for duplicate_campaign in duplicate_campaigns:
+                # Preserve aggregate counters
+                canonical_campaign.sent_count += duplicate_campaign.sent_count
+                canonical_campaign.open_count += duplicate_campaign.open_count
+                canonical_campaign.click_count += duplicate_campaign.click_count
+                canonical_campaign.bounce_count += duplicate_campaign.bounce_count
+                canonical_campaign.unsubscribe_count += duplicate_campaign.unsubscribe_count
+                canonical_campaign.complaint_count += duplicate_campaign.complaint_count
+
+                # Preserve campaign-linked records
+                Email.objects.filter(campaign=duplicate_campaign).update(campaign=canonical_campaign)
+                duplicate_campaign.email_send_requests.update(campaign=canonical_campaign)
+
+                duplicate_campaign.delete()
+
+            canonical_campaign.subscriber_list = canonical_list
+            canonical_campaign.is_active = True
+            canonical_campaign.save(update_fields=[
+                'subscriber_list',
+                'is_active',
+                'sent_count',
+                'open_count',
+                'click_count',
+                'bounce_count',
+                'unsubscribe_count',
+                'complaint_count',
+                'updated_at'
+            ])
     
     # Create Gmail subscriber list
     # Include user ID in slug to ensure uniqueness across users
@@ -238,10 +292,6 @@ def _create_gmail_resources(user, credential):
         base_campaign_slug = base_campaign_slug[:max_base_length]
         campaign_slug = f"{base_campaign_slug}-{user.id}"
     
-    # Additional check in case of collision (shouldn't happen with user ID, but just in case)
-    if Campaign.objects.filter(user=user, slug=campaign_slug).exists():
-        campaign_slug = f"{campaign_slug}-{str(uuid.uuid4())[:8]}"
-    
     gmail_campaign, created = Campaign.objects.get_or_create(
         user=user,
         slug=campaign_slug,
@@ -252,6 +302,24 @@ def _create_gmail_resources(user, credential):
             'is_active': True
         }
     )
+
+    # Keep campaign tied to the canonical list, and clean up any duplicate auto-created campaigns
+    campaign_description = f"Auto-created campaign for Gmail auto-replies from {credential.email_address}"
+    if (
+        gmail_campaign.name != campaign_name or
+        gmail_campaign.description != campaign_description or
+        gmail_campaign.subscriber_list_id != gmail_list.id or
+        not gmail_campaign.is_active
+    ):
+        gmail_campaign.name = campaign_name
+        gmail_campaign.description = campaign_description
+        gmail_campaign.subscriber_list = gmail_list
+        gmail_campaign.is_active = True
+        gmail_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+
+    list_description = f"Auto-created list for Gmail account {credential.email_address}"
+    _merge_duplicate_lists(gmail_list, user, list_name, list_description)
+    _merge_duplicate_campaigns(gmail_campaign, user, campaign_name, campaign_description, gmail_list)
     
     # Create default email template
     if created or not gmail_campaign.emails.exists():
@@ -271,7 +339,56 @@ def _create_gmail_resources(user, credential):
 def _create_imap_resources(user, credential):
     """Auto-create IMAP subscriber list and campaign."""
     from django.utils.text import slugify
-    import uuid
+
+    def _merge_duplicate_lists(canonical_list, user_obj, target_name, target_description):
+        duplicate_lists = List.objects.filter(
+            user=user_obj,
+            name=target_name,
+            description=target_description
+        ).exclude(pk=canonical_list.pk)
+
+        for duplicate_list in duplicate_lists:
+            subscribers = list(duplicate_list.subscribers.all())
+            if subscribers:
+                canonical_list.subscribers.add(*subscribers)
+
+            Campaign.objects.filter(subscriber_list=duplicate_list).update(subscriber_list=canonical_list)
+            duplicate_list.delete()
+
+    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, target_description, canonical_list):
+        duplicate_campaigns = Campaign.objects.filter(
+            user=user_obj,
+            name=target_name,
+            description=target_description
+        ).exclude(pk=canonical_campaign.pk)
+
+        if duplicate_campaigns.exists():
+            for duplicate_campaign in duplicate_campaigns:
+                canonical_campaign.sent_count += duplicate_campaign.sent_count
+                canonical_campaign.open_count += duplicate_campaign.open_count
+                canonical_campaign.click_count += duplicate_campaign.click_count
+                canonical_campaign.bounce_count += duplicate_campaign.bounce_count
+                canonical_campaign.unsubscribe_count += duplicate_campaign.unsubscribe_count
+                canonical_campaign.complaint_count += duplicate_campaign.complaint_count
+
+                Email.objects.filter(campaign=duplicate_campaign).update(campaign=canonical_campaign)
+                duplicate_campaign.email_send_requests.update(campaign=canonical_campaign)
+
+                duplicate_campaign.delete()
+
+            canonical_campaign.subscriber_list = canonical_list
+            canonical_campaign.is_active = True
+            canonical_campaign.save(update_fields=[
+                'subscriber_list',
+                'is_active',
+                'sent_count',
+                'open_count',
+                'click_count',
+                'bounce_count',
+                'unsubscribe_count',
+                'complaint_count',
+                'updated_at'
+            ])
     
     # Create IMAP subscriber list
     # Include user ID in slug to ensure uniqueness across users
@@ -308,10 +425,6 @@ def _create_imap_resources(user, credential):
         base_campaign_slug = base_campaign_slug[:max_base_length]
         campaign_slug = f"{base_campaign_slug}-{user.id}"
     
-    # Additional check in case of collision (shouldn't happen with user ID, but just in case)
-    if Campaign.objects.filter(user=user, slug=campaign_slug).exists():
-        campaign_slug = f"{campaign_slug}-{str(uuid.uuid4())[:8]}"
-    
     imap_campaign, created = Campaign.objects.get_or_create(
         user=user,
         slug=campaign_slug,
@@ -322,6 +435,23 @@ def _create_imap_resources(user, credential):
             'is_active': True
         }
     )
+
+    campaign_description = f"Auto-created campaign for IMAP auto-replies from {credential.email_address}"
+    if (
+        imap_campaign.name != campaign_name or
+        imap_campaign.description != campaign_description or
+        imap_campaign.subscriber_list_id != imap_list.id or
+        not imap_campaign.is_active
+    ):
+        imap_campaign.name = campaign_name
+        imap_campaign.description = campaign_description
+        imap_campaign.subscriber_list = imap_list
+        imap_campaign.is_active = True
+        imap_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+
+    list_description = f"Auto-created list for IMAP account {credential.email_address}"
+    _merge_duplicate_lists(imap_list, user, list_name, list_description)
+    _merge_duplicate_campaigns(imap_campaign, user, campaign_name, campaign_description, imap_list)
     
     # Create default email template
     if created or not imap_campaign.emails.exists():
@@ -343,7 +473,7 @@ def _create_imap_resources(user, credential):
 def gmail_quick_signup(request):
     """Quick signup with Gmail OAuth for non-authenticated users."""
     try:
-        email_address = request.data.get('email', '').strip()
+        email_address = request.data.get('email', '').strip().lower()
         account_password = request.data.get('account_password', '').strip()
         
         if not email_address or not account_password:
@@ -403,7 +533,7 @@ def imap_quick_signup(request):
     from .imap_service import IMAPService
     
     try:
-        email_address = request.data.get('email', '').strip()
+        email_address = request.data.get('email', '').strip().lower()
         imap_host = request.data.get('host', '').strip()
         imap_port = int(request.data.get('port', 993))
         imap_username = request.data.get('username', '').strip()
@@ -503,7 +633,7 @@ def imap_connect(request):
     from .imap_service import IMAPService
     
     try:
-        email_address = request.data.get('email', '').strip()
+        email_address = request.data.get('email', '').strip().lower()
         imap_host = request.data.get('host', '').strip()
         imap_port = int(request.data.get('port', 993))
         imap_username = request.data.get('username', '').strip()
@@ -531,10 +661,11 @@ def imap_connect(request):
         
         # Test connection
         service = IMAPService()
-        if not service.test_connection(credential):
+        connection_success, error_message = service.test_connection(credential)
+        if not connection_success:
             credential.is_active = False
             credential.save()
-            return Response({'error': 'Failed to connect to IMAP server. Please check your settings.'}, status=400)
+            return Response({'error': error_message or 'Failed to connect to IMAP server. Please check your settings.'}, status=400)
         
         # Auto-create IMAP list and campaign
         _create_imap_resources(request.user, credential)

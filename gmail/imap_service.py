@@ -2,6 +2,7 @@
 IMAP Service for email integration.
 """
 import imaplib
+import ssl
 import email
 from email.header import decode_header
 from email.utils import parsedate_to_datetime
@@ -146,14 +147,65 @@ class IMAPService:
             return False, error_msg
     
     def _connect(self, credential: EmailCredential) -> imaplib.IMAP4:
-        """Connect to IMAP server."""
+        """Connect to IMAP server.
+
+        Robustly handles both SSL and non-SSL servers even if saved
+        credential mode/port is mismatched.
+        """
+        host = credential.imap_host
+        port = credential.imap_port or (993 if credential.imap_use_ssl else 143)
+
+        attempts = []
+
+        # Build preferred attempt order from saved mode, but always include fallbacks.
         if credential.imap_use_ssl:
-            mail = imaplib.IMAP4_SSL(credential.imap_host, credential.imap_port or 993)
+            if port == 143:
+                attempts = ['plain_starttls', 'plain', 'ssl']
+            else:
+                attempts = ['ssl', 'plain_starttls', 'plain']
         else:
-            mail = imaplib.IMAP4(credential.imap_host, credential.imap_port or 143)
-        
-        mail.login(credential.imap_username, credential.imap_password)
-        return mail
+            attempts = ['plain_starttls', 'plain', 'ssl']
+
+        errors = []
+
+        for mode in attempts:
+            mail = None
+            try:
+                if mode == 'ssl':
+                    mail = imaplib.IMAP4_SSL(host, port)
+                else:
+                    mail = imaplib.IMAP4(host, port)
+                    if mode == 'plain_starttls':
+                        capabilities = []
+                        if hasattr(mail, 'capabilities') and mail.capabilities:
+                            capabilities = [
+                                c.decode('utf-8', errors='ignore') if isinstance(c, bytes) else str(c)
+                                for c in mail.capabilities
+                            ]
+                        if any(c.upper() == 'STARTTLS' for c in capabilities):
+                            mail.starttls()
+                        else:
+                            raise imaplib.IMAP4.error('STARTTLS not supported')
+
+                mail.login(credential.imap_username, credential.imap_password)
+                if mode != ('ssl' if credential.imap_use_ssl else 'plain_starttls'):
+                    logger.warning(
+                        f"IMAP fallback mode '{mode}' succeeded for {credential.email_address} on {host}:{port}"
+                    )
+                return mail
+            except Exception as e:
+                errors.append(f"{mode}: {e}")
+                if mail is not None:
+                    try:
+                        mail.logout()
+                    except Exception:
+                        pass
+                continue
+
+        raise Exception(
+            f"Unable to connect/login IMAP for {credential.email_address} on {host}:{port}. "
+            f"Attempts failed -> {' | '.join(errors)}"
+        )
     
     def _find_sent_folder(self, mail) -> Optional[str]:
         """Find the sent folder by trying common names."""

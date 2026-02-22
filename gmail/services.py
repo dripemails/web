@@ -119,7 +119,7 @@ class GmailService:
             # Get user's email address
             service = build('gmail', 'v1', credentials=credentials)
             profile = service.users().getProfile(userId='me').execute()
-            email_address = profile.get('emailAddress', '')
+            email_address = (profile.get('emailAddress', '') or '').strip().lower()
             
             # Save or update credential
             credential, created = EmailCredential.objects.update_or_create(

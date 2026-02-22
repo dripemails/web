@@ -21,6 +21,7 @@ Usage:
     python cron.py process_gmail_emails
     python cron.py process_gmail_emails --settings=dripemails.live
     python cron.py process_gmail_emails --limit 50
+    python cron.py process_gmail_emails --email alex.schliker@gmail.com
     python cron.py process_gmail_emails --periodic
     python cron.py process_gmail_emails --periodic --interval 120
     
@@ -28,6 +29,7 @@ Usage:
     python cron.py crawl_imap
     python cron.py crawl_imap --settings=dripemails.live
     python cron.py crawl_imap --limit 50
+    python cron.py crawl_imap --email founders@dripemails.org
     python cron.py crawl_imap --periodic
     python cron.py crawl_imap --periodic --interval 120
     
@@ -454,7 +456,7 @@ def check_user_by_id(user_id: int):
         sys.exit(1)
 
 
-def process_gmail_emails(limit=None):
+def process_gmail_emails(limit=None, email=None):
     """
     Fetch and process Gmail emails for all active Gmail credentials.
     Sends auto-reply emails to From, To, and Sender email addresses.
@@ -466,12 +468,16 @@ def process_gmail_emails(limit=None):
     from campaigns.tasks import send_campaign_email
     import re
     
-    # Get all active Gmail credentials
+    # Get all active Gmail credentials (optionally filtered by email address)
     credentials = EmailCredential.objects.filter(
         provider=EmailProvider.GMAIL,
         is_active=True,
         sync_enabled=True
     ).select_related('user')
+
+    if email:
+        email = email.strip().lower()
+        credentials = credentials.filter(email_address__iexact=email)
     
     total_credentials = credentials.count()
     logger.info(f"Processing Gmail emails for {total_credentials} credentials")
@@ -662,7 +668,7 @@ def process_gmail_emails(limit=None):
     logger.info(f"  Errors: {error_count}")
 
 
-def crawl_imap(limit=None):
+def crawl_imap(limit=None, email=None):
     """
     Fetch and process IMAP emails for all active IMAP credentials.
     Sends auto-reply emails to From, To, and Sender email addresses.
@@ -674,12 +680,16 @@ def crawl_imap(limit=None):
     from campaigns.tasks import send_campaign_email
     import re
     
-    # Get all active IMAP credentials
+    # Get all active IMAP credentials (optionally filtered by email address)
     credentials = EmailCredential.objects.filter(
         provider=EmailProvider.IMAP,
         is_active=True,
         sync_enabled=True
     ).select_related('user')
+
+    if email:
+        email = email.strip().lower()
+        credentials = credentials.filter(email_address__iexact=email)
     
     total_credentials = credentials.count()
     logger.info(f"Processing IMAP emails for {total_credentials} credentials")
@@ -1125,6 +1135,7 @@ Examples:
     parser.add_argument('--user-id', type=int, help='Check SPF for specific user ID (check_spf only)')
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users (check_spf only)')
     parser.add_argument('--limit', type=int, help='Limit number of items to process')
+    parser.add_argument('--email', type=str, help='Only process credentials for this email address (process_gmail_emails, crawl_imap)')
     parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (process_gmail_emails, crawl_imap, garbage_collect)')
     parser.add_argument('--interval', type=int, default=120, help='Interval in seconds between executions when using --periodic (default: 120 = 2 minutes)')
     
@@ -1153,7 +1164,7 @@ Examples:
                 while True:
                     try:
                         logger.info(f"Running Gmail email processing cycle at {timezone.now()}")
-                        process_gmail_emails(limit=args.limit)
+                        process_gmail_emails(limit=args.limit, email=args.email)
                         logger.info(f"Completed Gmail email processing cycle. Sleeping for {args.interval} seconds...")
                     except KeyboardInterrupt:
                         logger.info("Received interrupt signal. Stopping periodic execution.")
@@ -1167,7 +1178,7 @@ Examples:
                 logger.info("Periodic Gmail email processing stopped by user")
                 sys.exit(0)
         else:
-            process_gmail_emails(limit=args.limit)
+            process_gmail_emails(limit=args.limit, email=args.email)
     elif args.command == 'crawl_imap':
         if args.periodic:
             logger.info(f"Starting periodic IMAP email crawling (interval: {args.interval} seconds)")
@@ -1175,7 +1186,7 @@ Examples:
                 while True:
                     try:
                         logger.info(f"Running IMAP email crawling cycle at {timezone.now()}")
-                        crawl_imap(limit=args.limit)
+                        crawl_imap(limit=args.limit, email=args.email)
                         logger.info(f"Completed IMAP email crawling cycle. Sleeping for {args.interval} seconds...")
                     except KeyboardInterrupt:
                         logger.info("Received interrupt signal. Stopping periodic execution.")
@@ -1189,7 +1200,7 @@ Examples:
                 logger.info("Periodic IMAP email crawling stopped by user")
                 sys.exit(0)
         else:
-            crawl_imap(limit=args.limit)
+            crawl_imap(limit=args.limit, email=args.email)
     elif args.command == 'garbage_collect':
         if args.periodic:
             logger.info(f"Starting periodic garbage collection (interval: {args.interval} seconds)")

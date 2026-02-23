@@ -19,6 +19,9 @@
 
   <div class="bg-white rounded-lg shadow-sm p-6">
     <form method="get" class="mb-6">
+      {% if agent %}
+      <input type="hidden" name="agent" value="{{ agent }}">
+      {% endif %}
       <label class="flex items-center space-x-3">
         <span class="text-sm text-gray-600">{% trans "Campaign" %}</span>
         <select name="campaign_id" onchange="this.form.submit()" class="ml-2 border rounded px-3 py-2">
@@ -34,52 +37,52 @@
       <p class="text-gray-600">{% trans "Select a campaign to view analysis." %}</p>
     {% else %}
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-medium">{% trans "Campaign Statistics" %}</h2>
+        <h2 class="text-lg font-semibold text-gray-900">{% trans "Campaign Statistics" %}</h2>
         <div id="stats-timestamp" class="text-sm text-gray-500">{% trans "Loading..." %}</div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Sent" %}</div>
-          <div class="text-xl font-semibold" data-metric="sent">{{ campaign.sent_count }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="sent">{{ campaign.sent_count }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Opens" %}</div>
-          <div class="text-xl font-semibold" data-metric="opens">{{ campaign.open_count }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="opens">{{ campaign.open_count }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Clicks" %}</div>
-          <div class="text-xl font-semibold" data-metric="clicks">{{ campaign.click_count }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="clicks">{{ campaign.click_count }}</div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Open Rate" %}</div>
-          <div class="text-xl font-semibold" data-metric="open_rate">{{ campaign.open_rate|default:"0%" }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="open_rate">{{ campaign.open_rate|default:"0%" }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Click Rate" %}</div>
-          <div class="text-xl font-semibold" data-metric="click_rate">{{ campaign.click_rate|default:"0%" }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="click_rate">{{ campaign.click_rate|default:"0%" }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Delivery Rate" %}</div>
-          <div class="text-xl font-semibold" data-metric="delivery_rate">{{ campaign.delivery_rate|default:"0%" }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="delivery_rate">{{ campaign.delivery_rate|default:"0%" }}</div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Bounces" %}</div>
-          <div class="text-xl font-semibold" data-metric="bounces">{{ campaign.bounce_count|default:0 }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="bounces">{{ campaign.bounce_count|default:0 }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Unsubscribes" %}</div>
-          <div class="text-xl font-semibold" data-metric="unsubscribes">{{ campaign.unsubscribe_count|default:0 }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="unsubscribes">{{ campaign.unsubscribe_count|default:0 }}</div>
         </div>
         <div class="p-4 bg-gray-50 rounded border">
           <div class="text-sm text-gray-500">{% trans "Complaints" %}</div>
-          <div class="text-xl font-semibold" data-metric="complaints">{{ campaign.complaint_count|default:0 }}</div>
+          <div class="text-xl font-semibold text-gray-900" data-metric="complaints">{{ campaign.complaint_count|default:0 }}</div>
         </div>
       </div>
 
@@ -111,7 +114,7 @@
 
       <!-- Monthly events chart -->
       <div class="mb-6">
-        <h2 class="text-lg font-medium mb-2">{% trans "Monthly events" %}</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Monthly events" %}</h2>
         {% if by_month_items %}
           <div class="overflow-auto bg-white rounded border">
             <table class="min-w-full divide-y divide-gray-200">
@@ -142,7 +145,7 @@
 
       <!-- Per-email breakdown chart and table -->
       <div>
-        <h2 class="text-lg font-medium mb-2">{% trans "Per-email breakdown" %}</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">{% trans "Per-email breakdown" %}</h2>
         {% if email_rows %}
           <div class="overflow-auto bg-white rounded border">
             <table class="min-w-full divide-y divide-gray-200">
@@ -187,6 +190,9 @@
     let lastUpdated = new Date();
     let refreshInterval = 15000; // 15 seconds
     let campaignId = '{{ campaign.id|default:"" }}';
+    const weeklyAnalyticsBaseUrl = '{% url "analytics:weekly" %}';
+    const campaignStatsBaseUrl = '/api/campaigns/';
+    const agentParam = '{{ agent|default:""|escapejs }}';
     
     console.log('Campaign ID from template:', campaignId);
     
@@ -225,7 +231,11 @@
       console.log('Initializing charts for campaign:', campaignId);
       
       // Fetch weekly analytics data for this specific campaign
-      fetch(`/analytics/weekly/?campaign_id=${campaignId}`)
+      const query = new URLSearchParams({ campaign_id: campaignId });
+      if (agentParam) {
+        query.set('agent', agentParam);
+      }
+      fetch(`${weeklyAnalyticsBaseUrl}?${query.toString()}`)
         .then(response => {
           console.log('Response status:', response.status);
           return response.json();
@@ -381,7 +391,12 @@
     }
 
     function updateStatistics() {
-      fetch(`/api/campaigns/${campaignId}/stats/`)
+      const query = new URLSearchParams();
+      if (agentParam) {
+        query.set('agent', agentParam);
+      }
+      const statsUrl = `${campaignStatsBaseUrl}${encodeURIComponent(campaignId)}/stats/${query.toString() ? `?${query.toString()}` : ''}`;
+      fetch(statsUrl)
         .then(response => {
           if (!response.ok) throw new Error('Failed to fetch stats');
           return response.json();

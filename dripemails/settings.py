@@ -357,6 +357,16 @@ CORS_ALLOWED_ORIGINS = [
     'https://dripemails.org',
 ]
 
+# Allow embedding in iframe (for Ionic/mobile apps in development)
+# In production, XFrameOptionsMiddleware is enabled with default 'DENY' setting
+if not DEBUG:
+    X_FRAME_OPTIONS = 'SAMEORIGIN'  # Allow same-origin iframes in production
+
+# Allow embedding in iframe (for Ionic/mobile apps in development)
+# In production, XFrameOptionsMiddleware is enabled with default 'DENY' setting
+if not DEBUG:
+    X_FRAME_OPTIONS = 'SAMEORIGIN'  # Allow same-origin iframes in production
+
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

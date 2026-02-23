@@ -2,6 +2,7 @@
 import threading
 
 from django.conf import settings
+from django.utils.cache import patch_vary_headers
 
 _thread_locals = threading.local()
 
@@ -52,4 +53,41 @@ class FrameAncestorsMiddleware:
         if csp and not csp.strip().endswith(';'):
             csp = csp.rstrip() + '; '
         response['Content-Security-Policy'] = csp + f"frame-ancestors {ancestors};"
+        return response
+
+
+class NoCacheAuthPagesMiddleware:
+    """Force no-cache headers on auth pages to avoid stale CSRF tokens.
+
+    Applies to login and signup/register pages (including localized URLs).
+    """
+
+    AUTH_URL_NAMES = {
+        'account_login',
+        'account_signup',
+    }
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+
+        resolver_match = getattr(request, 'resolver_match', None)
+        url_name = resolver_match.url_name if resolver_match else None
+        path = (request.path or '').lower().rstrip('/')
+
+        is_auth_page = (
+            url_name in self.AUTH_URL_NAMES or
+            path.endswith('/accounts/login') or
+            path.endswith('/accounts/signup') or
+            path.endswith('/accounts/register')
+        )
+
+        if is_auth_page:
+            response['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0, private'
+            response['Pragma'] = 'no-cache'
+            response['Expires'] = '0'
+            patch_vary_headers(response, ('Cookie',))
+
         return response

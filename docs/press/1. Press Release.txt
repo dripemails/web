@@ -1,0 +1,64 @@
+FOR IMMEDIATE RELEASE
+
+Subject: DripEmails.org Launches Intelligent Email Automation with Gmail + IMAP Auto-Engagement
+
+Hi {{first_name}},
+
+We’re excited to announce DripEmails.org, a modern email marketing and automation platform that helps teams launch high-converting campaigns, manage subscribers, and engage contacts automatically—all in one place.
+
+The headline feature: you can connect either Gmail or IMAP and let DripEmails automatically respond to inbound conversations with smart follow-ups such as:
+
+“I noticed we corresponded. Did you have any questions?”
+
+This makes it easy to turn every incoming email into a relationship-building opportunity without manual busywork.
+
+What DripEmails.org includes:
+
+• Gmail + IMAP Integrations
+  - Connect Gmail or IMAP accounts for auto-reply workflows
+  - Automatically detect inbound messages and trigger campaign-based follow-ups
+  - Support for practical mailbox crawling and periodic processing flows
+
+• Drip Campaign Management
+  - Build multi-step email sequences with configurable wait times (minutes, hours, days, weeks, months)
+  - Automatic sequencing and progression through campaign steps
+  - Rich HTML + text templates and reusable campaign structures
+
+• AI-Powered Email Features
+  - AI email generation for faster drafting
+  - AI revision to improve tone, clarity, and readability
+  - Topic-assisted writing and template improvement workflows
+
+• Subscriber & List Management
+  - Create and manage lists and subscribers at scale
+  - CSV import/export support
+  - Segmentation, custom fields, and subscription status handling
+  - Unsubscribe-ready workflow support
+
+• Analytics & Reporting
+  - Campaign-level performance visibility
+  - Open/click tracking and engagement insights
+  - Dashboard analytics for ongoing optimization
+
+• Delivery & Infrastructure
+  - Built-in SMTP server support
+  - SPF/DKIM/DMARC-aware architecture and deliverability-oriented setup paths
+  - API-driven workflows for integration with your stack
+
+• Developer + Ops Friendly
+  - Django/Python architecture with REST APIs
+  - Supports both scheduled workflows and immediate/synchronous sending in supported environments
+  - Practical cron-based processing for campaign and inbox automation jobs
+
+DripEmails.org is built for startups, agencies, sales teams, support teams, and growth marketers who want powerful automation with practical implementation.
+
+If you’d like, we can schedule a quick walkthrough to show how to:
+1) connect Gmail or IMAP,
+2) launch your first auto-reply drip sequence,
+3) and track engagement performance in real time.
+
+Website: https://dripemails.org
+Contact: founders@dripemails.org
+
+Best regards,
+The DripEmails.org Team

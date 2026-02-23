@@ -1,0 +1,14 @@
+Subject: Quick Intro — DripEmails Auto-Reply
+
+Hi [First Name] — quick intro:
+
+DripEmails.org lets you connect Gmail or IMAP and automatically follow up with inbound contacts using drip campaigns.
+
+Example reply:
+“I noticed we corresponded. Did you have any questions?”
+
+It also includes AI-assisted email writing, list/subscriber management, and campaign analytics.
+
+If useful, I can share a 10-minute walkthrough.
+https://dripemails.org
+founders@dripemails.org

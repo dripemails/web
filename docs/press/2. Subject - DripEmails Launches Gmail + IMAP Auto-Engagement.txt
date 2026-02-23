@@ -1,0 +1,25 @@
+Subject: DripEmails Launches Gmail + IMAP Auto-Engagement
+
+Hi [First Name],
+
+DripEmails.org just launched a simpler way to automate follow-up from real inbox conversations.
+
+You can now connect Gmail or IMAP and automatically engage inbound contacts with helpful replies like:
+
+“I noticed we corresponded. Did you have any questions?”
+
+Key highlights:
+- Gmail + IMAP integrations for automated inbox follow-up
+- Multi-step drip campaigns with timed sequencing
+- AI-assisted email generation and revision
+- Subscriber lists, segmentation, and import/export
+- Analytics dashboard for opens, clicks, and campaign performance
+- Built-in SMTP and API-friendly architecture
+
+If you’d like a quick demo, we can show your first connected inbox and live auto-reply workflow in minutes.
+
+Website: https://dripemails.org
+Contact: founders@dripemails.org
+
+Best,
+DripEmails.org

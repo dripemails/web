@@ -1,0 +1,7 @@
+Twitter/X variant (<=280 chars)
+
+DripEmails.org connects to Gmail or IMAP and auto-follows up on inbound emails with smart drip replies like:
+“I noticed we corresponded. Did you have any questions?”
+
+AI writing + lists + analytics in one place.
+https://dripemails.org/resources/blog/

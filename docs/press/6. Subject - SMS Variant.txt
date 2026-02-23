@@ -1,0 +1,3 @@
+SMS variant (~160 chars)
+
+DripEmails.org connects Gmail/IMAP and auto-follows up with drip replies. AI writing + analytics included. Learn more: https://dripemails.org/resources/blog/

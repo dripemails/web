@@ -1,0 +1,27 @@
+Subject: Founder Note — Why We Built DripEmails.org
+
+Hi [First Name],
+
+I wanted to personally share what we’re building at DripEmails.org.
+
+Most email tools make teams bounce between inboxes, campaign tools, and spreadsheets. We built DripEmails to unify that workflow: connect Gmail or IMAP, then automatically follow up with thoughtful drip responses whenever a conversation starts.
+
+A simple example:
+“I noticed we corresponded. Did you have any questions?”
+
+From there, DripEmails can continue the sequence automatically using your campaign timing rules.
+
+What matters most to us:
+- Practical automation (not complexity)
+- Strong campaign and list management
+- AI help for writing and editing emails faster
+- Real analytics to improve results
+- Flexible infrastructure (SMTP support, APIs, and ops-friendly workflows)
+
+If this is relevant to your team, I’d be glad to give you a walkthrough and help set up your first auto-engagement flow.
+
+Thank you for taking a look.
+
+— Founder, DripEmails.org
+https://dripemails.org
+founders@dripemails.org

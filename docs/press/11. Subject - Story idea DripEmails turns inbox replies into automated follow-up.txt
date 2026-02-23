@@ -1,0 +1,33 @@
+Subject: Story idea: DripEmails turns inbox replies into automated follow-up
+
+Hi {{first_name}},
+
+I’m reaching out with a product story your audience might find useful.
+
+DripEmails.org helps teams connect Gmail or IMAP and automatically follow up with people they’ve already emailed—using human-style messages like:
+
+“I noticed we corresponded. Did you have any questions?”
+
+Why this is interesting now:
+- Teams are overloaded with inbox follow-up and lead leakage
+- Most tools focus on outbound blasts, not inbound relationship automation
+- DripEmails combines inbox integration + drip campaigns + AI writing + analytics in one workflow
+
+What’s new/unique:
+- Gmail and IMAP auto-engagement
+- Auto-created campaigns/lists with dedupe-safe behavior
+- Personalized templates with variables like {{first_name}} and {{email}}
+- Practical operations support (cron processing, SMTP support, API workflows)
+
+If helpful, I can share:
+- a short demo
+- screenshots
+- customer-style use cases
+- founder interview availability
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+Contact: founders@dripemails.org
+
+Thanks for considering,
+DripEmails.org

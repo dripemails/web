@@ -1,0 +1,20 @@
+Subject: {{first_name}}, want a 10-minute DripEmails walkthrough?
+
+Hi {{first_name}},
+
+Would you be open to a quick walkthrough of DripEmails.org?
+
+In 10 minutes, I can show you how to:
+1) connect Gmail or IMAP,
+2) launch an auto-reply campaign,
+3) and send personalized responses using fields like {{first_name}} and {{email}}.
+
+A common first-touch message teams use is:
+“I noticed we corresponded. Did you have any questions?”
+
+If that’s useful for {{company_name}}, reply with a time that works for you.
+
+Best regards,
+DripEmails.org
+https://dripemails.org/resources/blog/
+founders@dripemails.org

@@ -1,0 +1,23 @@
+Subject: {{first_name}}, should I send over the DripEmails setup guide?
+
+Hi {{first_name}},
+
+Happy to send a quick setup guide if helpful.
+
+With DripEmails.org, you can:
+- connect Gmail or IMAP,
+- auto-engage inbound contacts,
+- run timed drip campaigns,
+- track opens/clicks and campaign performance.
+
+You can personalize every step using variables like {{first_name}} and {{email}}.
+
+Typical first message:
+“I noticed we corresponded. Did you have any questions?”
+
+Want me to send the guide for {{company_name}}?
+
+Thanks,
+DripEmails.org
+https://dripemails.org/resources/blog/
+founders@dripemails.org

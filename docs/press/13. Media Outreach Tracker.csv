@@ -1,0 +1,66 @@
+publication,reporter_name,email,beat,priority,status,last_contact,next_follow_up,notes,pitch_variant
+TechCrunch,,,Startups/SaaS,High,Not started,,,Prioritize startup launch + founder interview,Launch
+VentureBeat,,,AI + Enterprise SaaS,High,Not started,,,Position practical AI + inbox workflow,AI
+The Information,,,Enterprise software,High,Not started,,,Focus on workflow/productivity economics,Productivity
+Forbes Tech Council/Forbes Tech,,,Business tech,High,Not started,,,Emphasize SMB and operator value,Founder
+Fast Company,,,Innovation/Future of work,High,Not started,,,Narrative around inbox automation trend,Productivity
+Wired Business,,,Product + internet culture,Medium,Not started,,,Angle: automation meets communication habits,Launch
+Axios Pro Rata,,,Deals/startup ecosystem,Medium,Not started,,,Short executive brief style,Launch
+Crunchbase News,,,Startups/data-driven trends,Medium,Not started,,,Pitch as operational efficiency story,Productivity
+Sifted,,,European startups/SaaS,Medium,Not started,,,Regional startup relevance,Launch
+EU-Startups,,,European startup launches,Medium,Not started,,,Concise launch + product differentiator,Launch
+SiliconANGLE,,,Cloud/dev/enterprise tech,Medium,Not started,,,API + integration + ops angle,Technical
+ZDNET,,,Business IT/software,Medium,Not started,,,Practical use-cases for teams,Productivity
+InfoWorld,,,Developer/architecture,Medium,Not started,,,Django/Python + API-friendly platform,Technical
+The New Stack,,,Engineering + dev tools,Medium,Not started,,,Operational architecture and workflows,Technical
+DevOps.com,,,DevOps/operations tooling,Low,Not started,,,Cron and workflow reliability angle,Technical
+ReadWrite,,,Business tech/startups,Low,Not started,,,General launch positioning,Launch
+BetaKit,,,Canadian startups/tech,Low,Not started,,,Startup product + team productivity,Launch
+SaaStr,,,B2B SaaS founders/operators,High,Not started,,,Founder + GTM follow-up automation angle,Founder
+SaaS Mag,,,SaaS growth/ops,Medium,Not started,,,Lifecycle email automation story,Productivity
+SaaS Insider,,,SaaS strategy,Medium,Not started,,,Inbound-to-drip conversion angle,Productivity
+MarTech,,,Marketing technology,High,Not started,,,Marketing ops + campaign sequencing,Productivity
+Chiefmartec,,,Marketing technology landscape,Medium,Not started,,,Position within martech stack,Technical
+MarketingProfs,,,Marketing practice/how-to,Medium,Not started,,,Educational angle with examples,Launch
+Search Engine Journal,,,Digital marketing,Medium,Not started,,,Email workflow and engagement focus,Productivity
+Social Media Examiner,,,Creator/marketer tools,Low,Not started,,,Cross-channel follow-up mention,Launch
+HubSpot Blog,,,Marketing + sales education,High,Not started,,,Thought leadership + actionable workflow,Productivity
+Ahrefs Blog,,,Growth/marketing systems,Low,Not started,,,Workflow optimization angle,Productivity
+Neil Patel Blog,,,SMB marketing audience,Low,Not started,,,Simple problem/solution framing,Launch
+Content Marketing Institute,,,Content + lifecycle marketing,Low,Not started,,,Nurture sequence tie-in,Productivity
+G2 Learn Hub,,,Software buying audience,Low,Not started,,,Category education + use-case,Launch
+Capterra Blog,,,SMB software buyers,Low,Not started,,,Practical checklist style pitch,Launch
+Product Hunt Newsletter,,,Product discovery,High,Not started,,,Launch + quick demo assets,Launch
+Indie Hackers,,,Founders/builders,High,Not started,,,Founder journey + lessons learned,Founder
+Hacker News (Show HN) coverage targets,,,Developer community,Medium,Not started,,,Technical post + community feedback,Technical
+Lenny's Newsletter,,,Product + growth operators,High,Not started,,,Growth workflow angle + metrics,Productivity
+Ben's Bites,,,AI/product daily digest,Medium,Not started,,,Short AI-enabled workflow pitch,AI
+The Rundown AI,,,AI tools and workflows,Medium,Not started,,,Practical AI-in-email angle,AI
+Future Tools Newsletter,,,AI tools curation,Low,Not started,,,Tool-focused quick pitch,AI
+Superhuman Blog,,,Email productivity audience,Low,Not started,,,Inbox workflow innovation,Productivity
+Mailmodo Blog,,,Email marketing tech,Low,Not started,,,Campaign + personalization detail,Productivity
+Litmus Blog,,,Email optimization audience,Low,Not started,,,Engagement and lifecycle messaging,Productivity
+EmailTooltester,,,Email software reviews,Medium,Not started,,,Hands-on review invitation,Launch
+Geekflare,,,Software/tool roundups,Low,Not started,,,Feature-focused listing pitch,Launch
+AlternativeTo,,,Software alternatives,Low,Not started,,,Comparison positioning,Launch
+StackShare Blog,,,Technical stack stories,Low,Not started,,,Architecture + stack overview,Technical
+DZone,,,Developer publication,Low,Not started,,,Engineering implementation angle,Technical
+Medium - Better Marketing,,,Marketing practitioners,Low,Not started,,,Guest thought leadership option,Founder
+Substack - Growth In Reverse,,,Growth case studies,Low,Not started,,,Case-study style pitch,Productivity
+Substack - Not Boring,,,Business/tech analysis,Low,Not started,,,Broader market thesis angle,Founder
+Substack - Marketing Examined,,,Marketing operators,Low,Not started,,,Workflow and conversion framing,Productivity
+Substack - Every,,,Future of work/software,Low,Not started,,,Narrative around communication automation,Founder
+Substack - TLDR / dev digests,,,Developer digest audience,Low,Not started,,,Technical + launch snippet,Technical
+Tech in Asia,,,APAC startups and SaaS,Low,Not started,,,Regional expansion-ready narrative,Launch
+YourStory,,,Startup ecosystem,Low,Not started,,,Founder story + product utility,Founder
+Startups.com Blog,,,Founder education,Low,Not started,,,Operational playbook positioning,Founder
+Founder Institute Blog,,,Early-stage founders,Low,Not started,,,Practical founder workflow benefits,Founder
+Y Combinator Bookface/Startup School community,,,Founder/operators,Medium,Not started,,,Community post + feedback loop,Founder
+Noah Kagan AppSumo Blog,,,SMB growth operators,Low,Not started,,,Simple ROI messaging,Productivity
+Sales Hacker,,,Sales workflows and enablement,Medium,Not started,,,Follow-up automation for pipeline,Productivity
+RevGenius,,,Revenue community,Low,Not started,,,Sales + marketing alignment angle,Productivity
+Pavilion Community Content,,,Revenue leadership,Low,Not started,,,Operational efficiency narrative,Founder
+Close Blog,,,Sales email process,Low,Not started,,,Tactical sales follow-up story,Productivity
+Outreach Blog,,,Sales engagement audience,Low,Not started,,,Complementary workflow perspective,Productivity
+Apollo Blog,,,Prospecting + sequencing audience,Low,Not started,,,Inbounds to sequence bridge angle,Productivity
+Customer.io Blog,,,Lifecycle messaging audience,Low,Not started,,,Lifecycle and triggered messaging angle,Productivity

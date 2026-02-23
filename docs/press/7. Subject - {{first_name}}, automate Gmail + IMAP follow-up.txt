@@ -1,0 +1,17 @@
+Subject: {{first_name}}, automate Gmail + IMAP follow-up
+
+Hi {{first_name}},
+
+Quick note: DripEmails.org helps teams automatically follow up on inbound email by connecting Gmail or IMAP and triggering smart drip responses.
+
+For example, after someone writes in, your first response can be:
+“I noticed we corresponded. Did you have any questions?”
+
+Then your sequence can continue with timed follow-ups using variables like {{first_name}}, {{last_name}}, and {{email}}.
+
+If you want, I can share a sample setup tailored to {{company_name}}.
+
+Best,
+DripEmails.org
+https://dripemails.org
+founders@dripemails.org

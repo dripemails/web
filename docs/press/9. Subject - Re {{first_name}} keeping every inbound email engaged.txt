@@ -1,0 +1,21 @@
+Subject: Re {{first_name}}: keeping every inbound email engaged
+
+Hi {{first_name}},
+
+Most teams lose momentum after inbound emails because follow-up slips.
+
+DripEmails.org solves that by connecting Gmail/IMAP and automatically sending relevant follow-up sequences with personalization variables:
+- {{first_name}}
+- {{last_name}}
+- {{email}}
+- {{subject}}
+
+Starter message example:
+“I noticed we corresponded. Did you have any questions?”
+
+If you’d like, I can send a ready-to-import campaign for {{company_name}}.
+
+Best,
+DripEmails.org
+https://dripemails.org
+founders@dripemails.org

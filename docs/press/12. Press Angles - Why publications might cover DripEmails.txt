@@ -1,0 +1,42 @@
+Press Angles: Why publications might cover DripEmails.org
+
+1) The Inbox Automation Angle
+- Headline concept: “This startup turns inbox conversations into automated drip follow-up.”
+- Why it works: It reframes email automation from outbound-only to inbound-engagement.
+
+2) The Productivity Angle
+- Headline concept: “Teams lose revenue in follow-up gaps—DripEmails closes the loop.”
+- Why it works: Strong pain point for sales, support, founders, and agencies.
+
+3) The Practical AI Angle
+- Headline concept: “AI writing that supports real email workflows, not just drafting.”
+- Why it works: Shows practical AI utility in existing communication systems.
+
+4) The SMB/Startup Angle
+- Headline concept: “A lightweight way for small teams to run personalized follow-up at scale.”
+- Why it works: Useful for budget-conscious teams without large RevOps stacks.
+
+5) The Technical Builder Angle
+- Headline concept: “Open, API-friendly email workflow platform built on Django/Python.”
+- Why it works: Appeals to technical publications and developer audiences.
+
+Proof points to include in outreach
+- Gmail + IMAP integrations for auto-reply workflows
+- Multi-step campaigns with wait-time sequencing
+- Subscriber/list management + import/export
+- AI generation/revision support
+- Analytics dashboard and campaign tracking
+- SMTP + API-friendly architecture
+
+Suggested publication categories
+- SaaS and startup media
+- Marketing operations and growth newsletters
+- Sales productivity and RevOps outlets
+- Founder/operator communities
+- Developer tooling and Python ecosystem publications
+
+Suggested CTA to journalists
+- Offer a 10-minute product walkthrough
+- Offer founder quote/interview
+- Offer test account/screenshots
+- Offer a concise launch brief and use-case examples

@@ -1,6 +1,23 @@
 from rest_framework import serializers
 from .models import Campaign, Email, EmailEvent
 from subscribers.models import List
+import re
+
+
+def preserve_consecutive_spaces_in_html(html):
+    if not html:
+        return html
+    parts = re.split(r'(<[^>]+>)', html)
+    processed_parts = []
+    for part in parts:
+        if not part:
+            processed_parts.append(part)
+            continue
+        if part.startswith('<') and part.endswith('>'):
+            processed_parts.append(part)
+            continue
+        processed_parts.append(re.sub(r' {2,}', lambda m: '&nbsp;' * len(m.group(0)), part))
+    return ''.join(processed_parts)
 
 class EmailSerializer(serializers.ModelSerializer):
     footer_id = serializers.CharField(write_only=True, required=False, allow_blank=True)
@@ -46,6 +63,14 @@ class EmailSerializer(serializers.ModelSerializer):
         if value is not None and value < 0:
             raise serializers.ValidationError("Wait time must be a non-negative integer (0 = send immediately).")
         return value
+
+    def validate_body_html(self, value):
+        return preserve_consecutive_spaces_in_html(value)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['body_html'] = preserve_consecutive_spaces_in_html(data.get('body_html'))
+        return data
 
 
 class CampaignSerializer(serializers.ModelSerializer):

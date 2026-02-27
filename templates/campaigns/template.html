@@ -16,6 +16,8 @@
         min-height: 300px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
+        white-space: break-spaces !important;
+        word-break: break-word;
     }
     /* Make Quill paragraphs visually behave like simple line breaks */
     .ql-editor p {
@@ -741,13 +743,113 @@ function cleanQuillContent(html) {
     return html;
 }
 
+// Preserve runs of spaces in HTML text nodes by converting all but the last
+// space in each run to non-breaking spaces. This keeps visual spacing intact
+// through Quill parsing/rendering and round-trip save/load.
+function preserveConsecutiveSpacesInHtml(html) {
+    if (!html) return html;
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+    const textNodes = [];
+    let currentNode;
+    while ((currentNode = walker.nextNode())) {
+        textNodes.push(currentNode);
+    }
+    textNodes.forEach(function(node) {
+        if (!node.nodeValue || node.nodeValue.indexOf('  ') === -1) return;
+        node.nodeValue = node.nodeValue.replace(/ {2,}/g, function(match) {
+            return '\u00A0'.repeat(match.length);
+        });
+    });
+    return container.innerHTML;
+}
+
+// Ensure user-typed double spaces are preserved in Quill content.
+// Quill/HTML can visually collapse regular spaces, so convert two typed spaces
+// into NBSP + regular space at input time.
+function enableDoubleSpacePreservation(editor) {
+    if (!editor) return;
+    function handleSpaceInsert(e) {
+        if (e) {
+            const isSpaceInput = (e.inputType === 'insertText' && e.data === ' ') || e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
+            if (!isSpaceInput) return;
+        }
+
+        const range = editor.getSelection();
+        if (!range) return;
+        const previousChar = range.index > 0 ? editor.getText(range.index - 1, 1) : '';
+
+        if (e && typeof e.preventDefault === 'function') {
+            e.preventDefault();
+        }
+
+        const insertValue = (previousChar === ' ' || previousChar === '\u00A0') ? '\u00A0 ' : ' ';
+        if (range.length > 0) {
+            editor.deleteText(range.index, range.length, 'user');
+        }
+        editor.insertText(range.index, insertValue, 'user');
+        editor.setSelection(range.index + insertValue.length, 0, 'silent');
+    }
+
+    if (editor.root && typeof editor.root.addEventListener === 'function') {
+        editor.root.addEventListener('beforeinput', function(e) {
+            handleSpaceInsert(e);
+        });
+        editor.root.addEventListener('keydown', function(e) {
+            handleSpaceInsert(e);
+        });
+    }
+
+    editor.on('text-change', function(delta, oldDelta, source) {
+        if (source !== 'user') return;
+        const range = editor.getSelection();
+        if (!range || range.index < 2) return;
+
+        const recent = editor.getText(range.index - 2, 2);
+        if (recent === '  ') {
+            editor.deleteText(range.index - 2, 2, 'silent');
+            editor.insertText(range.index - 2, '\u00A0 ', 'silent');
+            editor.setSelection(range.index, 0, 'silent');
+        }
+    });
+}
+
+// Preserve consecutive spaces when Quill imports HTML (e.g. template load,
+// paste operations). This targets clipboard conversion where spaces can be
+// normalized even before save logic runs.
+function preserveSpacesInDelta(delta) {
+    if (!delta || !Array.isArray(delta.ops)) return delta;
+    delta.ops = delta.ops.map(function(op) {
+        if (typeof op.insert !== 'string' || op.insert.indexOf('  ') === -1) {
+            return op;
+        }
+        return Object.assign({}, op, {
+            insert: op.insert.replace(/ {2,}/g, function(match) {
+                return '\u00A0'.repeat(match.length);
+            })
+        });
+    });
+    return delta;
+}
+
+function enableClipboardSpacePreservation(editor) {
+    if (!editor || !editor.clipboard || typeof editor.clipboard.addMatcher !== 'function') {
+        return;
+    }
+    editor.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
+        return preserveSpacesInDelta(delta);
+    });
+}
+
 // Set HTML in the main Quill editor using the clipboard API so the document model stays in sync.
 // Using root.innerHTML alone does not update Quill's internal model, so content can disappear.
 function setQuillHtml(editor, html) {
     if (!editor) return;
     const cleaned = html ? cleanQuillContent(html) : '';
+    const spacingPreserved = preserveConsecutiveSpacesInHtml(cleaned);
     editor.deleteText(0, editor.getLength());
-    editor.clipboard.dangerouslyPasteHTML(0, cleaned);
+    editor.clipboard.dangerouslyPasteHTML(0, spacingPreserved);
 }
 
 // Convert a plain-text body (body_text) into simple HTML paragraphs for Quill.
@@ -759,6 +861,10 @@ function bodyTextToHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;/');
+    // Preserve consecutive spaces in fallback plain-text conversion
+    escaped = escaped.replace(/ {2,}/g, function(match) {
+        return '&nbsp;'.repeat(match.length);
+    });
     const lines = escaped.split(/\r?\n/);
     // Map each line to a <p>...</p>; empty lines become <p><br></p> for visual spacing
     return lines.map(function(line) {
@@ -793,8 +899,10 @@ function normalizeHtmlForSending(html) {
     // Remove trailing <br/>s
     html = html.replace(/(<br\s*\/?>\s*)+$/gi, '');
 
-    // Trim any leading whitespace
-    return html.trim();
+    // Preserve consecutive spaces in saved HTML so spacing survives render.
+    html = preserveConsecutiveSpacesInHtml(html);
+
+    return html;
 }
 
 // Function to copy variable to clipboard and insert into editor
@@ -837,6 +945,9 @@ document.addEventListener('DOMContentLoaded', function() {
     quill = new Quill('#editor', {
         theme: 'snow',
         modules: {
+            clipboard: {
+                matchVisual: false
+            },
             toolbar: [
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
@@ -849,6 +960,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         placeholder: '{% trans "Enter your email content here..." %}'
     });
+    enableClipboardSpacePreservation(quill);
+    enableDoubleSpacePreservation(quill);
     
     // Campaign modal functions
     const showCampaignModal = "{{ show_campaign_modal|default:False|lower }}" === "true";
@@ -990,6 +1103,9 @@ document.addEventListener('DOMContentLoaded', function() {
     footerQuill = new Quill('#footerEditor', {
         theme: 'snow',
         modules: {
+            clipboard: {
+                matchVisual: false
+            },
             toolbar: [
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
@@ -1002,6 +1118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         placeholder: '{% trans "Enter footer content here..." %}'
     });
+    enableClipboardSpacePreservation(footerQuill);
     
     const aiGenerateBtn = document.getElementById('aiGenerateBtn');
     const aiModal = document.getElementById('aiModal');

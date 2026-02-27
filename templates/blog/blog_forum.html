@@ -14,6 +14,7 @@
         <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Ask a Question" %}</h2>
         <form method="post" class="space-y-4">
             {% csrf_token %}
+            <input type="hidden" name="post_type" value="question">
             {% if form.non_field_errors %}
             <div class="rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-700">
                 {{ form.non_field_errors }}
@@ -45,7 +46,7 @@
         <h2 class="text-2xl font-semibold text-gray-900 mb-4">{% trans "Recent Questions" %}</h2>
         <div class="space-y-6">
             {% for question in forum_posts %}
-            <article class="bg-white rounded-lg shadow p-6">
+            <article id="question-{{ question.id }}" class="bg-white rounded-lg shadow p-6">
                 <div class="flex items-start justify-between gap-4 mb-3">
                     <h3 class="text-xl font-semibold text-gray-900">
                         {{ question.title }}
@@ -56,8 +57,42 @@
                 <div class="text-sm text-gray-500 mb-4">
                     {% blocktrans with author=question.user.username created_at=question.created_at updated_at=question.updated_at %}Asked by {{ author }} · Created: {{ created_at }} · Updated: {{ updated_at }}{% endblocktrans %}
                 </div>
-                <div class="border-t border-gray-200 pt-3">
-                    <p class="text-sm text-gray-600">{% trans "Community answers can be posted as follow-up forum posts by other users." %}</p>
+
+                <div class="border-t border-gray-200 pt-4 mt-4 space-y-3">
+                    <h4 class="text-base font-semibold text-gray-800">{% trans "Answers" %} ({{ question.answers.count }})</h4>
+
+                    {% for answer in question.answers.all %}
+                    <div class="bg-gray-50 rounded-md p-3">
+                        <p class="text-gray-800 mb-2">{{ answer.content }}</p>
+                        <p class="text-sm text-gray-500">
+                            {% blocktrans with author=answer.user.username created_at=answer.created_at %}Answered by {{ author }} on {{ created_at }}{% endblocktrans %}
+                        </p>
+                    </div>
+                    {% empty %}
+                    <p class="text-sm text-gray-600">{% trans "No answers yet. Be the first to answer." %}</p>
+                    {% endfor %}
+
+                    {% if user.is_authenticated %}
+                    <form method="post" class="pt-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_type" value="answer">
+                        <input type="hidden" name="question_id" value="{{ question.id }}">
+                        <label for="answer-content-{{ question.id }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Your Answer" %}</label>
+                        <textarea
+                            id="answer-content-{{ question.id }}"
+                            name="content"
+                            rows="3"
+                            required
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="{% trans 'Share a helpful answer...' %}"
+                        ></textarea>
+                        <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors">
+                            {% trans "Post Answer" %}
+                        </button>
+                    </form>
+                    {% else %}
+                    <p class="text-sm text-gray-600">{% trans "Log in to post an answer." %}</p>
+                    {% endif %}
                 </div>
             </article>
             {% empty %}

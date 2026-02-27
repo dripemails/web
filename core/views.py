@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.utils import timezone
 from django.template.loader import render_to_string
@@ -19,7 +20,7 @@ import pytz
 import logging
 import uuid
 from .models import BlogPost, ForumPost, SuccessStory
-from .forms import ForumPostForm, SuccessStoryForm
+from .forms import ForumPostForm, ForumAnswerForm, SuccessStoryForm
 
 logger = logging.getLogger(__name__)
 
@@ -580,22 +581,36 @@ def blog_post_detail(request, slug):
 
 def blog_forum(request):
     """Blog forum page for community questions and answers."""
-    forum_posts_queryset = ForumPost.objects.all().select_related('user')
+    forum_posts_queryset = ForumPost.objects.all().select_related('user').prefetch_related('answers__user')
+    form = ForumPostForm()
 
     if request.method == 'POST':
         if not request.user.is_authenticated:
             messages.error(request, _('You must be logged in to post a question.'))
             return redirect('account_login')
 
-        form = ForumPostForm(request.POST)
-        if form.is_valid():
-            forum_post = form.save(commit=False)
-            forum_post.user = request.user
-            forum_post.save()
-            messages.success(request, _('Your question has been posted successfully.'))
-            return redirect('core:blog_forum')
-    else:
-        form = ForumPostForm()
+        post_type = request.POST.get('post_type', 'question')
+
+        if post_type == 'answer':
+            question_id = request.POST.get('question_id')
+            question = get_object_or_404(ForumPost, id=question_id)
+            answer_form = ForumAnswerForm(request.POST)
+            if answer_form.is_valid():
+                answer = answer_form.save(commit=False)
+                answer.question = question
+                answer.user = request.user
+                answer.save()
+                messages.success(request, _('Your answer has been posted successfully.'))
+                return redirect(f"{reverse('core:blog_forum')}#question-{question.id}")
+            messages.error(request, _('Please provide a valid answer before posting.'))
+        else:
+            form = ForumPostForm(request.POST)
+            if form.is_valid():
+                forum_post = form.save(commit=False)
+                forum_post.user = request.user
+                forum_post.save()
+                messages.success(request, _('Your question has been posted successfully.'))
+                return redirect('core:blog_forum')
 
     paginator = Paginator(forum_posts_queryset, 10)
     page_number = request.GET.get('page')

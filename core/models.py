@@ -46,6 +46,21 @@ class ForumPost(models.Model):
         return f"{self.title} by {self.user.username}"
 
 
+class ForumAnswer(models.Model):
+    """Answer for a forum question."""
+    question = models.ForeignKey(ForumPost, on_delete=models.CASCADE, related_name='answers')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='forum_answers')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Answer by {self.user.username} on {self.question.title}"
+
+
 class SuccessStory(models.Model):
     """Success story model with logo upload."""
     company_name = models.CharField(max_length=200)

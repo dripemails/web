@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import ForumPost, SuccessStory
+from .models import ForumPost, ForumAnswer, SuccessStory
 
 
 class ForumPostForm(forms.ModelForm):
@@ -17,6 +17,20 @@ class ForumPostForm(forms.ModelForm):
                 'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500',
                 'rows': 8,
                 'placeholder': 'Write your post here...'
+            }),
+        }
+
+
+class ForumAnswerForm(forms.ModelForm):
+    """Form for creating forum answers."""
+    class Meta:
+        model = ForumAnswer
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500',
+                'rows': 4,
+                'placeholder': 'Write your answer...'
             }),
         }
 

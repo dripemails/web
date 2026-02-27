@@ -7,18 +7,21 @@
 {% block extra_head %}
 <link href="{% static 'js/pell.css' %}" rel="stylesheet">
 <script src="{% static 'js/pell.js' %}"></script>
-<!-- Quill.js - Free WYSIWYG Editor -->
-<link href="{% static 'js/quill.core.css' %}" rel="stylesheet">
-<link href="{% static 'js/quill.snow.css' %}" rel="stylesheet">
-<script src="{% static 'js/quill.min.js' %}"></script>
+
+<!-- include summernote library (jQuery) -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+
 <style>
-    .ql-editor {
+    .note-editable {
         min-height: 300px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-size: 14px;
     }
-    /* Make Quill paragraphs visually behave like simple line breaks */
-    .ql-editor p {
+    .note-editable p {
         margin: 0;
         padding: 0;
     }
@@ -44,13 +47,13 @@
     }
     
     /* Footer modal responsive sizing */
-    #footerEditor .ql-editor {
+    #footerEditor .note-editable {
         min-height: 200px;
         max-height: calc(90vh - 300px);
         overflow-y: auto;
     }
     
-    #footerEditor .ql-container {
+    #footerEditor .note-editor {
         height: auto;
         min-height: 200px;
         max-height: calc(90vh - 300px);
@@ -63,12 +66,12 @@
             max-width: calc(100vw - 2rem);
         }
         
-        #footerEditor .ql-editor {
+        #footerEditor .note-editable {
             min-height: 150px;
             max-height: calc(90vh - 250px);
         }
         
-        #footerEditor .ql-container {
+        #footerEditor .note-editor {
             min-height: 150px;
             max-height: calc(90vh - 250px);
         }
@@ -730,27 +733,41 @@ if ($httpCode === 200) {
 
 <script>
 // @ts-nocheck - Django template variables used throughout
-// Global variables for Quill editors
-let quill;
-let footerQuill;
+// Global variables for Summernote editors
+let summernoteEditor;
+let summernoteFooterEditor;
 
-// Function to clean HTML when loading into Quill (editor-facing).
-// No <p><br></p> stripping or replacement - pass content through as-is for the editor.
-function cleanQuillContent(html) {
+// Pass-through cleaner for editor HTML.
+function cleanEditorContent(html) {
     if (!html) return html;
     return html;
 }
 
-// Set HTML in the main Quill editor using the clipboard API so the document model stays in sync.
-// Using root.innerHTML alone does not update Quill's internal model, so content can disappear.
-function setQuillHtml(editor, html) {
+function setSummernoteHtml(editor, html) {
     if (!editor) return;
-    const cleaned = html ? cleanQuillContent(html) : '';
-    editor.deleteText(0, editor.getLength());
-    editor.clipboard.dangerouslyPasteHTML(0, cleaned);
+    const cleaned = html ? cleanEditorContent(html) : '';
+    editor.summernote('code', cleaned);
 }
 
-// Convert a plain-text body (body_text) into simple HTML paragraphs for Quill.
+function getSummernoteHtml(editor) {
+    if (!editor) return '';
+    return editor.summernote('code') || '';
+}
+
+function getSummernoteText(editor) {
+    if (!editor) return '';
+    const text = editor.summernote('codeview.isActivated')
+        ? editor.val()
+        : editor.summernote('code');
+    return $('<div>').html(text || '').text().trim();
+}
+
+function clearSummernote(editor) {
+    if (!editor) return;
+    editor.summernote('reset');
+}
+
+// Convert a plain-text body (body_text) into simple HTML paragraphs.
 // This is used when an older email/template only has body_text and body_html is empty.
 function bodyTextToHtml(text) {
     if (!text) return '';
@@ -769,53 +786,21 @@ function bodyTextToHtml(text) {
     }).join('');
 }
 
-// Function to normalize HTML for saving/sending.
-// This converts Quill's <p>-based HTML into <br/>-based line breaks so that
-// stored templates and outgoing emails don't contain <p> tags.
-function normalizeHtmlForSending(html) {
+// Prepare HTML for saving/sending from Summernote.
+// Keep spacing/paragraphs exactly as authored.
+function prepareHtmlForSaving(html) {
     if (!html) return html;
-
-    // First, clean empty paragraphs but keep Quill structure
-    html = cleanQuillContent(html);
-
-    // Discard empty paragraphs entirely (do not save <p><br></p> as blank lines).
-    html = html.replace(/<p><br\s*\/?><\/p>/gi, '');
-
-    // Strip remaining <p> wrappers:
-    // - Opening <p> tags become nothing
-    // - Closing </p> tags become a single <br/>
-    html = html.replace(/<p>/gi, '');
-    html = html.replace(/<\/p>/gi, '<br/>');
-
-    // Collapse 3+ consecutive <br/> into just 2 to avoid extra spacing
-    html = html.replace(/(<br\s*\/?>\s*){3,}/gi, '<br/><br/>');
-
-    // Remove trailing <br/>s
-    html = html.replace(/(<br\s*\/?>\s*)+$/gi, '');
-
-    // Trim any leading whitespace
-    return html.trim();
+    return cleanEditorContent(html);
 }
 
 // Function to copy variable to clipboard and insert into editor
 function copyVariable(variable, element) {
     // Copy to clipboard
     navigator.clipboard.writeText(variable).then(function() {
-        // Insert into Quill editor at current cursor position
-        if (quill) {
-            // Ensure editor has focus so selection is valid
-            quill.focus();
-            let range = quill.getSelection();
-
-            // If there's still no range (e.g., click from outside), append near end
-            if (!range) {
-                const length = quill.getLength();
-                range = { index: Math.max(length - 1, 0), length: 0 };
-            }
-
-            // Insert variable at the current cursor position
-            quill.insertText(range.index, variable);
-            quill.setSelection(range.index + variable.length);
+        // Insert into Summernote editor at current cursor position
+        if (summernoteEditor) {
+            summernoteEditor.summernote('focus');
+            summernoteEditor.summernote('editor.insertText', variable);
         }
         
         // Show brief success feedback
@@ -833,21 +818,19 @@ function copyVariable(variable, element) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Quill editor
-    quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                [{ 'header': [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'align': [] }],
-                ['link', 'image'],
-                ['clean']
-            ]
-        },
-        placeholder: '{% trans "Enter your email content here..." %}'
+    // Initialize Summernote editor
+    summernoteEditor = $('#editor');
+    summernoteEditor.summernote({
+        height: 320,
+        placeholder: '{% trans "Enter your email content here..." %}',
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture']],
+            ['view', ['codeview']]
+        ]
     });
     
     // Campaign modal functions
@@ -877,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Otherwise show modal for selection
         // Validate form first
         const subject = document.getElementById('subject').value.trim();
-        const bodyContent = cleanQuillContent(quill.root.innerHTML.trim());
+        const bodyContent = cleanEditorContent(getSummernoteHtml(summernoteEditor).trim());
         
         if (!subject) {
             alert('{% trans "Please enter an email subject." %}');
@@ -916,9 +899,9 @@ document.addEventListener('DOMContentLoaded', function() {
         hideCampaignModal();
         
         // Get form data
-        // Use Quill's HTML, cleaned for empties but normalized to <br/> for saving/sending
-        const rawHtml = quill.root.innerHTML;
-        const htmlContent = normalizeHtmlForSending(rawHtml);
+        // Use editor HTML exactly as authored in Summernote
+        const rawHtml = getSummernoteHtml(summernoteEditor);
+        const htmlContent = prepareHtmlForSaving(rawHtml);
         const footerSelect = document.getElementById('footer_select');
         const selectedFooterId = footerSelect.value;
         
@@ -942,7 +925,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wait_time: waitTime,
             wait_unit: waitUnit,
             body_html: htmlContent,
-            body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
+            body_text: getSummernoteText(summernoteEditor)
         };
         
         // Only add footer_id if a footer is selected
@@ -987,20 +970,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initialize footer editor
-    footerQuill = new Quill('#footerEditor', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                [{ 'header': [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'align': [] }],
-                ['link'],
-                ['clean']
-            ]
-        },
-        placeholder: '{% trans "Enter footer content here..." %}'
+    summernoteFooterEditor = $('#footerEditor');
+    summernoteFooterEditor.summernote({
+        height: 220,
+        placeholder: '{% trans "Enter footer content here..." %}',
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link']],
+            ['view', ['codeview']]
+        ]
     });
     
     const aiGenerateBtn = document.getElementById('aiGenerateBtn');
@@ -1095,14 +1076,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Set content in Quill editor:
+                // Set content in editor:
                 // - Prefer HTML body when available
                 // - Fallback to body_text (converted to simple HTML) when body_html is empty
                 let htmlToLoad = data.body_html;
                 if ((!htmlToLoad || htmlToLoad.trim() === '') && data.body_text) {
                     htmlToLoad = bodyTextToHtml(data.body_text);
                 }
-                setQuillHtml(quill, htmlToLoad);
+                setSummernoteHtml(summernoteEditor, htmlToLoad);
                 
                 // Set footer if available
                 if (data.footer_id) {
@@ -1279,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.subject) {
                     document.getElementById('subject').value = data.subject;
-                    setQuillHtml(quill, data.body_html);
+                    setSummernoteHtml(summernoteEditor, data.body_html);
                     aiModal.classList.add('hidden');
                     aiGenerateForm.reset();
                     alert('{% trans "Email generated successfully! Review and save when ready." %}');
@@ -1325,7 +1306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preview functionality
     if (previewBtn) {
         previewBtn.addEventListener('click', function() {
-            let content = cleanQuillContent(quill.root.innerHTML);
+            let content = cleanEditorContent(getSummernoteHtml(summernoteEditor));
             
             // Replace sender_email variable with user's email for preview
             const userEmail = '{{ request.user.email }}';
@@ -1373,7 +1354,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cancelNewFooter.addEventListener('click', function() {
             newFooterModal.classList.add('hidden');
             newFooterForm.reset();
-            footerQuill.setContents([]);
+            clearSummernote(summernoteFooterEditor);
         });
     }
     
@@ -1383,7 +1364,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === newFooterModal) {
                 newFooterModal.classList.add('hidden');
                 newFooterForm.reset();
-                footerQuill.setContents([]);
+                clearSummernote(summernoteFooterEditor);
             }
         });
     }
@@ -1479,8 +1460,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // If template is not saved, save it first
             if (!templateId) {
-                // Get form data (normalize so <p><br></p> are discarded and HTML is br-only)
-                const htmlContent = normalizeHtmlForSending(quill.root.innerHTML);
+                // Get form data and preserve Summernote spacing/paragraphs
+                const htmlContent = prepareHtmlForSaving(getSummernoteHtml(summernoteEditor));
                 const footerSelect = document.getElementById('footer_select');
                 const selectedFooterId = footerSelect.value;
                 
@@ -1501,7 +1482,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     wait_time: waitTime,
                     wait_unit: document.getElementById('wait_unit').value,
                     body_html: htmlContent,
-                    body_text: quill.getText().trim()
+                    body_text: getSummernoteText(summernoteEditor)
                 };
                 
                 if (selectedFooterId && selectedFooterId.trim()) {
@@ -1567,8 +1548,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = '{% trans "Saving..." %}';
             submitBtn.disabled = true;
             
-            // Get content from Quill editor (normalize so <p><br></p> are discarded and HTML is br-only)
-            const htmlContent = normalizeHtmlForSending(quill.root.innerHTML);
+            // Get content from editor and preserve Summernote spacing/paragraphs
+            const htmlContent = prepareHtmlForSaving(getSummernoteHtml(summernoteEditor));
             
             // Get selected footer
             const footerSelect = document.getElementById('footer_select');
@@ -1596,7 +1577,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 wait_time: waitTime,
                 wait_unit: waitUnit,
                 body_html: htmlContent,
-                body_text: quill.getText().trim() // Use Quill's getText() for proper plain text
+                body_text: getSummernoteText(summernoteEditor)
             };
             
             // Only add footer_id if a footer is selected
@@ -1798,7 +1779,7 @@ document.getElementById('newFooterForm').addEventListener('submit', function(e) 
     e.preventDefault();
     
     const name = document.getElementById('footerName').value;
-    const htmlContent = cleanQuillContent(footerQuill.root.innerHTML);
+    const htmlContent = cleanEditorContent(getSummernoteHtml(summernoteFooterEditor));
     const isDefault = document.getElementById('isDefault').checked;
     
     if (!name.trim()) {
@@ -1846,7 +1827,7 @@ document.getElementById('newFooterForm').addEventListener('submit', function(e) 
             // Close modal and reset form
             document.getElementById('newFooterModal').classList.add('hidden');
             document.getElementById('newFooterForm').reset();
-            footerQuill.setContents([]);
+            clearSummernote(summernoteFooterEditor);
             
             // Show success message
             alert('{% trans "Footer created successfully!" %}');

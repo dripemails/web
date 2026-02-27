@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from django.utils import timezone
@@ -576,6 +577,40 @@ def blog_index(request):
 def blog_post_detail(request, slug):
     post = get_object_or_404(BlogPost, slug=slug, published=True)
     return render(request, 'blog/blog_post_detail.html', {'post': post})
+
+def blog_forum(request):
+    """Blog forum page for community questions and answers."""
+    forum_posts_queryset = ForumPost.objects.all().select_related('user')
+
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request, _('You must be logged in to post a question.'))
+            return redirect('account_login')
+
+        form = ForumPostForm(request.POST)
+        if form.is_valid():
+            forum_post = form.save(commit=False)
+            forum_post.user = request.user
+            forum_post.save()
+            messages.success(request, _('Your question has been posted successfully.'))
+            return redirect('core:blog_forum')
+    else:
+        form = ForumPostForm()
+
+    paginator = Paginator(forum_posts_queryset, 10)
+    page_number = request.GET.get('page')
+    forum_posts = paginator.get_page(page_number)
+    query_params = request.GET.copy()
+    query_params.pop('page', None)
+    pagination_query = query_params.urlencode()
+
+    context = {
+        'forum_posts': forum_posts,
+        'page_obj': forum_posts,
+        'pagination_query': pagination_query,
+        'form': form,
+    }
+    return render(request, 'blog/blog_forum.html', context)
 
 def community_user_forum(request):
     """User forum page - allows logged in users to post."""

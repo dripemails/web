@@ -68,5 +68,6 @@ urlpatterns = [
     path('resources/community/social/', views.community_social, name='community_social'),
     # Blog
     path('resources/blog/', views.blog_index, name='blog_index'),
+    path('resources/blog/forum/', views.blog_forum, name='blog_forum'),
     path('resources/blog/<slug:slug>/', views.blog_post_detail, name='blog_post_detail'),
 ]

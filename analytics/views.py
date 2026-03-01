@@ -304,7 +304,7 @@ def track_open(request, tracking_id, encoded_email):
     if subscriber_email:
         # Always process synchronously (no Celery)
         try:
-            from campaigns.models import EmailEvent, Campaign
+            from campaigns.models import EmailEvent
             # Find the sent event with the same tracking ID
             sent_event = EmailEvent.objects.get(
                 id=tracking_id, 
@@ -326,11 +326,6 @@ def track_open(request, tracking_id, encoded_email):
                     subscriber_email=subscriber_email,
                     event_type='opened'
                 )
-                
-                # Update campaign metrics
-                campaign = sent_event.email.campaign
-                campaign.open_count += 1
-                campaign.save(update_fields=['open_count'])
                 
                 logger.info(f"Recorded open event for {subscriber_email}")
             else:
@@ -360,7 +355,7 @@ def message_split_gif(request):
         if subscriber_email:
             # Always process synchronously (no Celery)
             try:
-                from campaigns.models import EmailEvent, Campaign
+                from campaigns.models import EmailEvent
                 # Find the sent event with the same tracking ID
                 sent_event = EmailEvent.objects.get(
                     id=tracking_id, 
@@ -382,11 +377,6 @@ def message_split_gif(request):
                         subscriber_email=subscriber_email,
                         event_type='opened'
                     )
-                    
-                    # Update campaign metrics
-                    campaign = sent_event.email.campaign
-                    campaign.open_count += 1
-                    campaign.save(update_fields=['open_count'])
                     
                     logger.info(f"Recorded open event for {subscriber_email}")
                 else:
@@ -426,7 +416,7 @@ def track_click(request, tracking_id):
         from django.conf import settings
         if sys.platform == 'win32' and settings.DEBUG:
             # Process synchronously
-            from campaigns.models import EmailEvent, Campaign
+            from campaigns.models import EmailEvent
             try:
                 sent_event = EmailEvent.objects.get(
                     id=tracking_id,
@@ -441,11 +431,6 @@ def track_click(request, tracking_id):
                     event_type='clicked',
                     link_clicked=destination_url
                 )
-                
-                # Update campaign metrics
-                campaign = sent_event.email.campaign
-                campaign.click_count += 1
-                campaign.save(update_fields=['click_count'])
             except EmailEvent.DoesNotExist:
                 pass
             except Exception:

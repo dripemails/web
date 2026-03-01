@@ -1,6 +1,6 @@
-Subject: {{first_name}} {{last_name}}, possible coverage: DripEmails.org and the shift to inbound follow-up automation
+Subject: {{first_name}}, possible coverage: DripEmails.org and the shift to inbound follow-up automation
 
-Hi {{first_name}} {{last_name}},
+Hi {{first_name}},
 
 Sharing a quick story pitch in case it is relevant for your publication.
 

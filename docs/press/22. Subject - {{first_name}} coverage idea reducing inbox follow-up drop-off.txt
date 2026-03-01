@@ -1,0 +1,29 @@
+Subject: {{first_name}}, coverage idea: reducing inbox follow-up drop-off with DripEmails.org
+
+Hi {{first_name}},
+
+I wanted to share a quick press angle you might find relevant.
+
+DripEmails.org helps teams reduce follow-up drop-off by automating personalized responses after real inbox engagement.
+
+By connecting Gmail or IMAP, teams can keep active conversations moving instead of losing momentum to manual backlog.
+
+Why this is timely:
+- High-intent replies often go stale without structured follow-up
+- Teams want practical automation beyond one-off outbound sends
+- Consistent timing + personalization is increasingly tied to outcomes
+
+Product highlights:
+- Gmail + IMAP inbox integration
+- Configurable drip follow-up workflows
+- AI-assisted copy generation and revision
+- Merge fields including {{first_name}} and {{email}}
+- Engagement analytics for optimization
+
+If useful, I can share a short walkthrough and founder interview availability.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks,
+DripEmails.org

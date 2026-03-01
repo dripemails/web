@@ -1,0 +1,29 @@
+Subject: {{first_name}}, possible feature: Gmail + IMAP continuity workflows from DripEmails.org
+
+Hi {{first_name}},
+
+Wanted to send a potential feature angle that may fit your audience.
+
+DripEmails.org helps teams turn inbox activity into structured follow-up workflows so fewer conversations go cold.
+
+Instead of manual reminders, teams use Gmail or IMAP integrations to trigger sequenced, personalized touchpoints automatically.
+
+Why it could be a strong story:
+- Teams are managing larger inbox volumes with leaner resources
+- Follow-up consistency is now a major performance lever
+- Practical automation is replacing fragmented one-off tools
+
+Core capabilities:
+- Inbox-aware automation via Gmail + IMAP
+- Flexible drip sequence timing
+- AI-assisted email writing and refinement
+- Merge fields like {{first_name}} and {{email}}
+- Analytics for opens, clicks, and engagement
+
+If helpful, I can share a brief walkthrough and Q&A with the founders.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks for considering,
+DripEmails.org

@@ -1,0 +1,29 @@
+Subject: {{first_name}}, potential coverage: DripEmails.org and inbound email retention
+
+Hi {{first_name}},
+
+Wanted to send over a press angle that may be relevant to your audience.
+
+DripEmails.org is focused on helping teams retain more value from conversations already happening in their inbox.
+
+By connecting Gmail or IMAP, teams can automate follow-up messages, keep conversations active, and reduce missed opportunities.
+
+Coverage angle:
+- Inbound reply management is often under-automated
+- Teams are prioritizing relationship continuity over one-off blasts
+- Workflow speed and personalization are now core growth levers
+
+Product highlights:
+- Inbox-aware automation via Gmail + IMAP
+- Configurable drip sequences for follow-up timing
+- AI tools for generating and refining message copy
+- Merge fields like {{first_name}} and {{email}}
+- Open/click and engagement tracking
+
+If helpful, I can share a short walkthrough and a founder Q&A.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks,
+DripEmails.org

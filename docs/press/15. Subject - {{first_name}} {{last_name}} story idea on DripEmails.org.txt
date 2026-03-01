@@ -1,6 +1,6 @@
-Subject: {{first_name}} {{last_name}}, story idea: DripEmails.org helps teams automate real inbox follow-up
+Subject: {{first_name}}, story idea: DripEmails.org helps teams automate real inbox follow-up
 
-Hi {{first_name}} {{last_name}},
+Hi {{first_name}},
 
 I wanted to share a press story idea that may be a fit for your audience.
 
@@ -28,7 +28,6 @@ If useful, I can share:
 
 Website: https://dripemails.org
 Blog: https://dripemails.org/resources/blog/
-Contact: founders@dripemails.org
 
 Thanks for your time,
 DripEmails.org

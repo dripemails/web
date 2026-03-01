@@ -1,0 +1,29 @@
+Subject: {{first_name}}, quick press pitch: DripEmails.org turns inbox replies into automated workflows
+
+Hi {{first_name}},
+
+Reaching out with a fast story idea for your publication.
+
+DripEmails.org helps teams automate a high-friction part of email ops: follow-up after real inbox engagement.
+
+Instead of relying only on outbound campaigns, teams can connect Gmail or IMAP and trigger personalized sequences from inbound activity.
+
+Why this matters:
+- Manual follow-up causes avoidable pipeline leakage
+- Teams need automation for both outbound and inbound journeys
+- Personalized timing is increasingly tied to conversion quality
+
+What stands out:
+- Gmail + IMAP integrations
+- Multi-step drip automation with flexible delays
+- AI-assisted email drafting and revision
+- Personalization via merge fields like {{first_name}} and {{email}}
+- Engagement analytics for ongoing improvement
+
+Happy to share a demo, screenshots, and use-case examples if useful.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

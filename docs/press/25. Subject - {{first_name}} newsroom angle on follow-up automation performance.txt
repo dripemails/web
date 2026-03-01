@@ -1,0 +1,29 @@
+Subject: {{first_name}}, newsroom angle: performance impact of follow-up automation
+
+Hi {{first_name}},
+
+I’m reaching out with a possible coverage angle around modern email operations.
+
+DripEmails.org helps teams automate personalized follow-up from inbox engagement, improving consistency where manual workflows often break.
+
+With Gmail or IMAP connected, teams can run timed sequences and keep high-intent conversations active.
+
+Angle summary:
+- Manual follow-up creates avoidable leakage in active conversations
+- Teams are moving from campaign-only tooling to lifecycle workflows
+- Better follow-up timing supports stronger engagement outcomes
+
+Product snapshot:
+- Gmail + IMAP integrations
+- Configurable multi-step drip campaigns
+- AI-assisted content generation and revision
+- Merge-field personalization ({{first_name}}, {{email}})
+- Tracking for opens, clicks, and campaign behavior
+
+Happy to provide a short demo and background materials if useful.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best regards,
+DripEmails.org

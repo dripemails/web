@@ -1,0 +1,33 @@
+Subject: {{first_name}}, possible coverage: DripEmails.org and the shift to inbound follow-up automation
+
+Hi {{first_name}},
+
+Sharing a quick story pitch in case it is relevant for your publication.
+
+DripEmails.org helps teams automate the part of email work that is often missed: consistent, personalized follow-up after real inbox engagement.
+
+Most platforms are built around outbound sends. DripEmails adds a workflow for what happens next by connecting Gmail or IMAP and running follow-up sequences automatically.
+
+Why this could be a strong press angle:
+- High-intent conversations frequently stall due to manual workload
+- Teams are looking for practical automation, not just bigger send volume
+- Personalization and timing now matter more than one-time blasts
+
+Product highlights:
+- Gmail + IMAP integration for inbox-aware automation
+- Configurable multi-step drip sequences
+- AI-assisted writing and message revision
+- Merge-field personalization including {{first_name}}, {{last_name}}, and {{email}}
+- Engagement analytics for optimization over time
+
+Happy to provide anything useful for coverage:
+- 10-minute product walkthrough
+- screenshots and feature notes
+- real-world usage scenarios
+- founder Q&A availability
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

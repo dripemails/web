@@ -1,0 +1,29 @@
+Subject: {{first_name}}, story pitch: inbox-first email automation at DripEmails.org
+
+Hi {{first_name}},
+
+Sharing a concise product story idea for your publication.
+
+DripEmails.org takes an inbox-first approach: automate follow-up from real engagement signals, not only outbound campaign schedules.
+
+Teams connect Gmail or IMAP, then run personalized sequences that help maintain continuity in active conversations.
+
+Coverage angle:
+- Inbound workflows are still underserved in many marketing stacks
+- Teams are prioritizing relationship continuity and response quality
+- AI is improving workflow speed without removing personalization
+
+What DripEmails.org includes:
+- Gmail + IMAP connectivity
+- Multi-step drip sequences with flexible timing
+- AI-assisted drafting and edits
+- Personalization using {{first_name}} and {{email}}
+- Open/click tracking and campaign insights
+
+Happy to provide screenshots, product notes, and a quick demo.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

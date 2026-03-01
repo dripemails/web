@@ -1,0 +1,29 @@
+Subject: {{first_name}}, press note: keeping inbound conversations active with DripEmails.org
+
+Hi {{first_name}},
+
+Sending over a quick press note in case this is relevant for upcoming coverage.
+
+DripEmails.org is built to help teams keep inbound conversations active through automated, personalized follow-up workflows.
+
+By connecting Gmail or IMAP, teams can trigger sequenced responses after engagement and reduce missed opportunities.
+
+Why this matters now:
+- Conversation continuity is becoming central to email performance
+- Teams need workflow automation that still feels personal
+- Inbound follow-up remains a common operational gap
+
+Highlights:
+- Gmail + IMAP automation support
+- Sequenced drip campaigns with flexible delays
+- AI-assisted draft creation and editing
+- Personalization fields including {{first_name}} and {{email}}
+- Analytics to measure engagement trends
+
+If useful, I can send a quick walkthrough, screenshots, and use-case examples.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks,
+DripEmails.org

@@ -1,0 +1,29 @@
+Subject: {{first_name}}, media angle: DripEmails.org for Gmail + IMAP follow-up automation
+
+Hi {{first_name}},
+
+I’m reaching out with a possible story fit around practical email automation.
+
+DripEmails.org helps teams automate inbound follow-up by connecting Gmail or IMAP and running personalized drip workflows after engagement.
+
+Unlike outbound-only tooling, this approach focuses on preserving momentum in real conversations.
+
+Angle summary:
+- Reduces manual inbox workload
+- Improves consistency of high-intent follow-up
+- Combines automation, personalization, and analytics in one workflow
+
+Feature snapshot:
+- Gmail + IMAP connectivity
+- Flexible drip timing and sequence logic
+- AI-assisted draft generation and revision
+- Merge-field personalization including {{first_name}} and {{email}}
+- Performance tracking with opens/clicks insights
+
+Happy to provide a quick demo, product screenshots, and use-case examples.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks for considering,
+DripEmails.org

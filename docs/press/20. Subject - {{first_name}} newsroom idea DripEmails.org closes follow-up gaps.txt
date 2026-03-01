@@ -1,0 +1,29 @@
+Subject: {{first_name}}, newsroom idea: DripEmails.org helps teams close email follow-up gaps
+
+Hi {{first_name}},
+
+Sharing a concise product story pitch.
+
+DripEmails.org enables teams to automate personalized follow-up after inbox interactions, not just outbound sends.
+
+With Gmail or IMAP connected, the platform helps teams keep warm conversations moving through sequenced, context-aware outreach.
+
+Why it could be timely coverage:
+- Teams are stretched thin across fragmented inbox workflows
+- Missed follow-up is a hidden revenue and engagement drain
+- AI-assisted personalization is moving from optional to expected
+
+Core capabilities:
+- Gmail + IMAP integrations
+- Multi-step campaign sequencing
+- AI-assisted message creation and revision
+- Personalization with {{first_name}} and {{email}}
+- Analytics for response and engagement trends
+
+If useful, I can send screenshots, product notes, and interview availability.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best regards,
+DripEmails.org

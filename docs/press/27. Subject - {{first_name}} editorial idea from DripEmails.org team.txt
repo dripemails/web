@@ -1,0 +1,29 @@
+Subject: {{first_name}}, editorial idea from the DripEmails.org team
+
+Hi {{first_name}},
+
+I wanted to share a potential editorial angle your readers may find useful.
+
+DripEmails.org helps teams automate follow-up after inbox engagement, combining Gmail/IMAP integration with personalized drip workflows.
+
+This approach addresses a frequent gap: outbound tools send messages, but inbound conversations often lack consistent next steps.
+
+Potential story themes:
+- The shift from campaign-only email stacks to continuity workflows
+- How teams reduce manual follow-up load without losing personalization
+- The role of AI-assisted messaging in practical day-to-day operations
+
+Product highlights:
+- Gmail + IMAP connectivity
+- Multi-step, timed drip sequences
+- AI-assisted writing and revision
+- Merge fields such as {{first_name}} and {{email}}
+- Engagement tracking and optimization data
+
+If helpful, I can share a demo, screenshots, and founder interview availability.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

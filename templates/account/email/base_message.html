@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% load i18n %}{% blocktrans with site_name=current_site.name %}{{ site_name }}{% endblocktrans %}</title>
+    <title>{% blocktrans with site_name=current_site.name %}{{ site_name }}{% endblocktrans %}</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -83,7 +84,7 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>{% load i18n %}{% blocktrans with site_name=current_site.name %}Hello from {{ site_name }}!{% endblocktrans %}</h1>
+            <h1>{% blocktrans with site_name=current_site.name %}Hello from {{ site_name }}!{% endblocktrans %}</h1>
         </div>
         <div class="email-body">
             <div class="email-content">
@@ -91,7 +92,7 @@
             </div>
         </div>
         <div class="email-footer">
-            <p>{% load i18n %}{% blocktrans with site_name=current_site.name %}Thank you for using {{ site_name }}!{% endblocktrans %}<br>
+            <p>{% blocktrans with site_name=current_site.name %}Thank you for using {{ site_name }}!{% endblocktrans %}<br>
             <a href="https://{{ current_site.domain }}{% if agent %}?agent={{ agent }}{% endif %}">{{ current_site.domain }}</a></p>
         </div>
     </div>

@@ -91,8 +91,8 @@
             </div>
         </div>
         <div class="email-footer">
-            <p>{% load i18n %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using {{ site_name }}!<br>
-            <a href="https://{{ site_domain }}{% if agent %}?agent={{ agent }}{% endif %}">{{ site_domain }}</a>{% endblocktrans %}</p>
+            <p>{% load i18n %}{% blocktrans with site_name=current_site.name %}Thank you for using {{ site_name }}!{% endblocktrans %}<br>
+            <a href="https://{{ current_site.domain }}{% if agent %}?agent={{ agent }}{% endif %}">{{ current_site.domain }}</a></p>
         </div>
     </div>
 </body>

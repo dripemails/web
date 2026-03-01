@@ -259,19 +259,19 @@
                             <div class="bg-gray-50 p-4 rounded-lg mb-4">
                                 <h3 class="text-sm font-medium text-gray-700 mb-2">{% trans "Available Variables" %} <span class="text-xs text-gray-500">({% trans "Click to copy" %})</span></h3>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{first_name}}', this)">
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onmousedown="return copyVariable('{{first_name}}', this, event)" ontouchstart="return copyVariable('{{first_name}}', this, event)">
                                         <code class="variable-code">{{first_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{last_name}}', this)">
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onmousedown="return copyVariable('{{last_name}}', this, event)" ontouchstart="return copyVariable('{{last_name}}', this, event)">
                                         <code class="variable-code">{{last_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{full_name}}', this)">
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onmousedown="return copyVariable('{{full_name}}', this, event)" ontouchstart="return copyVariable('{{full_name}}', this, event)">
                                         <code class="variable-code">{{full_name}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{{email}}', this)">
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onmousedown="return copyVariable('{{email}}', this, event)" ontouchstart="return copyVariable('{{email}}', this, event)">
                                         <code class="variable-code">{{email}}</code>
                                     </div>
-                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="copyVariable('{% templatetag openvariable %}sender_email{% templatetag closevariable %}', this)">
+                                    <div class="bg-white p-2 rounded border border-gray-200 text-sm cursor-pointer hover:bg-gray-50 transition-colors" onmousedown="return copyVariable('{% templatetag openvariable %}sender_email{% templatetag closevariable %}', this, event)" ontouchstart="return copyVariable('{% templatetag openvariable %}sender_email{% templatetag closevariable %}', this, event)">
                                         <code class="variable-code">{% templatetag openvariable %}sender_email{% templatetag closevariable %}</code>
                                     </div>
                                 </div>
@@ -736,6 +736,18 @@ if ($httpCode === 200) {
 // Global variables for Summernote editors
 let summernoteEditor;
 let summernoteFooterEditor;
+let hasSavedEditorRange = false;
+
+function saveEditorRange() {
+    if (!summernoteEditor) return;
+    summernoteEditor.summernote('editor.saveRange');
+    hasSavedEditorRange = true;
+}
+
+function restoreEditorRange() {
+    if (!summernoteEditor || !hasSavedEditorRange) return;
+    summernoteEditor.summernote('editor.restoreRange');
+}
 
 // Pass-through cleaner for editor HTML.
 function cleanEditorContent(html) {
@@ -794,27 +806,37 @@ function prepareHtmlForSaving(html) {
 }
 
 // Function to copy variable to clipboard and insert into editor
-function copyVariable(variable, element) {
-    // Copy to clipboard
-    navigator.clipboard.writeText(variable).then(function() {
-        // Insert into Summernote editor at current cursor position
-        if (summernoteEditor) {
-            summernoteEditor.summernote('focus');
-            summernoteEditor.summernote('editor.insertText', variable);
-        }
-        
-        // Show brief success feedback
-        if (element) {
-            const originalBg = element.style.backgroundColor;
-            element.style.backgroundColor = '#10B981';
-            setTimeout(() => {
-                element.style.backgroundColor = originalBg;
-            }, 200);
-        }
-    }).catch(function(err) {
-        console.error('Could not copy text: ', err);
-        alert('{% trans "Could not copy variable. Please try again." %}');
-    });
+function copyVariable(variable, element, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Insert into Summernote editor at current cursor position
+    if (summernoteEditor) {
+        summernoteEditor.summernote('focus');
+        restoreEditorRange();
+        summernoteEditor.summernote('editor.insertText', variable);
+        saveEditorRange();
+    }
+
+    // Best-effort copy to clipboard (do not block insertion on clipboard permission issues)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(variable).catch(function(err) {
+            console.warn('Could not copy text to clipboard:', err);
+        });
+    }
+
+    // Show brief success feedback
+    if (element) {
+        const originalBg = element.style.backgroundColor;
+        element.style.backgroundColor = '#10B981';
+        setTimeout(() => {
+            element.style.backgroundColor = originalBg;
+        }, 200);
+    }
+
+    return false;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -830,7 +852,24 @@ document.addEventListener('DOMContentLoaded', function() {
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture']],
             ['view', ['codeview']]
-        ]
+        ],
+        callbacks: {
+            onInit: function() {
+                saveEditorRange();
+            },
+            onFocus: function() {
+                saveEditorRange();
+            },
+            onKeyup: function() {
+                saveEditorRange();
+            },
+            onMouseup: function() {
+                saveEditorRange();
+            },
+            onPaste: function() {
+                saveEditorRange();
+            }
+        }
     });
     
     // Campaign modal functions

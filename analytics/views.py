@@ -88,6 +88,9 @@ def weekly_analytics(request):
         campaigns = Campaign.objects.filter(user=request.user, id=campaign_id)
     else:
         campaigns = Campaign.objects.filter(user=request.user)
+
+    selected_campaign = campaigns.first() if campaign_id else None
+    subscriber_list = selected_campaign.subscriber_list if selected_campaign else None
     
     # Calculate date range for the past 7 days
     end_date = timezone.now()
@@ -107,6 +110,7 @@ def weekly_analytics(request):
             'delivery_rate': 0,
             'open_rate': 0,
             'click_rate': 0,
+            'subscriber_count': 0,
         }
     
     # Get all email events for user's campaigns in the past 7 days
@@ -151,6 +155,13 @@ def weekly_analytics(request):
         if delivered > 0:
             data['open_rate'] = round((opened / delivered) * 100, 2)
             data['click_rate'] = round((clicked / delivered) * 100, 2)
+
+        if subscriber_list:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+            day_end = timezone.make_aware(datetime.combine(date_obj, datetime.max.time()))
+            data['subscriber_count'] = subscriber_list.subscribers.filter(
+                created_at__lte=day_end
+            ).count()
     
     # Convert to sorted list
     result = sorted(daily_data.values(), key=lambda x: x['date'])

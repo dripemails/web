@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.db import transaction
 from django.template.loader import render_to_string
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -307,6 +309,39 @@ def account_settings(request):
         'api_token': token.key,
     }
     return render(request, 'core/settings.html', context)
+
+
+@login_required
+def delete_account(request):
+    """Show confirmation page and fully delete authenticated account."""
+    if request.method == 'POST' or request.GET.get('confirm') or request.GET.get('confirmation_text'):
+        confirmation_text = ''
+        if request.method == 'POST':
+            confirmation_text = request.POST.get('confirmation_text', '').strip()
+        else:
+            confirmation_text = request.GET.get('confirm', request.GET.get('confirmation_text', '')).strip()
+
+        if confirmation_text != 'DELETE':
+            messages.error(request, _('Please type DELETE to confirm account deletion.'))
+            return redirect('core:delete_account')
+
+        user_id = request.user.id
+
+        try:
+            with transaction.atomic():
+                user = request.user
+                logout(request)
+                user.delete()
+
+            logger.info(f"User account {user_id} deleted via settings confirmation page")
+            messages.success(request, _('Your account has been permanently deleted.'))
+            return redirect('core:home')
+        except Exception as e:
+            logger.error(f"Failed deleting account {user_id}: {str(e)}")
+            messages.error(request, _('We could not delete your account right now. Please contact support.'))
+            return redirect('core:delete_account')
+
+    return render(request, 'core/delete_account_confirm.html')
 
 @login_required
 def promo_verification(request):

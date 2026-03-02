@@ -1,145 +1,133 @@
-# Logrotate Configuration for DripEmails.org
+# Cron Log Rotation Guide
 
-This directory contains logrotate configuration files to automatically rotate and manage log files created by the DripEmails project.
+This project writes cron logs to a command-specific file in the repository `logs/` folder, based on the command you run:
 
-## Files
+- `check_spf.log`
+- `send_scheduled_emails.log`
+- `process_gmail_emails.log`
+- `crawl_imap.log`
+- `garbage_collect.log`
+- fallback: `cron.log`
 
-- `dripemails.conf` - Main logrotate configuration for all DripEmails log files
+The log directory is derived in code from the project root using `Path(__file__).resolve().parent / "logs"`.
 
-## Installation
+## Files in this directory
 
-To use this logrotate configuration:
+- `dripemails.conf` - Canonical config for rotating all project log files
+- `README.md` - Setup and operational instructions
 
-1. **Copy the configuration to logrotate.d:**
-   ```bash
-   sudo cp docs/logrotate/dripemails.conf /etc/logrotate.d/dripemails
-   ```
+## 1) Confirm current log files
 
-2. **Set proper permissions:**
-   ```bash
-   sudo chmod 644 /etc/logrotate.d/dripemails
-   sudo chown root:root /etc/logrotate.d/dripemails
-   ```
-
-3. **Test the configuration:**
-   ```bash
-   sudo logrotate -d /etc/logrotate.d/dripemails
-   ```
-   (The `-d` flag runs in debug/dry-run mode)
-
-4. **Force a test rotation:**
-   ```bash
-   sudo logrotate -f /etc/logrotate.d/dripemails
-   ```
-
-## Log Files Covered
-
-The configuration rotates the following log files:
-
-### Application Logs
-- `/home/dripemails/web/logs/*.log` - All Django and application logs
-  - `django.log` - Django application logs
-  - `spf_check.log` - SPF record checking logs
-  - `daphne.log`, `daphne-error.log` - Daphne ASGI server logs
-  - `celery.log`, `celerybeat.log` - Celery worker and beat logs
-  - `gunicorn.log`, `gunicorn-error.log` - Gunicorn WSGI server logs
-
-### Service Logs (Supervisor)
-- `/var/log/gmail_processor.log`, `/var/log/gmail_processor_error.log` - Gmail email processor logs
-- `/var/log/imap_crawler.log`, `/var/log/imap_crawler_error.log` - IMAP email crawler logs
-- `/var/log/dripemails.log`, `/var/log/dripemails-error.log` - General cron job logs
-- `/var/log/supervisor/dripemails*.log` - Supervisor service logs
-- `/var/log/supervisor/ollama-server.log`, `/var/log/supervisor/ollama-server-error.log` - Ollama AI server logs (if used)
-
-### Web Server Logs
-- `/var/log/nginx/dripemails-access.log`, `/var/log/nginx/dripemails-error.log` - Nginx access and error logs
-- `/var/log/uwsgi/dripemails.log` - UWSGI server logs (if used)
-
-## Rotation Settings
-
-- **Frequency**: Daily rotation
-- **Retention**: 
-  - Application logs: 14 days
-  - Service logs: 7 days
-  - Nginx logs: 30 days
-- **Compression**: Enabled (with delaycompress - compresses previous day's log)
-- **Permissions**: Created with appropriate user/group (dripemails:dripemails for app logs, www-data:www-data for nginx)
-
-## Customization
-
-To customize rotation settings, edit `/etc/logrotate.d/dripemails` after installation:
-
-### Common Options:
-
-- `daily` - Rotate daily (other options: `weekly`, `monthly`)
-- `rotate N` - Keep N rotated log files
-- `compress` - Compress rotated logs
-- `delaycompress` - Don't compress the most recent rotated log
-- `notifempty` - Don't rotate if log is empty
-- `missingok` - Don't error if log file is missing
-- `create MODE USER GROUP` - Set permissions for new log files
-- `postrotate/endscript` - Commands to run after rotation (e.g., restart services)
-
-### Example: Change retention to 30 days
+From project root (`dripemails.org/`):
 
 ```bash
-/home/dripemails/web/logs/*.log {
+ls -lah logs/
+```
+
+## 2) Install the provided config (recommended on Linux)
+
+Copy `docs/logrotate/dripemails.conf` to `/etc/logrotate.d/dripemails-cron` and replace `PROJECT_ROOT` with your absolute project path.
+
+Example install:
+
+```bash
+sudo cp docs/logrotate/dripemails.conf /etc/logrotate.d/dripemails-cron
+sudo chmod 644 /etc/logrotate.d/dripemails-cron
+sudo chown root:root /etc/logrotate.d/dripemails-cron
+```
+
+Core rule inside the config:
+
+```conf
+# Replace PROJECT_ROOT with your absolute project path (directory containing cron.py)
+PROJECT_ROOT/logs/*.log {
     daily
-    rotate 30  # Changed from 14 to 30
-    # ... rest of config
+    rotate 30
+    missingok
+    notifempty
+    compress
+    delaycompress
+    copytruncate
+    create 0640 www-data www-data
 }
 ```
 
-## Verification
+Notes:
+- Replace `PROJECT_ROOT` with your real deployment path.
+- The provided config also includes `PROJECT_ROOT/*.log` and `PROJECT_ROOT/*.jsonl` to cover top-level project logs.
+- Adjust owner/group in `create` for your runtime user.
 
-To verify logrotate is working:
-
-1. **Check logrotate status:**
-   ```bash
-   sudo logrotate -d /etc/logrotate.d/dripemails
-   ```
-
-2. **View logrotate logs:**
-   ```bash
-   sudo cat /var/log/logrotate.status
-   ```
-
-3. **Check rotated logs:**
-   ```bash
-   ls -lah /home/dripemails/web/logs/
-   ls -lah /var/log/gmail_processor.log*
-   ls -lah /var/log/imap_crawler.log*
-   ```
-
-## Troubleshooting
-
-### Logs not rotating
-
-1. **Check logrotate is running:**
-   ```bash
-   systemctl status logrotate.timer  # On systemd systems
-   ```
-
-2. **Check logrotate configuration syntax:**
-   ```bash
-   sudo logrotate -d /etc/logrotate.d/dripemails
-   ```
-
-3. **Manually trigger rotation:**
-   ```bash
-   sudo logrotate -f /etc/logrotate.d/dripemails
-   ```
-
-### Permission errors
-
-If you see permission errors, ensure log files have correct ownership:
+Test config safely:
 
 ```bash
-sudo chown -R dripemails:dripemails /home/dripemails/web/logs/
-sudo chown dripemails:dripemails /var/log/gmail_processor.log /var/log/imap_crawler.log
+sudo logrotate -d /etc/logrotate.d/dripemails-cron
 ```
 
-### Service restart issues
+Force one rotation run:
 
-If services fail to restart after rotation, check the postrotate scripts. You may need to adjust the service restart commands based on your setup.
+```bash
+sudo logrotate -f /etc/logrotate.d/dripemails-cron
+```
+
+## 3) Comprehensive rotation script (manual fallback)
+
+Create `scripts/rotate_cron_logs.sh` in the repo:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+LOG_DIR="${PROJECT_ROOT}/logs"
+ARCHIVE_DIR="${LOG_DIR}/archive"
+TS="$(date +%Y%m%d-%H%M%S)"
+
+mkdir -p "${ARCHIVE_DIR}"
+
+shopt -s nullglob
+for file in "${LOG_DIR}"/*.log; do
+  base="$(basename "${file}")"
+  gz_target="${ARCHIVE_DIR}/${base}.${TS}.gz"
+
+  cp "${file}" "${ARCHIVE_DIR}/${base}.${TS}"
+  : > "${file}"
+  gzip -f "${ARCHIVE_DIR}/${base}.${TS}"
+
+  echo "Rotated ${file} -> ${gz_target}"
+done
+
+# Keep only 30 days of archived logs
+find "${ARCHIVE_DIR}" -type f -name "*.gz" -mtime +30 -delete
+```
+
+Make executable:
+
+```bash
+chmod +x scripts/rotate_cron_logs.sh
+```
+
+Run manually:
+
+```bash
+./scripts/rotate_cron_logs.sh
+```
+
+Optional cron entry (daily at 2:15 AM):
+
+```cron
+15 2 * * * /path/to/project/scripts/rotate_cron_logs.sh >> /path/to/project/logs/logrotate-script.log 2>&1
+```
+
+## 4) Operational checks
+
+After rotation:
+
+- `logs/*.log` still exists and is writable
+- old files are in `logs/archive/*.gz`
+- cron commands continue appending to command-specific files
+
+## 5) Windows note
+
+`logrotate` is Linux-native. On Windows, use Task Scheduler with a PowerShell equivalent script, or rotate logs in application code.
 

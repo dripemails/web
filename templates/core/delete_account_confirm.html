@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete Account" %} - {{ site_name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="bg-red-600 py-6 px-8 text-white">
+                    <h1 class="text-2xl font-bold">{% trans "Delete Account" %}</h1>
+                    <p class="text-red-100">{% trans "This action is permanent and cannot be undone." %}</p>
+                </div>
+
+                <div class="p-8">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                        <p class="text-sm text-red-800">
+                            {% trans "Deleting your account will permanently remove your campaigns, lists, templates, subscribers, settings, and related data." %}
+                        </p>
+                    </div>
+
+                    <form method="post" class="space-y-4">
+                        {% csrf_token %}
+                        <div>
+                            <label for="confirmation_text" class="block text-sm font-medium text-gray-700 mb-2">
+                                {% trans "Type DELETE to confirm" %}
+                            </label>
+                            <input
+                                type="text"
+                                id="confirmation_text"
+                                name="confirmation_text"
+                                required
+                                autocomplete="off"
+                                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 py-2 px-3"
+                                placeholder="DELETE"
+                            >
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <a href="{% url 'core:settings' %}{% if agent %}?agent={{ agent }}{% endif %}" class="text-gray-600 hover:text-gray-800">
+                                {% trans "Cancel" %}
+                            </a>
+                            <button type="submit" class="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition-colors">
+                                {% trans "Permanently Delete Account" %}
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-600 mb-3">
+                            {% trans "If your client cannot submit POST forms, use this GET confirmation link instead:" %}
+                        </p>
+                        <a href="{% url 'core:delete_account' %}?confirm=DELETE{% if agent %}&agent={{ agent }}{% endif %}" class="inline-block text-sm font-medium text-red-700 hover:text-red-900 underline">
+                            {% trans "Delete via GET confirmation" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

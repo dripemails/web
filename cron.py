@@ -46,6 +46,7 @@ import sys
 import django
 import dns.resolver
 import dns.exception
+from pathlib import Path
 from typing import Optional, Dict, List, Tuple
 import logging
 from datetime import datetime
@@ -94,11 +95,30 @@ except ImportError:
     USE_SHARED_SPF_UTILS = False
 
 # Setup logging to file
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOGS_DIR = os.path.join(BASE_DIR, 'logs')
-os.makedirs(LOGS_DIR, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+LOGS_DIR = BASE_DIR / 'logs'
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
-LOG_FILE = os.path.join(LOGS_DIR, 'spf_check.log')
+
+def detect_invoked_command(argv: List[str]) -> str:
+    """Detect the cron command from argv for command-specific log files."""
+    valid_commands = {
+        'check_spf',
+        'send_scheduled_emails',
+        'process_gmail_emails',
+        'crawl_imap',
+        'garbage_collect',
+    }
+
+    for arg in argv[1:]:
+        if arg in valid_commands:
+            return arg
+
+    return 'cron'
+
+
+INVOKED_COMMAND = detect_invoked_command(sys.argv)
+LOG_FILE = LOGS_DIR / f'{INVOKED_COMMAND}.log'
 
 # Configure logging with both file and console handlers
 logger = logging.getLogger(__name__)
@@ -109,7 +129,7 @@ logger.handlers = []
 
 # File handler with rotation (10MB max, keep 5 backups)
 file_handler = RotatingFileHandler(
-    LOG_FILE,
+    str(LOG_FILE),
     maxBytes=10 * 1024 * 1024,  # 10MB
     backupCount=5,
     encoding='utf-8'
@@ -1059,9 +1079,12 @@ def send_scheduled_emails(limit=None):
 
 def garbage_collect(limit=None):
     """
-    Garbage collection: Delete old email messages and send activity records.
+    Garbage collection: Delete orphaned campaign data and old activity records.
     
     Deletes:
+    - Campaign objects with missing/deleted users (orphaned campaigns)
+    - Email objects with missing campaigns (orphaned emails)
+    - EmailSendRequest objects with missing user/campaign/email references
     - EmailMessage objects older than DATA_RETENTION_DAYS days
     - EmailSendRequest objects older than DATA_RETENTION_DAYS days
     
@@ -1069,37 +1092,76 @@ def garbage_collect(limit=None):
         limit: Optional limit on number of records to delete per type
     """
     from gmail.models import EmailMessage
-    from campaigns.models import EmailSendRequest
+    from campaigns.models import Campaign, Email, EmailSendRequest
+    from django.contrib.auth.models import User
     from django.conf import settings
+    from django.db.models import Exists, OuterRef
     from datetime import timedelta
+
+    def _delete_with_optional_limit(queryset, limit_value):
+        """Safely delete queryset records with optional limit and return (deleted_count, total_matching)."""
+        total_matching = queryset.count()
+
+        if total_matching == 0:
+            return 0, 0
+
+        if limit_value:
+            ids = list(queryset.values_list('pk', flat=True)[:limit_value])
+            if not ids:
+                return 0, total_matching
+            deleted_count = queryset.model.objects.filter(pk__in=ids).delete()[0]
+            return deleted_count, total_matching
+
+        deleted_count = queryset.delete()[0]
+        return deleted_count, total_matching
     
     # Get retention period from settings
     retention_days = getattr(settings, 'DATA_RETENTION_DAYS', 30)
     cutoff_date = timezone.now() - timedelta(days=retention_days)
     
     logger.info(f"Starting garbage collection for records older than {retention_days} days (before {cutoff_date})")
+
+    # 1) Delete orphaned campaign/email/send-request records (can happen if users were removed externally)
+    orphaned_campaigns = Campaign.objects.filter(
+        ~Exists(User.objects.filter(id=OuterRef('user_id')))
+    )
+    deleted_orphan_campaigns, orphan_campaign_count = _delete_with_optional_limit(orphaned_campaigns, limit)
+    logger.info(f"Deleted {deleted_orphan_campaigns} orphan Campaign records (out of {orphan_campaign_count} total matching)")
+
+    orphaned_emails = Email.objects.filter(
+        ~Exists(Campaign.objects.filter(id=OuterRef('campaign_id')))
+    )
+    deleted_orphan_emails, orphan_email_count = _delete_with_optional_limit(orphaned_emails, limit)
+    logger.info(f"Deleted {deleted_orphan_emails} orphan Email records (out of {orphan_email_count} total matching)")
+
+    orphaned_send_requests = EmailSendRequest.objects.filter(
+        ~Exists(User.objects.filter(id=OuterRef('user_id')))
+        | ~Exists(Campaign.objects.filter(id=OuterRef('campaign_id')))
+        | ~Exists(Email.objects.filter(id=OuterRef('email_id')))
+    )
+    deleted_orphan_send_requests, orphan_send_request_count = _delete_with_optional_limit(orphaned_send_requests, limit)
+    logger.info(
+        f"Deleted {deleted_orphan_send_requests} orphan EmailSendRequest records "
+        f"(out of {orphan_send_request_count} total matching)"
+    )
     
-    # Delete old EmailMessage records
+    # 2) Delete old EmailMessage records
     old_email_messages = EmailMessage.objects.filter(received_at__lt=cutoff_date)
-    email_message_count = old_email_messages.count()
-    
-    if limit:
-        old_email_messages = old_email_messages[:limit]
-    
-    deleted_email_messages = old_email_messages.delete()[0]
+    deleted_email_messages, email_message_count = _delete_with_optional_limit(old_email_messages, limit)
     logger.info(f"Deleted {deleted_email_messages} EmailMessage records (out of {email_message_count} total matching)")
     
-    # Delete old EmailSendRequest records
+    # 3) Delete old EmailSendRequest records
     old_send_requests = EmailSendRequest.objects.filter(created_at__lt=cutoff_date)
-    send_request_count = old_send_requests.count()
-    
-    if limit:
-        old_send_requests = old_send_requests[:limit]
-    
-    deleted_send_requests = old_send_requests.delete()[0]
+    deleted_send_requests, send_request_count = _delete_with_optional_limit(old_send_requests, limit)
     logger.info(f"Deleted {deleted_send_requests} EmailSendRequest records (out of {send_request_count} total matching)")
     
     logger.info(f"Garbage collection complete:")
+    logger.info(f"  Orphan Campaign records deleted: {deleted_orphan_campaigns} (of {orphan_campaign_count} matching)")
+    logger.info(f"  Orphan Email records deleted: {deleted_orphan_emails} (of {orphan_email_count} matching)")
+    logger.info(
+        f"  Orphan EmailSendRequest records deleted: "
+        f"{deleted_orphan_send_requests} (of {orphan_send_request_count} matching)"
+    )
     logger.info(f"  EmailMessage records deleted: {deleted_email_messages} (of {email_message_count} matching)")
     logger.info(f"  EmailSendRequest records deleted: {deleted_send_requests} (of {send_request_count} matching)")
 

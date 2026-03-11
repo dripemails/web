@@ -7,6 +7,7 @@ import logging
 import uuid
 import sys
 import re
+import html
 from analytics.models import UserProfile
 
 logger = logging.getLogger(__name__)
@@ -59,46 +60,79 @@ def _normalize_html_line_breaks(html_content: str) -> str:
 
 
 def _html_to_plain_text(html_content):
-    """Convert HTML to plain text, preserving URLs from links."""
+    """Convert HTML to readable plain text, preserving useful web/mail links."""
     if not html_content:
         return ""
-    
-    # Replace <a href="URL">text</a> with "text (URL)" if URL is different from text
+
+    # Remove non-content regions first
+    html_content = re.sub(r'<(script|style|head)[^>]*>.*?</\1>', '', html_content, flags=re.IGNORECASE | re.DOTALL)
+
+    # Replace <a href="URL">text</a> with sensible plain-text representation
     def replace_link(match):
-        url = match.group(1)
-        text = match.group(2)
-        # If the link text is different from URL or doesn't contain the full URL, append the URL
-        if url.lower() not in text.lower() or not text.startswith('http'):
+        url = (match.group(1) or '').strip()
+        text = match.group(2) or ''
+        text = re.sub(r'<[^>]+>', '', text)
+        text = html.unescape(text).strip()
+
+        if not text:
+            text = url
+
+        lower_url = url.lower()
+
+        # Don't leak noisy/non-user-facing URL schemes into plain text
+        if lower_url.startswith(('data:', 'cid:', 'javascript:')):
+            return text
+
+        # mailto links are useful; render as the address
+        if lower_url.startswith('mailto:'):
+            address = url[7:]
+            if text and text.lower() != address.lower():
+                return f"{text} ({address})"
+            return address
+
+        # Keep web links readable
+        if lower_url.startswith(('http://', 'https://')):
+            if text.lower() == url.lower():
+                return text
             return f"{text} ({url})"
+
+        # Fallback for other schemes/relative links
         return text
-    
+
     # Pattern to match <a> tags with href
     link_pattern = re.compile(r'<a[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.IGNORECASE | re.DOTALL)
     html_content = link_pattern.sub(replace_link, html_content)
-    
+
+    # Replace block-level tags with line breaks for readability
+    html_content = re.sub(r'</(p|div|h[1-6]|section|article|blockquote|pre|tr)>', '\n\n', html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r'<(p|div|h[1-6]|section|article|blockquote|pre|tr)[^>]*>', '\n', html_content, flags=re.IGNORECASE)
+
+    # Table/list structure hints
+    html_content = re.sub(r'</td>', '\t', html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r'</th>', '\t', html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r'<li[^>]*>', '\n- ', html_content, flags=re.IGNORECASE)
+    html_content = re.sub(r'</li>', '', html_content, flags=re.IGNORECASE)
+
     # Replace <br> and <br/> with newlines
     html_content = re.sub(r'<br\s*/?>', '\n', html_content, flags=re.IGNORECASE)
-    
-    # Replace </p>, </div>, </h1-6> with double newlines
-    html_content = re.sub(r'</(p|div|h[1-6]|li)>', '\n\n', html_content, flags=re.IGNORECASE)
-    
-    # Replace <li> with bullet point
-    html_content = re.sub(r'<li[^>]*>', '\n• ', html_content, flags=re.IGNORECASE)
-    
+
+    # Replace horizontal rule with plain separator
+    html_content = re.sub(r'<hr\s*/?>', '\n----------------------------------------\n', html_content, flags=re.IGNORECASE)
+
+    # Remove image tags entirely
+    html_content = re.sub(r'<img[^>]*>', '', html_content, flags=re.IGNORECASE)
+
     # Remove all other HTML tags
     html_content = re.sub(r'<[^>]+>', '', html_content)
-    
+
     # Decode HTML entities
-    html_content = html_content.replace('&nbsp;', ' ')
-    html_content = html_content.replace('&amp;', '&')
-    html_content = html_content.replace('&lt;', '<')
-    html_content = html_content.replace('&gt;', '>')
-    html_content = html_content.replace('&quot;', '"')
-    
+    html_content = html.unescape(html_content)
+
     # Clean up extra whitespace and newlines
     html_content = re.sub(r'\n\s*\n\s*\n+', '\n\n', html_content)
-    html_content = re.sub(r'[ \t]+', ' ', html_content)
-    
+    html_content = re.sub(r'[^\S\n]+', ' ', html_content)
+    html_content = re.sub(r'\n[ \t]+', '\n', html_content)
+
     return html_content.strip()
 
 
@@ -368,7 +402,7 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
 
     # Replace variables in content (include site_name, site_url, sender_email)
     html_content = email.body_html
-    text_content = email.body_text
+    text_content = email.body_text or ""
     subject = email.subject
 
     user_email_for_var = email.campaign.user.email if email.campaign and email.campaign.user else settings.DEFAULT_FROM_EMAIL
@@ -944,6 +978,10 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                 text_content = pattern.sub(replacement, text_content)
             if subject:
                 subject = pattern.sub(replacement, subject)
+
+    # If plain text body is empty, derive a readable one from HTML
+    if html_content and not text_content.strip():
+        text_content = _html_to_plain_text(html_content)
     
     # Replace HR tags with separator image and wrap all links with tracking
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)

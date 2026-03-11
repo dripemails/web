@@ -509,6 +509,9 @@ def process_gmail_emails(limit=None, email=None):
     total_processed = 0
     total_sent = 0
     error_count = 0
+    total_bounce_detected = 0
+    total_bounce_unsubscribed = 0
+    total_bounce_check_errors = 0
     
     service = GmailService()
     
@@ -516,6 +519,9 @@ def process_gmail_emails(limit=None, email=None):
         credential_processed = 0
         credential_sent = 0
         credential_errors = 0
+        credential_bounce_detected = 0
+        credential_bounce_unsubscribed = 0
+        credential_bounce_check_errors = 0
         
         try:
             # Fetch latest emails
@@ -536,12 +542,27 @@ def process_gmail_emails(limit=None, email=None):
                 # Check for bounce/DSN (Undelivered Mail Returned to Sender, etc.) and unsubscribe failed recipients
                 try:
                     from gmail.bounce import process_bounce_and_unsubscribe
+                    logger.info(
+                        f"Running bounce scan for Gmail message {email_msg.id} "
+                        f"(subject={email_msg.subject!r}, from={email_msg.from_email})"
+                    )
                     was_bounce, unsubscribed = process_bounce_and_unsubscribe(email_msg, credential, logger_instance=logger)
                     if was_bounce:
-                        logger.info(f"Processed as bounce: {email_msg.id}; unsubscribed: {unsubscribed}")
+                        unsubscribed_count = len(unsubscribed or [])
+                        credential_bounce_detected += 1
+                        total_bounce_detected += 1
+                        credential_bounce_unsubscribed += unsubscribed_count
+                        total_bounce_unsubscribed += unsubscribed_count
+                        logger.info(
+                            f"Processed as bounce: message={email_msg.id}, "
+                            f"unsubscribed_count={unsubscribed_count}, unsubscribed={unsubscribed or []}"
+                        )
                         continue
+                    logger.debug(f"Bounce scan complete (not a bounce): {email_msg.id}")
                 except Exception as e:
                     logger.warning(f"Bounce check failed for Gmail message {email_msg.id}: {e}")
+                    credential_bounce_check_errors += 1
+                    total_bounce_check_errors += 1
                 
                 try:
                     logger.info(f"Processing Gmail email {email_msg.id} (subject: {email_msg.subject}, from: {email_msg.from_email})")
@@ -669,7 +690,17 @@ def process_gmail_emails(limit=None, email=None):
                     credential_errors += 1
                     continue
             
-            logger.info(f"Credential {credential.email_address} summary: {credential_processed} processed, {credential_sent} sent, {credential_errors} errors")
+            logger.info(
+                f"Credential {credential.email_address} summary: "
+                f"{credential_processed} processed, {credential_sent} sent, {credential_errors} errors, "
+                f"bounce_detected={credential_bounce_detected}, "
+                f"bounce_unsubscribed={credential_bounce_unsubscribed}, "
+                f"bounce_check_errors={credential_bounce_check_errors}"
+            )
+            logger.info(
+                f"Bounce summary ({credential.email_address}): "
+                f"detected={credential_bounce_detected}, unsubscribed={credential_bounce_unsubscribed}"
+            )
             
         except Exception as e:
             logger.error(f"Error processing Gmail for credential {credential.id} ({credential.email_address}): {str(e)}", exc_info=True)
@@ -685,6 +716,9 @@ def process_gmail_emails(limit=None, email=None):
     logger.info(f"  Credentials processed: {total_credentials}")
     logger.info(f"  Emails processed: {total_processed}")
     logger.info(f"  Auto-replies sent: {total_sent}")
+    logger.info(f"  Bounces detected: {total_bounce_detected}")
+    logger.info(f"  Bounce unsubscribes: {total_bounce_unsubscribed}")
+    logger.info(f"  Bounce check errors: {total_bounce_check_errors}")
     logger.info(f"  Errors: {error_count}")
 
 
@@ -721,10 +755,19 @@ def crawl_imap(limit=None, email=None):
     total_processed = 0
     total_sent = 0
     error_count = 0
+    total_bounce_detected = 0
+    total_bounce_unsubscribed = 0
+    total_bounce_check_errors = 0
     
     service = IMAPService()
     
     for credential in credentials:
+        credential_processed = 0
+        credential_sent = 0
+        credential_errors = 0
+        credential_bounce_detected = 0
+        credential_bounce_unsubscribed = 0
+        credential_bounce_check_errors = 0
         try:
             logger.info(f"=" * 80)
             logger.info(f"Processing IMAP credential: {credential.id} for {credential.email_address} (User: {credential.user.id})")
@@ -768,12 +811,27 @@ def crawl_imap(limit=None, email=None):
                 if not email_msg.processed:
                     try:
                         from gmail.bounce import process_bounce_and_unsubscribe
+                        logger.info(
+                            f"  Running bounce scan for IMAP message {email_msg.id} "
+                            f"(subject={email_msg.subject!r}, from={email_msg.from_email})"
+                        )
                         was_bounce, unsubscribed = process_bounce_and_unsubscribe(email_msg, credential, logger_instance=logger)
                         if was_bounce:
-                            logger.info(f"  Processed as bounce: {email_msg.id}; unsubscribed: {unsubscribed}")
+                            unsubscribed_count = len(unsubscribed or [])
+                            credential_bounce_detected += 1
+                            total_bounce_detected += 1
+                            credential_bounce_unsubscribed += unsubscribed_count
+                            total_bounce_unsubscribed += unsubscribed_count
+                            logger.info(
+                                f"  Processed as bounce: message={email_msg.id}, "
+                                f"unsubscribed_count={unsubscribed_count}, unsubscribed={unsubscribed or []}"
+                            )
                             continue
+                        logger.debug(f"  Bounce scan complete (not a bounce): {email_msg.id}")
                     except Exception as e:
                         logger.warning(f"  Bounce check failed for IMAP message {email_msg.id}: {e}")
+                        credential_bounce_check_errors += 1
+                        total_bounce_check_errors += 1
                 
                 try:
                     # Get folder and names from provider_data
@@ -965,9 +1023,11 @@ def crawl_imap(limit=None, email=None):
                                 original_email_message=email_msg  # Pass the original incoming email message
                             )
                             total_sent += 1
+                            credential_sent += 1
                             logger.info(f"      ✓ Successfully sent auto-reply to {recipient_email} ({first_name}) for IMAP message {email_msg.id} from folder {folder}")
                         except Exception as e:
                             logger.error(f"      ✗ Error sending auto-reply to {recipient_email}: {str(e)}", exc_info=True)
+                            credential_errors += 1
                             # Continue processing other recipients
                             continue
                     
@@ -977,14 +1037,26 @@ def crawl_imap(limit=None, email=None):
                     email_msg.campaign_email = campaign_email
                     email_msg.save(update_fields=['processed', 'campaign_email'])
                     total_processed += 1
+                    credential_processed += 1
                     logger.info(f"  ✓ Completed processing email {email_msg.id}")
                     
                 except Exception as e:
                     logger.error(f"  ✗ Error processing IMAP email {email_msg.id}: {str(e)}", exc_info=True)
                     error_count += 1
+                    credential_errors += 1
                     continue
             
-            logger.info(f"Completed processing credential {credential.id}: {len(email_messages)} emails fetched, {total_processed} processed, {total_sent} auto-replies sent")
+            logger.info(
+                f"Completed processing credential {credential.id}: {len(email_messages)} emails fetched, "
+                f"{credential_processed} processed, {credential_sent} auto-replies sent, "
+                f"{credential_errors} errors, bounce_detected={credential_bounce_detected}, "
+                f"bounce_unsubscribed={credential_bounce_unsubscribed}, "
+                f"bounce_check_errors={credential_bounce_check_errors}"
+            )
+            logger.info(
+                f"Bounce summary ({credential.email_address}): "
+                f"detected={credential_bounce_detected}, unsubscribed={credential_bounce_unsubscribed}"
+            )
             
         except Exception as e:
             logger.error(f"✗ Error processing IMAP for credential {credential.id} ({credential.email_address}): {str(e)}", exc_info=True)
@@ -996,6 +1068,9 @@ def crawl_imap(limit=None, email=None):
     logger.info(f"  Credentials processed: {total_credentials}")
     logger.info(f"  Emails processed: {total_processed}")
     logger.info(f"  Auto-replies sent: {total_sent}")
+    logger.info(f"  Bounces detected: {total_bounce_detected}")
+    logger.info(f"  Bounce unsubscribes: {total_bounce_unsubscribed}")
+    logger.info(f"  Bounce check errors: {total_bounce_check_errors}")
     logger.info(f"  Errors: {error_count}")
     logger.info(f"=" * 80)
 
@@ -1184,6 +1259,7 @@ Available Commands:
 Examples:
   python cron.py check_spf --all-users
   python cron.py send_scheduled_emails
+    python cron.py send_scheduled_emails --periodic --interval 120
   python cron.py process_gmail_emails --periodic --interval 120
   python cron.py crawl_imap --periodic --interval 120
   python cron.py garbage_collect --periodic --interval 86400
@@ -1198,7 +1274,7 @@ Examples:
     parser.add_argument('--all-users', action='store_true', help='Check SPF for all users (check_spf only)')
     parser.add_argument('--limit', type=int, help='Limit number of items to process')
     parser.add_argument('--email', type=str, help='Only process credentials for this email address (process_gmail_emails, crawl_imap)')
-    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (process_gmail_emails, crawl_imap, garbage_collect)')
+    parser.add_argument('--periodic', action='store_true', help='Run continuously with periodic execution (send_scheduled_emails, process_gmail_emails, crawl_imap, garbage_collect)')
     parser.add_argument('--interval', type=int, default=120, help='Interval in seconds between executions when using --periodic (default: 120 = 2 minutes)')
     
     args = parser.parse_args()
@@ -1218,7 +1294,27 @@ Examples:
             parser.print_help()
             sys.exit(1)
     elif args.command == 'send_scheduled_emails':
-        send_scheduled_emails(limit=args.limit)
+        if args.periodic:
+            logger.info(f"Starting periodic scheduled email sending (interval: {args.interval} seconds)")
+            try:
+                while True:
+                    try:
+                        logger.info(f"Running scheduled email send cycle at {timezone.now()}")
+                        send_scheduled_emails(limit=args.limit)
+                        logger.info(f"Completed scheduled email send cycle. Sleeping for {args.interval} seconds...")
+                    except KeyboardInterrupt:
+                        logger.info("Received interrupt signal. Stopping periodic execution.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error in periodic scheduled email send cycle: {str(e)}", exc_info=True)
+                        logger.info(f"Continuing despite error. Will retry in {args.interval} seconds...")
+
+                    time.sleep(args.interval)
+            except KeyboardInterrupt:
+                logger.info("Periodic scheduled email sending stopped by user")
+                sys.exit(0)
+        else:
+            send_scheduled_emails(limit=args.limit)
     elif args.command == 'process_gmail_emails':
         if args.periodic:
             logger.info(f"Starting periodic Gmail email processing (interval: {args.interval} seconds)")

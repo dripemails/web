@@ -1998,13 +1998,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     content = stripAllHTML(content);
                                                 }
                                                 
-                                                return `<div class="whitespace-pre-wrap leading-relaxed">${content || noContentText}</div>`;
+                                                return `<div class="text-[15px] text-gray-700 whitespace-pre-wrap break-words leading-7">${formatPreviewText(content || noContentText)}</div>`;
                                             })()}
                                         </div>
                                     </div>
-                                    <div class="pt-3 border-t border-gray-200">
-                                        <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
-                                            ${(() => {
+                                    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                        <div class="text-xs font-semibold text-indigo-800 mb-2 uppercase tracking-wide">Original Email</div>
+                                        ${(() => {
                                                 // Format date for separator
                                                 const dateStr = formatDateInTimezone(email.received_at, true);
                                                 // Use display name if available, otherwise use email
@@ -2021,11 +2021,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 if (gmailContent && /<[^>]+>/.test(gmailContent)) {
                                                     gmailContent = stripAllHTML(gmailContent);
                                                 }
-                                                gmailContent = gmailContent || noContentText;
+                                                gmailContent = formatPreviewText(gmailContent || noContentText);
                                                 
                                                 return `
                                                     <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
-                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${gmailContent}</div>
+                                                    <div class="text-[15px] text-gray-700 whitespace-pre-wrap break-words leading-7">${gmailContent}</div>
                                                 `;
                                             })()}
                                     </div>
@@ -2041,7 +2041,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     if (gmailContent && /<[^>]+>/.test(gmailContent)) {
                                         gmailContent = stripAllHTML(gmailContent);
                                     }
-                                    return `<div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${gmailContent || noContentText}</div>`;
+                                    return `<div class="text-[15px] text-gray-700 whitespace-pre-wrap break-words leading-7">${formatPreviewText(gmailContent || noContentText)}</div>`;
                                 })()}
                             `}
                         </div>
@@ -2388,8 +2388,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Helper to normalize preview text so it reads naturally in UI panels
+    function formatPreviewText(rawText) {
+        if (!rawText) return '';
+
+        let text = rawText
+            .replace(/\r\n?/g, '\n')
+            .replace(/\u00a0/g, ' ')
+            .replace(/[ \t]+\n/g, '\n')
+            .replace(/\n[ \t]+/g, '\n')
+            .replace(/([,.;:!?])([A-Za-z0-9])/g, '$1 $2')
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/[^\S\n]{2,}/g, ' ')
+            .replace(/\n{3,}/g, '\n\n');
+
+        return text.trim();
+    }
+
     // Helper function to strip ALL HTML tags and content, including style/link/script tags
-    // This prevents HTML styling from affecting the page layout
+    // This prevents HTML styling from affecting the page layout while preserving readable structure
     function stripAllHTML(htmlContent) {
         if (!htmlContent) return '';
         
@@ -2398,7 +2415,12 @@ document.addEventListener('DOMContentLoaded', function() {
             .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
             .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
             .replace(/<link\b[^>]*>/gi, '')
-            .replace(/<\/?link\b[^>]*>/gi, '');
+            .replace(/<\/?link\b[^>]*>/gi, '')
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<li\b[^>]*>/gi, '\n• ')
+            .replace(/<\/li>/gi, '')
+            .replace(/<\/(p|div|h[1-6]|section|article|blockquote|pre|tr)>/gi, '\n\n')
+            .replace(/<\/(td|th)>/gi, '\t');
         
         // Create a temporary element in a sandbox (won't affect page)
         // Use DOMParser which doesn't execute scripts/styles
@@ -2407,12 +2429,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const doc = parser.parseFromString(cleaned, 'text/html');
             // Get text content only - this strips all HTML tags
             let text = doc.body.textContent || doc.body.innerText || '';
-            // Clean up whitespace
-            text = text.replace(/\s+/g, ' ').trim();
-            return text;
+            return formatPreviewText(text);
         } catch (e) {
             // Fallback: use regex to remove all HTML tags
-            return cleaned
+            const text = cleaned
                 .replace(/<[^>]+>/g, '') // Remove all HTML tags
                 .replace(/&nbsp;/g, ' ')
                 .replace(/&amp;/g, '&')
@@ -2420,8 +2440,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 .replace(/&gt;/g, '>')
                 .replace(/&quot;/g, '"')
                 .replace(/&#39;/g, "'")
-                .replace(/\s+/g, ' ')
                 .trim();
+            return formatPreviewText(text);
         }
     }
     
@@ -2684,14 +2704,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     content = content.replace(/\{\{Email\}\}/gi, vars.email || '');
                                                     content = content.replace(/\{\{Subject\}\}/gi, vars.subject || '');
                                                     
-                                                    return email.campaign_email_body_html ? 
-                                                        `<div class="leading-relaxed">${content}</div>` : 
-                                                        `<div class="whitespace-pre-wrap leading-relaxed">${content}</div>`;
+                                                    if (email.campaign_email_body_html) {
+                                                        content = stripAllHTML(content);
+                                                    }
+                                                    if (content && /<[^>]+>/.test(content)) {
+                                                        content = stripAllHTML(content);
+                                                    }
+
+                                                    return `<div class="text-[15px] text-gray-700 whitespace-pre-wrap break-words leading-7">${formatPreviewText(content || noContentText)}</div>`;
                                                 })()}
                                             </div>
                                         </div>
-                                        <div class="pt-3 border-t border-gray-200">
-                                            <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Original Email</div>
+                                        <div class="p-4 ${isSentEmail ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-200' : 'bg-indigo-50 border-indigo-200'} border rounded-xl shadow-sm">
+                                            <div class="text-xs font-bold ${isSentEmail ? 'text-green-800' : 'text-indigo-800'} mb-2 uppercase tracking-wide">Original Email</div>
                                             ${(() => {
                                                 // Use original_email data if available (for sent auto-replies), otherwise use current email
                                                 const origEmail = email.original_email || email;
@@ -2721,18 +2746,18 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 if (originalContent && /<[^>]+>/.test(originalContent)) {
                                                     originalContent = stripAllHTML(originalContent);
                                                 }
-                                                originalContent = originalContent || noContentText;
+                                                originalContent = formatPreviewText(originalContent || noContentText);
                                                 
                                                 return `
                                                     <div class="text-xs text-gray-500 mb-3 pb-2 border-b border-gray-200 font-medium">${separator}</div>
-                                                    <div class="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">${originalContent}</div>
+                                                    <div class="text-[15px] text-gray-700 whitespace-pre-wrap break-words leading-7">${originalContent}</div>
                                                 `;
                                             })()}
                                         </div>
                                     </div>
                                 ` : `
                                     <div class="p-4 ${isSentEmail ? 'bg-white border border-green-100' : 'bg-gray-50 border border-gray-100'} rounded-lg shadow-sm">
-                                        <div class="text-sm ${isSentEmail ? 'text-gray-800' : 'text-gray-700'} whitespace-pre-wrap leading-relaxed font-normal">
+                                        <div class="text-[15px] ${isSentEmail ? 'text-gray-800' : 'text-gray-700'} whitespace-pre-wrap break-words leading-7 font-normal">
                                             ${(() => {
                                                 let content = email.body_text || '';
                                                 if (!content && email.body_html) {
@@ -2743,7 +2768,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 if (content && /<[^>]+>/.test(content)) {
                                                     content = stripAllHTML(content);
                                                 }
-                                                return content || `<span class="text-gray-400 italic">${noContentText}</span>`;
+                                                return formatPreviewText(content) || `<span class="text-gray-400 italic">${noContentText}</span>`;
                                             })()}
                                         </div>
                                     </div>

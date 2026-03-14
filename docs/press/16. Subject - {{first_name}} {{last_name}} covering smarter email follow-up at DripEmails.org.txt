@@ -17,7 +17,7 @@ Product highlights:
 - Gmail + IMAP integration for inbox-aware automation
 - Configurable multi-step drip sequences
 - AI-assisted writing and message revision
-- Merge-field personalization including {{first_name}}, {{last_name}}, and {{email}}
+- Merge-field personalization including {{first_name}}, and {{email}}
 - Engagement analytics for optimization over time
 
 Happy to provide anything useful for coverage:

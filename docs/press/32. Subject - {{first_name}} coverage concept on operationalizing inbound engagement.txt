@@ -1,0 +1,29 @@
+Subject: {{first_name}}, coverage concept: operationalizing inbound engagement with DripEmails.org
+
+Hi {{first_name}},
+
+I wanted to share a coverage concept focused on execution in day-to-day email operations.
+
+DripEmails.org helps teams operationalize inbound engagement by automating personalized follow-up after replies and interactions.
+
+With Gmail or IMAP connected, follow-up workflows can run consistently while teams maintain message quality.
+
+Why the angle may land:
+- Most automation tools emphasize outbound sends over conversation continuity
+- Teams are prioritizing dependable response workflows across lifecycle stages
+- AI-assisted writing is improving turnaround without sacrificing personalization
+
+Product capabilities:
+- Gmail + IMAP workflow triggers
+- Multi-step drip sequences with custom timing
+- AI-assisted draft generation and editing
+- Merge-field support for {{first_name}} and {{email}}
+- Engagement tracking for iterative optimization
+
+If useful, I can send a short brief, screenshots, and use-case examples.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

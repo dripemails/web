@@ -1,0 +1,29 @@
+Subject: {{first_name}}, newsroom brief: follow-up timing and engagement at DripEmails.org
+
+Hi {{first_name}},
+
+Sending over a brief newsroom idea that may fit stories on practical automation outcomes.
+
+DripEmails.org helps teams automate post-engagement follow-up so inbound conversations keep progressing instead of slowing down.
+
+Through Gmail and IMAP integrations, teams can schedule personalized sequences that improve timing discipline across the funnel.
+
+Possible editorial takeaways:
+- Follow-up timing is often the hidden variable in email performance
+- Inbound conversation automation can reduce operational bottlenecks
+- Teams increasingly need measurable workflow consistency, not just campaign volume
+
+DripEmails.org at a glance:
+- Gmail + IMAP integration for trigger-based automation
+- Configurable multi-step drip campaign logic
+- AI-assisted drafting and revision support
+- Personalization fields like {{first_name}} and {{email}}
+- Analytics for engagement and workflow impact
+
+If helpful, I can share a quick demo, screenshots, and founder interview windows.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best regards,
+DripEmails.org

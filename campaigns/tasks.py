@@ -1256,7 +1256,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
 
 def process_email_open(tracking_id, subscriber_email):
     """Process email open event."""
-    from .models import EmailEvent, Campaign
+    from .models import EmailEvent
     
     try:
         # Find the sent event with the same tracking ID
@@ -1281,11 +1281,6 @@ def process_email_open(tracking_id, subscriber_email):
                 event_type='opened'
             )
             
-            # Update campaign metrics
-            campaign = sent_event.email.campaign
-            campaign.open_count += 1
-            campaign.save(update_fields=['open_count'])
-            
             logger.info(f"Recorded open event for {subscriber_email}")
         else:
             logger.debug(f"Open event already exists for {subscriber_email}, skipping duplicate")
@@ -1298,7 +1293,7 @@ def process_email_open(tracking_id, subscriber_email):
 
 def process_email_click(tracking_id, subscriber_email, link_url):
     """Process email click event."""
-    from .models import EmailEvent, Campaign
+    from .models import EmailEvent
     
     try:
         # Find the sent event with the same tracking ID
@@ -1315,11 +1310,6 @@ def process_email_click(tracking_id, subscriber_email, link_url):
             event_type='clicked',
             link_clicked=link_url
         )
-        
-        # Update campaign metrics (count each click)
-        campaign = sent_event.email.campaign
-        campaign.click_count += 1
-        campaign.save(update_fields=['click_count'])
         
         logger.info(f"Recorded click event for {subscriber_email} on {link_url}")
     

@@ -1,0 +1,29 @@
+Subject: {{first_name}}, editorial angle: reducing inbound response decay with DripEmails.org
+
+Hi {{first_name}},
+
+Sharing a concise editorial idea in case it fits your upcoming coverage plans.
+
+DripEmails.org is built for a practical gap in email operations: keeping inbound conversations moving after an initial reply.
+
+With Gmail or IMAP connected, teams can launch personalized follow-up steps automatically and reduce manual delays.
+
+Potential angle points:
+- Follow-up latency is a major cause of lost conversation momentum
+- Teams need automation that still reads like one-to-one communication
+- AI-assisted drafting is becoming operational, not experimental
+
+Product snapshot:
+- Gmail + IMAP inbox integrations
+- Time-based, multi-step drip workflows
+- AI-supported message drafting and iteration
+- Personalization using {{first_name}} and {{email}}
+- Tracking data for opens, clicks, and behavior trends
+
+Happy to share a short walkthrough and supporting materials if helpful.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks,
+DripEmails.org

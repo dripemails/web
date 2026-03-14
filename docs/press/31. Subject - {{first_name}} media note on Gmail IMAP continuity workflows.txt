@@ -1,0 +1,29 @@
+Subject: {{first_name}}, media note: Gmail + IMAP continuity workflows at DripEmails.org
+
+Hi {{first_name}},
+
+Quick media note in case this supports a broader email infrastructure story.
+
+DripEmails.org enables teams to run automated follow-up after inbox engagement, using Gmail and IMAP integrations to keep conversations active.
+
+The result is fewer dropped threads and more consistent next-step communication without heavy manual effort.
+
+Coverage themes you could explore:
+- The rise of continuity workflows in modern email programs
+- How teams balance automation speed with personalization quality
+- Why inbound engagement automation is becoming a core metric lever
+
+Highlights:
+- Native Gmail + IMAP integration paths
+- Sequenced follow-up campaigns with timed delivery
+- AI-assisted copy generation and revision tools
+- Personalization merge fields including {{first_name}} and {{email}}
+- Analytics for engagement and workflow tuning
+
+If helpful, I can provide visuals, a product walkthrough, and background notes.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Thanks,
+DripEmails.org

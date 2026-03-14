@@ -1,0 +1,29 @@
+Subject: {{first_name}}, story pitch: human-like automated follow-up from DripEmails.org
+
+Hi {{first_name}},
+
+I wanted to send over a story pitch that may align with your audience.
+
+DripEmails.org helps teams automate follow-up from real inbox engagement while keeping messaging personalized and context-aware.
+
+Instead of stopping at outbound sends, teams can continue conversations with scheduled workflows triggered through Gmail or IMAP.
+
+Why this is relevant now:
+- Teams are measured on continuity, not just send volume
+- Inbound reply management is still highly manual in many stacks
+- Practical AI tools are reducing the writing burden for operators
+
+What DripEmails.org provides:
+- Gmail + IMAP powered automation
+- Flexible multi-step follow-up sequencing
+- AI-assisted writing and message refinement
+- Merge-field personalization with {{first_name}} and {{email}}
+- Analytics for engagement and campaign performance
+
+If this is useful, I can share demo access, screenshots, and interview options.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best regards,
+DripEmails.org

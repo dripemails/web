@@ -330,8 +330,8 @@ def _send_test_email_sync(email_id, test_email, variables=None):
         logger.error(error_msg)
         raise ValueError(error_msg)
     
-    # If we have HTML content but no text content, convert HTML to plain text
-    if html_content and not text_content:
+    # Derive text/plain from HTML so paragraphs match (stored body_text often loses </p> breaks)
+    if html_content and html_content.strip():
         text_content = _html_to_plain_text(html_content)
     
     # Create and send email
@@ -445,10 +445,6 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
     # Always add tracking pixel for open tracking (especially important for IMAP/Gmail auto-replies)
     html_content = _add_tracking_pixel(html_content, tracking_id, subscriber_email, base_url=site_url)
     
-    # If we have HTML content but no text content, convert HTML to plain text
-    if html_content and not text_content:
-        text_content = _html_to_plain_text(html_content)
-    
     # For auto-reply campaigns, append original incoming email content with separator
     campaign_name_lower = email.campaign.name.lower() if email.campaign else ''
     is_auto_reply = 'auto' in campaign_name_lower or 'reply' in campaign_name_lower
@@ -484,9 +480,6 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
         
         # Add separator and original content to HTML
         html_content += separator_html
-        
-        # Add separator and original content to text
-        text_content += f"\n\n{separator_text}\n{original_body_text}"
     
     # Add email footer if one is assigned
     if email.footer:
@@ -495,10 +488,6 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             placeholder = f"{{{{{key}}}}}"
             footer_html = footer_html.replace(placeholder, str(value))
         html_content += footer_html
-        # Convert footer HTML to text for plain text version using proper HTML to text conversion
-        footer_text = _html_to_plain_text(footer_html)
-        if footer_text:
-            text_content += f"\n\n{footer_text}"
     
     # Get user email and name for From address
     # Prefer user from request_obj if available, otherwise use campaign user
@@ -565,17 +554,12 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             address_lines.append(' '.join(postal_country))
         
         address_html = ''
-        address_text = ''
         if address_lines:
             address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
-            address_text = '\n' + '\n'.join(address_lines)
         
         # Add to HTML content with separator
         unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_url}">unsubscribe here</a>.</p>{address_html}'
         html_content += unsubscribe_html
-        # Add to text content with separator
-        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_url}{address_text}"
-        text_content += unsubscribe_text
     
     # Add ads if required
     if show_ads:
@@ -584,9 +568,11 @@ def _send_single_email_sync(email_id, subscriber_email, variables=None, request_
             'site_name': site_name,
             'site_logo': site_logo,
         })
-        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
-        text_content += f"\n\n{ads_text}"
+    
+    # Plain part must match final HTML (stored body_text often omits paragraph breaks)
+    if html_content and html_content.strip():
+        text_content = _html_to_plain_text(html_content)
     
     # Create and send email
     # Check if user has auto BCC enabled
@@ -979,10 +965,6 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
             if subject:
                 subject = pattern.sub(replacement, subject)
 
-    # If plain text body is empty, derive a readable one from HTML
-    if html_content and not text_content.strip():
-        text_content = _html_to_plain_text(html_content)
-    
     # Replace HR tags with separator image and wrap all links with tracking
     html_content = _replace_hr_with_separator(html_content, tracking_id, subscriber.email, base_url=site_url)
     html_content = _wrap_links_with_tracking(html_content, tracking_id, subscriber.email, base_url=site_url)
@@ -998,10 +980,6 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
                 placeholder = f"{{{{{key}}}}}"
                 footer_html = footer_html.replace(placeholder, _safe_replacement(value))
         html_content += footer_html
-        # Convert footer HTML to text for plain text version using proper HTML to text conversion
-        footer_text = _html_to_plain_text(footer_html)
-        if footer_text:
-            text_content += f"\n\n{footer_text}"
     
     # For auto-reply campaigns, append original incoming email content with separator
     campaign_name_lower = email.campaign.name.lower()
@@ -1039,9 +1017,6 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
         
         # Add separator and original content to HTML
         html_content += separator_html
-        
-        # Add separator and original content to text
-        text_content += f"\n\n{separator_text}\n{original_body_text}"
     
     # Add ads if required
     if show_ads:
@@ -1050,9 +1025,7 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
             'site_name': site_name,
             'site_logo': site_logo,
         })
-        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
-        text_content += f"\n\n{ads_text}"
     
     # Add unsubscribe link if required
     if show_unsubscribe:
@@ -1081,21 +1054,20 @@ def send_campaign_email(email_id, subscriber_id, variables=None, original_email_
             address_lines.append(' '.join(postal_country))
         
         address_html = ''
-        address_text = ''
         if address_lines:
             address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
-            address_text = '\n' + '\n'.join(address_lines)
         
         unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>{address_html}'
-        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}{address_text}"
         html_content += unsubscribe_html
-        text_content += unsubscribe_text
+    
+    # Plain part must match HTML structure (stored body_text often loses </p> breaks — jQuery .text() concatenates paragraphs)
+    if html_content and html_content.strip():
+        text_content = _html_to_plain_text(html_content)
     
     # Get user email and name for From address
     user_email = email.campaign.user.email
     
     # Check if user has valid SPF record
-    user_profile, _ = UserProfile.objects.get_or_create(user=email.campaign.user)
     has_valid_spf = user_profile.spf_verified
     
     # Get full_name for From header

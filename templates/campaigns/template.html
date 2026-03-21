@@ -766,12 +766,30 @@ function getSummernoteHtml(editor) {
     return editor.summernote('code') || '';
 }
 
+// Plain text for API body_text: preserve paragraph/list breaks (jQuery .text() concatenates <p> with no separator).
+function htmlEmailToPlainTextForSave(html) {
+    if (!html) return '';
+    let h = String(html)
+        .replace(/<\/p>/gi, '\n\n')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/div>/gi, '\n')
+        .replace(/<\/h[1-6]>/gi, '\n\n')
+        .replace(/<\/blockquote>/gi, '\n\n')
+        .replace(/<\/li>/gi, '\n')
+        .replace(/<[^>]+>/g, '');
+    const d = document.createElement('div');
+    d.innerHTML = h;
+    let t = d.textContent || d.innerText || '';
+    t = t.replace(/\n[ \t]+/g, '\n').replace(/[ \t]+\n/g, '\n');
+    return t.trim();
+}
+
 function getSummernoteText(editor) {
     if (!editor) return '';
     const text = editor.summernote('codeview.isActivated')
         ? editor.val()
         : editor.summernote('code');
-    return $('<div>').html(text || '').text().trim();
+    return htmlEmailToPlainTextForSave(text || '');
 }
 
 function clearSummernote(editor) {
@@ -796,6 +814,52 @@ function bodyTextToHtml(text) {
         }
         return '<p>' + line + '</p>';
     }).join('');
+}
+
+// Strip a small HTML fragment to plain text (for repairing single-<p> bodies with newlines).
+function stripHtmlFragmentToText(html) {
+    if (!html) return '';
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent || d.innerText || '';
+}
+
+// Normalize API body_html/body_text so line breaks survive in Summernote.
+// Plain text stored in body_html, or a single <p> with embedded newlines, collapses in HTML —
+// convert to paragraph markup using body_text when possible.
+function normalizeLoadedEmailHtml(bodyHtml, bodyText) {
+    const rawHtml = bodyHtml || '';
+    const html = rawHtml.trim();
+    const text = (bodyText || '').trim();
+
+    function hasBlockLineBreakMarkup(s) {
+        return /<\s*(br|p|div|li|h[1-6]|ul|ol|tr|blockquote)\b/i.test(s);
+    }
+
+    if (!html && text) {
+        return bodyTextToHtml(text);
+    }
+    if (!html) {
+        return '';
+    }
+
+    if (!hasBlockLineBreakMarkup(html)) {
+        const src = text || html;
+        if (/\r?\n/.test(src)) {
+            return bodyTextToHtml(src);
+        }
+        return rawHtml;
+    }
+
+    const singleP = /^<p[^>]*>([\s\S]*)<\/p>\s*$/i.exec(html);
+    if (singleP && /\r?\n/.test(singleP[1]) && !/<br\s*\/?>/i.test(singleP[1])) {
+        const plainSource = text || stripHtmlFragmentToText(singleP[1]);
+        if (/\r?\n/.test(plainSource)) {
+            return bodyTextToHtml(plainSource);
+        }
+    }
+
+    return rawHtml;
 }
 
 // Prepare HTML for saving/sending from Summernote.
@@ -1115,13 +1179,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Set content in editor:
-                // - Prefer HTML body when available
-                // - Fallback to body_text (converted to simple HTML) when body_html is empty
-                let htmlToLoad = data.body_html;
-                if ((!htmlToLoad || htmlToLoad.trim() === '') && data.body_text) {
-                    htmlToLoad = bodyTextToHtml(data.body_text);
-                }
+                // Set content in editor: repair plain-text / newline-only bodies so spacing shows in Summernote
+                const htmlToLoad = normalizeLoadedEmailHtml(data.body_html, data.body_text);
                 setSummernoteHtml(summernoteEditor, htmlToLoad);
                 
                 // Set footer if available

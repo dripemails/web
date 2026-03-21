@@ -9,6 +9,17 @@ class EmailSerializer(serializers.ModelSerializer):
         model = Email
         fields = ['id', 'subject', 'body_html', 'body_text', 'wait_time', 'wait_unit', 'order', 'footer', 'footer_id']
         read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def validate(self, attrs):
+        """Keep body_text in sync with body_html so search/API plain previews aren't one concatenated line."""
+        body_html = attrs.get('body_html')
+        if body_html is None and self.instance is not None:
+            body_html = self.instance.body_html
+        body_html = body_html or ''
+        if isinstance(body_html, str) and body_html.strip():
+            from .tasks import _html_to_plain_text
+            attrs['body_text'] = _html_to_plain_text(body_html)
+        return attrs
         
     def create(self, validated_data):
         footer_id = validated_data.pop('footer_id', None)

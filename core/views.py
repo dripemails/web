@@ -979,10 +979,6 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
             placeholder = f"{{{{{key}}}}}"
             footer_html = footer_html.replace(placeholder, str(value))
         html_content += footer_html
-        # Convert footer HTML to text for plain text version using proper HTML to text conversion
-        footer_text = _html_to_plain_text(footer_html)
-        if footer_text:
-            text_content += f"\n\n{footer_text}"
     
     # Generate unsubscribe link
     if subscriber and hasattr(subscriber, 'uuid'):
@@ -999,9 +995,7 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
             ctx,
             request=request_obj if (request_obj is not None and hasattr(request_obj, 'get_host')) else None,
         )
-        ads_text = f"This email was sent using {site_name} - Free email marketing automation\nWant to send emails without this footer? Share about {site_name} and remove this message: {site_url}/promo-verification/"
         html_content += ads_html
-        text_content += f"\n\n{ads_text}"
     
     # Add unsubscribe link if required
     if show_unsubscribe:
@@ -1030,15 +1024,14 @@ def generate_email_preview(email_obj, variables=None, subscriber=None, request_o
             address_lines.append(' '.join(postal_country))
         
         address_html = ''
-        address_text = ''
         if address_lines:
             address_html = '<p style="font-size: 11px; color: #999; margin-top: 10px; line-height: 1.4;">' + '<br>'.join(address_lines) + '</p>'
-            address_text = '\n' + '\n'.join(address_lines)
         
         unsubscribe_html = f'<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;"><p style="font-size: 12px; color: #666; margin-top: 20px;">If you no longer wish to receive these emails, you can <a href="{unsubscribe_link}">unsubscribe here</a>.</p>{address_html}'
-        unsubscribe_text = f"\n\n--\n\nIf you no longer wish to receive these emails, you can unsubscribe here: {unsubscribe_link}{address_text}"
         html_content += unsubscribe_html
-        text_content += unsubscribe_text
+    
+    if html_content.strip():
+        text_content = _html_to_plain_text(html_content)
     
     return {
         'html': html_content,

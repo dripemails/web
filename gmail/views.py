@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
@@ -500,10 +500,8 @@ def gmail_quick_signup(request):
             password=account_password
         )
         
-        # Log the user in
-        user = authenticate(request, username=username, password=account_password)
-        if user:
-            login(request, user)
+        # Log the user in so OAuth callback (login_required) succeeds; explicit backend for allauth/multi-backend
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         
         # Return auth URL for Gmail OAuth
         from .services import GmailService
@@ -529,92 +527,100 @@ def gmail_quick_signup(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def imap_quick_signup(request):
-    """Quick signup with IMAP connection for non-authenticated users."""
+    """Quick signup with IMAP connection for non-authenticated users.
+
+    User + EmailCredential are created inside a transaction; if IMAP verification fails,
+    the whole signup is rolled back so the email can be used again. On success, the user
+    is logged in and the session cookie is set on the response.
+    """
+    from django.db import transaction
     from .imap_service import IMAPService
-    
+
+    class ImapSignupError(Exception):
+        """Controlled failure inside atomic block (rolls back user + credential)."""
+
+        def __init__(self, payload, status=400):
+            self.payload = payload
+            self.status = status
+
     try:
         email_address = request.data.get('email', '').strip().lower()
         imap_host = request.data.get('host', '').strip()
-        imap_port = int(request.data.get('port', 993))
+        try:
+            imap_port = int(request.data.get('port', 993) or 993)
+        except (TypeError, ValueError):
+            return Response({'error': 'Invalid IMAP port'}, status=400)
         imap_username = request.data.get('username', '').strip()
         imap_password = request.data.get('password', '').strip()
         use_ssl = request.data.get('use_ssl', True)
+        if isinstance(use_ssl, str):
+            use_ssl = use_ssl.strip().lower() in ('true', '1', 'yes', 'on')
         account_password = request.data.get('account_password', '').strip()
-        
+
         if not all([email_address, imap_host, imap_username, imap_password]):
             return Response({'error': 'Missing required IMAP fields'}, status=400)
-        
+
         if not account_password:
             return Response({'error': 'Account password is required'}, status=400)
-        
-        # Check if user already exists
+
         if User.objects.filter(email=email_address).exists():
             return Response({
                 'error': 'An account with this email already exists. Please sign in instead.',
                 'exists': True
             }, status=400)
-        
-        # Create new user
-        username = email_address.split('@')[0]  # Use email prefix as username
-        # Ensure username is unique
+
+        username = email_address.split('@')[0]
         base_username = username
         counter = 1
         while User.objects.filter(username=username).exists():
             username = f"{base_username}{counter}"
             counter += 1
-        
-        user = User.objects.create_user(
-            username=username,
-            email=email_address,
-            password=account_password
-        )
-        
-        # Log the user in
-        user = authenticate(request, username=username, password=account_password)
-        if user:
-            login(request, user)
-        
-        # Create IMAP credential
-        credential, created = EmailCredential.objects.update_or_create(
-            user=user,
-            provider=EmailProvider.IMAP,
-            email_address=email_address,
-            defaults={
-                'imap_host': imap_host,
-                'imap_port': imap_port,
-                'imap_username': imap_username,
-                'imap_password': imap_password,
-                'imap_use_ssl': use_ssl,
-                'is_active': True,
-                'sync_enabled': True,
-            }
-        )
-        
-        # Test connection
-        service = IMAPService()
-        connection_success, error_message = service.test_connection(credential)
-        if not connection_success:
-            credential.is_active = False
-            credential.save()
-            
-            # Check for application-specific password error
-            if error_message == 'app_password_required':
-                return Response({
-                    'error': 'Application-specific password required. Gmail requires an app password for IMAP access.',
-                    'error_type': 'app_password_required',
-                    'help_links': {
-                        'support': 'https://support.google.com/accounts/answer/185833',
-                        'app_passwords': 'https://myaccount.google.com/apppasswords'
+
+        credential = None
+        user = None
+        try:
+            with transaction.atomic():
+                user = User.objects.create_user(
+                    username=username,
+                    email=email_address,
+                    password=account_password
+                )
+                credential, _created = EmailCredential.objects.update_or_create(
+                    user=user,
+                    provider=EmailProvider.IMAP,
+                    email_address=email_address,
+                    defaults={
+                        'imap_host': imap_host,
+                        'imap_port': imap_port,
+                        'imap_username': imap_username,
+                        'imap_password': imap_password,
+                        'imap_use_ssl': bool(use_ssl),
+                        'is_active': True,
+                        'sync_enabled': True,
                     }
-                }, status=400)
-            
-            return Response({
-                'error': error_message or 'Failed to connect to IMAP server. Please check your settings.'
-            }, status=400)
-        
-        # Auto-create IMAP list and campaign
-        _create_imap_resources(user, credential)
-        
+                )
+                service = IMAPService()
+                connection_success, error_message = service.test_connection(credential)
+                if not connection_success:
+                    if error_message == 'app_password_required':
+                        raise ImapSignupError({
+                            'error': 'Application-specific password required. Gmail requires an app password for IMAP access.',
+                            'error_type': 'app_password_required',
+                            'help_links': {
+                                'support': 'https://support.google.com/accounts/answer/185833',
+                                'app_passwords': 'https://myaccount.google.com/apppasswords'
+                            }
+                        }, 400)
+                    raise ImapSignupError({
+                        'error': error_message or 'Failed to connect to IMAP server. Please check your settings.'
+                    }, 400)
+                _create_imap_resources(user, credential)
+        except ImapSignupError as e:
+            return Response(e.payload, status=e.status)
+
+        user.refresh_from_db()
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+
         return Response({
             'message': 'Account created and IMAP connected successfully!',
             'credential_id': str(credential.id),

@@ -1342,6 +1342,7 @@
                             {% trans "Create Your Account" %}
                         </h3>
                         <div class="mt-2">
+                            {% csrf_token %}
                             <p class="text-sm text-gray-500 mb-4">
                                 {% trans "Your email address will be your username. Please create a password to secure your account:" %}
                             </p>
@@ -1387,6 +1388,13 @@
 <script>
 let signupData = null;
 let signupType = null; // 'gmail' or 'imap'
+
+function getCsrfToken() {
+    const input = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (input && input.value) return input.value;
+    const m = document.cookie.match(/csrftoken=([^;]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
+}
 
 // Toggle Gmail app password notice based on host input
 document.addEventListener('DOMContentLoaded', function() {
@@ -1494,11 +1502,12 @@ document.getElementById('home-imap-form')?.addEventListener('submit', function(e
         return;
     }
     
+    const portRaw = parseInt(document.getElementById('home-imap-port').value, 10);
     const formData = {
-        email: document.getElementById('home-imap-email').value,
-        host: document.getElementById('home-imap-host').value,
-        port: parseInt(document.getElementById('home-imap-port').value),
-        username: document.getElementById('home-imap-username').value,
+        email: document.getElementById('home-imap-email').value.trim(),
+        host: document.getElementById('home-imap-host').value.trim(),
+        port: Number.isFinite(portRaw) ? portRaw : 993,
+        username: document.getElementById('home-imap-username').value.trim(),
         password: document.getElementById('home-imap-password').value,
         use_ssl: document.getElementById('home-imap-use-ssl').checked
     };
@@ -1534,8 +1543,14 @@ document.getElementById('modal-submit-btn')?.addEventListener('click', function(
     btn.disabled = true;
     btn.textContent = '{% trans "Creating Account..." %}';
     
-    // Get CSRF token
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const csrftoken = getCsrfToken();
+    if (!csrftoken) {
+        errorDiv.textContent = '{% trans "Security token missing. Please refresh the page and try again." %}';
+        errorDiv.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = '{% trans "Create Account & Connect" %}';
+        return;
+    }
     
     // Prepare submit data
     const submitData = {
@@ -1548,16 +1563,29 @@ document.getElementById('modal-submit-btn')?.addEventListener('click', function(
         ? '/api/gmail/quick-signup/' 
         : '/api/gmail/imap/quick-signup/';
     
-    // Submit to API
+    // Submit to API (credentials required so session cookie from login() is stored)
     fetch(apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
+        credentials: 'same-origin',
         body: JSON.stringify(submitData)
     })
-    .then(response => response.json())
+    .then(async function(response) {
+        const text = await response.text();
+        let data = {};
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch (parseErr) {
+            throw new Error(text ? text.slice(0, 200) : ('HTTP ' + response.status));
+        }
+        if (!response.ok && !data.error) {
+            data.error = data.detail || ('HTTP ' + response.status);
+        }
+        return data;
+    })
     .then(data => {
         if (data.error) {
             if (data.error_type === 'app_password_required' && data.help_links) {
@@ -1598,6 +1626,8 @@ document.getElementById('modal-submit-btn')?.addEventListener('click', function(
                         </div>
                     </div>
                 `;
+            } else if (data.exists) {
+                errorDiv.innerHTML = '{% trans "An account with this email already exists." %} <a href="{% url 'account_login' %}{% if agent %}?agent={{ agent }}{% endif %}" class="font-semibold underline text-red-900">{% trans "Sign in" %}</a> {% trans "to connect Gmail or IMAP from your dashboard." %}';
             } else {
                 errorDiv.textContent = data.error;
             }
@@ -1613,7 +1643,7 @@ document.getElementById('modal-submit-btn')?.addEventListener('click', function(
         }
     })
     .catch(error => {
-        errorDiv.textContent = '{% trans "An error occurred. Please try again." %}';
+        errorDiv.textContent = (error && error.message) ? error.message : '{% trans "An error occurred. Please try again." %}';
         errorDiv.classList.remove('hidden');
         btn.disabled = false;
         btn.textContent = '{% trans "Create Account & Connect" %}';

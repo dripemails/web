@@ -50,7 +50,12 @@ def site_detection(request):
     use_https = getattr(settings, 'USE_HTTPS', None)
     if use_https is None:
         use_https = not getattr(settings, 'DEBUG', True)
-    scheme = 'https' if use_https or request.is_secure() else 'http'
+
+    # Some call sites pass a lightweight MockRequest (only get_host()).
+    # Use request.is_secure() only when it exists.
+    is_secure_fn = getattr(request, 'is_secure', None)
+    is_secure = is_secure_fn() if callable(is_secure_fn) else False
+    scheme = 'https' if use_https or is_secure else 'http'
     site_url = f'{scheme}://{domain}'
 
     # Static asset follows domain; local dev (e.g. Site.domain localhost:8000) uses production logo asset

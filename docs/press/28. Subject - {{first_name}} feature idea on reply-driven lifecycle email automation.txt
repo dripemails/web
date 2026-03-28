@@ -1,0 +1,29 @@
+Subject: {{first_name}}, feature idea: reply-driven lifecycle email automation at DripEmails.org
+
+Hi {{first_name}},
+
+I wanted to share a potential feature angle your publication may find timely.
+
+DripEmails.org helps teams automate follow-up after inbox engagement, so high-intent conversations do not stall after the first response.
+
+By connecting Gmail or IMAP, teams can continue conversations through sequenced workflows while preserving a personal tone.
+
+Why this could resonate:
+- Email teams are shifting from campaign blasts to lifecycle continuity
+- Inbound conversations are often where revenue intent is strongest
+- Automation quality now depends on timing plus relevance
+
+Platform highlights:
+- Gmail + IMAP connection for workflow triggers
+- Multi-step drip sequences with configurable delays
+- AI-assisted writing and content revision
+- Merge fields such as {{first_name}} and {{email}}
+- Engagement analytics for optimization decisions
+
+If useful, I can send a concise demo, screenshots, and founder availability.
+
+Website: https://dripemails.org
+Blog: https://dripemails.org/resources/blog/
+
+Best,
+DripEmails.org

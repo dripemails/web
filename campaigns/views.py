@@ -876,6 +876,14 @@ def campaign_analysis_view(request):
             elif ev.event_type == 'complained':
                 by_month[month]['complaints'] += 1
 
+        # Keep top metric cards in sync with real-time event data
+        campaign.sent_count = events.filter(event_type='sent').count()
+        campaign.open_count = events.filter(event_type='opened').count()
+        campaign.click_count = events.filter(event_type='clicked').count()
+        campaign.bounce_count = events.filter(event_type='bounced').count()
+        campaign.unsubscribe_count = events.filter(event_type='unsubscribed').count()
+        campaign.complaint_count = events.filter(event_type='complained').count()
+
         # Per-email breakdown with unique opens
         for e in campaign.emails.all():
             sent = EmailEvent.objects.filter(email=e, event_type='sent').count()
@@ -941,10 +949,15 @@ def campaign_stats_api(request, campaign_id):
         event_type='complained'
     ).count()
     
-    # Get opens and clicks from campaign model (these are incremented via signals)
-    campaign.refresh_from_db()
-    open_count = campaign.open_count
-    click_count = campaign.click_count
+    # Get opens and clicks from events for consistency across all event sources
+    open_count = EmailEvent.objects.filter(
+        email__campaign=campaign,
+        event_type='opened'
+    ).count()
+    click_count = EmailEvent.objects.filter(
+        email__campaign=campaign,
+        event_type='clicked'
+    ).count()
     
     # Calculate rates
     delivered_count = sent_count - bounce_count

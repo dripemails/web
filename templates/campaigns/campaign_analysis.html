@@ -90,7 +90,7 @@
       <div class="mb-6">
         <h2 class="text-lg font-medium mb-2">{% trans "Past 7 Days Trends" %}</h2>
         <!-- Rate charts with data -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="p-4 bg-white rounded border">
             <h3 class="text-sm text-gray-600 mb-2">{% trans "Delivery Rate" %}</h3>
             <div style="height: 150px; position: relative;">
@@ -107,6 +107,18 @@
             <h3 class="text-sm text-gray-600 mb-2">{% trans "Click-Through Rate" %}</h3>
             <div style="height: 150px; position: relative;">
               <canvas id="clickRateChart"></canvas>
+            </div>
+          </div>
+          <div class="p-4 bg-white rounded border">
+            <h3 class="text-sm text-gray-600 mb-2">{% trans "Subscribers" %}</h3>
+            <div style="height: 150px; position: relative;">
+              {% if campaign.subscriber_list %}
+              <canvas id="subscriberTrendChart"></canvas>
+              {% else %}
+              <div class="h-full flex items-center justify-center text-center px-3">
+                <p class="text-sm text-gray-500 font-medium">{% trans "No subscribers found for this campaign" %}</p>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -200,6 +212,7 @@
     let deliveryChart = null;
     let openChart = null;
     let clickChart = null;
+    let subscriberChart = null;
 
     // Wait for DOM to be ready
     document.addEventListener('DOMContentLoaded', function() {
@@ -253,11 +266,12 @@
           const deliveryRates = weeklyData.map(d => d.delivery_rate);
           const openRates = weeklyData.map(d => d.open_rate);
           const clickRates = weeklyData.map(d => d.click_rate);
+          const subscriberCounts = weeklyData.map(d => d.subscriber_count || 0);
           
-          console.log('Chart data:', { dates, deliveryRates, openRates, clickRates });
+          console.log('Chart data:', { dates, deliveryRates, openRates, clickRates, subscriberCounts });
           
-          // Common chart options
-          const commonOptions = {
+          // Common chart options for percentage-based charts
+          const rateChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
@@ -277,6 +291,45 @@
                   callback: function(value) {
                     return value + '%';
                   },
+                  font: {
+                    size: 10
+                  }
+                },
+                grid: {
+                  display: true
+                }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 10
+                  }
+                },
+                grid: {
+                  display: false
+                }
+              }
+            }
+          };
+
+          // Common chart options for raw subscriber count chart
+          const subscriberChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  precision: 0,
                   font: {
                     size: 10
                   }
@@ -320,7 +373,7 @@
                   tension: 0.4
                 }]
               },
-              options: commonOptions
+              options: rateChartOptions
             });
             console.log('Delivery chart created:', deliveryChart);
           } else {
@@ -349,7 +402,7 @@
                   tension: 0.4
                 }]
               },
-              options: commonOptions
+              options: rateChartOptions
             });
             console.log('Open chart created:', openChart);
           } else {
@@ -378,11 +431,38 @@
                   tension: 0.4
                 }]
               },
-              options: commonOptions
+              options: rateChartOptions
             });
             console.log('Click chart created:', clickChart);
           } else {
             console.error('Click Rate Canvas not found!');
+          }
+
+          // Subscriber Trend Chart
+          const subscriberTrendCtx = document.getElementById('subscriberTrendChart');
+          console.log('Subscriber Trend Canvas:', subscriberTrendCtx);
+          if (subscriberTrendCtx) {
+            if (subscriberChart) {
+              subscriberChart.destroy();
+            }
+            console.log('Creating subscriber trend chart...');
+            subscriberChart = new Chart(subscriberTrendCtx.getContext('2d'), {
+              type: 'line',
+              data: {
+                labels: dates,
+                datasets: [{
+                  label: 'Subscribers',
+                  data: subscriberCounts,
+                  borderColor: 'rgb(99, 102, 241)',
+                  backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                  borderWidth: 2,
+                  fill: true,
+                  tension: 0.4
+                }]
+              },
+              options: subscriberChartOptions
+            });
+            console.log('Subscriber chart created:', subscriberChart);
           }
         })
         .catch(error => {

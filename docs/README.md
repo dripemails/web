@@ -134,7 +134,7 @@ sudo DOMAIN=dripemails.org \
 
 ```bash
 cd /home/dripemails/web/docs
-sudo DOMAIN=dripemails.org CERTBOT_EMAIL=you@dripemails.org bash setup-postfix-tls-certbot.sh obtain-nginx
+sudo DOMAIN=dripemails.org CERTBOT_EMAIL=founders@dripemails.org bash setup-postfix-tls-certbot.sh obtain-nginx
 ```
 
 ### 4) Certificate already exists (wire Postfix + hook only)

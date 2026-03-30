@@ -199,14 +199,23 @@ def gmail_disconnect(request):
 
 
 def _create_gmail_resources(user, credential):
-    """Auto-create Gmail subscriber list and campaign."""
+    """Auto-create Gmail subscriber list and campaign.
+
+    Important behavior:
+    - If a "Gmail Auto-Reply - <email>" campaign already exists for this user,
+      reuse it (do not create a new one on subsequent Connect Gmail flows).
+    - Same concept applies to the auto-created subscriber list.
+    """
     from django.utils.text import slugify
 
-    def _merge_duplicate_lists(canonical_list, user_obj, target_name, target_description):
+    def _merge_duplicate_lists(canonical_list, user_obj, target_name):
+        if not canonical_list:
+            return
+
+        # Merge by name only (description has historically drifted across releases).
         duplicate_lists = List.objects.filter(
             user=user_obj,
-            name=target_name,
-            description=target_description
+            name__iexact=target_name,
         ).exclude(pk=canonical_list.pk)
 
         for duplicate_list in duplicate_lists:
@@ -220,11 +229,14 @@ def _create_gmail_resources(user, credential):
 
             duplicate_list.delete()
 
-    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, target_description, canonical_list):
+    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, canonical_list):
+        if not canonical_campaign:
+            return
+
+        # Merge by name only (description has historically drifted across releases).
         duplicate_campaigns = Campaign.objects.filter(
             user=user_obj,
-            name=target_name,
-            description=target_description
+            name__iexact=target_name,
         ).exclude(pk=canonical_campaign.pk)
 
         if duplicate_campaigns.exists():
@@ -256,73 +268,101 @@ def _create_gmail_resources(user, credential):
                 'complaint_count',
                 'updated_at'
             ])
-    
-    # Create Gmail subscriber list
-    # Include user ID in slug to ensure uniqueness across users
-    list_name = f"Gmail - {credential.email_address}"
+
+    provider_email = (credential.email_address or '').strip().lower()
+    list_name = f"Gmail - {provider_email}"
     base_slug = slugify(list_name)
-    # Make slug unique per user by including user ID
-    unique_slug = f"{base_slug}-{user.id}"
-    
-    # Ensure slug doesn't exceed max length (150 chars)
-    if len(unique_slug) > 150:
-        # Truncate base slug if needed, keeping user ID
-        max_base_length = 150 - len(str(user.id)) - 1  # -1 for the hyphen
-        base_slug = base_slug[:max_base_length]
+
+    campaign_name = f"Gmail Auto-Reply - {provider_email}"
+    list_description = f"Auto-created list for Gmail account {provider_email}"
+    campaign_description = f"Auto-created campaign for Gmail auto-replies from {provider_email}"
+
+    # 1) Reuse existing campaign if it exists ever (by name).
+    gmail_campaign = Campaign.objects.filter(
+        user=user,
+        name__iexact=campaign_name,
+    ).order_by('created_at').first()
+
+    # If the canonical campaign already exists, prefer its subscriber_list.
+    gmail_list = gmail_campaign.subscriber_list if gmail_campaign else None
+
+    created_campaign = False
+
+    # 2) Reuse existing list if campaign didn't give us one.
+    if not gmail_list:
+        gmail_list = List.objects.filter(
+            user=user,
+            name__iexact=list_name,
+        ).order_by('created_at').first()
+
+    # 3) Only create new list/campaign if they do not exist by name.
+    if not gmail_list:
+        # Include user ID in slug to ensure uniqueness across users.
         unique_slug = f"{base_slug}-{user.id}"
-    
-    gmail_list, created = List.objects.get_or_create(
-        user=user,
-        slug=unique_slug,
-        defaults={
-            'name': list_name,
-            'description': f"Auto-created list for Gmail account {credential.email_address}"
-        }
-    )
-    
-    # Create Gmail campaign
-    # Include user ID in campaign slug as well for consistency
-    campaign_name = f"Gmail Auto-Reply - {credential.email_address}"
-    base_campaign_slug = slugify(campaign_name)
-    campaign_slug = f"{base_campaign_slug}-{user.id}"
-    
-    # Ensure slug doesn't exceed max length
-    if len(campaign_slug) > 150:
-        max_base_length = 150 - len(str(user.id)) - 1
-        base_campaign_slug = base_campaign_slug[:max_base_length]
-        campaign_slug = f"{base_campaign_slug}-{user.id}"
-    
-    gmail_campaign, created = Campaign.objects.get_or_create(
-        user=user,
-        slug=campaign_slug,
-        defaults={
-            'name': campaign_name,
-            'description': f"Auto-created campaign for Gmail auto-replies from {credential.email_address}",
-            'subscriber_list': gmail_list,
-            'is_active': True
-        }
-    )
+        # Ensure slug doesn't exceed max length (150 chars)
+        if len(unique_slug) > 150:
+            max_base_length = 150 - len(str(user.id)) - 1  # -1 for the hyphen
+            base_slug = base_slug[:max_base_length]
+            unique_slug = f"{base_slug}-{user.id}"
 
-    # Keep campaign tied to the canonical list, and clean up any duplicate auto-created campaigns
-    campaign_description = f"Auto-created campaign for Gmail auto-replies from {credential.email_address}"
-    if (
-        gmail_campaign.name != campaign_name or
-        gmail_campaign.description != campaign_description or
-        gmail_campaign.subscriber_list_id != gmail_list.id or
-        not gmail_campaign.is_active
+        gmail_list, _created_list = List.objects.get_or_create(
+            user=user,
+            slug=unique_slug,
+            defaults={
+                'name': list_name,
+                'description': list_description,
+            }
+        )
+    
+    if gmail_list and (
+        gmail_list.name != list_name or
+        gmail_list.description != list_description
     ):
-        gmail_campaign.name = campaign_name
-        gmail_campaign.description = campaign_description
-        gmail_campaign.subscriber_list = gmail_list
-        gmail_campaign.is_active = True
-        gmail_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+        gmail_list.name = list_name
+        gmail_list.description = list_description
+        gmail_list.save(update_fields=['name', 'description', 'updated_at'])
 
-    list_description = f"Auto-created list for Gmail account {credential.email_address}"
-    _merge_duplicate_lists(gmail_list, user, list_name, list_description)
-    _merge_duplicate_campaigns(gmail_campaign, user, campaign_name, campaign_description, gmail_list)
-    
-    # Create default email template
-    if created or not gmail_campaign.emails.exists():
+    # Create Gmail campaign only if it doesn't exist by name.
+    if not gmail_campaign:
+        base_campaign_slug = slugify(campaign_name)
+        campaign_slug = f"{base_campaign_slug}-{user.id}"
+
+        # Ensure slug doesn't exceed max length
+        if len(campaign_slug) > 150:
+            max_base_length = 150 - len(str(user.id)) - 1
+            base_campaign_slug = base_campaign_slug[:max_base_length]
+            campaign_slug = f"{base_campaign_slug}-{user.id}"
+
+        gmail_campaign, created_campaign = Campaign.objects.get_or_create(
+            user=user,
+            slug=campaign_slug,
+            defaults={
+                'name': campaign_name,
+                'description': campaign_description,
+                'subscriber_list': gmail_list,
+                'is_active': True,
+            }
+        )
+
+    # Keep campaign tied to the canonical list, and clean up any duplicate auto-created campaigns.
+    if gmail_campaign and gmail_list:
+        if (
+            gmail_campaign.name != campaign_name or
+            gmail_campaign.description != campaign_description or
+            gmail_campaign.subscriber_list_id != gmail_list.id or
+            not gmail_campaign.is_active
+        ):
+            gmail_campaign.name = campaign_name
+            gmail_campaign.description = campaign_description
+            gmail_campaign.subscriber_list = gmail_list
+            gmail_campaign.is_active = True
+            gmail_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+
+    _merge_duplicate_lists(gmail_list, user, list_name)
+    _merge_duplicate_campaigns(gmail_campaign, user, campaign_name, gmail_list)
+
+    # Create default email template (once per campaign).
+    if gmail_campaign and (created_campaign or not gmail_campaign.emails.exists()):
         Email.objects.create(
             campaign=gmail_campaign,
             subject="Re: {{subject}}",
@@ -337,14 +377,23 @@ def _create_gmail_resources(user, credential):
 
 
 def _create_imap_resources(user, credential):
-    """Auto-create IMAP subscriber list and campaign."""
+    """Auto-create IMAP subscriber list and campaign.
+
+    Important behavior:
+    - If an "IMAP Auto-Reply - <email>" campaign already exists for this user,
+      reuse it (do not create a new one on subsequent Connect IMAP flows).
+    - Same concept applies to the auto-created subscriber list.
+    """
     from django.utils.text import slugify
 
-    def _merge_duplicate_lists(canonical_list, user_obj, target_name, target_description):
+    def _merge_duplicate_lists(canonical_list, user_obj, target_name):
+        if not canonical_list:
+            return
+
+        # Merge by name only (description has historically drifted across releases).
         duplicate_lists = List.objects.filter(
             user=user_obj,
-            name=target_name,
-            description=target_description
+            name__iexact=target_name,
         ).exclude(pk=canonical_list.pk)
 
         for duplicate_list in duplicate_lists:
@@ -355,11 +404,14 @@ def _create_imap_resources(user, credential):
             Campaign.objects.filter(subscriber_list=duplicate_list).update(subscriber_list=canonical_list)
             duplicate_list.delete()
 
-    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, target_description, canonical_list):
+    def _merge_duplicate_campaigns(canonical_campaign, user_obj, target_name, canonical_list):
+        if not canonical_campaign:
+            return
+
+        # Merge by name only (description has historically drifted across releases).
         duplicate_campaigns = Campaign.objects.filter(
             user=user_obj,
-            name=target_name,
-            description=target_description
+            name__iexact=target_name,
         ).exclude(pk=canonical_campaign.pk)
 
         if duplicate_campaigns.exists():
@@ -390,71 +442,98 @@ def _create_imap_resources(user, credential):
                 'updated_at'
             ])
     
-    # Create IMAP subscriber list
-    # Include user ID in slug to ensure uniqueness across users
-    list_name = f"IMAP - {credential.email_address}"
+    provider_email = (credential.email_address or '').strip().lower()
+    list_name = f"IMAP - {provider_email}"
     base_slug = slugify(list_name)
-    # Make slug unique per user by including user ID
-    unique_slug = f"{base_slug}-{user.id}"
-    
-    # Ensure slug doesn't exceed max length (150 chars)
-    if len(unique_slug) > 150:
-        # Truncate base slug if needed, keeping user ID
-        max_base_length = 150 - len(str(user.id)) - 1  # -1 for the hyphen
-        base_slug = base_slug[:max_base_length]
+    campaign_name = f"IMAP Auto-Reply - {provider_email}"
+    campaign_description = f"Auto-created campaign for IMAP auto-replies from {provider_email}"
+    list_description = f"Auto-created list for IMAP account {provider_email}"
+
+    # 1) Reuse existing campaign if it exists ever (by name).
+    imap_campaign = Campaign.objects.filter(
+        user=user,
+        name__iexact=campaign_name,
+    ).order_by('created_at').first()
+
+    # If the canonical campaign already exists, prefer its subscriber_list.
+    imap_list = imap_campaign.subscriber_list if imap_campaign else None
+
+    created_campaign = False
+
+    # 2) Reuse existing list if campaign didn't give us one.
+    if not imap_list:
+        imap_list = List.objects.filter(
+            user=user,
+            name__iexact=list_name,
+        ).order_by('created_at').first()
+
+    # 3) Only create new list/campaign if they do not exist by name.
+    if not imap_list:
         unique_slug = f"{base_slug}-{user.id}"
-    
-    imap_list, created = List.objects.get_or_create(
-        user=user,
-        slug=unique_slug,
-        defaults={
-            'name': list_name,
-            'description': f"Auto-created list for IMAP account {credential.email_address}"
-        }
-    )
-    
-    # Create IMAP campaign
-    # Include user ID in campaign slug as well for consistency
-    campaign_name = f"IMAP Auto-Reply - {credential.email_address}"
-    base_campaign_slug = slugify(campaign_name)
-    campaign_slug = f"{base_campaign_slug}-{user.id}"
-    
-    # Ensure slug doesn't exceed max length
-    if len(campaign_slug) > 150:
-        max_base_length = 150 - len(str(user.id)) - 1
-        base_campaign_slug = base_campaign_slug[:max_base_length]
-        campaign_slug = f"{base_campaign_slug}-{user.id}"
-    
-    imap_campaign, created = Campaign.objects.get_or_create(
-        user=user,
-        slug=campaign_slug,
-        defaults={
-            'name': campaign_name,
-            'description': f"Auto-created campaign for IMAP auto-replies from {credential.email_address}",
-            'subscriber_list': imap_list,
-            'is_active': True
-        }
-    )
+        # Ensure slug doesn't exceed max length (150 chars)
+        if len(unique_slug) > 150:
+            max_base_length = 150 - len(str(user.id)) - 1  # -1 for the hyphen
+            base_slug = base_slug[:max_base_length]
+            unique_slug = f"{base_slug}-{user.id}"
 
-    campaign_description = f"Auto-created campaign for IMAP auto-replies from {credential.email_address}"
-    if (
-        imap_campaign.name != campaign_name or
-        imap_campaign.description != campaign_description or
-        imap_campaign.subscriber_list_id != imap_list.id or
-        not imap_campaign.is_active
+        imap_list, _created_list = List.objects.get_or_create(
+            user=user,
+            slug=unique_slug,
+            defaults={
+                'name': list_name,
+                'description': list_description,
+            }
+        )
+
+    if imap_list and (
+        imap_list.name != list_name or
+        imap_list.description != list_description
     ):
-        imap_campaign.name = campaign_name
-        imap_campaign.description = campaign_description
-        imap_campaign.subscriber_list = imap_list
-        imap_campaign.is_active = True
-        imap_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+        imap_list.name = list_name
+        imap_list.description = list_description
+        imap_list.save(update_fields=['name', 'description', 'updated_at'])
 
-    list_description = f"Auto-created list for IMAP account {credential.email_address}"
-    _merge_duplicate_lists(imap_list, user, list_name, list_description)
-    _merge_duplicate_campaigns(imap_campaign, user, campaign_name, campaign_description, imap_list)
-    
-    # Create default email template
-    if created or not imap_campaign.emails.exists():
+    # Create IMAP campaign only if it doesn't exist by name.
+    if not imap_campaign:
+        base_campaign_slug = slugify(campaign_name)
+        campaign_slug = f"{base_campaign_slug}-{user.id}"
+
+        # Ensure slug doesn't exceed max length
+        if len(campaign_slug) > 150:
+            max_base_length = 150 - len(str(user.id)) - 1
+            base_campaign_slug = base_campaign_slug[:max_base_length]
+            campaign_slug = f"{base_campaign_slug}-{user.id}"
+
+        imap_campaign, created_campaign = Campaign.objects.get_or_create(
+            user=user,
+            slug=campaign_slug,
+            defaults={
+                'name': campaign_name,
+                'description': campaign_description,
+                'subscriber_list': imap_list,
+                'is_active': True,
+            }
+        )
+
+    # Keep campaign tied to the canonical list, and clean up any duplicate auto-created campaigns.
+    if imap_campaign and imap_list:
+        if (
+            imap_campaign.name != campaign_name or
+            imap_campaign.description != campaign_description or
+            imap_campaign.subscriber_list_id != imap_list.id or
+            not imap_campaign.is_active
+        ):
+            imap_campaign.name = campaign_name
+            imap_campaign.description = campaign_description
+            imap_campaign.subscriber_list = imap_list
+            imap_campaign.is_active = True
+            imap_campaign.save(update_fields=['name', 'description', 'subscriber_list', 'is_active', 'updated_at'])
+
+    _merge_duplicate_lists(imap_list, user, list_name)
+    _merge_duplicate_campaigns(imap_campaign, user, campaign_name, imap_list)
+
+    # Create default email template (once per campaign).
+    if imap_campaign and (created_campaign or not imap_campaign.emails.exists()):
         Email.objects.create(
             campaign=imap_campaign,
             subject="Re: {{subject}}",

@@ -1,6 +1,8 @@
 # Postfix SSL Certificate Installation
 
-This directory contains a script to automatically install SSL certificates for Postfix using Let's Encrypt certbot on Ubuntu Server 24.04.1.
+**Preferred (current):** use the shared Certbot + Postfix helper in the parent folder: [`../setup-postfix-tls-certbot.sh`](../setup-postfix-tls-certbot.sh) and [../README.md](../README.md) (Postfix + Let’s Encrypt section).
+
+This directory contains an older script to automatically install SSL certificates for Postfix using Let's Encrypt certbot on Ubuntu Server 24.04.1.
 
 ## Files
 

@@ -506,6 +506,7 @@ DEFAULT_FROM_EMAIL=founders@dripemails.org
 
 ### Documentation
 
+- 📖 [Docs index — Postfix + Let’s Encrypt (Certbot)](docs/README.md)
 - 📖 [Production Setup Guide](docs/smtp_server_production_setup.md)
 - 📖 [Supervisord Setup Guide](docs/supervisord_setup.md)
 - 📖 [Supervisord Quick Reference](docs/supervisord_quick_reference.md)

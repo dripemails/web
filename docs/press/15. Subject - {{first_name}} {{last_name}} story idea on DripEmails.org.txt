@@ -17,7 +17,7 @@ What DripEmails.org offers:
 - Gmail + IMAP auto-engagement workflows
 - Multi-step drip campaigns with flexible timing
 - AI-assisted drafting and revision for campaign emails
-- Personalized templates with merge fields like {{first_name}}, {{last_name}}, and {{email}}
+- Personalized templates with merge fields like {{first_name}} and {{email}}
 - Campaign analytics (opens, clicks, and engagement tracking)
 
 If useful, I can share:

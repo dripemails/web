@@ -60,6 +60,10 @@ sudo systemctl stop nginx
 
 sudo DOMAIN=dripemails.org CERTBOT_EMAIL=founders@dripemails.org bash setup-postfix-tls-certbot.sh obtain-standalone
 
+sudo DOMAIN=dripemails.org CERTBOT_EMAIL=founders@dripemails.org \
+  CERTBOT_EXTRA_ARGS='-d mail.dripemails.org -d web2.dripemails.org' \
+  bash setup-postfix-tls-certbot.sh obtain-standalone
+
 sudo systemctl start nginx
 sudo systemctl status nginx --no-pager
 ```
